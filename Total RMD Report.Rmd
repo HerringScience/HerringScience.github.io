@@ -6,11 +6,10 @@ output:
     highlight: kate
 ---
 
-
 ```{r setup, include=FALSE}
 ## Global options
 year= "2022" #Change global/current year here
-knitr::opts_knit$set(root.dir = 'G:/My Drive/HSC Working/R Markdown/HTML Markdown/')
+knitr::opts_knit$set(root.dir = 'G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/')
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 ```
 
@@ -18,7 +17,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='cente
 #Import all packages, CTD data, and land data
 
 #Packages
-setwd("G:/My Drive/HSC Working/R Markdown/Main Data/")
+setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/Main Data/")
 library(cli)
 library(lubridate)
 library(reprex)
@@ -89,7 +88,7 @@ NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward 
 
 ```{r Box Import}
 #Import All Boxes
-setwd("G:/My Drive/HSC Working/R Markdown/Box Coordinates/")
+setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/Box Coordinates/")
 boxes = read.csv("surveyBoxes.csv")
 
 # Scots Bay plankton and CTD box
