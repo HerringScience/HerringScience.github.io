@@ -6,6 +6,7 @@ output:
     highlight: kate
 ---
 
+
 ```{r setup, include=FALSE}
 ## Global options
 year= "2022" #Change global/current year here
