@@ -21,7 +21,7 @@ NVessel = NA
 PlanktonVessel = "Lady Janice II"
 Tagging = c("Morning Star", "Lady Janice II", "Sealife II", "Tasha Marie")
 
-knitr::opts_knit$set(root.dir = 'G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/')
+knitr::opts_knit$set(root.dir = 'C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/')
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 ```
 
@@ -56,7 +56,7 @@ StartDate = substr(surv.date, 1,10)
 year = substr(surv.date, 1,4)
 
 #Load plan
-setwd(paste0("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/Surveys/", year, "/", surv, surv.no, "/"))
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no, "/"))
 Plan = list.files(pattern = "*plan.csv") %>% 
   map_df(~read_csv(.))
 
@@ -64,7 +64,7 @@ Table = list.files(pattern = "*Table.csv") %>%
   map_df(~read_csv(.))
 
 #Land Data
-setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/")
 can<-getData('GADM', country="CAN", level=1)
 us = getData('GADM', country = "USA", level = 1)
 can1 = rbind(can,us)
@@ -105,7 +105,7 @@ names(TowBox) = c('Lat', 'Lon')
 
 ```{r Box Import}
 #Import All Boxes
-setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/Box Coordinates/")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/")
 boxes = read.csv("surveyBoxes.csv")
 
 # Scots Bay plankton and CTD box

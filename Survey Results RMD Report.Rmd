@@ -16,14 +16,14 @@ surv.no = "6"
 #This will show you what photos or data are missing in the console below
 #If none show up (character(0)), press Knit
 current=paste0(surv, surv.no)
-setwd(paste0("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/Surveys/", year, "/", current))
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
 files = list.files(pattern=c("Missing.csv", "Missing.jpg"))
 print(files)
 ```
 
 ```{r setup, include=FALSE}
 ## Global options
-knitr::opts_knit$set(root.dir = 'G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/')
+knitr::opts_knit$set(root.dir = 'C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/')
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 #Import all packages, CTD data, and land data
 
 #Packages
-setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/Main Data/")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/")
 library(cli)
 library(lubridate)
 library(reprex)
@@ -114,7 +114,7 @@ SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
 
 ```{r Box Import, include=FALSE}
 #Import All Boxes
-setwd("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/Box Coordinates/")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/")
 boxes = read.csv("surveyBoxes.csv")
 
 # Scots Bay plankton and CTD box
@@ -148,7 +148,7 @@ Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
-setwd(paste0("G:/.shortcut-targets-by-id/1TK7GaNVtjsT_n5XLgTIC8iu4KPN6mAb7/Herring Science Council/Sharepoint/R Markdown/HTML Markdown/Surveys/", year, "/", current))
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
 Map = read_csv("Map.csv")
 Region = read_csv("Region.csv")
 Speed=read_csv("Speed.csv")
