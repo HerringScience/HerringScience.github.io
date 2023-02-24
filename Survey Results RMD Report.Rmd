@@ -7,6 +7,9 @@ output:
 
 ```{r DATA CHECK RUN THIS FIRST MANUALLY, include=FALSE}
 rm(list = ls())
+
+test
+
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"

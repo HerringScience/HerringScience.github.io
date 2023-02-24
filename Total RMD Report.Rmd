@@ -147,8 +147,7 @@ LRP2 %>%
   mutate(Difference = Biomass-LRP) %>%
   mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
   kbl(format = "html", escape = F) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(height = "400px")
+  kable_paper("striped", full_width = F)
 ```
 :::
 :::
@@ -173,7 +172,7 @@ LRP2 %>%
   dplyr::select(Year, Scots) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F) %>%
-  scroll_box(width="20%", height = "400px")
+  scroll_box(width="40%", height = "400px")
 ```
 :::
 :::
@@ -198,7 +197,7 @@ LRP2 %>%
   dplyr::select(Year, German, Seal) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F) %>%
-  scroll_box(width="30%", height = "400px")
+  scroll_box(width="60%", height = "400px")
 ```
 :::
 :::
