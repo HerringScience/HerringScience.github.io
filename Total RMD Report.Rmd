@@ -41,7 +41,7 @@ library(gridExtra)
 library(cowplot)
 
 #Tagging Data
-Tag = read_csv("Tagging Data.csv") #Tagging Data
+Tag = read_csv("TaggingEvents.csv") #Tagging Data
 polysT = read_csv("timGrounds.csv") #Coloured ground maps
 Tag$Year = as.factor(Tag$Year)
 Tag$Vessel = as.factor(Tag$Vessel)
@@ -72,7 +72,6 @@ SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
 LRP2 = read_csv("LRP Data.csv")
-LRP2$Year = as.factor(LRP2$Year)
 
 #Larval Data
 Larval = read_csv("Full Larval.csv")
@@ -126,37 +125,83 @@ polySI = as.PolySet(SUA, projection="LL")
 
 #### Total
 
+::: row
+::: col-md-6
 ```{r}
-colors <- c("Total Biomass" = "black", "LRP" = "red", "3yr Moving Average" = "grey")
 ggplot(data=LRP2, aes(x=Year, y=Biomass)) +
-  geom_point(aes(color = "Total Biomass")) +
-  geom_point(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg', aes(color = "3yr Moving Average")) +
-  geom_hline(yintercept = 317846, linetype = "longdash", size =1, aes(color = "LRP")) +
+  geom_point(aes(colour="black")) +
+  geom_path(aes(colour="black")) +
+  geom_point(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg', aes(colour="grey")) +
+  geom_path(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg', aes(colour="grey")) +
+  geom_hline(yintercept = 317846, linetype = "longdash", size =1, aes(colour="red")) +
   scale_y_continuous(labels=scales::comma) +
   theme(axis.text.x = element_text(angle = 55)) +
-  labs(x="Year", y = "Biomass (mt)", color = "Legend") +
-  scale_color_manual(values=colors)
+  labs(x="Year", y = "Biomass (mt)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+LRP2 %>%
+  dplyr::select(Year, Scots, German, Seal, Biomass, LRP, "3yr Avg") %>%
+  mutate(Difference = Biomass-LRP) %>%
+  mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
+  kbl(format = "html", escape = F) %>%
+  kable_paper("striped", full_width = F) %>%
+  scroll_box(height = "400px")
+```
+:::
+:::
 
 #### Scots Bay
 
+::: row
+::: col-md-6
 ```{r}
 ggplot(data=LRP2, aes(x=Year, y=Scots)) +
   geom_point() +
+  geom_path() +
   scale_y_continuous(labels=scales::comma) +
   theme(axis.text.x = element_text(angle = 55)) +
   labs(x="Year", y = "Biomass (mt)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+LRP2 %>%
+  dplyr::select(Year, Scots) %>%
+  kbl(format = "html", escape = F) %>%
+  kable_paper("striped", full_width = F) %>%
+  scroll_box(width="20%", height = "400px")
+```
+:::
+:::
 
 #### German Bank
 
+::: row
+::: col-md-6
 ```{r}
 ggplot(data=LRP2, aes(x=Year, y=German)) +
   geom_point() +
+  geom_path() +
   scale_y_continuous(labels=scales::comma) +
   theme(axis.text.x = element_text(angle = 55)) +
   labs(x="Year", y = "Biomass (mt)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+LRP2 %>%
+  dplyr::select(Year, German, Seal) %>%
+  kbl(format = "html", escape = F) %>%
+  kable_paper("striped", full_width = F) %>%
+  scroll_box(width="30%", height = "400px")
+```
+:::
+:::
 
 ### Annual SSB Estimates {.tabset}
 

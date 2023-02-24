@@ -22,7 +22,7 @@ library(psych)
 
 ##Tagging Data
 #Data import and filtering
-Tag <- read_csv("GC:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging_Raw.csv")
+Tag <- read_csv("GC:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
 Tag$Date = ymd(Tag$Date) 
 Tag <- Tag %>% mutate(Julian = yday(Date)) #add Julian day
 Tag <- Tag %>% mutate(Year = as.numeric(substr(Date, 1, 4)))
