@@ -144,7 +144,7 @@ ggplot(data=LRP2, aes(x=Year, y=Biomass)) +
 ```{r echo=FALSE}
 LRP2 %>%
   dplyr::select(Year, Scots, German, Seal, Biomass, LRP, "3yr Avg") %>%
-  mutate(Difference = Biomass-LRP) %>%
+  mutate(Difference = "3yr Avg"-LRP) %>%
   mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F)
