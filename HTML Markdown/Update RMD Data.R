@@ -22,7 +22,7 @@ library(psych)
 
 ##Tagging Data
 #Data import and filtering
-Tag <- read_csv("GC:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
+Tag <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
 Tag$Date = ymd(Tag$Date) 
 Tag <- Tag %>% mutate(Julian = yday(Date)) #add Julian day
 Tag <- Tag %>% mutate(Year = as.numeric(substr(Date, 1, 4)))
@@ -54,10 +54,10 @@ Tag$Vessel[which(Tag$Vessel=="Lady Meliss")] <- "Lady Melissa"
 Tag$Vessel[which(Tag$Vessel=="Lady Janice II")] <- "Lady Janice"
 summary(Tag$Vessel) #double check
 
-Tag %>% write_csv("G:/My Drive/HSC Working/R Markdown/Main Data/Tagging Data.csv")
+Tag %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv"))
 
 ##Performance data import and filtering
-setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no))
 actual = list.files(pattern = "*tableA.csv") %>% map_df(~read_csv(.))
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
@@ -104,16 +104,16 @@ Survey = Survey %>%
          Year = as.numeric(substr(Date, 7, 10)),
          Day = as.numeric(substr(Date, 4, 5)))
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/")
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 Survey %>% write_csv("Survey Data.csv")
 
 ##CTD Data import and filtering
-CTD <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv")
+CTD <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv"))
 CTD <- CTD %>% dplyr::select(-Pressure, -Conductivity, -Specific_conductance, -Sound_velocity, -Density, -plankton_ID)
 CTD$Date = ymd(CTD$Date)
 CTD <- CTD %>% mutate(Julian = yday(Date)) #add Julian day
 CTD <- CTD %>% rename(Ground = ground, ID = id)
-Bio <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Biomass.csv")
+Bio <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Biomass.csv"))
 CTD <- left_join(CTD, Bio, by = "Date")
 CTD <- CTD %>% mutate(Month = as.numeric(substr(Date, 6, 7))) %>% dplyr::select(-Location) #may need to remove other columns
 CTD$Month <- as.factor(CTD$Month)
@@ -227,6 +227,6 @@ Strat = Strat %>%
 
 CTD30 = Strat
 
-CTD %>% write_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv")
-CTD30 %>% write_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv")
-SST %>% write_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv")
+CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
+CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
+SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
