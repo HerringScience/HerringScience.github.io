@@ -276,12 +276,12 @@ if(surv=="SB"){
   cat("\n")
   cat("### Tidal Charts", "\n")
   cat("\n")
-  knitr::include_graphics(paste0("Surveys/", year, "/", surv, surv.no, "/Hourly.jpg"))
+  knitr::include_graphics(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no, "/Hourly.jpg"), rel_path = FALSE)
 }
 ```
 
 ```{r}
 if(surv=="SB"){
-    knitr::include_graphics(paste0("Surveys/", year, "/", surv, surv.no, "/Daily.jpg"))
+    knitr::include_graphics(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no, "/Daily.jpg"), rel_path = FALSE)
 }
 ```
