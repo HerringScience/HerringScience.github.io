@@ -1,0 +1,1130 @@
+id,DATE,BOAT,AREA,Size_4.5,Size4.5_5,Size5_6,Size6_7,Size7_8,Size8_9,Size9_10,Size10_11,Size11_12,Size_12,COMMENTS,Month
+1,2004-02-03,Canada 100,Wolves,5,4,3,4,12.25,8.5,NA,NA,NA,NA,,2
+2,2004-02-04,Starlight,USA,NA,NA,NA,NA,5.25,7.75,10.5,2.75,11.5,4,,2
+3,2004-02-19,Sunlight,USA,NA,NA,NA,NA,3.25,4.25,2,0.5,6.5,5.25,Rhode Island,2
+4,2004-02-23,Sunlight,USA,NA,NA,NA,NA,NA,2,2,5.75,8.5,13.25,Rhode Island,2
+5,2004-03-01,Sunlight,USA,NA,NA,NA,NA,4.5,2.5,5.5,3.5,4.5,4.75,Rhode Island,3
+6,2004-07-07,Caroline B,Westerd (US),NA,NA,NA,9.25,5.5,7.5,12.25,10.25,NA,NA,,7
+7,2004-07-07,Margaret Elizabeth,Long Island Shore,NA,NA,7.25,11.75,14,18.25,12,9.5,11,NA,,7
+8,2004-07-09,Senator Neil,St Mary's Bay,NA,NA,6.25,6.25,9.25,11.75,12.25,13,NA,NA,,7
+9,2004-07-12,Strathburn,Grand Manan,NA,NA,3,6.75,4.25,4.25,10.5,NA,NA,NA,,7
+10,2004-07-19,Margaret Elizabeth,Long Island Shore,NA,NA,NA,7.25,9,13.5,10,16,13.75,3.25,,7
+11,2004-07-20,Jennifer & Boys,Grand Manan,NA,NA,NA,4.75,4.5,9,12.25,15.75,17.25,NA,,7
+12,2004-07-20,Haven Lady,Wolves,NA,NA,3.25,3.5,4.25,11,12.75,10.5,3,8,,7
+13,2004-07-21,Strathaven,Campobello,NA,NA,2,2,6,7.5,12.75,6.5,8.75,NA,,7
+14,2004-07-25,Michael Eileen,Grand Manan,NA,NA,NA,12.75,10.25,13.25,15.25,14,10.75,13,,7
+15,2004-07-26,Polly B,NS Seine,NA,NA,NA,6,1.5,4.25,13.5,7.25,6.25,10.75,,7
+16,2004-07-26,Beatrice B,Deer Island,NA,NA,2.25,2,12.5,7.75,11.75,14.25,9.5,9,,7
+17,2004-08-02,Haven Lady,Back Bay,NA,NA,3.25,2.5,3.75,11,NA,NA,NA,NA,Hog Island,8
+18,2004-08-02,Strathaven,Wolves,NA,NA,NA,0.75,1.75,7.5,12,11.75,NA,NA,,8
+19,2004-08-03,Aaron & Kate,Long Island Shore,NA,NA,NA,3.5,4.25,9.5,16,11.5,8,6.5,,8
+20,2004-08-03,Strathlorne,Blisses,NA,NA,NA,NA,7,13.25,9.75,9.75,4.5,5.5,,8
+21,2004-08-08,Strathburn,Grand Manan,NA,NA,NA,4.5,6.25,15,12.75,14.75,NA,NA,Mumps,8
+22,2004-08-08,Margaret Elizabeth,Long Island Shore,NA,NA,NA,4.75,5.75,6,11.5,8.75,8.25,6.5,,8
+23,2004-08-09,Haven Lady,Blisses,NA,NA,NA,1.5,5.25,10.5,8.5,8.5,6,NA,,8
+24,2004-08-10,Canada 100,Grand Manan,NA,NA,NA,4.75,5.5,12.5,9.75,7,9,NA,,8
+25,2004-08-10,Senator Neil,Sandy Cove,NA,NA,NA,5,9.75,9.75,7.25,10.25,11.75,1.25,,8
+26,2004-08-11,Haven Lady,Back Bay,NA,NA,0.75,3.5,8.75,11,9.5,12.75,9.25,NA,,8
+27,2004-08-16,Canada 100,Grand Manan,NA,NA,NA,8.25,6.75,10,16,10.75,NA,NA,,8
+28,2004-08-16,Beatrice B,Campobello,NA,NA,NA,2,7,15.5,14.25,10.5,6,NA,,8
+29,2004-08-22,Haven Lady,Deer Island,NA,NA,NA,2.75,5.5,7.75,5.75,10,3,2,,8
+30,2004-08-22,Caroline B,Back Bay,NA,NA,NA,3,5.25,10.5,6,9.25,4,4.25,,8
+31,2004-08-22,Beatrice B,Wolves,NA,NA,NA,0,4,8.5,6.5,8,7.75,NA,,8
+1,2005-01-05,Aaron & Kate,Wolves,NA,7.75,7.5,9.25,8.25,8.25,13.5,2.25,NA,NA,,1
+2,2005-01-05,Thunder Bay,Trucks,NA,NA,NA,NA,4.25,3.5,3.25,3.75,0.5,3,,1
+3,2005-01-09,Thunder Bay,Trucks,NA,NA,NA,NA,4.25,2.75,3.75,3.25,3,8.75,,1
+4,2005-01-10,Margaret Elilzabeth,Wolves,NA,5,8.25,9,8.25,4.25,6.25,14.25,1,NA,,1
+5,2005-01-17,Thunder Bay,Trucks,NA,NA,NA,NA,3,3.5,2.5,4,1.5,0.75,,1
+6,2005-01-17,Aaron & Kate,Wolves,NA,6.75,9.25,8.5,7,NA,NA,NA,NA,NA,,1
+7,2005-02-03,Western Venture,Trucks,NA,NA,NA,NA,0.25,0.5,1.25,5.25,4,6.25,,2
+8,2005-02-16,,New Bedford,NA,NA,NA,NA,1.75,0,0.5,1.5,3.75,2.75,,2
+9,2005-05-29,Canada 100,Long Island Shore,NA,NA,NA,NA,5.25,1.75,3.5,9.5,2.5,NA,,5
+10,2005-05-30,Western Venture,Trucks,NA,NA,NA,NA,NA,NA,6.75,7.25,9.5,13.5,,5
+11,2005-06-02,Polly B,Grand Manan,NA,NA,NA,NA,15.25,10.5,4.5,9.25,8.75,2.5,,6
+12,2005-06-06,Aaron & Kate,Long Island Shore,NA,NA,NA,NA,2.75,3.75,3.5,3.5,6,3.5,,6
+13,2005-06-07,Osprey,Gloucester,NA,NA,NA,NA,NA,6.75,10.25,11,16.5,12.25,,6
+14,2005-06-08,Capelco,St Mary's Bay,NA,NA,NA,NA,NA,13.5,13,8,11.5,NA,,6
+15,2005-06-09,Michael Eileen,Grand Manan,NA,NA,NA,NA,NA,NA,7.25,6,NA,NA,Money Cove,6
+16,2005-06-12,Capelco,St Mary's Bay,NA,NA,NA,NA,12.25,7.5,7.25,8.25,5.25,4.25,,6
+17,2005-06-13,Margaret Elilzabeth,Long Island Shore,NA,NA,NA,6,4.25,7.5,5,7.75,5.75,3.75,,6
+18,2005-06-13,Western Venture,Gloucester,NA,NA,NA,NA,NA,NA,4.75,10.25,14.5,12.5,,6
+19,2005-06-15,Canada 100,SW Banks,NA,NA,NA,NA,NA,3.5,9,11.5,6.25,7.25,,6
+20,2005-06-19,Silver King,St Mary's Bay,NA,NA,NA,1,4.75,4.25,8,7,3,NA,,6
+21,2005-06-20,Aaron & Kate,NE Banks,NA,NA,NA,NA,NA,8.75,11.5,13,8.75,10.25,,6
+22,2005-06-21,Margaret Elilzabeth,German Banks,NA,NA,NA,NA,3.75,6.75,6.5,2.25,6,3.75,,6
+23,2005-06-26,Strathaven,St Mary's Bay,NA,NA,NA,NA,NA,8.5,5.75,8,NA,NA,,6
+24,2005-06-27,Margaret Elilzabeth,Long Island Shore,NA,NA,NA,NA,6.5,6.75,10.75,10,18,8.75,,6
+25,2005-07-04,Aaron & Kate,Long Island Shore,NA,NA,NA,NA,NA,7,10.5,12.75,5.5,6,,7
+26,2005-07-05,Senator Neil,Grand Manan,NA,NA,NA,NA,NA,7.25,7.5,6.75,11.5,11.75,Gully,7
+27,2005-07-06,Michael Eileen,St Mary's Bay,NA,0.5,1,5.25,6.25,8.25,11,NA,NA,NA,,7
+28,2005-07-06,Margaret Elilzabeth,Grand Manan,NA,NA,NA,NA,NA,7.5,11.25,14.25,12.5,13.75,,7
+29,2005-07-07,Polly B,Grand Manan,NA,NA,NA,NA,NA,15,13,13.5,14.25,12.5,,7
+30,2005-07-10,Caroline B,St Mary's Bay,NA,NA,NA,1.75,3,2.75,NA,NA,NA,NA,,7
+31,2005-07-11,Canada 100,Grand Manan,NA,NA,NA,NA,9.75,12.5,9.25,11,15,10.5,,7
+32,2005-07-12,Margaret Elilzabeth,NE Banks,NA,NA,NA,NA,NA,10.75,13.75,13.75,14.5,NA,,7
+33,2005-07-13,Canada 100,Grand Manan,NA,NA,NA,NA,NA,13.5,12,11,11.25,13.25,,7
+34,2005-07-13,Strathlorne,Blisses,NA,NA,3.75,2.25,5,8,12.5,NA,NA,NA,,7
+35,2005-07-18,Margaret Elilzabeth,Grand Manan,NA,NA,NA,NA,10.5,13,11.5,11,14,16,,7
+36,2005-07-18,Caroline B,Beaver Harbour,NA,0.25,1.5,2.5,6.5,10.5,10.5,16.75,NA,NA,,7
+37,2005-07-19,Capelco,St Mary's Bay,NA,NA,0.75,0.75,1.25,7.5,NA,NA,NA,NA,Sandy Cove,7
+38,2005-07-20,Margaret Elilzabeth,Grand Manan,NA,NA,NA,NA,NA,11,11.5,12.75,12.75,10.25,,7
+39,2005-07-21,Silver King,Grand Manan,NA,NA,NA,NA,NA,10,10.5,15.75,8.25,NA,,7
+40,2005-07-21,Capelco,St Mary's Bay,NA,NA,NA,4.25,4.25,5,10.5,6.5,10.5,4,,7
+41,2005-07-22,Margaret Elilzabeth,Grand Manan,NA,NA,NA,NA,NA,13,13,15.75,15.25,15,White Head,7
+42,2005-08-01,Caroline B,Deer Island,NA,NA,NA,4,9,15.25,14.25,9,NA,NA,Deep Cove,8
+43,2005-08-01,Strathaven,St Mary's Bay,NA,NA,NA,NA,NA,NA,3.75,1.5,11.75,6.75,Sandy Cove,8
+44,2005-08-01,Michael Eileen,Grand Manan,NA,NA,NA,3.5,9,10.5,NA,NA,NA,NA,Seawall,8
+45,2005-08-01,Senator Neil,Blisses,NA,NA,NA,6.75,7.75,10,7.75,9,NA,NA,,8
+46,2005-08-02,Canada 100,Scotts Bay,NA,NA,NA,NA,NA,2.5,7,6.25,5,6.75,Head of the Bay,8
+47,2005-08-05,Strathburn,Campobello,NA,NA,9.75,11.25,9.25,12.25,8.25,8.5,4.5,NA,Mill Cove,8
+48,2005-08-10,Senator Neil,Deer Island,NA,NA,NA,12,10.75,18.25,14.75,8.5,NA,NA,,8
+49,2005-08-10,Margaret Elilzabeth,Scotts Bay,NA,NA,NA,NA,NA,4.25,6,4.75,8.5,4,,8
+50,2005-08-10,Strathaven,Blisses,NA,NA,NA,5.25,10,9.75,11.25,10,15,7,,8
+51,2005-08-10,Strathlorne,Back Bay,NA,NA,4.5,9.5,7,9.75,12.5,16.5,4.5,NA,,8
+52,2005-08-10,Strathburn,Wolves,NA,NA,NA,NA,8.75,13.5,11,10.5,13.75,NA,,8
+53,2005-08-14,Strathburn,Deadmans,NA,NA,NA,5.5,11.5,12.25,13,15,7.75,NA,,8
+54,2005-08-14,Strathlorne,Wolves,NA,NA,NA,8,12.5,12.75,14,12,6,NA,,8
+55,2005-08-15,Margaret Elilzabeth,Scotts Bay,NA,NA,NA,NA,NA,5.25,5.5,8.5,5.25,3,,8
+56,2005-08-15,Caroline B,Deer Island,NA,NA,NA,11,12,14.25,13.25,11.25,9.25,NA,,8
+57,2005-08-15,Strathburn,Blisses,NA,NA,NA,9.5,15.75,13.25,12,8.5,5.25,8.25,,8
+58,2005-08-17,Strathlorne,Campobello,NA,NA,NA,7.25,11,11.25,13,13.25,4,NA,,8
+59,2005-08-17,Silver King,Grand Manan,NA,NA,NA,NA,14,14.25,16.25,11.5,10.5,4.5,,8
+60,2005-08-18,Caroline B,Beaver Harbour,NA,NA,4.75,6.75,9,16.5,15.75,6,16.25,NA,,8
+61,2005-08-19,Capelco,Sandy Cove,NA,NA,NA,4,2.25,5.5,4.75,4.25,4,6.75,,8
+62,2005-08-21,Andrew & Deane,Back Bay,NA,NA,NA,9.25,3.75,4.5,12.5,6.5,6.5,NA,Eagle Island,8
+63,2005-08-21,Strathaven,Campobello,NA,NA,NA,8.75,16,14.5,12.5,6.25,NA,NA,Schooner Cove,8
+64,2005-08-21,Andrew & Deane,Sandy Cove,NA,NA,NA,4,5,9.5,10.75,10.25,7.75,13.5,,8
+65,2005-08-22,Margaret Elilzabeth,Scotts Bay,NA,NA,NA,NA,NA,5.5,5,5.75,7.25,5.5,,8
+66,2005-08-22,Strathburn,Blisses,NA,NA,NA,7.75,9,13.75,14.5,6.5,4.5,NA,,8
+67,2005-08-23,Strathlorne,Deer Island,NA,NA,NA,11.5,12,16.75,10.75,7.5,0.25,NA,,8
+68,2005-08-23,Polly B,Long Island Shore,NA,NA,NA,47.75,5.25,6.5,13.25,12,9.75,NA,,8
+69,2005-08-23,Strathburn,Beaver Harbour,NA,NA,NA,NA,8,13,15.5,7,4.5,5.5,,8
+70,2005-08-25,Silver King,Wolves,NA,NA,NA,NA,10.75,13.25,11.75,11,3,3.75,,8
+71,2005-08-28,Senator Neil,Deer Island,1.75,3.5,2,4.75,9.5,13.25,15.5,15.25,11.5,NA,,8
+72,2005-08-28,Capelco,Campobello,NA,NA,NA,NA,NA,8,9,5.5,3.25,7,,8
+73,2005-08-29,Caroline B,Wolves,NA,NA,NA,NA,NA,0.75,5.5,6.5,5.5,2.5,,8
+74,2005-08-29,Canada 100,Scotts Bay,NA,NA,NA,5,7.5,10.75,8,3,6.75,NA,,8
+75,2005-09-02,Strathlorne,Blisses,NA,NA,NA,3,4.5,6.75,7.5,5.75,2.5,NA,,9
+76,2005-09-05,Silver King,Wolves,NA,NA,NA,8,6.5,11.25,11,1.5,7.5,10.5,,9
+77,2005-09-05,Andrew & Deane,Grand Manan,NA,NA,NA,7,5.25,16,16.75,4.75,4.75,8,,9
+78,2005-09-06,Strathlorne,Blisses,NA,NA,NA,NA,NA,11.5,13.25,6.25,4,3.5,,9
+79,2005-09-06,Canada 100,Scotts Bay,NA,NA,NA,NA,NA,5.75,7.75,5.25,5.5,4.5,,9
+80,2005-09-12,Andrew & Deane,Wolves,NA,NA,NA,4.25,8.25,12,14,5.5,NA,NA,,9
+81,2005-09-13,Margaret Elilzabeth,Long Island Shore,NA,NA,NA,NA,8.5,6,4.25,4,6,7.25,,9
+82,2005-09-15,Caroline B,Wolves,NA,NA,NA,2,5,8,14.5,6,4.25,NA,,9
+83,2005-09-15,Michael Eileen,Blisses,NA,NA,NA,7,7.25,16,17,6.25,NA,NA,,9
+84,2005-09-16,Margaret Elilzabeth,German Banks,NA,NA,NA,NA,NA,NA,6,2.75,8.5,2.25,,9
+85,2005-09-19,Polly B,Centerville,NA,NA,NA,6,5.25,7.75,10.5,6.75,4.5,9.75,,9
+86,2005-09-26,Aaron & Kate,Long Island Shore,NA,NA,NA,6.25,6.5,6.25,9,4.25,9.25,NA,,9
+87,2005-09-26,Senator Neil,Back Bay,NA,NA,NA,8.25,9.5,8.75,11,5.5,4.5,5.75,,9
+88,2005-09-27,Senator Neil,Campobello,NA,NA,NA,6.5,7,10.25,10,3,7.5,NA,,9
+89,2005-09-28,Strathlorne,Deer Island,NA,NA,NA,8.5,13,13.75,12.75,5,8,NA,,9
+90,2005-09-28,Strathaven,Wolves,NA,NA,NA,7.75,7,11.25,10.5,10.5,8,NA,,9
+91,2005-10-02,Michael Eileen,Wolves,NA,NA,NA,6.75,8.25,8.25,12.75,20.75,15.5,NA,,10
+92,2005-10-02,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,2.25,5.75,3.5,4.25,,10
+93,2005-10-03,Canada 100,Yankee Banks,NA,NA,NA,NA,NA,12.25,13.75,10.25,9.5,10,,10
+94,2005-10-03,Aaron & Kate,Long Island Shore,NA,NA,NA,7,7,8.5,9,11,NA,NA,,10
+95,2005-10-04,Polly B,SW Banks,NA,NA,NA,NA,NA,NA,4.5,9.25,10.25,9.25,,10
+96,2005-10-12,Margaret Elilzabeth,Wolves,NA,NA,NA,NA,8.25,6,16.25,19.5,20,14.25,,10
+97,2005-10-18,Canada 100,Wolves,NA,NA,7.5,6.75,11.5,14.5,10.25,7.5,NA,NA,,10
+98,2005-11-29,NFLD fish,,NA,NA,NA,NA,NA,NA,9.75,9.25,5,11.5,,11
+1,2006-01-04,Thunder Bay,Gloucester,NA,NA,NA,NA,1.75,3.75,7.5,4.25,7.75,3,,1
+2,2006-01-05,Canada 100,Beaver Harbour,NA,13.25,17.5,17.5,18.75,21,NA,NA,NA,NA,,1
+3,2006-01-09,Margaret Elizabeth,Seeleys Head,NA,11.25,13.5,14,15,17.5,17.5,NA,NA,NA,,1
+4,2006-01-09,Margaret Elizabeth,Seeleys Head,NA,15.5,16.5,16.75,19,17.5,20.5,NA,NA,NA,,1
+5,2006-01-09,Sunlight,Gloucester,NA,NA,NA,NA,4,5.25,3.75,3.25,NA,NA,,1
+6,2006-01-13,Julie Ann,Halifax,NA,NA,NA,NA,NA,NA,NA,6.25,1,17,,1
+7,2006-01-13,Julie Ann,Halifax,NA,NA,NA,NA,NA,NA,NA,6.25,6.25,12,,1
+8,2006-01-18,Thunder Bay,Rhode Island,NA,NA,NA,4.5,5,5.25,3.5,2.25,4.5,3.5,,1
+9,2006-01-26,Trucks,Rhode Island,NA,NA,NA,NA,4.25,2.5,3.5,2.5,5.5,8.25,,1
+10,2006-02-02,Sunlight,Rhode Island,NA,NA,NA,NA,3.75,2.5,2.5,4.5,5.75,11.25,,2
+11,2006-02-10,Western Sea,Rhode Island,NA,NA,NA,NA,NA,2.25,2.75,1.5,1.5,1.5,,2
+12,2006-03-02,Western Venture,Rhode Island,NA,NA,NA,NA,NA,1.25,1.5,0.5,2.25,7.75,,3
+13,2006-03-10,Mackerel Boat,,NA,NA,NA,NA,NA,NA,NA,4,1.75,10.5,(mackerel),3
+14,2006-06-02,Margaret Elizabeth,Long Island Shore,NA,NA,NA,NA,NA,3.75,10.5,4.5,10.5,11,,6
+15,2006-06-07,Margaret Elizabeth,Long Island Shore,NA,NA,NA,NA,NA,3.25,10,13.5,6.25,5.25,,6
+16,2006-06-14,Margaret Elizabeth,Long Island Shore,NA,NA,NA,5.25,6.5,7.75,7.75,2.75,2,5.5,,6
+17,2006-06-16,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,NA,12.25,13.5,11,12.5,13.5,,6
+18,2006-06-20,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,12.5,12.25,9.75,14.25,16.5,7.5,,6
+19,2006-07-04,Margaret Elizabeth,SW Banks,NA,NA,NA,NA,NA,11.75,17,15,14,16,,7
+20,2006-07-10,Brunswick Provider,SW Banks,NA,NA,NA,7.5,11.25,14,17.5,9.5,10.25,14,,7
+21,2006-07-12,Margaret Elizabeth,SW Banks,NA,NA,NA,11.5,15,15.75,19.25,19.5,15.5,14,,7
+22,2006-07-12,Silver King,St Marys Bay,NA,NA,NA,6.25,10.5,9.75,12.25,9,17.75,19.5,,7
+23,2006-07-18,Canada 100,SW Banks,NA,NA,NA,NA,10.75,14.5,20.75,11.75,18.5,17,,7
+24,2006-07-20,Michael Eileen,USA Seine,NA,NA,NA,NA,12,8.75,11.5,12,12.5,14.5,,7
+25,2006-07-24,Canada 100,Scott's Bay,NA,NA,NA,NA,NA,NA,6.5,7.75,5.75,9.75,Head of the Bay,7
+26,2006-07-24,Strathlorne,Grand Manan,NA,NA,NA,12.25,17.75,16.75,21.25,15.5,6.75,6.25,,7
+27,2006-07-25,Canada 100,SW Banks,NA,NA,NA,NA,NA,15,16,17.5,18.25,10,,7
+28,2006-07-25,Andrew & Deane,Grand Manan,3.25,6.5,7,11.25,17,17.75,NA,NA,NA,NA,Money Cove,7
+29,2006-07-27,Capelco,USA Seine,NA,NA,NA,8,16.5,16.75,15.75,12.25,18,NA,,7
+30,2006-07-27,Senator Neil,St Marys Bay,NA,NA,NA,3.25,6.25,12.25,2.75,9.5,10.25,3.5,Sandy Cove,7
+31,2006-07-28,Strathlorne,Blisses,NA,2,0.75,3.5,9,11,14,10.25,14.25,7,Spider Cove,7
+32,2006-07-28,Andrew & Deane,Grand Manan,NA,3.25,7,8.5,10.25,19.25,NA,NA,NA,NA,Eagle Rock,7
+33,2006-07-30,Strathlorne,Blisses,NA,NA,4,5.75,8,10,12.25,10.5,7.75,NA,,7
+34,2006-07-30,Strathaven,Grand Manan,NA,NA,NA,5.25,8,14,18.5,4.75,8.25,NA,,7
+35,2006-07-31,Margaret Elizabeth,SW Banks,NA,NA,NA,NA,10,17.5,18,13.5,13.75,9.5,,7
+36,2006-07-31,Sunlight,USA Seine,NA,NA,NA,NA,NA,NA,13.75,12,16.75,19,,7
+37,2006-08-01,Brunswick Provider,NE Banks,NA,NA,NA,NA,14.25,16.25,15,15.25,13.25,12.5,,8
+38,2006-08-03,Strathlorne,Deer Island,NA,NA,4.25,3.25,8,7,14,4.25,9.25,NA,Deep Cove,8
+39,2006-08-03,Silver King,Grand Manan,NA,NA,NA,NA,10.5,18.5,NA,NA,NA,NA,Gully,8
+40,2006-08-07,Capelco,Sandy Cove,NA,NA,NA,3.75,8,18,12.25,9.5,9.75,4.5,,8
+41,2006-08-07,Caroline B,,2.5,6.5,7.25,6.5,NA,NA,NA,NA,NA,NA,,8
+42,2006-08-07,Senator Neil,Deer Island,NA,NA,8.5,12.5,17.5,NA,NA,NA,NA,NA,Back Bar Island,8
+43,2006-08-08,Strathlorne,Deer Island,3,3.25,NA,NA,NA,NA,NA,NA,NA,NA,,8
+44,2006-08-08,Silver King,Grand Manan,3.5,4.25,2.75,8.75,9.25,NA,NA,NA,NA,NA,Star,8
+45,2006-08-12,Canada 100,Scott's Bay,NA,NA,NA,NA,NA,NA,3.5,6.75,5.75,2.25,Head of the Bay,8
+46,2006-08-13,Strathburn,Blisses,NA,NA,NA,NA,10.25,14.25,10.5,6.5,NA,NA,Tuckers Cove,8
+47,2006-08-13,Caroline B,Deer Island,3.25,5,5.75,6.5,12,9.75,NA,NA,NA,NA,Pinafore,8
+48,2006-08-13,Silver King,Back Bay,NA,NA,NA,10,8,12.75,11.5,10,7.75,NA,Eagle Island,8
+49,2006-08-14,Strathlorne,Deer Island,1.75,7.75,4.75,10.75,9.25,NA,NA,NA,NA,NA,Rattle Rock,8
+50,2006-08-14,Caroline B,Lepreau,1.5,1.75,2.75,2,4.75,13.5,10.5,NA,NA,NA,Fisher Point,8
+51,2006-08-14,Andrew & Deane,Wolves,NA,NA,NA,7,10.25,13.75,11.75,11.5,7.25,NA,Welcome,8
+52,2006-08-14,Stathburn,Blisses,NA,NA,NA,NA,9.5,13.5,9,11.5,7.5,NA,,8
+53,2006-08-15,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,5.25,5.5,3,2.5,Head of the Bay,8
+54,2006-08-16,Margaret Elizabeth,Margaretsville,3.25,3.5,3.5,6.25,15.75,7.75,12,13,NA,NA,,8
+55,2006-08-17,Strathlorne,Beaver Harbour,NA,NA,NA,NA,NA,NA,NA,13,10.25,NA,Moose Island,8
+56,2006-08-17,Michael Eileen,St Marys Bay,NA,NA,NA,5.75,9,14.75,8.5,13.25,9.75,5.5,Sandy Cove,8
+57,2006-08-17,Margaret Elizabeth,Margaretsville,NA,NA,NA,NA,NA,NA,7.5,4.5,3.5,NA,,8
+58,2006-08-20,Capelco,St Marys Bay,NA,NA,NA,4.25,4,11.25,15,12.25,7,5.5,Sandy Cove,8
+59,2006-08-20,Strathaven,Blisses,NA,NA,NA,6.25,9.5,12,7.5,10.75,7,5,,8
+60,2006-08-20,Andrew & Deane,,1.75,1.5,3.75,8.75,3,19.75,20,6,9.25,8.25,,8
+61,2006-08-21,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,6.5,12.25,10.75,12.5,13,Head of the Bay,8
+62,2006-08-22,Senator Neil,Campobello,NA,NA,NA,5.75,11.5,12.25,11.75,12.25,8,NA,,8
+63,2006-08-22,Sunlight,Trucks,NA,NA,NA,NA,NA,NA,12.5,11.75,11,13,USA Trucks,8
+64,2006-08-23,Senator Neil,USA Seine,NA,NA,NA,NA,NA,NA,8.5,9.5,6.5,9.5,(from Sunlight),8
+65,2006-08-23,Caroline B,Deer Island,3.5,5.75,6.25,3.75,6.75,12.75,15.75,NA,NA,NA,Growler, Hospital Is
+66,2006-08-24,Caroline B,Back Bay,NA,NA,NA,6.75,6.75,8.25,14.5,11,19.25,NA,NB Shut off,8
+67,2006-08-27,Andrew & Deane,Grand Manan,NA,NA,3.5,14.75,7.5,NA,NA,11.5,4,NA,Money Cove,8
+68,2006-08-27,Michael Eileen,Campobello,NA,NA,NA,NA,13.25,NA,10,8.25,11.75,NA,Schooner Cove,8
+69,2006-08-27,Strathaven,Blisses,1,1.5,5.25,NA,12.25,15.75,18.25,NA,NA,NA,Spider Cove,8
+70,2006-08-27,Senator Neil,Blisses,NA,NA,NA,10.5,10.5,17,12.75,11.25,10.5,NA,Tuckers Cove,8
+71,2006-08-28,Michael Eileen,St Marys Bay,NA,NA,NA,2.5,7.75,10.75,11.75,8.5,8.25,3.5,,8
+72,2006-08-28,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,5.5,7.5,7,8.5,,8
+73,2006-08-29,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,6.5,9.75,6.5,4,,8
+74,2006-09-04,Canada 100,Scott's Bay,5.5,5.25,8,7.5,9,9.5,13,13,10,12,(Grades 5 to 1),9
+75,2006-09-05,Brunswick Provider,Moores Ledge,9.75,10,15.5,16,17,17,12,11,17.5,18,(Grades 5 to 1),9
+76,2006-09-05,Caroline B,Blisses,NA,NA,3.75,7.5,8,9.75,10.75,6.75,10.5,5,,9
+77,2006-09-05,Caroline B,Deer Island,NA,NA,NA,10.5,13.75,12.5,NA,NA,NA,NA,,9
+78,2006-09-05,Michael Eileen,Beaver Harbour,NA,NA,NA,NA,10.5,18.25,13,9.25,7.75,NA,Moose Island,9
+79,2006-09-06,Andrew & Deane,Deadmans,NA,NA,NA,NA,10,11,9.5,6,5.75,NA,Shut off,9
+80,2006-09-06,Margaret Elizabeth,Lurcher,NA,NA,NA,NA,8,8.5,14,10.5,10.5,NA,,9
+81,2006-09-07,Strathaven,Deer Island,NA,NA,NA,NA,12,16.5,12.5,12.5,NA,NA,Rattle Rock,9
+82,2006-09-10,Silver King,Blisses,NA,NA,NA,NA,5,9.75,12.5,5.5,8.25,NA,,9
+83,2006-09-10,Caroline B,Deer Island,NA,3.5,3,8.5,8.5,14,17.5,12.5,NA,NA,,9
+84,2006-09-11,Strathaven,Deadmans,NA,NA,NA,NA,12.5,9.75,9.5,7.5,NA,NA,,9
+85,2006-09-11,Canada 100,Lurcher,NA,NA,NA,NA,5,9,14.25,12.75,10,NA,,9
+86,2006-09-12,Senator Neil,Perry Shore,NA,1.75,2.5,8,7,14.5,15,15.5,7.25,NA,,9
+87,2006-09-12,Strathlorne,Back Bay,NA,NA,4.75,7,11,23.5,17,12.95,6.5,10.25,,9
+88,2006-09-12,Brunswick Provider,The Rip,NA,NA,NA,NA,7,12,16.25,10.25,9.25,NA,,9
+89,2006-09-13,Strathburn,Campobello,NA,NA,NA,7.25,13,10.5,16.25,1.25,6.25,NA,,9
+90,2006-09-13,Silver King,Grand Manan,2.75,3.5,10.5,5.25,8.5,19,24.75,2,0.75,NA,,9
+91,2006-09-14,Canada 100,Yarmouth,NA,NA,NA,NA,6.25,12.25,10,12.25,10,NA,,9
+92,2006-09-18,Canada 100,Yarmouth,NA,NA,NA,3.5,4.25,8.5,8,6.25,NA,NA,,9
+93,2006-09-18,Caroline B,Deer Island,NA,NA,5.75,10,9.5,8.5,12,10,5.5,NA,,9
+94,2006-09-18,Silver King,Deer Island,NA,NA,NA,NA,20.5,20.5,16.5,16,6.5,NA,,9
+95,2006-09-19,Strathburn,Deadmans,NA,NA,NA,3,8,16.5,17,5.5,NA,NA,Flower Pot,9
+96,2006-09-20,Canada 100,German Banks,NA,NA,4.5,5,9,8,5,6,4,4,(Grades 4 to 1),9
+97,2006-09-21,Strathburn,Campobello,NA,NA,NA,NA,NA,NA,NA,6.5,7,NA,Ship Head,9
+98,2006-09-21,Michael Eileen,Wolves,NA,4,6.5,9.5,NA,NA,NA,NA,NA,NA,Bradfords Cove,9
+99,2006-09-22,Strathburn,Wolves,NA,NA,3,7,9.75,14.5,14,NA,NA,NA,Bradfords Cove,9
+100,2006-09-24,Strathburn,Blisses,NA,NA,6.25,6.75,7.25,15,16.5,6.5,10,8,Shut off,9
+101,2006-09-25,Strathburn,Grand Manan,NA,2.75,6.75,7,8.25,10.25,16.5,10,10.75,NA,Bradfords Cove,9
+102,2006-09-25,Strathlorne,Blisses,NA,NA,2.25,6.75,9.25,11.5,10.75,14.25,NA,NA,,9
+103,2006-09-26,Andrew & Deane,Campobello,NA,NA,8.75,10,7.25,12.25,10.5,2.25,NA,NA,,9
+104,2006-09-26,Canada 100,Lurcher,NA,NA,NA,NA,9.5,10.75,11.75,5.75,NA,NA,,9
+105,2006-09-26,Andrew & Deane,Deer Island,NA,NA,NA,5,8,15.25,9.75,6,5,NA,Black Prince,9
+106,2006-09-28,Senator Neil,Perry Shore,NA,NA,4.25,3.25,7.25,13,19.5,NA,NA,NA,Fish Point,9
+107,2006-09-28,Michael Eileen,Wolves,NA,NA,3,5.25,10.25,15,22.75,12.25,21.25,NA,,9
+108,2006-10-01,Canada 100,Seeleys Head,NA,NA,NA,NA,2.5,7,10,4.5,3.25,NA,,10
+109,2006-10-02,Caroline B,Deer Island,NA,NA,4.5,10,18.5,17,18,7.75,NA,NA,Shut off,10
+110,2006-10-03,Silver King,Deadmans,NA,NA,NA,2,11.25,10,13.25,NA,NA,NA,Flower Pot,10
+111,2006-10-03,Andrew & Deane,Campobello,NA,NA,NA,NA,NA,6.5,10.75,7.5,1.5,2.5,Quaddy Head,10
+112,2006-10-04,Caroline B,Blisses,NA,NA,NA,NA,10,14.5,10.5,NA,NA,NA,Mackerel Rock,10
+113,2006-10-09,Strahaven,Campobello,NA,NA,NA,NA,NA,10.5,9.5,7.5,11.5,6.75,Meadow Brook,10
+114,2006-10-09,Brunswick Provider,German Banks,NA,NA,NA,NA,NA,NA,8,5.5,4.5,7.5,NS seine,10
+115,2006-10-09,Strathlorne,L'etete,NA,NA,NA,4,6,11.5,7,NA,NA,NA,Shut off,10
+116,2006-10-09,Senator Neil,Deadmans,NA,NA,NA,NA,6.5,13,1,NA,NA,NA,Flower Pot,10
+117,2006-10-10,Crystal Sea,Georges Bank,NA,NA,NA,NA,NA,NA,4,7,4,NA,USA Trucks,10
+118,2006-10-10,Caroline B,Deer Island,NA,NA,5,5.5,13.5,15,NA,NA,NA,NA,Halfaway,10
+119,2006-10-15,Challenger,Middle Banks,NA,NA,NA,NA,NA,9,7,8.75,5,7.25,USA Trucks,10
+120,2006-10-15,Capelco,Campobello,NA,NA,NA,NA,NA,NA,11.75,16.75,7.5,10.75,Southern Head,10
+121,2006-10-15,Strathburn,Deer Island,NA,NA,2,4,6.5,12.25,10.25,12,NA,NA,Mackerel Rock,10
+122,2006-10-16,Caroline B,Back Bay,1.75,0.75,2.5,11,13,16,11.25,NA,NA,NA,Hog Island,10
+123,2006-10-16,Canada 100,Lurcher,NA,NA,NA,1.25,4,8,9.75,7.75,NA,NA,,10
+124,2006-10-17,Margaret Elizabeth,Long Island Shore,NA,NA,NA,NA,NA,12.5,15.5,14.5,15.5,NA,,10
+125,2006-10-17,Strathburn,Wolves,NA,NA,1,5.75,4.75,15.5,7.5,NA,NA,NA,Beach,10
+126,2006-10-18,Capelco,Blisses,NA,NA,5,5,4.75,4.25,10.25,13.75,8.25,NA,,10
+127,2006-10-19,Margaret Elizabeth,NW Banks,NA,NA,NA,NA,NA,NA,16.25,10.25,18.25,13,,10
+128,2006-10-19,Senator Neil,Back Bay,NA,NA,2.75,3,7.75,14.75,5.5,15,NA,NA,,10
+129,2006-10-23,Margaret Elizabeth,Lurcher,NA,NA,NA,4.25,4.5,9.5,19.5,11.5,15.5,NA,,10
+130,2006-10-23,Canada 100,Centerville,NA,NA,15.25,20,17.75,NA,NA,NA,NA,NA,NS seine,10
+131,2006-10-23,Strathaven,Deer Island,NA,NA,4.75,5,10,12,NA,NA,NA,NA,Hospital Island,10
+132,2006-10-24,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,NA,6.75,15.25,15.5,11.75,2.75,,10
+133,2006-10-24,Strathlorne,Back Bay,NA,NA,1,2.25,4.75,7.5,10,7,20.75,NA,Hog Island,10
+134,2006-10-25,Senator Neil,Deer Island,NA,NA,6.75,8.75,16,12.75,17,9,NA,NA,Rattle Rock,10
+135,2006-10-26,Caroline B,Beaver Harbour,NA,NA,5.75,5.25,5.25,4.75,6,9.25,7.25,NA,Moose Island,10
+136,2006-12-04,Western Venture,Gloucester,NA,NA,NA,NA,5.5,6.5,7.5,3,10,5.5,USA trucks,12
+137,2006-12-05,Nicole Daniel,Caraquet,NA,NA,NA,NA,NA,9.5,6.75,11.5,10,NA,NB trucks,12
+138,2006-12-06,Capelco,Grand Manan,NA,NA,7,9.5,14.5,NA,NA,NA,NA,NA,NB shut off,12
+1,2007-01-09,Heather Lynn,Rhode Island,NA,NA,NA,NA,NA,3.25,7.5,5.25,NA,NA,USA Trucks,1
+2,2007-01-11,Canada 100,Wolves,NA,NA,NA,7.25,13.75,8.75,17.25,NA,NA,NA,,1
+3,2007-01-12,Brunswick Provider,Wolves,NA,NA,6.5,11.25,12.75,18.25,17.75,NA,NA,NA,,1
+4,2007-01-12,Sunlight,,NA,NA,NA,NA,NA,7,1.75,1.5,NA,NA,USA Trucks,1
+5,2007-01-19,Western Venture,,NA,NA,NA,NA,NA,4.5,1.25,1.75,2.5,0.5,,1
+6,2007-01-30,Heather Lynn,,NA,NA,NA,NA,1,3.75,4.5,1,1.75,1.75,,1
+7,2007-02-22,Heather Lynn,Mud Hole,NA,NA,NA,NA,0.5,1.25,4.25,0.75,6.5,2.5,,2
+8,2007-02-27,Trucks,Block Island,NA,NA,NA,NA,1.25,2.5,1.25,2.75,0.5,5.25,,2
+9,2007-02-28,Trucks,Nauset Beach,NA,NA,NA,NA,3.25,3.5,5.75,2.75,2.75,1.25,off Cape Cod,2
+10,2007-06-04,Senator Neil,Back Bay,NA,NA,6.5,7,8.5,10,13,NA,NA,NA,,6
+11,2007-06-15,Canada 100,,NA,NA,NA,NA,11.25,17,13.75,19,12,NA,,6
+12,2007-06-19,Capelco,Grand Manan,NA,NA,7,5.75,8,10.5,13.5,NA,NA,NA,Money Cove,6
+13,2007-06-21,Margaret Elizabeth,SW Banks,NA,NA,NA,16,16.75,23.5,17,20,17,NA,,6
+14,2007-06-22,Capelco,Grand Manan,NA,NA,8,7.5,9,14,11,19.5,NA,NA,Money Cove,6
+15,2007-06-26,Capelco,Grand Manan,NA,NA,4.5,9.5,12.75,18.75,NA,NA,NA,NA,Intruder,6
+16,2007-06-27,Brunswick Provider,SW Banks,NA,NA,NA,16.5,18.5,24,18.5,12.25,NA,NA,,6
+17,2007-06-27,Silver King,Grand Manan,NA,NA,NA,11,13.25,15.25,10.75,8.25,NA,NA,,6
+18,2007-06-28,Capelco,USA fish,NA,NA,NA,9.75,11.5,3.5,18.75,NA,NA,NA,Shut off,6
+19,2007-06-28,Strathaven,Grand Manan,NA,NA,12,17.5,21,22.5,14,NA,NA,NA,North Air,6
+20,2007-06-28,Capelco,Grand Manan,NA,NA,NA,16,15,20.75,13.75,NA,NA,NA,Iron Lady,6
+21,2007-06-30,Julie Ann,Halifax,NA,NA,NA,NA,NA,NA,11.5,12.25,8,NA,,6
+22,2007-07-02,Strathaven,Grand Manan,NA,NA,18.75,6.75,11,12,15,NA,NA,NA,Money Cove,7
+23,2007-07-02,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,NA,16.5,15.5,8.25,,7
+24,2007-07-03,Canada 100,Prong,NA,NA,NA,NA,7.75,8.75,17.5,17.5,16.75,NA,,7
+25,2007-07-03,Strathburn,Grand Manan,NA,NA,5.25,5.25,12.25,18.5,16,NA,NA,NA,Bradfords Cove,7
+26,2007-07-04,Canada 100,Prong,NA,NA,NA,NA,NA,22.5,19.75,18.5,17,16.75,,7
+27,2007-07-04,Sunlight,,NA,NA,NA,NA,NA,NA,NA,19,20,18.75,USA Trucks,7
+28,2007-07-04,Senator Neil,Grand Manan,NA,NA,NA,19.5,22.25,18,NA,NA,NA,NA,,7
+29,2007-07-05,Canada 100,Centerville,NA,NA,NA,NA,12,15.5,18.25,9.5,10.5,NA,NS Seine,7
+30,2007-07-05,Margaret Elizabeth,Long Island Shore,NA,NA,NA,NA,18,13.5,16.5,18,15,4.25,NS Seine,7
+31,2007-07-08,Strathaven,Grand Manan,NA,NA,NA,14.75,21.5,18.25,24.25,15.25,12.75,NA,,7
+32,2007-07-08,Canada 100,Yarmouth,NA,NA,NA,NA,NA,19.75,19,21.25,12.5,19.25,,7
+33,2007-07-09,Canada 100,Grand Manan,NA,NA,NA,12.5,15.25,20.75,18.5,19,15.25,NA,,7
+34,2007-07-09,Senator Neil,Grand Manan,NA,NA,15,20,21,20.5,23.75,NA,NA,NA,Gully,7
+35,2007-07-09,Strathlorne,Grand Manan,NA,NA,NA,19.5,18,18.75,20.5,NA,NA,NA,Bulls Eddy,7
+36,2007-07-10,Brunswick Provider,Long Island Shore,NA,NA,NA,8.75,10.5,11,17.5,20.5,NA,NA,,7
+37,2007-07-10,Margaret Elizabeth,Yankee Banks,NA,NA,NA,NA,8,NA,10,16.75,11.25,13.25,,7
+38,2007-07-10,Silver King,St Mary's Bay,NA,NA,NA,10,9.25,19.5,NA,NA,NA,NA,,7
+39,2007-07-15,Michael Eileen,Grand Manan,NA,NA,NA,17.5,19.25,20,18.25,13.5,NA,NA,Cora Belle,7
+40,2007-07-15,Strathlorne,Grand Manan,NA,NA,23.25,21.5,13.5,16.25,14.25,15.5,15,15,Gully,7
+41,2007-07-16,Canada 100,Scotts Bay,NA,NA,NA,NA,NA,NA,9.75,5.25,8.75,8,,7
+42,2007-07-16,Senator Neil,Blisses,NA,NA,6,5.25,13.5,18.5,21,20.75,NA,NA,,7
+43,2007-07-17,Strathaven,Grand Manan,NA,NA,NA,11.75,18.5,16.25,13.5,NA,NA,NA,Seawall,7
+44,2007-07-17,Michael Eileen,St Mary's Bay,NA,NA,NA,NA,NA,14.75,14.75,13.5,11.5,6.5,Sandy Cove,7
+45,2007-07-19,Brunswick Provider,Grand Manan,NA,NA,NA,13.5,15.5,17,20.5,19.5,15.5,NA,White Head,7
+46,2007-07-19,Caroline B,Campobello,NA,NA,13.5,10.75,10.5,15,18,10,7,NA,,7
+47,2007-07-19,Strathaven,Grand Manan,NA,NA,16,15,7.5,12.75,19.5,NA,NA,NA,Gully,7
+48,2007-07-19,Senator Neil,Wolves,NA,NA,12,15,10,19.25,17,NA,NA,NA,,7
+49,2007-07-19,Canada 100,Long Island Shore,NA,NA,NA,NA,12.25,16.5,17,13,16.5,NA,,7
+50,2007-07-22,Andrew & Deane,Grn,NA,NA,NA,11.25,16.25,17.75,17,17.25,18.25,NA,Money Cove,7
+51,2007-07-22,Strathlorne,Grand Manan,NA,NA,NA,14,15,13.5,22.25,NA,NA,NA,Gully,7
+52,2007-07-23,Senator Neil,Beaver Harbour,NA,NA,NA,12,13.25,16.5,NA,NA,NA,NA,Barry Head,7
+53,2007-07-23,Michael Eileen,Grand Manan,NA,NA,NA,NA,13.75,20,19.75,NA,NA,NA,Jubilee,7
+54,2007-07-23,Margaret Elizabeth,Scotts Bay,NA,NA,NA,NA,NA,13,11.75,9,11.75,13.5,Head of the Bay,7
+55,2007-07-24,Strathlorne,Blisses,NA,NA,NA,9,12.5,15.25,NA,NA,NA,NA,,7
+56,2007-07-24,Capelco,German Banks,NA,NA,NA,NA,NA,NA,12.75,13,12,12.25,,7
+57,2007-07-25,Canada 100,Grand Manan,NA,NA,9.75,12.5,12.5,23.5,15.25,NA,NA,NA,White Head,7
+58,2007-07-25,Canada 100,Grand Manan,NA,NA,NA,10,17,13.25,21.75,NA,NA,NA,,7
+59,2007-07-25,Strathaven,Wolves,NA,NA,NA,7.75,16.25,17,NA,NA,NA,NA,,7
+60,2007-07-29,Strathaven,Campobello,NA,NA,6.5,9,17,11,20.5,NA,NA,NA,Man 0 War,7
+61,2007-07-29,Senator Neil,Wolves,NA,NA,NA,6.5,15.5,20.25,NA,NA,NA,NA,,7
+62,2007-07-29,Silver King,Grand Manan,NA,NA,NA,14,19.25,21.25,19.5,NA,NA,NA,Mumps,7
+63,2007-07-29,Strathlorne,Deer Island,NA,NA,NA,9.5,11.5,17,20,18.75,13.75,NA,,7
+64,2007-07-31,Strathburn,St Mary's Bay,NA,NA,NA,5.25,8.75,4.25,19.5,12.5,10.25,7.25,,7
+65,2007-07-31,Michael Eileen,Grand Manan,NA,NA,NA,10.5,17,19.75,NA,NA,NA,NA,,7
+66,2007-08-01,Andrew & Deane,Grand Manan,NA,NA,NA,11.75,16.75,19.5,21,NA,NA,NA,,8
+67,2007-08-02,Canada 100,Long Island Shore,NA,NA,NA,10.25,14.5,12.75,16.75,14.25,18.25,12.25,,8
+68,2007-08-02,Strathaven,Blisses,NA,NA,9,12.5,18,21.25,16.25,15,9,NA,,8
+69,2007-08-06,Strathlorne,Blisses,NA,NA,1.5,7,11.5,10.25,15.25,13.75,11.5,NA,,8
+70,2007-08-06,Strathburn,Deer Island,NA,NA,NA,6.5,16.5,19.75,15,8.25,11,NA,,8
+71,2007-08-08,Michael Eileen,Grand Manan,NA,NA,11.75,17.5,19.75,19.75,11.5,12.75,NA,NA,,8
+72,2007-08-08,Strathlorne,Deer Island,NA,NA,NA,13.75,15.75,17,NA,NA,NA,NA,,8
+73,2007-08-08,Margaret Elizabeth,Margaretsville,NA,NA,NA,NA,NA,NA,13.75,11.75,10,4.5,,8
+74,2007-08-09,Margaret Elizabeth,,NA,NA,NA,14.25,9.25,20.75,23,14,12.25,NA,,8
+75,2007-08-09,Senator Neil,Deer Island,NA,NA,NA,NA,9.5,18.25,16.25,17.25,10,NA,,8
+76,2007-08-09,Strathlorne,Wolves,NA,NA,2.25,6.25,14.5,22.25,14.75,12.25,NA,NA,,8
+77,2007-08-09,Canada 100,Long Island Shore,NA,NA,NA,NA,10.5,18.5,20,17,NA,NA,,8
+78,2007-08-10,Caroline B,Beaver Harbour,NA,NA,NA,12.5,17.75,24.5,NA,NA,NA,NA,Moose Island,8
+79,2007-08-10,Strathlorne,Blisses,NA,NA,NA,12,12.75,12.75,22.25,19.75,10.25,NA,Tuckers Cove,8
+80,2007-08-12,Senator Neil,Blisses,NA,NA,NA,14,15.5,17.75,NA,NA,NA,NA,Eagle Island,8
+81,2007-08-13,Strathaven,Grand Manan,NA,NA,9,12.5,14.5,14.75,15,12.25,NA,NA,Bulls Eddy,8
+82,2007-08-13,Senator Neil,Blisses,NA,NA,8,5,15.25,10.25,14,8.25,13.75,NA,,8
+83,2007-08-13,Margaret Elizabeth,Margaretsville,NA,NA,NA,NA,NA,7,9,12.25,8.5,11,,8
+84,2007-08-13,Strathburn,Deer Island,NA,NA,NA,12.25,16.75,18.75,15.5,12.5,10,NA,Casco Island,8
+85,2007-08-13,Strathlorne,Wolves,NA,NA,NA,12.25,13.5,19.25,24,NA,NA,NA,,8
+86,2007-08-13,Capelco,Grand Manan,NA,NA,10.25,12.5,14.5,16,18.25,NA,NA,NA,,8
+87,2007-08-14,Canada 100,Long Island Shore,NA,NA,NA,12,12,16,14,14.25,14.5,NA,,8
+88,2007-08-14,Silver King,Campobello,NA,NA,NA,NA,15,16.25,15.75,6,NA,NA,Shut off,8
+89,2007-08-14,Strathburn,Grand Manan,NA,NA,NA,NA,15,25.25,18.75,13.5,12.5,NA,Money Cove,8
+90,2007-08-15,Strathlorne,Wolves,NA,NA,NA,14.5,15.5,15,15.5,NA,NA,NA,,8
+91,2007-08-15,Strathaven,Grand Manan,NA,NA,NA,8.75,14.5,13.5,10,8.5,9,NA,Gully,8
+92,2007-08-15,Caroline B,Deer Island,NA,NA,12.5,15.25,15.5,16,NA,NA,NA,NA,Zig Zag, Black Prince
+93,2007-08-15,Strathaven,Grand Manan,NA,NA,NA,10.25,17.75,17.75,22,NA,NA,NA,Gully (last night's),8
+94,2007-08-19,Strathlorne,Grand Manan,NA,NA,NA,12,14,15,24.25,NA,NA,NA,,8
+95,2007-08-19,Strathlorne,Campobello,NA,NA,NA,8,11.25,13,16.25,16.5,9.75,NA,Schooner Cove,8
+96,2007-08-19,Senator Neil,Wolves,NA,NA,NA,10,20.75,17,NA,NA,NA,NA,,8
+97,2007-08-19,Andrew & Deane,Deer Island,NA,NA,NA,8.5,14,13,17.25,14.25,10.25,NA,Abnaki,8
+98,2007-08-20,Strathburn,Blisses,NA,NA,NA,13,17.75,19,9.5,NA,NA,NA,,8
+99,2007-08-21,Canada 100,SW Banks,NA,NA,NA,11.75,7.5,14.75,15.75,17,NA,NA,,8
+100,2007-08-21,Strathlorne,Grand Manan,NA,NA,NA,12.25,12.75,17.75,19.25,15.25,NA,NA,,8
+101,2007-08-21,Strathlorne,Deer Island,NA,NA,NA,10.75,15,16.5,20.25,18,6,NA,Pup,8
+102,2007-08-24,Strathlorne,Blisses,NA,NA,NA,5.5,15,17.25,22,15.5,NA,NA,Frye,8
+103,2007-08-26,Margaret Elizabeth,Scotts Bay,NA,NA,NA,NA,NA,NA,5,11.75,9.5,5.5,Head of the Bay,8
+104,2007-08-26,Caroline B,Deer Island,NA,NA,NA,9,11.75,19,NA,NA,NA,NA,Pup,8
+105,2007-08-26,Strathaven,Wolves,NA,NA,NA,12.25,14.25,16.5,12.5,NA,NA,NA,Nubble,8
+106,2007-08-26,Strathlorne,Blisses,NA,NA,NA,12.25,9,11.5,16.75,14.5,7.5,NA,Eagle Island,8
+107,2007-08-27,Strathaven,Campobello,NA,NA,NA,8.25,14.25,12.75,10.75,8.25,NA,NA,Man 0 War,8
+108,2007-08-27,Strathburn,Wolves,NA,NA,NA,11,11.75,19.25,NA,NA,NA,NA,Flat Pot,8
+109,2007-08-27,Silver King,Grand Manan,1,3.75,7.75,4.25,9.5,11.5,11.75,13.5,13.5,NA,Bradfords Cove,8
+110,2007-08-28,Capelco,Grand Manan,NA,NA,NA,NA,14.5,19,17.25,9.75,NA,NA,Gully,8
+111,2007-08-28,Strathlorne,Deer Island,NA,NA,NA,NA,14,17.75,10.5,NA,NA,NA,Abnaki,8
+112,2007-08-29,Michael Eileen,Campobello,NA,NA,NA,7.5,8.75,16.25,15.25,11.75,10.25,NA,Schooner Cove,8
+113,2007-08-29,Strathlorne,Deer Island,NA,NA,NA,11.5,15.25,19.25,13.75,NA,NA,NA,Zig Zag,8
+114,2007-09-03,Andrew & Deane,Deer Island,NA,NA,NA,12,14,13.25,NA,NA,NA,NA,Carney's Cove,9
+115,2007-09-03,Strathburn,Wolves,NA,NA,NA,8.5,11.5,18,NA,NA,NA,NA,,9
+116,2007-09-03,Senator Neil,Deer Island,NA,NA,NA,11.25,13,13,6.5,12.25,8.25,6,Carney's Cove,9
+117,2007-09-03,Michael Eileen,Grand Manan,NA,NA,8.5,9,20.25,19.5,15.5,15,11.25,9,Sherman Kinghorne,9
+118,2007-09-04,Andrew & Deane,Grand Manan,NA,NA,8.5,7,16.75,13.25,18.5,11,8.75,NA,First Venture,9
+119,2007-09-04,Canada 100,NE Banks,NA,NA,NA,7.75,14.5,16.5,20.75,20.5,7.75,14.75,,9
+120,2007-09-04,Strathlorne,Blisses,NA,NA,NA,7.75,13,19.5,18.25,19.75,NA,NA,,9
+121,2007-09-05,Michael Eileen,Campobello,NA,NA,NA,10.25,14.25,16.5,15.5,13,8.5,10.25,Ship Head,9
+122,2007-09-05,Senator Neil,Blisses,NA,NA,NA,5.75,12.75,15.25,15.75,16,7.25,4.5,Crab Rock,9
+123,2007-09-06,Senator Neil,Campobello,NA,NA,NA,10,12.5,18,15,8.5,9.25,NA,Schooner Cove,9
+124,2007-09-06,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,14,12,14,12.25,,9
+125,2007-09-09,Caroline B,Back Bay,NA,NA,NA,14,12.75,10.75,13,NA,NA,NA,Eagle Island,9
+126,2007-09-09,Senator Neil,Wolves,NA,NA,NA,13.5,14,14.5,10,NA,NA,NA,Wolf,9
+127,2007-09-09,Michael Eileen,Deadmans,NA,NA,NA,NA,NA,17.25,14.25,9.25,13.5,NA,Hit & Miss,9
+128,2007-09-10,Caroline B,Blisses,NA,NA,NA,9.75,15.75,18.25,22.5,14,NA,NA,Eagle Island,9
+129,2007-09-11,Brunswick Provider,NE Banks,NA,NA,NA,NA,12.25,13.5,18.25,13.25,19.75,NA,,9
+130,2007-09-11,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,12,11,5.5,8.75,,9
+131,2007-09-13,Silver King,Deadmans,NA,NA,NA,6.75,10.25,15.5,17.75,10.5,8,NA,Hit & Miss,9
+132,2007-09-13,Strathlorne,Campobello,NA,NA,NA,12.5,12.5,13.5,16,15.75,13.75,1.25,Shag Rock,9
+133,2007-09-17,Strathlorne,Deer Island,NA,NA,NA,8,10,20,18.25,NA,NA,NA,Abnaki,9
+134,2007-09-17,Strathaven,Grand Manan,NA,NA,8.75,11.75,14.5,18.5,17.5,NA,NA,NA,Money Cove,9
+135,2007-09-17,Capelco,Campobello,NA,NA,NA,8.5,12.25,13.5,13.5,11.75,6.25,NA,Ship Head,9
+136,2007-09-17,Canada 100,German Banks,NA,NA,NA,NA,NA,13,13,8,10.75,8.75,,9
+137,2007-09-18,Brunswick Provider,Grand Manan,NA,NA,NA,4.75,12.75,19,17.25,NA,NA,NA,White Head,9
+138,2007-09-18,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,8.25,8.5,10,6,,9
+139,2007-09-18,Senator Neil,Blisses,NA,NA,NA,8.75,12,16.5,15.75,12.5,NA,NA,Spider Cove,9
+140,2007-09-19,Michael Eileen,Grand Manan,NA,NA,NA,9,12,12.25,13,NA,NA,NA,Iron Lady,9
+141,2007-09-19,Caroline B,Deer Island,NA,NA,NA,8.25,11.5,14.25,NA,NA,NA,NA,Abnaki,9
+142,2007-09-20,Caroline B,Campobello,NA,NA,NA,5.75,8.75,15.75,11.75,12.25,8.5,NA,Ship Head,9
+143,2007-09-20,Silver King,Blisses,NA,NA,NA,5,10.75,14.5,17.75,7.75,NA,NA,Spider Cove,9
+144,2007-09-20,Margaret Elizabeth,NE Banks,NA,NA,NA,9,16,20,16.5,22.75,10.75,NA,,9
+145,2007-09-23,Strathburn,Grand Manan,NA,NA,NA,7.5,9.75,14,17.75,11.25,9,NA,,9
+146,2007-09-24,Senator Neil,Campobello,NA,NA,NA,8.5,9.5,15,13.75,7.25,9,NA,,9
+147,2007-09-24,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,10,4,14.5,12.25,,9
+148,2007-09-25,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,9.75,5.5,4.25,8.5,,9
+149,2007-09-25,Strathlorne,Wolves,NA,NA,NA,7,10.25,17,6.25,12,NA,NA,,9
+150,2007-09-25,Brunswick Provider,Grand Manan,NA,NA,NA,12,16.25,22,18.75,19,9.5,NA,,9
+151,2007-09-26,Michael Eileen,Wolves,NA,NA,NA,8.75,13.25,15.5,16.5,10,NA,NA,,9
+152,2007-09-30,Caroline B,Wolves,NA,NA,NA,8.75,9,20.5,17,NA,NA,NA,Welcome,9
+153,2007-09-30,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,11.25,9,1.25,15.25,,9
+154,2007-10-01,Strathlorne,Wolves,NA,NA,NA,8.25,9,15.75,15.25,NA,NA,NA,Paul's Cove,10
+155,2007-10-01,Brunswick Provider,NE Banks,NA,NA,NA,NA,12.25,13.25,10.5,NA,NA,NA,,10
+156,2007-10-01,Silver King,Grand Manan,NA,NA,NA,8.25,14.25,22.25,13.75,12.25,NA,NA,Mystery,10
+157,2007-10-02,Capelco,Campobello,NA,NA,NA,5.75,11.25,15.5,15.75,8.5,10.5,NA,Ship Head,10
+158,2007-10-03,Andrew & Deane,Blisses,NA,NA,NA,3,8.75,15.5,9.5,9.5,NA,NA,Deep Cove,10
+159,2007-10-04,Andrew & Deane,Beaver Harbour,NA,NA,NA,6.25,11.75,11.75,11.5,NA,NA,NA,Moose Island,10
+160,2007-10-08,Senator Neil,Wolves,NA,NA,4.75,7,9.75,NA,NA,NA,NA,NA,Back Cove,10
+161,2007-10-08,Caroline B,Blisses,NA,NA,NA,NA,8,10.75,10.75,NA,NA,NA,Deep Cove,10
+162,2007-10-08,Strathburn,Deadmans,NA,NA,6.25,10.75,11.25,10.75,NA,NA,NA,NA,Hit & Miss,10
+163,2007-10-08,Michael Eileen,Grand Manan,NA,NA,NA,NA,6.5,10.75,13.25,NA,NA,NA,Bulls Eddy,10
+164,2007-10-08,Strathlorne,Wolves,NA,NA,NA,17.5,11.5,10.25,15.25,NA,NA,NA,Beach,10
+165,2007-10-09,Michael Eileen,Campobello,NA,NA,NA,7.5,13,16.25,14.25,8.75,NA,NA,Herring Cove,10
+166,2007-10-09,Margaret Elizabeth,SW Banks,NA,NA,NA,NA,13.5,14.5,18,13.25,13.75,NA,,10
+167,2007-10-09,Silver King,Campobello,NA,NA,NA,3.5,7,12.75,11.25,NA,NA,NA,Shag Rock,10
+168,2007-10-09,Strathburn,Grand Manan,NA,NA,NA,9.75,13.25,15.5,15.5,NA,NA,NA,Mumps,10
+169,2007-10-10,Strathaven,Blisses,NA,NA,NA,9,10,10.75,5.75,NA,NA,NA,Paul's Cove,10
+170,2007-10-10,Strathburn,Deadmans,NA,NA,2.5,4.5,9.5,15.25,12,14,NA,NA,Hit & Miss,10
+171,2007-10-14,Michael Eileen,Wolves,NA,NA,NA,6,9.25,9.75,15.25,NA,NA,NA,Beach,10
+172,2007-10-14,Capelco,Grand Manan,NA,NA,NA,10.25,14,14.75,NA,NA,NA,NA,Cora Belle,10
+173,2007-10-14,Strathburn,Blisses,NA,NA,NA,8.25,9,10.75,11.5,16.25,NA,NA,Spider Cove,10
+174,2007-10-14,Strathlorne,Wolves,NA,NA,NA,6,10.75,14.5,14,NA,NA,NA,Paul's Cove,10
+175,2007-10-15,Strathlorne,Campobello,NA,NA,NA,6.75,11.5,11.75,10.75,9.25,NA,NA,Shag Rock,10
+176,2007-10-15,Strathburn,Deadmans,NA,NA,8.75,12.75,15.5,14.5,9.75,NA,NA,NA,Hit & Miss,10
+177,2007-10-15,Canada 100,Grand Manan,NA,NA,3.25,5.5,9,14.25,15.5,24.75,NA,NA,North Head,10
+178,2007-10-15,Senator Neil,Blisses,NA,NA,3.25,5.5,8.25,13.5,17,11.25,10.5,NA,Deep Cove,10
+179,2007-10-16,Capelco,Grand Manan,NA,NA,NA,7,9,13,16.75,14.75,NA,NA,Mumps,10
+180,2007-10-16,Strathlorne,Campobello,NA,NA,NA,7.75,9,13.5,14,9.25,NA,NA,Shut off,10
+181,2007-10-17,Caroline B,Deadmans,NA,NA,NA,5.5,7,11.75,14,6.5,11.75,NA,Hit & Miss,10
+1,2008-01-15,Starlight,USA,NA,NA,NA,NA,7.5,5.5,10.5,2.25,3.75,11.5,USA trucks,1
+2,2008-01-22,Sunlight,USA,NA,NA,NA,NA,4.5,8,4.25,3,1.75,3.75,USA trucks,1
+3,2008-01-22,Starlight,USA,NA,NA,NA,NA,8.25,8,10.25,2.5,10,NA,USA trucks,1
+4,2008-01-23,Trucks,USA,NA,NA,NA,NA,NA,7.75,1.75,4.25,6,NA,USA trucks,1
+5,2008-01-24,Heather Lynn,USA,NA,NA,NA,NA,NA,9.75,6.75,6.5,NA,NA,USA trucks,1
+6,2008-01-24,Sunlight,,NA,NA,NA,NA,2.25,6.75,6.75,2.75,5.25,NA,USA trucks,1
+7,2008-01-28,Endeavour,,NA,NA,NA,NA,NA,NA,5,3.25,7.75,10.5,USA trucks,1
+8,2008-02-04,Heather Lynn,,NA,NA,NA,NA,3,5.5,3.25,7.5,NA,NA,USA trucks,2
+9,2008-02-06,Challenger,,NA,NA,NA,NA,NA,4.25,1.25,7,5.75,NA,USA trucks,2
+10,2008-03-06,Frozen Sardines,From NS,NA,NA,NA,9.25,16.5,16.75,16.25,NA,NA,NA,Comeau Sar,3
+11,2008-06-01,Silver King,St Marys Bay,NA,NA,NA,10.25,10.25,8,5.25,14.5,9.75,NA,,6
+12,2008-06-02,Brunswick Provider,NE Banks,NA,NA,NA,NA,10.25,15.75,12,13.5,6.5,NA,,6
+13,2008-06-06,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,NA,11.25,11,8,5.25,NA,,6
+14,2008-06-06,Silver King,St Marys Bay,NA,NA,NA,8.5,10.75,14.5,9.75,11,NA,NA,,6
+15,2008-06-10,Capelco,St Marys Bay,NA,NA,5.5,9.75,11.5,8,7.75,7.25,NA,NA,,6
+16,2008-06-10,Brunswick Provider,NE Banks,NA,NA,NA,10.75,13,14.5,17.75,16,12.75,NA,,6
+17,2008-06-11,Michael Eileen,St Marys Bay,NA,NA,6.75,5.25,11.75,14.5,12.25,11.25,NA,NA,Griffin Cove,6
+18,2008-06-11,Capelco,St Marys Bay,NA,NA,6,8,6.25,11.25,12.5,10.25,6.5,7.75,,6
+19,2008-06-12,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,7,12.25,20.25,12,14,NA,,6
+20,2008-06-15,Senator Neil,St Marys Bay,NA,NA,NA,NA,NA,12.25,12.5,9.75,8.5,4.25,East Cove,6
+21,2008-06-15,Michael Eileen,St Marys Bay,NA,NA,NA,NA,9,12.75,14.5,7.5,9.25,9.5,Lake Brook,6
+22,2008-06-16,Brunswick Provider,Long Island Shore,NA,NA,NA,NA,12.5,13.5,6.25,9.5,8.5,7,,6
+23,2008-06-16,Margaret Elizabeth,Long Island Shore,NA,NA,NA,NA,NA,13.75,12.5,12.25,7,NA,,6
+24,2008-06-18,Silver King,Wolves,NA,NA,7,7,7.25,13,14.75,14.5,NA,NA,Shoal Cove,6
+25,2008-06-23,Silver King,St Marys Bay,NA,NA,NA,NA,12.25,11.25,12,12,7.75,10.5,Lake Brook,6
+26,2008-07-07,Caroline B,St Andrews Bay,NA,NA,8.75,9.5,9.5,13.25,15.5,NA,NA,NA,Sacker,7
+27,2008-07-07,Strathlorne,Back Bay,NA,NA,11,9.75,13.75,13.25,NA,NA,NA,NA,Crow Island,7
+28,2008-07-08,Senator Neil,Deadmans,NA,NA,9,7.75,12.5,11.25,15.75,9,NA,NA,Blisses,7
+29,2008-07-09,Margaret Elizabeth,Grand Manan,NA,NA,NA,NA,16.25,20.75,16.75,17,20.25,18.5,,7
+30,2008-07-13,Strathlorne,Beaver Harbour,NA,NA,8,7.75,19.5,19.25,NA,NA,NA,NA,Moose Island,7
+31,2008-07-13,Strathlorne,,NA,NA,4.75,12.5,7.5,20,NA,NA,NA,NA,,7
+32,2008-07-13,Strathlorne,Beaver Harbour,NA,NA,4.75,5.75,13,NA,NA,NA,NA,NA,Moose Island,7
+33,2008-07-13,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,11.5,12.5,11,10.25,6.25,Head of the Bay,7
+34,2008-07-14,Caroline B,Back Bay,NA,NA,5.5,4,10.5,14.5,9.25,13.25,NA,NA,Crow Island,7
+35,2008-07-14,Strathlorne,Deer Island,NA,NA,9.25,11.5,12.5,13.5,13.5,3.5,NA,NA,Pinafore,7
+36,2008-07-15,Strathlorne,Blisses,NA,NA,10,7.5,13.25,14.5,14.25,16.75,NA,NA,Eagle Island,7
+37,2008-07-17,Silver King,Sandy Cove,NA,NA,NA,NA,14,15,11,NA,7.75,NA,Sandy Cove,7
+38,2008-07-20,Caroline B,Blisses,NA,NA,NA,8,8.75,13.5,NA,NA,NA,NA,Spruce Island,7
+39,2008-07-20,Strathlorne,Grand Manan,NA,NA,NA,NA,14.25,20.25,17.5,NA,NA,NA,Money Cove,7
+40,2008-07-20,Capelco,St Marys Bay,NA,NA,NA,NA,NA,15.75,11.75,8.5,13.75,9.5,Sandy Cove,7
+41,2008-07-21,Capelco,Grand Manan,NA,NA,NA,8,10.5,13.5,NA,NA,NA,NA,Mystery,7
+42,2008-07-21,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,12,12.75,9.25,12.75,5.25,Head of the Bay,7
+43,2008-07-22,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,11.25,12.25,15.25,10.5,11.5,11.5,,7
+44,2008-07-27,Strathlorne,Wolves,NA,NA,12,10.5,9.5,12,11.25,NA,NA,NA,,7
+45,2008-07-28,Canada 100,NE Banks,NA,NA,NA,NA,14,14,14,15.75,17.5,13.25,,7
+46,2008-07-28,Capelco,Campobello,NA,NA,NA,5.5,7.5,13.25,8.5,9.5,6,NA,Schooner Cove,7
+47,2008-07-29,Michael Eileen,St Marys Bay,NA,NA,NA,4.5,9,5,1,6.5,3.5,NA,Sandy Cove,7
+48,2008-07-29,Senator Neil,Campobello,NA,NA,NA,9.75,11.75,20,11.5,NA,NA,NA,,7
+49,2008-07-29,Senator Neil,Campobello,NA,NA,NA,8.5,7.5,16.75,NA,NA,NA,NA,,7
+50,2008-08-06,Margaret Elizabeth,SW Banks,NA,NA,NA,NA,NA,15.75,16.25,12.5,12.5,12.5,,8
+51,2008-08-06,Caroline B,Back Bay,NA,NA,7,13.5,14.75,16.5,9.5,12.25,5,NA,Eagle Island,8
+52,2008-08-06,Strathaven,Wolves,NA,NA,8.75,10.75,15.5,22,16,5.75,10,NA,Buttermilk,8
+53,2008-08-07,Caroline B,Blisses,NA,NA,6.5,5,15.25,9.5,14.25,NA,NA,NA,Spider Cove,8
+54,2008-08-08,Brunswick Provider,Scott's Bay,NA,NA,NA,NA,NA,11.25,6.25,13.75,5.25,9,Head of the Bay,8
+55,2008-08-10,Strathlorne,Blisses,NA,NA,NA,4,7.5,13,15.25,14.75,NA,NA,,8
+56,2008-08-11,Capelco,St Marys Bay,NA,NA,NA,3.75,7,13,17.5,5.25,4.25,NA,Sandy Cove,8
+57,2008-08-12,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,9,10,5.5,8.5,10.5,Head of the Bay,8
+58,2008-08-12,Michael Eileen,Deadmans,NA,NA,NA,6.25,14,15.5,11,10.5,NA,NA,Hit or Miss,8
+59,2008-08-13,Caroline B,Blisses,NA,NA,2.25,5.75,13,4.5,NA,NA,NA,NA,Deep Cove,8
+60,2008-08-13,Strathburn,Beaver Harbour,NA,NA,NA,10.25,16.5,20.5,NA,NA,NA,NA,Moose Island,8
+61,2008-08-14,Strathburn,Back Bay,NA,NA,NA,10.75,13.75,15.75,10,NA,NA,NA,,8
+62,2008-08-14,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,NA,NA,9.75,NA,(Spawn fish),8
+63,2008-08-14,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,NA,NA,9.75,NA,(Slinks),8
+64,2008-08-17,Senator Neil,Deer Island,NA,NA,NA,13.5,17,14.25,19.25,10.25,NA,NA,,8
+65,2008-08-17,Silver King,Sandy Cove,NA,NA,NA,NA,7.5,5,13,13.75,10.25,19,,8
+66,2008-08-17,Andrew & Deane,Wolves,NA,NA,NA,12.75,14,NA,NA,NA,NA,NA,,8
+67,2008-08-18,Capelco,Grand Manan,NA,NA,NA,NA,11.25,14.5,NA,NA,NA,NA,,8
+68,2008-08-18,Strathaven,Blisses,NA,NA,NA,7.5,14.75,18,10.25,15.5,12,NA,,8
+69,2008-08-18,Margaret Elizabeth,Long Island Shore,NA,NA,NA,5.25,10.25,16.25,16,8.5,7.75,NA,,8
+70,2008-08-19,Silver King,Deadmans,NA,NA,NA,7.5,14,14.25,7.5,6.5,NA,NA,,8
+71,2008-08-20,Michael Eileen,Grand Manan,NA,NA,NA,NA,10,11.5,9.25,7,5,NA,,8
+72,2008-08-21,Caroline B,Campobello,NA,NA,NA,10.5,14.25,15.25,20,11.25,NA,NA,Ship Head,8
+73,2008-08-24,Michael Eileen,St Marys Bay,NA,NA,NA,NA,NA,12.75,16,13.5,12,11.5,Sandy Cove,8
+74,2008-08-25,Silver King,Blisses,NA,NA,8.5,9.5,13.75,14.25,10.75,NA,NA,NA,Fryes,8
+75,2008-08-25,Caroline B,Deer Island,NA,NA,NA,10.25,16.75,17.5,11,NA,NA,NA,Rattle Rock,8
+76,2008-08-25,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,12.5,5.75,12.25,10,7,Head of the Bay,8
+77,2008-08-25,Strathaven,Wolves,NA,NA,NA,NA,7.75,16.5,NA,NA,NA,NA,Southern Wolves,8
+78,2008-08-26,Sunlight,,NA,NA,NA,NA,NA,4.5,4.5,9.5,15.25,NA,,8
+79,2008-08-26,Strathlorne,Campobello,NA,NA,NA,8.5,18,13.5,10.25,NA,NA,NA,Ship Head,8
+80,2008-08-26,Strathburn,Wolves,NA,NA,NA,6.25,7.25,17.25,NA,NA,NA,NA,Shoal Cove,8
+81,2008-08-26,Capelco,St Marys Bay,NA,NA,NA,3,7.25,6.25,7.5,1.25,NA,NA,Sandy Cove,8
+82,2008-08-26,Brunswick Provider,Scott's Bay,NA,NA,NA,NA,NA,10,10.5,12.75,5.75,4.5,Head of the Bay,8
+83,2008-08-27,Senator Neil,Blisses,NA,NA,NA,NA,15.75,19.75,18.5,9.5,NA,NA,Tuckers Cove,8
+84,2008-09-01,Senator Neil,Blisses,NA,NA,NA,8.25,11.75,5.75,NA,NA,NA,NA,Double R,9
+85,2008-09-01,Strathburn,Wolves,NA,NA,NA,8.75,12,14.75,NA,NA,NA,NA,Southern Wolves,9
+86,2008-09-02,Brunswick Provider,Long Island Shore,NA,NA,NA,8.25,11.25,10,14.75,6.5,NA,NA,,9
+87,2008-09-03,Senator Neil,Back Bay,NA,NA,NA,7.5,13,14,15.75,5.5,4.5,NA,Charley Cove,9
+88,2008-09-05,Brunswick Provider,German Banks,NA,NA,NA,NA,NA,NA,8,9.75,10.25,5.25,,9
+89,2008-09-08,Margaret Elizabeth,Grand Manan,NA,NA,NA,8.25,13,14,13,5,NA,NA,White Head,9
+90,2008-09-08,Senator Neil,Deer Island,NA,NA,NA,12.75,14.5,19.25,20.25,11.5,NA,NA,Dog Fish Hole,9
+91,2008-09-09,Silver King,Wolves,NA,NA,NA,9.5,10.25,16,16.25,14.5,NA,NA,Southern Wolves,9
+92,2008-09-11,Brunswick Provider,NE Banks,NA,NA,NA,NA,10.25,14.5,15.5,7.75,7,NA,,9
+93,2008-09-11,Michael Eileen,Grand Manan,NA,NA,NA,6.75,8.5,14,18.5,11.5,7.75,8.25,Jubilee,9
+94,2008-09-14,Andrew & Deane,Grand Manan,NA,NA,NA,NA,13.25,9.5,10,NA,NA,NA,Mystery,9
+95,2008-09-15,Margaret Elizabeth,Grand Manan,NA,NA,NA,14.25,17,17.25,16.5,14,NA,NA,,9
+96,2008-09-16,Strathlorne,Deadmans,NA,NA,NA,8.5,9.5,11.25,4.25,12.5,5.5,NA,Hit & Miss,9
+97,2008-09-16,Strathburn,Blisses,NA,NA,NA,5.75,12.25,18,14.5,9,9.25,NA,Deep Cove,9
+98,2008-09-17,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,7.25,12,17.75,18.75,7.75,16.75,,9
+99,2008-09-17,Andrew & Deane,Grand Manan,NA,NA,NA,NA,NA,15.5,10.75,5.75,6.75,3.5,Pats Cove,9
+100,2008-09-17,Caroline B,Deer Island,NA,NA,NA,7.75,12.25,17.5,5,NA,NA,NA,Specs,9
+101,2008-09-19,Brunswick Provider,NE Banks,NA,NA,NA,NA,5.5,8.75,14,10.5,2,0.5,,9
+102,2008-09-19,Silver King,Wolves,NA,NA,NA,6.5,6.75,14.5,16,9.75,6.5,NA,,9
+103,2008-09-21,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,4,7.5,6.25,3,7.25,,9
+104,2008-09-21,Capelco,Campobello,NA,NA,6.75,9.25,15.75,17.25,11.75,2,16.75,NA,Ship Head,9
+105,2008-09-22,Senator Neil,Deer Island,NA,NA,7.5,10,14.75,16,12,NA,NA,NA,,9
+106,2008-09-22,Strathlorne,Blisses,NA,NA,6.5,10,13.75,13.25,20.5,9.5,5.5,NA,,9
+107,2008-09-24,Margaret Elizabeth,Grand Manan,NA,NA,NA,12.75,15.75,17.75,15,7.25,7,NA,White Head,9
+108,2008-10-02,Margaret Elizabeth,Grand Manan,NA,NA,NA,NA,11.25,16.75,16.5,14.25,2.25,NA,,10
+109,2008-10-06,Andrew & Deane,Grand Manan,NA,NA,7,11.75,11.75,16.25,12.75,11.75,NA,NA,Money Cove,10
+110,2008-10-13,Capelco,Grand Manan,NA,NA,7.75,9.75,NA,NA,NA,NA,NA,NA,Money Cove,10
+111,2008-10-13,Caroline B,Deer Island,NA,NA,3.75,8,13.5,15,NA,NA,NA,NA,Abnaki, Carneys 
+112,2008-10-15,Brunswick Provider,Long Island Shore,NA,NA,NA,NA,13.25,12.5,12.5,9.75,NA,NA,,10
+113,2008-10-19,Caroline B,Deer Island,NA,NA,7,10.75,13,16.25,15.5,NA,NA,NA,,10
+114,2008-10-20,Brunswick Provider,Wolves,NA,NA,NA,11.5,13.75,16.25,14.5,11.5,NA,NA,,10
+115,2008-10-20,Brunswick Provider,Wolves,NA,NA,NA,11.25,12,16.5,17.75,NA,NA,NA,,10
+116,2008-11-03,Brunswick Provider,Wolves,NA,NA,10.5,10.75,11.5,16.5,14.5,9.25,NA,NA,,11
+117,2008-11-04,Trucks,Gloucester,NA,NA,NA,NA,NA,NA,2,4.25,9.5,4.75,,11
+118,2008-11-10,Canada 100,Campobello,NA,NA,9.25,10,11,14,16,13.75,NA,NA,,11
+1,2009-01-05,Brunswick Provider,Grand Manan,NA,NA,NA,NA,NA,13.5,13,15.5,NA,NA,,1
+2,2009-01-06,Margaret Elizabeth,Grand Manan,NA,NA,10.5,9.25,11,13.75,15.25,12.25,14.75,NA,,1
+3,2009-01-06,Sunlight,Gloucester,NA,NA,NA,NA,9,2.75,6.5,4,6.5,5.75,USA Truck fish,1
+4,2009-01-14,Margaret Elizabeth,Grand Manan,NA,NA,NA,NA,3.75,12.5,10,2.75,5,3.25,,1
+5,2009-01-14,Trucks,Gloucester,NA,NA,7.25,10.25,11,14,NA,NA,NA,NA,USA Truck fish,1
+6,2009-01-27,Canada 100,Grand Manan,NA,NA,8.5,11.75,14.25,10.25,17.75,6.75,NA,NA,,1
+7,2009-01-27,Trucks,,NA,NA,NA,4.5,5,7.25,0.5,2.5,3,NA,USA Truck fish,1
+8,2009-02-02,Trucks,,NA,NA,NA,4.25,2,5.5,4.25,7.5,3.75,2.75,,2
+9,2009-02-09,Trucks,,NA,NA,NA,5,4.25,3.5,3.25,2.25,NA,NA,,2
+10,2009-02-27,Trucks,Mud Hole,NA,NA,NA,NA,NA,NA,0.75,3.75,3.25,5.25,USA Truck fish,2
+11,2009-05-19,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,7.75,12,10.25,8.25,7,5,,5
+12,2009-05-25,Canada 100,NE Banks,NA,NA,NA,NA,11,11.25,13.5,8.75,9.5,7.75,,5
+13,2009-06-09,Margaret Elizabeth,,NA,NA,NA,13.5,14,16.5,16.25,NA,NA,NA,,6
+14,2009-06-12,Capelco,Grand Manan,NA,NA,6.75,10.75,10,10.75,NA,NA,NA,NA,Money Cove,6
+15,2009-06-23,Silver King,Nova Scotia,NA,NA,5,8.25,9.75,NA,18.75,2.75,NA,NA,St Marys Bay,6
+16,2009-06-29,Capelco,Grand Manan,NA,NA,NA,NA,11.5,12,9.75,NA,NA,NA,Money Cove,6
+17,2009-07-01,Brunswick Provider,Grand Manan,NA,NA,NA,NA,10.5,13,14.75,14.75,18.75,17.5,,7
+18,2009-07-05,Caroline B,Grand Manan,NA,NA,NA,9.75,11.5,11,NA,NA,NA,NA,Money Cove,7
+19,2009-07-05,Silver King,Grand Manan,NA,NA,NA,NA,6.5,11.75,12.5,NA,NA,NA,Bradfords Cove,7
+20,2009-07-06,Margaret Elizabeth,SW Banks,NA,NA,NA,NA,NA,15.5,15,17.5,16.25,12.75,,7
+21,2009-07-06,Strathaven,Grand Manan,NA,NA,NA,7.5,6.75,9.25,7.25,NA,NA,NA,Seawall,7
+22,2009-07-07,Strathaven,Beaver Harbour,NA,3,6.5,13.75,9.75,NA,NA,NA,NA,NA,Barry Head,7
+23,2009-07-10,Brunswick Provider,SW Banks,NA,NA,NA,NA,NA,NA,16.5,18.25,13,13,,7
+24,2009-07-13,Brunswick Provider,Scotts Bay,NA,NA,NA,NA,NA,NA,4.75,8.75,2.75,2,,7
+25,2009-07-14,Caroline B,,NA,6.5,11,12,NA,NA,NA,NA,NA,NA,Sacker,7
+26,2009-07-15,Brunswick Provider,Scotts Bay,NA,NA,NA,NA,NA,8.25,8.5,9,9.75,5,Head of Bay,7
+27,2009-07-16,Margaret Elizabeth,Grand Manan,NA,NA,NA,13,13.75,19.25,16.5,9.5,3.5,NA,,7
+28,2009-07-20,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,13,17.25,17.75,16,16,15.25,,7
+29,2009-07-21,Caroline B,Back Bay,NA,10.25,11.25,9.5,8.75,NA,NA,NA,NA,NA,,7
+30,2009-07-21,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,13.25,17.25,14.5,13,15.25,11.5,,7
+31,2009-07-21,Michael Eileen,Grand Manan,NA,NA,NA,11.5,15.75,9.25,NA,NA,NA,NA,Mumps,7
+32,2009-07-22,Michael Eileen,Nova Scotia,NA,NA,NA,5.75,7.75,NA,NA,NA,NA,NA,Sandy Cove,7
+33,2009-07-22,Strathaven,Grand Manan,NA,NA,NA,13,13.75,20.25,NA,NA,NA,NA,Money Cove,7
+34,2009-07-26,Margaret Elizabeth,Scotts Bay,NA,NA,NA,NA,NA,NA,7,8.5,10.25,5.75,Head of Bay,7
+35,2009-07-26,Capelco,Nova Scotia,NA,NA,NA,6.75,11.75,9.25,8.25,10.75,10.25,10.25,Sandy Cove,7
+36,2009-07-27,Silver King,Grand Manan,NA,NA,NA,10.25,8.75,15.5,NA,NA,NA,NA,Mumps,7
+37,2009-07-27,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,NA,14.75,17.5,16.25,10.25,10,,7
+38,2009-07-29,Andrew & Deane,Nova Scotia,NA,NA,7,7.5,7.25,15,11.75,12.25,8.5,NA,Sandy Cove,7
+39,2009-07-31,Margaret Elizabeth,Grand Manan,NA,NA,NA,NA,NA,17.25,11,4,15.25,8.25,,7
+40,2009-07-31,Andrew & Deane,Grand Manan,NA,NA,10.5,6.5,13,8,7,NA,NA,NA,Intruder, Mumps
+41,2009-08-01,Michael Eileen,Grand Manan,NA,NA,8.5,14.75,14.75,12,NA,NA,NA,NA,Mumps,8
+42,2009-08-03,Strathlorne,Grand Manan,NA,NA,10,10.5,14.75,17.5,NA,NA,NA,NA,Mumps,8
+43,2009-08-03,Strathaven,Grand Manan,NA,NA,NA,11.25,13.5,17,15.75,NA,NA,NA,Seawall,8
+44,2009-08-03,Caroline B,Grand Manan,NA,NA,NA,6.25,13.25,11.25,14.75,NA,NA,NA,Seawall,8
+45,2009-08-05,Strathaven,Grand Manan,NA,NA,8.5,14.75,14.75,12,NA,NA,NA,NA,Mumps,8
+46,2009-08-05,Brunswick Provider,NE Banks,NA,NA,NA,12.25,9,17.5,14.5,18.5,14,10.25,,8
+47,2009-08-06,Michael Eileen,Grand Manan,NA,NA,NA,12,14.5,14.75,14.5,11.75,NA,NA,Mumps,8
+48,2009-08-06,Capelco,Grand Manan,3,NA,NA,6.5,11.25,12.75,9.75,NA,NA,NA,Money Cove,8
+49,2009-08-06,Senator Neil,Grand Manan,NA,NA,NA,12.25,15,NA,NA,NA,NA,NA,Mumps,8
+50,2009-08-09,Capelco,Nova Scotia,NA,NA,NA,11.25,8.25,11.75,12,12.75,7.75,NA,Sandy Cove,8
+51,2009-08-09,Silver King,Grand Manan,NA,NA,NA,10.75,11.75,11.5,NA,NA,NA,NA,Gull Cove,8
+52,2009-08-09,Brunswick Provider,Head of Bay,NA,NA,NA,NA,NA,NA,14.5,6.25,5.75,5,Scotts Bay,8
+53,2009-08-10,Margaret Elizabeth,Head of Bay,NA,NA,NA,NA,NA,NA,8.5,13,10,7,Scotts Bay,8
+54,2009-08-10,Andrew & Deane,Grand Manan,NA,NA,NA,10.75,14.5,14.75,8.25,NA,NA,NA,Jubilee,8
+55,2009-08-11,Caroline B,Back Bay,NA,NA,6.75,9.5,NA,NA,NA,NA,NA,NA,Charlies Cove,8
+56,2009-08-12,Michael Eileen,Grand Manan,2.25,NA,6.75,7.75,14.25,12.75,NA,NA,NA,NA,Money Cove,8
+57,2009-08-12,Caroline B,Grand Manan,NA,NA,NA,5,10.25,14.75,NA,NA,NA,NA,Gully,8
+58,2009-08-13,Strathlorne,Grand Manan,NA,NA,NA,5.5,7,9.25,NA,NA,NA,NA,Money Cove,8
+59,2009-08-13,Canada 100,NE Banks,NA,NA,NA,12.25,11,14.25,NA,NA,NA,NA,,8
+60,2009-08-13,Senator Neil,Grand Manan,NA,NA,NA,6.75,9.5,NA,NA,NA,NA,NA,New Dominion,8
+61,2009-08-14,Brunswick Provider,SW Banks,NA,NA,NA,NA,11.5,9,15.75,14.25,8.5,NA,,8
+62,2009-08-17,Margaret Elizabeth,NE Banks,NA,NA,NA,9.5,7.25,14.25,10.75,7,10.25,8.5,,8
+63,2009-08-17,Silver King,Grand Manan,5.5,NA,5.25,6.25,7.5,NA,NA,NA,NA,NA,New Dominion,8
+64,2009-08-18,Michael Eileen,Grand Manan,NA,NA,NA,7.75,9.25,12.25,8.5,11.5,9.5,NA,Gully,8
+65,2009-08-19,Andrew & Deane,Grand Manan,NA,NA,NA,8.25,12.75,16,NA,9.75,NA,NA,Money Cove,8
+66,2009-08-19,Strathaven,Grand Manan,4.75,NA,NA,10,10.5,14,NA,NA,NA,NA,Seawall,8
+67,2009-08-20,Senator Neil,Deer Island,NA,12.75,13.75,11.5,13.25,12,NA,NA,NA,NA,,8
+68,2009-08-31,Margaret Elizabeth,Grand Manan,NA,NA,NA,14.25,16.25,16.5,18.25,12,11.75,NA,,8
+69,2009-09-01,Strathlorne,Grand Manan,NA,NA,NA,14.5,17.75,NA,NA,NA,NA,NA,,9
+70,2009-09-02,Silver King,Grand Manan,NA,NA,NA,13.5,15.25,17.75,NA,NA,NA,NA,Intruder ,9
+71,2009-09-03,Caroline B,Blisses,NA,NA,NA,14.25,14,22,11.25,NA,NA,NA,,9
+72,2009-09-07,Strathlorne,Deer Island,9.25,NA,NA,14.25,15.5,19.25,16.25,NA,NA,NA,,9
+73,2009-09-08,Trucks,,NA,NA,NA,NA,NA,8.5,14.5,12,10.25,11,,9
+74,2009-09-08,Brunswick Provider,Grand Manan,NA,NA,NA,13.25,16.75,15,18.25,9.5,13.25,4.75,,9
+75,2009-09-09,Strathlorne,Blisses,NA,NA,NA,14,17,15.25,NA,NA,NA,NA,Dire Straights,9
+76,2009-09-09,Caroline B,Maces Bay,NA,NA,5.25,4.25,11.5,NA,NA,NA,NA,NA,Plumper,9
+77,2009-09-09,Strathlorne,Blisses,NA,NA,NA,17.5,21.5,22.25,NA,NA,NA,NA,Dire Straights,9
+78,2009-09-09,Strathaven,Grand Manan,NA,NA,NA,13.75,13.75,12,NA,NA,NA,NA,Gully,9
+79,2009-09-13,Senator Neil,Wolves,NA,NA,NA,11.75,17.75,18.75,12,8,NA,NA,Welcome,9
+80,2009-09-13,Senator Neil,Grand Manan,NA,NA,NA,9.5,13.25,13.25,15,5.25,NA,NA,Dire Straights,9
+81,2009-09-13,Strathlorne,Blisses,NA,NA,NA,11.75,19,17.75,18,NA,NA,NA,Menhaden,9
+82,2009-09-14,Voyager,Georges Bank,NA,NA,NA,NA,NA,NA,8,10,8,8.75,Truck fish,9
+83,2009-09-14,Andrew & Deane,Fryes Island,NA,NA,NA,16.5,15,18.25,NA,NA,NA,NA,shut off,9
+84,2009-09-15,Canada 100,Long Island Shore,NA,NA,NA,8,5.25,10.25,8,NA,NA,NA,Lurcher,9
+85,2009-09-16,Trucks,Georges Bank,NA,NA,NA,NA,NA,NA,2.5,8.5,9,8.25,,9
+86,2009-09-16,Strathlorne,Fryes Island,NA,NA,NA,11,15.25,NA,NA,NA,NA,NA,shut off,9
+87,2009-09-17,Canada 100,NE Banks,NA,NA,NA,9.25,11.25,12.5,14,NA,NA,NA,,9
+88,2009-09-18,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,8.75,12,10,15,16.25,4,,9
+89,2009-09-20,Trucks,Georges Bank,NA,NA,NA,NA,NA,6.5,8.25,9,9.5,6.5,,9
+90,2009-09-20,Strathburn,Blisses,NA,NA,NA,9.5,10.25,20.25,16,6,NA,NA,Dire Straights,9
+91,2009-09-20,Strathburn,Seeleys Cove,NA,NA,NA,7.5,11.75,NA,NA,NA,NA,NA,Bills Point,9
+92,2009-09-23,Trucks,Georges Bank,NA,NA,NA,NA,NA,NA,10.25,9.75,10,9.5,,9
+93,2009-09-23,Margaret Elizabeth,NE Banks,NA,NA,NA,NA,NA,9.25,12,13.5,14.25,10,,9
+94,2009-09-28,Trucks,Georges Bank,NA,NA,NA,NA,NA,NA,4.25,6.25,11,9.75,,9
+95,2009-09-28,Margaret Elizabeth,Long Island Shore,NA,NA,NA,8,11,9.5,11.5,9.25,NA,NA,Northwest Ledge,9
+96,2009-09-29,Canada 100,Long Island Shore,NA,NA,NA,8,7.75,13.75,15.25,NA,NA,NA,The Rip,9
+97,2009-10-01,Strathlorne,Dipper Harbour,NA,NA,NA,2.75,7.25,9,NA,NA,NA,NA,,10
+98,2009-10-01,Margaret Elizabeth,Wolves,NA,NA,NA,9.5,10.25,13.5,19.75,NA,NA,NA,,10
+99,2009-10-05,Margaret Elizabeth,Grand Manan,NA,NA,NA,NA,10.25,10,7,8.75,4.5,4,,10
+100,2009-10-05,Caroline B,Dipper Harbour,NA,NA,NA,3.5,10,14.75,NA,NA,NA,NA,,10
+101,2009-10-05,Caroline B,Deadmans,NA,NA,NA,7.5,12.5,NA,NA,NA,NA,NA,,10
+102,2009-10-06,Strathburn,Deadmans,NA,NA,NA,7,10.5,NA,NA,NA,NA,NA,,10
+103,2009-10-06,Strathlorne,Moose Island,NA,NA,NA,2.75,9.75,16.25,19.5,3.25,NA,NA,,10
+104,2009-10-08,Trucks,Gloucester,NA,NA,NA,NA,NA,NA,8.75,7.25,9.5,8,USA truck fish,10
+105,2009-10-19,Canada 100,Wolves,NA,NA,NA,6.75,14.5,13.75,16.5,20,17,NA,,10
+106,2009-10-21,Margaret Elizabeth,Wolves,NA,NA,NA,8.75,11.5,12.75,12.5,NA,NA,NA,,10
+107,2009-10-26,Canada 100,Wolves,8.25,NA,8.5,8.25,10,14.5,NA,NA,NA,NA,,10
+108,2009-10-26,Margaret Elizabeth,Wolves,NA,NA,NA,5.5,16.75,13.5,17.5,NA,NA,NA,,10
+109,2009-10-27,Canada 100,Wolves,NA,NA,NA,7.25,10.25,12.5,10.25,12.75,16.25,14.75,,10
+110,2009-10-28,Trucks,Gloucester,NA,NA,NA,NA,NA,4,4,7,5.75,8,USA truck fish,10
+111,2009-11-02,Canada 100,Wolves,NA,NA,NA,10.5,5.75,14.5,16.5,NA,NA,NA,,11
+112,2009-11-04,Western Venture,Gloucester,NA,NA,NA,NA,7,7.75,7.75,3.25,6.25,6.25,USA truck fish,11
+113,2009-11-09,Trucks,Gloucester,NA,NA,NA,NA,NA,NA,5,9,8.5,7.75,USA truck fish,11
+114,2009-11-10,Brunswick Provider,Wolves,NA,NA,NA,8.5,9.5,12.5,9.5,NA,NA,NA,,11
+115,2009-11-13,Trucks,Caraquet,NA,NA,NA,NA,NA,NA,14.75,11.75,12,16,NB Truck fish,11
+116,2009-11-23,Western Venture,Gloucester,NA,NA,NA,NA,6.5,4.5,4.5,4.5,2.75,9.5,USA truck fish,11
+1,2010-01-03,Margaret Elizabeth,Wolves,5.5,NA,NA,7.75,7.75,9,NA,NA,NA,NA,,1
+2,2010-01-04,Canada 100,Wolves,NA,NA,2,6.25,4.75,12.25,NA,NA,NA,NA,,1
+3,2010-01-05,Sunlight,Pt. Judith, RI,NA,NA,NA,NA,5.5,4,4.5,1.25,3.25,0.0342,USA truck fish
+4,2010-01-06,Providian,Fall River, Mas,NA,NA,NA,NA,8.5,5,0.5,2.75,12.25,0.058,USA truck fish
+5,2010-01-10,Margaret Elizabeth,Wolves,NA,NA,2.5,3,7.75,6.25,NA,NA,NA,NA,,1
+6,2010-01-12,Margaret Elizabeth,Wolves,NA,NA,NA,3.75,6.25,NA,NA,NA,NA,NA,,1
+7,2010-01-14,Sunlight,Block Island,NA,NA,NA,2.75,4.25,2.5,2,NA,NA,NA,USA truck fish,1
+8,2010-01-17,Ocean State,Pt. Judith, RI,NA,NA,NA,0.75,3,3.25,4.5,2.75,2,0.0271,USA truck fish
+9,2010-01-17,Brunswick Provider,Wolves,NA,NA,NA,5.5,6,NA,NA,NA,NA,NA,,1
+10,2010-01-20,Margaret Elizabeth,Blisses,3.25,7,5.75,2.5,6,1,NA,NA,NA,NA,,1
+11,2010-01-21,Brunswick Provider,Seeleys Cove,NA,6.75,3.75,6.75,5.25,NA,NA,NA,NA,NA,,1
+12,2010-01-22,Ocean State,Block Island,NA,NA,NA,2.25,3.25,1,2.75,0,0,NA,,1
+13,2010-01-24,Canada 100,Seeleys Cove,NA,NA,NA,4.5,5.5,8,5.5,NA,NA,NA,,1
+14,2010-02-11,Providian,Cape Cod Hi,NA,NA,3.5,4.5,5.75,4.5,5.5,5.5,3.25,12.75,,2
+15,2010-02-15,Sunlight,,NA,NA,4.25,1.5,0,2.75,3,3.25,NA,NA,,2
+16,2010-02-23,Western Venture,Mud Hole,NA,NA,NA,NA,1.25,1.5,0.5,0.5,2.75,0.75,,2
+17,2010-03-04,Sunlight,,NA,NA,NA,NA,1.75,2.75,2,0.25,NA,1,,3
+18,2010-03-08,Western Venture,Hudson Canyon,NA,NA,NA,NA,0.75,0.75,2.75,0.5,2.25,3,,3
+19,2010-05-30,Capelco,St. Marys Bay,NA,3.5,5.25,8.5,1.75,NA,NA,NA,NA,NA,Nova Scotia,5
+20,2010-05-31,Margaret Elizabeth,One Mike,NA,NA,NA,12.25,9.25,10,13.75,12.75,NA,NA,,5
+21,2010-05-31,Canada 100,Nova Scotia,NA,NA,NA,NA,NA,NA,16.25,11.5,18.25,15.25,NS Truck fish,5
+22,2010-05-31,Caroline B,Fryes Island,NA,2.5,3.25,5,2.5,NA,NA,NA,NA,NA,Frye Wier,5
+23,2010-06-02,Margaret Elizabeth,One Mike,NA,NA,NA,NA,13.75,15.25,17.5,16.75,12,NA,,6
+24,2010-06-03,Caroline B,Fryes Island,NA,4.25,4.5,5,3,NA,NA,NA,NA,NA,Frye Wier,6
+25,2010-06-03,Capelco,,NA,5.25,10.75,15,4.75,NA,NA,NA,NA,NA,,6
+26,2010-06-04,Margaret Elizabeth,Long Island Sh,NA,NA,7,10.25,12,8.5,13.5,NA,NA,NA,,6
+27,2010-06-04,Brunswick Provider,Long Island Sh,NA,NA,10.5,13.25,9.75,15.75,12.75,NA,NA,NA,,6
+28,2010-06-07,Brunswick Provider,Long Island Sh,NA,NA,NA,12.75,10.25,14.5,12,14.5,NA,NA,,6
+29,2010-06-07,Canada 100,Long Island Sh,NA,NA,NA,13.25,11.75,13.25,9.75,13.25,NA,NA,,6
+30,2010-06-07,Capelco,Grand Manan,NA,6.75,12,12.75,NA,NA,NA,NA,NA,NA,Money Cove,6
+31,2010-06-08,Silver King,Grand Manan,NA,NA,7.25,6.75,4.5,5.5,0.25,NA,NA,NA,Money Cove,6
+32,2010-06-09,Caroline B,Grand Manan,NA,4.5,7,10.25,7.5,NA,NA,NA,NA,NA,,6
+33,2010-06-10,Margaret Elizabeth,One Mike,NA,NA,NA,NA,NA,8,5.5,14.25,18.75,NA,,6
+34,2010-06-10,Caroline B,Blisses,NA,4.5,7,10.25,7.5,NA,NA,NA,NA,NA,Fryes Weir,6
+35,2010-06-10,Caroline B,Deer Island,NA,3.75,6.5,11.25,7.5,NA,NA,NA,NA,NA,Black Water,6
+36,2010-06-10,Canada 100,One Mike,NA,NA,NA,NA,7,11.25,13,NA,NA,NA,,6
+37,2010-06-10,Capelco,St. Marys Bay,NA,NA,NA,10.5,8,5.25,NA,NA,NA,NA,Little Cove,6
+38,2010-06-11,Margaret Elizabeth,Northeast Bank,NA,NA,NA,8.5,4.5,9.75,2.5,NA,NA,NA,,6
+39,2010-06-11,Brunswick Provider,Lurcher,NA,NA,NA,NA,NA,5,9.75,9,6.75,14.5,,6
+40,2010-06-13,Capelco,St. Marys Bay,NA,NA,5,8.5,5.25,15.5,NA,NA,NA,NA,Sandy Cove,6
+41,2010-06-13,Michael Eileen,Grand Manan,NA,NA,8.75,8.75,11,11.5,NA,NA,NA,NA,Jubilee,6
+42,2010-06-13,Strathaven,Grand Manan,NA,NA,NA,7.25,12.25,8.75,12.75,11.75,NA,NA,Money Cove,6
+43,2010-06-14,Brunswick Provider,St. Marys Bay,NA,NA,NA,7.25,7.75,11.75,10.75,NA,NA,NA,Sandy Cove,6
+44,2010-06-14,Margaret Elizabeth,Nova Scotia,NA,NA,NA,9.75,7.5,13.5,NA,NA,NA,NA,Sandy Cove,6
+45,2010-06-15,Capelco,St. Marys Bay,NA,NA,3.5,7.75,10,NA,NA,NA,NA,NA,Lake Brook,6
+46,2010-06-15,Strathaven,Grand Manan,NA,NA,NA,9,5.75,12,4,NA,NA,NA,Bradfords Cove,6
+47,2010-06-16,Margaret Elizabeth,Northeast Bank,NA,NA,NA,5.5,7.25,12.5,7.25,5.75,7.25,NA,,6
+48,2010-06-17,Silver King,Grand Manan,NA,NA,6.25,11.75,6.25,NA,NA,NA,NA,NA,Money Cove,6
+49,2010-06-17,Caroline B,Blisses,NA,2.75,5.5,4,8.75,NA,NA,NA,NA,NA,,6
+50,2010-06-18,Brunswick Provider,Prong,NA,NA,NA,5,5.5,10,7,8.75,NA,NA,,6
+51,2010-06-20,Strathaven,Grand Manan,NA,NA,5.5,4.5,5.25,8.25,NA,NA,NA,NA,Bradfords Cove,6
+52,2010-06-20,Capelco,Nova Scotia,NA,NA,NA,11.75,10.75,NA,NA,NA,NA,NA,Griffin Brook,6
+53,2010-06-21,Brunswick Provider,NE Banks,NA,NA,NA,NA,5,10.5,10.75,13.5,3.25,10.5,,6
+54,2010-06-21,Canada 100,NE Banks,NA,NA,NA,6.5,8.5,11.25,10.75,9.75,NA,NA,,6
+55,2010-06-21,Caroline B,Grand Manan,NA,NA,8.75,7,7.75,NA,NA,NA,NA,NA,Seawall,6
+56,2010-06-21,Strathaven,Nova Scotia,NA,NA,NA,13.25,13,13.25,14,12.5,NA,NA,St Marys Bay,6
+57,2010-06-22,Caroline B,Wolves,NA,NA,4.25,10.25,9.25,NA,NA,NA,NA,NA,Brown I,6
+58,2010-06-25,Brunswick Provider,Long Island Sh,NA,NA,NA,7.75,7.25,14.25,11,7.75,4.5,NA,,6
+59,2010-06-27,Silver King,,NA,NA,NA,7.5,5.75,NA,NA,NA,NA,NA,Seawall,6
+60,2010-06-27,Strathaven,Grand Manan,NA,NA,5.75,5.75,5.75,NA,NA,NA,NA,NA,Bradfords Cove,6
+61,2010-06-27,Capelco,,NA,NA,5.5,5.5,NA,NA,NA,NA,NA,NA,Seawall,6
+62,2010-06-27,Caroline B,Deer Island,NA,1.5,1.75,9,3.75,10.25,NA,NA,NA,NA,,6
+63,2010-06-27,Silver King,Grand Manan,NA,NA,8.75,8.5,5,10.75,NA,NA,NA,NA,Bradfords Cove,6
+64,2010-06-27,Michael Eileen,Grand Manan,NA,NA,6.75,7.5,6.75,14.75,NA,NA,NA,NA,,6
+65,2010-06-28,Canada 100,Passamaquoddy,NA,NA,NA,9.25,7.75,11,11,10.25,10,NA,,6
+66,2010-06-28,Strathaven,,NA,NA,5.25,5.25,4.75,4.75,NA,NA,NA,NA,,6
+67,2010-06-28,Caroline B,,NA,1.75,6,8.5,NA,NA,NA,NA,NA,NA,,6
+68,2010-06-29,Strathaven,Nova Scotia,NA,NA,2.25,6.25,7.25,8.75,NA,NA,NA,NA,Sandy Cove,6
+69,2010-06-30,Margaret Elizabeth,Prong,NA,NA,NA,4.75,4.5,5.75,6.75,NA,NA,NA,,6
+70,2010-07-04,Strathaven,Nova Scotia,NA,NA,NA,7.75,8,8.5,NA,NA,NA,NA,Sandy Cove,7
+71,2010-07-04,Caroline B,Letang,NA,1.25,4.75,11.25,NA,NA,NA,NA,NA,NA,Limekiln,7
+72,2010-07-04,Canada 100,Grand Manan,NA,NA,7.25,7.75,9,7.75,NA,NA,NA,NA,White Head ,7
+73,2010-07-05,Brunswick Provider,NE Banks,NA,NA,NA,NA,3,2.75,9,5.75,10,NA,,7
+74,2010-07-05,Silver King,Grand Manan,NA,NA,5.25,6.25,5.5,12.25,9.5,NA,NA,NA,Money Cove,7
+75,2010-07-06,Michael Eileen,Campobello,NA,NA,7.5,7.25,8.25,NA,NA,NA,NA,NA,,7
+76,2010-07-06,Brunswick Provider,SW Banks,NA,NA,NA,NA,5.5,12.25,9.5,17.5,7.25,NA,,7
+77,2010-07-08,Strathburn ,Grand Manan,NA,NA,4,6.25,5.25,6.5,NA,NA,NA,NA,Bradfords Cove,7
+78,2010-07-09,Margaret Elizabeth,Head of Bay,NA,NA,NA,NA,NA,NA,8.75,9.25,4,8,,7
+79,2010-07-10,Silver King,Grand Manan,NA,NA,7,6.75,5,NA,NA,NA,NA,NA,Money Cove,7
+80,2010-07-12,Michael Eileen,St. Marys Bay,NA,1.25,3.5,NA,NA,NA,NA,NA,NA,NA,Sandy Cove,7
+81,2010-07-12,Strathburn ,Grand Manan,NA,NA,2.75,7.75,3.5,NA,NA,NA,NA,NA,Money Cove,7
+82,2010-07-12,Capelco,Grand Manan,NA,NA,NA,5.5,5.75,10.5,10.25,7.5,14.5,NA,Bradfords Cove,7
+83,2010-07-13,Canada 100,NE Banks,NA,NA,NA,NA,6.25,11,6.25,9.25,13.25,5.5,,7
+84,2010-07-14,Caroline B,Deer Island,NA,NA,NA,5.75,5.5,5.5,NA,NA,NA,NA,,7
+85,2010-07-14,Margaret Elizabeth,NE Banks,NA,NA,5.75,5,6.75,NA,NA,NA,NA,NA,,7
+86,2010-07-21,Margaret Elizabeth,NE Banks,NA,NA,NA,4.5,5.25,10.25,12.5,7.75,8.5,13.75,,7
+87,2010-07-21,Andrew & Deane,Nova Scotia,NA,NA,NA,7.5,4.75,NA,NA,NA,NA,NA,Caldwell Cove,7
+88,2010-07-21,Strathlorne,Grand Manan,NA,NA,4.75,10.5,8.25,13.25,7.5,10.25,NA,NA,Seawall,7
+89,2010-07-22,Strathlorne,Grand Manan,NA,NA,1.25,3.75,10.25,13.25,NA,NA,NA,NA,Mumps,7
+90,2010-07-22,Michael Eileen,Nova Scotia,NA,NA,NA,5.75,3.25,NA,NA,NA,NA,NA,Caldwell Cove,7
+91,2010-07-22,Margaret Elizabeth,NE Banks,NA,NA,NA,8.25,6.25,13.25,12,13,NA,NA,,7
+92,2010-07-23,Strathaven,Grand Manan,NA,NA,NA,7.5,10.5,13,NA,NA,NA,NA,,7
+93,2010-07-24,Caroline B,Deer Island,NA,NA,4,6,NA,NA,NA,NA,NA,NA,,7
+94,2010-07-25,Margaret Elizabeth,Head of Bay,NA,NA,NA,NA,NA,10.75,8,10.75,8.75,7.25,Scotts Bay,7
+95,2010-07-26,Strathlorne,Deer Island,NA,NA,2.75,8.5,6.5,4.75,NA,NA,NA,NA,Press, Abnaki
+96,2010-07-26,Michael Eileen,Grand Manan,NA,NA,NA,5.5,10,14.5,10.25,11.5,NA,NA,New Dominion, Gully
+97,2010-07-27,Brunswick Provider,Head of Bay,NA,NA,NA,NA,NA,4,10.75,11,6.75,NA,,7
+98,2010-07-28,Brunswick Provider,NE Banks,NA,NA,NA,6.25,6,10.75,11.5,10.25,NA,NA,,7
+99,2010-07-28,Andrew & Deane,Grand Manan,NA,NA,NA,4.25,4.5,NA,NA,NA,NA,NA,Intruder,7
+100,2010-07-29,Capelco,Grand Manan,NA,NA,NA,4.25,9.25,9.25,NA,NA,NA,NA,Mumps,7
+101,2010-07-30,Silver King,Wolves,NA,NA,1.5,6.75,10.25,NA,NA,NA,NA,NA,Brown I and Brown II,7
+102,2010-08-01,Strathaven,Grand Manan,NA,NA,3.25,7,7.25,NA,NA,NA,NA,NA,Jubilee,8
+103,2010-08-01,Strathlorne,Campobello,NA,NA,1.25,6.25,5.5,NA,NA,NA,NA,NA,Shag Rock,8
+104,2010-08-01,Senator Neil,Grand Manan,NA,NA,2.25,6.75,4.5,NA,NA,NA,NA,NA,Bradfords Cove,8
+105,2010-08-01,Caroline B,Deer Island,NA,NA,2.25,2.75,3.5,6.75,NA,NA,NA,NA,Pinafore, Specs
+106,2010-08-02,Strathlorne,Wolves,NA,NA,4.75,4.75,13,NA,NA,NA,NA,NA,Brown I,8
+107,2010-08-03,Margaret Elizabeth,NE Banks,NA,NA,NA,4.75,10.5,13.25,13.5,9.75,NA,NA,,8
+108,2010-08-09,Brunswick Provider,Head of Bay,NA,NA,NA,NA,NA,7.5,5.75,8.75,6,5.75,,8
+109,2010-08-09,Canada 100,Grand Manan,NA,NA,NA,8,9.75,11.25,NA,NA,NA,NA,White Head ,8
+110,2010-08-11,Michael Eileen,Grand Manan,NA,NA,4,7.75,6.75,NA,NA,NA,NA,NA,Bradfords Cove,8
+111,2010-08-11,Strathburn ,Wolves,NA,NA,3.75,4.75,6.5,NA,NA,NA,NA,NA,Southern Wolves,8
+112,2010-08-11,Caroline B,Deer Island,NA,NA,3.5,5.25,NA,NA,NA,NA,NA,NA,Specs, Buttercup
+113,2010-08-12,Canada 100,SW Banks,NA,NA,NA,2.75,7.75,9,9.75,13.5,12.25,NA,,8
+114,2010-08-12,Strathaven,Wolves,NA,NA,5,9.5,NA,NA,NA,NA,NA,NA,Pauls Cove,8
+115,2010-08-12,Strathburn ,Campobello,NA,NA,4.25,6.75,7.75,10.75,NA,NA,NA,NA,shut off,8
+116,2010-08-15,Capelco,Grand Manan,NA,NA,4.25,4,8,NA,NA,NA,NA,NA,,8
+117,2010-08-17,Margaret Elizabeth,SW Banks,NA,NA,NA,5.75,5.5,12.5,8.5,8.75,4.25,NA,,8
+118,2010-08-18,Strathburn ,Sandy Cove,NA,NA,NA,4.75,6.25,NA,NA,NA,NA,NA,,8
+119,2010-08-18,Caroline B,Campobello,NA,NA,2.5,4.5,5,8.25,11.75,NA,NA,NA,Ship Head, Shag Ro
+120,2010-08-18,Senator Neil,Grand Manan,NA,NA,3.75,2.5,3.75,3.5,NA,NA,NA,NA,Mumps,8
+121,2010-08-19,Brunswick Provider,NE Banks,NA,NA,NA,7,6.75,7.25,8.25,NA,NA,NA,,8
+122,2010-08-22,Margaret Elizabeth,Head of Bay,NA,NA,NA,NA,NA,7.75,7,NA,NA,NA,,8
+123,2010-08-23,Canada 100,Head of Bay,NA,NA,NA,NA,NA,7,6.75,10,7.75,NA,,8
+124,2010-08-23,Silver King,Grand Manan,NA,NA,NA,7.25,7.75,NA,NA,NA,NA,NA,Jubilee,8
+125,2010-08-25,Strathaven,Wolves,NA,NA,4.5,5.75,10,NA,NA,NA,NA,NA,Eastern Wolves,8
+126,2010-08-27,Strathaven,Campobello,NA,NA,NA,4,6.5,5.5,NA,NA,NA,NA,Shag Rock,8
+127,2010-08-29,Strathlorne,Deer Island,NA,NA,NA,4.5,7.25,NA,NA,NA,NA,NA,Pup, Spruce Island
+128,2010-08-29,Strathburn ,Grand Manan,NA,NA,NA,4.5,6,NA,NA,NA,NA,NA,Seawall,8
+129,2010-08-29,Canada 100,NE Banks,NA,NA,NA,4,4.5,7.5,NA,NA,NA,NA,,8
+130,2010-08-30,Michael Eileen,Grand Manan,NA,NA,NA,5.75,6.5,7.5,7.75,9.25,7.25,8.25,Pat's Cove,8
+131,2010-08-30,Canada 100,SW Banks,NA,NA,NA,4.25,5.5,8.75,7.75,8,NA,NA,,8
+132,2010-08-31,Strathaven,Nova Scotia,NA,NA,NA,4.5,NA,NA,7.75,10,NA,NA,Sandy Cove,8
+133,2010-09-06,Canada 100,Head of Bay,NA,NA,NA,NA,NA,6.25,5,4,3.5,4,,9
+134,2010-09-07,Strathlorne,Campobello,NA,NA,2.25,3,4.5,NA,NA,NA,NA,NA,Quaddy Head,9
+135,2010-09-07,Michael Eileen,Wolves,NA,NA,0.75,3.75,5.5,NA,NA,NA,NA,NA,Welcome Weir,9
+136,2010-09-08,Margaret Elizabeth,SW Banks,NA,NA,NA,3.5,6,6.5,6.5,7,NA,NA,,9
+137,2010-09-09,Strathaven,Grand Manan,NA,NA,NA,4.75,8.25,8.5,3.5,NA,NA,NA,,9
+138,2010-09-09,Andrew & Deane,Grand Manan,NA,NA,NA,4.75,4,NA,NA,NA,NA,NA,Bulls Eddy, New Ven
+139,2010-09-12,Strathaven,Grand Manan,NA,NA,NA,6.75,8.75,6.75,7.75,NA,NA,NA,Bradfords Cove,9
+140,2010-09-14,Capelco,German Banks,NA,NA,NA,NA,NA,2.25,2.5,1.5,2.25,4.75,Silver Harvest, Dual V
+141,2010-09-16,Canada 100,SW Banks,NA,NA,NA,4.75,8.75,9.25,7.75,NA,NA,NA,,9
+142,2010-09-18,Andrew & Deane,Wolves,NA,NA,NA,4.5,7.75,NA,NA,NA,NA,NA,,9
+143,2010-09-18,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,3,7,8.25,5.75,,9
+144,2010-09-18,Strathburn ,Grand Manan,NA,NA,NA,2.5,4.5,NA,NA,NA,NA,NA,,9
+145,2010-09-20,Strathlorne,Campobello,NA,NA,NA,3.25,7.25,NA,NA,NA,NA,NA,Quaddy Head,9
+146,2010-09-28,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,4.75,5.5,10.75,3.75,9.75,,9
+147,2010-10-05,Brunswick Provider,Wolves,NA,NA,NA,7.5,7.25,5.5,10,NA,NA,NA,,10
+148,2010-10-05,Andrew & Deane,Grand Manan,NA,NA,NA,5.5,5.75,4.5,NA,NA,NA,NA,Seawall,10
+149,2010-10-05,Brunswick Provider,Grand Manan,NA,NA,NA,5,6.75,NA,NA,NA,NA,NA,White Head ,10
+150,2010-10-05,Michael Eileen,Grand Manan,NA,NA,NA,5.75,2.25,5,NA,NA,NA,NA,Bradfords Cove,10
+151,2010-10-06,Strathaven,Grand Manan,NA,NA,NA,7,7,5.75,NA,NA,NA,NA,Bradfords Cove,10
+152,2010-10-12,Canada 100,Grand Manan,NA,NA,NA,4.5,5,4.25,4,NA,NA,NA,North Head,10
+153,2010-10-12,Silver King,Grand Manan,NA,NA,NA,4,8.75,7.25,6,NA,NA,NA,Bradfords Cove,10
+154,2010-10-12,Strathlorne,Blisses,NA,NA,4.5,7.75,7,4.75,8.5,NA,NA,NA,Bliss Isand,10
+155,2010-10-12,Brunswick Provider,Grand Manan,NA,NA,NA,4.75,5.5,7.75,NA,NA,NA,NA,North Head,10
+156,2010-10-14,Strathlorne,Wolves,NA,NA,2.75,4.5,7.75,8.75,NA,NA,NA,NA,Wolves Island,10
+157,2010-10-14,Canada 100,Wolves,NA,NA,NA,4.5,7.5,NA,NA,NA,NA,NA,,10
+158,2010-10-17,Brunswick Provider,Wolves,NA,NA,NA,5.5,7.5,NA,NA,NA,NA,NA,,10
+159,2010-10-18,Canada 100,Wolves,NA,NA,NA,5.75,7.25,NA,NA,NA,NA,NA,,10
+160,2010-10-19,Brunswick Provider,Grand Manan,NA,NA,NA,7.25,6.75,NA,NA,NA,NA,NA,White Head ,10
+161,2010-10-20,Canada 100,Grand Manan,NA,NA,NA,6.75,7.5,12.75,9.75,NA,NA,NA,White Head ,10
+162,2010-10-21,Capelco,Wolves,NA,NA,5.25,6.5,6.5,7.75,9,NA,NA,NA,Pauls Cove,10
+163,2010-10-25,Brunswick Provider,Wolves,NA,NA,NA,4.75,7,8,NA,NA,NA,NA,,10
+164,2010-10-27,Canada 100,Wolves,NA,NA,NA,6,7.75,10,13.25,11.75,12.25,5.5,,10
+165,2010-10-29,Brunswick Provider,Wolves,NA,NA,NA,10.75,12.25,9.75,18.75,5.5,6.5,NA,,10
+166,2010-10-31,Brunswick Provider,Wolves,NA,NA,NA,5.25,NA,NA,NA,NA,NA,NA,,10
+167,2010-11-01,Canada 100,Wolves,NA,NA,NA,5.5,5.25,6,3,10.25,12.25,NA,,11
+168,2010-11-01,Caroline B,Deadman's,NA,NA,5.25,7.75,6.75,10.5,14.5,NA,NA,NA,Flowerpot,11
+169,2010-11-02,Michael Eileen,Grand Manan,NA,NA,NA,6.5,8.5,9.75,11.25,NA,NA,NA,Intruder,11
+170,2010-11-04,Western Venture,Jeffreys Ledge,NA,NA,NA,NA,5,3.75,NA,NA,NA,3,USA truck fish,11
+171,2010-11-04,Canada 100,Grand Manan,NA,NA,NA,5.25,4,7.5,7.75,NA,4.75,NA,White Head ,11
+172,2010-11-30,Sunlight,Thatchers Island,NA,NA,NA,NA,2.25,2.5,1.25,3.5,2.25,2.75,Gloucester Trucks,11
+173,2010-11-30,Barry Group,Caraquet,NA,NA,NA,NA,NA,NA,4.75,8.5,6.5,6,Miscou Banks ,11
+174,2011-01-07,Sunlight,Block Island Sd,NA,NA,NA,NA,2.5,4.25,3.5,NA,NA,NA,USA truck fish,1
+175,2011-01-07,Heather Lynn,Block Island Sd,NA,NA,NA,NA,4.5,4.25,3.75,NA,0,NA,USA truck fish,1
+176,2011-01-13,Sea Breeze,,NA,NA,NA,2.75,4,4,1.75,4.5,3.25,NA,USA truck fish,1
+177,2011-01-25,Western Venture,East Mud Hole,NA,NA,NA,NA,4.25,0.25,1.75,0.75,NA,NA,USA truck fish,1
+178,2011-01-26,Western Venture,East Mud Hole,NA,NA,NA,0.75,1,2.25,3.25,0.25,0,NA,USA truck fish,1
+179,2011-01-26,Heather Lynn,Block Island Sd,NA,NA,NA,0.75,1,2.75,4.5,1.25,NA,NA,USA truck fish,1
+180,2011-01-30,Western Venture,Mud Hole,NA,NA,NA,NA,1.75,3,NA,NA,NA,NA,USA truck fish,1
+181,2011-01-31,Western Venture,Mud Hole,NA,NA,NA,NA,1.25,3,NA,1,1.75,NA,USA truck fish,1
+182,2011-02-06,Ocean State,Block Island Sd,NA,NA,0.75,1.25,1.75,0.5,0.25,NA,7.25,NA,USA Truck Fish,2
+183,2011-02-07,Western Venture,Mud Hole,NA,NA,NA,NA,0.25,2,2.25,0,NA,NA,USA Truck Fish,2
+184,2011-02-08,Sunlight,Mud Hole,NA,NA,NA,2.5,2,2.75,1.75,NA,NA,NA,USA Truck Fish,2
+185,2011-02-09,Sunlight,Mud Hole,NA,NA,NA,1,2.5,5.5,1.75,0,NA,NA,USA Truck Fish,2
+186,2011-02-17,Sunlight,Mud Hole,NA,NA,NA,0,1,0.5,2.75,2.25,8,NA,USA Truck Fish,2
+187,2011-02-17,Western Venture,Mud Hole,NA,NA,NA,2.5,3.5,2.25,6.5,2.25,NA,NA,USA Truck Fish,2
+188,2011-02-21,Sunlight,Mud Hole,NA,NA,NA,NA,0,1.25,0.5,0,0,NA,USA Truck Fish,2
+189,2011-02-23,Western Venture,Mud Hole,NA,NA,NA,NA,0,3.75,1.75,1.5,1,1.5,USA Truck Fish,2
+190,2011-02-23,Western Venture,Mud Hole,NA,NA,NA,0.75,1.75,1,2,0,0,NA,USA Truck Fish,2
+191,2011-03-01,Western Venture,Mud Hole,NA,NA,NA,0.75,0.25,0.75,1.75,0,0,NA,USA Truck Fish,3
+192,2011-03-01,Norpel Herring,,NA,NA,NA,NA,1.5,2,6.5,2.75,4.5,6.25,USA Truck Fish,3
+193,2011-03-01,Western Venture,Mud Hole,NA,NA,NA,0.75,0.25,0.75,1.75,0,0,NA,USA Truck Fish,3
+194,2011-03-06,Sunlight ,Block Island Sd,NA,NA,NA,0.75,0.25,1.5,0,0,NA,NA,USA Truck Fish,3
+195,2011-03-06,Sunlight,Block Island Sd,NA,NA,NA,0.25,1,0,0,3,NA,NA,USA Truck Fish,3
+196,2011-03-09,Sunlight,Block Island Sd,NA,NA,NA,0.5,1.25,1.5,NA,NA,0,2,USA Truck Fish,3
+197,2011-03-15,Sunlight,Block Island Sd,NA,NA,NA,0.75,2,1,2.75,NA,NA,NA,USA Truck Fish,3
+198,2011-03-17,Sunlight ,Block Island Sd,NA,NA,NA,NA,1,1.25,0.5,2,2.25,NA,USA Truck Fish,3
+199,2011-03-21,Sunlight,Block Island Sd,NA,NA,NA,0.5,1,1,2,0.5,NA,NA,USA Truck Fish,3
+200,2011-05-09,Margaret Elizabeth,North East Bank,NA,NA,NA,NA,NA,NA,14.75,14,8.5,8.75,Grand Manan,5
+201,2011-05-18,Margaret Elizabeth,N.S Seine,NA,NA,NA,NA,NA,NA,15.5,15.5,10.5,7.5,,5
+202,2011-05-27,Margaret Elizabeth,N.S.Seine,NA,NA,6.5,5.5,7,7.25,9.25,5.5,NA,NA,,5
+203,2011-06-01,Brunswick Provider,North East Bank,NA,NA,NA,NA,8.25,10.5,10.5,14.5,10.75,NA,Grand Manan,6
+204,2011-06-03,Brunswick Provider,North East Bank,NA,NA,NA,8.5,11.25,10.75,16.25,12,NA,NA,Grand Manan,6
+205,2011-06-07,Margaret Elizabeth,South West Bank,NA,NA,NA,NA,11.25,11.25,14,11.75,NA,NA,Grand Manan,6
+206,2011-06-13,Margaret Elizabeth,North East Bank,NA,NA,NA,NA,12.25,11.5,18,13.5,12.25,NA,Grand Manan,6
+207,2011-06-13,Brunswick Provider,North East Bank,NA,NA,NA,NA,13.25,10.5,10.25,11.5,5.5,NA,Grand Manan,6
+208,2011-06-20,Brunswick Provider,North East Bank,NA,NA,NA,NA,15.25,13,18.75,22.25,11.5,NA,Grand Manan,6
+209,2011-06-21,Canada-100,North East Bank,NA,NA,NA,NA,NA,12,16.5,12,12.75,NA,Grand Manan,6
+210,2011-06-26,Capelco,Money Cove,NA,NA,NA,NA,12,11.5,14.25,15.75,NA,NA,Grand Manan,6
+211,2011-06-26,Micheal Eileen,Sea Wall,NA,NA,NA,11.5,16,10.25,15.75,NA,NA,NA,Grand Manan,6
+212,2011-06-28,Margaret Elizabeth,North East Bank,NA,NA,NA,NA,NA,14.5,17,10.75,11,14.75,Grand Manan,6
+213,2011-06-28,Canada-100,North East Bank,NA,NA,NA,NA,NA,15,18,17,16,5.25,Grand Manan,6
+214,2011-07-03,Capelco,Sandy Cove,NA,NA,NA,NA,NA,11.25,12,15.75,14.5,NA,,7
+215,2011-07-04,Margaret Elizabeth,Scot's Bay,NA,NA,NA,NA,NA,4.5,9.25,7,8.25,6.75,,7
+216,2011-07-04,Canada-100,White Head,NA,NA,NA,5.75,15.25,15.75,14,16.25,8.25,NA,Grand Manan,7
+217,2011-07-04,Andrew Deane,Sea Wall,NA,NA,NA,4,6.75,11,NA,NA,NA,NA,Grand Manan,7
+218,2011-07-04,Canada-100,Scot's Bay,NA,NA,NA,NA,NA,9.25,11,10.75,12.75,5,Head Of The Bay,7
+219,2011-07-06,Canada-100,White Head,NA,NA,NA,NA,NA,12.5,16.75,14.75,13.75,10.25,Grand Manan,7
+220,2011-07-11,Canada-100,White Head,NA,NA,NA,NA,12.5,16.75,14.75,13.75,10.25,NA,Grand Manan,7
+221,2011-07-11,Capelco,Schoodic Ridge,NA,NA,NA,NA,9.75,11.75,14.5,13.25,15.25,NA,USA Seine,7
+222,2011-07-12,Margaret Elizabeth,North East Bank,NA,NA,NA,NA,NA,12.5,15.25,18.5,16,7.5,Grand Manan,7
+223,2011-07-13,Silver King,Sandy Cove,NA,NA,NA,8.75,11.25,12,15.75,15,NA,NA,,7
+224,2011-07-14,Canada-100,North East Bank,NA,NA,NA,NA,NA,7.75,15,18.25,14.75,NA,N.B. Seine,7
+225,2011-07-14,Silver King,Bradfords Cove,NA,NA,NA,7.5,8.5,NA,NA,NA,NA,NA,Grand Manan,7
+226,2011-07-17,Andrew Deane,Sandy Cove,NA,NA,6.5,7.75,8.5,8.5,NA,NA,NA,NA,,7
+227,2011-07-17,Strathaven,Money Cove,NA,NA,6.5,6,8.5,NA,NA,NA,NA,NA,Grand Manan,7
+228,2011-07-18,Brunswick Provider,,NA,NA,NA,NA,NA,8.75,8,7,NA,NA,N.B.Seine,7
+229,2011-07-18,Capelco,,NA,NA,NA,NA,NA,7.75,8,8.75,NA,NA,U.S.Seine,7
+230,2011-07-20,Strathburn,Sea Wall,NA,NA,7.25,8,8.5,NA,NA,NA,NA,NA,Grand Manan,7
+231,2011-07-21,Andrew Deane,Sea Wall,NA,NA,NA,5.25,3.75,11.5,9.75,13,NA,NA,Grand Manan,7
+232,2011-07-21,Strathaven,Money Cove,NA,NA,NA,NA,5.5,13.25,16,12.25,NA,NA,Grand Manan,7
+233,2011-07-21,Micheal Eileen,Sea Wall,NA,NA,NA,3.75,9.75,16.25,13,9.75,7.75,NA,Grand Manan,7
+234,2011-07-26,Brunswick Provider,Scot's Bay,NA,NA,NA,NA,NA,5.75,7.25,8.25,5.25,3.25,Head Of The Bay,7
+235,2011-07-26,Micheal Eileen,Sandy Cove,NA,NA,NA,NA,5.75,11.75,18.5,NA,NA,NA,,7
+236,2011-07-26,Silver King,Bradfords Cove,NA,NA,NA,7,8.75,14.25,17,NA,NA,NA,Grand Manan,7
+237,2011-07-27,Andrew Deane,Bradfords Cove,NA,NA,NA,7.75,9,11.87,NA,NA,NA,NA,Grand Manan,7
+238,2011-07-28,Strathaven,Mystrey,NA,NA,NA,4.25,6.75,17.25,NA,NA,NA,NA,Grand Manan,7
+239,2011-07-28,Capelco,,NA,NA,NA,NA,10.5,10.25,9.75,11,NA,NA,USA Seine,7
+240,2011-07-28,Silver King,Winner Weir,NA,NA,5.75,7.75,12.5,NA,NA,NA,NA,NA,Whale Cove,7
+241,2011-07-29,Brunswick Provider,North East Bank,NA,NA,NA,NA,NA,11.25,14.75,11,12.75,5.25,Grand Manan,7
+242,2011-08-01,Senator Neil,Sandy Cove,NA,NA,NA,12.5,15.5,12.5,15.25,NA,NA,NA,,8
+243,2011-08-01,Margaret Elizabeth,Scot's Bay,NA,NA,NA,NA,NA,10.5,7.5,6,9.5,8,Head Of The Bay,8
+244,2011-08-02,Strathburn,Iron Lady,NA,NA,NA,8.25,11,NA,13,NA,NA,NA,Grand Manan,8
+245,2011-08-03,Andrew Deane,Mystrey Island,NA,NA,NA,8.25,11.5,11,NA,NA,NA,NA,Grand Manan,8
+246,2011-08-04,Strathburn,Intruder,NA,NA,NA,NA,10.5,14,15.75,NA,NA,NA,Grand Manan,8
+247,2011-08-04,Senator Neil,Double R,NA,NA,NA,6.5,11.5,8.5,8.25,NA,NA,NA,Blisses,8
+248,2011-08-04,Brunswick Provider,White Head,NA,NA,NA,NA,12.25,16.5,14.5,9.25,NA,NA,Grand Manan,8
+249,2011-08-05,Silver King,Local Shut Off,NA,NA,NA,12.25,15.5,10.5,12.25,16.5,NA,NA,,8
+250,2011-08-08,Margaret Elizabeth,White Head,NA,NA,NA,NA,16.5,16,19.5,NA,NA,NA,Grand Manan,8
+251,2011-08-09,Senator Neil,Tuckers,NA,NA,NA,12,15.75,NA,NA,NA,NA,NA,Blisses,8
+252,2011-08-09,Voyager,,NA,NA,NA,NA,NA,9.5,14,NA,NA,NA,USA Truck Fish,8
+253,2011-08-10,Capelco,,NA,NA,NA,NA,13.25,6.5,NA,NA,NA,NA,USA Plan-B,8
+254,2011-08-12,Caroline B,Moose Island,NA,NA,7,7.25,12.75,NA,NA,NA,NA,NA,Deer Island,8
+255,2011-08-12,Brunswick Provider,White Head,NA,NA,NA,NA,11.5,9.75,10.25,NA,NA,NA,Grand Manan,8
+256,2011-08-14,Micheal Eileen,Winner Weir,NA,NA,NA,8.75,8,13.75,NA,NA,NA,NA,Whale Cove,8
+257,2011-08-14,Andrew Deane,Sea Wall,NA,NA,NA,NA,15,13.75,16.75,NA,NA,NA,Grand Manan,8
+258,2011-08-15,Andrew Deane,Mumps,NA,NA,NA,10.5,20.25,11.5,NA,NA,NA,NA,Wolves,8
+259,2011-08-15,Strathaven,Mystrey Island,NA,NA,NA,7.5,9.5,11.5,NA,NA,NA,NA,Grand Manan,8
+260,2011-08-15,Senator Neil,Moose Island,NA,NA,NA,10.25,15.25,9.75,7.5,NA,NA,NA,,8
+261,2011-08-15,Canada-100,Scot's Bay,NA,NA,NA,NA,NA,10.25,11,8.5,2.25,NA,,8
+262,2011-08-15,Capelco,USA Seine,NA,NA,NA,NA,15,8.5,11,7.75,NA,NA,,8
+263,2011-08-17,Caroline B,Shut off,6.25,6,NA,10.25,13.75,NA,9.5,8,NA,NA,Dear Island,8
+264,2011-08-18,Senator Neil,Eagel Island,NA,NA,NA,8,11.5,12.5,8.5,9.25,9,NA,Blisses,8
+265,2011-08-22,Brunswick Provider,White Head,NA,NA,NA,NA,14.75,16.75,14.5,6.5,NA,NA,Grand Manan,8
+266,2011-08-23,Senator Neil,,NA,NA,NA,NA,16.25,20,6.5,8.25,NA,NA,Deer Island,8
+267,2011-08-24,Capelco,,NA,NA,NA,NA,6.75,11.25,12.5,12.25,NA,NA,USA Seine,8
+268,2011-08-25,,Pacific Herring,NA,NA,NA,NA,20,19.5,NA,NA,NA,NA,Pacific Herring,8
+269,2011-08-28,Canada-100,Scotts Bay,NA,NA,NA,NA,NA,9,7,7.25,3.25,NA,,8
+270,2011-08-30,Margaret Elizabeth,Scotts Bay,NA,NA,NA,NA,NA,9.5,7.25,2.5,4.25,NA,,8
+271,2011-08-30,Caroline B,Deer Island,NA,NA,NA,NA,20.25,19,NA,NA,NA,NA,,8
+272,2011-09-07,Senator Neil,Back Bay,NA,4.75,7,6.75,16.25,11,12.25,NA,NA,NA,,9
+273,2011-09-07,Canada-100,North East Banks,NA,NA,NA,NA,NA,12,14.25,15.5,12.5,7,,9
+274,2011-09-09,Brunswick Provider,White Head,NA,NA,NA,NA,10,13.5,12.25,6.5,NA,NA,Grand Manan,9
+275,2011-09-10,Brunswick Provider,South West Bank,NA,NA,NA,NA,12.5,16.75,12.75,10.5,11.5,11,Grand Manan,9
+276,2011-09-10,Brunswick Provider,White Head,NA,NA,NA,NA,10.25,17,16,7.5,NA,NA,Grand Manan,9
+277,2011-09-11,Brunswick Provider,German Banks,NA,NA,NA,NA,NA,4.75,4.75,6.75,7.5,5.5,Nova Scotia,9
+278,2011-09-12,Brunswick Provider,White Head,NA,NA,NA,NA,12.75,12.75,13.75,NA,NA,NA,Grand Manan,9
+279,2011-09-12,Strathlorne,Campobello,NA,NA,NA,13,14.5,20,13.25,14.75,NA,NA,,9
+280,2011-09-13,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,9,7.25,6.75,7,Nova Scotia,9
+281,2011-09-13,Strathlorne,Blisses,NA,3,5.5,7.25,17.75,14.5,9,NA,NA,NA,,9
+282,2011-09-22,Senator Neil,Campobello,NA,NA,NA,11.25,12.5,13.75,8.5,NA,NA,NA,,9
+283,2011-09-22,Canada 100,North East Bank,NA,NA,NA,NA,5.5,9.75,8,NA,NA,NA,,9
+284,2011-09-23,Capelco,,NA,NA,NA,NA,4,9,8.75,4.25,9.5,NA,USA,9
+285,2011-09-23,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,7.75,5.75,8.5,5.5,3.5,Nova Scotia,9
+286,2011-09-26,Brunswick Provider,German Banks,NA,NA,NA,NA,NA,4.75,4.75,6.75,7.5,5.5,Nova Scotia,9
+287,2011-09-27,Strathlorne,Back Bay,NA,NA,10,10.25,NA,NA,NA,NA,NA,NA,Charleys cove,9
+288,2011-09-29,Strathlorne,Deer Island,NA,NA,10.5,13.25,17.25,11.5,14.75,NA,NA,NA,,9
+289,2011-10-01,Caroline B,Blisses,NA,NA,6.25,9,14.25,18,19,NA,NA,NA,,10
+290,2011-10-03,Western Venture,Kettle Bottom,NA,NA,NA,NA,NA,8,10.25,6.5,12.5,NA,Maine,10
+291,2011-10-03,Strathlorne,Campobello,NA,NA,NA,NA,16.25,21,6,4.5,NA,NA,Shut Off,10
+292,2001-10-04,Margaret Elizabeth,German Banks,NA,NA,NA,NA,3.25,6.75,8.75,11,11.25,NA,Nova Scotia,10
+293,2011-10-05,Western Venture,Kettle Bottom,NA,NA,NA,10.5,12.75,18,NA,NA,NA,NA,USA Truck Fish,10
+294,2011-10-05,Western Venture,Kettle Bottom,NA,NA,NA,NA,NA,9.5,6.25,5.75,NA,NA,USA Truck Fish,10
+295,2011-10-06,Brunswick Provider,Wolves,NA,NA,NA,NA,6.5,10,10,9,6.5,7,Grand Manan,10
+296,2011-10-12,Strathlorne,Deer Island,NA,NA,8.5,12.25,18.5,NA,NA,NA,NA,NA,,10
+297,2011-10-13,Brunswick Provider,Wolves,NA,NA,NA,NA,16,18.75,20.5,20.75,15.75,NA,Grand Manan,10
+298,2011-10-16,Margaret Elizabeth,,NA,NA,NA,NA,10.25,16.25,15,NA,NA,NA,Grand Manan,10
+299,2011-10-18,Caroline B,Deer Island,NA,NA,7.75,12,16.25,20.25,13,NA,NA,NA,,10
+300,2011-10-19,Brunswick Provider,,NA,NA,NA,NA,13.75,17,16.5,18.75,NA,NA,Grand Manan,10
+301,2011-10-24,Brunswick Provider,,NA,NA,NA,NA,6.75,14.5,12.75,6.5,NA,NA,Grand Manan,10
+302,2011-10-25,Sunlight,,NA,NA,NA,NA,7,9.75,11.25,10.25,15.25,NA,Schoodic Ridge,10
+303,2011-10-26,Margaret Elizabeth,,NA,NA,NA,NA,10.25,13.5,15.25,12,NA,NA,Grand Manan,10
+304,2011-11-01,Brunswick Provider,North Head,NA,NA,NA,NA,8.25,13.5,11,20,NA,NA,Grand Manan,11
+305,2011-11-02,Margaret Elizabeth,North Head,NA,NA,NA,NA,7.75,11.5,11,16,NA,NA,Grand  Manan,11
+306,2011-11-03,Brunswick Provider,South West Banks,NA,NA,NA,NA,NA,5.25,8.5,5.75,10.25,12.25,Grand Manan,11
+307,2011-11-06,Margaret Elizabeth,North West Banks,NA,NA,NA,NA,11.25,13,8.5,7.5,NA,NA,Grand Manan,11
+308,2011-11-09,Brunswick Provider,North East  Banks,NA,NA,NA,NA,NA,7,9,6,3.25,NA,Grand Manan,11
+309,2011-12-05,Gemini,North Shore,NA,NA,NA,NA,NA,5,3,5.75,12.5,NA,Miscow Banks,12
+310,2011-12-13,,,NA,NA,NA,NA,NA,NA,5,NA,NA,NA,Norpel,12
+311,2011-12-13,,,NA,NA,NA,NA,NA,6,NA,NA,NA,NA,R.K.Murrphy,12
+312,2012-01-03,Heather Lynn,Block Island Sound,NA,NA,NA,NA,NA,4,5.5,2.25,NA,NA,U.S.A.Truck Fish,1
+313,2012-01-05,Sunlight,Block Island Sound,NA,NA,NA,NA,NA,4,2.75,2.5,NA,NA,U.S.A.Truck Fish,1
+314,2012-01-06,Heather Lynn,Block Island Sound,NA,NA,NA,NA,NA,1.25,2,5.5,NA,NA,U.S.A.Truck Fish,1
+315,2012-01-07,Heather Lynn,Block Island Sound,NA,NA,NA,NA,NA,2.75,2.5,3.25,NA,NA,U.S.A.Truck Fish,1
+316,2012-01-08,Sunlight,Block Island Sound,NA,NA,NA,NA,NA,2,4,8.25,5.75,NA,U.S.A.Truck Fish,1
+317,2012-01-09,Sunlight,Block Island Sound,NA,NA,NA,NA,NA,2.5,1.25,6.5,NA,NA,U.S.A.Truck Fish,1
+318,2012-01-09,Sunlight,Block Island Sound,NA,NA,NA,NA,NA,2.75,5,4,9.5,NA,U.S.A.Truck Fish,1
+319,2012-01-16,,,NA,NA,NA,NA,NA,3.5,6.5,5.5,NA,NA,Norpel Sardines,1
+320,2012-01-16,Heather Lynn,,NA,NA,NA,NA,NA,1.75,4.75,4.5,0.5,NA,U S A Truck Fish,1
+321,2012-01-22,,Block Island Sound,NA,NA,NA,NA,NA,2,1,NA,NA,NA,U.S.A.Truck Fish,1
+322,2012-02-01,Western Venture,,NA,NA,NA,NA,2,1,NA,4.75,NA,NA,U.S.A.Truck Fish,2
+323,2012-02-06,Sunlight,Narragansett,NA,NA,NA,NA,NA,3.25,3.5,4,3,NA,U.S.A.Truck Fish,2
+324,2012-02-10,Heather Lynn,Block Island Sound,NA,NA,NA,NA,NA,2,8.25,2.25,NA,NA,U.S.A.Truck Fish,2
+325,2012-02-10,Western Venture,North Mud Hole,NA,NA,NA,NA,NA,0.75,4,11.5,5.25,NA,U.S.A.Truck Fish,2
+326,2012-02-13,Ocean State,Block Island Sound,NA,NA,NA,NA,NA,3.5,4.75,3.25,4,NA,U.S.A.Truck Fish,2
+327,2012-02-16,Western Venture,Mud hole,NA,NA,NA,NA,NA,0.5,2.5,4.25,NA,NA,U.S.A.Truck Fish,2
+328,2012-02-19,Sunlight,Moriches,NA,NA,NA,NA,NA,3.5,2.25,4.25,2,NA,U.S.A.Truck Fish,2
+329,2012-02-20,Heather Lynn,Block Island Sound,NA,NA,NA,NA,NA,4,3.75,2.5,9.75,11,U.S.A Trucks Fish,2
+330,2012-02-20,Western Venture,Cape Cod Island,NA,NA,NA,NA,NA,1.5,2.25,6.25,NA,NA,U.S.A.Truck Fish,2
+331,2012-02-22,Frozen Sardines,,NA,NA,NA,NA,NA,20.5,NA,NA,NA,NA,Comeaus,2
+332,2012-02-27,Frozen Sardines,,NA,NA,NA,NA,NA,NA,14,NA,NA,NA,R.K.Murrphy Sardines,2
+333,2012-02-27,Frozen Sardines,,NA,NA,NA,NA,NA,5,NA,NA,NA,NA,Cape Seafood,2
+334,2012-05-02,Brunswick Provider,S.W.Banks,NA,NA,NA,5,5.5,5.5,4,9.5,5,NA,Grand Manan,5
+335,2012-05-07,Brunswick Provider,S.W.Banks,NA,NA,NA,7.5,4.25,6.75,3.5,4,NA,NA,Grand Manan,5
+336,2012-05-14,Canada 100,S.W.Banks,NA,NA,NA,4,5,5.75,7.75,4.5,NA,NA,Grand Manan,5
+337,2012-05-21,Margaret Elizabeth,Sheet Harbour,NA,NA,NA,NA,NA,NA,NA,9,10.25,14,,5
+338,2012-05-30,Silver King,Money Cove,NA,NA,NA,NA,NA,7,10,9.75,12.5,NA,Grand Manan,5
+339,2012-06-02,Canada 100,S.W.Banks,NA,NA,NA,NA,9,8.25,9.25,13,NA,NA,Grand Manan,6
+340,2012-06-02,Silver King,Money Cove,NA,NA,8.25,3.75,2,11,10.75,6.75,NA,NA,Grand Manan,6
+341,2012-06-03,Brunswick Provider,S.W.Banks,NA,NA,NA,NA,5.5,11,9.25,3.5,3.75,NA,Grand Manan ,6
+342,2012-06-12,Brunswick Provider,N.E.Banks,NA,NA,NA,NA,NA,6.75,10.5,10,6.25,NA,Grand Manan,6
+343,2012-06-17,Margaret Elizabeth,Prong,NA,NA,NA,NA,NA,NA,NA,11.5,14.25,2.25,Grand Manan,6
+344,2012-06-26,Margaret Elizabeth,White Head,NA,NA,NA,NA,10,9.5,12.5,8.5,NA,NA,Grand Manan,6
+345,2012-07-02,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,6.25,4,5.25,6,,7
+346,2012-07-03,Margaret Elizabeth,N.E.Banks,NA,NA,NA,9.5,10.75,10,9.25,10.25,9.5,NA,Grand Manan,7
+347,2012-07-04,Irish Venture,Georges Bank,NA,NA,NA,NA,NA,NA,13.25,11,11.25,NA,U.S.A.Truck Fish,7
+348,2012-07-09,Margaret Elizabeth,N.E.Banks,NA,NA,NA,NA,NA,14,11.75,12,NA,NA,Grand Manan,7
+349,2012-07-10,Brunswick Provider,S.W.Banks,NA,NA,NA,NA,NA,10.5,9.25,11.25,11,10,Grand Manan,7
+350,2012-07-12,Western Venture,Mt. Desert,NA,NA,NA,NA,NA,9.75,10,12.75,9.5,NA,U.S.A.Truck Fish,7
+351,2012-07-12,Canada 100,N.E.Banks,NA,NA,NA,NA,10,12.25,12,NA,NA,NA,Grand Manan,7
+352,2012-07-16,Canada 100,N.E.Banks,NA,NA,NA,8.5,9.25,8,12.5,12.5,NA,NA,Grand Manan,7
+353,2012-07-17,Canada 100,Scott's Bay,NA,NA,NA,NA,NA,5.25,4,6.25,3,1.75,Head of the Bay,7
+354,2012-07-18,Western Sea,Mt. Desert,NA,NA,NA,10.75,13,NA,NA,NA,NA,NA,U.S.A.Truck Fish,7
+355,2012-07-19,,Kettle Ground,NA,NA,NA,NA,NA,NA,14,14.75,13,8.25,U.S.A.Truck Fish,7
+356,2012-07-19,Capelco,Mt.Desert rock,NA,NA,NA,10,12.25,12,12.25,NA,NA,NA,,7
+357,2012-07-19,,,NA,NA,NA,NA,NA,11,6.25,9,NA,NA,U.S.A.Truck Fish,7
+358,2012-07-21,Canada 100,N.E.Banks,NA,NA,NA,11,9.25,12.25,13,NA,NA,NA,Grand Manan,7
+359,2012-07-22,Western Venture,Georges Banks,NA,NA,NA,NA,NA,NA,10.5,10.25,9.5,NA,U.S.A.Truck Fish,7
+360,2012-07-22,Margaret Elizabeth,Prong,NA,NA,NA,7.5,13,12.25,9,NA,NA,NA,Grand  Manan,7
+361,2012-07-23,Micheal Eileen,Mt. Desert,NA,NA,NA,11,8.25,10.25,13.25,NA,NA,NA,U.S.A.Seine,7
+362,2012-07-24,Sunlight,Georges Banks,NA,NA,NA,NA,NA,NA,11,10.75,NA,NA,U.S.A.Truck Fish,7
+363,2012-07-25,Western Wave,Kettle Bottom,NA,NA,NA,NA,NA,NA,14,10.75,11.5,NA,U.S.A.Truck Fish,7
+364,2012-07-30,Margaret Elizabeth,Scott's Bay,NA,NA,NA,NA,NA,NA,7,5.75,5,3.5,Head of the Bay,7
+365,2012-07-30,Micheal Eileen,Mt. Desert Rock,NA,NA,NA,9,8.25,9.75,NA,NA,NA,NA,U.S.A.Seine,7
+366,2012-07-31,Capelco,Mt.Desert rock,NA,NA,NA,8.25,14,10.25,16.25,NA,NA,NA,U.S.A.Seine,7
+367,2012-07-31,Canada 100,N.E.Banks,NA,NA,NA,8.75,8,10,12.25,13.5,NA,NA,Grand Manan,7
+368,2012-08-05,Micheal Eileen,Mt.Desert Rock,NA,NA,NA,10,9.75,8,10,NA,NA,NA,U.S.A.Seine,8
+369,2012-08-07,Canada 100,N.E.Banks,NA,NA,NA,NA,9,12.25,6.5,7.25,NA,NA,Grand Manan,8
+370,2012-08-08,Capelco,Mt.Desert rock,NA,NA,NA,6.25,12,14.25,NA,NA,NA,NA,U.S.A.Seine,8
+371,2012-08-09,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,4.25,3.5,4,4.25,N.S.Seine,8
+372,2012-08-10,Margaret Elizabeth,Lurcher,NA,NA,NA,8.25,10,12.25,NA,NA,NA,NA,,8
+373,2012-08-10,Canada 100,North East Banks,NA,NA,NA,10.25,13.5,11.5,15,9.25,NA,NA,Grand Manan,8
+374,2012-08-12,Brunswick Provider,Scotts Bay,NA,NA,NA,NA,NA,NA,5.5,5,8.75,NA,Head of the Bay,8
+375,2012-08-20,Andrew Deane,Money Cove,NA,NA,6.75,7.25,10.75,12,13,NA,NA,NA,Grand Manan,8
+376,2012-08-20,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,6.25,4,5,3.25,N.S.Seine,8
+377,2012-08-23,Capelco,Mt Desert Rock,NA,NA,NA,6.25,11,11,9.75,9,NA,NA,U.S.A. Seine,8
+378,2012-08-23,Brunswick Provider,Lurcher,NA,NA,NA,NA,NA,NA,8,8.75,3,NA,,8
+379,2012-08-26,,,NA,NA,NA,NA,NA,NA,NA,7.25,7.75,12.5,Truck Fish,8
+380,2012-08-28,Margaret Elizabeth,Scotts Bay,NA,NA,NA,NA,NA,7.25,8,7,NA,NA,Head of the Bay,8
+381,2012-08-30,Canada 100,German Banks,NA,NA,NA,NA,NA,NA,5.25,6.5,7.25,1,N.S.Seine,8
+382,2012-08-30,Western venture,,NA,NA,NA,NA,NA,5.75,6.25,9,9.25,NA,,8
+383,2012-08-31,Capelco,Mt Desert Rock,NA,NA,NA,NA,4.75,11.5,10.25,10,NA,NA,,8
+384,2012-09-07,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,NA,5,4,4,7,N.S. Seine,9
+385,2012-09-23,Margaret Elizabeth,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,,9
+386,2012-09-23,Capelco,Mt Desert Rock,NA,NA,NA,NA,6.5,8,8.25,10.25,NA,NA,,9
+387,2012-09-24,Andrew Deane,Money Cove,NA,2.5,5.75,7,6,NA,NA,NA,NA,NA,,9
+388,2012-10-04,Western Venture,,NA,NA,NA,NA,NA,NA,NA,5.25,4.25,4,,10
+389,2012-10-25,Western Venture,,NA,NA,NA,NA,NA,5.25,2,2.5,1.75,NA,U.S.A. Truck Fish,10
+390,2012-10-27,Margaret Elizabeth,German Banks,NA,NA,NA,NA,NA,4,4.75,6.5,3,2.5,Nova Scotia,10
+391,2012-10-27,Heather Lynn,Narragansett,NA,NA,NA,2.75,3,0,0.25,1,NA,NA,USA Trucks,10
+392,2013-01-08,Heather Lynn,Narragansett,NA,NA,NA,3,2.25,1.75,1.75,2,3.75,NA,USA Trucks,1
+393,2013-01-11,Providian,Cape Cod,NA,NA,NA,3,2.25,3,2.75,3,NA,NA,USA Trucks,1
+394,2013-01-14,Sunlight,Cape Cod,NA,NA,NA,NA,1.5,NA,0,0.25,NA,NA,USA Trucks,1
+395,2013-01-15,Ocean State,Block Island Sd,NA,NA,NA,2.5,3.25,4,1,2.5,3.25,NA,USA Trucks,1
+396,2013-01-16,Heather Lynn,Block Island Sd,NA,NA,NA,NA,NA,NA,NA,11,NA,NA,Alewives,1
+397,2013-01-16,Heather Lynn,Block Island Sd,NA,NA,NA,NA,NA,NA,NA,1.5,NA,NA,Mackerel,1
+398,2013-01-16,Heather Lynn,Block Island Sd,NA,NA,NA,NA,NA,NA,NA,4,NA,NA,Herring,1
+399,2013-01-22,Alantic Queen,Block Island Sd,NA,NA,NA,2,1.75,0.25,0,7,NA,NA,USA Trucks,1
+400,2013-01-25,Sunlight,Block Island Sd,NA,NA,NA,1.25,3,0,4.75,NA,NA,NA,USA Trucks,1
+401,2013-01-26,Heather Lynn,Narragansett,NA,NA,NA,0.25,2.25,0.5,0,0,0.5,NA,USA Trucks,1
+402,2013-01-26,Cape Seafood,Cape Cod,NA,NA,NA,1.25,1,3.25,2.25,NA,NA,NA,USA Trucks,1
+403,2013-01-29,Sunlight,Block Island Sd,NA,NA,NA,1.25,3,2,0.75,2.5,NA,NA,USA Trucks,1
+404,2013-01-29,Alantic Queen,Block Island Sd,NA,NA,NA,1.5,2.5,2.5,1.25,3.75,0.75,NA,USA Trucks,1
+405,2013-02-07,Providian,Georges Banks,NA,NA,NA,NA,4,1.75,3.25,7.5,NA,NA,USA Trucks,2
+406,2013-02-07,Heather Lynn,Point Judith,NA,NA,NA,NA,2,1,1.5,3.5,NA,NA,USA Trucks,2
+407,2013-02-12,Heather Lynn,Block Island Sd,NA,NA,NA,1,1.25,4,0,3.75,2.5,NA,USA Trucks,2
+408,2013-02-12,Sunlight,Block Island Sd,NA,NA,NA,NA,NA,0.75,0,3.25,0.25,NA,USA Trucks,2
+409,2013-02-13,Sweeden,Astrid,NA,NA,NA,7,8,11,NA,NA,NA,NA,USA Trucks,2
+410,2013-02-14,Alantic Queen,Block Island Sd,NA,NA,NA,0,0,0,1.5,0.25,0.5,NA,USA Trucks,2
+411,2013-02-20,Heather Lynn,Block Island Sd,NA,NA,NA,1,2.25,0,1.5,0,NA,NA,USA Trucks,2
+412,2013-02-21,Heather Lynn,Block Island Sd,NA,NA,NA,0.25,3,2.5,0.75,0.5,0.5,NA,USA Trucks,2
+413,2013-02-28,Westeren Venture   Mudd Hole,Mud Hole,NA,NA,NA,NA,0.75,3,2.25,1.25,NA,NA,USA Trucks,2
+414,2013-03-04,Heather Lynn,Block Island Sd,NA,NA,NA,0,0,1.5,0.5,1,NA,NA,USA Trucks,3
+415,2013-03-04,Sunlight,Fire Island,NA,NA,NA,NA,1.5,0,0.5,0,NA,NA,USA Trucks,3
+416,2013-03-04,Western Vent,Georges Banks,NA,NA,NA,NA,3.75,3,1.25,4.5,1.25,NA,USA Trucks,3
+417,2013-03-07,Sunlight,Fire Island,NA,NA,NA,NA,0.25,1,0,0.25,NA,NA,New York,3
+418,2013-03-13,Western Vent,Moriches,NA,NA,NA,NA,0,0.25,2.25,3,3.75,NA,USA Trucks,3
+419,2013-03-15,Heather Lynn,Montauk,NA,NA,NA,0.75,0.25,0.25,0,0,NA,NA,USA Trucks,3
+420,2013-03-19,Sunlight,Moriches,NA,NA,NA,0,0,1.25,0.25,2,2.5,NA,New York,3
+421,2013-05-06,Brunswick Provider,North East Banks,NA,NA,NA,3,4.75,5,3,2.25,4.5,NA,Grand Manan,5
+422,2013-05-09,Brunswick Provider,North East Banks,NA,NA,NA,4,6.75,3,5.75,4.5,3.25,NA,Grand Manan,5
+423,2013-05-21,Margaret Elizabeth,Patch,NA,NA,NA,NA,NA,NA,4.25,12.5,12.5,11.75,Nova Scotia,5
+424,2013-06-04,Andrew Deane,Mill Cove,NA,2.25,2.25,3.25,NA,NA,NA,NA,NA,NA,Back Bay,6
+425,2013-06-04,Brunswick Provider,North East Banks,NA,NA,NA,NA,9,8,10.25,11.25,5,NA,Grand Manan,6
+426,2013-06-05,Andrew Deane,Crab Rock,NA,4,5,3.75,NA,NA,NA,NA,NA,NA,Back Bay,6
+427,2013-06-05,Canada 100,North East Banks,NA,NA,NA,NA,6.25,9.5,13.5,15.25,9.75,NA,Grand Manan,6
+1,2017-01-03,Heather Lynn,Narragansett Beach,NA,NA,NA,NA,NA,2.75,3,2.75,5.25,NA,USA trucks,1
+2,2017-01-03,Frz Sardines,Cape Seafood,NA,NA,NA,NA,NA,NA,NA,5,NA,NA,Froze 326-16,1
+3,2017-01-09,Frz Sardines,Norpel,NA,NA,NA,NA,NA,NA,1,3,NA,NA,Froze Nov 30/16,1
+4,2017-01-10,Osprey,Cape Cod,NA,NA,NA,NA,NA,2,3.5,5.5,5.75,NA,USA trucks,1
+5,2017-01-10,Heather Lynn,Block Island,NA,NA,NA,NA,NA,2.5,4.5,2.5,4,NA,USA trucks,1
+6,2017-01-10,Seabreeze,Narragansett Beach,NA,NA,NA,NA,NA,2,4.5,6.75,3,NA,USA trucks,1
+7,2017-01-16,Frz Sardines,Norpel,NA,NA,NA,NA,NA,NA,NA,NA,2.25,NA,Froze Dec 7/16,1
+8,2017-01-16,Sunlight,Cape Cod,NA,NA,NA,NA,NA,2,3,1.25,5.75,NA,USA trucks,1
+9,2017-01-16,Lightning Bay,Block Island,NA,NA,NA,NA,NA,2.75,3,0.25,0,NA,USA trucks,1
+10,2017-01-17,Heather Lynn,Montauk Point,NA,NA,NA,NA,NA,2,3.75,0.25,1.25,NA,USA trucks,1
+11,2017-01-18,Frz Sardines,Pilchard Sardine,NA,NA,NA,NA,NA,NA,8.75,NA,NA,NA,2016-03-11,1
+12,2017-01-22,Providian,Chatham Mass.,NA,NA,NA,NA,NA,0.5,1.75,5.25,6.25,NA,USA trucks,1
+13,2017-01-23,Lightning Bay,Montauk ,NA,NA,NA,NA,NA,2.75,3.5,2.75,2.5,NA,USA trucks,1
+14,2017-01-23,Frz Sardines,Norpel,NA,NA,NA,NA,NA,NA,NA,NA,3.75,NA,Froze Nov 29/16,1
+15,2017-01-31,Irish Venture,Cape Cod,NA,NA,NA,NA,NA,2,2.5,7,6.75,NA,USA trucks,1
+16,2017-02-01,Frozen Pre Cuts,Pilchard,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2021-12-16,2
+17,2017-02-22,Frozen Sardines,Channel,NA,NA,NA,NA,NA,NA,NA,NA,4,NA,17016,2
+18,2017-02-22,Frozen Sardines,Pilchard,NA,NA,NA,NA,15.5,14,NA,NA,NA,NA,43085,2
+19,2017-02-23,Sunlight,Tom's River,NA,NA,NA,NA,NA,NA,NA,2.5,1,1.5,1.67%,USA trucks
+20,2017-02-23,Sunlight,Tom's River,NA,NA,NA,NA,NA,NA,NA,0.25,1.25,2,1.17%,USA trucks
