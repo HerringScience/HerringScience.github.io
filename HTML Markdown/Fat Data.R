@@ -30,6 +30,7 @@ Com2 = read_csv("Comeaus 2017.csv")
 Com3 = read_csv("Comeaus 2018.csv")
 Com4 = read_csv("Comeaus 2020.csv")
 Com5 = read_csv("Comeaus 2021.csv")
+Com6 = read_csv("Comeaus 2022.csv")
 Scotia = read_csv("Scotia 2017-2018.csv")
 Unkn = read_csv("Unknown 2007-2013.csv")
 
