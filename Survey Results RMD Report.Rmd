@@ -13,13 +13,6 @@ surv = "SB"
 surv2 = "Scots Bay"
 year = "2022"
 surv.no = "6"
-
-#This will show you what photos or data are missing in the console below
-#If none show up (character(0)), press Knit
-current=paste0(surv, surv.no)
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
-files = list.files(pattern=c("Missing.csv", "Missing.jpg"))
-print(files)
 ```
 
 ```{r setup, include=FALSE}
