@@ -9,20 +9,20 @@ surv.no="6"
 
 #Set vessels for SB only
 ids = c("LM","LB", "MS", "SL", "C1", "BP")
-NorthVessel = "FM"
-EastVessel = "LJ"
+NorthVessel = "NA" #set NA if none
+EastVessel = "NA" #set NA if none
 
 #Area and TS values
-SB1= 618 #SB main area
+SB1= 640 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
 SBTS1 = -35.5 #TS38
 GBTS1 = -35.5 #TS38
 
-GB1 = 805 #GB main area
-GB2 = 267 #Seal Island area
-GB3 = 0.77 #Ad-hoc school survey area
+GB1 = 800 #GB main area
+GB2 = 280 #Seal Island area
+GB3 = NA #Ad-hoc school survey area
 
 library(cli)
 library(lubridate)
@@ -81,6 +81,24 @@ summary(Tag$Vessel) #double check
 
 Tag %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv"))
 
+##ECHOVIEW DATA##
+
+#Land Data
+can<-getData('GADM', country="CAN", level=1)
+us = getData('GADM', country = "USA", level = 1)
+can1 = rbind(can,us)
+NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+
+# Proper coordinates for German Bank
+GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
+proj4string(GBMap) <- CRS(proj4string(NBNS))
+GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+
+# Proper coordinates for Scots Bay
+SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
+proj4string(SBMap) <- CRS(proj4string(NBNS))
+SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+
 #Import All Boxes
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
 boxes = read.csv("surveyBoxes.csv")
@@ -103,10 +121,10 @@ pathnames <- list.files(pattern="[.]R$", path=paste0("C:/Users/", Sys.info()[7],
 sapply(pathnames, FUN=source)
 
 #Echoview Data
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
-Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current), pattern = "Map") %>% 
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no))
+Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "Map") %>% 
   map_df(~read_csv(.))
-Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current), pattern = "Region") %>% 
+Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "Region") %>% 
   map_df(~read_csv(.))
 
 if(surv == "SB"){
@@ -383,21 +401,3 @@ CTD30 = Strat
 CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
 CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
 SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
-
-##ECHOVIEW DATA##
-
-#Land Data
-can<-getData('GADM', country="CAN", level=1)
-us = getData('GADM', country = "USA", level = 1)
-can1 = rbind(can,us)
-NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-
-# Proper coordinates for German Bank
-GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
-proj4string(GBMap) <- CRS(proj4string(NBNS))
-GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
-
-# Proper coordinates for Scots Bay
-SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
-proj4string(SBMap) <- CRS(proj4string(NBNS))
-SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
