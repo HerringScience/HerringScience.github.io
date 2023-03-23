@@ -177,9 +177,9 @@ c=if(surv=="SB"){
 
  **When running your transect, if you are recording a school of fish but are near the end of your line, please continue recording in a straight line even if it extends beyond the boundaries of the survey box.**
 
-### Lines figures
+### Transects figure
 
-```{r, out.width="1200px", out.height="500px"}
+```{r, out.width="525px", out.height="275px"}
 Plan2 = Plan %>%
   dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
 

@@ -1783,3 +1783,9 @@ Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) +
   ggtitle("Approximate spawning times of larvae captured in Scots Bay") +
   labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
 ```
+
+## Fat Project {.tabset}
+
+### Chart Data
+
+### Graph Data
