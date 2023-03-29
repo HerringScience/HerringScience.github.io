@@ -37,23 +37,18 @@ Unknown = read_csv("Unknown 2007-2013.csv")
 Connors = Connors %>% dplyr::select(Date = DATE, Vessel = BOAT, Ground = AREA, 
                                     Size4.5 = Size_4.5, Size4.5_5, Size5_6, Size6_7, Size7_8, 
                                     Size8_9, Size9_10, Size10_11, Size11_12, Size12 = Size_12, Month) %>%
-  mutate(Year = substr(Date,1,4))
+  mutate(Year = as.numeric(substr(Date,1,4)))
 Connors = pivot_longer(data=Connors, cols=starts_with("Size"), names_to="Size", names_prefix = "Size", values_to="Fat") %>%
   filter(Fat < 40)
-Connors$Year = as.factor(Connors$Year)
-Connors$Month = as.factor(Connors$Month)
 
 #Scotia QC / structuring
 Scotia = Scotia %>% rename(Fat = Average)
-Scotia$Month = as.factor(Scotia$Month)
-Scotia$Year = as.factor(Scotia$Year)
+Scotia$Month = as.numeric(Scotia$Month)
 
 #Unknown QC / structuring
 Unknown = Unknown %>% dplyr::select(Date, Fat = "% Fat") %>%
-  mutate(Year = substr(Date,1,4)) %>%
-  mutate(Month = substr(Date,6,7))
-Unknown$Year = as.factor(Unknown$Year)
-Unknown$Month = as.factor(Unknown$Month)
+  mutate(Year = as.numeric(substr(Date,1,4))) %>%
+  mutate(Month = as.numeric(substr(Date,6,7)))
 
 #Comeau's QC / structuring
 Com1 = Com1 %>% dplyr::select(Year, Month, Date, Vessel, Ground = Area, Type, Size, Fat)
@@ -71,8 +66,9 @@ Com9 = full_join(Com8, Com3)
 Com10 = full_join(Com9, Com2)
 Comeau = full_join(Com10, Com1)
 rm(list= c("Com1", "Com2", "Com3", "Com4", "Com5", "Com6", "Com7", "Com8", "Com9", "Com10"))
-Comeau$Month = as.factor(Comeau$Month)
-Comeau$Year = as.factor(Comeau$Year)
+Comeau = Comeau %>%
+  mutate(Year = as.numeric(paste0("20",substr(Date,8,9))))
+Comeau = Comeau %>% dplyr::filter(!is.na(Year))
 
 Comeau = Comeau %>%
   mutate(Supplier = "Comeaus") %>%
@@ -95,8 +91,7 @@ rm(list=c("Master1", "Master2"))
 Master = Master %>%
   relocate(Supplier, Year, Month, Day, Date, Date2, Vessel, Lat, Lon, Ground, 
            "FishLength(cm)", "FishWeight(g)", Size, Fat, CollectionMethod, SampleID, Method, Type, Filets, Plant)
-Master$Month <- str_remove(Master$Month, "^0+")
-Master$Month = as.numeric(Master$Month)
+Master$Year = as.factor(Master$Year)
 Master$Month = as.factor(Master$Month)
 Master = Master %>% dplyr::filter(Fat < 40)
 
@@ -143,6 +138,7 @@ Master = Master %>%
                   ifelse(Ground == "Mt.Desert rock", "Mt Desert",
                   ifelse(Ground == "Mt. Desert Rock", "Mt Desert",
                   ifelse(Ground == "Mystrey", "Mystrey Island",
+                  ifelse(Ground == "Area 10", "Murphys Weir",
                   ifelse(Ground == "Double R", NA,
                   ifelse(Ground == "Local Shut Off", "Shut Off",
                   ifelse(Ground == "Shut off", "Shut Off",
@@ -158,15 +154,41 @@ Master = Master %>%
                                 ifelse(Ground == "Scots", "Scots Bay",
                                        ifelse(Ground == "Sw of Seal Island", "Seal Island",
                                               ifelse(Ground == "West of Seal Island", "Seal Island",
-                                                     Ground))))))))))))))))))))))))
+                                                     Ground)))))))))))))))))))))))))
+
+Master = Master %>%
+  mutate(Ground = ifelse(Ground == "Deadman's", "Deadmans",
+                  ifelse(Ground == "North East  Banks", "NE Banks",
+                  ifelse(Ground == "NE banks", "NE Banks",
+                  ifelse(Ground == "North West Banks", "NW Banks",
+                  ifelse(Ground == "South West Banks", "SW Grounds",
+                  ifelse(Ground == "SW of Seal Island", "Seal Island",
+                  ifelse(Ground == "SW German Bank", "German Bank",
+                  ifelse(Ground == "SW Banks", "SW Grounds",
+                  ifelse(Ground == "Tear Drop", "Teardrop",
+                  ifelse(Ground == "Patch", "The Patch",
+                  ifelse(Ground == "Winner Weir", "Winner",
+                  ifelse(Ground == "East Mud Hole", "Mud Hole",
+                  ifelse(Ground == "Pt. Judith", "Point Judith",
+                  ifelse(Ground == "Block Island Sound", "Block Island",
+                  ifelse(Ground == "Kettle Ground", "Kettle Bottom",
+                  ifelse(Ground == "Montauk Point", "Montauk",
+                  ifelse(Ground == "Narragansett Beach", "Narragansett",
+                  ifelse(Ground == "Pilchard Sardine", "Pilchard",
+                  ifelse(Ground == "St. Marys Bay", "St Marys Bay",
+                  ifelse(Ground == "Trucks", "Tuckers Cove",
+                  ifelse(Ground == "Tuckers", "Tuckers Cove",
+                  ifelse(Ground == "Tom's River", "Toms River",
+                  ifelse(Ground == "NA", NA,
+                  Ground))))))))))))))))))))))))
 
 
 # Add Lat/Lon for Grounds - general center point
-unique(Master$Ground)
+sort(unique(Master$Ground))
 
-Master = Master %>%
-  mutate(Lat = ifelse(Ground == X & is.na(Lat), NewValue, Lat)) %>% #Need to keep original lat/lon if exists
-  mutate(Lon = ifelse(Ground == X & is.na(Lon), NewValue, Lon))
+# Master = Master %>%
+#  mutate(Lat = ifelse(Ground == X & is.na(Lat), NewValue, Lat)) %>% #Need to keep original lat/lon if exists
+#  mutate(Lon = ifelse(Ground == X & is.na(Lon), NewValue, Lon))
   
 Master = Master %>%
   mutate(Lat = ifelse(Ground == "NB Coastal" & is.na(Lat), 45.095, Lat)) %>%
@@ -193,18 +215,165 @@ Master = Master %>%
   mutate(Lat = ifelse(Ground == "Yankee" & is.na(Lat), 44.85714, Lat)) %>%
   mutate(Lon = ifelse(Ground == "Yankee" & is.na(Lon), -66.095, Lon)) %>%
   
-  mutate(Lat = ifelse(Ground == "" & is.na(Lat), 44, Lat)) %>%
-  mutate(Lon = ifelse(Ground == "" & is.na(Lon), -66, Lon)) %>%
+  mutate(Lat = ifelse(Ground == "Trinity" & is.na(Lat), 44.0334, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Trinity" & is.na(Lon), -66.3, Lon)) %>%
   
-  mutate(Lat = ifelse(Ground == "" & is.na(Lat), 45, Lat)) %>%
-  mutate(Lon = ifelse(Ground == "" & is.na(Lon), -66, Lon)) %>%
+  mutate(Lat = ifelse(Ground == "Browns Bank" & is.na(Lat), 42.4998, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Browns Bank" & is.na(Lon), -66.8998, Lon)) %>%
   
-  mutate(Lat = ifelse(Ground == "" & is.na(Lat), 44, Lat)) %>%
-  mutate(Lon = ifelse(Ground == "" & is.na(Lon), -66, Lon)) %>%
+  mutate(Lat = ifelse(Ground == "SW Grounds" & is.na(Lat), 43.02385714, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "SW Grounds" & is.na(Lon), -66.45242857, Lon)) %>%
   
-  mutate(Lat = ifelse(Ground == "" & is.na(Lat), 44, Lat)) %>%
-  mutate(Lon = ifelse(Ground == "" & is.na(Lon), -66, Lon)) %>%
-
+  mutate(Lat = ifelse(Ground == "Lurcher" & is.na(Lat), 43.85714286, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Lurcher" & is.na(Lon), -66.88085714, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Gannet Dry Ledge" & is.na(Lat), 43.69042857, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Gannet Dry Ledge" & is.na(Lon), -66.52385714, Lon)) %>% 
+  
+  mutate(Lat = ifelse(Ground == "Back Bay" & is.na(Lat), 45.04816667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Back Bay" & is.na(Lon), -66.854, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Blacks Harbour" & is.na(Lat), 45.052645, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Blacks Harbour" & is.na(Lon), -66.793285, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Blisses" & is.na(Lat), 45.01983333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Blisses" & is.na(Lon), -66.8445, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Bradfords Cove" & is.na(Lat), 44.60584, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Bradfords Cove" & is.na(Lon), -66.94, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Campobello" & is.na(Lat), 44.89316667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Campobello" & is.na(Lon), -66.959, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Chance Harbour" & is.na(Lat), 45.131, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Chance Harbour" & is.na(Lon), -66.3485, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Chattis Point" & is.na(Lat), 45.016, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Chattis Point" & is.na(Lon), -66.9, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Cora Bell" & is.na(Lat), 44.7564, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Cora Bell" & is.na(Lon), -66.7342, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Crow Harbour" & is.na(Lat), 45.10216667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Crow Harbour" & is.na(Lon), -66.61083333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Crow Island" & is.na(Lat), 45.04283333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Crow Island" & is.na(Lon), -66.88016667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Curry Cove" & is.na(Lat), 44.92866667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Curry Cove" & is.na(Lon), -66.9365, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Deadmans" & is.na(Lat), 45.04983333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Deadmans" & is.na(Lon), -66.771, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Deep Cove" & is.na(Lat), 45.11933333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Deep Cove" & is.na(Lon), -66.52616667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Digdeguash Basin" & is.na(Lat), 45.19116667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Digdeguash Basin" & is.na(Lon), -66.95966667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Fairhaven" & is.na(Lat), 44.96583333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Fairhaven" & is.na(Lon), -67.01016667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Friers Bay" & is.na(Lat), 44.8865, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Friers Bay" & is.na(Lon), -66.95283333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Fryes Island" & is.na(Lat), 45.06583333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Fryes Island" & is.na(Lon), -66.8365, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Herring Cove" & is.na(Lat), 44.87466667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Herring Cove" & is.na(Lon), -66.92183333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Indian Island" & is.na(Lat), 44.932, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Indian Island" & is.na(Lon), -66.966, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Iron Lady" & is.na(Lat), 44.75683333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Iron Lady" & is.na(Lon), -66.75, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Lawrence Cove" & is.na(Lat), 45.00183333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Lawrence Cove" & is.na(Lon), -66.9485, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Leonardville" & is.na(Lat), 44.97483333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Leonardville" & is.na(Lon), -66.9515, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Lepreau" & is.na(Lat), 45.14533333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Lepreau" & is.na(Lon), -66.485, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Lords Cove" & is.na(Lat), 45.00183333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Lords Cove" & is.na(Lon), -66.9485, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Meadow Brook" & is.na(Lat), 44.88083333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Meadow Brook" & is.na(Lon), -66.9125, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Mill Cove" & is.na(Lat), 44.93033333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Mill Cove" & is.na(Lon), -66.90466667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Money Cove" & is.na(Lat), 44.777, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Money Cove" & is.na(Lon), -66.82, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Mumps" & is.na(Lat), 44.67364, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Mumps" & is.na(Lon), -66.686615, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "New River" & is.na(Lat), 45.1315, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "New River" & is.na(Lon), -66.53383333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Oak Bay" & is.na(Lat), 45.22416667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Oak Bay" & is.na(Lon), -67.17916667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Patridge Island" & is.na(Lat), 45.2375, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Patridge Island" & is.na(Lon), -66.052, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Pipe Dream" & is.na(Lat), 44.74283333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Pipe Dream" & is.na(Lon), -66.75, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Red Head" & is.na(Lat), 45.10633333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Red Head" & is.na(Lon), -66.6005, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Round Meadow" & is.na(Lat), 45.10566667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Round Meadow" & is.na(Lon), -66.49716667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Sand Beach" & is.na(Lat), 45.00616667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Sand Beach" & is.na(Lon), -66.9, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Sandy Cove" & is.na(Lat), 45.07083333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Sandy Cove" & is.na(Lon), -66.68116667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Schooner Cove" & is.na(Lat), 44.9, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Schooner Cove" & is.na(Lon), -66.902, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Seelys Basin" & is.na(Lat), 45.07166667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Seelys Basin" & is.na(Lon), -66.67883333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Seelys Cove" & is.na(Lat), 45.08633333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Seelys Cove" & is.na(Lon), -66.65033333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Seelys Head" & is.na(Lat), 45.04533333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Seelys Head" & is.na(Lon), -66.78, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Ship Beach" & is.na(Lat), 44.97816667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Ship Beach" & is.na(Lon), -66.69433333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Spectacle" & is.na(Lat), 44.99033333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Spectacle" & is.na(Lon), -66.91533333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Spider Cove" & is.na(Lat), 45.02916667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Spider Cove" & is.na(Lon), -66.827, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Spruce Cove" & is.na(Lat), 45.02566667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Spruce Cove" & is.na(Lon), -66.86116667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Tuckers Cove" & is.na(Lat), 45.01716667, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Tuckers Cove" & is.na(Lon), -66.84833333, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Whale Cove" & is.na(Lat), 44.77283333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Whale Cove" & is.na(Lon), -66.758, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Winner" & is.na(Lat), 44.77433333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Winer" & is.na(Lon), -66.76016667, Lon)) %>%
+  
+  mutate(Lat = ifelse(Ground == "Wolves" & is.na(Lat), 44.95533333, Lat)) %>%
+  mutate(Lon = ifelse(Ground == "Wolves" & is.na(Lon), -66.72105556, Lon))
+  
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/")
 Master %>% write_csv("Total Fat Data.csv")
 
