@@ -73,6 +73,11 @@ SSB$Ground <- as.factor(SSB$Ground)
 #LRP Data
 LRP2 = read_csv("LRP Data.csv")
 
+#Fat Data
+FatData = read_csv("Total Fat Data.csv")
+FatData$Year = as.factor(FatData$Year)
+FatData$Month = as.factor(FatData$Month)
+
 #Larval Data
 Larval = read_csv("Full Larval.csv")
 Larval$Year <- as.factor(Larval$Year)
@@ -127,13 +132,13 @@ polySI = as.PolySet(SUA, projection="LL")
 
 ::: row
 ::: col-md-6
-```{r}
+```{r echo=FALSE}
 ggplot(data=LRP2, aes(x=Year, y=Biomass)) +
-  geom_point(aes(colour="black")) +
-  geom_path(aes(colour="black")) +
-  geom_point(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg', aes(colour="grey")) +
-  geom_path(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg', aes(colour="grey")) +
-  geom_hline(yintercept = 317846, linetype = "longdash", size =1, aes(colour="red")) +
+  geom_point() +
+  geom_path() +
+  geom_point(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg') +
+  geom_path(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg') +
+  geom_hline(yintercept = 317846, linetype = "longdash", size =1) +
   scale_y_continuous(labels=scales::comma) +
   theme(axis.text.x = element_text(angle = 55)) +
   labs(x="Year", y = "Biomass (mt)")
@@ -142,9 +147,12 @@ ggplot(data=LRP2, aes(x=Year, y=Biomass)) +
 
 ::: col-md-6
 ```{r echo=FALSE}
-LRP2 %>%
-  dplyr::select(Year, Scots, German, Seal, Biomass, LRP, "3yr Avg") %>%
-  mutate(Difference = "3yr Avg"-LRP) %>%
+LRP3 = LRP2 %>%
+  dplyr::select(Year, Scots, German, Seal, Biomass, LRP, ThreeYear="3yr Avg") %>%
+  mutate(Difference = ThreeYear-LRP)
+
+LRP3 %>% 
+  dplyr::filter(!is.na(ThreeYear)) %>%
   mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F)
@@ -157,7 +165,7 @@ LRP2 %>%
 ::: row
 ::: col-md-6
 ```{r}
-ggplot(data=LRP2, aes(x=Year, y=Scots)) +
+ggplot(data=LRP3, aes(x=Year, y=Scots)) +
   geom_point() +
   geom_path() +
   scale_y_continuous(labels=scales::comma) +
@@ -168,7 +176,7 @@ ggplot(data=LRP2, aes(x=Year, y=Scots)) +
 
 ::: col-md-6
 ```{r echo=FALSE}
-LRP2 %>%
+LRP3 %>%
   dplyr::select(Year, Scots) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F) %>%
@@ -182,7 +190,7 @@ LRP2 %>%
 ::: row
 ::: col-md-6
 ```{r}
-ggplot(data=LRP2, aes(x=Year, y=German)) +
+ggplot(data=LRP3, aes(x=Year, y=German)) +
   geom_point() +
   geom_path() +
   scale_y_continuous(labels=scales::comma) +
@@ -193,7 +201,7 @@ ggplot(data=LRP2, aes(x=Year, y=German)) +
 
 ::: col-md-6
 ```{r echo=FALSE}
-LRP2 %>%
+LRP3 %>%
   dplyr::select(Year, German, Seal) %>%
   kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F) %>%
@@ -1786,6 +1794,67 @@ Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) +
 
 ## Fat Project {.tabset}
 
-### Chart Data
+### By Year
+```{r}
+ggplot(data=FatData, aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
 
-### Graph Data
+### By Month
+
+```{r}
+ggplot(data=subset(FatData, !is.na(Month)), aes(x=Month, y=Fat)) +
+  geom_boxplot() + 
+  labs(y="Fat Perecent (%)")
+```
+
+### By Supplier {.tabset .tabset-pills}
+
+#### Connors
+
+```{r}
+ggplot(data=subset(FatData, Supplier == "Connors"), aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+
+ggplot(data=subset(FatData, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+
+#### Comeaus
+
+```{r}
+ggplot(data=subset(FatData, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+
+ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+
+#### Scotia
+
+```{r}
+ggplot(data=subset(FatData, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+
+ggplot(data=subset(FatData, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+
+#### USA
+
+```{r}
+ggplot(data=subset(FatData, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+
+ggplot(data=subset(FatData, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```

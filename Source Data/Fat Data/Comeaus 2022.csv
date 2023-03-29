@@ -1,552 +1,552 @@
 Plant,CollectionMethod,SampleID,Method ,Date,Vessel,Lat,Lon,Ground,Fat,FishLength(cm),FishWeight(g)
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,19.8,22.86,142
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,19.8,22.86,133
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,18.8,22.86,104
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,18.8,22.86,121
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,20,25.4,137
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,20,25.4,125
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,14.8,22.86,119
-Sea Life,,,1,03-Jun-22,Lady Melissa,44.09,-67.55,Grand Manan Banks,14.5,22.86,125
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,25.4,135
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,25.4,142
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,22.86,112
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,22.86,101
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,19.6,22.86,136
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,19.6,22.86,123
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.6,22.86,130
-Sea Life,,,1,06-Jun-22,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.6,22.86,125
-Sea Life,,,1,07-Jun-22,Sealife II,44.17,-66.59,Grand Manan Banks,18.8,25.4,156
-Sea Life,,,1,07-Jun-22,Sealife II,44.17,-66.59,Grand Manan Banks,19.4,25.4,161
-Sea Life,,,1,07-Jun-22,Sealife II,44.17,-66.59,Grand Manan Banks,16,25.4,152
-Sea Life,,,1,07-Jun-22,Sealife II,44.17,-66.59,Grand Manan Banks,15.6,22.86,118
-Sea Life,,,1,07-Jun-22,Sealife II,44.17,-66.59,Grand Manan Banks,16.6,22.86,113
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.2,22.86,110
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.2,22.86,121
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,18,25.4,136
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,18,25.4,148
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.4,25.4,136
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.4,25.4,126
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,17.6,22.86,113
-Sea Life,,,1,08-Jun-22,Lady Melissa,44.15,-67.59,Grand Manan Banks,17.6,22.86,113
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,19.8,25.4,143
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,19.8,25.4,140
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,15.4,22.86,110
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,15.4,22.86,105
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,20.2,22.86,118
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,20.2,22.86,107
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,16.2,25.4,136
-Sea Life,,,1,08-Jun-22,Sealife II,44.15,-67.59,Grand Manan Banks,16.2,25.4,144
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,11.6,22.86,122
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,11.6,22.86,114
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,10.2,25.4,136
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,10.2,25.4,124
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,12.8,25.4,116
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,12.8,25.4,127
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,8,22.86,118
-Sea Life,,,1,14-Jun-22,Sealife II,44.42,-64.44,Scots Bay,8,22.86,105
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,8,25.4,140
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,8,25.4,122
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,7.4,22.86,110
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,7.4,22.86,96
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,7.8,22.86,119
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,7.8,22.86,106
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,15,22.86,112
-Sea Life,,,1,14-Jun-22,Lady Janice,45.14,-65.46,Scots Bay,15,22.86,124
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,20,25.4,150
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,19,27.94,200
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,8.2,27.94,164
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,13.4,27.94,164
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,18.6,27.94,194
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,27.94,180
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,25.4,147
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,15.6,25.4,146
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,15.6,22.86,108
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,15.6,22.86,110
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,133
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,129
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,7.4,22.86,120
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,7.4,22.86,118
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,115
-Sea Life,,,1,15-Jun-22,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,129
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,20.4,25.4,140
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,20.4,25.4,142
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,22.86,108
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,22.86,108
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,14.4,22.86,100
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,14.4,22.86,103
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,22.86,109
-Sea Life,,,1,15-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,22.86,104
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,18.8,22.86,105
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,18.8,22.86,100
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,13.4,22.86,104
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,13.4,22.86,104
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,18.4,22.86,102
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,18.4,22.86,101
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,12.4,22.86,99
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,12.4,22.86,94
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,9.8,25.4,126
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,9.8,25.4,111
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,13.6,25.4,143
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,13.6,25.4,143
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,12,22.86,122
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,12,22.86,118
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,12.2,22.86,110
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,12.2,22.86,114
-Sea Life,,,1,15-Jun-22,Sealife II,44.18,-67,Grand Manan Banks,19,25.4,159
-Sea Life,,,1,15-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,19,25.4,154
-Sea Life,,,1,15-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,19.4,27.94,167
-Sea Life,,,1,15-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,19.8,27.94,186
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,12.6,22.86,118
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,12.6,22.86,120
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,17.8,25.4,130
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,17.8,25.4,121
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,17.4,25.4,125
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,17.4,25.4,132
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,15.8,22.86,109
-Sea Life,,,1,16-Jun-22,Sealife II,44.15,-67.02,Grand Manan Banks,15.8,22.86,99
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,19,25.4,174
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,15.2,27.94,187
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,13.2,27.94,190
-Sea Life,,,1,16-Jun-22,Lady Janice,44.17,-66.58,Grand Manan Banks,19.2,25.4,170
-Sea Life,,,1,20-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,14.2,30.48,237
-Sea Life,,,1,20-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,14.6,30.48,240
-Sea Life,,,1,20-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,17.2,27.94,217
-Sea Life,,,1,20-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,19.6,30.48,244
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12.2,22.86,113
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12.2,22.86,98
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,14,25.4,113
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,14,25.4,116
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,19,25.4,134
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,19,25.4,145
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,17.6,25.4,133
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,17.6,25.4,127
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,111
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,99
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,105
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,107
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,16.2,22.86,114
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,16.2,22.86,113
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,9.4,22.86,115
-Sea Life,,,1,20-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,116
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,7.6,25.4,104
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,7.6,25.4,107
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,7,22.86,98
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,7,22.86,101
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,106
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,106
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,13.2,22.86,103
-Sea Life,,,1,21-Jun-22,Lady Janice,44.16,-67,Grand Manan Banks,13.2,22.86,107
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,15.2,27.94,193
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,14.6,27.94,178
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,14.2,30.48,217
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,12.8,27.94,191
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,16,30.48,213
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,18.8,30.48,246
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,18.8,30.48,233
-Sea Life,,,1,22-Jun-22,Lady Melissa,44.19,-62.16,Off Shore Banks,19.4,27.94,217
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,15.6,22.86,101
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,15.6,22.86,111
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,7.6,22.86,92
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,7.6,22.86,90
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.4,22.86,85
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.4,22.86,79
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,9.2,25.4,108
-Sea Life,,,1,22-Jun-22,Lady Janice,44.16,-67.01,Grand Manan Banks,9.2,25.4,115
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,16,27.94,199
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,14,27.94,181
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,18.4,27.94,175
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,17.6,27.94,183
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,18.4,30.48,238
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,17,30.48,228
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,17.8,30.48,263
-Sea Life,,,1,23-Jun-22,Lady Melissa,44.15,-62.3,Off Shore Banks,18,27.94,248
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,17.4,30.48,252
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,18.6,30.48,268
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,17.8,30.48,228
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,18.2,27.94,217
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,14.6,27.94,187
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,13.2,27.94,171
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,16.4,27.94,195
-Sea Life,,,1,24-Jun-22,Lady Melissa,44.18,-62.16,Off Shore Banks,15,27.94,178
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,16.4,25.4,149
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,13.2,27.94,188
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,17.6,25.4,161
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,16,27.94,176
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,18.6,27.94,208
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,16.2,30.48,225
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,16.2,27.94,196
-Sea Life,,,1,27-Jun-22,Lady Melissa,44.16,-62.19,Off Shore Banks,18.6,30.48,247
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,10,25.4,126
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,10,25.4,158
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,9.8,22.86,125
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,9.8,22.86,117
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,11.8,22.86,106
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,11.8,22.86,111
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,13,25.4,125
-Sea Life,,,1,28-Jun-22,Lady Janice,45.14,-64.42,Scots Bay,13,25.4,112
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,12.6,22.86,113
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,12.6,22.86,93
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,14.6,22.86,87
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,14.6,22.86,88
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,16,22.86,90
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,16,22.86,86
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,14.4,22.86,77
-Sea Life,,,1,29-Jun-22,Lady Janice,44.37,-66.37,Grand Manan Banks,14.4,22.86,85
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,18.6,22.86,109
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,18.6,22.86,96
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,13.4,22.86,90
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,13.4,22.86,86
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,17,22.86,106
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,17,22.86,98
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,18.2,22.86,87
-Sea Life,,,1,30-Jun-22,Lady Janice,44.36,-66.34,Grand Manan Banks,18.2,22.86,91
-Sea Life,,,1,01-Jul-22,Lady Melissa,44.18,-63.12,Off Shore Banks,18.8,27.94,189
-Sea Life,,,1,01-Jul-22,Lady Melissa,44.18,-63.12,Off Shore Banks,14.4,30.48,224
-Sea Life,,,1,01-Jul-22,Lady Melissa,44.18,-63.12,Off Shore Banks,16.4,27.94,205
-Sea Life,,,1,01-Jul-22,Lady Melissa,44.18,-63.12,Off Shore Banks,14.2,27.94,211
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,17,22.86,108
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,17,22.86,99
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,12.4,22.86,110
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,12.4,22.86,104
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,18,22.86,96
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,18,22.86,95
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,17.4,22.86,102
-Sea Life,,,1,04-Jul-22,Lady Janice,44.38,-66.36,Grand Manan Banks,17.4,22.86,100
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,15.4,22.86,102
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,15.4,22.86,100
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,13.6,22.86,112
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,13.6,22.86,101
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,14.2,22.86,97
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,14.2,22.86,96
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,17.4,22.86,110
-Sea Life,,,1,05-Jul-22,Lady Janice,44.36,-66.38,Grand Manan Banks,17.4,22.86,116
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,17.4,30.48,247
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,20.2,27.94,213
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,18.8,30.48,247
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,17.6,30.48,226
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,18.6,30.48,239
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,14.2,30.48,263
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,15.6,30.48,217
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,17.4,27.94,214
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,14.4,27.94,184
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,17.2,30.48,233
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,13,30.48,212
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,15.2,27.94,200
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,12.8,27.94,212
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,18,27.94,202
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,14.8,27.94,174
-Sea Life,,,1,06-Jul-22,Lady Melissa,44.16,-62.15,Off Shore Banks,15.2,27.94,189
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,15.4,22.86,107
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,15.4,22.86,103
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,17.4,22.86,87
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,17.4,22.86,86
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,18.4,22.86,101
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,18.4,22.86,97
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.6,25.4,114
-Sea Life,,,1,07-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.6,25.4,94
-Sea Life,,,1,08-Jul-22,Lady Melissa,44.15,-62.25,Off Shore Banks,14.4,30.48,216
-Sea Life,,,1,08-Jul-22,Lady Melissa,44.15,-62.25,Off Shore Banks,15.4,30.48,236
-Sea Life,,,1,08-Jul-22,Lady Melissa,44.15,-62.25,Off Shore Banks,18.4,27.94,219
-Sea Life,,,1,08-Jul-22,Lady Melissa,44.15,-62.25,Off Shore Banks,16,27.94,206
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,14.6,20.32,86
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,14.6,20.32,83
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.2,22.86,85
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.2,22.86,92
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.4,22.86,101
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,12.4,22.86,101
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,16,22.86,106
-Sea Life,,,1,08-Jul-22,Lady Janice,44.37,-66.38,Grand Manan Banks,16,22.86,90
-Sea Life,,,1,11-Jul-22,Lady Melissa,44.13,-63.22,Off Shore Banks,18.6,30.48,236
-Sea Life,,,1,11-Jul-22,Lady Melissa,44.13,-63.22,Off Shore Banks,17.4,30.48,255
-Sea Life,,,1,11-Jul-22,Lady Melissa,44.13,-63.22,Off Shore Banks,13.2,27.94,220
-Sea Life,,,1,11-Jul-22,Lady Melissa,44.13,-63.22,Off Shore Banks,16.8,27.94,219
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,11.2,22.86,128
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,11.2,22.86,125
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,10.6,22.86,122
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,10.6,22.86,120
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,110
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,111
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,116
-Sea Life,,,1,12-Jul-22,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,120
-Sea Life,,,1,12-Jul-22,Lady Melissa,44.17,-62.18,Off Shore Banks,19.6,30.48,249
-Sea Life,,,1,12-Jul-22,Lady Melissa,44.17,-62.18,Off Shore Banks,13.6,30.48,260
-Sea Life,,,1,12-Jul-22,Lady Melissa,44.17,-62.18,Off Shore Banks,18,30.48,245
-Sea Life,,,1,12-Jul-22,Lady Melissa,44.17,-62.18,Off Shore Banks,18.2,27.9,215
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,17.8,30.48,245
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,14.8,30.48,228
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,16.2,27.94,224
-Sea Life,,,1,12-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,20.6,27.94,210
-Sea Life,,,1,12-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,15.4,27.94,221
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,17.6,27.94,225
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,18.2,30.48,244
-Sea Life,,,1,21-Jul-22,Lady Melissa,43.57,-62.27,Off Shore Banks,18.8,30.48,287
-Sea Life,,,1,23-Jul-22,Lady Melissa,43.59,-62.23,Off Shore Banks,20.2,27.94,245
-Sea Life,,,1,23-Jul-22,Lady Melissa,43.59,-62.23,Off Shore Banks,15.8,30.48,249
-Sea Life,,,1,23-Jul-22,Lady Melissa,43.59,-62.23,Off Shore Banks,16.6,27.94,234
-Sea Life,,,1,23-Jul-22,Lady Melissa,43.59,-62.23,Off Shore Banks,16.4,30.48,250
-Sea Life,,,1,25-Jul-22,Lady Melissa,43.57,-62.28,Off Shore Banks,20,27.94,245
-Sea Life,,,1,25-Jul-22,Lady Melissa,43.57,-62.28,Off Shore Banks,11.2,30.48,238
-Sea Life,,,1,25-Jul-22,Lady Melissa,43.57,-62.28,Off Shore Banks,21,30.48,250
-Sea Life,,,1,25-Jul-22,Lady Melissa,43.57,-62.28,Off Shore Banks,18,30.48,284
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,7.4,27.9,220
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12.2,27.9,233
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12,25.4,188
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,14.8,25.4,181
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,9.8,27.9,222
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,7.4,27.9,212
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,12.8,27.9,223
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,15.2,27.9,202
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12.4,25.4,135
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12.4,25.4,125
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,9.2,22.86,110
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,9.2,22.86,110
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12.6,22.86,113
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,12.6,22.86,98
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,9.8,22.86,117
-Sea Life,,,1,28-Jul-22,Sealife II,45.1,-64.57,Scots Bay,9.8,22.86,114
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11.6,22.86,106
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11.6,22.86,108
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,7.8,25.4,121
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,7.8,25.4,119
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11.2,25.4,151
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11.2,25.4,140
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11,22.86,104
-Sea Life,,,1,28-Jul-22,Lady Janice,45.1,-64.57,Scots Bay,11,22.86,97
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,5.2,30.48,261
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,10.2,27.94,231
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,15.4,30.48,254
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,8.5,30.48,278
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,17.6,30.48,249
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,8.6,27.94,199
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,7.4,30.48,258
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,16.2,27.94,241
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,7.2,25.4,142
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,7.2,25.4,144
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,7,22.86,97
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,7,22.86,108
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,8.4,22.86,120
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,8.4,22.86,125
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,14.4,25.4,123
-Sea Life,,,1,29-Jul-22,Sealife II,44.42,-65.46,Scots Bay,14.4,25.4,119
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,15,22.86,118
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,15,22.86,112
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,12.4,22.86,126
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,12.4,22.86,118
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,9.6,22.86,120
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,9.6,22.86,130
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,10,22.86,104
-Sea Life,,,1,29-Jul-22,Lady Janice,45.1,-64.59,Scots Bay,10,22.86,105
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,11.6,22.86,109
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,11.6,22.86,96
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,10,22.86,98
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,10,22.86,94
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,8.8,22.86,94
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,8.8,22.86,88
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,13.2,22.86,98
-Sea Life,,,1,01-Aug-22,Lady Janice,44.06,-66.28,Long Island,13.2,22.86,96
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,15,22.86,102
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,15,22.86,101
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,8.4,22.86,108
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,8.4,22.86,97
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,12.2,22.86,96
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,12.2,22.86,95
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,13,22.86,107
-Sea Life,,,1,01-Aug-22,Sealife II,44.06,-66.28,Long Island,13,22.86,99
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,11.2,22.86,95
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,11.2,22.86,89
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,13.8,25.4,112
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,13.8,25.4,116
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,12.6,22.86,101
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,12.6,22.86,100
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,10.4,25.4,107
-Sea Life,,,1,02-Aug-22,Lady Janice,43.54,-66.29,Lurcher,10.4,25.4,96
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.2,25.4,111
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.2,25.4,94
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,8.4,22.86,95
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,8.4,22.86,94
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.6,22.86,88
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.6,22.86,92
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,6.4,22.86,86
-Sea Life,,,1,04-Aug-22,Lady Janice,44.16,-67.01,Grand Manan Banks,6.4,22.86,95
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,12.8,22.86,102
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,12.8,22.86,96
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,10.6,22.86,97
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,10.6,22.86,103
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,11.6,22.86,117
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,11.6,22.86,119
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,9.8,22.86,116
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,9.8,22.86,111
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,14,25.4,209
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,10.2,27.94,224
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,4,27.94,205
-Sea Life,,,1,08-Aug-22,Lady Janice,45.09,-65.01,Scots Bay,8,27.94,202
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,8.4,27.94,206
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,6.8,27.94,208
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,9.4,27.94,199
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,10.2,27.94,210
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.4,27.94,232
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,11.4,27.94,205
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,11.6,27.94,210
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.8,27.94,206
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,13.8,22.86,127
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,13.8,22.86,115
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,7.8,25.4,124
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,7.8,25.4,116
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,10.6,25.4,124
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,10.6,25.4,117
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,8.6,25.4,116
-Sea Life,,,1,09-Aug-22,Lady Janice,45.1,-64.56,Scots Bay,8.6,25.4,115
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,15.6,22.86,117
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,15.6,22.86,120
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,14.8,25.4,136
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,14.8,25.4,131
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,144
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,135
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,137
-Sea Life,,,1,09-Aug-22,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,142
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,11.8,30.48,255
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,12.4,30.48,230
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,9.2,27.94,213
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,15.4,27.94,227
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10.4,27.94,240
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10,27.94,212
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,14.8,27.94,222
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,9,30.48,236
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,10.6,22.86,118
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,10.6,22.86,115
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,13,25.4,123
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,13,25.4,113
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,17.4,27.94,145
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,17.4,27.94,131
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,11,25.4,120
-Sea Life,,,1,10-Aug-22,Lady Melissa,45.5N,-64.56,Scots Bay,11,25.4,136
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,13.4,25.4,146
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,13.4,25.4,158
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10,22.86,120
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10,22.86,132
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,9.6,22.86,122
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,9.6,22.86,115
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10.4,22.86,128
-Sea Life,,,1,10-Aug-22,Lady Janice,45.1,-64.58,Scots Bay,10.4,22.86,127
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,14.4,30.48,240
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,10.4,30.48,254
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,9,27.94,232
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,9.2,27.94,202
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,15.8,30.48,238
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,14.2,30.48,272
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,6,27.94,202
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,10,27.94,245
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,11,27.94,210
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,8.2,27.94,197
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,11.6,30.48,214
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,5.6,30.48,235
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,9.8,22.86,97
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,9.8,22.86,90
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,8.6,25.4,153
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,8.6,25.4,150
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,16,22.86,131
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,16,22.86,132
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,10,22.86,117
-Sea Life,,,1,11-Aug-22,Lady Melissa,45.11,-64.56,Scots Bay,10,22.86,96
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,14.2,25.4,146
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,14.2,25.4,134
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,8.6,22.86,138
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,8.6,22.86,121
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,13.2,22.86,133
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,13.2,22.86,130
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,14.6,22.86,105
-Sea Life,,,1,11-Aug-22,Lady Janice,45.09,-64.58,Scots Bay,14.6,22.86,110
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,10,22.86,112
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,10,22.86,96
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,12.2,22.86,118
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,12.2,22.86,93
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,11.8,22.86,108
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,11.8,22.86,111
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,13.4,22.86,103
-Sea Life,,,1,11-Aug-22,Sealife II,45.11,-64.53,Scots Bay,13.4,22.86,113
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,11.2,30.48,223
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,13.4,30.48,237
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,16.4,27.94,219
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,17,27.94,234
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,19.6,27.94,244
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,8.6,27.94,216
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,18.2,27.94,192
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,6.6,30.48,235
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,14.6,25.4,131
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,14.6,25.4,125
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,10,25.4,136
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,10,25.4,138
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,10.2,25.4,130
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,10.2,25.4,135
-Sea Life,,,1,16-Aug-22,Sealife II,43.17,-66.25,German Bank,12,25.4,164
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,8.2,25.4,126
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,8.2,25.4,129
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,9.2,25.4,135
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,9.2,25.4,136
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,18.4,25.4,137
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,18.4,25.4,140
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,14.2,25.4,159
-Sea Life,,,1,16-Aug-22,Lady Melissa,43.21,-66.26,German Bank,14.2,25.4,151
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,13.4,27.94,204
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,13.4,27.94,170
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,11.4,25.4,148
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,11.4,25.4,139
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,15.4,25.4,121
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,15.4,25.4,121
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,12.2,25.4,130
-Sea Life,,,1,23-Aug-22,Lady Janice,45.08,-65,Scots Bay,12.2,25.4,120
-Sea Life,,,1,23-Aug-22,Lady Melissa,45.09,-65.02,Scots Bay,10,27.94,216
-Sea Life,,,1,23-Aug-22,Lady Janice,45.09,-65.02,Scots Bay,12.2,25.4,184
-Sea Life,,,1,23-Aug-22,Lady Janice,45.09,-65.02,Scots Bay,15,25.4,171
-Sea Life,,,1,23-Aug-22,Lady Janice,45.09,-65.02,Scots Bay,14,25.4,194
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,8.4,25.4,146
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,8.4,25.4,144
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,8.2,25.4,126
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,8.2,25.4,134
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,16.2,25.4,142
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,16.2,25.4,153
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,9.8,25.4,159
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,14.2,27.94,192
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,11,30.48,215
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,15.8,27.94,200
-Sea Life,,,1,25-Aug-22,Lady Melissa,43.14,-66.2,German Bank,15,30.48,203
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,8.4,25.4,103
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,8.4,25.4,109
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,9.4,25.4,118
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,9.4,25.4,114
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,13,22.86,79
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,13,22.86,88
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,14.6,22.86,103
-Sea Life,,,1,25-Aug-22,Lady Janice,44.16,-67,German Bank,14.6,22.86,92
-Sea Life,,,1,26-Aug-22,Lady Janice,43.16,-66.22,German Bank,16.6,30.48,221
-Sea Life,,,1,26-Aug-22,Lady Janice,43.16,-66.22,German Bank,13,30.48,242
-Sea Life,,,1,26-Aug-22,Lady Janice,43.16,-66.22,German Bank,7.8,27.94,222
-Sea Life,,,1,26-Aug-22,Lady Janice,43.16,-66.22,German Bank,8.8,25.4,220
-Sea Life,,,1,26-Aug-22,Sealife II,45.17,-66.22,German Bank,14.8,27.94,219
-Sea Life,,,1,26-Aug-22,Sealife II,45.17,-66.22,German Bank,8.6,27.94,201
-Sea Life,,,1,26-Aug-22,Sealife II,45.17,-66.22,German Bank,12,27.94,211
-Sea Life,,,1,26-Aug-22,Sealife II,45.17,-66.22,German Bank,16.8,30.48,227
-Sea Life,,,1,30-Aug-22,Lady Janice,43.15,-66.2,German Bank,14.6,29.21,203
-Sea Life,,,1,30-Aug-22,Lady Janice,43.15,-66.2,German Bank,13.2,29.21,198
-Sea Life,,,1,30-Aug-22,Lady Janice,43.15,-66.2,German Bank,14.2,27.94,159
-Sea Life,,,1,30-Aug-22,Lady Janice,43.15,-66.2,German Bank,10.8,26.67,163
-Sea Life,,,1,30-Aug-22,Sealife II,43.16,-66.21,German Bank,8,26.67,143
-Sea Life,,,1,30-Aug-22,Sealife II,43.16,-66.21,German Bank,7.8,29.21,204
-Sea Life,,,1,30-Aug-22,Sealife II,43.16,-66.21,German Bank,8.8,27.94,181
-Sea Life,,,1,30-Aug-22,Sealife II,43.16,-66.21,German Bank,19,26.67,137
-Sea Life,,,1,31-Aug-22,Lady Janice,43.14,-66.2,German Bank,14.2,27.94,203
-Sea Life,,,1,31-Aug-22,Lady Janice,43.14,-66.2,German Bank,10.2,27.94,202
-Sea Life,,,1,31-Aug-22,Lady Janice,43.14,-66.2,German Bank,14,27.94,216
-Sea Life,,,1,31-Aug-22,Lady Janice,43.14,-66.2,German Bank,18,30.48,249
-Sea Life,,,1,31-Aug-22,Sealife II,43.15,-66.21,German Bank,12.2,30.48,243
-Sea Life,,,1,31-Aug-22,Sealife II,43.15,-66.21,German Bank,7.8,30.48,223
-Sea Life,,,1,31-Aug-22,Sealife II,43.15,-66.21,German Bank,15.2,30.48,250
-Sea Life,,,1,31-Aug-22,Sealife II,43.15,-66.21,German Bank,16.2,27.94,212
-Sea Life,,,1,31-Aug-22,Lady Melissa,43.16,-66.21,German Bank,10.6,27.94,209
-Sea Life,,,1,31-Aug-22,Lady Melissa,43.16,-66.21,German Bank,8.8,27.94,225
-Sea Life,,,1,31-Aug-22,Lady Melissa,43.16,-66.21,German Bank,12,30.48,239
-Sea Life,,,1,31-Aug-22,Lady Melissa,43.16,-66.21,German Bank,15.8,27.94,224
-Sea Life,,,1,01-Sep-22,Sealife II,43.15,-66.21,German Bank,9.8,27.94,205
-Sea Life,,,1,01-Sep-22,Sealife II,43.15,-66.21,German Bank,10.4,30.48,290
-Sea Life,,,1,01-Sep-22,Sealife II,43.15,-66.21,German Bank,13.2,30.48,236
-Sea Life,,,1,01-Sep-22,Sealife II,43.15,-66.21,German Bank,14.2,27.97,204
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,19.8,22.86,142
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,19.8,22.86,133
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,18.8,22.86,104
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,18.8,22.86,121
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,20,25.4,137
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,20,25.4,125
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,14.8,22.86,119
+Sea Life,,,1,2022-06-03,Lady Melissa,44.09,-67.55,Grand Manan Banks,14.5,22.86,125
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,25.4,135
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,25.4,142
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,22.86,112
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.8,22.86,101
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,19.6,22.86,136
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,19.6,22.86,123
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.6,22.86,130
+Sea Life,,,1,2022-06-06,Lady Melissa,44.15,-67.02,Grand Manan Banks,18.6,22.86,125
+Sea Life,,,1,2022-06-07,Sealife II,44.17,-66.59,Grand Manan Banks,18.8,25.4,156
+Sea Life,,,1,2022-06-07,Sealife II,44.17,-66.59,Grand Manan Banks,19.4,25.4,161
+Sea Life,,,1,2022-06-07,Sealife II,44.17,-66.59,Grand Manan Banks,16,25.4,152
+Sea Life,,,1,2022-06-07,Sealife II,44.17,-66.59,Grand Manan Banks,15.6,22.86,118
+Sea Life,,,1,2022-06-07,Sealife II,44.17,-66.59,Grand Manan Banks,16.6,22.86,113
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.2,22.86,110
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.2,22.86,121
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,18,25.4,136
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,18,25.4,148
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.4,25.4,136
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,19.4,25.4,126
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,17.6,22.86,113
+Sea Life,,,1,2022-06-08,Lady Melissa,44.15,-67.59,Grand Manan Banks,17.6,22.86,113
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,19.8,25.4,143
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,19.8,25.4,140
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,15.4,22.86,110
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,15.4,22.86,105
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,20.2,22.86,118
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,20.2,22.86,107
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,16.2,25.4,136
+Sea Life,,,1,2022-06-08,Sealife II,44.15,-67.59,Grand Manan Banks,16.2,25.4,144
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,11.6,22.86,122
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,11.6,22.86,114
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,10.2,25.4,136
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,10.2,25.4,124
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,12.8,25.4,116
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,12.8,25.4,127
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,8,22.86,118
+Sea Life,,,1,2022-06-14,Sealife II,44.42,-64.44,Scots Bay,8,22.86,105
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,8,25.4,140
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,8,25.4,122
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,7.4,22.86,110
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,7.4,22.86,96
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,7.8,22.86,119
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,7.8,22.86,106
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,15,22.86,112
+Sea Life,,,1,2022-06-14,Lady Janice,45.14,-65.46,Scots Bay,15,22.86,124
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,20,25.4,150
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,19,27.94,200
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,8.2,27.94,164
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,13.4,27.94,164
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,18.6,27.94,194
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,27.94,180
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,25.4,147
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,15.6,25.4,146
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,15.6,22.86,108
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,15.6,22.86,110
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,133
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,129
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,7.4,22.86,120
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,7.4,22.86,118
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,115
+Sea Life,,,1,2022-06-15,Lady Melissa,44.18,-66.59,Grand Manan Banks,12,25.4,129
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,20.4,25.4,140
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,20.4,25.4,142
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,22.86,108
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,17.2,22.86,108
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,14.4,22.86,100
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,14.4,22.86,103
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,22.86,109
+Sea Life,,,1,2022-06-15,Lady Janice,44.17,-66.58,Grand Manan Banks,7.4,22.86,104
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,18.8,22.86,105
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,18.8,22.86,100
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,13.4,22.86,104
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,13.4,22.86,104
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,18.4,22.86,102
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,18.4,22.86,101
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,12.4,22.86,99
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,12.4,22.86,94
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,9.8,25.4,126
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,9.8,25.4,111
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,13.6,25.4,143
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,13.6,25.4,143
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,12,22.86,122
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,12,22.86,118
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,12.2,22.86,110
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,12.2,22.86,114
+Sea Life,,,1,2022-06-15,Sealife II,44.18,-67,Grand Manan Banks,19,25.4,159
+Sea Life,,,1,2022-06-15,Sealife II,44.15,-67.02,Grand Manan Banks,19,25.4,154
+Sea Life,,,1,2022-06-15,Sealife II,44.15,-67.02,Grand Manan Banks,19.4,27.94,167
+Sea Life,,,1,2022-06-15,Sealife II,44.15,-67.02,Grand Manan Banks,19.8,27.94,186
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,12.6,22.86,118
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,12.6,22.86,120
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,17.8,25.4,130
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,17.8,25.4,121
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,17.4,25.4,125
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,17.4,25.4,132
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,15.8,22.86,109
+Sea Life,,,1,2022-06-16,Sealife II,44.15,-67.02,Grand Manan Banks,15.8,22.86,99
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,19,25.4,174
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,15.2,27.94,187
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,13.2,27.94,190
+Sea Life,,,1,2022-06-16,Lady Janice,44.17,-66.58,Grand Manan Banks,19.2,25.4,170
+Sea Life,,,1,2022-06-20,Lady Melissa,44.18,-62.16,Off Shore Banks,14.2,30.48,237
+Sea Life,,,1,2022-06-20,Lady Melissa,44.18,-62.16,Off Shore Banks,14.6,30.48,240
+Sea Life,,,1,2022-06-20,Lady Melissa,44.18,-62.16,Off Shore Banks,17.2,27.94,217
+Sea Life,,,1,2022-06-20,Lady Melissa,44.18,-62.16,Off Shore Banks,19.6,30.48,244
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12.2,22.86,113
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12.2,22.86,98
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,14,25.4,113
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,14,25.4,116
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,19,25.4,134
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,19,25.4,145
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,17.6,25.4,133
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,17.6,25.4,127
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,111
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,99
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,105
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,12,22.86,107
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,16.2,22.86,114
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,16.2,22.86,113
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,9.4,22.86,115
+Sea Life,,,1,2022-06-20,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,116
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,7.6,25.4,104
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,7.6,25.4,107
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,7,22.86,98
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,7,22.86,101
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,106
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,9.4,25.4,106
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,13.2,22.86,103
+Sea Life,,,1,2022-06-21,Lady Janice,44.16,-67,Grand Manan Banks,13.2,22.86,107
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,15.2,27.94,193
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,14.6,27.94,178
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,14.2,30.48,217
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,12.8,27.94,191
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,16,30.48,213
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,18.8,30.48,246
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,18.8,30.48,233
+Sea Life,,,1,2022-06-22,Lady Melissa,44.19,-62.16,Off Shore Banks,19.4,27.94,217
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,15.6,22.86,101
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,15.6,22.86,111
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,7.6,22.86,92
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,7.6,22.86,90
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.4,22.86,85
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,13.4,22.86,79
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,9.2,25.4,108
+Sea Life,,,1,2022-06-22,Lady Janice,44.16,-67.01,Grand Manan Banks,9.2,25.4,115
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,16,27.94,199
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,14,27.94,181
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,18.4,27.94,175
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,17.6,27.94,183
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,18.4,30.48,238
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,17,30.48,228
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,17.8,30.48,263
+Sea Life,,,1,2022-06-23,Lady Melissa,44.15,-62.3,Off Shore Banks,18,27.94,248
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,17.4,30.48,252
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,18.6,30.48,268
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,17.8,30.48,228
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,18.2,27.94,217
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,14.6,27.94,187
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,13.2,27.94,171
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,16.4,27.94,195
+Sea Life,,,1,2022-06-24,Lady Melissa,44.18,-62.16,Off Shore Banks,15,27.94,178
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,16.4,25.4,149
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,13.2,27.94,188
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,17.6,25.4,161
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,16,27.94,176
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,18.6,27.94,208
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,16.2,30.48,225
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,16.2,27.94,196
+Sea Life,,,1,2022-06-27,Lady Melissa,44.16,-62.19,Off Shore Banks,18.6,30.48,247
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,10,25.4,126
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,10,25.4,158
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,9.8,22.86,125
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,9.8,22.86,117
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,11.8,22.86,106
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,11.8,22.86,111
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,13,25.4,125
+Sea Life,,,1,2022-06-28,Lady Janice,45.14,-64.42,Scots Bay,13,25.4,112
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,12.6,22.86,113
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,12.6,22.86,93
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,14.6,22.86,87
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,14.6,22.86,88
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,16,22.86,90
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,16,22.86,86
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,14.4,22.86,77
+Sea Life,,,1,2022-06-29,Lady Janice,44.37,-66.37,Grand Manan Banks,14.4,22.86,85
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,18.6,22.86,109
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,18.6,22.86,96
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,13.4,22.86,90
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,13.4,22.86,86
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,17,22.86,106
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,17,22.86,98
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,18.2,22.86,87
+Sea Life,,,1,2022-06-30,Lady Janice,44.36,-66.34,Grand Manan Banks,18.2,22.86,91
+Sea Life,,,1,2022-07-01,Lady Melissa,44.18,-63.12,Off Shore Banks,18.8,27.94,189
+Sea Life,,,1,2022-07-01,Lady Melissa,44.18,-63.12,Off Shore Banks,14.4,30.48,224
+Sea Life,,,1,2022-07-01,Lady Melissa,44.18,-63.12,Off Shore Banks,16.4,27.94,205
+Sea Life,,,1,2022-07-01,Lady Melissa,44.18,-63.12,Off Shore Banks,14.2,27.94,211
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,17,22.86,108
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,17,22.86,99
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,12.4,22.86,110
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,12.4,22.86,104
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,18,22.86,96
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,18,22.86,95
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,17.4,22.86,102
+Sea Life,,,1,2022-07-04,Lady Janice,44.38,-66.36,Grand Manan Banks,17.4,22.86,100
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,15.4,22.86,102
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,15.4,22.86,100
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,13.6,22.86,112
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,13.6,22.86,101
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,14.2,22.86,97
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,14.2,22.86,96
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,17.4,22.86,110
+Sea Life,,,1,2022-07-05,Lady Janice,44.36,-66.38,Grand Manan Banks,17.4,22.86,116
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,17.4,30.48,247
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,20.2,27.94,213
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,18.8,30.48,247
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,17.6,30.48,226
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,18.6,30.48,239
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,14.2,30.48,263
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,15.6,30.48,217
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,17.4,27.94,214
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,14.4,27.94,184
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,17.2,30.48,233
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,13,30.48,212
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,15.2,27.94,200
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,12.8,27.94,212
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,18,27.94,202
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,14.8,27.94,174
+Sea Life,,,1,2022-07-06,Lady Melissa,44.16,-62.15,Off Shore Banks,15.2,27.94,189
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,15.4,22.86,107
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,15.4,22.86,103
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,17.4,22.86,87
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,17.4,22.86,86
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,18.4,22.86,101
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,18.4,22.86,97
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,12.6,25.4,114
+Sea Life,,,1,2022-07-07,Lady Janice,44.37,-66.38,Grand Manan Banks,12.6,25.4,94
+Sea Life,,,1,2022-07-08,Lady Melissa,44.15,-62.25,Off Shore Banks,14.4,30.48,216
+Sea Life,,,1,2022-07-08,Lady Melissa,44.15,-62.25,Off Shore Banks,15.4,30.48,236
+Sea Life,,,1,2022-07-08,Lady Melissa,44.15,-62.25,Off Shore Banks,18.4,27.94,219
+Sea Life,,,1,2022-07-08,Lady Melissa,44.15,-62.25,Off Shore Banks,16,27.94,206
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,14.6,20.32,86
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,14.6,20.32,83
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,12.2,22.86,85
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,12.2,22.86,92
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,12.4,22.86,101
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,12.4,22.86,101
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,16,22.86,106
+Sea Life,,,1,2022-07-08,Lady Janice,44.37,-66.38,Grand Manan Banks,16,22.86,90
+Sea Life,,,1,2022-07-11,Lady Melissa,44.13,-63.22,Off Shore Banks,18.6,30.48,236
+Sea Life,,,1,2022-07-11,Lady Melissa,44.13,-63.22,Off Shore Banks,17.4,30.48,255
+Sea Life,,,1,2022-07-11,Lady Melissa,44.13,-63.22,Off Shore Banks,13.2,27.94,220
+Sea Life,,,1,2022-07-11,Lady Melissa,44.13,-63.22,Off Shore Banks,16.8,27.94,219
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,11.2,22.86,128
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,11.2,22.86,125
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,10.6,22.86,122
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,10.6,22.86,120
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,110
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,111
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,116
+Sea Life,,,1,2022-07-12,Sealife II,45.08,-65.03,Scots Bay,12.6,22.86,120
+Sea Life,,,1,2022-07-12,Lady Melissa,44.17,-62.18,Off Shore Banks,19.6,30.48,249
+Sea Life,,,1,2022-07-12,Lady Melissa,44.17,-62.18,Off Shore Banks,13.6,30.48,260
+Sea Life,,,1,2022-07-12,Lady Melissa,44.17,-62.18,Off Shore Banks,18,30.48,245
+Sea Life,,,1,2022-07-12,Lady Melissa,44.17,-62.18,Off Shore Banks,18.2,27.9,215
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,17.8,30.48,245
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,14.8,30.48,228
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,16.2,27.94,224
+Sea Life,,,1,2022-07-12,Lady Melissa,43.57,-62.27,Off Shore Banks,20.6,27.94,210
+Sea Life,,,1,2022-07-12,Lady Melissa,43.57,-62.27,Off Shore Banks,15.4,27.94,221
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,17.6,27.94,225
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,18.2,30.48,244
+Sea Life,,,1,2022-07-21,Lady Melissa,43.57,-62.27,Off Shore Banks,18.8,30.48,287
+Sea Life,,,1,2022-07-23,Lady Melissa,43.59,-62.23,Off Shore Banks,20.2,27.94,245
+Sea Life,,,1,2022-07-23,Lady Melissa,43.59,-62.23,Off Shore Banks,15.8,30.48,249
+Sea Life,,,1,2022-07-23,Lady Melissa,43.59,-62.23,Off Shore Banks,16.6,27.94,234
+Sea Life,,,1,2022-07-23,Lady Melissa,43.59,-62.23,Off Shore Banks,16.4,30.48,250
+Sea Life,,,1,2022-07-25,Lady Melissa,43.57,-62.28,Off Shore Banks,20,27.94,245
+Sea Life,,,1,2022-07-25,Lady Melissa,43.57,-62.28,Off Shore Banks,11.2,30.48,238
+Sea Life,,,1,2022-07-25,Lady Melissa,43.57,-62.28,Off Shore Banks,21,30.48,250
+Sea Life,,,1,2022-07-25,Lady Melissa,43.57,-62.28,Off Shore Banks,18,30.48,284
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,7.4,27.9,220
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12.2,27.9,233
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12,25.4,188
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,14.8,25.4,181
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,9.8,27.9,222
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,7.4,27.9,212
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,12.8,27.9,223
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,15.2,27.9,202
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12.4,25.4,135
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12.4,25.4,125
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,9.2,22.86,110
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,9.2,22.86,110
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12.6,22.86,113
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,12.6,22.86,98
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,9.8,22.86,117
+Sea Life,,,1,2022-07-28,Sealife II,45.1,-64.57,Scots Bay,9.8,22.86,114
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11.6,22.86,106
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11.6,22.86,108
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,7.8,25.4,121
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,7.8,25.4,119
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11.2,25.4,151
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11.2,25.4,140
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11,22.86,104
+Sea Life,,,1,2022-07-28,Lady Janice,45.1,-64.57,Scots Bay,11,22.86,97
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,5.2,30.48,261
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,10.2,27.94,231
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,15.4,30.48,254
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,8.5,30.48,278
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,17.6,30.48,249
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,8.6,27.94,199
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,7.4,30.48,258
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,16.2,27.94,241
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,7.2,25.4,142
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,7.2,25.4,144
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,7,22.86,97
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,7,22.86,108
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,8.4,22.86,120
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,8.4,22.86,125
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,14.4,25.4,123
+Sea Life,,,1,2022-07-29,Sealife II,44.42,-65.46,Scots Bay,14.4,25.4,119
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,15,22.86,118
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,15,22.86,112
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,12.4,22.86,126
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,12.4,22.86,118
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,9.6,22.86,120
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,9.6,22.86,130
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,10,22.86,104
+Sea Life,,,1,2022-07-29,Lady Janice,45.1,-64.59,Scots Bay,10,22.86,105
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,11.6,22.86,109
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,11.6,22.86,96
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,10,22.86,98
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,10,22.86,94
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,8.8,22.86,94
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,8.8,22.86,88
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,13.2,22.86,98
+Sea Life,,,1,2022-08-01,Lady Janice,44.06,-66.28,Long Island,13.2,22.86,96
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,15,22.86,102
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,15,22.86,101
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,8.4,22.86,108
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,8.4,22.86,97
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,12.2,22.86,96
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,12.2,22.86,95
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,13,22.86,107
+Sea Life,,,1,2022-08-01,Sealife II,44.06,-66.28,Long Island,13,22.86,99
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,11.2,22.86,95
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,11.2,22.86,89
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,13.8,25.4,112
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,13.8,25.4,116
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,12.6,22.86,101
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,12.6,22.86,100
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,10.4,25.4,107
+Sea Life,,,1,2022-08-02,Lady Janice,43.54,-66.29,Lurcher,10.4,25.4,96
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,13.2,25.4,111
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,13.2,25.4,94
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,8.4,22.86,95
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,8.4,22.86,94
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,13.6,22.86,88
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,13.6,22.86,92
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,6.4,22.86,86
+Sea Life,,,1,2022-08-04,Lady Janice,44.16,-67.01,Grand Manan Banks,6.4,22.86,95
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,12.8,22.86,102
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,12.8,22.86,96
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,10.6,22.86,97
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,10.6,22.86,103
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,11.6,22.86,117
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,11.6,22.86,119
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,9.8,22.86,116
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,9.8,22.86,111
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,14,25.4,209
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,10.2,27.94,224
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,4,27.94,205
+Sea Life,,,1,2022-08-08,Lady Janice,45.09,-65.01,Scots Bay,8,27.94,202
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,8.4,27.94,206
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,6.8,27.94,208
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,9.4,27.94,199
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,10.2,27.94,210
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.4,27.94,232
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,11.4,27.94,205
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,11.6,27.94,210
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.8,27.94,206
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,13.8,22.86,127
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,13.8,22.86,115
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,7.8,25.4,124
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,7.8,25.4,116
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,10.6,25.4,124
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,10.6,25.4,117
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,8.6,25.4,116
+Sea Life,,,1,2022-08-09,Lady Janice,45.1,-64.56,Scots Bay,8.6,25.4,115
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,15.6,22.86,117
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,15.6,22.86,120
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,14.8,25.4,136
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,14.8,25.4,131
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,144
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,135
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,137
+Sea Life,,,1,2022-08-09,Sealife II,45.08,-65.01,Scots Bay,9.8,25.4,142
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,11.8,30.48,255
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,12.4,30.48,230
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,9.2,27.94,213
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,15.4,27.94,227
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10.4,27.94,240
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10,27.94,212
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,14.8,27.94,222
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,9,30.48,236
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,10.6,22.86,118
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,10.6,22.86,115
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,13,25.4,123
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,13,25.4,113
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,17.4,27.94,145
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,17.4,27.94,131
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,11,25.4,120
+Sea Life,,,1,2022-08-10,Lady Melissa,45.5,-64.56,Scots Bay,11,25.4,136
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,13.4,25.4,146
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,13.4,25.4,158
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10,22.86,120
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10,22.86,132
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,9.6,22.86,122
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,9.6,22.86,115
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10.4,22.86,128
+Sea Life,,,1,2022-08-10,Lady Janice,45.1,-64.58,Scots Bay,10.4,22.86,127
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,14.4,30.48,240
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,10.4,30.48,254
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,9,27.94,232
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,9.2,27.94,202
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,15.8,30.48,238
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,14.2,30.48,272
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,6,27.94,202
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,10,27.94,245
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,11,27.94,210
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,8.2,27.94,197
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,11.6,30.48,214
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,5.6,30.48,235
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,9.8,22.86,97
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,9.8,22.86,90
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,8.6,25.4,153
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,8.6,25.4,150
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,16,22.86,131
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,16,22.86,132
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,10,22.86,117
+Sea Life,,,1,2022-08-11,Lady Melissa,45.11,-64.56,Scots Bay,10,22.86,96
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,14.2,25.4,146
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,14.2,25.4,134
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,8.6,22.86,138
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,8.6,22.86,121
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,13.2,22.86,133
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,13.2,22.86,130
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,14.6,22.86,105
+Sea Life,,,1,2022-08-11,Lady Janice,45.09,-64.58,Scots Bay,14.6,22.86,110
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,10,22.86,112
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,10,22.86,96
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,12.2,22.86,118
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,12.2,22.86,93
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,11.8,22.86,108
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,11.8,22.86,111
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,13.4,22.86,103
+Sea Life,,,1,2022-08-11,Sealife II,45.11,-64.53,Scots Bay,13.4,22.86,113
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,11.2,30.48,223
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,13.4,30.48,237
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,16.4,27.94,219
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,17,27.94,234
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,19.6,27.94,244
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,8.6,27.94,216
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,18.2,27.94,192
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,6.6,30.48,235
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,14.6,25.4,131
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,14.6,25.4,125
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,10,25.4,136
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,10,25.4,138
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,10.2,25.4,130
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,10.2,25.4,135
+Sea Life,,,1,2022-08-16,Sealife II,43.17,-66.25,German Bank,12,25.4,164
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,8.2,25.4,126
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,8.2,25.4,129
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,9.2,25.4,135
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,9.2,25.4,136
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,18.4,25.4,137
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,18.4,25.4,140
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,14.2,25.4,159
+Sea Life,,,1,2022-08-16,Lady Melissa,43.21,-66.26,German Bank,14.2,25.4,151
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,13.4,27.94,204
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,13.4,27.94,170
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,11.4,25.4,148
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,11.4,25.4,139
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,15.4,25.4,121
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,15.4,25.4,121
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,12.2,25.4,130
+Sea Life,,,1,2022-08-23,Lady Janice,45.08,-65,Scots Bay,12.2,25.4,120
+Sea Life,,,1,2022-08-23,Lady Melissa,45.09,-65.02,Scots Bay,10,27.94,216
+Sea Life,,,1,2022-08-23,Lady Janice,45.09,-65.02,Scots Bay,12.2,25.4,184
+Sea Life,,,1,2022-08-23,Lady Janice,45.09,-65.02,Scots Bay,15,25.4,171
+Sea Life,,,1,2022-08-23,Lady Janice,45.09,-65.02,Scots Bay,14,25.4,194
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,8.4,25.4,146
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,8.4,25.4,144
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,8.2,25.4,126
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,8.2,25.4,134
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,16.2,25.4,142
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,16.2,25.4,153
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,9.8,25.4,159
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,14.2,27.94,192
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,11,30.48,215
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,15.8,27.94,200
+Sea Life,,,1,2022-08-25,Lady Melissa,43.14,-66.2,German Bank,15,30.48,203
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,8.4,25.4,103
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,8.4,25.4,109
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,9.4,25.4,118
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,9.4,25.4,114
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,13,22.86,79
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,13,22.86,88
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,14.6,22.86,103
+Sea Life,,,1,2022-08-25,Lady Janice,44.16,-67,German Bank,14.6,22.86,92
+Sea Life,,,1,2022-08-26,Lady Janice,43.16,-66.22,German Bank,16.6,30.48,221
+Sea Life,,,1,2022-08-26,Lady Janice,43.16,-66.22,German Bank,13,30.48,242
+Sea Life,,,1,2022-08-26,Lady Janice,43.16,-66.22,German Bank,7.8,27.94,222
+Sea Life,,,1,2022-08-26,Lady Janice,43.16,-66.22,German Bank,8.8,25.4,220
+Sea Life,,,1,2022-08-26,Sealife II,45.17,-66.22,German Bank,14.8,27.94,219
+Sea Life,,,1,2022-08-26,Sealife II,45.17,-66.22,German Bank,8.6,27.94,201
+Sea Life,,,1,2022-08-26,Sealife II,45.17,-66.22,German Bank,12,27.94,211
+Sea Life,,,1,2022-08-26,Sealife II,45.17,-66.22,German Bank,16.8,30.48,227
+Sea Life,,,1,2022-08-30,Lady Janice,43.15,-66.2,German Bank,14.6,29.21,203
+Sea Life,,,1,2022-08-30,Lady Janice,43.15,-66.2,German Bank,13.2,29.21,198
+Sea Life,,,1,2022-08-30,Lady Janice,43.15,-66.2,German Bank,14.2,27.94,159
+Sea Life,,,1,2022-08-30,Lady Janice,43.15,-66.2,German Bank,10.8,26.67,163
+Sea Life,,,1,2022-08-30,Sealife II,43.16,-66.21,German Bank,8,26.67,143
+Sea Life,,,1,2022-08-30,Sealife II,43.16,-66.21,German Bank,7.8,29.21,204
+Sea Life,,,1,2022-08-30,Sealife II,43.16,-66.21,German Bank,8.8,27.94,181
+Sea Life,,,1,2022-08-30,Sealife II,43.16,-66.21,German Bank,19,26.67,137
+Sea Life,,,1,2022-08-31,Lady Janice,43.14,-66.2,German Bank,14.2,27.94,203
+Sea Life,,,1,2022-08-31,Lady Janice,43.14,-66.2,German Bank,10.2,27.94,202
+Sea Life,,,1,2022-08-31,Lady Janice,43.14,-66.2,German Bank,14,27.94,216
+Sea Life,,,1,2022-08-31,Lady Janice,43.14,-66.2,German Bank,18,30.48,249
+Sea Life,,,1,2022-08-31,Sealife II,43.15,-66.21,German Bank,12.2,30.48,243
+Sea Life,,,1,2022-08-31,Sealife II,43.15,-66.21,German Bank,7.8,30.48,223
+Sea Life,,,1,2022-08-31,Sealife II,43.15,-66.21,German Bank,15.2,30.48,250
+Sea Life,,,1,2022-08-31,Sealife II,43.15,-66.21,German Bank,16.2,27.94,212
+Sea Life,,,1,2022-08-31,Lady Melissa,43.16,-66.21,German Bank,10.6,27.94,209
+Sea Life,,,1,2022-08-31,Lady Melissa,43.16,-66.21,German Bank,8.8,27.94,225
+Sea Life,,,1,2022-08-31,Lady Melissa,43.16,-66.21,German Bank,12,30.48,239
+Sea Life,,,1,2022-08-31,Lady Melissa,43.16,-66.21,German Bank,15.8,27.94,224
+Sea Life,,,1,2022-09-01,Sealife II,43.15,-66.21,German Bank,9.8,27.94,205
+Sea Life,,,1,2022-09-01,Sealife II,43.15,-66.21,German Bank,10.4,30.48,290
+Sea Life,,,1,2022-09-01,Sealife II,43.15,-66.21,German Bank,13.2,30.48,236
+Sea Life,,,1,2022-09-01,Sealife II,43.15,-66.21,German Bank,14.2,27.97,204
