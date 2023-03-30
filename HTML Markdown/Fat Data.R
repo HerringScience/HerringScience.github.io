@@ -539,4 +539,9 @@ Master = Master %>%
   mutate(Lon = ifelse(Ground == "Hudson Canyon" & is.na(Lon), -72.19678104, Lon))
   
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/")
+WAA = read_csv("WeightAtAge.csv")
+WAA = WAA %>% dplyr::select(Year = YEAR, Age = AGE, WAA) %>%
+  dplyr::filter(Age < 12)
+Master = full_join(Master, WAA)
+Master = Master %>% filter(!is.na(Fat))
 Master %>% write_csv("Total Fat Data.csv")

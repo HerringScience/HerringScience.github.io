@@ -72,11 +72,10 @@ SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
 LRP2 = read_csv("LRP Data.csv")
+LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
 
 #Fat Data
 FatData = read_csv("Total Fat Data.csv")
-FatData$Year = as.factor(FatData$Year)
-FatData$Month = as.factor(FatData$Month)
 
 #Larval Data
 Larval = read_csv("Full Larval.csv")
@@ -133,22 +132,25 @@ polySI = as.PolySet(SUA, projection="LL")
 ::: row
 ::: col-md-6
 ```{r echo=FALSE}
-ggplot(data=LRP2, aes(x=Year, y=Biomass)) +
-  geom_point() +
-  geom_path() +
-  geom_point(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg') +
-  geom_path(data=LRP2, x=LRP2$Year, y=LRP2$'3yr Avg') +
-  geom_hline(yintercept = 317846, linetype = "longdash", size =1) +
+colors = NULL
+colors = c("Biomass" = "darkgreen", "Three Year Avg" = "blue")
+ggplot(LRP2, aes(x=Year)) +
+  geom_line(aes(y=Biomass, colour = "Biomass")) +
+  geom_line(aes(y=ThreeYear, colour = "Three Year Avg")) +
+  geom_hline(yintercept = 317846, linetype = "longdash", size = 1, colour = "red") +
   scale_y_continuous(labels=scales::comma) +
   theme(axis.text.x = element_text(angle = 55)) +
-  labs(x="Year", y = "Biomass (mt)")
+    labs(x = "Year",
+         y = "Biomass (mt)",
+         color = "Legend") +
+    scale_color_manual(values = colors)
 ```
 :::
 
 ::: col-md-6
 ```{r echo=FALSE}
 LRP3 = LRP2 %>%
-  dplyr::select(Year, Scots, German, Seal, Biomass, LRP, ThreeYear="3yr Avg") %>%
+  dplyr::select(Year, Scots, German, Seal, Biomass, LRP, ThreeYear="ThreeYear") %>%
   mutate(Difference = ThreeYear-LRP)
 
 LRP3 %>% 
@@ -1796,7 +1798,9 @@ Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) +
 
 ### By Year
 ```{r}
-ggplot(data=FatData, aes(x=Year, y=Fat)) +
+FatData2 = FatData %>%
+  mutate(Year = as.factor(Year))
+ggplot(data=FatData2, aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -1804,7 +1808,7 @@ ggplot(data=FatData, aes(x=Year, y=Fat)) +
 ### By Month
 
 ```{r}
-ggplot(data=subset(FatData, !is.na(Month)), aes(x=Month, y=Fat)) +
+ggplot(data=subset(FatData2, !is.na(Month)), aes(x=Month, y=Fat)) +
   geom_boxplot() + 
   labs(y="Fat Perecent (%)")
 ```
@@ -1814,11 +1818,11 @@ ggplot(data=subset(FatData, !is.na(Month)), aes(x=Month, y=Fat)) +
 #### Connors
 
 ```{r}
-ggplot(data=subset(FatData, Supplier == "Connors"), aes(x=Year, y=Fat)) +
+ggplot(data=subset(FatData2, Supplier == "Connors"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 
-ggplot(data=subset(FatData, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+ggplot(data=subset(FatData2, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -1826,11 +1830,11 @@ ggplot(data=subset(FatData, Supplier == "Connors" & !is.na(Month)), aes(x=Month,
 #### Comeaus
 
 ```{r}
-ggplot(data=subset(FatData, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
+ggplot(data=subset(FatData2, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 
-ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+ggplot(data=subset(FatData2, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -1838,11 +1842,11 @@ ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month,
 #### Scotia
 
 ```{r}
-ggplot(data=subset(FatData, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
+ggplot(data=subset(FatData2, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 
-ggplot(data=subset(FatData, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+ggplot(data=subset(FatData2, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -1850,11 +1854,30 @@ ggplot(data=subset(FatData, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, 
 #### USA
 
 ```{r}
-ggplot(data=subset(FatData, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
+ggplot(data=subset(FatData2, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 
-ggplot(data=subset(FatData, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+ggplot(data=subset(FatData2, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
+```
+
+### Weight At Age
+
+```{r}
+FatDataSum = FatData %>% 
+  group_by(Year) %>%
+  summarize(WAA = mean(WAA), Fat = mean(Fat))
+
+p1 = ggplot(FatDataSum, aes(x=Year)) + 
+  geom_line(aes(y=Fat)) +
+  labs(y="Fat Percentage (%)")
+
+p2 = ggplot(FatDataSum, aes(x=Year)) +
+  geom_line(aes(y=WAA)) +
+  labs(y="Average Weight At Age (g)")
+
+library(patchwork)
+p1+p2
 ```
