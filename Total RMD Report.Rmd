@@ -10,7 +10,7 @@ output:
 ## Global options
 year= "2022" #Change global/current year here
 
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/"))
+knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 ```
 

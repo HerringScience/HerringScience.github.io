@@ -17,7 +17,7 @@ surv.no = "4"
 
 ```{r setup, include=FALSE}
 ## Global options
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/"))
+knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
@@ -142,7 +142,7 @@ Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
 Map = list.files(pattern = "Map*") %>% 
   map_df(~read_csv(.))
@@ -252,8 +252,8 @@ a=unique(ifelse(Survey$Sample == "Y",
 ### Tides Tables
 
 ```{r, fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
 
 a = unique(ifelse(Survey$Ground == "GB", "Yarmouth NS, Station #365", "Margaretsville NS, Station #315"))
 ```
@@ -349,7 +349,7 @@ a = unique(PRC$Vessel)
 ```
 
 ```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Snip.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Snip.jpg"), rel_path = FALSE)
 ```
 
 The largest backscatter was seen by **`r a`**, at the following location:
@@ -516,13 +516,13 @@ h=unique(f$AvgTowDepth)
 ::: row
 ::: col-md-6
 ```{r, fig.cap="Plankton tow depth profile #1", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Tow 1.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 1.jpg"), rel_path = FALSE)
 ```
 :::
 
 ::: col-md-6
 ```{r, fig.cap="Plankton tow depth profile #2", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Tow 2.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 2.jpg"), rel_path = FALSE)
 ```
 :::
 :::
@@ -532,7 +532,7 @@ The first tow is `r a`, which was `r c` the tide and had an average depth of `r 
 #### Captured plankton
 
 ```{r, fig.cap="Captured plankton from the surface tows", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current, "/Plankton.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Plankton.jpg"), rel_path = FALSE)
 ```
 
 ### CTD Data

@@ -122,10 +122,10 @@ pathnames <- list.files(pattern="[.]R$", path=paste0("C:/Users/", Sys.info()[7],
 sapply(pathnames, FUN=source)
 
 #Echoview Data
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no))
-Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "Map") %>% 
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no), pattern = "Map") %>% 
   map_df(~read_csv(.))
-Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "Region") %>% 
+Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no), pattern = "Region") %>% 
   map_df(~read_csv(.))
 
 if(surv == "SB"){
@@ -182,7 +182,7 @@ if(surv=="GB"){
   
   x = surveyTrack2(x=trans1, polyNameA  = polyGB, polyNameB  = polySI, title = name )
   
-  if(adhoc=="TRUE"){SUA = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "adhoc") %>% 
+  if(adhoc=="TRUE"){SUA = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no), pattern = "adhoc") %>% 
     map_df(~read_csv(.))
   polyAD = as.PolySet(SUA, projection="LL")
   
@@ -230,7 +230,7 @@ if(surv=="GB"){
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
 
 ##Performance data import and filtering
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 actual = list.files(pattern = "*tableA.csv") %>% map_df(~read_csv(.))
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
