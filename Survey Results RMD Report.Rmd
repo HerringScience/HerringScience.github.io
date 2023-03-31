@@ -5,14 +5,14 @@ output:
     highlight: kate
 ---
 
-```{r DATA CHECK RUN THIS FIRST MANUALLY, include=FALSE}
+```{r, include=FALSE}
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2022"
-surv.no = "6"
+surv.no = "4"
 ```
 
 ```{r setup, include=FALSE}
@@ -143,8 +143,13 @@ Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current))
-Map = read_csv("Map.csv")
-Region = read_csv("Region.csv")
+
+Map = list.files(pattern = "Map*") %>% 
+  map_df(~read_csv(.))
+
+Region = list.files(pattern = "Region*") %>% 
+  map_df(~read_csv(.))
+
 Speed=read_csv("Speed.csv")
 Distance=read_csv("Distance.csv")
 SurveyTotal=read_csv("Performance Total.csv")
@@ -185,7 +190,6 @@ b = ggplot(Map,aes(x=Lon, y=Lat)) +
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(colour = Vessel, size = 400)) +
   geom_segment(aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   coord_map() + 
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
@@ -602,7 +606,8 @@ a=ifelse(Vessel_Speed$AvgSpeed > 8, paste0("Average vessel speed was ", round(Ve
 
 ```{r, fig.align='center'}
 Distance = Distance %>%
-  filter(Difference < 40)
+  filter(Difference < 40) %>%
+  filter(Difference > 0)
 
 ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() + 
   ylab("Distance cut from Planned Lines (KM)") + 

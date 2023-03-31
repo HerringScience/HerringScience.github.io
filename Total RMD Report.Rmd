@@ -1257,7 +1257,7 @@ ggplot(data = subset(atDepth, Ground == "Scots Bay"), aes(x=Year, y=StratSalt, g
   geom_boxplot() + 
     stat_summary(fun.y = median, fun.ymax = length,
                geom = "text", aes(label = ..ymax..), vjust = -0.5) +
-  ylim(NA,0.75)
+  ylim(NA,0.75) +
   labs(x="Year", y = "Salinity Difference (PSS)", title = "Salinity Difference (Stratification) vs. Year")
 ```
 
@@ -1796,77 +1796,247 @@ Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) +
 
 ## Fat Project {.tabset}
 
-### By Year
-```{r}
-FatData2 = FatData %>%
-  mutate(Year = as.factor(Year))
-ggplot(data=FatData2, aes(x=Year, y=Fat)) +
+### By Year {.tabset .tabset-pills}
+
+#### Total
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+FatDataSum = FatData
+FatData$Year = as.factor(FatData$Year)
+ggplot(data=FatData, aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
+:::
 
-### By Month
-
-```{r}
-ggplot(data=subset(FatData2, !is.na(Month)), aes(x=Month, y=Fat)) +
-  geom_boxplot() + 
-  labs(y="Fat Perecent (%)")
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
 ```
-
-### By Supplier {.tabset .tabset-pills}
+:::
+:::
 
 #### Connors
 
-```{r}
-ggplot(data=subset(FatData2, Supplier == "Connors"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-
-ggplot(data=subset(FatData2, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Connors"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Connors") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
 
 #### Comeaus
 
-```{r}
-ggplot(data=subset(FatData2, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-
-ggplot(data=subset(FatData2, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Comeaus") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
 
 #### Scotia
 
-```{r}
-ggplot(data=subset(FatData2, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-
-ggplot(data=subset(FatData2, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Scotia") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
 
 #### USA
 
-```{r}
-ggplot(data=subset(FatData2, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-
-ggplot(data=subset(FatData2, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Unknown") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+  
+### By Month {.tabset .tabset-pills}
+
+#### Total
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+FatData$Month = as.factor(FatData$Month)
+ggplot(data=subset(FatData, !is.na(Month)), aes(x=Month, y=Fat)) +
+  geom_boxplot() + 
+  labs(y="Fat Perecent (%)")
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  group_by(Month) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+
+#### Connors
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Connors" & !is.na(Month)) %>%
+  group_by(Month) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+
+#### Comeaus
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Comeaus" & !is.na(Month)) %>%
+  group_by(Month) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+
+#### Scotia
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Scotia" & !is.na(Month)) %>%
+  group_by(Month) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+
+#### USA
+
+::: row
+::: col-md-6
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatData %>%
+  dplyr::filter(Supplier == "Unknown" & !is.na(Month)) %>%
+  group_by(Month) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
 
 ### Weight At Age
 
-```{r}
-FatDataSum = FatData %>% 
+::: row
+::: col-md-6
+```{r echo=FALSE}
+FatDataSum = FatDataSum %>% 
   group_by(Year) %>%
   summarize(WAA = mean(WAA), Fat = mean(Fat))
 
@@ -1881,3 +2051,13 @@ p2 = ggplot(FatDataSum, aes(x=Year)) +
 library(patchwork)
 p1+p2
 ```
+:::
+
+::: col-md-6
+```{r echo=FALSE}
+FatDataSum %>%
+  kbl(col.names = c("Year", "Avg Wt at Age (g)", "Fat (%)")) %>%
+  kable_paper("striped", full_width = T)
+```
+:::
+:::

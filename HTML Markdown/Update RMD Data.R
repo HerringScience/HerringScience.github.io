@@ -2,10 +2,11 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB"
-surv2="Scots Bay"
+surv="GB"
+surv2="German Bank"
 year="2022"
-surv.no="6"
+surv.no="4"
+adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
 ids = c("LM","LB", "MS", "SL", "C1", "BP")
@@ -181,13 +182,14 @@ if(surv=="GB"){
   
   x = surveyTrack2(x=trans1, polyNameA  = polyGB, polyNameB  = polySI, title = name )
   
-  SUA = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", current), pattern = "adhoc") %>% 
+  if(adhoc=="TRUE"){SUA = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/HTML Markdown/Surveys/", year, "/", surv, surv.no), pattern = "adhoc") %>% 
     map_df(~read_csv(.))
   polyAD = as.PolySet(SUA, projection="LL")
   
   x = surveyTrack2(x=trans2, polyNameA  = polyGB, polyNameB  = polyAD, title = name )
   
   ggplot(trans2, aes(x=X, y=Y)) + geom_polygon(data=polyAD,aes(x=X, y=Y, group=PID), fill = "white", colour = "black")  + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1)  + labs(x=NULL, y=NULL) + coord_map()
+  }
   
   ids = c("T01", "T02", "T03")
   map1 = map[which((map$Transect_No %in% ids)), ]
@@ -234,7 +236,7 @@ actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
 wd = getwd()
-Perform = full_join(actual, plan) %>% mutate(Survey = substr(wd, 60,60)) %>% mutate(Location = substr(wd, 58,59))
+Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
 Perform = Perform %>% rename(End.Lat="End Lat", End.Lon="End Lon", Start.Lat="Start Lat", Start.Lon="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
@@ -243,7 +245,7 @@ Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist.
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
   mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
   mutate(Duration = as.numeric(End-Start)*60) %>%
-  mutate(Speed = (Distance*1000)/(Duration))
+  mutate(Speed = (Distance*1000)/(Duration*60))
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
