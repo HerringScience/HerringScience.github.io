@@ -31,7 +31,7 @@ Com4 = read_csv("Comeaus 2020.csv")
 Com5 = read_csv("Comeaus 2021.csv")
 Com6 = read_csv("Comeaus 2022.csv")
 Scotia = read_csv("Scotia Update.csv") #manually adjusted date_time due to missing leading 0's
-Unknown = read_csv("Unknown 2007-2013.csv")
+Maine = read_csv("Maine 2007-2013.csv")
 
 #Connors QC / structuring
 Connors = Connors %>% dplyr::select(Date = DATE, Vessel = BOAT, Ground = AREA, 
@@ -44,8 +44,8 @@ Connors = pivot_longer(data=Connors, cols=starts_with("Size"), names_to="Size", 
 Scotia = Scotia %>% rename(Fat = Average)
 Scotia$Date = ymd(Scotia$Date)
 
-#Unknown QC / structuring
-Unknown = Unknown %>% dplyr::select(Date, Fat = "% Fat") %>%
+#Maine QC / structuring
+Maine = Maine %>% dplyr::select(Date, Fat = "% Fat") %>%
   mutate(Year = as.numeric(substr(Date,1,4))) %>%
   mutate(Month = as.numeric(substr(Date,6,7)))
 
@@ -73,12 +73,12 @@ Connors = Connors %>%
   mutate(Supplier = "Connors")
 Scotia = Scotia %>%
   mutate(Supplier = "Scotia")
-Unknown = Unknown %>%
-  mutate(Supplier = "Unknown")
+Maine = Maine %>%
+  mutate(Supplier = "Maine")
 
 Master1 = full_join(Comeau, Connors)
 Master2 = full_join(Master1, Scotia)
-Master = full_join(Master2, Unknown)
+Master = full_join(Master2, Maine)
 rm(list=c("Master1", "Master2"))
 
 Master = Master %>%

@@ -1891,12 +1891,12 @@ FatData %>%
 :::
 :::
 
-#### USA
+#### Maine
 
 ::: row
 ::: col-md-6
 ```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
+ggplot(data=subset(FatData, Supplier == "Maine"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -1905,7 +1905,7 @@ ggplot(data=subset(FatData, Supplier == "Unknown"), aes(x=Year, y=Fat)) +
 ::: col-md-6
 ```{r echo=FALSE}
 FatData %>%
-  dplyr::filter(Supplier == "Unknown") %>%
+  dplyr::filter(Supplier == "Maine") %>%
   group_by(Year) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Year", "Avg Fat (%)")) %>%
@@ -2008,12 +2008,12 @@ FatData %>%
 :::
 :::
 
-#### USA
+#### Maine
 
 ::: row
 ::: col-md-6
 ```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Unknown" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+ggplot(data=subset(FatData, Supplier == "Maine" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
 ```
@@ -2022,7 +2022,7 @@ ggplot(data=subset(FatData, Supplier == "Unknown" & !is.na(Month)), aes(x=Month,
 ::: col-md-6
 ```{r echo=FALSE}
 FatData %>%
-  dplyr::filter(Supplier == "Unknown" & !is.na(Month)) %>%
+  dplyr::filter(Supplier == "Maine" & !is.na(Month)) %>%
   group_by(Month) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Month", "Avg Fat (%)")) %>%
@@ -2061,3 +2061,41 @@ FatDataSum %>%
 ```
 :::
 :::
+
+### Spatial Analysis
+
+#### By Latitude
+
+```{r}
+library(scales)
+FatData %>%
+  filter(!is.na(Lat)) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)")
+```
+
+#### By Ground
+
+```{r}
+can<-getData('GADM', country="CAN", level=1)
+us = getData('GADM', country = "USA", level = 1)
+can1 = rbind(can,us)
+NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine", "New Hampshire", "Massachusetts", "Connecticut", "Rhode Island", "New York", "Vermont", "New Jersey"),]
+
+CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
+proj4string(CP) <- CRS(proj4string(NBNS))
+out <- gIntersection(NBNS, CP, byid=TRUE)
+
+FatData %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData, Lat < 46 & Lat > 40), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom')
+
+```
