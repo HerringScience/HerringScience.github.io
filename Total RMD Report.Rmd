@@ -2097,5 +2097,4 @@ FatData %>%
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
   coord_map() +
   theme(legend.position = 'bottom')
-
 ```
