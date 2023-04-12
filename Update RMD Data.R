@@ -7,6 +7,7 @@ surv2="German Bank"
 year="2022"
 surv.no="4"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
+daysturnover = 31 #days since last survey on same ground
 
 #Set vessels for SB only
 ids = c("LM","LB", "MS", "SL", "C1", "BP")
@@ -85,8 +86,8 @@ Tag %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringSc
 ##ECHOVIEW DATA##
 
 #Land Data
-can<-getData('GADM', country="CAN", level=1)
-us = getData('GADM', country = "USA", level = 1)
+can<-getData('GADM', download = FALSE, country="CAN", level=1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
+us = getData('GADM', download = FALSE, country = "USA", level = 1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
 can1 = rbind(can,us)
 NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 
@@ -228,6 +229,29 @@ if(surv=="GB"){
   write.table(A, file= "tableA.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
   write.table(B, file= "tableB.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
+
+#Turnover Calc
+if(surv == "GB"){
+  y_intercept <- 0.199392662629964
+  x_Var_1 <-0.528381832773883
+  Bio = C %>% filter(Layer == "German Bank")
+}
+if(surv == "SB"){
+  y_intercept <- 0.364102758434224
+  x_Var_1 <-0.436969270679439
+  Bio = C %>% filter(Layer == "Scots Bay")
+}
+
+resultsa$Date <-
+  as.Date(substr(resultsa$Date_Time_S, 0, 10))
+Date <- resultsa$Date
+Survey <- 1:length(resultsa$Date)
+Biomass <- resultsa$trans_biomass
+
+TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
+C$Turnover = TurnBio
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 ##Performance data import and filtering
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))

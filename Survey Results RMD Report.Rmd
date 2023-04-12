@@ -269,15 +269,15 @@ Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer
 ### Main Results
 
 ```{r Biomass details}
-a=SSB %>% filter(Ground == surv2 & Year==year & Survey_Number == surv.no)
-b=unique(a$HSC_Estimate)
+a=tableC %>% filter(Layer == "German Bank" | Layer == "Scots Bay")
+b=a$`Biomass (tons)`
 b=format(b, big.mark=(","), digits=2)
-c=unique(a$HSC_Turnover_Adjusted)
+c=as.numeric(a$Turnover)
 c=format(c, big.mark=(","), digits=2)
-d=SSB %>% filter(Ground == "Seal Island" & Year == year & Survey_Number == surv.no)
-e=unique(d$HSC_Estimate)
-e=format(e, big.mark=(","), digits=2)
-f=unique(ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover ", c, "mt. The preliminary biomass estimate for Seal Island is ", e, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover ", c, "mt.")))
+d=tableC %>% filter(Layer == "Seal Island")
+d=d$'Biomass (tons)'
+d=format(d, big.mark=(","), digits=2)
+f=unique(ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt.")))
 ```
 
 The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength. 
