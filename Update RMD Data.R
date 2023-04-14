@@ -7,7 +7,6 @@ surv2="German Bank"
 year="2022"
 surv.no="4"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-daysturnover = 31 #days since last survey on same ground
 
 #Set vessels for SB only
 ids = c("LM","LB", "MS", "SL", "C1", "BP")
@@ -19,11 +18,10 @@ SB1= 640 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
-SBTS1 = -35.5 #TS38
-GBTS1 = -35.5 #TS38
+TS1 = -35.5 #TS38
 
-GB1 = 800 #GB main area
-GB2 = 280 #Seal Island area
+GB1 = 805 #GB main area
+GB2 = 267 #Seal Island area
 GB3 = NA #Ad-hoc school survey area
 
 library(cli)
@@ -51,9 +49,7 @@ library(cowplot)
 #Data import and filtering
 Tag <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
 Tag$Date = ymd(Tag$Date) 
-Tag <- Tag %>% mutate(Julian = yday(Date)) #add Julian day
-Tag <- Tag %>% mutate(Year = as.numeric(substr(Date, 1, 4)))
-Tag = Tag %>% dplyr::select(-Tag_Annual)
+Tag <- Tag %>% mutate(Julian = yday(Date)) %>% mutate(Year = as.numeric(substr(Date, 1, 4))) %>% dplyr::select(-Tag_Annual)
 
 #Add tags per year per tagger
 Tag_Annual = Tag %>%
@@ -61,9 +57,7 @@ Tag_Annual = Tag %>%
   mutate(count = n_distinct(Year)) %>%
   summarize(n=n(),
             count2 = mean(count)) %>%
-  mutate(Tag_Annual = n/count2)
-
-Tag_Annual = Tag_Annual %>%
+  mutate(Tag_Annual = n/count2) %>%
   dplyr::select(-n, -count2)
 
 Tag = left_join(Tag, Tag_Annual, by = "Tagger")
@@ -133,7 +127,7 @@ if(surv == "SB"){
   out = SBout
   map = mapDat(x = Map)
   x = Region
-  trans = transects(x= Region, TS38 = SBTS1, TS50 = NA)
+  trans = transects(x= Region, TS38 = TS1, TS50 = NA)
   x = surveyTrack3(x=trans, polyNameA  = polySB_main, polyNameB  = polyNorthern,  polyNameC  = polyEastern,  title = name)
   northern = trans[which((trans$Vessel == NorthVessel)), ]
   eastern = trans[which((trans$Vessel == EastVessel)), ]
@@ -174,7 +168,7 @@ if(surv=="GB"){
   out=GBMap
   map = mapDat(x = Map)
   x = Region
-  trans = transects(x= Region, TS38 = GBTS1 , TS50 = NA)
+  trans = transects(x= Region, TS38 = TS1 , TS50 = NA)
   
   ids = c("T01", "T02", "T03")
   trans1 = trans[which((trans$Transect_No %in% ids)), ]
@@ -230,7 +224,18 @@ if(surv=="GB"){
   write.table(B, file= "tableB.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
 
-#Turnover Calc
+###Turnover Calc###
+
+#Find date of last survey, calculate time between surveys for turnover
+Survey <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+surv.no2 = as.numeric(surv.no)
+day1 = Survey %>% filter(Ground == surv & Survey.No == (surv.no2) & Year == year) %>% dplyr::select(Date)
+day1 = dmy(unique(day1$Date))
+day2 = Survey %>% filter(Ground == surv & Survey.No == (surv.no2-1) & Year == year) %>% dplyr::select(Date)
+day2 = dmy(unique(day2$Date))
+daysturnover = as.numeric(day(day1))-as.numeric(day(day2))
+
+#SB and GB turnover calculation
 if(surv == "GB"){
   y_intercept <- 0.199392662629964
   x_Var_1 <-0.528381832773883
@@ -249,11 +254,13 @@ Survey <- 1:length(resultsa$Date)
 Biomass <- resultsa$trans_biomass
 
 TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
+
+#Add it to Table C
 C$Turnover = TurnBio
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
-##Performance data import and filtering
+###Performance data import and filtering###
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 actual = list.files(pattern = "*tableA.csv") %>% map_df(~read_csv(.))
 actual = actual %>% mutate(Type = "Actual")
