@@ -2,10 +2,10 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB"
-surv2="German Bank"
+surv="SB"
+surv2="Scots Bay"
 year="2022"
-surv.no="4"
+surv.no="6"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
@@ -233,7 +233,7 @@ day1 = Survey %>% filter(Ground == surv & Survey.No == (surv.no2) & Year == year
 day1 = dmy(unique(day1$Date))
 day2 = Survey %>% filter(Ground == surv & Survey.No == (surv.no2-1) & Year == year) %>% dplyr::select(Date)
 day2 = dmy(unique(day2$Date))
-daysturnover = as.numeric(day(day1))-as.numeric(day(day2))
+daysturnover = as.numeric(day1-day2)
 
 #SB and GB turnover calculation
 if(surv == "GB"){
@@ -244,7 +244,7 @@ if(surv == "GB"){
 if(surv == "SB"){
   y_intercept <- 0.364102758434224
   x_Var_1 <-0.436969270679439
-  Bio = C %>% filter(Layer == "Scots Bay")
+  Bio = C %>% filter(Layer == "Scots Bay" | Layer == "Main Box" | Layer == "Eastern Box" | Layer == "Northern Box")
 }
 
 resultsa$Date <-
@@ -261,8 +261,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 ###Performance data import and filtering###
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
-actual = list.files(pattern = "*tableA.csv") %>% map_df(~read_csv(.))
+actual = tableA
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
