@@ -791,6 +791,7 @@ ggplot(data = subset(atDepth, Ground == "Scots Bay" & In_Box == "1"), aes(x=Year
   theme(axis.text.x = element_text(angle = 55))
 ```
 
+
 ```{r, results = "asis"}
 atDepth1 = atDepth %>% 
   filter(Ground == "Scots Bay" & In_Box == "1") %>%

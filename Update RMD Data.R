@@ -55,8 +55,7 @@ Tag <- Tag %>% mutate(Julian = yday(Date)) %>% mutate(Year = as.numeric(substr(D
 Tag_Annual = Tag %>%
   group_by(Tagger) %>%
   mutate(count = n_distinct(Year)) %>%
-  summarize(n=n(),
-            count2 = mean(count)) %>%
+  summarize(n=n(), count2 = mean(count)) %>%
   mutate(Tag_Annual = n/count2) %>%
   dplyr::select(-n, -count2)
 
@@ -301,7 +300,7 @@ Perform %>% write_csv("Performance Total.csv")
 ##Survey Data import and filtering
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/")
 Survey = read_csv("planktonsamplingData.csv")
-Survey = Survey %>% dplyr::select(Ground, id, Survey.No, Date, StartTime, Sample, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, Lon1, Lat1, Lon2, Lat2, Time1, Time2, TowTime, AirTemp, Speed, Heading, TideDirection, AvgTowDepth, MaxTowDepth, CTD_ID, AvgTemp, AvgSalinity, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DepthDiscD, DepthDiscA) 
+Survey = Survey %>% dplyr::select(Ground, id, Survey.No, Date, StartTime, Sample, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, No_jars, Lon1, Lat1, Lon2, Lat2, Time1, Time2, TowTime, AirTemp, Speed, Heading, TideDirection, AvgTowDepth, MaxTowDepth, CTD_ID, AvgTemp, AvgSalinity, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DepthDiscD, DepthDiscA) 
 Survey = Survey %>%
   mutate(Month = as.numeric(substr(Date, 1, 2)),
          Year = as.numeric(substr(Date, 7, 10)),
@@ -433,3 +432,19 @@ CTD30 = Strat
 CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
 CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
 SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
+
+##Larval Data
+Larval <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
+Survey <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+
+Survey = Survey %>% 
+  dplyr::select(No_jars, id, Volume) %>%
+  mutate(No_jars = ifelse(is.na(No_jars), 1, No_jars))
+
+Larval = left_join(Larval, Survey)
+Larval = Larval %>%
+  mutate(Larv_per_jar = Abundance/No_jars) %>%
+  mutate(VolumeSampledLitres = Volume) %>%
+  dplyr::select(-Volume) %>%
+  mutate(VolumeSampledLitres = ifelse(VolumeSampledLitres < 0, NA, VolumeSampledLitres)) %>%
+  mutate(Density = Larv_per_jar/VolumeSampledLitres)

@@ -171,10 +171,7 @@ z=unique(Survey$Date)
 ```{r, results = "hide", fig.show="first", fig.align='center'}
 Map = Map %>%
   mutate(Vessel = substr(Region_name, 1, 2)) %>%
-  rename(Lon = Lon_S,
-         Lat = Lat_S,
-         Lon2 = Lon_E,
-         Lat2 = Lat_E)
+  rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
 
 a = ggplot(Map,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
