@@ -9,10 +9,10 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2022"
-surv.no = "6"
+surv.no = "4"
 ```
 
 ```{r setup, include=FALSE}
@@ -399,6 +399,7 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
   column_spec(3:5, background = "Grey", color= "White") %>%
   add_header_above(c(" "=2, "Current Year"=3, "Previous Year"=5), bold = TRUE, align = "l", underline=TRUE, font_size = 20)
 ```
+
 
 ```{r}
 Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
