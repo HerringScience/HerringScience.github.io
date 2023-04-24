@@ -40,6 +40,10 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
 
 #Tagging Data
 Tag = read_csv("TaggingEvents.csv") #Tagging Data
@@ -130,113 +134,182 @@ polySI = as.PolySet(SUA, projection="LL")
 
 #### Total
 
-::: row
-::: col-md-6
 ```{r echo=FALSE}
-colors = NULL
-colors = c("Biomass" = "darkgreen", "Three Year Avg" = "blue")
-ggplot(LRP2, aes(x=Year)) +
-  geom_line(aes(y=Biomass, colour = "Biomass")) +
-  geom_line(aes(y=ThreeYear, colour = "Three Year Avg")) +
-  geom_hline(yintercept = 317846, linetype = "longdash", size = 1, colour = "red") +
-  scale_y_continuous(labels=scales::comma) +
-  theme(axis.text.x = element_text(angle = 55)) +
-    labs(x = "Year",
-         y = "Biomass (mt)",
-         color = "Legend") +
-    scale_color_manual(values = colors)
+LRP2 %>% dplyr::select(Year, Biomass, LRP, ThreeYear) %>%
+  dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
+  dyOptions(drawPoints = TRUE, pointSize = 2) %>%
+  dyHighlight(highlightCircleSize = 5, 
+              highlightSeriesBackgroundAlpha = 0.8,
+              hideOnMouseOut = FALSE)
 ```
-:::
 
-::: col-md-6
 ```{r echo=FALSE}
 LRP3 = LRP2 %>%
   dplyr::select(Year, Scots, German, Seal, Biomass, LRP, ThreeYear="ThreeYear") %>%
   mutate(Difference = ThreeYear-LRP)
 
-LRP3 %>% 
-  dplyr::filter(!is.na(ThreeYear)) %>%
-  mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
-kbl(format = "html", escape = F) %>%
-  kable_paper("striped", full_width = F)
+LRP3 %>% arrange(desc(Year)) %>%
+  datatable(colnames = c("Year", "Scots Bay", "German Bank", "Seal Isl.", "Biomass (mt)", "LRP", "3yr Avg", "Difference"),
+  extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print'))) %>%
+  formatStyle(columns = "Difference", color = styleInterval(cuts = 0, values = c("red", "green")))
 ```
-:::
-:::
 
 #### Scots Bay
 
-::: row
-::: col-md-6
 ```{r}
-ggplot(data=LRP3, aes(x=Year, y=Scots)) +
-  geom_point() +
-  geom_path() +
-  scale_y_continuous(labels=scales::comma) +
-  theme(axis.text.x = element_text(angle = 55)) +
-  labs(x="Year", y = "Biomass (mt)")
+LRP3 %>% dplyr::select(Year, Scots) %>% 
+  dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
+  dyOptions(drawPoints = TRUE, pointSize = 2) %>%
+  dyHighlight(highlightCircleSize = 5, 
+              highlightSeriesBackgroundAlpha = 0.8,
+              hideOnMouseOut = FALSE)
 ```
-:::
 
-::: col-md-6
 ```{r echo=FALSE}
 LRP3 %>%
   dplyr::select(Year, Scots) %>%
-  kbl(format = "html", escape = F) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(width="40%", height = "400px")
+  arrange(desc(Year)) %>%
+  datatable(colnames = c("Year", "Scots Bay"),
+          extensions = 'Buttons',
+          options = list(
+            pagelength = 5,
+            dom = 'lfrtiBp',
+            buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
-:::
-:::
 
 #### German Bank
 
-::: row
-::: col-md-6
 ```{r}
-ggplot(data=LRP3, aes(x=Year, y=German)) +
-  geom_point() +
-  geom_path() +
-  scale_y_continuous(labels=scales::comma) +
-  theme(axis.text.x = element_text(angle = 55)) +
-  labs(x="Year", y = "Biomass (mt)")
+LRP3 %>% dplyr::select(Year, German) %>% 
+  dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
+  dyOptions(drawPoints = TRUE, pointSize = 2) %>%
+  dyHighlight(highlightCircleSize = 5, 
+              highlightSeriesBackgroundAlpha = 0.8,
+              hideOnMouseOut = FALSE)
 ```
-:::
 
-::: col-md-6
 ```{r echo=FALSE}
 LRP3 %>%
   dplyr::select(Year, German, Seal) %>%
-  kbl(format = "html", escape = F) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(width="60%", height = "400px")
+  arrange(desc(Year)) %>%
+  datatable(colnames = c("Year", "German Bank", "Seal Isl."),
+          extensions = 'Buttons',
+          options = list(
+            pagelength = 5,
+            dom = 'lfrtiBp',
+            buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
-:::
-:::
 
-### Annual SSB Estimates {.tabset}
+### Total SSB Summaries {.tabset}
 
-#### Scots Bay {.tabset .tabset-pills}
+#### Total
 
-##### Total
+```{r echo=FALSE}
+Plot_Summary = SSB %>%
+  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
+  filter(!is.na(DFO_Turnover_Adjusted)) %>%
+  group_by(Year) %>%
+  summarize(Biomass = sum(DFO_Turnover_Adjusted), na.rm = FALSE)
 
-```{r echo=FALSE, fig.align='center'}
-ggplot(data=subset(SSB, Ground == "Scots Bay"),  aes(x=Year, y=DFO_Turnover_Adjusted)) +
+p = ggplot(data=Plot_Summary,  aes(x=Year, y=Biomass)) +
+  geom_col(fill = "darkblue") +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x="Year", y = "DFO Estimate w/ Turnover") +
+  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
+
+ggplotly(p)
+```
+
+```{r echo=FALSE}
+Table = SSB %>%
+  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
+  group_by(Year) %>%
+  summarize(HSC_Estimate = sum(HSC_Estimate),
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
+            DFO_Estmate = sum(DFO_Estimate),
+            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
+  arrange(desc(Year))
+
+datatable(Table, 
+          colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover"), 
+          extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+```
+
+#### Scots Bay
+
+```{r echo=FALSE}
+p = ggplot(data=subset(SSB, Ground == "Scots Bay"),  aes(x=Year, y=DFO_Turnover_Adjusted, fill= Survey_Number)) +
   geom_col() +
   scale_y_continuous(labels=scales::comma) +
   labs(x="Year", y = "DFO Estimate w/ Turnover") +
   theme(axis.text.x = element_text(angle = 55), legend.position = "none")
+
+ggplotly(p)
 ```
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE}
 Table = SSB %>%
   filter(Ground == "Scots Bay") %>%
+  group_by(Year) %>%
+  summarize(HSC_Estimate = sum(HSC_Estimate),
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
+            DFO_Estmate = sum(DFO_Estimate),
+            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
+  ungroup() %>%
   arrange(desc(Year))
 
-kbl(Table, col.names=c("Year", "Ground", "Survey #", "Survey Date", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover")) %>%
-  kable_paper("striped") %>%
-  scroll_box(width="100%", height = "400px")
+datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover"),
+          extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+
 ```
 
+
+#### German Bank
+
+```{r echo=FALSE}
+p = ggplot(data=subset(SSB, Ground == "German Bank"),  aes(x=Year, y=DFO_Turnover_Adjusted, fill= Survey_Number)) +
+  geom_col() +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x="Year", y = "DFO Estimate w/ Turnover") +
+  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
+
+ggplotly(p)
+```
+
+```{r echo=FALSE}
+Table = SSB %>%
+  filter(Ground == "German Bank") %>%
+  group_by(Year) %>%
+  summarize(HSC_Estimate = sum(HSC_Estimate),
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
+            DFO_Estmate = sum(DFO_Estimate),
+            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
+  ungroup() %>%
+  arrange(desc(Year))
+
+datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover"),
+          extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+```
+
+### Annual SSB Estimates {.tabset}
+
+#### Scots Bay {.tabset .tabset-pills}
 
 ```{r, results = "asis", fig.align='center'}
 DFOSSB = SSB %>% dplyr::select(Year, Ground, Survey_Number, DFO_Turnover_Adjusted)
@@ -257,27 +330,6 @@ for(i in unique(SSB$Year)) {
 
 #### German Bank {.tabset .tabset-pills}
 
-##### Total
-
-```{r echo=FALSE, fig.align='center'}
-ggplot(data=subset(SSB, Ground == "German Bank"),  aes(x=Year, y=DFO_Turnover_Adjusted)) +
-  geom_col() +
-  scale_y_continuous(labels=scales::comma) +
-  labs(x="Year", y = "DFO Estimate w/ Turnover") +
-  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
-```
-
-```{r echo=FALSE, fig.align='center'}
-Table = SSB %>%
-  filter(Ground == "German Bank") %>%
-  arrange(desc(Year))
-
-kbl(Table, col.names=c("Year", "Ground", "Survey #", "Survey Date", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover")) %>%
-  kable_paper("striped") %>%
-  scroll_box(width="100%", height = "400px")
-```
-
-
 ```{r, results = "asis", fig.align='center'}
 DFOSSB = SSB %>% dplyr::select(Year, Ground, Survey_Number, DFO_Turnover_Adjusted)
 for(i in unique(SSB$Year)) {
@@ -294,114 +346,6 @@ for(i in unique(SSB$Year)) {
   cat("\n")
 }
 ```
-
-### Total SSB Summaries {.tabset}
-
-#### Total
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-Plot_Summary = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
-  filter(!Year == "2016")
-
-ggplot(data=Plot_Summary,  aes(x=Year, y=DFO_Turnover_Adjusted)) +
-  geom_col() +
-  scale_y_continuous(labels=scales::comma) +
-  labs(x="Year", y = "DFO Estimate w/ Turnover") +
-  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-Table = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
-  group_by(Year) %>%
-  summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
-            DFO_Estmate = sum(DFO_Estimate),
-            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted))
-
-kbl(Table, col.names=c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover")) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(width="100%", height = "400px")
-```
-:::
-:::
-
-#### Scots Bay
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-Plot_Summary = SSB %>%
-  filter(Ground == "Scots Bay") %>%
-  filter(!Year == "2016")
-
-ggplot(data=Plot_Summary,  aes(x=Year, y=DFO_Turnover_Adjusted)) +
-  geom_col() +
-  scale_y_continuous(labels=scales::comma) +
-  labs(x="Year", y = "DFO Estimate w/ Turnover") +
-  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-Table = SSB %>%
-  filter(Ground == "Scots Bay") %>%
-  group_by(Year) %>%
-  summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
-            DFO_Estmate = sum(DFO_Estimate),
-            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
-  ungroup() %>%
-  arrange(desc(Year))
-
-kbl(Table, col.names=c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover")) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(width="100%", height = "400px")
-```
-:::
-:::
-
-#### German Bank
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-Plot_Summary = SSB %>%
-  filter(Ground == "German Bank") %>%
-  filter(!Year == "2016")
-
-ggplot(data=Plot_Summary,  aes(x=Year, y=DFO_Turnover_Adjusted)) +
-  geom_col() +
-  scale_y_continuous(labels=scales::comma) +
-  labs(x="Year", y = "DFO Estimate w/ Turnover") +
-  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-Table = SSB %>%
-  filter(Ground == "German Bank") %>%
-  group_by(Year) %>%
-  summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
-            DFO_Estmate = sum(DFO_Estimate),
-            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
-  ungroup() %>%
-  arrange(desc(Year))
-
-kbl(Table, col.names=c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover")) %>%
-  kable_paper("striped", full_width = F) %>%
-  scroll_box(width="100%", height = "400px")
-```
-:::
-:::
 
 ## Tagging Project
 
@@ -2176,13 +2120,18 @@ CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
 out <- gIntersection(NBNS, CP, byid=TRUE)
 
-library(leaflet)
-
 pal <- colorNumeric(
   palette = "Reds",
   domain = FatData$Fat)
 
-leaflet(FatData) %>% addCircles(color=~pal(Fat), popup = ~as.character(Fat)) %>% addProviderTiles(providers$CartoDB.Positron) %>% clearBounds()
+leaflet(FatData, options = leafletOptions(preferCanvas = TRUE)) %>% 
+  addCircles(data = subset(FatData, Lat > 40 & Lat < 47), color=~pal(Fat), popup = ~as.character(Fat)) %>%
+  addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(updateWhenZooming = FALSE, updateWhenIdle = TRUE)) %>%
+  clearBounds() %>%
+  addLegend("bottomright", pal = pal, values = ~Fat,
+    title = "Fat Percent (%)",
+    labFormat = labelFormat(suffix = "%"),
+    opacity = 1)
 ```
 
 ##### August
