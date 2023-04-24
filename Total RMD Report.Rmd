@@ -39,6 +39,7 @@ library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
+library(DT)
 
 #Tagging Data
 Tag = read_csv("TaggingEvents.csv") #Tagging Data
@@ -156,7 +157,7 @@ LRP3 = LRP2 %>%
 LRP3 %>% 
   dplyr::filter(!is.na(ThreeYear)) %>%
   mutate(Difference = cell_spec(Difference, "html", color = ifelse(Difference > 0, "green", "red"))) %>%
-  kbl(format = "html", escape = F) %>%
+kbl(format = "html", escape = F) %>%
   kable_paper("striped", full_width = F)
 ```
 :::
@@ -2175,14 +2176,13 @@ CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
 out <- gIntersection(NBNS, CP, byid=TRUE)
 
-FatData %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
+library(leaflet)
+
+pal <- colorNumeric(
+  palette = "Reds",
+  domain = FatData$Fat)
+
+leaflet(FatData) %>% addCircles(color=~pal(Fat), popup = ~as.character(Fat)) %>% addProviderTiles(providers$CartoDB.Positron) %>% clearBounds()
 ```
 
 ##### August
