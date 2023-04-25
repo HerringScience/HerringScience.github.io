@@ -227,6 +227,7 @@ ggplotly(p)
 ```{r echo=FALSE}
 Table = SSB %>%
   filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
+  filter(!is.na(DFO_Turnover_Adjusted)) %>%
   group_by(Year) %>%
   summarize(HSC_Estimate = sum(HSC_Estimate),
             HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
@@ -1748,7 +1749,119 @@ Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) +
   labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
 ```
 
-## Fat Project {.tabset}
+## Fat Project 
+
+### Spatial Analysis
+
+#### By Ground {.tabset .tabset-pills}
+
+##### Total
+
+```{r}
+can<-getData('GADM', country="CAN", level=1)
+us = getData('GADM', country = "USA", level = 1)
+can1 = rbind(can,us)
+NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine", "New Hampshire", "Massachusetts", "Connecticut", "Rhode Island", "New York", "Vermont", "New Jersey"),]
+
+CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
+proj4string(CP) <- CRS(proj4string(NBNS))
+out <- gIntersection(NBNS, CP, byid=TRUE)
+
+pal <- colorNumeric(
+  palette = "Reds",
+  domain = FatData$Fat)
+
+leaflet(FatData, options = leafletOptions(preferCanvas = TRUE)) %>% 
+  addCircles(data = subset(FatData, Lat > 40 & Lat < 47), color=~pal(Fat), popup = ~as.character(Fat)) %>%
+  addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(updateWhenZooming = FALSE, updateWhenIdle = TRUE)) %>%
+  clearBounds() %>%
+  addLegend("bottomright", pal = pal, values = ~Fat,
+    title = "Fat Percent (%)",
+    labFormat = labelFormat(suffix = "%"),
+    opacity = 1)
+```
+
+##### August
+```{r}
+FatData %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Month == "8"), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom')
+```
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+  
+FatData2 = FatData %>% filter(Year == i)
+ 
+print(FatData2 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData2, Lat < 46 & Lat > 40), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom'))
+
+  cat("\n")
+}
+```
+
+#### By Latitude {.tabset .tabset-pills}
+
+##### Total
+
+```{r}
+library(scales)
+FatData %>%
+  filter(!is.na(Lat)) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)")
+```
+
+##### August
+
+```{r}
+FatData %>%
+  filter(!is.na(Lat)) %>%
+  filter(Month == "8") %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)")
+```
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+  
+FatData2 = FatData %>% filter(Year == i) %>% filter(!is.na(Lat))
+ 
+print(FatData2 %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+  cat("\n")
+}
+```
 
 ### By Year {.tabset .tabset-pills}
 
@@ -2015,198 +2128,3 @@ FatDataSum %>%
 ```
 :::
 :::
-
-### Spatial Analysis
-
-#### By Latitude {.tabset .tabset-pills}
-
-##### Total
-
-```{r}
-library(scales)
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### August
-
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Month == "8") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### 2022
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Year == "2022") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### 2021
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Year == "2021") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### 2020
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Year == "2020") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### 2018
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Year == "2018") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-##### 2017
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Year == "2017") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
-
-#### By Ground {.tabset .tabset-pills}
-
-##### Total
-
-```{r}
-can<-getData('GADM', country="CAN", level=1)
-us = getData('GADM', country = "USA", level = 1)
-can1 = rbind(can,us)
-NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine", "New Hampshire", "Massachusetts", "Connecticut", "Rhode Island", "New York", "Vermont", "New Jersey"),]
-
-CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
-
-pal <- colorNumeric(
-  palette = "Reds",
-  domain = FatData$Fat)
-
-leaflet(FatData, options = leafletOptions(preferCanvas = TRUE)) %>% 
-  addCircles(data = subset(FatData, Lat > 40 & Lat < 47), color=~pal(Fat), popup = ~as.character(Fat)) %>%
-  addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(updateWhenZooming = FALSE, updateWhenIdle = TRUE)) %>%
-  clearBounds() %>%
-  addLegend("bottomright", pal = pal, values = ~Fat,
-    title = "Fat Percent (%)",
-    labFormat = labelFormat(suffix = "%"),
-    opacity = 1)
-```
-
-##### August
-```{r}
-FatData %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Month == "8"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
-
-##### 2022
-```{r}
-FatData %>%
-  filter(Year == "2022") %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Year == "2022"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
-
-##### 2021
-```{r}
-FatData %>%
-  filter(Year == "2021") %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Year == "2021"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
-
-##### 2020
-```{r}
-FatData %>%
-  filter(Year == "2020") %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Year == "2020"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
-
-##### 2018
-```{r}
-FatData %>%
-  filter(Year == "2018") %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Year == "2018"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
-
-##### 2017
-```{r}
-FatData %>%
-  filter(Year == "2017") %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Year == "2017"), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom')
-```
