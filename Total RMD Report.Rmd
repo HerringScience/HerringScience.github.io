@@ -86,7 +86,7 @@ FatData = read_csv("Total Fat Data.csv")
 Larval = read_csv("Full Larval.csv")
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
-Larval$surv.No <- as.factor(Larval$surv.No)
+Larval$Survey.No <- as.factor(Larval$Survey.No)
 
 #Land Data
 can<-getData('GADM', country="CAN", level=1)
@@ -1495,7 +1495,7 @@ ggplot(data = CTD, aes(x=Lon, y=Lat)) +
 #### Total
 
 ```{r echo=FALSE, fig.align='center'}
-Larval %>% ggplot(aes(y=Lengthmm, x=JulianCollect, colour = Year)) + 
+Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
   geom_point() +
   labs(y="Length (mm)", x="Julian Date of Collection")
 
@@ -1529,13 +1529,13 @@ print(ggplot(data = Larval1, (aes(Lengthmm))) +
   labs(x = "Length (mm)", y="Count"))
   cat("\n")
   
-print(ggplot(data=Larval1, aes(Lengthmm, colour = surv.No)) + 
+print(ggplot(data=Larval1, aes(Lengthmm, colour = Survey.No)) + 
   geom_freqpoly(bins=100, linewidth = 1) +
   labs(y="Count", x="Length (mm)"))
   cat("\n")
   
   Table = Larval1 %>% 
-  group_by(surv.No) %>%
+  group_by(Survey.No) %>%
   summarize(AvgLength = mean(Lengthmm),
             AvgSD = mean(SD),
             Abundance = n()) %>%
@@ -1552,7 +1552,7 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 
 
 ```{r echo=FALSE, fig.align='center'}
-ggplot(Larval, aes(JulianCollect, Lengthmm, colour = Year)) + 
+ggplot(Larval, aes(Julian, Lengthmm, colour = Year)) + 
   geom_jitter(size = 2) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1581,7 +1581,7 @@ for(i in unique(Larval$Year)) {
 
 Larval1 = Larval %>% filter(Year == i)
  
-print(ggplot(Larval1, aes(JulianCollect, Lengthmm)) + 
+print(ggplot(Larval1, aes(Julian, Lengthmm)) + 
   geom_jitter(size = 2) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1725,7 +1725,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 #### Density
 ```{r, fig.align='center'}
-ggplot(Larval, aes(LastLength, ..density.., colour = surv.No)) + 
+ggplot(Larval, aes(LastLength, ..density.., colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
   ggtitle("Growth applied to compare spawning modes") +
   labs(y="Density", x="Growth Rate Applied Length (mm)")
@@ -1734,7 +1734,7 @@ ggplot(Larval, aes(LastLength, ..density.., colour = surv.No)) +
 #### Count
 
 ```{r, fig.align='center'}
-ggplot(Larval, aes(LastLength, colour = surv.No)) + 
+ggplot(Larval, aes(LastLength, colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
   ggtitle("Growth applied to compare spawning modes") +
   labs(y="Count", x="Growth Rate Applied Length (mm)")
