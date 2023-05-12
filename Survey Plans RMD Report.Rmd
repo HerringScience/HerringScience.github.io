@@ -11,15 +11,15 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2022-01-01 20:00"
-surv.no = "6"
-Allocation = "150"
+surv.date = "2023-05-18 22:00"
+surv.no = "1"
+Allocation = "0"
 SIAllocation = "75"
-vessels = 8
-EVessel = "Morning Star"
+vessels = 3
+EVessel = NA
 NVessel = NA
 PlanktonVessel = "Lady Janice II"
-Tagging = c("Morning Star", "Lady Janice II", "Sealife II", "Tasha Marie")
+Tagging = NA
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
@@ -58,9 +58,11 @@ year = substr(surv.date, 1,4)
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/"))
 Plan = list.files(pattern = "*plan.csv") %>% 
   map_df(~read_csv(.))
+Plan = Plan %>% filter(!is.na(Vessel))
 
 Table = list.files(pattern = "*Table.csv") %>% 
   map_df(~read_csv(.))
+Table = Table %>% filter(!is.na(Vessel))
 
 #Land Data
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/"))
@@ -157,6 +159,10 @@ d=if(surv=="GB"){
 e=if(surv == "SB" & !is.na(EVessel) & is.na(NVessel)){
   paste(EVessel, "will run 4 lines in the East box, and all other vessels will be running 2 lines in the Main Survey Box")
 }
+
+f=if(!is.na(Tagging)){
+  paste("Tagging will be conducted from the ", Tagging, ".")
+}
 ```
 
 Vessels will complete the following lines: `r a` `r b` `r c` `r d` `r e`.
@@ -164,8 +170,6 @@ Vessels will complete the following lines: `r a` `r b` `r c` `r d` `r e`.
 The survey will have a start time of `r StartTime`. 
 
 The `r PlanktonVessel` will conduct plankton tows and oceanographic sampling. 
-
-Tagging with be conducted from the `r Tagging`.
 
 ```{r}
 c=if(surv=="SB"){
@@ -192,7 +196,9 @@ if(surv=="GB"){a = ggplot(Plan2, aes(x=X, y=Y)) +
 
 if(surv=="SB"){a = ggplot(Plan2, aes(x=X, y=Y)) + 
     geom_polygon(data=SBout,aes(x=long, y=lat, group=group), fill = "gray") + 
-    geom_segment(data=Plan2, aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size=1) + 
+    geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID),fill='white',col='black') +
+    geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID),fill='white',col='black') +
+    geom_segment(data=Plan2, aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size=1) +
     coord_map() + 
     labs(x=NULL, y=NULL, caption = "Figure 1. Survey lines to be completed by participating vessels.")}
 
@@ -233,7 +239,8 @@ if(surv=="GB"){
 ### Full Lines Table
 
 ```{r}
-kbl(Table) %>%
+Table %>%
+  kbl() %>%
   kable_paper("striped", full_width = F) 
 ```
 

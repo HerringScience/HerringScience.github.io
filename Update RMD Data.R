@@ -436,6 +436,8 @@ CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringSc
 CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
 SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
 
+#Larval Data
+
 larv = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Measurements.csv"))
 arc = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARC Data.csv"))
 arc = arc %>% dplyr::select(id, Larvae_Count, Notes)
@@ -444,7 +446,7 @@ survey = survey %>% mutate(Ground = substr(id,1,2))
 
 larv = left_join(larv, arc, by="id")
 larv = left_join(larv, survey)
-larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Month, Year, Day)
+larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, CTDAvgSalinity=AvgSalinity, Volume, Month, Year, Day)
 larv$Date = dmy(larv$Date)
 larv$Survey.No = as.factor(larv$Survey.No)
 larv$Year = as.factor(larv$Year)
@@ -512,6 +514,21 @@ larv = larv %>% group_by(Year) %>%
   mutate(DayDiff = last(Julian)-Julian) %>%
   mutate(LastLength = ifelse(DayDiff == 0, Lengthmm, ((DayDiff*0.24)+Lengthmm))) 
 
+#join CTD + larval data, filter temp and salinity to where depth = avg tow depth +/- 0.25m
+CTDLarval = CTD %>%
+  dplyr::select(Depth, Temperature, Salinity, Ground, Year, Survey.No=Survey) %>%
+  mutate(Ground = ifelse(Ground == "Scots Bay", "SB", "GB"),
+         Survey.No = as.factor(Survey.No)) %>%
+  left_join(larv, by=c("Ground", "Year", "Survey.No")) %>%
+  group_by(Year, Survey.No, Ground, id) %>%
+  summarize(Depth, Temperature, Salinity, AvgTowDepth) %>%
+  group_by(Year, Survey.No, Ground, id) %>%
+  filter(between(Depth, min(AvgTowDepth-0.25), min(AvgTowDepth+0.25))) %>%
+  summarize(CTDTemp = mean(Temperature),
+            CTDSalinity = mean(Salinity))
+
+larv = left_join(larv,CTDLarval)
+
 larv = larv %>%
-  dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, JulianMin, JulianMax, LastLength, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, X, Y, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp, Volume)
+  dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, JulianMin, JulianMax, LastLength, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, X, Y, TowTime, AvgTowDepth, MaxTowDepth, CTDTemp, CTDSalinity, Volume)
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
