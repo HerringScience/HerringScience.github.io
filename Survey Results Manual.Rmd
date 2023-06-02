@@ -1,0 +1,669 @@
+---
+title: "HSC Survey Results"
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+
+```{r, include=FALSE}
+rm(list = ls())
+
+#Change these options
+surv = "SB"
+surv2 = "Scots Bay"
+year = "2023"
+surv.no = "1"
+```
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+```
+
+```{r Data Import, include=FALSE}
+#Import all packages, CTD data, and land data
+
+#Packages
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data"))
+library(cli)
+library(lubridate)
+library(reprex)
+library(tidyverse)
+library(geosphere)
+library(reshape2)
+library(moderndive)
+library(skimr)
+library(ggridges)
+library(weathercan)
+library(GGally)
+library(psych)
+library(raster)
+library(PBSmapping)
+library(rgeos)
+library(knitr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(DT)
+
+#Survey Data
+Survey = read_csv("Survey Data.csv") #Survey Data
+Survey$Year = as.factor(Survey$Year)
+Survey$Ground = as.factor(Survey$Ground)
+
+#Tagging Data
+Tag = read_csv("TaggingEvents.csv") #Tagging Data
+polysT = read_csv("timGrounds.csv") #Coloured ground maps
+Tag$Year = as.factor(Tag$Year)
+Tag$Vessel = as.factor(Tag$Vessel)
+Tag$Survey = as.factor(Tag$Survey)
+Tag$Tagger = as.factor(Tag$Tagger)
+
+#CTD Data
+SST = read_csv("CTD SST.csv") #SST
+polysT = read_csv("timGrounds.csv") #coloured ground maps
+CTD = read_csv("CTD Full.csv") #All Data
+atDepth = read_csv("CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+SST$Year <- as.factor(SST$Year)
+SST$Month <- as.factor(SST$Month)
+atDepth$Year <- as.factor(atDepth$Year)
+atDepth$Month <- as.factor(atDepth$Month)
+CTD$Year <- as.factor(CTD$Year)
+CTD$Month <- as.factor(CTD$Month)
+CTD$Survey <- as.factor(CTD$Survey)
+CTD <- CTD %>%
+  mutate(Julian_factor = Julian)
+CTD$Julian_factor <- as.factor(CTD$Julian_factor)
+CTD2=CTD
+
+#SSB Data
+SSB = read_csv("SSB Estimates.csv")
+SSB$Year <- as.factor(SSB$Year)
+SSB$Survey_Number <- as.factor(SSB$Survey_Number)
+SSB$Ground <- as.factor(SSB$Ground)
+
+#Larval Data
+Larval = read_csv("Full Larval.csv")
+Larval$Year <- as.factor(Larval$Year)
+Larval$category <- as.factor(Larval$category)
+Larval$Survey.No <- as.factor(Larval$Survey.No)
+
+#Land Data
+can<-getData('GADM', country="CAN", level=1)
+us = getData('GADM', country = "USA", level = 1)
+can1 = rbind(can,us)
+NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+
+# Proper coordinates for German Bank
+GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
+proj4string(GBMap) <- CRS(proj4string(NBNS))
+GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+
+# Proper coordinates for Scots Bay
+SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
+proj4string(SBMap) <- CRS(proj4string(NBNS))
+SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+```
+
+```{r Box Import, include=FALSE}
+#Import All Boxes
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+boxes = read.csv("surveyBoxes.csv")
+
+# Scots Bay plankton and CTD box
+SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
+SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+
+# Scots Bay
+SUA = read.csv("polygon_SBEastern.csv")
+polyEastern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SBNorthern.csv")
+polyNorthern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SB.csv")
+polySB_main = as.PolySet(SUA, projection="LL")
+
+#German Bank CTD box
+GBCTD=boxes[which(boxes$Box == "GBocean"), ]
+
+# German Bank      
+SUA = read.csv("polygon_GB.csv")
+polyGB = as.PolySet(SUA, projection="LL")
+
+# Seal Island      
+SUA = read.csv("polygon_SI.csv")
+polySI = as.PolySet(SUA, projection="LL")
+```
+
+```{r Set Ground and Survey #, include=FALSE}
+Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
+Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
+CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
+current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
+
+Map = list.files(pattern = "Map*") %>% 
+  map_df(~read_csv(.))
+
+Region = list.files(pattern = "Region*") %>% 
+  map_df(~read_csv(.))
+
+Speed=read_csv("Speed.csv")
+Distance=read_csv("Distance.csv")
+SurveyTotal=read_csv("Performance Total.csv")
+#Results Tables
+tableB=read_csv("tableB.csv") %>% dplyr::select(-Distance)
+tableC=read_csv("tableC.csv")
+```
+
+```{r include=FALSE}
+x=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
+y=unique(Survey$Survey.No)
+z=unique(Survey$Date)
+```
+
+# `r x` Survey \# `r y` Results from `r z` {.tabset}
+
+## Survey Details
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+Map = Map %>%
+  mutate(Vessel = substr(Region_name, 1, 2)) %>%
+  rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
+
+Region = Region %>% 
+  mutate(Vessel = substr(Region_name, 1, 2)) %>%
+  rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
+
+a = ggplot(Region,aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
+  coord_map() + 
+  labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
+  theme(plot.caption = element_text(face="italic", hjust=0.5))
+
+b = ggplot(Region,aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
+  coord_map() + 
+  labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
+  theme(plot.caption = element_text(face="italic", hjust=0.5))
+
+  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+```
+
+```{r}
+a=unique(Survey$Vessel.No)
+b=unique(ifelse(Survey$Sample == "Y", "fishing", ifelse(Survey$Sample == "N", "non-fishing", "NA")))
+c=unique(Survey$Date)
+d=unique(Survey$StartTime)
+e=unique(Survey$EVessel)
+f=unique(Survey$NVessel)
+g=unique(ifelse(Survey$Ground == "GB", "two transects in the German Bank box and one transect in the Seal Island Box", 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "No", "two transects each in the Main Survey Box",
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
+         "NA"))))))
+h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted by ", unique(Survey$PlanktonVessel))))
+i=unique(ifelse(Survey$Ground == "GB", a, 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "No", a,
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", a-1, 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", a-1, 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", a-2,
+         "NA"))))))
+```
+
+`r a` commercial purse seiners conducted this `r b` survey on `r c` starting at `r d`.
+
+`r i` vessels ran the following lines: Morning Star ran one line in the Main Box and all lines in the Eastern Box, Fundy Monarch ran one line in the Main Box and three lines in the North Box, while Brunswick Provider and Sealife II both ran two lines in the Main Box.
+
+`r h`.
+
+```{r}
+Tag_Summary = Tag %>%
+  group_by(Date, Vessel, Lon, Lat) %>%
+  summarize(Tag_Count = n_distinct(Tag_Num))
+
+a=sum(Tag_Summary$Tag_Count)
+a=format(a, big.mark=",")
+b=length(unique(Tag_Summary$Lat))
+c=unique(first(Tag_Summary$Date))
+d=unique(last(Tag_Summary$Date))
+e=length(unique(Tag_Summary$Vessel))
+
+f=unique(ifelse(Survey$Sample == "Y", 
+                paste0("A total of ", a, " tags were applied during the survey over ", b, " events from ", c, " to ", d, " from ", e, " vessels."), 
+                "No tags were applied during this survey."))
+```
+
+`r f`
+
+```{r}
+a=unique(ifelse(Survey$Sample == "Y", 
+                "Samples were obtained for target strength estimation.", 
+                "Since no fish were caught, no samples were obtained for target strength estimation."))
+```
+
+`r a`
+
+### Tides Tables
+
+```{r, fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
+
+a = unique(ifelse(Survey$Ground == "GB", "Yarmouth NS, Station #365", "Margaretsville NS, Station #315"))
+```
+
+Tide Schedule for `r a`, Source: www.waterlevels.gc.ca
+
+### Acoustic Equipment
+
+Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer prior to the survey that contains a 38kHz split beam and 200 kHz single beam transducer. Data was logged to the computer hard-drive for post-processing. BP and FM were calibrated on 38kHz before the survey, while all NS vessels were uncalibrated.
+
+## Survey Results {.tabset}
+
+### Main Results
+
+```{r Biomass details}
+b=sum(tableC$`Biomass (tons)`)
+b=format(b, big.mark=(","), digits=2)
+c=as.numeric(tableC$Turnover)
+c=format(c, big.mark=(","), digits=2)
+d=tableC %>% filter(Layer == "Seal Island")
+d=d$'Biomass (tons)'
+d=format(d, big.mark=(","), digits=2)
+f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt."))
+f=f[1:1]
+```
+
+The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength. 
+
+**`r f`**
+
+```{r, fig.align='center'}
+ggplot(Map, aes(x=Lon, y=Lat)) + 
+  geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
+  labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
+```
+
+### Transect Details 
+
+```{r}
+TransDetails = SurveyTotal %>%
+  filter(Type == "Actual") %>%
+  dplyr::select(-Dist..km., -Type, -Survey) %>%
+  rename("Transect #" = Transect.No., "Date/Time Start" = Date.Time.Start, "Date/Time End" = Date.Time.End, "Start Lon" = Start.Lon, "Start Lat" = Start.Lat, "End Lon" = End.Lon, "End Lat" = End.Lat, "Distance (km)" = Distance) %>%
+  arrange(Vessel, "Transect #") %>%
+  dplyr::select(-Start, -End, -Duration, -Year, -Date)
+TransDetails$`Distance (km)`=round(TransDetails$`Distance (km)`, digits = 2)
+TransDetails$Speed=round(TransDetails$Speed, digits=2)
+TransDetails$`Start Lat`=round(TransDetails$`Start Lat`, digits=3)
+TransDetails$`Start Lon`=round(TransDetails$`Start Lon`, digits=3)
+TransDetails$`End Lat`=round(TransDetails$`End Lat`, digits=3)
+TransDetails$`End Lon`=round(TransDetails$`End Lon`, digits=3)
+
+kbl(TransDetails, caption="Table 1: Transect Details", align='c') %>%
+  kable_paper("striped") %>%
+  scroll_box(width="100%", height = "350px")
+```
+
+### Survey Summary
+
+```{r}
+table1 = tableB %>% arrange(desc(`Mean Sa (/m2)`)) 
+table1$`Mean Sa (/m2)`=round(table1$`Mean Sa (/m2)`, digits=3)
+table1$`Biomass Density (kg/m2)`=round(table1$`Biomass Density (kg/m2)`, digits=3)
+
+kbl(table1, caption="Table 2: Acoustic Survey Results", align = 'c') %>%
+  kable_paper("striped", full_width=F) %>%
+  footnote(general = "Transects are listed from greatest to least backscatter.")
+```
+
+```{r}
+table2 = tableC %>% 
+  mutate("Percent Area" = (`Area (km2)`/sum(`Area (km2)`)*100),
+         "Percent Biomass" = `Biomass (tons)`/sum(`Biomass (tons)`)*100)
+table2$`Percent Area` = round(table2$'Percent Area', digits = 1)
+table2$'Percent Biomass' = round(table2$'Percent Biomass', digits = 1)
+table2$`Density (kg/m2)` = round(table2$`Density (kg/m2)`, digits = 4)
+table2$`Mean Sa` = round(table2$`Mean Sa`, digits = 4)
+table2$`Standard Error (tons)` = round(table2$`Standard Error (tons)`, digits = 2)
+table2$`Standard Error (%)` = round(table2$`Standard Error (%)`, digits = 2)
+table2 = table2 %>% dplyr::select(Layer, "Target Strength", "Area (km2)", "Mean Sa", "Density (kg/m2)", "Biomass (tons)", "Percent Area", "Percent Biomass", "Standard Error (tons)", "Standard Error (%)")
+
+kbl(table2, caption="Table 3: Survey Summary Table", format.args=(list(big.mark=","))) %>%
+  kable_paper("striped", full_width=F)
+```
+
+### Greatest Backscatter
+
+```{r}
+PRC = Map %>%
+  slice_max(PRC_ABC)
+
+Dense = Region %>%
+  slice_max(Area_Backscatter_Strength)
+
+a = unique(PRC$Vessel)
+
+c = unique(Dense$Vessel)
+```
+
+```{r, fig.cap="The single point with the greatest backscatter", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRC_Snip.jpg"), rel_path = FALSE)
+```
+
+The single point with the largest backscatter density (PRC) was recorded by **`r a`**, at the following location:
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+a = ggplot() + 
+  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+b = ggplot() + 
+  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+```
+
+```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Density_Snip.jpg"), rel_path = FALSE)
+```
+
+The transect with the overall largest biomass was recorded by **`r c`**, at the following location:
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+a = ggplot() + 
+  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+b = ggplot() + 
+  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+```
+
+### Annual Summaries
+
+```{r}
+year = as.numeric(year)
+Annual_Compare1 = SSB %>%
+  filter(Year == year & Ground == surv2) %>%
+  dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
+
+Annual_Compare2 = SSB %>%
+  filter(Year == year-1 & Ground == surv2)
+
+Annual_Compare3 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number"))
+Annual_Compare4 = Annual_Compare3 %>%
+  rename("Survey Number" = Survey_Number, "Survey Date" = Survey_Date.x, "HSC Estimate" = HSC_Estimate.x, "HSC Turnover Adjusted" = HSC_Turnover_Adjusted.x, "Survey Date " = Survey_Date.y, "HSC Estimate " = HSC_Estimate.y, "HSC Turnover Adjusted " = HSC_Turnover_Adjusted.y, "DFO Estimate" = DFO_Estimate, "DFO Turnover Adjusted" = DFO_Turnover_Adjusted) %>%
+  dplyr::select(-Year.x, -Year.y)
+
+kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=list(big.mark=",")) %>%
+  kable_paper("striped") %>% 
+  column_spec(3:5, background = "Grey", color= "White") %>%
+  add_header_above(c(" "=2, "Current Year"=3, "Previous Year"=5), bold = TRUE, align = "l", underline=TRUE, font_size = 20)
+```
+
+
+```{r}
+Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
+  group_by(Year, Ground) %>%
+  summarize("HSC Estimate" = sum(HSC_Estimate),
+            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted),
+            "DFO Estimate" = sum(DFO_Estimate),
+            "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
+
+kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
+  kable_paper("striped", full_width=F)
+```
+
+## Tagging, Plankton, and CTD Data {.tabset}
+
+### Tag Data
+
+::: row
+::: col-md-6
+```{r, results = "hide", fig.show="first", fig.align='center'}
+      
+Tows_Sum = Survey %>%
+  group_by(id, PlanktonVessel) %>%
+  summarize(Lon=mean(Lon1, Lon2),
+            Lat=mean(Lat1, Lat2)) %>%
+  rename(Vessel = PlanktonVessel) %>%
+  mutate(Vessel = "Plankton Tow",
+         Tag_Count = 300) 
+  
+CTD_Sum = CTD %>%
+  group_by(ID) %>%
+  summarize(Lat = mean(Lat),
+            Lon = mean(Lon)) %>%
+  rename(Vessel = ID) %>%
+  mutate(Vessel = "CTD Cast",
+         Tag_Count = 300)
+
+Tag_Sum = Tag %>%
+  group_by(Lat, Lon, Vessel, Tagger) %>%
+  summarize(Tag_Count=n_distinct(Tag_Num),
+            Lat=mean(Lat),
+            Lon=mean(Lon))
+
+ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
+ScienceData2 = full_join(ScienceData, Tag_Sum)
+
+a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_point(aes(colour = Vessel, size = Tag_Count)) +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+b = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_point(aes(colour = Vessel, size = Tag_Count)) +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+```
+:::
+
+::: col-md-6
+```{r echo=FALSE, fig.align='center'}
+Tag_Sum = Tag_Sum %>%
+  group_by(Vessel) %>%
+  summarize(Tags = sum(Tag_Count))
+
+kbl(Tag_Sum)%>%
+  kable_paper("striped", full_width = F)
+```
+:::
+:::
+
+### Plankton Data
+
+#### Tow Summary Table
+
+```{r, Tow table}
+Plankton = Survey %>%
+  rename(Vessel = PlanktonVessel) %>%
+  dplyr::select(Vessel, id, Ground, Date, WindDirection, Swell, AirTemp, Time1, Time2, Lat1, Lat2, Lon1, Lon2, AvgTowDepth, Speed, Heading, TideDirection, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DepthDiscD, DepthDiscA) %>%
+  rename("Set Number" = id, "Wind Direction (km/h)" = WindDirection, "Swell (m)" = Swell, "Air Temp (c)" = AirTemp, "Tow Start" = Time1, "Tow End" = Time2, "Start Lat" = Lat1, "End Lat" = Lat2, "Start Lon" = Lon1, "End Lon" = Lon2, "Avg Tow Depth (m)" = AvgTowDepth, "Tide Direction" = TideDirection, "Flow Start" = FlowReading1, "Flow End" = FlowReading2, "No. Revolutions" = NoRevs, "Distance (m)" = DistanceCalc, "Secchi Disappear (m)" = DepthDiscD, "Secchi Reappear (m)" = DepthDiscA)
+
+Plankton = t(Plankton)
+
+kbl(Plankton) %>%
+  kable_paper("striped") %>%
+  add_header_above(c("", "Tow 1", "Tow 2")) %>%
+  pack_rows("Base Details", 1, 7) %>%
+  pack_rows("Tow Details", 8, 17) %>%
+  pack_rows("Other Data Collection", 18, 24)
+```
+
+```{r}
+a=first(Survey$id)
+b=Survey %>% slice(1L) 
+c=b$TideDirection
+d=b$AvgTowDepth
+e=last(Survey$id)
+f=Survey %>% slice(2L) 
+g=unique(f$TideDirection)
+h=unique(f$AvgTowDepth)
+```
+
+#### Tow Depth Profiles
+
+::: row
+::: col-md-6
+```{r, fig.cap="Plankton tow depth profile #1", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 1.jpg"), rel_path = FALSE)
+```
+:::
+
+::: col-md-6
+```{r, fig.cap="Plankton tow depth profile #2", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 2.jpg"), rel_path = FALSE)
+```
+:::
+:::
+
+The first tow is `r a`, which was `r c` the tide and had an average depth of `r d`m. The second tow is `r e`, which was `r g` the tide and had an average depth of `r h`m.
+
+#### Captured plankton
+
+```{r, fig.cap="Captured plankton from the surface tows", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Plankton.jpg"), rel_path = FALSE)
+```
+
+### CTD Data
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+geom_path(size = 1.5) + 
+scale_y_reverse() + 
+labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
+
+b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+geom_path(size = 1.5) + 
+scale_y_reverse() + 
+labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
+
+ifelse(Survey$Ground == "SB", plot(a), plot(b))
+
+c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
+```
+
+CTD depth profiles for all `r year` `r c` surveys so far.
+
+#### Sea surface temperatures
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+a=ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
+  geom_point() + 
+  geom_line() +
+  ylab("Average Sea Surface Temperature") +
+  xlab("Julian Day")
+
+b=ggplot(data = subset(SST, Ground == "German Bank" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
+  geom_point() + 
+  geom_line() +
+  ylab("Average Sea Surface Temperature") +
+  xlab("Julian Day")
+
+ifelse(Survey$Ground == "SB", plot(a), plot(b))
+
+c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
+
+```
+
+Annual average sea surface temperatures (SST) for `r c`.
+
+## Vessel Performance {.tabset}
+
+### Speed
+
+```{r}
+Vessel_Speed = Speed %>%
+  group_by(Vessel) %>%
+  summarize(AvgSpeed = mean(Speed))
+
+ggplot(Vessel_Speed, aes(Vessel, AvgSpeed)) + geom_boxplot() + ylab("Speed (knots)") + theme_light() + geom_hline(yintercept=8, linetype="dashed", color="red", size=1)
+
+ggplot(Speed, aes(Vessel, Speed)) + geom_col(aes(fill = Transect)) + facet_wrap(~Transect) + theme_light() + geom_hline(yintercept=8, linetype="dashed", color="red", size=1)+labs(title="Speed per Transect") + xlab("Vessel") + ylab("Speed (knots)") + coord_cartesian(ylim = c(7, 10))
+
+```
+
+```{r}
+Vessel_Speed = Vessel_Speed %>%
+  summarize(AvgSpeed = mean(AvgSpeed))
+
+a=ifelse(Vessel_Speed$AvgSpeed > 8, paste0("Average vessel speed was ", round(Vessel_Speed$AvgSpeed, digits=2), ". This is above the 8 knot requirement; vessels are urged to slow down to prevent backscatter noise from interfering with the acoustic data."), paste0("The vessels performed well and the average vessel speed was ", round(Vessel_Speed$AvgSpeed, digits=2), " which is below the requirements of 8 knots."))
+```
+
+`r a`
+
+### Distance
+
+```{r, fig.align='center'}
+Distance = Distance %>%
+  filter(Difference < 40) %>%
+  filter(Difference > 0)
+
+ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() + 
+  ylab("Distance cut from Planned Lines (KM)") + 
+  theme_light() + 
+  geom_hline(yintercept=0, linetype="dashed", color="red", size=1)
+
+```
+
+```{r, fig.align='center'}
+Distance_Cut = Distance %>%
+  filter(Difference > 0) %>%
+  ungroup() %>%
+  summarize(Cut = sum(Difference))
+
+a=ifelse(Distance_Cut$Cut > 2, "More than 2km of distance was cut from the planned lines; vessels are reminded to complete their assigned lines straight and without deviating or cutting corners short.", "No significant distance was cut from the planned lines; vessels covered the planned area well.")
+```
+
+`r a`

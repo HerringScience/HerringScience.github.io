@@ -14,9 +14,9 @@ NorthVessel = "FM" #set NA if none
 EastVessel = "MS" #set NA if none
 
 #Area and TS values
-SB1= 640 #SB main area
-SB2= 77 #SB north area
-SB3= 115 #SB east area
+SB1= 664 #SB main area
+SB2= 81 #SB north area
+SB3= 127 #SB east area
 
 TS1 = -35.5 #TS38
 
@@ -262,7 +262,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 ###Performance data import and filtering###
-actual = tableA
+actual = A
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
@@ -276,12 +276,12 @@ Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist.
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
   mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
   mutate(Duration = as.numeric(End-Start)*60) %>%
-  mutate(Speed = (Distance*1000)/(Duration*60))
+  mutate(Speed = (Distance*1000)/(Duration))
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
 
-#summarize speed by Transect 1 + 2 (remove any box runners)
+#summarize speed by Transect
 Speed<-Perform %>%
   dplyr::group_by(Vessel, Transect.No.) %>%
   dplyr::summarize(Speed = mean(Speed, na.rm = TRUE)) %>%

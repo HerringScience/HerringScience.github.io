@@ -7,9 +7,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-## Global options
-year= "2022" #Change global/current year here
-
+year= substr(Sys.Date(),1,4)
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 ```
@@ -2050,8 +2048,11 @@ pal <- colorNumeric(
   palette = "Reds",
   domain = FatData$Fat)
 
-leaflet(FatData, options = leafletOptions(preferCanvas = TRUE)) %>% 
-  addCircles(data = subset(FatData, Lat > 40 & Lat < 47), color=~pal(Fat), popup = ~as.character(Fat)) %>%
+FatDataSum = FatData %>%
+  group_by(Date, Lat, Lon) %>%
+  summarize(Fat = mean(Fat))
+leaflet(FatDataSum, options = leafletOptions(preferCanvas = TRUE)) %>% 
+  addCircles(data = subset(FatDataSum, Lat > 40 & Lat < 47), color=~pal(Fat), popup = ~as.character(Fat)) %>%
   addProviderTiles(providers$CartoDB.Positron, options = providerTileOptions(updateWhenZooming = FALSE, updateWhenIdle = TRUE)) %>%
   clearBounds() %>%
   addLegend("bottomright", pal = pal, values = ~Fat,

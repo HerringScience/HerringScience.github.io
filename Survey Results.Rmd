@@ -9,10 +9,10 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
-year = "2022"
-surv.no = "4"
+surv = "SB"
+surv2 = "Scots Bay"
+year = "2023"
+surv.no = "1"
 ```
 
 ```{r setup, include=FALSE}
@@ -88,7 +88,7 @@ SSB$Ground <- as.factor(SSB$Ground)
 Larval = read_csv("Full Larval.csv")
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
-Larval$surv.No <- as.factor(Larval$surv.No)
+Larval$Survey.No <- as.factor(Larval$Survey.No)
 
 #Land Data
 can<-getData('GADM', country="CAN", level=1)
@@ -174,7 +174,11 @@ Map = Map %>%
   mutate(Vessel = substr(Region_name, 1, 2)) %>%
   rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
 
-a = ggplot(Map,aes(x=Lon, y=Lat)) + 
+Region = Region %>% 
+  mutate(Vessel = substr(Region_name, 1, 2)) %>%
+  rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
+
+a = ggplot(Region,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -184,7 +188,7 @@ a = ggplot(Map,aes(x=Lon, y=Lat)) +
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
   theme(plot.caption = element_text(face="italic", hjust=0.5))
 
-b = ggplot(Map,aes(x=Lon, y=Lat)) + 
+b = ggplot(Region,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -235,9 +239,13 @@ b=length(unique(Tag_Summary$Lat))
 c=unique(first(Tag_Summary$Date))
 d=unique(last(Tag_Summary$Date))
 e=length(unique(Tag_Summary$Vessel))
+
+f=unique(ifelse(Survey$Sample == "Y", 
+                paste0("A total of ", a, " tags were applied during the survey over ", b, " events from ", c, " to ", d, " from ", e, " vessels."), 
+                "No tags were applied during this survey."))
 ```
 
-A total of `r a` tags were applied during the survey over `r b` events from `r c` to `r d`, from `r e` vessels.
+`r f`
 
 ```{r}
 a=unique(ifelse(Survey$Sample == "Y", 
@@ -267,10 +275,9 @@ Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer
 ### Main Results
 
 ```{r Biomass details}
-a=tableC %>% filter(Layer == "German Bank" | Layer == "Scots Bay" | Layer == "Main Box" | Layer == "Eastern Box" | Layer == "Northern Box")
-b=a$`Biomass (tons)`
+b=sum(tableC$`Biomass (tons)`)
 b=format(b, big.mark=(","), digits=2)
-c=as.numeric(a$Turnover)
+c=as.numeric(tableC$Turnover)
 c=format(c, big.mark=(","), digits=2)
 d=tableC %>% filter(Layer == "Seal Island")
 d=d$'Biomass (tons)'
@@ -344,34 +351,65 @@ kbl(table2, caption="Table 3: Survey Summary Table", format.args=(list(big.mark=
 PRC = Map %>%
   slice_max(PRC_ABC)
 
+Dense = Region %>%
+  slice_max(Area_Backscatter_Strength)
+
 a = unique(PRC$Vessel)
+
+c = unique(Dense$Vessel)
 ```
 
 ```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Snip.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRC_Snip.jpg"), rel_path = FALSE)
 ```
 
-The largest backscatter was seen by **`r a`**, at the following location:
+The single point with the largest backscatter density (PRC) was recorded by **`r a`**, at the following location:
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
-a = ggplot(PRC,aes(x=Lon, y=Lat)) + 
+a = ggplot() + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(colour = Vessel, size = 400)) +
+  geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
   guides(size="none") +
   coord_map() + 
   labs(x=NULL, y=NULL)
 
-b = ggplot(PRC,aes(x=Lon, y=Lat)) + 
+b = ggplot() + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(colour = Vessel, size = 400)) +
+  geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+```
+
+```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Density_Snip.jpg"), rel_path = FALSE)
+```
+
+The transect with the overall largest biomass was recorded by **`r c`**, at the following location:
+
+```{r, results = "hide", fig.show="first", fig.align='center'}
+a = ggplot() + 
+  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
+  guides(size="none") +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
+
+b = ggplot() + 
+  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   guides(size="none") +
   coord_map() + 
   labs(x=NULL, y=NULL)
@@ -423,16 +461,20 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 ```{r, results = "hide", fig.show="first", fig.align='center'}
       
 Tows_Sum = Survey %>%
-  rename("Plankton Tow" = PlanktonVessel) %>%
-  group_by(id, "Plankton Tow") %>%
+  group_by(id, PlanktonVessel) %>%
   summarize(Lon=mean(Lon1, Lon2),
-            Lat=mean(Lat1, Lat2))
-
+            Lat=mean(Lat1, Lat2)) %>%
+  rename(Vessel = PlanktonVessel) %>%
+  mutate(Vessel = "Plankton Tow",
+         Tag_Count = 300) 
+  
 CTD_Sum = CTD %>%
   group_by(ID) %>%
   summarize(Lat = mean(Lat),
             Lon = mean(Lon)) %>%
-  rename("CTD Cast" = ID)
+  rename(Vessel = ID) %>%
+  mutate(Vessel = "CTD Cast",
+         Tag_Count = 300)
 
 Tag_Sum = Tag %>%
   group_by(Lat, Lon, Vessel, Tagger) %>%
@@ -440,27 +482,26 @@ Tag_Sum = Tag %>%
             Lat=mean(Lat),
             Lon=mean(Lon))
 
-a = ggplot(CTD_Sum,aes(x=Lon, y=Lat)) + 
+ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
+ScienceData2 = full_join(ScienceData, Tag_Sum)
+
+a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(data=Tag_Sum, aes(colour = Vessel, size=Tag_Count)) +
-  geom_point(data=CTD_Sum, aes(colour = "CTD Cast", size = 300)) +
-  geom_point(data=Tows_Sum, aes(colour = "Plankton Tow", size = 300)) +
+  geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
   labs(x=NULL, y=NULL)
 
-b = ggplot(CTD_Sum,aes(x=Lon, y=Lat)) + 
+b = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(data=Tag_Sum, aes(colour = Vessel, size=Tag_Count)) +
-  geom_point(data=CTD_Sum, aes(colour = "CTD Cast", size = 300)) +
-  geom_point(data=Tows_Sum, aes(colour = "Plankton Tow", size = 300)) +
+  geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
   labs(x=NULL, y=NULL)
 
@@ -538,12 +579,12 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 ### CTD Data
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
-a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == "2022"), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
 
-b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == "2022"), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
@@ -553,7 +594,7 @@ ifelse(Survey$Ground == "SB", plot(a), plot(b))
 c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
 ```
 
-CTD depth profiles for all 2022 `r c` surveys so far.
+CTD depth profiles for all `r year` `r c` surveys so far.
 
 #### Sea surface temperatures
 
