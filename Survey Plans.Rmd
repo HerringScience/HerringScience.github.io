@@ -11,15 +11,15 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-06-05 21:00"
+surv.date = "2023-06-06 21:00"
 surv.no = "2"
-Allocation = "TBD" #set to "0" for a non-fishing survey
+Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "75"
-vessels = 7
+vessels = 6
 EVessel = "Tasha Marie"
 NVessel = "Brunswick Provider"
 PlanktonVessel = "Morning Star"
-Tagging = NA
+Tagging = "Sealife II, Tasha Marie, and Morning Star" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
@@ -170,6 +170,8 @@ Vessels will complete the following lines: `r a` `r b` `r c` `r d` `r e`.
 The survey will have a start time of `r StartTime`. 
 
 The `r PlanktonVessel` will conduct plankton tows and oceanographic sampling. 
+
+`r f`
 
 ```{r}
 c=if(surv=="SB"){
