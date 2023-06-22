@@ -5,17 +5,17 @@ rm(list = ls())
 surv="SB"
 surv2="Scots Bay"
 year="2023"
-surv.no="1"
+surv.no="2"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
-ids = c("FM", "MS", "SL", "BP")
-NorthVessel = "FM" #set NA if none
-EastVessel = "MS" #set NA if none
+ids = c("C1", "FM", "LJ", "LM", "MS", "SL") #only main box vessels
+NorthVessel = "BP" #set NA if none
+EastVessel = "TM" #set NA if none
 
 #Area and TS values
 SB1= 664 #SB main area
-SB2= 81 #SB north area
+SB2= 87 #SB north area
 SB3= 127 #SB east area
 
 TS1 = -35.5 #TS38
@@ -33,6 +33,7 @@ SB_y = 0.364102758434224
 SB_x_var = 0.436969270679439
 SB_days = 29
 
+library(rlang)
 library(cli)
 library(lubridate)
 library(reprex)
@@ -233,33 +234,56 @@ if(surv=="GB"){
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
 
 ###Turnover Calc###
+SSB = read.csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = SSB %>% filter(Year == year) %>% dplyr::select(Date = Survey_Date, Biomass = HSC_Estimate, Ground)
+SSB = distinct(SSB)
 
 #SB and GB turnover calculation
 if(surv == "GB"){
   y_intercept = GB_y
   x_Var_1 = GB_x_var
   daysturnover = GB_days
-  Bio = C %>% filter(Layer == "German Bank")
+  SSB = SSB %>% filter(Ground == "German Bank")
 }
+
 if(surv == "SB"){
   y_intercept =  SB_y
   x_Var_1 = SB_x_var
   daysturnover = SB_days
-  Bio = C %>% filter(Layer == "Scots Bay" | Layer == "Main Box" | Layer == "Eastern Box" | Layer == "Northern Box")
+  SSB = SSB %>% filter(Ground == "Scots Bay")
 }
 
-resultsa$Date <-
-  as.Date(substr(resultsa$Date_Time_S, 0, 10))
-Date <- resultsa$Date
-Survey <- 1:length(resultsa$Date)
-Biomass <- resultsa$trans_biomass
-
+SSB$Date = as.Date(SSB$Date)
+resultsa$Date = as.Date(substr(resultsa$Date_Time_S, 0, 10))
+Date = first(resultsa$Date)
+Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass)
+Current = tibble(Date, Biomass, surv2)
+Current = Current %>% dplyr::select(Date, Biomass, Ground = surv2) %>% mutate(Current = "Y")
+Surveys = full_join(Current, SSB)
+Surveys = Surveys %>% arrange(Date)
+Date = Surveys$Date
+Survey = 1:length(Surveys$Date)
+Biomass = Surveys$Biomass
 TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
+Previous = Surveys %>% filter(is.na(Current))
+Previous = sum(Previous$Biomass)
+Turnover = TurnBio-Previous
 
 #Add it to Table C
-C$Turnover = TurnBio
+C$Turnover = Turnover
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
+
+#Update SSB Estimates
+SSB = read_csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB$Survey_Date = as.Date(SSB$Survey_Date)
+Current$Turnover = Turnover
+Current$Year = as.integer(year)
+Current$Survey_Number = as.integer(surv.no)
+Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass, HSC_Turnover_Adjusted = Turnover)
+SSB = full_join(SSB, Current)
+SSB = SSB %>% arrange(Year)
+SSB %>% write_csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 
 ###Performance data import and filtering###
 actual = A
