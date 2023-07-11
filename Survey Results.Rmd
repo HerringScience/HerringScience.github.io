@@ -13,6 +13,7 @@ surv = "SB"
 surv2 = "Scots Bay"
 year = "2023"
 surv.no = "2"
+hightide = "2023-06-07 02:11:00"
 ```
 
 ```{r setup, include=FALSE}
@@ -220,9 +221,17 @@ i=unique(ifelse(Survey$Ground == "GB", a,
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", a-1, 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", a-2,
          "NA"))))))
+month1 = substr(c,4,5)
+day1 = substr(c,1,2)
+tidestring = paste0(year, "-", month1, "-", day1, " ", d)
+tidestring = as.POSIXlt(tidestring, format="%Y-%m-%d %H:%M:%S")
+hightide = as.POSIXlt(hightide, format="%Y-%m-%d %H:%M:%S")
+tidediff = as.double(difftime(tidestring, hightide, units = "hours"))
+j = ifelse(tidediff < 0, "before", "after")
+k = abs(round(tidediff, digits = 2))
 ```
 
-`r a` commercial purse seiners conducted this `r b` survey on `r c` starting at `r d`.
+`r a` commercial purse seiners conducted this `r b` survey on `r c` starting at `r d`, which was `r k` hours `r j` high tide.
 
 `r i` vessels ran `r g`.
 
@@ -291,9 +300,7 @@ The results are subject to change as DFO will re-evaluate data editing, area est
 **`r f`**
 
 ```{r, fig.align='center'}
-ggplot(Map, aes(x=Lon, y=Lat)) + 
-  geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
-  labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRCplot.jpg"), rel_path = FALSE)
 ```
 
 ### Transect Details 

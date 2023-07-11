@@ -11,15 +11,15 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-06-18 20:30"
-surv.no = "3"
+surv.date = "2023-07-02 20:00"
+surv.no = "4"
 Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "75"
-vessels = 5
-EVessel = "Lady Janice"
-NVessel = "Sealife II"
-PlanktonVessel = "Lady Janice"
-Tagging = "Sealife II and Lady Janice" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+vessels = 6
+EVessel = "Sealife II"
+NVessel = "Leroy and Barry"
+PlanktonVessel = NA
+Tagging = "Sealife II, Lady Janice, and Tasha Marie" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
@@ -161,15 +161,15 @@ e=if(surv == "SB" & !is.na(EVessel) & is.na(NVessel)){
 }
 
 f=if(!is.na(Tagging)){
-  paste("Tagging will be conducted from the ", Tagging, ".")
+  paste0("Tagging will be conducted from the ", Tagging, ".")
 }
+
+#The `r PlanktonVessel` will conduct plankton tows and oceanographic sampling. 
 ```
 
 Vessels will complete the following lines: `r a` `r b` `r c` `r d` `r e`.
 
 The survey will have a start time of `r StartTime`. 
-
-The `r PlanktonVessel` will conduct plankton tows and oceanographic sampling. 
 
 `r f`
 
@@ -214,18 +214,18 @@ a=if(surv=="SB"){
 b=if(surv=="GB"){
   paste0(PlanktonVessel, "will complete both plankton towing and CTD casts (northern small box)")
 }
+
+#The `r a` `r b`.
 ```
 
-The `r a` `r b`.
-
 ```{r}
-if(surv=="SB"){
-  kables(list(
-  kable(CTDBox, caption = "CTD Box") %>%
-  kable_styling(full_width = FALSE, position = "float_left"),
-  kable(TowBox, caption = "Tow Box") %>%
-  kable_styling(full_width = FALSE, position = "right")))
-}
+#if(surv=="SB"){
+#  kables(list(
+#  kable(CTDBox, caption = "CTD Box") %>%
+#  kable_styling(full_width = FALSE, position = "float_left"),
+#  kable(TowBox, caption = "Tow Box") %>%
+#  kable_styling(full_width = FALSE, position = "right")))
+#}
 
 if(surv=="GB"){
   kbl(CTDBox, caption = "CTD Box") %>%
@@ -237,6 +237,17 @@ if(surv=="GB"){
 
 ```{r}
 Table %>%
+  mutate(Vessel = ifelse(Vessel == "BP", "Brunswick Provider",
+                  ifelse(Vessel == "C1", "Canada 100",
+                  ifelse(Vessel == "SL", "Sealife II",
+                  ifelse(Vessel == "LM", "Lady Melissa",
+                  ifelse(Vessel == "LJ", "Lady Janice",
+                  ifelse(Vessel == "TM", "Tasha Marie",
+                  ifelse(Vessel == "FM", "Fundy Monarch",
+                  ifelse(Vessel == "LB", "Leroy and Barry",
+                  ifelse(Vessel == "MS", "Morning Star",
+                  "NA")))))))))) %>%
+  arrange(Vessel) %>%
   kbl() %>%
   kable_styling(full_width=FALSE) 
 ```

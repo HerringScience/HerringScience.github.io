@@ -55,39 +55,7 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 
-##Tagging Data
-#Data import and filtering
-Tag <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-Tag$Date = ymd(Tag$Date) 
-Tag <- Tag %>% mutate(Julian = yday(Date)) %>% mutate(Year = as.numeric(substr(Date, 1, 4))) %>% dplyr::select(-Tag_Annual)
-
-#Add tags per year per tagger
-Tag_Annual = Tag %>%
-  group_by(Tagger) %>%
-  mutate(count = n_distinct(Year)) %>%
-  summarize(n=n(), count2 = mean(count)) %>%
-  mutate(Tag_Annual = n/count2) %>%
-  dplyr::select(-n, -count2)
-
-Tag = left_join(Tag, Tag_Annual, by = "Tagger")
-
-#Adding Ground
-Tag <- Tag %>% 
-  mutate(Ground = ifelse(between(Lat, 45.02, 45.4) & between(Lon, -65.5, -64.5), "Scots Bay", 
-                         ifelse(between(Lat, 43.15, 43.7) & between(Lon, -66.75, -66.05), "German Bank", 'Other')))
-
-#Change any 'Sealife' to 'Sealife II', and other corrections
-Tag$Vessel = as.factor(Tag$Vessel)
-summary(Tag$Vessel) #spot any issues
-Tag$Vessel[which(Tag$Vessel=="Sealife")] <- "Sealife II"
-Tag$Vessel[which(Tag$Vessel=="Lady Meliss")] <- "Lady Melissa"
-Tag$Vessel[which(Tag$Vessel=="Lady Janice II")] <- "Lady Janice"
-summary(Tag$Vessel) #double check
-
-Tag %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv"))
-
 ##ECHOVIEW DATA##
-
 #Land Data
 can<-getData('GADM', download = FALSE, country="CAN", level=1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
 us = getData('GADM', download = FALSE, country = "USA", level = 1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
@@ -141,8 +109,8 @@ if(surv == "SB"){
   northern = trans[which((trans$Vessel == NorthVessel)), ]
   eastern = trans[which((trans$Vessel == EastVessel)), ]
   main = trans[which((trans$Vessel %in% ids)), ]
-  ggplot(map, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL)
-  
+  PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
+
   # Results
   resultsa = biomassCalc(x = main, areaKm = SB1)
   resultsb = biomassCalc(x = northern, areaKm = SB2)
@@ -198,8 +166,7 @@ if(surv=="GB"){
   ids = c("T01", "T02", "T03")
   map1 = map[which((map$Transect_No %in% ids)), ]
   
-  ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL)
-  
+  PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
   SI = trans[which(trans$Transect_No == "T03"), ]
   ids = c("T01", "T02")
   GB = trans[which((trans$Transect_No %in% ids)), ]
@@ -232,6 +199,8 @@ if(surv=="GB"){
   write.table(A, file= "tableA.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
   write.table(B, file= "tableB.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
+
+ggsave("PRCplot.jpg")
 
 ###Turnover Calc###
 SSB = read.csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
