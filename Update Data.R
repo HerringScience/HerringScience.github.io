@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB"
 surv2="Scots Bay"
 year="2023"
-surv.no="2"
+surv.no="3"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
-ids = c("C1", "FM", "LJ", "LM", "MS", "SL") #only main box vessels
-NorthVessel = "BP" #set NA if none
-EastVessel = "TM" #set NA if none
+ids = c("C1", "BP", "LB") #only main box vessels
+NorthVessel = "SL" #set NA if none
+EastVessel = "LJ" #set NA if none
 
 #Area and TS values
-SB1= 664 #SB main area
-SB2= 87 #SB north area
-SB3= 127 #SB east area
+SB1= 661 #SB main area
+SB2= 66 #SB north area
+SB3= 123 #SB east area
 
 TS1 = -35.5 #TS38
 
@@ -200,11 +200,12 @@ if(surv=="GB"){
   write.table(B, file= "tableB.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
   write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
 
-ggsave("PRCplot.jpg")
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+ggsave("PRCplot.jpg", height = 15, width = 15, units = "cm")
 
 ###Turnover Calc###
 SSB = read.csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
-SSB = SSB %>% filter(Year == year) %>% dplyr::select(Date = Survey_Date, Biomass = HSC_Estimate, Ground)
+SSB = SSB %>% filter(Year == year) %>% dplyr::select(Date = Survey_Date, Biomass = HSC_Estimate, Ground, HSC_Turnover_Adjusted)
 SSB = distinct(SSB)
 
 #SB and GB turnover calculation
@@ -235,7 +236,7 @@ Survey = 1:length(Surveys$Date)
 Biomass = Surveys$Biomass
 TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
 Previous = Surveys %>% filter(is.na(Current))
-Previous = sum(Previous$Biomass)
+Previous = sum(Previous$HSC_Turnover_Adjusted)
 Turnover = TurnBio-Previous
 
 #Add it to Table C

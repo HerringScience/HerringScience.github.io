@@ -12,8 +12,8 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2023"
-surv.no = "2"
-hightide = "2023-06-07 02:11:00"
+surv.no = "3"
+hightide = "2023-06-19 01:00:00"
 ```
 
 ```{r setup, include=FALSE}
