@@ -29,7 +29,7 @@ Lon = conv_unit(Lon,"deg_min_sec","dec_deg")
 Lon = as.numeric(Lon)
 Lat = conv_unit(Lat, "deg_min_sec", "dec_deg")
 Lat = as.numeric(Lat)
-Lat = -1*Lat
+Lon = -1*Lon
 Tags = tibble(Tag_Num, Date, Lon, Lat, Vessel, Survey, CTD)
 Tags$Date = ymd(Tags$Date)
 Tags = Tags %>% 
@@ -38,7 +38,10 @@ Tags = Tags %>%
                   ifelse(Vessel == "Tasha Marie", "Dale Fitzgerald",
                   ifelse(Vessel == "Lady Janice", "Lee Surette",
                   ifelse(Vessel == "Morning Star", "Nicholas D'entremont",
-                  NA)))))) %>%
+                  ifelse(Vessel == "Fundy Monarch", "William Cusack",
+                  ifelse(Vessel == "Canada 100", "William Cusack",
+                  ifelse(Vessel == "Brunswick Provider", "William Cusack", 
+                  NA))))))))) %>%
   mutate(Ground = ifelse(between(Lat, 45.02, 45.4) & between(Lon, -65.5, -64.5), "Scots Bay", 
                          ifelse(between(Lat, 43.15, 43.7) & between(Lon, -66.75, -66.05), "German Bank", 'Other')))
 
