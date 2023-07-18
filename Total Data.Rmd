@@ -683,7 +683,8 @@ ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x=Year, y=
 ```{r, results = "asis"}
 SST1 = SST %>% 
   filter(Ground == "Scots Bay" & In_Box == "1") %>%
-  arrange(Survey)
+  arrange(Survey) %>%
+  arrange(Year)
 
 for(i in unique(SST1$Year)) {
   

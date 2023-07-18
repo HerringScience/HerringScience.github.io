@@ -146,6 +146,15 @@ CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SBEastern.csv"))
+polyEastern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SBNorthern.csv"))
+polyNorthern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SB.csv"))
+polySB_main = as.PolySet(SUA, projection="LL")
+
 Map = list.files(pattern = "Map*") %>% 
   map_df(~read_csv(.))
 
@@ -250,7 +259,7 @@ d=unique(last(Tag_Summary$Date))
 e=length(unique(Tag_Summary$Vessel))
 
 f=unique(ifelse(Survey$Sample == "Y", 
-                paste0("A total of ", a, " tags were applied during the survey over ", b, " events from ", c, " to ", d, " from ", e, " vessels."), 
+                paste0("A total of ", a, " tags were applied during the survey over ", b, " event(s) from ", c, " to ", d, " from ", e, " vessel(s)."), 
                 "No tags were applied during this survey."))
 ```
 
