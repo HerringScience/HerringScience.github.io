@@ -21,7 +21,8 @@ CTD = NA #Add the CTD id only if a TAGGER completed a cast (not the cast by the 
 ##
 
 # Load TaggingEvents.csv
-Tagging <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+#Tagging <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+Tagging <- read_csv("/Users/tracey/Dropbox/Mac/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
 Tagging$Date = ymd(Tagging$Date) 
 
 # Modify Data
@@ -62,5 +63,7 @@ Tag_Annual = TaggingEvents %>%
 TaggingEvents = left_join(TaggingEvents, Tag_Annual, by = "Tagger")
 
 # Save TaggingEvents.csv
-TaggingEvents %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-TaggingEvents %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv"))
+#TaggingEvents %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+#TaggingEvents %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv"))
+TaggingEvents %>% write_csv("/Users/tracey/Dropbox/Mac/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
+TaggingEvents %>% write_csv("/Users/tracey/Dropbox/Mac/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv")
