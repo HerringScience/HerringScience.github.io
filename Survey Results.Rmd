@@ -13,7 +13,7 @@ surv = "SB"
 surv2 = "Scots Bay"
 year = "2023"
 surv.no = "4"
-hightide = "2023-06-19 01:00:00"
+hightide = "2023-07-02 23:18:00"
 ```
 
 ```{r setup, include=FALSE}
@@ -117,16 +117,6 @@ boxes = read.csv("surveyBoxes.csv")
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
 
-# Scots Bay
-SUA = read.csv("polygon_SBEastern.csv")
-polyEastern = as.PolySet(SUA, projection="LL")
-
-SUA = read.csv("polygon_SBNorthern.csv")
-polyNorthern = as.PolySet(SUA, projection="LL")
-
-SUA = read.csv("polygon_SB.csv")
-polySB_main = as.PolySet(SUA, projection="LL")
-
 #German Bank CTD box
 GBCTD=boxes[which(boxes$Box == "GBocean"), ]
 
@@ -144,7 +134,6 @@ Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
 SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
 polyEastern = as.PolySet(SUA, projection="LL")
@@ -154,6 +143,8 @@ polyNorthern = as.PolySet(SUA, projection="LL")
 
 SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SB.csv"))
 polySB_main = as.PolySet(SUA, projection="LL")
+
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
 Map = list.files(pattern = "Map*") %>% 
   map_df(~read_csv(.))
@@ -376,7 +367,7 @@ c = unique(Dense$Vessel)
 ```
 
 ```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRC_Snip.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Snip.jpg"), rel_path = FALSE)
 ```
 
 The single point with the largest backscatter density (PRC) was recorded by **`r a`**, at the following location:
@@ -402,10 +393,6 @@ b = ggplot() +
   labs(x=NULL, y=NULL)
 
   ifelse(Survey$Ground == "SB", plot(a), plot(b))
-```
-
-```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Density_Snip.jpg"), rel_path = FALSE)
 ```
 
 The transect with the overall largest biomass was recorded by **`r c`**, at the following location:
@@ -475,15 +462,7 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 ::: row
 ::: col-md-6
 ```{r, results = "hide", fig.show="first", fig.align='center'}
-      
-Tows_Sum = Survey %>%
-  group_by(id, PlanktonVessel) %>%
-  summarize(Lon=mean(Lon1, Lon2),
-            Lat=mean(Lat1, Lat2)) %>%
-  rename(Vessel = PlanktonVessel) %>%
-  mutate(Vessel = "Plankton Tow",
-         Tag_Count = 300) 
-  
+ 
 CTD_Sum = CTD %>%
   group_by(ID) %>%
   summarize(Lat = mean(Lat),
@@ -492,6 +471,16 @@ CTD_Sum = CTD %>%
   mutate(Vessel = "CTD Cast",
          Tag_Count = 300)
 
+if(!is.na(unique(Survey$PlanktonVessel))){Tows_Sum = 
+  Survey %>%
+  group_by(id) %>%
+  summarize(Lon=mean(Lon1, Lon2),
+            Lat=mean(Lat1, Lat2)) %>%
+  rename(Vessel = PlanktonVessel) %>%
+  mutate(Vessel = "Plankton Tow",
+         Tag_Count = 300)}
+if(is.na(unique(Survey$id))){Tows_Sum = CTD_Sum}
+  
 Tag_Sum = Tag %>%
   group_by(Lat, Lon, Vessel, Tagger) %>%
   summarize(Tag_Count=n_distinct(Tag_Num),
