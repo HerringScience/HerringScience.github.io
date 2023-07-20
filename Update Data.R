@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB"
 surv2="Scots Bay"
 year="2023"
-surv.no="3"
+surv.no="4"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
-ids = c("C1", "BP", "LB") #only main box vessels
-NorthVessel = "SL" #set NA if none
-EastVessel = "LJ" #set NA if none
+ids = c("BP", "LJ", "C1", "TM") #only main box vessels
+NorthVessel = "LB" #set NA if none
+EastVessel = "SL" #set NA if none
 
 #Area and TS values
 SB1= 661 #SB main area
-SB2= 66 #SB north area
-SB3= 123 #SB east area
+SB2= 77 #SB north area
+SB3= 115 #SB east area
 
 TS1 = -35.5 #TS38
 
@@ -77,17 +77,19 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 boxes = read.csv("surveyBoxes.csv")
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+GBCTD=boxes[which(boxes$Box == "GBocean"), ]
+SUA = read.csv("polygon_GB.csv")
+polyGB = as.PolySet(SUA, projection="LL")
+SUA = read.csv("polygon_SI.csv")
+polySI = as.PolySet(SUA, projection="LL")
+
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 SUA = read.csv("polygon_SBEastern.csv")
 polyEastern = as.PolySet(SUA, projection="LL")
 SUA = read.csv("polygon_SBNorthern.csv")
 polyNorthern = as.PolySet(SUA, projection="LL")
 SUA = read.csv("polygon_SB.csv")
 polySB_main = as.PolySet(SUA, projection="LL")
-GBCTD=boxes[which(boxes$Box == "GBocean"), ]
-SUA = read.csv("polygon_GB.csv")
-polyGB = as.PolySet(SUA, projection="LL")
-SUA = read.csv("polygon_SI.csv")
-polySI = as.PolySet(SUA, projection="LL")
 
 #Load functions
 pathnames <- list.files(pattern="[.]R$", path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Functions"), full.names=TRUE)

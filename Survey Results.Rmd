@@ -12,7 +12,7 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2023"
-surv.no = "3"
+surv.no = "4"
 hightide = "2023-06-19 01:00:00"
 ```
 
@@ -146,13 +146,13 @@ CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
-SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SBEastern.csv"))
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
 polyEastern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SBNorthern.csv"))
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBNorthern.csv"))
 polyNorthern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Box Coordinates/polygon_SB.csv"))
+SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SB.csv"))
 polySB_main = as.PolySet(SUA, projection="LL")
 
 Map = list.files(pattern = "Map*") %>% 
