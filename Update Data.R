@@ -2,8 +2,8 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB"
-surv2="Scots Bay"
+surv="SB" #SB or GB
+surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
 year="2023"
 surv.no="4"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
