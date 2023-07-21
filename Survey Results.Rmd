@@ -378,8 +378,8 @@ The single point with the largest backscatter density (PRC) was recorded by **`r
 a = ggplot() + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-if(!is.na(unique(Survey$NVessel))){geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
-if(!is.na(unique(Survey$EVessel))){geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$NVessel)))geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
   geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
   guides(size="none") +
   coord_map() + 
@@ -403,8 +403,8 @@ The transect with the overall largest biomass was recorded by **`r c`**, at the 
 a = ggplot() + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-if(!is.na(unique(Survey$NVessel))){geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
-if(!is.na(unique(Survey$EVessel))){geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$NVessel)))geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
   geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   guides(size="none") +
   coord_map() + 
@@ -497,8 +497,8 @@ a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) +
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-if(!is.na(unique(Survey$NVessel))){geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
-if(!is.na(unique(Survey$EVessel))){geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$NVessel)))geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+{if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
   geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
   labs(x=NULL, y=NULL)
