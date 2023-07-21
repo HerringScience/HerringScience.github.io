@@ -251,9 +251,9 @@ c=unique(first(Tag_Summary$Date))
 d=unique(last(Tag_Summary$Date))
 e=length(unique(Tag_Summary$Vessel))
 
-f=unique(ifelse(Survey$Sample == "Y", 
+f=if_else(a != 0, 
                 paste0("A total of ", a, " tags were applied during the survey over ", b, " event(s) from ", c, " to ", d, " from ", e, " vessel(s)."), 
-                "No tags were applied during this survey."))
+                "No tags were applied during this survey.")
 ```
 
 `r f`
