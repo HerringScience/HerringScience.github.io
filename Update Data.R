@@ -14,7 +14,7 @@ NorthVessel = NA #set NA if none
 EastVessel = NA #set NA if none
 
 #Area and TS values
-SB1= 661 #SB main area
+SB1= 390 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
