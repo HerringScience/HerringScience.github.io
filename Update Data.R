@@ -4,14 +4,14 @@ rm(list = ls())
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
 surv="SB" #SB or GB
 surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
-year="2023"
-surv.no="4"
+year="2022"
+surv.no="10"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
-ids = c("BP", "LJ", "C1", "TM") #only main box vessels
-NorthVessel = "LB" #set NA if none
-EastVessel = "SL" #set NA if none
+ids = c("BP", "FM", "C1") #only main box vessels
+NorthVessel = NA #set NA if none
+EastVessel = NA #set NA if none
 
 #Area and TS values
 SB1= 661 #SB main area
