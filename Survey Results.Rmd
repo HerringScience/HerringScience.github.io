@@ -11,9 +11,9 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-year = "2022"
-surv.no = "10"
-hightide = "2022-10-02 17:00:00"
+year = "2023"
+surv.no = "5"
+hightide = "2023-07-17 00:11:00"
 ```
 
 ```{r setup, include=FALSE}
@@ -205,7 +205,7 @@ b = ggplot(Region,aes(x=Lon, y=Lat)) +
 
 ```{r}
 a=unique(Survey$Vessel.No)
-b=unique(ifelse(Survey$Sample == "Y", "fishing", ifelse(Survey$Sample == "N", "non-fishing", "NA")))
+b=unique(ifelse(Survey$Fishing == "Y", "fishing", ifelse(Survey$Fishing == "N", "non-fishing", "NA")))
 c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
@@ -473,14 +473,16 @@ CTD_Sum = CTD %>%
   mutate(Vessel = "CTD Cast",
          Tag_Count = 300)
 
-if(!is.na(unique(Survey$PlanktonVessel))){Tows_Sum = 
+if(!is.na(unique(Survey$PlanktonVessel))){
+  Tows_Sum = 
   Survey %>%
-  group_by(id) %>%
+  group_by(id, PlanktonVessel) %>%
   summarize(Lon=mean(Lon1, Lon2),
-            Lat=mean(Lat1, Lat2)) %>%
+            Lat=mean(Lat1, Lat2)) %>% 
   rename(Vessel = PlanktonVessel) %>%
   mutate(Vessel = "Plankton Tow",
          Tag_Count = 300)}
+
 if(is.na(unique(Survey$PlanktonVessel))){Tows_Sum = CTD_Sum}
   
 Tag_Sum = Tag %>%

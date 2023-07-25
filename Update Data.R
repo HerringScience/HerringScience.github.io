@@ -4,17 +4,17 @@ rm(list = ls())
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
 surv="SB" #SB or GB
 surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
-year="2022"
-surv.no="10"
+year="2023"
+surv.no="5"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 
 #Set vessels for SB only
-ids = c("BP", "FM", "C1") #only main box vessels
-NorthVessel = NA #set NA if none
-EastVessel = NA #set NA if none
+ids = c("FM", "LB", "LJ", "SL") #only main box vessels
+NorthVessel = "LM" #set NA if none
+EastVessel = "C1" #set NA if none
 
 #Area and TS values
-SB1= 390 #SB main area
+SB1= 661 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
@@ -227,6 +227,7 @@ if(surv == "SB"){
 
 SSB$Date = as.Date(SSB$Date)
 resultsa$Date = as.Date(substr(resultsa$Date_Time_S, 0, 10))
+resultsa = resultsa %>% arrange(Date)
 Date = first(resultsa$Date)
 Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass)
 Current = tibble(Date, Biomass, surv2)
@@ -298,11 +299,11 @@ Perform %>% write_csv("Performance Total.csv")
 ##Survey Data import and filtering
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/")
 Survey = read_csv("planktonsamplingData.csv")
-Survey = Survey %>% dplyr::select(Ground, id, Survey.No, Date, StartTime, Sample, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, No_jars, Lon1, Lat1, Lon2, Lat2, Time1, Time2, TowTime, AirTemp, Speed, Heading, TideDirection, AvgTowDepth, MaxTowDepth, CTD_ID, AvgTemp, AvgSalinity, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, DepthDiscD, DepthDiscA) 
+Survey = Survey %>% dplyr::select(Ground, id, Survey.No, Date, StartTime, Sample, Fishing, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, No_jars, Lon1, Lat1, Lon2, Lat2, Time1, Time2, TowTime, AirTemp, Speed, Heading, TideDirection, AvgTowDepth, MaxTowDepth, CTD_ID, AvgTemp, AvgSalinity, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, DepthDiscD, DepthDiscA) 
 Survey = Survey %>%
-  mutate(Month = as.numeric(substr(Date, 1, 2)),
+  mutate(Day = as.numeric(substr(Date, 1, 2)),
+         Month = as.numeric(substr(Date, 4, 5)),
          Year = as.numeric(substr(Date, 7, 10)),
-         Day = as.numeric(substr(Date, 4, 5)),
          Ground = surv,
          NoRevs = FlowReading2-FlowReading1,
          DistanceCalc = NoRevs*26873/1000000,
