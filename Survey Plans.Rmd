@@ -11,15 +11,15 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-07-16 21:30"
-surv.no = "5"
+surv.date = "2023-07-30 20:30"
+surv.no = "6"
 Allocation = "100" #set to "0" for a non-fishing survey
-SIAllocation = "75"
-vessels = 6
-EVessel = "Canada 100"
-NVessel = "Lady Melissa"
+SIAllocation = "75" #Seal Island allocation for GB-only
+vessels = 7
+EVessel = NA
+NVessel = NA
 PlanktonVessel = "Lady Janice"
-Tagging = "Sealife II, Lady Janice, Fundy Monarch, and Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+Tagging = "Morning Star, Sealife II, Lady Janice, Fundy Monarch, and Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
