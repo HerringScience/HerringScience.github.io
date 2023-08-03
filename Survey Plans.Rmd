@@ -19,10 +19,11 @@ Tagging = "Morning Star, Sealife II, Lady Janice, Fundy Monarch, Tasha Marie, an
 
 #Set vessels below
 vessels = 9
-EVessel = "Brunswick Provider" #Set NA for GB
-NVessel = "Fundy Monarch" #Set NA for GB
+EVessel = "Brunswick Provider" #Set NA for GB or excluding box
+NVessel = "Fundy Monarch" #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
-#Main box only
+
+#Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Morning Star"
 V2 = PlanktonVessel
 V3 = "Leroy and Barry"
