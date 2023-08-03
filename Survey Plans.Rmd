@@ -11,15 +11,27 @@ rm(list = ls())
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-07-30 20:30"
-surv.no = "6"
+surv.date = "2023-08-14 20:30"
+surv.no = "7"
 Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "75" #Seal Island allocation for GB-only
-vessels = 7
-EVessel = NA
-NVessel = NA
+Tagging = "Morning Star, Sealife II, Lady Janice, Fundy Monarch, Tasha Marie, and Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+
+#Set vessels below
+vessels = 9
+EVessel = "Brunswick Provider" #Set NA for GB
+NVessel = "Fundy Monarch" #Set NA for GB
 PlanktonVessel = "Lady Janice"
-Tagging = "Morning Star, Sealife II, Lady Janice, Fundy Monarch, and Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+#Main box only
+V1 = "Morning Star"
+V2 = PlanktonVessel
+V3 = "Leroy and Barry"
+V4 = "Sealife II"
+V5 = "Lady Melissa"
+V6 = "Canada 100"
+V7 = "Tasha Marie"
+V8 = NA
+V9 = NA
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
@@ -47,6 +59,7 @@ library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
+library(measurements)
 
 #Parse date time
 surv.date = as.POSIXlt(surv.date, format="%Y-%m-%d %H:%M")
@@ -54,15 +67,49 @@ StartTime = substr(surv.date, 12,16)
 StartDate = substr(surv.date, 1,10)
 year = substr(surv.date, 1,4)
 
-#Load plan
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/"))
-Plan = list.files(pattern = "*plan.csv") %>% 
-  map_df(~read_csv(.))
-Plan = Plan %>% filter(!is.na(Vessel))
+#Create Plan by combining main box with any extra boxes
+vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+           NA)))
 
-Table = list.files(pattern = "*Table.csv") %>% 
-  map_df(~read_csv(.))
-Table = Table %>% filter(!is.na(Vessel))
+Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+
+if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+if(!is.na(NVessel) & !is.na(EVessel)){
+  Plan = full_join(Main, North)
+  Plan = full_join(Plan, East)}
+
+#Add vessel names to Plan
+Plan = Plan %>% 
+  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
+
+#Short-hand names and save for Update Data script usage
+Plan2 = Plan %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Fundy Monarch", "FM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Brunswick Provider", "BP")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Melissa", "LM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
+write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
 #Land Data
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/"))
@@ -214,18 +261,18 @@ a=if(surv=="SB"){
 b=if(surv=="GB"){
   paste0(PlanktonVessel, "will complete both plankton towing and CTD casts (northern small box)")
 }
-
-#The `r a` `r b`.
 ```
 
+The `r a` `r b`.
+
 ```{r}
-#if(surv=="SB"){
-#  kables(list(
-#  kable(CTDBox, caption = "CTD Box") %>%
-#  kable_styling(full_width = FALSE, position = "float_left"),
-#  kable(TowBox, caption = "Tow Box") %>%
-#  kable_styling(full_width = FALSE, position = "right")))
-#}
+if(surv=="SB"){
+  kables(list(
+  kable(CTDBox, caption = "CTD Box") %>%
+  kable_styling(full_width = FALSE, position = "float_left"),
+  kable(TowBox, caption = "Tow Box") %>%
+  kable_styling(full_width = FALSE, position = "right")))
+}
 
 if(surv=="GB"){
   kbl(CTDBox, caption = "CTD Box") %>%
@@ -236,17 +283,58 @@ if(surv=="GB"){
 ##### Full Lines Table
 
 ```{r}
-Table %>%
-  mutate(Vessel = ifelse(Vessel == "BP", "Brunswick Provider",
-                  ifelse(Vessel == "C1", "Canada 100",
-                  ifelse(Vessel == "SL", "Sealife II",
-                  ifelse(Vessel == "LM", "Lady Melissa",
-                  ifelse(Vessel == "LJ", "Lady Janice",
-                  ifelse(Vessel == "TM", "Tasha Marie",
-                  ifelse(Vessel == "FM", "Fundy Monarch",
-                  ifelse(Vessel == "LB", "Leroy and Barry",
-                  ifelse(Vessel == "MS", "Morning Star",
-                  "NA")))))))))) %>%
+Plan$`Start Lat` = conv_unit(Plan$`Start Lat`, "dec_deg", "deg_dec_min")
+Plan$`Start Lon` = conv_unit(Plan$`Start Lon`, "dec_deg", "deg_dec_min")
+Plan$`End Lat` = conv_unit(Plan$`End Lat`, "dec_deg", "deg_dec_min")
+Plan$`End Lon` = conv_unit(Plan$`End Lon`, "dec_deg", "deg_dec_min")
+
+Plan = Plan %>%
+  mutate('Start Lat' = substr(Plan$`Start Lat`, 1, 8)) %>%
+  mutate('End Lat' = substr(Plan$`End Lat`, 1, 8)) %>%
+  mutate('Start Lon' = substr(Plan$`Start Lon`, 2, 10)) %>%
+  mutate('End Lon' = substr(Plan$`End Lon`, 2, 10))
+
+degree = str_split_i(Plan$`Start Lat`, " ", -2)
+end = str_split_i(Plan$`Start Lat`, " ", 2)
+decimal = as.numeric(str_split_i(end, "\\.", 1))
+decimal = sprintf("%02d", decimal)
+minutes = as.numeric(str_split_i(end, "\\.", -1))
+minutes = sprintf("%02d", minutes)
+minutes = str_pad(minutes, width=3, side="right", pad="0")
+all = paste0(degree,decimal,".",minutes)
+Plan$`Start Lat` = all
+
+degree = str_split_i(Plan$`End Lat`, " ", -2)
+end = str_split_i(Plan$`End Lat`, " ", 2)
+decimal = as.numeric(str_split_i(end, "\\.", 1))
+decimal = sprintf("%02d", decimal)
+minutes = as.numeric(str_split_i(end, "\\.", -1))
+minutes = sprintf("%02d", minutes)
+minutes = str_pad(minutes, width=3, side="right", pad="0")
+all = paste0(degree,decimal,".",minutes)
+Plan$`End Lat` = all
+
+degree = str_split_i(Plan$`Start Lon`, " ", -2)
+end = str_split_i(Plan$`Start Lon`, " ", 2)
+decimal = as.numeric(str_split_i(end, "\\.", 1))
+decimal = sprintf("%02d", decimal)
+minutes = as.numeric(str_split_i(end, "\\.", -1))
+minutes = sprintf("%02d", minutes)
+minutes = str_pad(minutes, width=3, side="right", pad="0")
+all = paste0(degree,decimal,".",minutes)
+Plan$`Start Lon` = all
+
+degree = str_split_i(Plan$`End Lon`, " ", -2)
+end = str_split_i(Plan$`End Lon`, " ", 2)
+decimal = as.numeric(str_split_i(end, "\\.", 1))
+decimal = sprintf("%02d", decimal)
+minutes = as.numeric(str_split_i(end, "\\.", -1))
+minutes = sprintf("%02d", minutes)
+minutes = str_pad(minutes, width=3, side="right", pad="0")
+all = paste0(degree,decimal,".",minutes)
+Plan$`End Lon` = all
+
+Plan %>%
   arrange(Vessel) %>%
   kbl() %>%
   kable_styling(full_width=FALSE) 

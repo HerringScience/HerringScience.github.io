@@ -10,8 +10,8 @@ adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv"
 
 #Set vessels for SB only
 ids = c("FM", "LB", "LJ", "SL") #only main box vessels
-NorthVessel = "LM" #set NA if none
-EastVessel = "C1" #set NA if none
+NVessel = "LM" #set NA if none
+EVessel = "C1" #set NA if none
 
 #Area and TS values
 SB1= 661 #SB main area
@@ -108,8 +108,8 @@ if(surv == "SB"){
   x = Region
   trans = transects(x= Region, TS38 = TS1, TS50 = NA)
   x = surveyTrack3(x=trans, polyNameA  = polySB_main, polyNameB  = polyNorthern,  polyNameC  = polyEastern,  title = name)
-  northern = trans[which((trans$Vessel == NorthVessel)), ]
-  eastern = trans[which((trans$Vessel == EastVessel)), ]
+  northern = trans[which((trans$Vessel == NVessel)), ]
+  eastern = trans[which((trans$Vessel == EVessel)), ]
   main = trans[which((trans$Vessel %in% ids)), ]
   PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
 
