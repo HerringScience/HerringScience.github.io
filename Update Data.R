@@ -2,27 +2,32 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB
-surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
+surv="GB" #SB or GB
+surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
-surv.no="5"
+surv.no="1"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
+Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #Set vessels for SB only
 ids = c("FM", "LB", "LJ", "SL") #only main box vessels
-NVessel = "LM" #set NA if none
-EVessel = "C1" #set NA if none
 
 #Area and TS values
 SB1= 661 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
-TS1 = -35.5 #TS38
-
 GB1 = 805 #GB main area
 GB2 = 267 #Seal Island area
 GB3 = NA #Ad-hoc school survey area
+
+##
+###
+##
+
+#BELOW VALUES SHOULD RARELY CHANGE#
+TS1 = -35.5 #TS38
 
 #turnover calculation regression values
 GB_y = 0.199392662629964
@@ -54,6 +59,63 @@ library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
+library(readxl)
+
+##Survey Data import and filtering
+setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
+Survey = read_csv("planktonsamplingData.csv")
+Survey = Survey %>%
+  mutate(Day = as.numeric(substr(Date, 1, 2)),
+         Month = as.numeric(substr(Date, 4, 5)),
+         Year = as.numeric(substr(Date, 7, 10)))
+Survey = Survey %>% filter(Year == year & Ground == surv & Survey.No == surv.no)
+if(Sample == "Y"){Survey$Sample = "Y"}
+if(Sample == "N"){Survey$Sample = "N"}
+
+#get CTD data from Plankton
+if(!is.na(Plankton$CTD_ID)){
+  CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
+  CTDData = CTDData %>%
+    dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)", 
+                  Salinity = "Salinity (Practical Salinity Scale)", Sound_velocity = "Sound velocity (Meters per Second)", Density = "Density (Kilograms per Cubic Meter)")
+  CTDData = CTDData %>%
+    mutate(plankton_ID = paste0(first(Plankton$Set_Number), "/", last(Plankton$Set_Number)),
+           ground = surv2,
+           id = Plankton$CTD_ID,
+           Date = StartDate,
+           Lat = Plankton$CTD_Lat,
+           Lon = Plankton$CTD_Lon,
+           Year = year,
+           Survey = surv.no)
+  CTDRaw = read_csv("CTD_Raw.csv")
+  CTDTotal = full_join(CTDRaw, CTDData)
+  CTDTotal %>% write_csv("CTD_Raw.csv")
+}
+
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+Plankton = read_csv("PlanktonData.csv")
+Plankton = Plankton %>%
+  mutate(NoRevs = FlowReading2-FlowReading1,
+         DistanceCalc = NoRevs*26873/1000000,
+         Volume = DistanceCalc*3.1415)
+
+#get Ruskin data
+if(Tow == "Y"){
+  TowData = read_excel(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Ruskin.xlsx"), sheet = 'Data')
+  TowData$DateTime = TowData$Time
+  TowData$Date = substr(TowData$DateTime,1,10)
+  TowData$Date = as.Date(TowData$Date)
+  TowData$Time = substr(TowData$DateTime,12,19)
+TowData = TowData %>%
+  filter(Time == Plankton$Time1:Plankton$Time2)
+}
+
+
+
+SurveyTotal = 
+
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
+Survey %>% write_csv("Survey Data.csv")
 
 ##ECHOVIEW DATA##
 #Land Data
@@ -102,6 +164,26 @@ Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/Herri
 Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no), pattern = "Region") %>% 
   map_df(~read_csv(.))
 
+NVessel = ifelse(Survey$NVessel == "Lady Janice II", "LJ",
+                 ifelse(Survey$NVessel == "Sealife II", "SL",
+                        ifelse(Survey$NVessel == "Lady Melissa", "LM",
+                               ifelse(Survey$NVessel == "Canada 100", "C1",
+                                      ifelse(Survey$NVessel == "Fundy Monarch", "FM",
+                                             ifelse(Survey$NVessel == "Brunswick Provider", "BP",
+                                                    ifelse(Survey$NVessel == "Leroy and Barry", "LB",
+                                                           ifelse(Survey$NVessel == "Morning Star", "MS",
+                                                                  ifelse(Survey$NVessel == "Tasha Marie", "TM",
+                                                                         NA)))))))))
+EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
+                 ifelse(Survey$EVessel == "Sealife II", "SL",
+                        ifelse(Survey$EVessel == "Lady Melissa", "LM",
+                               ifelse(Survey$EVessel == "Canada 100", "C1",
+                                      ifelse(Survey$EVessel == "Fundy Monarch", "FM",
+                                             ifelse(Survey$EVessel == "Brunswick Provider", "BP",
+                                                    ifelse(Survey$EVessel == "Leroy and Barry", "LB",
+                                                           ifelse(Survey$EVessel == "Morning Star", "MS",
+                                                                  ifelse(Survey$EVessel == "Tasha Marie", "TM",
+                                                                         NA)))))))))
 if(surv == "SB"){
   out = SBout
   map = mapDat(x = Map)
@@ -206,7 +288,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 ggsave("PRCplot.jpg", height = 15, width = 15, units = "cm")
 
 ###Turnover Calc###
-SSB = read.csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = read.csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 SSB = SSB %>% filter(Year == year) %>% dplyr::select(Date = Survey_Date, Biomass = HSC_Estimate, Ground, HSC_Turnover_Adjusted)
 SSB = distinct(SSB)
 
@@ -248,7 +330,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 #Update SSB Estimates
-SSB = read_csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = read_csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 SSB$Survey_Date = as.Date(SSB$Survey_Date)
 Current$Turnover = Turnover
 Current$Year = as.integer(year)
@@ -256,7 +338,7 @@ Current$Survey_Number = as.integer(surv.no)
 Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass, HSC_Turnover_Adjusted = Turnover)
 SSB = full_join(SSB, Current)
 SSB = SSB %>% arrange(Year)
-SSB %>% write_csv(file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB %>% write_csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 
 ###Performance data import and filtering###
 actual = A
@@ -295,22 +377,6 @@ Distance<-Perform %>%
 Speed %>% write_csv("Speed.csv")
 Distance %>% write_csv("Distance.csv")
 Perform %>% write_csv("Performance Total.csv")
-
-##Survey Data import and filtering
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/")
-Survey = read_csv("planktonsamplingData.csv")
-Survey = Survey %>% dplyr::select(Ground, id, Survey.No, Date, StartTime, Sample, Fishing, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, No_jars, Lon1, Lat1, Lon2, Lat2, Time1, Time2, TowTime, AirTemp, Speed, Heading, TideDirection, AvgTowDepth, MaxTowDepth, CTD_ID, AvgTemp, AvgSalinity, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, DepthDiscD, DepthDiscA) 
-Survey = Survey %>%
-  mutate(Day = as.numeric(substr(Date, 1, 2)),
-         Month = as.numeric(substr(Date, 4, 5)),
-         Year = as.numeric(substr(Date, 7, 10)),
-         Ground = surv,
-         NoRevs = FlowReading2-FlowReading1,
-         DistanceCalc = NoRevs*26873/1000000,
-         Volume = DistanceCalc*3.1415)
-
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
-Survey %>% write_csv("Survey Data.csv")
 
 ##CTD Data import and filtering
 CTD <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv"))
