@@ -12,7 +12,7 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 surv.date = "2023-08-06 20:30:00"
-surv.no = "1"
+surv.no = "2"
 Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "50" #Seal Island allocation for GB-only
 Tagging = "Morning Star, Lady Janice II, Sealife II, and Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
@@ -28,7 +28,7 @@ V1 = "Morning Star"
 V2 = "Lady Melissa"
 V3 = "Leroy and Barry"
 V4 = PlanktonVessel
-V5 = NA
+V5 = "Sealife II"
 V6 = NA
 V7 = NA
 V8 = NA
@@ -69,51 +69,52 @@ StartDate = substr(surv.date, 1,10)
 year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
-Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
-#vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-#           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-#           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
-#           NA)))
+#Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
-#Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+           NA)))
 
-#if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
-#if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
 
-#if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
-#if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
-#if(!is.na(NVessel) & !is.na(EVessel)){
-#  Plan = full_join(Main, North)
-#  Plan = full_join(Plan, East)}
-#if(is.na(NVessel) & is.na(EVessel)){Plan = Main}
+if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+if(!is.na(NVessel) & !is.na(EVessel)){
+  Plan = full_join(Main, North)
+  Plan = full_join(Plan, East)}
+if(is.na(NVessel) & is.na(EVessel)){Plan = Main}
 
 #Add vessel names to Plan
-#Plan = Plan %>% 
-#  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
+Plan = Plan %>% 
+  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
 
 #Short-hand names and save for Update Data script usage
-#Plan2 = Plan %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Fundy Monarch", "FM")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Brunswick Provider", "BP")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Lady Melissa", "LM")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
-#  mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
-#write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+Plan2 = Plan %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Fundy Monarch", "FM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Brunswick Provider", "BP")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Melissa", "LM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
+write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
 #Land Data
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/"))
@@ -186,9 +187,16 @@ SUA = read.csv("polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 ```
 
+```{r}
+if(surv == "GB"){
+  a="non-fishing"
+}
+```
+
+
 ### `r surv2` Survey \#`r surv.no` - `r StartDate` {.tabset}
 
-This survey will include `r vessels` participating vessels. 
+This **`r a`** survey will include `r vessels` participating vessels. 
 
 ```{r echo=FALSE}
 a=if(surv == "SB" & !is.na(EVessel) & !is.na(NVessel)){
@@ -288,14 +296,15 @@ if(surv=="GB"){
 ##### Full Lines Table
 
 ```{r}
+#Plan3 = Plan
 Plan$`Start Lat` = conv_unit(Plan$`Start Lat`, "dec_deg", "deg_dec_min")
 Plan$`Start Lon` = conv_unit(Plan$`Start Lon`, "dec_deg", "deg_dec_min")
 Plan$`End Lat` = conv_unit(Plan$`End Lat`, "dec_deg", "deg_dec_min")
 Plan$`End Lon` = conv_unit(Plan$`End Lon`, "dec_deg", "deg_dec_min")
 
 Plan = Plan %>%
-  mutate('Start Lat' = substr(Plan$`Start Lat`, 1, 8)) %>%
-  mutate('End Lat' = substr(Plan$`End Lat`, 1, 8)) %>%
+  mutate('Start Lat' = substr(Plan$`Start Lat`, 1, 9)) %>%
+  mutate('End Lat' = substr(Plan$`End Lat`, 1, 9)) %>%
   mutate('Start Lon' = substr(Plan$`Start Lon`, 2, 10)) %>%
   mutate('End Lon' = substr(Plan$`End Lon`, 2, 10))
 
@@ -323,8 +332,7 @@ degree = str_split_i(Plan$`Start Lon`, " ", -2)
 end = str_split_i(Plan$`Start Lon`, " ", 2)
 decimal = as.numeric(str_split_i(end, "\\.", 1))
 decimal = sprintf("%02d", decimal)
-minutes = as.numeric(str_split_i(end, "\\.", -1))
-minutes = sprintf("%02d", minutes)
+minutes = str_split_i(end, "\\.", -1)
 minutes = str_pad(minutes, width=3, side="right", pad="0")
 all = paste0(degree,decimal,".",minutes)
 Plan$`Start Lon` = all
@@ -333,8 +341,7 @@ degree = str_split_i(Plan$`End Lon`, " ", -2)
 end = str_split_i(Plan$`End Lon`, " ", 2)
 decimal = as.numeric(str_split_i(end, "\\.", 1))
 decimal = sprintf("%02d", decimal)
-minutes = as.numeric(str_split_i(end, "\\.", -1))
-minutes = sprintf("%02d", minutes)
+minutes = str_split_i(end, "\\.", -1)
 minutes = str_pad(minutes, width=3, side="right", pad="0")
 all = paste0(degree,decimal,".",minutes)
 Plan$`End Lon` = all
@@ -398,10 +405,7 @@ if(surv=="SB"){
 ```
 
 ```{r, include = "FALSE"}
-#save all changes and information to planktonsamplingData.csv for Update Data and results
-SurveyData = read_csv((paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")))
-SurveyData$StartTime = as.character(SurveyData$StartTime)
-SurveyData$Net = as.character(SurveyData$Net)
+#save all changes and information to a .csv for Update Data and results
 CurrentData = tibble(FlowmeterType = "General Oceanics", TowType = "Surface Tow", Gear = "1/500", PlanktonVessel = PlanktonVessel, EVessel = EVessel, NVessel = NVessel, Survey.No = surv.no, Ground = surv, Vessel.No = vessels, Net = "1")
 Month = substr(StartDate, 6,7)
 Day = substr(StartDate, 9,10)
@@ -416,11 +420,5 @@ CurrentData = CurrentData %>%
                            NA))))) %>%
   mutate(Fishing = ifelse(Allocation > 0 | !is.na(Allocation), "Y", "N")) %>%
   mutate(PlanktonVessel = ifelse(PlanktonVessel == "Lady Janice", "Lady Janice II", PlanktonVessel))
-Survey = full_join(SurveyData, CurrentData)
-row = nrow(Survey)
-Survey2 = Survey[rep(row, 1),]
-Survey = rbind(Survey, Survey2)
-Survey = Survey %>%
- dplyr::select(id, Sample, No_jars, Lon1, Lat1, Lon2, Lat2, AirTemp, Speed, Heading, TideDirection, CTD_ID, WindDirection, WindSpeed, Swell, FlowReading1, FlowReading2, Observers, DepthDiscD, DepthDiscA, Ground, Survey.No, Date, StartTime, Fishing, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, Time1, Time2, TowTime, Gear, Net, TowType, AvgTowDepth, MaxTowDepth, AvgTemp, AvgSalinity, SurfaceTemp, WaterDepth1, WaterDepth2, FlowmeterType) 
-Survey %>% write_csv((paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")))
+CurrentData %>% write_csv((paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
 ```

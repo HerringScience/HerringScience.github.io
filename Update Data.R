@@ -7,11 +7,11 @@ surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
 surv.no="1"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
-#Set vessels for SB only
-ids = c("FM", "LB", "LJ", "SL") #only main box vessels
+#(SB ONLY) Set main-box vessels
+ids = c("FM", "LB", "LJ", "SL")
 
 #Area and TS values
 SB1= 661 #SB main area
@@ -60,20 +60,23 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 library(readxl)
+library(hms)
 
 ##Survey Data import and filtering
-setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
-Survey = read_csv("planktonsamplingData.csv")
-Survey = Survey %>%
-  mutate(Day = as.numeric(substr(Date, 1, 2)),
-         Month = as.numeric(substr(Date, 4, 5)),
-         Year = as.numeric(substr(Date, 7, 10)))
-Survey = Survey %>% filter(Year == year & Ground == surv & Survey.No == surv.no)
-if(Sample == "Y"){Survey$Sample = "Y"}
-if(Sample == "N"){Survey$Sample = "N"}
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+Plankton = read_csv("PlanktonData.csv")
+Plankton = Plankton %>%
+  mutate(Year = year,
+         Ground = surv,
+         Survey.No = surv.no,
+         TowTime = difftime(Time2, Time1, units = "mins"))
+Plankton$Year = as.numeric(Plankton$Year)
+Plankton$Swell = as.character(Plankton$Swell)
+if(Sample == "Y"){Plankton$Sample = "Y"}
+if(Sample == "N"){Plankton$Sample = "N"}
 
 #get CTD data from Plankton
-if(!is.na(Plankton$CTD_ID)){
+if(!is.na(first(Plankton$CTD_ID))){
   CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
   CTDData = CTDData %>%
     dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)", 
@@ -90,14 +93,15 @@ if(!is.na(Plankton$CTD_ID)){
   CTDRaw = read_csv("CTD_Raw.csv")
   CTDTotal = full_join(CTDRaw, CTDData)
   CTDTotal %>% write_csv("CTD_Raw.csv")
+  Plankton = Plankton %>%
+    mutate(AvgTemp = mean(CTDData$Temperature),
+           AvgSalinity = mean(CTDData$Salinity))
 }
-
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
-Plankton = read_csv("PlanktonData.csv")
-Plankton = Plankton %>%
-  mutate(NoRevs = FlowReading2-FlowReading1,
-         DistanceCalc = NoRevs*26873/1000000,
-         Volume = DistanceCalc*3.1415)
+if(is.na(first(Plankton$CTD_ID))){
+  Plankton = Plankton %>%
+    mutate(AvgTemp = NA,
+           AvgSalinity = NA)
+}
 
 #get Ruskin data
 if(Tow == "Y"){
@@ -106,16 +110,89 @@ if(Tow == "Y"){
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Date = as.Date(TowData$Date)
   TowData$Time = substr(TowData$DateTime,12,19)
-TowData = TowData %>%
-  filter(Time == Plankton$Time1:Plankton$Time2)
+  TowData$Time = hms::as_hms(TowData$Time)
+
+#Filter tow data based on Time1 + Time2
+Tow1 = TowData[TowData$Time >= first(Plankton$Time1) & TowData$Time <= first(Plankton$Time2),]
+Tow2 = TowData[TowData$Time >= last(Plankton$Time1) & TowData$Time <= last(Plankton$Time2),]
+
+#Calculate average and max tow depths for each
+Tow1 = Tow1 %>%
+  mutate(AvgTowDepth = mean(Depth),
+         MaxTowDepth = max(Depth),
+         Tow_No = 1)
+
+Tow2 = Tow2 %>%
+  mutate(AvgTowDepth = mean(Depth),
+         MaxTowDepth = max(Depth),
+         Tow_No = 2)
+
+#ggplot the profiles for each tow
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+
+Tow1 %>%
+  ggplot(aes(x = Time, y = Depth)) +
+  geom_path(size = 1, colour = "blue") +
+  scale_y_reverse() +
+  labs(y = "Depth (m)")
+  ggsave("Tow 1.jpg")
+
+Tow2 %>%
+  ggplot(aes(x = Time, y = Depth)) +
+  geom_path(size = 1, colour = "blue") +
+  scale_y_reverse() +
+  labs(y = "Depth (m)")
+  ggsave("Tow 2.jpg")
+
+#combine the avg and max values with plankton sheet
+TowTbl1 = tibble_row(Tow_No = 1, AvgTowDepth = first(Tow1$AvgTowDepth), MaxTowDepth = first(Tow1$MaxTowDepth))
+TowTbl2 = tibble_row(Tow_No = 2, AvgTowDepth = first(Tow2$AvgTowDepth), MaxTowDepth = first(Tow2$MaxTowDepth))
+TowCalcs = full_join(TowTbl1, TowTbl2)
+
+Plankton = full_join(Plankton, TowCalcs, by = "Tow_No")
 }
 
+#convert lat/lon before combining
+Plankton$Lon1 = as.numeric(conv_unit(Plankton$Lon1, "deg_dec_min", "dec_deg"))*-1
+Plankton$Lon2 = as.numeric(conv_unit(Plankton$Lon2, "deg_dec_min", "dec_deg"))*-1
+Plankton$Lat1 = as.numeric(conv_unit(Plankton$Lat1, "deg_dec_min", "dec_deg"))
+Plankton$Lat2 = as.numeric(conv_unit(Plankton$Lat2, "deg_dec_min", "dec_deg"))
 
+Plankton = Plankton %>%
+  rename(id = Set_Number)
 
-SurveyTotal = 
+PlanData = read_csv((paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
+PlanData$Survey.No = as.character(PlanData$Survey.No)
 
+SurveyTotal = full_join(Plankton, PlanData)
+
+setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
+Survey = read_csv("planktonsamplingData.csv")
+
+Total = full_join(Survey, SurveyTotal)
+
+Total = Total %>%
+  mutate(Day = as.numeric(substr(Date, 1, 2)),
+         Month = as.numeric(substr(Date, 4, 5)),
+         Year = as.numeric(substr(Date, 7, 10)),
+         TowTime = difftime(Time2, Time1, units ="mins"),
+         NoRevs = FlowReading2-FlowReading1,
+         DistanceCalc = NoRevs*26873/1000000,
+         Volume = DistanceCalc*3.1415)
+
+Total = Total %>%
+  dplyr::select(Year, Month, Day, Date, Ground, id, Survey.No, Fishing, Sample, 
+                StartTime, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, 
+                Tow_No, Time1, Time2, TowTime, Lat1, Lon1, Lat2, Lon2, No_jars, 
+                Speed, Heading, TideDirection, Swell, WindDirection, WindSpeed, 
+                AirTemp, Observers, Net, Gear, TowType, FlowmeterType, FlowReading1, 
+                FlowReading2, NoRevs, DistanceCalc, Volume, AvgTowDepth, MaxTowDepth, 
+                DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
+                SurfaceTemp, WaterDepth1, WaterDepth2)
+
+Total %>% write_Csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
-Survey %>% write_csv("Survey Data.csv")
+Total %>% write_csv("Survey Data.csv")
 
 ##ECHOVIEW DATA##
 #Land Data
