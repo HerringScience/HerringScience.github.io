@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 Set_Number,No_jars,Tow_No,Lon1,Lat1,Lon2,Lat2,Time1,Time2,TideDirection,Speed,Heading,Observer,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon
 SB2023-01,1,1,65 14.91,45 03.75,65 13.43,45 03.34,19:06,19:16,with,6.7,60,Tracey,NW,11,0,21,600052,650367,10,9.5,10K100766_20230813_224414,45.0542,-65.2085
 SB2023-02,1,2,65 12.60,45 03.96,65 13.20,45 03.62,19:27,19:37,against,3.3,230,Tracey,NW,11,0,21,650367,709731,10,9.5,10K100766_20230813_224414,45.0542,-65.2085
+=======
+Set_Number,No_jars,Tow_No,Lon1,Lat1,Lon2,Lat2,Time1,Time2,TideDirection,Speed,Heading,Observers,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon
+>>>>>>> 5561eb91bff0be4f961948644d25def04a3952e2
