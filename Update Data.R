@@ -105,7 +105,7 @@ if(is.na(first(Plankton$CTD_ID))){
 
 #get Ruskin data
 if(Tow == "Y"){
-  TowData = read_excel(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Ruskin.xlsx"), sheet = 'Data')
+  TowData = read_excel(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Ruskin.xlsx"), skip = 1, sheet = 'Data')
   TowData$DateTime = TowData$Time
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Date = as.Date(TowData$Date)
