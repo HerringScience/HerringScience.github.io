@@ -135,16 +135,25 @@ Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 
+if(surv == "SB"){
 if(!is.na(unique(Survey$EVessel))){
-SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
-polyEastern = as.PolySet(SUA, projection="LL")}
+   SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
+   polyEastern = as.PolySet(SUA, projection="LL")}
 
 if(!is.na(unique(Survey$NVessel))){
-SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBNorthern.csv"))
-polyNorthern = as.PolySet(SUA, projection="LL")}
+   SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBNorthern.csv"))
+   polyNorthern = as.PolySet(SUA, projection="LL")}
 
 SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SB.csv"))
-polySB_main = as.PolySet(SUA, projection="LL")
+polySB_main = as.PolySet(SUA, projection="LL")}
+
+ 
+
+if(surv == "GB"){
+   SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_GB.csv"))
+   polyGB = as.PolySet(SUA, projection="LL")
+   SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SI.csv"))
+   polySI = as.PolySet(SUA, projection="LL")}
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
@@ -181,6 +190,7 @@ Region = Region %>%
   mutate(Vessel = substr(Region_name, 1, 2)) %>%
   rename(Lon = Lon_S,Lat = Lat_S, Lon2 = Lon_E, Lat2 = Lat_E)
 
+if(surv == "SB"){
 a = ggplot(Region,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -189,18 +199,23 @@ a = ggplot(Region,aes(x=Lon, y=Lat)) +
   geom_segment(aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   coord_map() + 
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
-  theme(plot.caption = element_text(face="italic", hjust=0.5))
+  theme(plot.caption = element_text(face="italic", hjust=0.5))}
 
-b = ggplot(Region,aes(x=Lon, y=Lat)) + 
+ 
+
+if(surv == "GB"){
+a = ggplot(Region,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_segment(aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   coord_map() + 
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
-  theme(plot.caption = element_text(face="italic", hjust=0.5))
+  theme(plot.caption = element_text(face="italic", hjust=0.5))}
 
-  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+ 
+
+  plot(a)
 ```
 
 ```{r}
@@ -275,16 +290,32 @@ a=unique(ifelse(Survey$Sample == "Y",
 
 `r a`
 
-### Tides Tables
-
-```{r, fig.align='center'}
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
-
-a = unique(ifelse(Survey$Ground == "GB", "Yarmouth NS, Station #365", "Margaretsville NS, Station #315"))
+```{r}
+if(surv == "SB"){
+  a=paste0("### Tides Tables")
+}
 ```
 
-Tide Schedule for `r a`, Source: www.waterlevels.gc.ca
+ 
+
+`r a`
+
+ 
+
+```{r, fig.align='center'}
+if(surv == "SB"){
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
+b = paste0("Tide Schedule for Margaretsville NS, Station #315m Source: www.waterlevels.gc.ca")
+}
+
+ 
+
+```
+
+ 
+
+`r b`
 
 ### Acoustic Equipment
 
@@ -384,6 +415,7 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 The single point with the largest backscatter density (PRC) was recorded by **`r a`**, at the following location:
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
+if(surv == "SB"){
 a = ggplot() + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -392,23 +424,29 @@ a = ggplot() +
   geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
   guides(size="none") +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-b = ggplot() + 
+ 
+
+if(surv == "GB"){
+a = ggplot() + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_point(data=PRC,aes(x=Lon, y=Lat, colour = Vessel, size = 400)) +
   guides(size="none") +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+ 
+
+plot(a)
 ```
 
 The transect with the overall largest biomass was recorded by **`r c`**, at the following location:
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
+if(surv == "SB"){
 a = ggplot() + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -417,18 +455,23 @@ a = ggplot() +
   geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   guides(size="none") +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-b = ggplot() + 
+ 
+
+if(surv == "GB"){
+a = ggplot() + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_segment(data=Dense, aes(x = Lon, y = Lat, xend = Lon2, yend = Lat2, colour = Vessel), size = 1)  + 
   guides(size="none") +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+ 
+
+plot(a)
 ```
 
 ### Annual Summaries
@@ -503,6 +546,7 @@ Tag_Sum = Tag %>%
 ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
 ScienceData2 = full_join(ScienceData, Tag_Sum)
 
+if(surv == "SB"){
 a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -512,18 +556,23 @@ a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) +
 {if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
   geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-b = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
+ 
+
+if(surv == "GB"){
+a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
-  labs(x=NULL, y=NULL)
+  labs(x=NULL, y=NULL)}
 
-  ifelse(Survey$Ground == "SB", plot(a), plot(b))
+ 
+
+plot(a)
 ```
 :::
 
@@ -546,8 +595,8 @@ kbl(Tag_Sum)%>%
 ```{r, Tow table}
 Plankton = Survey %>%
   rename(Vessel = PlanktonVessel) %>%
-  dplyr::select(Vessel, id, Ground, Date, WindDirection, Swell, AirTemp, Time1, Time2, Lat1, Lat2, Lon1, Lon2, AvgTowDepth, Speed, Heading, TideDirection, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DepthDiscD, DepthDiscA) %>%
-  rename("Set Number" = id, "Wind Direction (km/h)" = WindDirection, "Swell (m)" = Swell, "Air Temp (c)" = AirTemp, "Tow Start" = Time1, "Tow End" = Time2, "Start Lat" = Lat1, "End Lat" = Lat2, "Start Lon" = Lon1, "End Lon" = Lon2, "Avg Tow Depth (m)" = AvgTowDepth, "Tide Direction" = TideDirection, "Flow Start" = FlowReading1, "Flow End" = FlowReading2, "No. Revolutions" = NoRevs, "Distance (m)" = DistanceCalc, "Secchi Disappear (m)" = DepthDiscD, "Secchi Reappear (m)" = DepthDiscA)
+  dplyr::select(Vessel, id, Ground, Date, WindDirection, Swell, AirTemp, Time1, Time2, Lat1, Lat2, Lon1, Lon2, AvgTowDepth, Speed, Heading, TideDirection, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DiscDepthD, DiscDepthA) %>%
+  rename("Set Number" = id, "Wind Direction (km/h)" = WindDirection, "Swell (m)" = Swell, "Air Temp (c)" = AirTemp, "Tow Start" = Time1, "Tow End" = Time2, "Start Lat" = Lat1, "End Lat" = Lat2, "Start Lon" = Lon1, "End Lon" = Lon2, "Avg Tow Depth (m)" = AvgTowDepth, "Tide Direction" = TideDirection, "Flow Start" = FlowReading1, "Flow End" = FlowReading2, "No. Revolutions" = NoRevs, "Distance (m)" = DistanceCalc, "Secchi Disappear (m)" = DiscDepthD, "Secchi Reappear (m)" = DiscDepthA)
 
 Plankton = t(Plankton)
 

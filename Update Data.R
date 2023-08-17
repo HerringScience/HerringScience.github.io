@@ -411,26 +411,29 @@ Surveys = Surveys %>% arrange(Date)
 Date = Surveys$Date
 Survey = 1:length(Surveys$Date)
 Biomass = Surveys$Biomass
-TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
-Previous = Surveys %>% filter(is.na(Current))
-Previous = sum(Previous$HSC_Turnover_Adjusted)
-Turnover = TurnBio-Previous
 
+if(surv.no > 1){
+  TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
+  Previous = Surveys %>% filter(is.na(Current))
+  Previous = sum(Previous$HSC_Turnover_Adjusted)
+  Turnover = TurnBio-Previous
+  Current$Turnover = Turnover
+  
 #Add it to Table C
 C$Turnover = Turnover
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
-write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
+write.table(C, file= "tableC.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)}
 
 #Update SSB Estimates
-SSB = read_csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 SSB$Survey_Date = as.Date(SSB$Survey_Date)
-Current$Turnover = Turnover
 Current$Year = as.integer(year)
 Current$Survey_Number = as.integer(surv.no)
-Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass, HSC_Turnover_Adjusted = Turnover)
+   if(surv.no > 1){Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass, HSC_Turnover_Adjusted = Turnover)}
+   if(surv.no == 1){Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass)}
 SSB = full_join(SSB, Current)
 SSB = SSB %>% arrange(Year)
-SSB %>% write_csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 
 ###Performance data import and filtering###
 actual = A
