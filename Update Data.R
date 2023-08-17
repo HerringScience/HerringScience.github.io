@@ -7,7 +7,7 @@ surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
 surv.no="1"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
@@ -18,8 +18,8 @@ SB1= 661 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
-GB1 = 805 #GB main area
-GB2 = 267 #Seal Island area
+GB1 = 511 #GB main area
+GB2 = 299 #Seal Island area
 GB3 = NA #Ad-hoc school survey area
 
 ##
@@ -61,6 +61,7 @@ library(gridExtra)
 library(cowplot)
 library(readxl)
 library(hms)
+library(measurements)
 
 ##Survey Data import and filtering
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
@@ -76,6 +77,9 @@ if(Sample == "Y"){Plankton$Sample = "Y"}
 if(Sample == "N"){Plankton$Sample = "N"}
 
 #get CTD data from Plankton
+SurveyData = read_csv("Plan Data.csv")
+SurveyData$StartDate = as.Date(SurveyData$Date, format = "%d/%m/%Y")
+
 if(!is.na(first(Plankton$CTD_ID))){
   CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
   CTDData = CTDData %>%
@@ -84,13 +88,16 @@ if(!is.na(first(Plankton$CTD_ID))){
   CTDData = CTDData %>%
     mutate(plankton_ID = paste0(first(Plankton$Set_Number), "/", last(Plankton$Set_Number)),
            ground = surv2,
-           id = Plankton$CTD_ID,
-           Date = StartDate,
-           Lat = Plankton$CTD_Lat,
-           Lon = Plankton$CTD_Lon,
-           Year = year,
-           Survey = surv.no)
+           id = first(Plankton$CTD_ID),
+           Date = first(SurveyData$StartDate),
+           Lat = first(Plankton$CTD_Lat),
+           Lon = first(Plankton$CTD_Lon),
+           Year = first(year),
+           Survey = first(surv.no))
+  setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data"))
   CTDRaw = read_csv("CTD_Raw.csv")
+  CTDData$Year = as.numeric(CTDData$Year)
+  CTDData$Survey = as.numeric(CTDData$Survey)
   CTDTotal = full_join(CTDRaw, CTDData)
   CTDTotal %>% write_csv("CTD_Raw.csv")
   Plankton = Plankton %>%
@@ -169,6 +176,7 @@ SurveyTotal = full_join(Plankton, PlanData)
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
 Survey = read_csv("planktonsamplingData.csv")
 
+SurveyTotal$TowTime = as.numeric(SurveyTotal$TowTime)
 Total = full_join(Survey, SurveyTotal)
 
 Total = Total %>%
@@ -190,7 +198,7 @@ Total = Total %>%
                 DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
                 SurfaceTemp, WaterDepth1, WaterDepth2)
 
-Total %>% write_Csv("planktonsamplingData.csv")
+Total %>% write_csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 Total %>% write_csv("Survey Data.csv")
 
@@ -223,12 +231,19 @@ SUA = read.csv("polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
-SUA = read.csv("polygon_SBEastern.csv")
-polyEastern = as.PolySet(SUA, projection="LL")
-SUA = read.csv("polygon_SBNorthern.csv")
-polyNorthern = as.PolySet(SUA, projection="LL")
-SUA = read.csv("polygon_SB.csv")
-polySB_main = as.PolySet(SUA, projection="LL")
+if(surv == "SB") 
+  {SUA = read.csv("polygon_SBEastern.csv")
+   polyEastern = as.PolySet(SUA, projection="LL")
+   SUA = read.csv("polygon_SBNorthern.csv")
+   polyNorthern = as.PolySet(SUA, projection="LL")
+   SUA = read.csv("polygon_SB.csv")
+   polySB_main = as.PolySet(SUA, projection="LL")}
+
+if(surv == "GB"){
+  SUA = read.csv("polygon_GB.csv")
+  polyGB = as.PolySet(SUA, projection="LL")
+  SUA = read.csv("polygon_SI.csv")
+  polySI = as.PolySet(SUA, projection="LL")}
 
 #Load functions
 pathnames <- list.files(pattern="[.]R$", path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Functions"), full.names=TRUE)
@@ -365,7 +380,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 ggsave("PRCplot.jpg", height = 15, width = 15, units = "cm")
 
 ###Turnover Calc###
-SSB = read.csv(file = "C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 SSB = SSB %>% filter(Year == year) %>% dplyr::select(Date = Survey_Date, Biomass = HSC_Estimate, Ground, HSC_Turnover_Adjusted)
 SSB = distinct(SSB)
 

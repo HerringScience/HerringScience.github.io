@@ -9,11 +9,11 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2023"
-surv.no = "5"
-hightide = "2023-07-17 00:11:00"
+surv.no = "1"
+hightide = "2023-07-17 00:11:00" #for Scots Bay only
 ```
 
 ```{r setup, include=FALSE}
@@ -231,9 +231,18 @@ hightide = as.POSIXlt(hightide, format="%Y-%m-%d %H:%M:%S")
 tidediff = as.double(difftime(tidestring, hightide, units = "hours"))
 j = ifelse(tidediff < 0, "before", "after")
 k = abs(round(tidediff, digits = 2))
+if(surv == "SB")
+  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hours ", j, " hide tide.")}
+
+ 
+
+if(surv == "GB")
+  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ".")}
+
+ 
 ```
 
-`r a` commercial purse seiners conducted this `r b` survey on `r c` starting at `r d`, which was `r k` hours `r j` high tide.
+`r n`
 
 `r i` vessels ran `r g`.
 

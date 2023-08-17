@@ -39,6 +39,8 @@ CP3 <- as(extent(-67, -65, 43, 44), "SpatialPolygons")
 CP4 <- as(extent(-66, -63, 44, 46), "SpatialPolygons") 
 # Scotia Shelf
 CP5 <- as(extent(-65, -60, 43, 46), "SpatialPolygons") 
+# Grand Manan Area
+CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
 
 #Reduce Province data down to only the above extents/limits
 proj4string(CP1) <- CRS(proj4string(NBNS))
@@ -84,30 +86,31 @@ setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.githu
 tags = read.csv("TaggingEvents.csv")
 
 Tag1 = tags %>%
-  filter(Tag_Num == 505883 |
-         Tag_Num == 508798 |
-         Tag_Num == 555352 |
-         Tag_Num == 524866 |
-         Tag_Num == 508679 |
-         Tag_Num == 565723 |
-         Tag_Num == 556380 |
-         Tag_Num == 555955 |
-         Tag_Num == 476485 |
-         Tag_Num == 509188)
+    filter(Tag_Num == 555955 |         
+           Tag_Num == 555352 |
+           Tag_Num == 505883 |
+           Tag_Num == 556380 |
+           Tag_Num == 508798 |
+           Tag_Num == 508679 |
+           Tag_Num == 509188 |
+           Tag_Num == 565723 |
+           Tag_Num == 476485 |
+           Tag_Num == 524866)
+
 
 Tag1 = Tag1 %>%
   dplyr::select(Tag_Num, Date, Lon, Lat, Vessel)
 
-#CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
-#proj4string(CP6) <- CRS(proj4string(NBNS))
-#GM <- gIntersection(NBNS, CP6, byid=TRUE)
+CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
+proj4string(CP6) <- CRS(proj4string(NBNS))
+GM <- gIntersection(NBNS, CP6, byid=TRUE)
 
-#NEBank = boxes[which(boxes$Box == "NortheastBank"), ]
 
 #All Data at once
 ggplot(boxes,aes(x=X, y=Y)) + 
   geom_polygon(aes(colour = Box),fill= NA,lwd=1) + 
   geom_polygon(data=All,aes(x=long, y=lat, group=group)) + 
-  geom_point(data=Tag1, aes(x=Lon, y=Lat, colour = Date), size=5) +
+  geom_point(data=Tag1, aes(x=Lon, y=Lat, colour = Date), size=3) +
   coord_map() + 
   labs(x=NULL, y=NULL)
+
