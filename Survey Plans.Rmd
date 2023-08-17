@@ -300,55 +300,39 @@ if(surv=="GB"){
 ##### Full Lines Table
 
 ```{r}
-#Plan3 = Plan
-Plan$`Start Lat` = conv_unit(Plan$`Start Lat`, "dec_deg", "deg_dec_min")
-Plan$`Start Lon` = conv_unit(Plan$`Start Lon`, "dec_deg", "deg_dec_min")
-Plan$`End Lat` = conv_unit(Plan$`End Lat`, "dec_deg", "deg_dec_min")
-Plan$`End Lon` = conv_unit(Plan$`End Lon`, "dec_deg", "deg_dec_min")
 
-Plan = Plan %>%
-  mutate('Start Lat' = substr(Plan$`Start Lat`, 1, 9)) %>%
-  mutate('End Lat' = substr(Plan$`End Lat`, 1, 9)) %>%
-  mutate('Start Lon' = substr(Plan$`Start Lon`, 2, 10)) %>%
-  mutate('End Lon' = substr(Plan$`End Lon`, 2, 10))
+if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+           NA)))}
+if(surv=="GB"){vessels2=vessels}
 
-degree = str_split_i(Plan$`Start Lat`, " ", -2)
-end = str_split_i(Plan$`Start Lat`, " ", 2)
-decimal = as.numeric(str_split_i(end, "\\.", 1))
-decimal = sprintf("%02d", decimal)
-minutes = as.numeric(str_split_i(end, "\\.", -1))
-minutes = sprintf("%02d", minutes)
-minutes = str_pad(minutes, width=3, side="right", pad="0")
-all = paste0(degree,decimal,".",minutes)
-Plan$`Start Lat` = all
+Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
 
-degree = str_split_i(Plan$`End Lat`, " ", -2)
-end = str_split_i(Plan$`End Lat`, " ", 2)
-decimal = as.numeric(str_split_i(end, "\\.", 1))
-decimal = sprintf("%02d", decimal)
-minutes = as.numeric(str_split_i(end, "\\.", -1))
-minutes = sprintf("%02d", minutes)
-minutes = str_pad(minutes, width=3, side="right", pad="0")
-all = paste0(degree,decimal,".",minutes)
-Plan$`End Lat` = all
+if(surv=="SB"){
+if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+if(!is.na(NVessel) & !is.na(EVessel)){
+  Plan = full_join(Main, North)
+  Plan = full_join(Plan, East)}
+if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
+if(surv=="GB"){Plan=Main}
 
-degree = str_split_i(Plan$`Start Lon`, " ", -2)
-end = str_split_i(Plan$`Start Lon`, " ", 2)
-decimal = as.numeric(str_split_i(end, "\\.", 1))
-decimal = sprintf("%02d", decimal)
-minutes = str_split_i(end, "\\.", -1)
-minutes = str_pad(minutes, width=3, side="right", pad="0")
-all = paste0(degree,decimal,".",minutes)
-Plan$`Start Lon` = all
-
-degree = str_split_i(Plan$`End Lon`, " ", -2)
-end = str_split_i(Plan$`End Lon`, " ", 2)
-decimal = as.numeric(str_split_i(end, "\\.", 1))
-decimal = sprintf("%02d", decimal)
-minutes = str_split_i(end, "\\.", -1)
-minutes = str_pad(minutes, width=3, side="right", pad="0")
-all = paste0(degree,decimal,".",minutes)
-Plan$`End Lon` = all
+#Add vessel names to Plan
+Plan = Plan %>% 
+  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
 
 Plan %>%
   arrange(Vessel) %>%
