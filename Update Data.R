@@ -157,7 +157,6 @@ TowTbl2 = tibble_row(Tow_No = 2, AvgTowDepth = first(Tow2$AvgTowDepth), MaxTowDe
 TowCalcs = full_join(TowTbl1, TowTbl2)
 
 Plankton = full_join(Plankton, TowCalcs, by = "Tow_No")
-}
 
 #convert lat/lon before combining
 Plankton$Lon1 = as.numeric(conv_unit(Plankton$Lon1, "deg_dec_min", "dec_deg"))*-1
@@ -200,7 +199,29 @@ Total = Total %>%
 
 Total %>% write_csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
-Total %>% write_csv("Survey Data.csv")
+Total %>% write_csv("Survey Data.csv")}
+
+if(Tow == "N"){
+  Survey = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+  Total = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+  PlanData = read_csv((paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
+  PlanData$Survey.No = as.character(PlanData$Survey.No)
+  Total = full_join(Total, PlanData)
+  Survey = full_join(Survey, PlanData)
+  Total = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+  Survey = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+  
+  setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+  Depth=1
+  Time=1
+  Tow1 = tibble(Depth, Time)
+  Tow1 %>%
+    ggplot(aes(x = Time, y = Depth)) +
+    scale_y_reverse() +
+    labs(y = "Depth (m)")
+    ggsave("Tow 1.jpg")
+    ggsave("Tow 2.jpg")
+}
 
 ##ECHOVIEW DATA##
 #Land Data
@@ -449,7 +470,7 @@ Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist.
 #calculate time/speed
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
   mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
-  mutate(Duration = as.numeric(End-Start)*60) %>%
+  mutate(Duration = as.numeric(End-Start)) %>%
   mutate(Speed = (Distance*1000)/(Duration))
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))

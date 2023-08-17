@@ -201,8 +201,6 @@ a = ggplot(Region,aes(x=Lon, y=Lat)) +
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
   theme(plot.caption = element_text(face="italic", hjust=0.5))}
 
- 
-
 if(surv == "GB"){
 a = ggplot(Region,aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
@@ -212,8 +210,6 @@ a = ggplot(Region,aes(x=Lon, y=Lat)) +
   coord_map() + 
   labs(x=NULL, y=NULL, caption = "Track plot and Survey Area") +
   theme(plot.caption = element_text(face="italic", hjust=0.5))}
-
- 
 
   plot(a)
 ```
@@ -225,7 +221,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "two transects in the German Bank box and one transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "No", "two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
@@ -248,18 +244,22 @@ j = ifelse(tidediff < 0, "before", "after")
 k = abs(round(tidediff, digits = 2))
 if(surv == "SB")
   {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hours ", j, " hide tide.")}
-
- 
-
 if(surv == "GB")
-  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ".")}
+{n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ".")}
 
+if(surv == "SB"){
+l = paste0(i, " vessels ran ", g)
+}
+
+if(surv == "GB"){
+l = g  
+}
  
 ```
 
 `r n`
 
-`r i` vessels ran `r g`.
+`r g`.
 
 `r h`.
 
@@ -276,8 +276,8 @@ d=unique(last(Tag_Summary$Date))
 e=length(unique(Tag_Summary$Vessel))
 
 f=if_else(a != 0, 
-                paste0("A total of ", a, " tags were applied during the survey over ", b, " event(s) from ", c, " to ", d, " from ", e, " vessel(s)."), 
-                "No tags were applied during this survey.")
+           paste0("A total of ", a, " tags were applied during the survey over ", b, " event(s) from ", c, " to ", d, " from ", e, " vessel(s)."), 
+                  "No tags were applied during this survey.")
 ```
 
 `r f`
@@ -292,30 +292,28 @@ a=unique(ifelse(Survey$Sample == "Y",
 
 ```{r}
 if(surv == "SB"){
-  a=paste0("### Tides Tables")
+  w=paste0("### Tides Tables")
+}
+
+if(surv == "GB"){
+  w=cat("\n")
 }
 ```
 
- 
-
-`r a`
-
- 
+`r w`
 
 ```{r, fig.align='center'}
 if(surv == "SB"){
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
-b = paste0("Tide Schedule for Margaretsville NS, Station #315m Source: www.waterlevels.gc.ca")
+t = paste0("Tide Schedule for Margaretsville NS, Station #315m Source: www.waterlevels.gc.ca")
 }
-
- 
-
+if(surv == "GB"){
+  t=cat("\n")
+}
 ```
 
- 
-
-`r b`
+`r t`
 
 ### Acoustic Equipment
 
@@ -326,14 +324,17 @@ Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer
 ### Main Results
 
 ```{r Biomass details}
-b=sum(tableC$`Biomass (tons)`)
+if(surv == "GB"){b= tableC %>% filter(Layer == "German Bank")
+b=sum(b$'Biomass (tons)')}
+if(surv == "SB"){b=sum(tableC$`Biomass (tons)`)}
 b=format(b, big.mark=(","), digits=2)
 c=as.numeric(tableC$Turnover)
 c=format(c, big.mark=(","), digits=2)
 d=tableC %>% filter(Layer == "Seal Island")
 d=d$'Biomass (tons)'
 d=format(d, big.mark=(","), digits=2)
-f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt."))
+if(surv.no == 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt."))}
+if(surv.no > 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt."))}
 f=f[1:1]
 ```
 
@@ -426,8 +427,6 @@ a = ggplot() +
   coord_map() + 
   labs(x=NULL, y=NULL)}
 
- 
-
 if(surv == "GB"){
 a = ggplot() + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
@@ -437,8 +436,6 @@ a = ggplot() +
   guides(size="none") +
   coord_map() + 
   labs(x=NULL, y=NULL)}
-
- 
 
 plot(a)
 ```
@@ -457,8 +454,6 @@ a = ggplot() +
   coord_map() + 
   labs(x=NULL, y=NULL)}
 
- 
-
 if(surv == "GB"){
 a = ggplot() + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
@@ -468,8 +463,6 @@ a = ggplot() +
   guides(size="none") +
   coord_map() + 
   labs(x=NULL, y=NULL)}
-
- 
 
 plot(a)
 ```
@@ -558,8 +551,6 @@ a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) +
   coord_map() + 
   labs(x=NULL, y=NULL)}
 
- 
-
 if(surv == "GB"){
 a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
@@ -569,8 +560,6 @@ a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) +
   geom_point(aes(colour = Vessel, size = Tag_Count)) +
   coord_map() + 
   labs(x=NULL, y=NULL)}
-
- 
 
 plot(a)
 ```
