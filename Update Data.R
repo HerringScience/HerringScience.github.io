@@ -225,8 +225,8 @@ if(Tow == "N"){
 
 ##ECHOVIEW DATA##
 #Land Data
-can<-getData('GADM', download = FALSE, country="CAN", level=1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
-us = getData('GADM', download = FALSE, country = "USA", level = 1, path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io")
+can<-getData('GADM', download = FALSE, country="CAN", level=1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
+us = getData('GADM', download = FALSE, country = "USA", level = 1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
 can1 = rbind(can,us)
 NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 
@@ -277,7 +277,7 @@ Map = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/Herri
 Region = list.files(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no), pattern = "Region") %>% 
   map_df(~read_csv(.))
 
-NVessel = ifelse(Survey$NVessel == "Lady Janice II", "LJ",
+if(surv=="SB"){NVessel = ifelse(Survey$NVessel == "Lady Janice II", "LJ",
                  ifelse(Survey$NVessel == "Sealife II", "SL",
                         ifelse(Survey$NVessel == "Lady Melissa", "LM",
                                ifelse(Survey$NVessel == "Canada 100", "C1",
@@ -297,7 +297,6 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
                                                            ifelse(Survey$EVessel == "Morning Star", "MS",
                                                                   ifelse(Survey$EVessel == "Tasha Marie", "TM",
                                                                          NA)))))))))
-if(surv == "SB"){
   out = SBout
   map = mapDat(x = Map)
   x = Region
@@ -344,9 +343,9 @@ if(surv=="GB"){
   x = Region
   trans = transects(x= Region, TS38 = TS1 , TS50 = NA)
   
-  ids = c("T01", "T02", "T03")
+  ids = c("T01", "T02", "T03", "T04")
   trans1 = trans[which((trans$Transect_No %in% ids)), ]
-  ids = c("T04", "T05", "T06", "T07")
+  ids = c("T05", "T06", "T07")
   trans2 = trans[which((trans$Transect_No %in% ids)), ]
   
   x = surveyTrack2(x=trans1, polyNameA  = polyGB, polyNameB  = polySI, title = name )
@@ -360,11 +359,11 @@ if(surv=="GB"){
   ggplot(trans2, aes(x=X, y=Y)) + geom_polygon(data=polyAD,aes(x=X, y=Y, group=PID), fill = "white", colour = "black")  + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1)  + labs(x=NULL, y=NULL) + coord_map()
   }
   
-  ids = c("T01", "T02", "T03")
+  ids = c("T01", "T02", "T03", "T04")
   map1 = map[which((map$Transect_No %in% ids)), ]
   
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
-  SI = trans[which(trans$Transect_No == "T03"), ]
+  SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
   ids = c("T01", "T02")
   GB = trans[which((trans$Transect_No %in% ids)), ]
   
@@ -410,6 +409,7 @@ if(surv == "GB"){
   y_intercept = GB_y
   x_Var_1 = GB_x_var
   daysturnover = GB_days
+  SSBSI = SSB %>% filter(Ground == "Seal Island")
   SSB = SSB %>% filter(Ground == "German Bank")
 }
 
@@ -424,9 +424,17 @@ SSB$Date = as.Date(SSB$Date)
 resultsa$Date = as.Date(substr(resultsa$Date_Time_S, 0, 10))
 resultsa = resultsa %>% arrange(Date)
 Date = first(resultsa$Date)
-Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass)
+
+if(surv=="GB"){
+  Biomass = sum(resultsa$trans_biomass)
+  BiomassSI = sum(resultsb$trans_biomass)}
+
+if(surv=="SB"){
+  Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass)}
+
 Current = tibble(Date, Biomass, surv2)
 Current = Current %>% dplyr::select(Date, Biomass, Ground = surv2) %>% mutate(Current = "Y")
+if(surv=="GB"){SealIsland = tibble(Year = as.integer(year), Date, BiomassSI, Ground = "Seal Island", Survey_Number = as.integer(surv.no))}
 Surveys = full_join(Current, SSB)
 Surveys = Surveys %>% arrange(Date)
 Date = Surveys$Date
@@ -452,7 +460,9 @@ Current$Year = as.integer(year)
 Current$Survey_Number = as.integer(surv.no)
    if(surv.no > 1){Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass, HSC_Turnover_Adjusted = Turnover)}
    if(surv.no == 1){Current = Current %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = Biomass)}
+   if(surv=="GB"){SealIsland = SealIsland %>% dplyr::select(Year, Ground, Survey_Number, Survey_Date = Date, HSC_Estimate = BiomassSI)}
 SSB = full_join(SSB, Current)
+if(surv=="GB"){SSB = full_join(SSB, SealIsland)}
 SSB = SSB %>% arrange(Year)
 SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 
@@ -470,8 +480,8 @@ Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist.
 #calculate time/speed
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
   mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
-  mutate(Duration = as.numeric(End-Start)) %>%
-  mutate(Speed = (Distance*1000)/(Duration))
+  mutate(Duration = as.numeric(End-Start)*60) %>%
+  mutate(Speed = ((Distance*1000)/(Duration))/60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 

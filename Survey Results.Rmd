@@ -147,8 +147,6 @@ if(!is.na(unique(Survey$NVessel))){
 SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SB.csv"))
 polySB_main = as.PolySet(SUA, projection="LL")}
 
- 
-
 if(surv == "GB"){
    SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_GB.csv"))
    polyGB = as.PolySet(SUA, projection="LL")
@@ -471,12 +469,19 @@ plot(a)
 
 ```{r}
 year = as.numeric(year)
-Annual_Compare1 = SSB %>%
+if(surv=="SB"){Annual_Compare1 = SSB %>%
   filter(Year == year & Ground == surv2) %>%
   dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
 
 Annual_Compare2 = SSB %>%
-  filter(Year == year-1 & Ground == surv2)
+  filter(Year == year-1 & Ground == surv2)}
+
+if(surv=="GB"){Annual_Compare1 = SSB %>%
+  filter(Year == year & Ground == "German Bank" | Ground == "Seal Island") %>%
+  dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
+
+Annual_Compare2 = SSB %>%
+  filter(Year == year-1 & Ground == "German Bank" | Ground == "Seal Island")}
 
 Annual_Compare3 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number"))
 Annual_Compare4 = Annual_Compare3 %>%
