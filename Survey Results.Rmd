@@ -9,11 +9,11 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
+surv = "SB"
+surv2 = "Scots Bay"
 year = "2023"
-surv.no = "1"
-hightide = "2023-07-17 00:11:00" #for Scots Bay only
+surv.no = "6"
+hightide = "2023-07-30 22:00:00" #for Scots Bay only
 ```
 
 ```{r setup, include=FALSE}
@@ -136,7 +136,7 @@ CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 
 if(surv == "SB"){
-if(!is.na(unique(Survey$EVessel))){
+  if(!is.na(unique(Survey$EVessel))){
    SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
    polyEastern = as.PolySet(SUA, projection="LL")}
 
@@ -220,14 +220,14 @@ d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
 g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
-         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "No", "two transects each in the Main Survey Box",
-         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
-         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
          "NA"))))))
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))
 i=unique(ifelse(Survey$Ground == "GB", a, 
-         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "No", a,
+         ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", a,
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", a-1, 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", a-1, 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", a-2,
@@ -302,12 +302,11 @@ if(surv == "GB"){
 
 ```{r, fig.align='center'}
 if(surv == "SB"){
-knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Daily.jpg"), rel_path = FALSE)
-t = paste0("Tide Schedule for Margaretsville NS, Station #315m Source: www.waterlevels.gc.ca")
 }
-if(surv == "GB"){
-  t=cat("\n")
+if(surv == "SB"){knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Hourly.jpg"), rel_path = FALSE)}
+if(surv == "SB"){t = paste0("Tide Schedule for Margaretsville NS, Station #315m Source: www.waterlevels.gc.ca")}
+if(surv == "GB"){t=cat("\n")
 }
 ```
 
@@ -324,7 +323,7 @@ Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer
 ```{r Biomass details}
 if(surv == "GB"){b= tableC %>% filter(Layer == "German Bank")
 b=sum(b$'Biomass (tons)')}
-if(surv == "SB"){b=sum(tableC$`Biomass (tons)`)}
+if(surv == "SB"){b=sum(tableC$`Biomass (tons)`, na.rm=TRUE)}
 b=format(b, big.mark=(","), digits=2)
 c=as.numeric(tableC$Turnover)
 c=format(c, big.mark=(","), digits=2)
@@ -477,11 +476,11 @@ Annual_Compare2 = SSB %>%
   filter(Year == year-1 & Ground == surv2)}
 
 if(surv=="GB"){Annual_Compare1 = SSB %>%
-  filter(Year == year & Ground == "German Bank" | Ground == "Seal Island") %>%
+  filter(Year == year & Ground == "German Bank" | Year == year & Ground == "Seal Island") %>%
   dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
 
 Annual_Compare2 = SSB %>%
-  filter(Year == year-1 & Ground == "German Bank" | Ground == "Seal Island")}
+  filter(Year == year-1 & Ground == "German Bank" | Year == year-1 & Ground == "Seal Island")}
 
 Annual_Compare3 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number"))
 Annual_Compare4 = Annual_Compare3 %>%
@@ -708,8 +707,9 @@ a=ifelse(Vessel_Speed$AvgSpeed > 8, paste0("Average vessel speed was ", round(Ve
 
 ```{r, fig.align='center'}
 Distance = Distance %>%
-  filter(Difference < 40) %>%
-  filter(Difference > 0)
+  filter(Difference < 0) %>%
+  filter(Difference > -10) %>%
+  mutate(Difference = abs(Difference))
 
 ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() + 
   ylab("Distance cut from Planned Lines (KM)") + 
@@ -720,7 +720,6 @@ ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() +
 
 ```{r, fig.align='center'}
 Distance_Cut = Distance %>%
-  filter(Difference > 0) %>%
   ungroup() %>%
   summarize(Cut = sum(Difference))
 

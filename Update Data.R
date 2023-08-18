@@ -2,16 +2,16 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB
-surv2="German Bank" #"German Bank" or "Scots Bay" as written
+surv="SB" #SB or GB
+surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
 year="2023"
-surv.no="1"
+surv.no="6"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("FM", "LB", "LJ", "SL")
+ids = c("C1", "FM", "LM", "LJ", "SL", "MS", "LB")
 
 #Area and TS values
 SB1= 661 #SB main area
@@ -104,6 +104,7 @@ if(!is.na(first(Plankton$CTD_ID))){
     mutate(AvgTemp = mean(CTDData$Temperature),
            AvgSalinity = mean(CTDData$Salinity))
 }
+
 if(is.na(first(Plankton$CTD_ID))){
   Plankton = Plankton %>%
     mutate(AvgTemp = NA,
@@ -114,8 +115,8 @@ if(is.na(first(Plankton$CTD_ID))){
 if(Tow == "Y"){
   TowData = read_excel(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Ruskin.xlsx"), skip = 1, sheet = 'Data')
   TowData$DateTime = TowData$Time
+  TowData$DateTime = TowData$DateTime-hours(3)
   TowData$Date = substr(TowData$DateTime,1,10)
-  TowData$Date = as.Date(TowData$Date)
   TowData$Time = substr(TowData$DateTime,12,19)
   TowData$Time = hms::as_hms(TowData$Time)
 
@@ -139,14 +140,14 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 
 Tow1 %>%
   ggplot(aes(x = Time, y = Depth)) +
-  geom_path(size = 1, colour = "blue") +
+  geom_path(linewidth = 1, colour = "blue") +
   scale_y_reverse() +
   labs(y = "Depth (m)")
   ggsave("Tow 1.jpg")
 
 Tow2 %>%
   ggplot(aes(x = Time, y = Depth)) +
-  geom_path(size = 1, colour = "blue") +
+  geom_path(linewidth = 1, colour = "blue") +
   scale_y_reverse() +
   labs(y = "Depth (m)")
   ggsave("Tow 2.jpg")
@@ -192,7 +193,7 @@ Total = Total %>%
                 StartTime, Vessel.No, ExtraBox, EVessel, NVessel, PlanktonVessel, 
                 Tow_No, Time1, Time2, TowTime, Lat1, Lon1, Lat2, Lon2, No_jars, 
                 Speed, Heading, TideDirection, Swell, WindDirection, WindSpeed, 
-                AirTemp, Observers, Net, Gear, TowType, FlowmeterType, FlowReading1, 
+                AirTemp, Observer, Net, Gear, TowType, FlowmeterType, FlowReading1, 
                 FlowReading2, NoRevs, DistanceCalc, Volume, AvgTowDepth, MaxTowDepth, 
                 DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
                 SurfaceTemp, WaterDepth1, WaterDepth2)
@@ -253,10 +254,11 @@ polySI = as.PolySet(SUA, projection="LL")
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 if(surv == "SB") 
-  {SUA = read.csv("polygon_SBEastern.csv")
-   polyEastern = as.PolySet(SUA, projection="LL")
-   SUA = read.csv("polygon_SBNorthern.csv")
-   polyNorthern = as.PolySet(SUA, projection="LL")
+  {
+  if(!is.na(PlanData$EVessel)){SUA = read.csv("polygon_SBEastern.csv")
+   polyEastern = as.PolySet(SUA, projection="LL")}
+  if(!is.na(PlanData$NVessel)){SUA = read.csv("polygon_SBNorthern.csv")
+   polyNorthern = as.PolySet(SUA, projection="LL")}
    SUA = read.csv("polygon_SB.csv")
    polySB_main = as.PolySet(SUA, projection="LL")}
 
@@ -301,7 +303,6 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
   map = mapDat(x = Map)
   x = Region
   trans = transects(x= Region, TS38 = TS1, TS50 = NA)
-  x = surveyTrack3(x=trans, polyNameA  = polySB_main, polyNameB  = polyNorthern,  polyNameC  = polyEastern,  title = name)
   northern = trans[which((trans$Vessel == NVessel)), ]
   eastern = trans[which((trans$Vessel == EVessel)), ]
   main = trans[which((trans$Vessel %in% ids)), ]
@@ -430,7 +431,7 @@ if(surv=="GB"){
   BiomassSI = sum(resultsb$trans_biomass)}
 
 if(surv=="SB"){
-  Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass)}
+  Biomass = sum(resultsa$trans_biomass, resultsb$trans_biomass, resultsc$trans_biomass, na.rm = TRUE)}
 
 Current = tibble(Date, Biomass, surv2)
 Current = Current %>% dplyr::select(Date, Biomass, Ground = surv2) %>% mutate(Current = "Y")
