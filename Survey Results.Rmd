@@ -348,6 +348,7 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 ```{r}
 TransDetails = SurveyTotal %>%
   filter(Type == "Actual") %>%
+  filter(!is.na(Vessel)) %>%
   dplyr::select(-Dist..km., -Type, -Survey) %>%
   rename("Transect #" = Transect.No., "Date/Time Start" = Date.Time.Start, "Date/Time End" = Date.Time.End, "Start Lon" = Start.Lon, "Start Lat" = Start.Lat, "End Lon" = End.Lon, "End Lat" = End.Lat, "Distance (km)" = Distance) %>%
   arrange(Vessel, "Transect #") %>%
@@ -367,7 +368,7 @@ kbl(TransDetails, caption="Table 1: Transect Details", align='c') %>%
 ### Survey Summary
 
 ```{r}
-table1 = tableB %>% arrange(desc(`Mean Sa (/m2)`)) 
+table1 = tableB %>% arrange(desc(`Mean Sa (/m2)`)) %>% filter(!is.na(Vessel))
 table1$`Mean Sa (/m2)`=round(table1$`Mean Sa (/m2)`, digits=3)
 table1$`Biomass Density (kg/m2)`=round(table1$`Biomass Density (kg/m2)`, digits=3)
 
@@ -386,7 +387,8 @@ table2$`Density (kg/m2)` = round(table2$`Density (kg/m2)`, digits = 4)
 table2$`Mean Sa` = round(table2$`Mean Sa`, digits = 4)
 table2$`Standard Error (tons)` = round(table2$`Standard Error (tons)`, digits = 2)
 table2$`Standard Error (%)` = round(table2$`Standard Error (%)`, digits = 2)
-table2 = table2 %>% dplyr::select(Layer, "Target Strength", "Area (km2)", "Mean Sa", "Density (kg/m2)", "Biomass (tons)", "Percent Area", "Percent Biomass", "Standard Error (tons)", "Standard Error (%)")
+table2 = table2 %>% dplyr::select(Layer, "Target Strength", "Area (km2)", "Mean Sa", "Density (kg/m2)", "Biomass (tons)", "Percent Area", "Percent Biomass", "Standard Error (tons)", "Standard Error (%)") 
+table2= table2 %>% filter(!is.na('Target Strength'))
 
 kbl(table2, caption="Table 3: Survey Summary Table", format.args=(list(big.mark=","))) %>%
   kable_paper("striped", full_width=F)
