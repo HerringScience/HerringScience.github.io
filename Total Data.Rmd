@@ -42,6 +42,7 @@ library(dygraphs)
 library(leaflet)
 library(rmapshaper)
 library(plotly)
+library(mapproj)
 
 #Tagging Data
 Tag = read_csv("TaggingEvents.csv") #Tagging Data
