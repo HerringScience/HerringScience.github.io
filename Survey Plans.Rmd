@@ -7,11 +7,12 @@ output:
 
 ```{r setup, include=FALSE}
 ## Global options
-rm(list = ls())
+rm(list = ls()) #removes everything in the current environment
+
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-08-27 20:00:00"
+surv.date = "2023-08-27 20:00:00" #survey date and time, as formatted
 surv.no = "8"
 Allocation = "200" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
@@ -34,8 +35,8 @@ V7 = "Lady Janice"
 V8 = "Brunswick Provider"
 V9 = NA
 
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
-knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
+knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center') #sets the coding chunk options of the whole document to not appear in the actual document (echo)
 ```
 
 ```{r Data Import, include=FALSE}
@@ -64,33 +65,37 @@ library(measurements)
 
 #Parse date time
 surv.date = as.POSIXlt(surv.date, format="%Y-%m-%d %H:%M:%S")
-StartTime = substr(surv.date, 12,19)
-StartDate = substr(surv.date, 1,10)
+StartTime = substr(surv.date, 12,19) #turns the 12th-19th section of surv.date into the start time (the 20:00:00 time of surv.date)
+StartDate = substr(surv.date, 1,10) #turns the 1st-10th section of surv.date into the start date (the 2023-01-01 date of surv.date)
 year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
 
 #Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+#above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 
-vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
            NA)))
 
 Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+#the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels. 
 
 if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+#if there is a NVessel this will load the North_Box.csv box outline
 if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+#if there is a EVessel this will load the East_Box.csv box outline
 
-if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
-if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
 if(!is.na(NVessel) & !is.na(EVessel)){
   Plan = full_join(Main, North)
-  Plan = full_join(Plan, East)}
-if(is.na(NVessel) & is.na(EVessel)){Plan = Main}
+  Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
+if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
 
 #Add vessel names to Plan
-Plan = Plan %>% 
+Plan = Plan %>% #renames the base "V#" Vessels in the plan to the actual vessel names manually listed in the first code chunk.
   mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
@@ -104,7 +109,7 @@ Plan = Plan %>%
   mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
 
 #Short-hand names and save for Update Data script usage
-Plan2 = Plan %>%
+Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorthand forms for other tools to use
   mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
@@ -139,11 +144,13 @@ b = c("6622.080", "6622.080", "6621.000", "6621.000")
 c = c("4503.432", "4503.000", "4503.000", "4503.432")
 d = c("6513.048", "6513.048", "6512.000", "6512.000")
 
+#If survey is Scots Bay, load the C + D coordinates above for the CTD box
 if(surv == "SB") {
   CTDBox = data.frame(c,d)
   names(CTDBox) = c('Lat', 'Lon')
 }
 
+#If survey is German Bank, load the A + B coordinates above for the CTD Box
 if(surv == "GB") {
   CTDBox = data.frame(a,b)
   names(CTDBox) = c('Lat', 'Lon')
@@ -152,7 +159,7 @@ if(surv == "GB") {
 #Make Tow Box (SB only)
 a = c("4501.800", "4504.200", "4506.780", "4504.500")
 b = c("6515.300", "6506.600", "6506.600", "6515.300")
-TowBox = data.frame(a,b)
+TowBox = data.frame(a,b) #combine A + B into a dataframe for the Tow Box
 names(TowBox) = c('Lat', 'Lon')
 ```
 
