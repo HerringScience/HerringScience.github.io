@@ -22,7 +22,7 @@ library(gridExtra)
 library(cowplot)
 
 #Load Data
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data")
+setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data"))
 Connors = read_csv("Connors 2004-2017.csv")
 Com1 = read_csv("Comeaus 2005-2010.csv")
 Com2 = read_csv("Comeaus 2017.csv")
@@ -537,8 +537,16 @@ Master = Master %>%
   
   mutate(Lat = ifelse(Ground == "Hudson Canyon" & is.na(Lat), 39.44444609, Lat)) %>%
   mutate(Lon = ifelse(Ground == "Hudson Canyon" & is.na(Lon), -72.19678104, Lon))
+
+#Set method/instrument type
+Master = Master %>%
+  mutate(Method = ifelse(Supplier == "Comeaus", "Microwave",
+                  ifelse(Supplier == "Connors", "Distillation",
+                  ifelse(Supplier == "Maine", "Microwave",
+                  ifelse(Supplier == "Scotia", "Fatmeter",
+                  NA)))))
   
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/")
+setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/"))
 WAA = read_csv("WeightAtAge.csv")
 WAA = WAA %>% dplyr::select(Year = YEAR, Age = AGE, WAA) %>%
   dplyr::filter(Age < 12)

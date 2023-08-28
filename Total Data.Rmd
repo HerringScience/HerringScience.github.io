@@ -1508,12 +1508,14 @@ ggplot(Larval, aes(Year, Lengthmm, colour = Year)) +
 
 Table = Larval %>%
   group_by(Year) %>%
-  summarize(AvgLength = mean(Lengthmm),
+  summarize(MinLength = min(Lengthmm),
+            MaxLength = max(Lengthmm),
+            AvgLength = mean(Lengthmm),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
 
-kbl(Table, col.names=c("Year", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
 ```
 
@@ -1782,12 +1784,14 @@ ggplot(Larval, aes(Year, Lengthmm, colour = Year)) +
 
 Table = Larval %>%
   group_by(Year) %>%
-  summarize(AvgLength = mean(Lengthmm),
+  summarize(MinLength = min(Lengthmm),
+            MaxLength = max(Lengthmm),
+            AvgLength = mean(Lengthmm),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
 
-kbl(Table, col.names=c("Year", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
 ```
 
