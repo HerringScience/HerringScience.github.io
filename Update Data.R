@@ -2,24 +2,24 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB
-surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
+surv="GB" #SB or GB
+surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
-surv.no="6"
+surv.no="2"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ids = c("C1", "FM", "LM", "LJ", "SL", "MS", "LB")
 
-#Area and TS values
+#Area and TS values - From table C
 SB1= 661 #SB main area
 SB2= 77 #SB north area
 SB3= 115 #SB east area
 
-GB1 = 511 #GB main area
-GB2 = 299 #Seal Island area
+GB1 = 796 #GB main area
+GB2 = 272 #Seal Island area
 GB3 = NA #Ad-hoc school survey area
 
 ##
