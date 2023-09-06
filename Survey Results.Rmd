@@ -394,7 +394,7 @@ kbl(table2, caption="Table 3: Survey Summary Table", format.args=(list(big.mark=
   kable_paper("striped", full_width=F)
 ```
 
-### Greatest Backscatter
+### Greatest Biomass Densities
 
 ```{r}
 PRC = Map %>%
@@ -408,11 +408,11 @@ a = unique(PRC$Vessel)
 c = unique(Dense$Vessel)
 ```
 
-```{r, fig.cap="A snip from the transect with the greatest backscatter", fig.align='center'}
+```{r, fig.cap="A snip from the transect with the greatest biomass density (kg/m2)", fig.align='center'}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Snip.jpg"), rel_path = FALSE)
 ```
 
-The single point with the largest backscatter density (PRC) was recorded by **`r a`**, at the following location:
+The single point with the largest biomass density (kg/m2) was recorded by **`r a`**, at the following location:
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
 if(surv == "SB"){
@@ -439,7 +439,7 @@ a = ggplot() +
 plot(a)
 ```
 
-The transect with the overall largest biomass was recorded by **`r c`**, at the following location:
+The transect with the greatest average biomass density (kg/m2) was recorded by **`r c`**, at the following location:
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
 if(surv == "SB"){
