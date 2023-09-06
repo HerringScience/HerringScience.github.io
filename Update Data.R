@@ -11,7 +11,7 @@ Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey win
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("C1", "FM", "LM", "LJ", "SL", "MS", "LB")
+ids = c("C1", "FM", "LM", "LJ", "SL", "MS", "LB", "BP", "TM")
 
 #Area and TS values - From table C
 SB1= 661 #SB main area
@@ -344,9 +344,9 @@ if(surv=="GB"){
   x = Region
   trans = transects(x= Region, TS38 = TS1 , TS50 = NA)
   
-  ids = c("T01", "T02", "T03", "T04")
+  ids = c("T01", "T02", "T03")
   trans1 = trans[which((trans$Transect_No %in% ids)), ]
-  ids = c("T05", "T06", "T07")
+  ids = c("T04", "T05", "T06", "T07")
   trans2 = trans[which((trans$Transect_No %in% ids)), ]
   
   x = surveyTrack2(x=trans1, polyNameA  = polyGB, polyNameB  = polySI, title = name )
@@ -357,14 +357,14 @@ if(surv=="GB"){
   
   x = surveyTrack2(x=trans2, polyNameA  = polyGB, polyNameB  = polyAD, title = name )
   
-  ggplot(trans2, aes(x=X, y=Y)) + geom_polygon(data=polyAD,aes(x=X, y=Y, group=PID), fill = "white", colour = "black")  + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1)  + labs(x=NULL, y=NULL) + coord_map()
+  ggplot(trans2, aes(x=X, y=Y)) + geom_polygon(data=polyAD,aes(x=X, y=Y, group=PID), fill = "white", colour = "black")  + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), linewidth = 1)  + labs(x=NULL, y=NULL) + coord_map()
   }
   
-  ids = c("T01", "T02", "T03", "T04")
+  ids = c("T01", "T02", "T03")
   map1 = map[which((map$Transect_No %in% ids)), ]
   
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
-  SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
+  SI = trans[which(trans$Transect_No == c("T03")), ]
   ids = c("T01", "T02")
   GB = trans[which((trans$Transect_No %in% ids)), ]
   
@@ -445,7 +445,7 @@ Biomass = Surveys$Biomass
 if(surv.no > 1){
   TurnBio = turnoverBio(y_intercept, x_Var_1, daysturnover, Date, Survey, Biomass)
   Previous = Surveys %>% filter(is.na(Current))
-  Previous = sum(Previous$HSC_Turnover_Adjusted)
+  Previous = sum(Previous$Biomass)
   Turnover = TurnBio-Previous
   Current$Turnover = Turnover
   
