@@ -10,30 +10,30 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
-surv.date = "2023-09-03 20:30:00" #survey date and time, as formatted
-surv.no = "3"
-Allocation = "150" #set to "0" for a non-fishing survey
-SIAllocation = "75" #Seal Island allocation for GB-only
-Tagging = "Canada 100, Lady Janice II, Lady Melissa, Morning Star, Sealife II, Tasha Marie" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+surv = "SB"
+surv2 = "Scots Bay"
+surv.date = "2023-09-10 20:00:00" #survey date and time, as formatted
+surv.no = "9"
+Allocation = "200" #set to "0" for a non-fishing survey
+SIAllocation = "0" #Seal Island allocation for GB-only
+Tagging = "Canada 100, Lady Janice II, Lady Melissa, Morning Star, and Sealife II" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 9
+vessels = 8
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Sealife II"
-V2 = "Leroy and Barry"
-V3 = "Brunswick Provider"
+V2 = "Fundy Monarch"
+V3 = PlanktonVessel
 V4 = "Morning Star"
-V5 = "Fundy Monarch"
+V5 = "Lady Janice II"
 V6 = "Canada 100"
-V7 = "Tasha Marie"
-V8 = "Lady Janice II"
-V9 = PlanktonVessel
+V7 = "Brunswick Provider"
+V8 = "Leroy and Barry"
+V9 = NA
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center') #sets the coding chunk options of the whole document to not appear in the actual document (echo)
@@ -121,7 +121,7 @@ Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorth
   mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
 write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
-#Land Data
+#Land Data - loads the land data the same way as Jenna's previous scripts
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/"))
 can<-getData('GADM', country="CAN", level=1)
 us = getData('GADM', country = "USA", level = 1)
@@ -195,10 +195,12 @@ polySI = as.PolySet(SUA, projection="LL")
 ```
 
 ```{r}
+#if the Survey is German Bank, it will be stated as non-fishing (in **bold**)
 if(surv == "GB"){
   a=paste0("**", "non-fishing", "**")
 }
 
+#if the Survey is Scots Bay, it will be a 'fishing' survey.
 if(surv == "SB") {
   a="fishing"
 }
@@ -210,6 +212,7 @@ if(surv == "SB") {
 This `r a` survey will include `r vessels` participating vessels. 
 
 ```{r echo=FALSE}
+#various combinations of which boxes are being used (north, east, none, etc), to determine a statement of which lines vessels are running
 a=if(surv == "SB" & !is.na(EVessel) & !is.na(NVessel)){
   paste(EVessel, "and", NVessel, "will run 4 lines in the East and North boxes, and all other vessels will be running 2 lines in the Main Survey Box")
 }
@@ -230,6 +233,7 @@ e=if(surv == "SB" & !is.na(EVessel) & is.na(NVessel)){
   paste(EVessel, "will run 4 lines in the East box, and all other vessels will be running 2 lines in the Main Survey Box")
 }
 
+#Statement which only appears if Tagging is not NA
 f=if(!is.na(Tagging)){
   paste0("Tagging will be conducted from the ", Tagging, ".")
 }
