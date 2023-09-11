@@ -639,7 +639,7 @@ survey = survey %>% mutate(Ground = substr(id,1,2))
 
 larv = left_join(larv, arc, by="id")
 larv = left_join(larv, survey)
-larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, CTDAvgSalinity=AvgSalinity, Volume, Month, Year, Day)
+larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Yolk_sac_length, Preservative, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, CTDAvgSalinity=AvgSalinity, Volume, Month, Year, Day)
 larv$Date = dmy(larv$Date)
 larv$Survey.No = as.factor(larv$Survey.No)
 larv$Year = as.factor(larv$Year)
