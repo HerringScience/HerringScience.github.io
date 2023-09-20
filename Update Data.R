@@ -2,10 +2,10 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB
-surv2="Scots Bay" #"German Bank" or "Scots Bay" as written
+surv="GB" #SB or GB
+surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
-surv.no="8"
+surv.no="3"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
