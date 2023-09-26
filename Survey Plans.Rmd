@@ -10,30 +10,30 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
-surv.date = "2023-09-24 20:00:00" #survey date and time, as formatted
-surv.no = "10"
-Allocation = "200" #set to "0" for a non-fishing survey
-SIAllocation = "0" #Seal Island allocation for GB-only
-Tagging = "Canada 100, Fundy Monarch, Lady Melissa, Morning Star" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+surv = "GB"
+surv2 = "German Bank"
+surv.date = "2023-09-27 20:00:00" #survey date and time, as formatted
+surv.no = "5"
+Allocation = "125" #set to "0" for a non-fishing survey
+SIAllocation = "75" #Seal Island allocation for GB-only
+Tagging = "Canada 100, Morning Star, Lady Janice II, Sealife II, Lady Melissa, Tasha Marie" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 4
+vessels = 9
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Fundy Monarch"
-V2 = PlanktonVessel
+V1 = "Canada 100"
+V2 = "Sealife II"
 V3 = "Morning Star"
-V4 = "Canada 100"
-V5 = NA
-V6 = NA
-V7 = NA
-V8 = NA
-V9 = NA
+V4 = "Brunswick Provider"
+V5 = "Tasha Marie"
+V6 = "Leroy and Barry"
+V7 = "Fundy Monarch"
+V8 = "Lady Janice"
+V9 = "Lady Melissa"
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center') #sets the coding chunk options of the whole document to not appear in the actual document (echo)
