@@ -692,7 +692,7 @@ Vessel_Speed = Speed %>%
 
 ggplot(Vessel_Speed, aes(Vessel, AvgSpeed)) + geom_boxplot() + ylab("Speed (knots)") + theme_light() + geom_hline(yintercept=8, linetype="dashed", color="red", size=1)
 
-ggplot(Speed, aes(Vessel, Speed)) + geom_col(aes(fill = Transect)) + facet_wrap(~Transect) + theme_light() + geom_hline(yintercept=8, linetype="dashed", color="red", size=1)+labs(title="Speed per Transect") + xlab("Vessel") + ylab("Speed (knots)") + coord_cartesian(ylim = c(7, 10))
+ggplot(Speed, aes(Vessel, Speed)) + geom_col(aes(fill = Transect)) + facet_wrap(~Transect) + theme_light() + geom_hline(yintercept=8, linetype="dashed", color="red", size=1)+labs(title="Speed per Transect") + xlab("Vessel") + ylab("Speed (knots)") + coord_cartesian(ylim = c(7, 11))
 
 ```
 
