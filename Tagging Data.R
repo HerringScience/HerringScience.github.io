@@ -6,11 +6,11 @@ library(tidyverse)
 library(measurements)
 
 # Set all tagging log data here
-Tag_Num = c(528712:528847) #Can add any tag entries, including breaks/gaps in the sequences
-Date = "2023-09-12" #"YYYY-MM-DD"
-Lat = "43 19 09" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
-Lon = "66 09 42"
-Vessel = "Lady Melissa" #As written unless changed in script below: "Lady Melissa", "Sealife II", "Tasha Marie", "Lady Janice", "Morning Star"
+Tag_Num = c(525401:525550) #Can add any tag entries, including breaks/gaps in the sequences
+Date = "2023-10-03" #"YYYY-MM-DD"
+Lat = "44 16.70" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
+Lon = "66 26 06"
+Vessel = "Lady Janice" #As written unless changed in script below: "Lady Melissa", "Sealife II", "Tasha Marie", "Lady Janice", "Morning Star"
 Survey = NA #Survey number for Scots Bay or German Bank when tags were applied, otherwise "NA"
 CTD = NA #Add the CTD id only if a TAGGER completed a cast (not the cast by the HSC tech)
 
