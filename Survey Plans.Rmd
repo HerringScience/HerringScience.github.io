@@ -12,7 +12,7 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2023-10-09 20:00:00" #survey date and time, as formatted
+surv.date = "2023-10-09 19:00:00" #survey date and time, as formatted
 surv.no = "11"
 Allocation = "200" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
