@@ -9,10 +9,10 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2023"
-surv.no = "10"
+surv.no = "5"
 hightide = "2023-09-24 19:26:00" #for Scots Bay only
 ```
 
