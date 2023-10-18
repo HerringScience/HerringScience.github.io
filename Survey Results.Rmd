@@ -500,7 +500,7 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
 Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
   group_by(Year, Ground) %>%
   summarize("HSC Estimate" = sum(HSC_Estimate),
-            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted),
+            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted, na.rm=TRUE),
             "DFO Estimate" = sum(DFO_Estimate),
             "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
 
