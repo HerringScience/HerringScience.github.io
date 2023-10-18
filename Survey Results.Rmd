@@ -503,6 +503,7 @@ Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Su
             "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted, na.rm=TRUE),
             "DFO Estimate" = sum(DFO_Estimate),
             "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
+Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
 
 kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
   kable_paper("striped", full_width=F)

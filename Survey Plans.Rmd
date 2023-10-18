@@ -12,27 +12,27 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "GB"
 surv2 = "German Bank"
-surv.date = "2023-10-11 20:00:00" #survey date and time, as formatted
-surv.no = "6"
-Allocation = "200" #set to "0" for a non-fishing survey
-SIAllocation = "50" #Seal Island allocation for GB-only
-Tagging = "Canada 100, Morning Star, Lady Janice, Sealife II" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+surv.date = "2023-10-24 19:00:00" #survey date and time, as formatted
+surv.no = "7"
+Allocation = "0" #set to "0" for a non-fishing survey
+SIAllocation = "0" #Seal Island allocation for GB-only
+Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 5
+vessels = 8
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Morning Star"
-V2 = "Sealife II"
-V3 = "Leroy and Barry"
-V4 = "Canada 100"
-V5 = PlanktonVessel
-V6 = NA
-V7 = NA
-V8 = NA
+V1 = "Canada 100"
+V2 = "Leroy and Barry"
+V3 = "Lady Melissa"
+V4 = "Morning Star"
+V5 = "Fundy Monarch"
+V6 = "Sealife II"
+V7 = "Brunswick Provider"
+V8 = PlanktonVessel
 V9 = NA
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
