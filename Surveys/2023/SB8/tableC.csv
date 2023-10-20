@@ -1,2 +1,4 @@
-Target Strength,Area (km2),Mean Sa,Density (kg/m2),Biomass (tons),Standard Error (tons),Standard Error (%),Layer
--35.5,661,-59.0830408958126,0.00436968145278211,2896.65898421223,303.869709673288,10.4903515163325,Main Box
+Target Strength,Area (km2),Mean Sa,Density (kg/m2),Biomass (tons),Standard Error (tons),Standard Error (%),Layer,Turnover
+-35.5,661,-59.0830409,0.004369681,2896.658984,303.8697097,10.49035152,Main Box,2300
+NA,77,NA,NA,NA,NA,NA,Northern Box,2300
+NA,115,NA,NA,NA,NA,NA,Eastern Box,2300
