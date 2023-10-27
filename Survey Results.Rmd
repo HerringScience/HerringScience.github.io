@@ -10,10 +10,10 @@ rm(list = ls())
 
 #Change these options
 surv = "GB"
-surv2 = "German Bank"
+surv2 = "6"
 year = "2023"
 surv.no = "6"
-hightide = "2023-10-11 21:44:00" #for Scots Bay only
+hightide = "2023-10-09 21:07:00" #for Scots Bay only
 ```
 
 ```{r setup, include=FALSE}
