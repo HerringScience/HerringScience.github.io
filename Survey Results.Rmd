@@ -219,18 +219,13 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-#g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
- #        ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
-  #       ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
-   #      ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-    #     ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
-     #    "NA"))))))
-g=unique(ifelse(Survey$Ground == "GB", "Six of the eight vessels ran two transects in the German Bank box and one transect in the Seal Island Box. Brunswick Provider had problems completing their lines, and therefore their third line was run by Morning Star", 
+g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
          "NA"))))))
+
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))
 i=unique(ifelse(Survey$Ground == "GB", a, 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", a,
