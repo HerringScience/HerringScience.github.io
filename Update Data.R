@@ -5,9 +5,9 @@ rm(list = ls())
 surv="GB" #SB or GB
 surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year="2023"
-surv.no="6"
+surv.no="7"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
@@ -344,9 +344,9 @@ if(surv=="GB"){
   x = Region
   trans = transects(x= Region, TS38 = TS1 , TS50 = NA)
   
-  ids = c("T01", "T02", "T03")
+  ids = c("T01", "T02", "T03", "T04")
   trans1 = trans[which((trans$Transect_No %in% ids)), ]
-  ids = c("T04", "T05", "T06", "T07")
+  ids = c("T05", "T06", "T07")
   trans2 = trans[which((trans$Transect_No %in% ids)), ]
   
   x = surveyTrack2(x=trans1, polyNameA  = polyGB, polyNameB  = polySI, title = name )
