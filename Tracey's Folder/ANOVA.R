@@ -32,58 +32,79 @@ library(AICcmodavg)
 library(datasets)
 library(multcompView)
 
-#remove everything in environment
+###remove everything in environment
 rm(list = ls())
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
 
 Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
-#Just Julian Date and HSC_Turnover
+Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
-JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Area", "Julian", "DFO_Estimates"))
+### IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
+#surv="GB" #SB or GB
+#surv2="German Bank" #"German Bank" or "Scots Bay" as written
+#year="2023"
+#surv.no="7"
+#adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
+#Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
+#Tow = "Y" #whether or not plankton tow(s) were conducted
+
+###Julian Date and DFO_Estimates
+
+JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Area", "Julian", "DFO_Estimate"))
     JulianAndBiomass <- na.omit(JulianAndBiomass)
 ScotsBay_Turnover <- subset(JulianAndBiomass, Survey_Area=='SB' )
 
+OneWayJB <- aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover)
+summary(OneWayJB)
 
-#Point Graph - Julian and Biomass
-Point_Graph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimates)) +geom_smooth() + geom_point() 
+Point_Graph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +geom_smooth() + geom_point() 
 print(Point_Graph)
 
-#Number of Vessels and Survey biomass
-VesselsBiomass <- subset(Survey_Factors, select=c("No_of_Vessels", "Julian", "DFO_Estimates", "Survey_Area"))
+###Number of Vessels and Survey biomass
+VesselsBiomass <- subset(Survey_Factors, select=c("No_of_Vessels", "Julian", "DFO_Estimate", "Survey_Area"))
     VesselsBiomass <- na.omit(VesselsBiomass)
     VesselsBiomass <- subset(VesselsBiomass, Survey_Area == "SB")
     VesselsBiomass$No_of_Vessels <- as.factor(VesselsBiomass$No_of_Vessels)
 
-GraphVessels <- ggplot(VesselsBiomass, aes(No_of_Vessels, DFO_Estimates))+ geom_point() + geom_smooth()
+GraphVessels <- ggplot(VesselsBiomass, aes(No_of_Vessels, DFO_Estimate))+ geom_point() + geom_smooth()
 print(GraphVessels)
 
-BoxplotVessels <-boxplot(VesselsBiomass$DFO_Estimates~VesselsBiomass$No_of_Vessels, main = "Biomass recorded per number of Vessels in Survey", xlab="Number of Vessels in Survey", ylab="DFO Estimates")
+BoxplotVessels <-boxplot(VesselsBiomass$DFO_Estimate~VesselsBiomass$No_of_Vessels, main = "Biomass recorded per number of Vessels in Survey", xlab="Number of Vessels in Survey", ylab="DFO Estimates")
 
-#Survey Area, Julian, Survey Time, High Tide Time, DFO_Estimates
-SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Area","Year", "Julian", "DFO_Estimates", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
+###Survey Area, Julian, Survey Time, High Tide Time, DFO_Estimate
+SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Area","Year", "Julian", "DFO_Estimate", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
 SurveyAreaTimeTideBiomass <- na.omit(SurveyAreaTimeTideBiomass)
 ScotsBay_HighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="SB")
 
 
-#ScotsBay_HighTideBiomassSubset <- subset(ScotsBay_HighTideBiomass, subset = Year %in% c(2012, 2013, 2014, 2015, 2016))
-#mean = mean(ScotsBay_HighTideBiomass$DFO_Estimates)
-
-#Scot Bay Tide Relative Point Graph
-Tide_Relative_Point <- ggplot(ScotsBay_HighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimates)) + geom_point(aes(group= Tide_Difference)) +geom_smooth() + geom_hline(yintercept=mean(ScotsBay_HighTideBiomass$DFO_Estimates))
+###Scot Bay Tide Relative Point Graph
+Tide_Relative_Point <- ggplot(ScotsBay_HighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Difference)) +geom_smooth() + geom_hline(yintercept=mean(ScotsBay_HighTideBiomass$DFO_Estimate))
 print(Tide_Relative_Point)
 
-#ANOVAS
-two.way <- aov(DFO_Estimates ~ Survey_Start*High_Tide, data = ScotsBay_HighTideBiomass)
-one.way <- aov(DFO_Estimates ~ Tide_Difference, data = ScotsBay_HighTideBiomass)
-summary(one.way)
-summary(two.way)
+###ANOVAS
+SurveyHighTide.two.way <- aov(DFO_Estimate ~ Survey_Start*High_Tide, data = ScotsBay_HighTideBiomass)
+HighTide.one.way <- aov(DFO_Estimate ~ High_Tide, data = ScotsBay_HighTideBiomass)
+
+SurveyTideDifference.two.way <- aov(DFO_Estimate ~ Survey_Start*Tide_Difference, data = ScotsBay_HighTideBiomass)
+SurveyTideDifference.one.way <- aov(DFO_Estimate ~ Tide_Difference, data = ScotsBay_HighTideBiomass)
+
+boxplot(DFO_Estimate ~ High_Tide, data = ScotsBay_HighTideBiomass)
+
+OneWayHighTide <- summary(HighTide.one.way)
+TwoWayHighTide <- summary(SurveyHighTide.two.way)
+
+OneWayTideDifference <- summary(SurveyTideDifference.one.way)
+TwoWayTideDifference <- summary(SurveyTideDifference.two.way)
+
+VBANOVA <- aov(DFO_Estimate ~ No_of_Vessels , data = VesselsBiomass)
+OneWayVBANOVA <- summary(VBANOVA)
 
 
-VBANOVA <- aov(DFO_Estimates ~ No_of_Vessels , data = VesselsBiomass)
-summary(VBANOVA)
 
-#One Way ANOVA - Julian and Turnover
-JTANOVA <- aov(DFO_Estimates ~ Julian, data = ScotsBay_Turnover)
-summary(JTANOVA)
+###Extra code that might be useful sometime
+
+#ScotsBay_HighTideBiomassSubset <- subset(ScotsBay_HighTideBiomass, subset = Year %in% c(2012, 2013, 2014, 2015, 2016))
+#mean = mean(ScotsBay_HighTideBiomass$DFO_Estimate)
+#boxplot(DFO_Estimate ~ Survey_Start*Tide_Difference, data = ScotsBay_HighTideBiomass)

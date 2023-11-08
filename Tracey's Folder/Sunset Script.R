@@ -37,9 +37,9 @@ rm(list = ls())
 
 
 #Set information here
-Lat = "45 03 54" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
-Lon = "65 14 93"
-date = "2023-09-11"
+Lat = "44 19 12" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
+Lon = "66 22 18"
+date = "2023-10-10"
 
 ### Code below ###
 
