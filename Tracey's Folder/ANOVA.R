@@ -35,7 +35,7 @@ library(multcompView)
 #remove everything in environment
 rm(list = ls())
 
-setwd("C:/Users/herri/Desktop/ANOVA")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
 
 Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
@@ -65,6 +65,8 @@ BoxplotVessels <-boxplot(VesselsBiomass$DFO_Estimates~VesselsBiomass$No_of_Vesse
 SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Area","Year", "Julian", "DFO_Estimates", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
 SurveyAreaTimeTideBiomass <- na.omit(SurveyAreaTimeTideBiomass)
 ScotsBay_HighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="SB")
+
+
 #ScotsBay_HighTideBiomassSubset <- subset(ScotsBay_HighTideBiomass, subset = Year %in% c(2012, 2013, 2014, 2015, 2016))
 #mean = mean(ScotsBay_HighTideBiomass$DFO_Estimates)
 
