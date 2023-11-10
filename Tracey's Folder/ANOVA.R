@@ -98,11 +98,6 @@ TwoWayHighTide <- summary(SurveyHighTide.two.way)
 OneWayTideDifference <- summary(SurveyTideDifference.one.way)
 TwoWayTideDifference <- summary(SurveyTideDifference.two.way)
 
-VBANOVA <- aov(DFO_Estimate ~ No_of_Vessels , data = VesselsBiomass)
-OneWayVBANOVA <- summary(VBANOVA)
-
-
-
 ###Extra code that might be useful sometime
 
 #ScotsBay_HighTideBiomassSubset <- subset(ScotsBay_HighTideBiomass, subset = Year %in% c(2012, 2013, 2014, 2015, 2016))
