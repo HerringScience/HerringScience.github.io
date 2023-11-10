@@ -35,20 +35,21 @@ library(multcompView)
 ###remove everything in environment
 rm(list = ls())
 
+
+### IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
+surv="GB" #SB or GB
+surv2="German Bank" #"German Bank" or "Scots Bay" as written
+year="2023"
+surv.no="8"
+adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
+Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
+Tow = "Y" #whether or not plankton tow(s) were conducted
+
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
 
 Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
-
-### IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-#surv="GB" #SB or GB
-#surv2="German Bank" #"German Bank" or "Scots Bay" as written
-#year="2023"
-#surv.no="7"
-#adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-#Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
-#Tow = "Y" #whether or not plankton tow(s) were conducted
 
 ###Julian Date and DFO_Estimates
 
