@@ -45,11 +45,11 @@ Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
 #Importing Data
-Date <- Survey_Data %>% slice_tail()
-  Date <- Date[4]
-  Date <- as.character(Date)
-  Date <- lubridate::dmy(Date)
-  Julian = yday(Date)
+Survey_Date <- Survey_Data %>% slice_tail()
+  Survey_Date <- Survey_Date[4]
+  Survey_Date <- as.character(Survey_Date)
+  Survey_Date <- lubridate::dmy(Survey_Date)
+  Julian = yday(Survey_Date)
   
 Year <- Survey_Data %>% slice_tail()
   Year <- Year[1]
@@ -73,16 +73,81 @@ Survey_Area <- Survey_Data %>% slice_tail()
   Survey_Area <- Survey_Area[5]  
   Survey_Area <- as.character(Survey_Area)
   
-  ### Set Ground, Survey Number etc 
+###Use to get Table C 
 surv= Survey_Area
-  #surv2="German Bank" #"German Bank" or "Scots Bay" as written
 year= Year
 surv.no=Survey_Number
-  #adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-  #Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
-  #Tow = "Y" #whether or not plankton tow(s) were conducted
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 
-TableC <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "tableC.csv")
+TableC <-read.csv("tableC.csv")
+
+### HSC numbers
+HSC_Estimate <- TableC %>% slice_head()
+  HSC_Estimate <- HSC_Estimate[5]  
+  HSC_Estimate <- as.numeric(HSC_Estimate)  
+
+HSC_Turnover <- TableC %>% slice_head()
+  HSC_Turnover <- HSC_Turnover[9]
+  HSC_Turnover <- as.numeric(HSC_Turnover)
   
+### DFO numbers
+DFO_Estimate <- "NA"
+DFO_Turnover_Adjusted <- "NA"
+
+### High Tide
+High_Tide <- "NA"
+Tide_Difference <- "NA"
+Tide_Relative <- "NA"
+
+### Lat and Long from CTD Cast
+
+Lat <- Survey_Data %>% slice_tail
+  Lat <- Lat[47]
+  Lat <- as.numeric(Lat)  
+
+Lon <- Survey_Data %>% slice_tail  
+  Lon <- Lon[48]
+  Lon <- as.numeric(Lon)  
+
+### Sunset Times
+Sunset <- suncalc::getSunlightTimes(date = Survey_Date, lat = Lat, lon = Lon, keep = c("sunsetStart"), tz = "America/Halifax")
+  Sunset <- as.data.frame(Sunset)
+  Sunset[] <- data.frame(lapply(Sunset, as.character), stringsAsFactors = FALSE)
+  Sunset$date = as.Date(Sunset$date)
+  
+Sunset_Date_Time <- Sunset$sunsetStart
+  Sunset_Date_Time <- as.POSIXct(Sunset_Date_Time)
+Sunset_Time <- as_hms(Sunset_Date_Time)
+  Sunset_Time <- as.character(Sunset_Time)
+  
+  Survey_Start <- Survey_Data %>% slice_tail()
+  Survey_Start <-Survey_Start[10]
+  Survey_Start <- as.POSIXct(Survey_Start$StartTime, format="%H:%M:%S")
+  Survey_Start <- as_hms(Survey_Start)
+  Survey_Start <- as.character(Survey_Start)
+  
+Sunset_Difference <- "NA"
+Sunset_Relative <- "NA"
+
+### Set working Directory back to original forlder
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
+
+### Append data to Survey_Factors
+Survey_Factors_Add <- data.frame((Survey_Date),
+                                 (Survey_Number),
+                                 Year <- c(Year),
+                                 (No_of_Vessels),
+                                 (Survey_Area),
+                                 (HSC_Estimate),
+                                 (HSC_Turnover),
+                                 (DFO_Estimate),
+                                 (DFO_Turnover_Adjusted),
+                                 (Survey_Start),
+                                 (High_Tide),
+                                 (Tide_Difference),
+                                 (Tide_Relative),
+                                 (Julian),
+                                 (Sunset_Time)
+                                 )
+                    
