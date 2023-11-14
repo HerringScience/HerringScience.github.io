@@ -44,12 +44,17 @@ Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
+# Data to Input manually
+
+High_Tide <- "20:13:00" #Time
+High_Tide_Date <- "2023-10-24" #Input Date 
+  
 #Importing Data
 Survey_Date <- Survey_Data %>% slice_tail()
   Survey_Date <- Survey_Date[4]
   Survey_Date <- as.character(Survey_Date)
   Survey_Date <- lubridate::dmy(Survey_Date)
-  Julian = yday(Survey_Date)
+Julian = yday(Survey_Date)
   
 Year <- Survey_Data %>% slice_tail()
   Year <- Year[1]
@@ -62,8 +67,9 @@ Survey_Number <- Survey_Data %>% slice_tail()
 Survey_Start <- Survey_Data %>% slice_tail()
   Survey_Start <-Survey_Start[10]
   Survey_Start <- as.POSIXct(Survey_Start$StartTime, format="%H:%M:%S")
-  Survey_Start <- as_hms(Survey_Start)
-  Survey_Start <- as.character(Survey_Start)  
+  Survey_Start <- as.character(as_hms(Survey_Start))
+  
+Survey_Date_Time <- as.POSIXct(paste(Survey_Date, Survey_Start), format= "%Y-%m-%d %H:%M:%S")
 
 No_of_Vessels <- Survey_Data %>% slice_tail()
   No_of_Vessels <- No_of_Vessels[11]  
@@ -94,12 +100,15 @@ HSC_Turnover <- TableC %>% slice_head()
 ### DFO numbers
 DFO_Estimate <- "NA"
 DFO_Turnover_Adjusted <- "NA"
+DFO_Area <- "NA"
+DFO_Density <- "NA"
 
 ### High Tide
-High_Tide <- "NA"
-Tide_Difference <- "NA"
-Tide_Relative <- "NA"
 
+HighTide_Date_Time <- as.POSIXct(paste(High_Tide_Date, High_Tide), format= "%Y-%m-%d %H:%M:%S")
+Tide_Difference <- as.character(as_hms(difftime(HighTide_Date_Time, Survey_Date_Time)))
+Tide_Relative <- as.character(difftime(HighTide_Date_Time, Survey_Date_Time, units = "hours"))
+  
 ### Lat and Long from CTD Cast
 
 Lat <- Survey_Data %>% slice_tail
@@ -121,14 +130,15 @@ Sunset_Date_Time <- Sunset$sunsetStart
 Sunset_Time <- as_hms(Sunset_Date_Time)
   Sunset_Time <- as.character(Sunset_Time)
   
-  Survey_Start <- Survey_Data %>% slice_tail()
+Survey_Start <- Survey_Data %>% slice_tail()
   Survey_Start <-Survey_Start[10]
   Survey_Start <- as.POSIXct(Survey_Start$StartTime, format="%H:%M:%S")
   Survey_Start <- as_hms(Survey_Start)
   Survey_Start <- as.character(Survey_Start)
   
-Sunset_Difference <- "NA"
-Sunset_Relative <- "NA"
+Sunset_Difference <- as.character(as_hms(difftime(Sunset_Date_Time, Survey_Date_Time)))
+Sunset_Relative <- as.character(difftime(Sunset_Date_Time, Survey_Date_Time, units = "hours"))
+
 
 ### Set working Directory back to original forlder
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
@@ -136,7 +146,7 @@ setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder"
 ### Append data to Survey_Factors
 Survey_Factors_Add <- data.frame((Survey_Date),
                                  (Survey_Number),
-                                 Year <- c(Year),
+                                 (Year),
                                  (No_of_Vessels),
                                  (Survey_Area),
                                  (HSC_Estimate),
@@ -148,6 +158,14 @@ Survey_Factors_Add <- data.frame((Survey_Date),
                                  (Tide_Difference),
                                  (Tide_Relative),
                                  (Julian),
-                                 (Sunset_Time)
+                                 (Sunset_Time),
+                                 (Sunset_Difference),
+                                 (Sunset_Relative),
+                                 (DFO_Area),
+                                 (DFO_Density),
+                                 (Survey_Date_Time),
+                                 (HighTide_Date_Time),
+                                 (Sunset_Date_Time)
                                  )
                     
+write.table(Survey_Factors_Add, file = "surveyFactorsAll_Tracey with SSB data 2.csv", sep = ",", append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)

@@ -1,5 +1,5 @@
-﻿Survey_Date,Survey_Number,Year,No_of_Vessels,Survey_Area,HSC_Estimate,HSC_Turnover,DFO_Estimate,DFO_Turnover_Adjusted,Survey_Start,High_Tide,Tide_Difference,Tide_Relative,Julian,Sunset_Time,Sunset_Difference,Sunset_Relative,DFO Area (km^2),DFO_Density,Survey_Date_Time,HighTide_Date_Time,Sunset_Date_Time,Comments
-1999-09-10,2,1999,,GB,NA,NA,182637,208259,20:30:00,23:59:00,3:29:00,3.48,253,19:45:00,0:45:00,-0.75,198,0.922409091,1999-09-10 20:30,1999-09-10 23:59,1999-09-10 19:45,"Time difference between survey start and high tide/sunset time. If 1.xx high tide/sunset was before survey, if 0.xx High Tide was after Survey."
+﻿Survey_Date,Survey_Number,Year,No_of_Vessels,Survey_Area,HSC_Estimate,HSC_Turnover,DFO_Estimate,DFO_Turnover_Adjusted,Survey_Start,High_Tide,Tide_Difference,Tide_Relative,Julian,Sunset_Time,Sunset_Difference,Sunset_Relative,DFO_Area,DFO_Density,Survey_Date_Time,HighTide_Date_Time,Sunset_Date_Time,Comments
+1999-09-10,2,1999,,GB,NA,NA,182637,208259,20:30:00,23:59:00,3:29:00,3.48,253,19:45:00,0:45:00,-0.75,Tide,0.922409091,1999-09-10 20:30,1999-09-10 23:59,1999-09-10 19:45,"Time difference, '-' is before, '+' is after"
 2000-08-29,1,2000,,GB,NA,NA,147621,100250,22:30:00,23:38:00,1:08:00,1.13,242,20:05:00,2:25:00,-2.42,532,0.277483083,2000-08-29 22:30,2000-08-29 23:38,2000-08-29 20:05,
 2000-09-12,2,2000,,GB,NA,NA,121783,112849,20:30:00,22:43:00,2:13:00,2.22,256,19:40:00,0:50:00,-0.83,96,1.268572917,2000-09-12 20:30,2000-09-12 22:43,2000-09-12 19:40,
 2000-09-27,3,2000,,GB,NA,NA,145273,54402,20:00:00,23:28:00,3:28:00,3.47,271,19:13:00,0:47:00,-0.78,338,0.429801775,2000-09-27 20:00,2000-09-27 23:28,2000-09-27 19:13,
@@ -262,3 +262,4 @@
 2023-10-24,7,2023,8,GB,11184,5502,,,19:00:00,18:26:00,0:34:00,-0.57,253,18:27:00,0:33:00,-0.55,,,2023-10-24 19:00,2023-10-24 18:26,2023-10-24 18:27,
 2023-09-24,10,2023,4,SB,3420,2997,,,20:00:00,19:26:00,0:34:00,-0.57,253,19:14:00,0:46:00,-0.77,,,2023-09-24 20:00,2023-09-24 19:26,2023-09-24 19:14,
 2023-10-09,11,2023,4,SB,3388,2971,,,19:00:00,21:07:00,2:07:00,2.12,253,18:46:00,0:14:00,-0.23,,,2023-10-09 19:00,2023-10-09 21:07,2023-10-09 18:46,
+2023-10-24,7,2023,8,GB,11183.58062,5502,NA,NA,19:00:00,20:13:00,1:13:00,1.216666667,297,18:27:11,-00:32:49.000000,-0.546944444,NA,NA,2023-10-24 19:00,2023-10-24 20:13,2023-10-24 18:27,
