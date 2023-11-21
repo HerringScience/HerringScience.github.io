@@ -89,6 +89,32 @@ SBOneWayTideRelative <- aov(DFO_Estimate ~ Tide_Relative, data = ScotsBayHighTid
   summary(SBOneWayTideRelative)
   
   
+###Sunset Relative
+SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate", "Sunset_Relative"))
+  SunsetData <- na.omit(SunsetData)
+  SunsetData <- subset(SunsetData,  Survey_Date < '2023-05-22') 
+  
+ScotsBaySunsetData <- subset(SunsetData, Survey_Area == "SB")
+  ScotsBaySunsetData$Sunset_Relative <- as.numeric(ScotsBaySunsetData$Sunset_Relative)
+  
+SBSunsetRelativePoint <- ggplot(ScotsBaySunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth()
+  print(SBSunsetRelativePoint + labs(y="Survey Biomass", x="Sunset Relative to Survey Start (hrs)"))
+  
+SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunsetData)
+  summary(SBSunsetOneWayANOVA)
+  
+###Peak Biomass
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+  
+ScotsBayPeakBiomass <- subset(PeakBiomass, Survey_Area == "SB")  
+  
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
+  
+ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth()
+  print(ScotsBayPeakBiomassPointGraph)
+  
 #
 ##
 ### GERMAN BANK
