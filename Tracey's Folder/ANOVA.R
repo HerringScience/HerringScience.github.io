@@ -148,8 +148,20 @@ GermanBankSunsetData <- subset(SunsetData, Survey_Area == "GB")
   GermanBankSunsetData$Sunset_Relative <- as.numeric(GermanBankSunsetData$Sunset_Relative)
 
 GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth()
-  print(GBSunsetRelativePoint)
+  print(GBSunsetRelativePoint + labs(y="Survey Biomass", x="Sunset Relative to Survey Start (hrs)"))
 
 GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSunsetData)
   summary(GBSunsetOneWayANOVA)
   
+###Peak Biomass
+
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+
+GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")  
+
+GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
+
+GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth()
+print(GermanBankPeakBiomassPointGraph)
