@@ -138,3 +138,18 @@ GBTideRelativePoint <- ggplot(GermanBankHighTideBiomass, aes(x=Tide_Relative, y=
   
 GBSurveyTideDifference.one.way <- aov(DFO_Estimate ~ Tide_Relative, data = GermanBankHighTideBiomass)
   summary(GBSurveyTideDifference.one.way)
+  
+###Sunset Relative
+SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate", "Sunset_Relative"))
+  SunsetData <- na.omit(SunsetData)
+  SunsetData <- subset(SunsetData,  Survey_Date < '2023-05-22') 
+
+GermanBankSunsetData <- subset(SunsetData, Survey_Area == "GB")
+  GermanBankSunsetData$Sunset_Relative <- as.numeric(GermanBankSunsetData$Sunset_Relative)
+
+GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth()
+  print(GBSunsetRelativePoint)
+
+GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSunsetData)
+  summary(GBSunsetOneWayANOVA)
+  
