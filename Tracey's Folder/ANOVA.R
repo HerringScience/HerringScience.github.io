@@ -10,12 +10,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos) - replaced by terra and sf
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -30,7 +30,9 @@ library(dplyr)
 library(RColorBrewer)
 library(AICcmodavg)
 library(datasets)
+library(terra)
 library(multcompView)
+library(sf)
 
 ###remove everything in environment
 rm(list = ls())
@@ -89,7 +91,7 @@ SBOneWayTideRelative <- aov(DFO_Estimate ~ Tide_Relative, data = ScotsBayHighTid
   summary(SBOneWayTideRelative)
   
   
-###Sunset Relative
+###Scots Bay Sunset Relative
 SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate", "Sunset_Relative"))
   SunsetData <- na.omit(SunsetData)
   SunsetData <- subset(SunsetData,  Survey_Date < '2023-05-22') 
@@ -103,7 +105,7 @@ SBSunsetRelativePoint <- ggplot(ScotsBaySunsetData, aes (x=Sunset_Relative, y=DF
 SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunsetData)
   summary(SBSunsetOneWayANOVA)
   
-###Peak Biomass
+###Scots Bay Peak Biomass
 PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
@@ -160,9 +162,10 @@ SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_
   
 GermanBankHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="GB")
   GermanBankHighTideBiomass <- subset(GermanBankHighTideBiomass, Survey_Date < '2023-05-22')
+  GermanBankHighTideBiomass <- subset(GermanBankHighTideBiomass, DFO_Estimate!="228870" & DFO_Estimate!="191802" & DFO_Estimate!="143937") #removed top 3 values to see if this made a difference to the ANOVA
   GermanBankHighTideBiomass$Tide_Relative <- as.numeric(GermanBankHighTideBiomass$Tide_Relative)
   
-GBTideRelativePoint <- ggplot(GermanBankHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +geom_smooth(span=1) + geom_hline(yintercept=mean(GermanBankHighTideBiomass$DFO_Estimate))
+GBTideRelativePoint <- ggplot(GermanBankHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +geom_smooth(span=5) + geom_hline(yintercept=mean(GermanBankHighTideBiomass$DFO_Estimate))
   print(GBTideRelativePoint + labs(y="Survey Biomass", x = "Tide Relative to Survey Start (hrs)"))
   
 GBSurveyTideDifference.one.way <- aov(DFO_Estimate ~ Tide_Relative, data = GermanBankHighTideBiomass)
