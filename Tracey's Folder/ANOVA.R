@@ -55,7 +55,7 @@ JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Survey_Area"
 
 ScotsBay_Turnover <- subset(JulianAndBiomass, Survey_Area=='SB' )
 
-SBPointGraph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +geom_smooth() + geom_point() 
+SBPointGraph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +geom_point() +geom_smooth(span = 1)
   print(SBPointGraph + labs(y = "Survey Biomass (mt)", x = "Julian Day"))
 
 OneWayJB <- aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover)
@@ -82,7 +82,7 @@ ScotsBayHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="SB")
   ScotsBayHighTideBiomass <- subset(ScotsBayHighTideBiomass, Survey_Date < '2023-05-22')
   ScotsBayHighTideBiomass$Tide_Relative <- as.numeric(ScotsBayHighTideBiomass$Tide_Relative)
                            
-SBTideRelativePoint <- ggplot(ScotsBayHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +geom_smooth() + geom_hline(yintercept=mean(ScotsBayHighTideBiomass$DFO_Estimate))
+SBTideRelativePoint <- ggplot(ScotsBayHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +stat_smooth(span = 1) + geom_hline(yintercept=mean(ScotsBayHighTideBiomass$DFO_Estimate))
   print(SBTideRelativePoint + labs(y="Survey Biomass", x = "Tide Relative to Survey Start in Hours"))
                            
 SBOneWayTideRelative <- aov(DFO_Estimate ~ Tide_Relative, data = ScotsBayHighTideBiomass)
@@ -97,7 +97,7 @@ SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_A
 ScotsBaySunsetData <- subset(SunsetData, Survey_Area == "SB")
   ScotsBaySunsetData$Sunset_Relative <- as.numeric(ScotsBaySunsetData$Sunset_Relative)
   
-SBSunsetRelativePoint <- ggplot(ScotsBaySunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth()
+SBSunsetRelativePoint <- ggplot(ScotsBaySunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth(span = 1)
   print(SBSunsetRelativePoint + labs(y="Survey Biomass", x="Sunset Relative to Survey Start (hrs)"))
   
 SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunsetData)
@@ -112,8 +112,11 @@ ScotsBayPeakBiomass <- subset(PeakBiomass, Survey_Area == "SB")
   
 ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
   
-ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth()
-  print(ScotsBayPeakBiomassPointGraph)
+ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth(span = 1)
+  print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Year"))
+  
+SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
+  summary(SBPeakBiomassANOVA)
   
 #
 ##
@@ -129,7 +132,7 @@ JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Survey_Area"
   
 GermanBankTurnover <- subset(JulianAndBiomass, Survey_Area=='GB' )
   
-GBPointGraph <- ggplot(GermanBankTurnover, aes(Julian, DFO_Estimate)) +geom_smooth() + geom_point() 
+GBPointGraph <- ggplot(GermanBankTurnover, aes(Julian, DFO_Estimate)) +geom_smooth(span = 1) + geom_point() 
   print(GBPointGraph + labs(y = "Survey Biomass (mt)", x = "Julian Day"))
 
 GBOneWayJB <- aov(DFO_Estimate ~ Julian, data = GermanBankTurnover)
@@ -159,7 +162,7 @@ GermanBankHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="GB"
   GermanBankHighTideBiomass <- subset(GermanBankHighTideBiomass, Survey_Date < '2023-05-22')
   GermanBankHighTideBiomass$Tide_Relative <- as.numeric(GermanBankHighTideBiomass$Tide_Relative)
   
-GBTideRelativePoint <- ggplot(GermanBankHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +geom_smooth() + geom_hline(yintercept=mean(GermanBankHighTideBiomass$DFO_Estimate))
+GBTideRelativePoint <- ggplot(GermanBankHighTideBiomass, aes(x=Tide_Relative, y=DFO_Estimate)) + geom_point(aes(group= Tide_Relative)) +geom_smooth(span=1) + geom_hline(yintercept=mean(GermanBankHighTideBiomass$DFO_Estimate))
   print(GBTideRelativePoint + labs(y="Survey Biomass", x = "Tide Relative to Survey Start (hrs)"))
   
 GBSurveyTideDifference.one.way <- aov(DFO_Estimate ~ Tide_Relative, data = GermanBankHighTideBiomass)
@@ -173,7 +176,7 @@ SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_A
 GermanBankSunsetData <- subset(SunsetData, Survey_Area == "GB")
   GermanBankSunsetData$Sunset_Relative <- as.numeric(GermanBankSunsetData$Sunset_Relative)
 
-GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth()
+GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth(span=1)
   print(GBSunsetRelativePoint + labs(y="Survey Biomass", x="Sunset Relative to Survey Start (hrs)"))
 
 GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSunsetData)
@@ -189,5 +192,8 @@ GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")
 
 GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
 
-GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth()
-print(GermanBankPeakBiomassPointGraph)
+GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth(span = 1)
+  print(GermanBankPeakBiomassPointGraph + labs(y="Peak Biomass", x = "Year"))
+  
+GBPeakBiomassANOVA = aov (DFO_Estimate~Year, data=GermanBankPeakBiomass)
+  summary(GBPeakBiomassANOVA)

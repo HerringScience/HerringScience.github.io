@@ -493,7 +493,7 @@ kbl(Annual_Table) %>%
 ::: col-md-6
 ```{r echo=FALSE}
 #Reset spatial extent back to full view
-CP <- as(extent(-69, -63, 42, 45.5), "SpatialPolygons")
+CP <- as(extent(-69, -61.5, 42, 45.5), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
 out <- gIntersection(NBNS, CP, byid=TRUE)
 
