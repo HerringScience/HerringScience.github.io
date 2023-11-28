@@ -12,12 +12,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -39,12 +39,15 @@ rm(list = ls())
 #Set information here
 Lat = "45 03 54" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
 Lon = "65 14 93"
-date = "2023-10-09"
+date = "2021-05-24"
 
 ### Code below ###
 
 #Load Sunset Time.csv - Pulls up previous entries.
 SunsetStart <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Desktop/surveyFactorsAll_Tracey with SSB data.csv"))
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
+
+SunsetStart <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
 #Lat and Lon Converter
 Lon = conv_unit(Lon,"deg_min_sec","dec_deg")
