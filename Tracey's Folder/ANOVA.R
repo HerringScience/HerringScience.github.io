@@ -37,6 +37,7 @@ library(sf)
 
 ###remove everything in environment
 rm(list = ls())
+options(scipen = 999)
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
 
@@ -113,18 +114,21 @@ PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian"
   
 ScotsBayPeakBiomass <- subset(PeakBiomass, Survey_Area == "SB")  
   
-ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate) 
-  
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+ScotsBayPeakBiomass <-ScotsBayPeakBiomass %>% add_column(format(ScotsBayPeakBiomass$Survey_Date, "%B"))
+colnames(ScotsBayPeakBiomass)[6] = "Month"
+ScotsBayPeakBiomass %>% group_by(Month)
+
+ScotsBayPeakBiomass$Month <-factor(ScotsBayPeakBiomass$Month, levels = c("June", "July", "August", "September"))
 ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
-                                 geom_point() + 
-                                 geom_smooth(span = 1)  + 
-                                 geom_text(aes(label=Year), nudge_x = 2) 
-                                 
+                                 geom_point(aes(color=Month)) + 
+                                 geom_smooth(span = .5)  + 
+                                 geom_text(aes(label=Year), nudge_x = 2.5)
+
+ScotsBayPeakBiomassPointGraph + scale_fill_discrete(breaks=c("June", "July", "August", "September"))
+
 
 print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
-
-ScotsBayPeakBiomassPointGraphRepel <- ScotsBayPeakBiomassPointGraph + geom_label_repel(aes(ScotsBayPeakBiomass))
-print(ScotsBayPeakBiomassPointGraphRepel) + labs(y = "Peak Survey Biomass (mt)", x = "Julian")
   
 SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
   summary(SBPeakBiomassANOVA)
@@ -194,18 +198,25 @@ GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=
 GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSunsetData)
   summary(GBSunsetOneWayANOVA)
   
-###Peak Biomass
-
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate"))
+###German Bank Peak Biomass
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Survey_Area", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
-
-GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")  
-
-GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
-
-GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth(span = 1)
-  print(GermanBankPeakBiomassPointGraph + labs(y="Peak Biomass", x = "Year"))
   
-GBPeakBiomassANOVA = aov (DFO_Estimate~Year, data=GermanBankPeakBiomass)
+GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")  
+  GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+  GermanBankPeakBiomass <-GermanBankPeakBiomass %>% add_column(format(GermanBankPeakBiomass$Survey_Date, "%B"))
+  colnames(GermanBankPeakBiomass)[6] = "Month"
+  GermanBankPeakBiomass %>% group_by(Month)
+  GermanBankPeakBiomass$Month <-factor(GermanBankPeakBiomass$Month, levels = c("June", "July", "August", "September"))
+  
+GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
+    geom_point(aes(color=Month)) + 
+    geom_smooth(span = .5)  + 
+    geom_text(aes(label=Year), nudge_x = 2.5)
+  
+  GermanBankPeakBiomassPointGraph + scale_fill_discrete(breaks=c("June", "July", "August", "September"))
+    print(GermanBankPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
+  
+  GBPeakBiomassANOVA = aov (DFO_Estimate~Year, data=GermanBankPeakBiomass)
   summary(GBPeakBiomassANOVA)
