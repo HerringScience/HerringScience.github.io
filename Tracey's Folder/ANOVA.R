@@ -1,5 +1,6 @@
 #ANOVA Survey Factors Investigations_Scots Bay Tides
 
+library(ggrepel)
 library(rlang)
 library(cli)
 library(lubridate)
@@ -106,16 +107,24 @@ SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunset
   summary(SBSunsetOneWayANOVA)
   
 ###Scots Bay Peak Biomass
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Survey_Area", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
   
 ScotsBayPeakBiomass <- subset(PeakBiomass, Survey_Area == "SB")  
   
-ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)  
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate) 
   
-ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate)) + geom_point() + geom_smooth(span = 1)
-  print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Year"))
+ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
+                                 geom_point() + 
+                                 geom_smooth(span = 1)  + 
+                                 geom_text(aes(label=Year), nudge_x = 2) 
+                                 
+
+print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
+
+ScotsBayPeakBiomassPointGraphRepel <- ScotsBayPeakBiomassPointGraph + geom_label_repel(aes(ScotsBayPeakBiomass))
+print(ScotsBayPeakBiomassPointGraphRepel) + labs(y = "Peak Survey Biomass (mt)", x = "Julian")
   
 SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
   summary(SBPeakBiomassANOVA)
