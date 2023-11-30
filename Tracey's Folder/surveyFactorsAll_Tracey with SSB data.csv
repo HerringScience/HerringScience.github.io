@@ -1,4 +1,4 @@
-id,Survey_Date,Survey_Number,Year,No_of_Vessels,Survey_Area,HSC_Estimate,HSC_Turnover,DFO_Estimate,DFO_Turnover_Adjusted,Survey_Start,High_Tide,Tide_Difference,Tide_Relative,Julian,Sunset_Time,Sunset_Difference,Sunset_Relative,DFO_Area_(km^2),DFO_Density,Survey_Started,HighTideDateTime,SunsetDateTime,Comments
+id,Survey_Date,Survey_Number,Year,No_of_Vessels,Ground,HSC_Estimate,HSC_Turnover,DFO_Estimate,DFO_Turnover_Adjusted,Survey_Start,High_Tide,Tide_Difference,Tide_Relative,Julian,Sunset_Time,Sunset_Difference,Sunset_Relative,DFO_Area,DFO_Density,Survey_Started,HighTideDateTime,SunsetDateTime,Comments
 1,1999-07-25,1,1999,1,SB,NA,NA,22307,"24,335",22:30:00,19:21:00,3:09:00,-3.15,206,20:50:00,1:40:00,-1.67,312.31,0.071425827,1999-07-25 22:30,1999-07-25 19:21,1999-07-25 20:50,
 2,1999-09-03,2,1999,1,SB,NA,NA,0,0,23:30:00,14:39:00,8:51:00,-8.85,246,19:49:00,3:41:00,-3.68,712,0,1999-09-03 23:30,1999-09-03 14:39,1999-09-03 19:49,
 3,1999-09-10,2,1999,,GB,NA,NA,182637,208259,20:30:00,23:59:00,3:29:00,3.48,253,19:45:00,0:45:00,-0.75,198,0.922409091,1999-09-10 20:30,1999-09-10 23:59,1999-09-10 19:45,"-' is before survey, '+' is after survey"
