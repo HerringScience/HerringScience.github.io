@@ -39,7 +39,7 @@ rm(list = ls())
 #Set information here
 Lat = "45 03 54" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
 Lon = "65 14 93"
-date = "2021-05-24"
+date = "1999-09-10"
 
 ### Code below ###
 
@@ -70,9 +70,11 @@ Sunset$date = as.Date(Sunset$date)
 SunsetStartOnly <- Sunset$sunsetStart
 SunsetStartOnly <- as.POSIXct(SunsetStartOnly)
 
+
+
 #Bind Data
-SunsetTimeCSV = full_join(SunsetStart, Sunset)
+#SunsetTimeCSV = full_join(SunsetStart, Sunset)
 
 #Save file
-SunsetTimeCSV %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/surveyFactorsAll_Tracey with SSB data.csv"))
+#SunsetTimeCSV %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/surveyFactorsAll_Tracey with SSB data.csv"))
 
