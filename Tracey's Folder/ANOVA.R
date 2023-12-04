@@ -53,7 +53,7 @@ Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.i
 
 ### SCOTS BAY Julian Date and Survey Biomass
 
-JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate"))
+JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate")) +
   JulianAndBiomass <- na.omit(JulianAndBiomass)
   JulianAndBiomass<- subset(JulianAndBiomass, Survey_Date < '2023-05-22') #As only one DFO factor for 2023 is in the system, removed to keep years nice.
 
@@ -62,8 +62,7 @@ ScotsBay_Turnover <- subset(JulianAndBiomass, Ground=='SB' )
 SBPointGraph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +geom_point() +geom_smooth(span = 1)
   print(SBPointGraph + labs(y = "Survey Biomass (mt)", x = "Julian Day"))
 
-OneWayJB <- aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover)
-  summary(OneWayJB)
+summary(aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover))
 
 ### SCOTS BAY Number of Vessels and Survey Biomass
 
@@ -216,3 +215,41 @@ GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Julian, y
   GBPeakBiomassANOVA = aov (DFO_Estimate~Year, data=GermanBankPeakBiomass)
   summary(GBPeakBiomassANOVA)
   
+### German Bank Index trend
+  
+TotalBiomass <- subset(Survey_Factors, select = c("Year","Ground", "DFO_Estimate", "Survey_Date"))
+  TotalBiomass <- na.omit(TotalBiomass)
+  TotalBiomass <- subset(TotalBiomass, Survey_Date < '2023-05-22')
+  
+GermanBankTotalBiomass <- subset(TotalBiomass, Ground == "GB")
+GermanBankTotalBiomass <- GermanBankTotalBiomass %>% group_by(Year) %>% add_count(Year)
+aggregateGB <- aggregate(GermanBankTotalBiomass$DFO_Estimate, list(GermanBankTotalBiomass$Year), FUN=(sum))
+
+GBTotalBiomass <- print(ggplot(aggregateGB, aes(x=Group.1, y=x, col = "Yearly Total Biomass")) + 
+                    geom_point(aes(size = 2)) +
+                    geom_line()+
+                    labs(x = "Year", y= "Total Biomass (mt)"))                    
+  
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+
+GermanBankPeakBiomass <- subset(PeakBiomass, Ground == "GB")  
+  GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+
+GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate), ) + 
+  geom_point(colour = 'blue', size = 3) +
+  geom_line()
+
+#print(GermanBankPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Year"))
+
+#plot1 <- print(plot(aggregateGB$Group.1, aggregateGB$x, ylim = c(0, 505000), col='blue', pch = 19) + geom_line())
+
+#plot2 <- print(plot(GermanBankPeakBiomass$Year, GermanBankPeakBiomass$DFO_Estimate, col="green", pch = 19))
+
+CombinedPlot<- print(ggplot() +
+                      geom_point(mapping = aes(x=Group.1, y=x), data = aggregateGB, colour = 'red', size = 2) +
+                      #geom_line(x='Group.1', y = 'x', data=aggregateGB)+ ## Trying to insert trendline
+                      geom_point(mapping = aes (x= Year, y = DFO_Estimate), data = GermanBankPeakBiomass, colour = 'blue', size = 2) +
+                      labs(x='Year', y = 'Total Biomass (mt)')
+                      )
