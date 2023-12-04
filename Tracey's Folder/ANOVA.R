@@ -53,11 +53,11 @@ Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.i
 
 ### SCOTS BAY Julian Date and Survey Biomass
 
-JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Survey_Area", "Julian", "DFO_Estimate"))
+JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate"))
   JulianAndBiomass <- na.omit(JulianAndBiomass)
   JulianAndBiomass<- subset(JulianAndBiomass, Survey_Date < '2023-05-22') #As only one DFO factor for 2023 is in the system, removed to keep years nice.
 
-ScotsBay_Turnover <- subset(JulianAndBiomass, Survey_Area=='SB' )
+ScotsBay_Turnover <- subset(JulianAndBiomass, Ground=='SB' )
 
 SBPointGraph <- ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +geom_point() +geom_smooth(span = 1)
   print(SBPointGraph + labs(y = "Survey Biomass (mt)", x = "Julian Day"))
@@ -67,9 +67,9 @@ OneWayJB <- aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover)
 
 ### SCOTS BAY Number of Vessels and Survey Biomass
 
-SBVesselsBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Julian", "DFO_Estimate", "Survey_Area"))
+SBVesselsBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Julian", "DFO_Estimate", "Ground"))
   SBVesselsBiomass <- na.omit(SBVesselsBiomass)
-  SBVesselsBiomass <- subset(SBVesselsBiomass, Survey_Area == "SB", Survey_Date < '2023-05-22')
+  SBVesselsBiomass <- subset(SBVesselsBiomass, Ground == "SB", Survey_Date < '2023-05-22')
   SBVesselsBiomass$No_of_Vessels <- as.factor(SBVesselsBiomass$No_of_Vessels)
 
 SBBoxplotVessels <-boxplot(SBVesselsBiomass$DFO_Estimate~SBVesselsBiomass$No_of_Vessels, xlab="Number of Vessels in Survey", ylab="Survey Biomass (mt)")
@@ -79,10 +79,10 @@ SBOneWayVessels <- aov(DFO_Estimate ~ No_of_Vessels, data = SBVesselsBiomass)
                            
 ###Scots Bay Survey Area, Julian, Survey Time, High Tide Time, Survey Biomass
                            
-SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Survey_Area","Year", "Julian", "DFO_Estimate", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
+SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Ground","Year", "Julian", "DFO_Estimate", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
   SurveyAreaTimeTideBiomass <- na.omit(SurveyAreaTimeTideBiomass)
                            
-ScotsBayHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="SB")
+ScotsBayHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Ground=="SB")
   ScotsBayHighTideBiomass <- subset(ScotsBayHighTideBiomass, Survey_Date < '2023-05-22')
   ScotsBayHighTideBiomass$Tide_Relative <- as.numeric(ScotsBayHighTideBiomass$Tide_Relative)
                            
@@ -94,11 +94,11 @@ SBOneWayTideRelative <- aov(DFO_Estimate ~ Tide_Relative, data = ScotsBayHighTid
   
   
 ###Scots Bay Sunset Relative
-SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate", "Sunset_Relative"))
+SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Ground", "DFO_Estimate", "Sunset_Relative"))
   SunsetData <- na.omit(SunsetData)
   SunsetData <- subset(SunsetData,  Survey_Date < '2023-05-22') 
   
-ScotsBaySunsetData <- subset(SunsetData, Survey_Area == "SB")
+ScotsBaySunsetData <- subset(SunsetData, Ground == "SB")
   ScotsBaySunsetData$Sunset_Relative <- as.numeric(ScotsBaySunsetData$Sunset_Relative)
   
 SBSunsetRelativePoint <- ggplot(ScotsBaySunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth(span = 1)
@@ -108,11 +108,11 @@ SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunset
   summary(SBSunsetOneWayANOVA)
   
 ###Scots Bay Peak Biomass
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Survey_Area", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
   
-ScotsBayPeakBiomass <- subset(PeakBiomass, Survey_Area == "SB")  
+ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
   
 ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
 ScotsBayPeakBiomass <-ScotsBayPeakBiomass %>% add_column(format(ScotsBayPeakBiomass$Survey_Date, "%B"))
@@ -121,9 +121,10 @@ ScotsBayPeakBiomass %>% group_by(Month)
 
 ScotsBayPeakBiomass$Month <-factor(ScotsBayPeakBiomass$Month, levels = c("June", "July", "August", "September"))
 ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
-                                 geom_point(aes(color=Month)) + 
-                                 geom_smooth(span = .5)  + 
-                                 geom_text(aes(label=Year), nudge_x = 2.5)
+                                 geom_point(aes(color=Month, size = 3)) + 
+                                 geom_label_repel(aes(label=Year), nudge_x = 2)
+                                 
+
 
 ScotsBayPeakBiomassPointGraph + scale_fill_discrete(breaks=c("June", "July", "August", "September"))
     print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
@@ -139,11 +140,11 @@ SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
   
 ###German Bank Julian Date and Survey Biomass
   
-JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Survey_Area", "Julian", "DFO_Estimate"))
+JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate"))
   JulianAndBiomass <- na.omit(JulianAndBiomass)
   JulianAndBiomass<- subset(JulianAndBiomass, Survey_Date < '2023-05-22') #As only one DFO factor for 2023 is in the system, removed to keep years nice.
   
-GermanBankTurnover <- subset(JulianAndBiomass, Survey_Area=='GB' )
+GermanBankTurnover <- subset(JulianAndBiomass, Ground=='GB' )
   
 GBPointGraph <- ggplot(GermanBankTurnover, aes(Julian, DFO_Estimate)) +geom_smooth(span = 1) + geom_point() 
   print(GBPointGraph + labs(y = "Survey Biomass (mt)", x = "Julian Day"))
@@ -153,25 +154,22 @@ GBOneWayJB <- aov(DFO_Estimate ~ Julian, data = GermanBankTurnover)
   
 
 ### German Bank Number of Vessels and Survey Biomass
-VesselsBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Julian", "DFO_Estimate", "Survey_Area"))
+VesselsBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Julian", "DFO_Estimate", "Ground"))
   VesselsBiomass <- na.omit(VesselsBiomass)
   
-GBVesselsBiomass <- subset(VesselsBiomass, Survey_Area == "GB", Survey_Date < '2023-05-22')
+GBVesselsBiomass <- subset(VesselsBiomass, Ground == "GB", Survey_Date < '2023-05-22')
   GBVesselsBiomass$No_of_Vessels <- as.factor(GBVesselsBiomass$No_of_Vessels)
   
 GBBoxplotVessels <-boxplot(GBVesselsBiomass$DFO_Estimate~GBVesselsBiomass$No_of_Vessels, xlab="Number of Vessels in Survey", ylab="Survey Biomass (mt)")
   
 GBOneWayVessels <- aov(DFO_Estimate ~ No_of_Vessels, data = GBVesselsBiomass)
   summary(GBOneWayVessels)
-  
-#GBSurveyTideDifference.two.way <- aov(DFO_Estimate ~ No_of_Vessels*Julian, data = GermanBank_HighTideBiomass)
-  #summary(GBSurveyTideDifference.two.way)
-  
+
 ###German Bank Survey Area, Julian, Survey Time, High Tide Time, DFO_Estimate
-SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Survey_Area","Year", "Julian", "DFO_Estimate", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
+SurveyAreaTimeTideBiomass <- subset(Survey_Factors, select=c("Survey_Date", "No_of_Vessels", "Ground","Year", "Julian", "DFO_Estimate", "Survey_Start", "High_Tide", "Tide_Difference", "Tide_Relative" ))
   SurveyAreaTimeTideBiomass <- na.omit(SurveyAreaTimeTideBiomass)
   
-GermanBankHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Survey_Area=="GB")
+GermanBankHighTideBiomass <- subset(SurveyAreaTimeTideBiomass, Ground=="GB")
   GermanBankHighTideBiomass <- subset(GermanBankHighTideBiomass, Survey_Date < '2023-05-22')
   GermanBankHighTideBiomass <- subset(GermanBankHighTideBiomass, DFO_Estimate!="228870" & DFO_Estimate!="191802" & DFO_Estimate!="143937") #removed top 3 values to see if this made a difference to the ANOVA
   GermanBankHighTideBiomass$Tide_Relative <- as.numeric(GermanBankHighTideBiomass$Tide_Relative)
@@ -183,11 +181,11 @@ GBSurveyTideDifference.one.way <- aov(DFO_Estimate ~ Tide_Relative, data = Germa
   summary(GBSurveyTideDifference.one.way)
   
 ###Sunset Relative
-SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Survey_Area", "DFO_Estimate", "Sunset_Relative"))
+SunsetData <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Ground", "DFO_Estimate", "Sunset_Relative"))
   SunsetData <- na.omit(SunsetData)
   SunsetData <- subset(SunsetData,  Survey_Date < '2023-05-22') 
 
-GermanBankSunsetData <- subset(SunsetData, Survey_Area == "GB")
+GermanBankSunsetData <- subset(SunsetData, Ground == "GB")
   GermanBankSunsetData$Sunset_Relative <- as.numeric(GermanBankSunsetData$Sunset_Relative)
 
 GBSunsetRelativePoint <- ggplot(GermanBankSunsetData, aes (x=Sunset_Relative, y=DFO_Estimate))+ geom_point(aes(group=Sunset_Relative)) +geom_smooth(span=1)
@@ -197,11 +195,11 @@ GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSuns
   summary(GBSunsetOneWayANOVA)
   
 ###German Bank Peak Biomass
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Survey_Area", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
   
-GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")  
+GermanBankPeakBiomass <- subset(PeakBiomass, Ground == "GB")  
   GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
   GermanBankPeakBiomass <-GermanBankPeakBiomass %>% add_column(format(GermanBankPeakBiomass$Survey_Date, "%B"))
   colnames(GermanBankPeakBiomass)[6] = "Month"
@@ -209,12 +207,12 @@ GermanBankPeakBiomass <- subset(PeakBiomass, Survey_Area == "GB")
   GermanBankPeakBiomass$Month <-factor(GermanBankPeakBiomass$Month, levels = c("August", "September", "October"))
   
 GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
-    geom_point(aes(color=Month)) + 
-    geom_smooth(span = .5)  + 
-    geom_text(aes(label=Year), nudge_x = 2.0)
+    geom_point(aes(color=Month, size = 3)) + 
+    geom_label_repel(aes(label=Year), nudge_x = 2)
   
   GermanBankPeakBiomassPointGraph + scale_fill_discrete(breaks=c("August", "September", "October"))
     print(GermanBankPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
   
   GBPeakBiomassANOVA = aov (DFO_Estimate~Year, data=GermanBankPeakBiomass)
   summary(GBPeakBiomassANOVA)
+  
