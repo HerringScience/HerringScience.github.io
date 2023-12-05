@@ -1,6 +1,5 @@
 #ANOVA Survey Factors Investigations_Scots Bay Tides
 
-library(ggrepel)
 library(rlang)
 library(cli)
 library(lubridate)
@@ -14,6 +13,7 @@ library(ggridges)
 #library(weathercan)
 library(GGally)
 library(psych)
+library(sp)
 library(raster)
 library(PBSmapping)
 #library(rgeos) - replaced by terra and sf
@@ -34,6 +34,7 @@ library(datasets)
 library(terra)
 library(multcompView)
 library(sf)
+library(ggrepel)
 
 ###remove everything in environment
 rm(list = ls())
@@ -224,22 +225,24 @@ TotalBiomass <- subset(Survey_Factors, select = c("Year","Ground", "DFO_Estimate
 GermanBankTotalBiomass <- subset(TotalBiomass, Ground == "GB")
 GermanBankTotalBiomass <- GermanBankTotalBiomass %>% group_by(Year) %>% add_count(Year)
 aggregateGB <- aggregate(GermanBankTotalBiomass$DFO_Estimate, list(GermanBankTotalBiomass$Year), FUN=(sum))
+colnames(aggregateGB)<-c("Year", "DFO_Estimate")
 
-GBTotalBiomass <- print(ggplot(aggregateGB, aes(x=Group.1, y=x, col = "Yearly Total Biomass")) + 
+GBTotalBiomass <- print(ggplot(aggregateGB, aes(x=Year, y=DFO_Estimate, col = "Yearly Total Biomass")) + 
                     geom_point(aes(size = 2)) +
                     geom_line()+
                     labs(x = "Year", y= "Total Biomass (mt)"))                    
   
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
 
 GermanBankPeakBiomass <- subset(PeakBiomass, Ground == "GB")  
   GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
 
-GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate), ) + 
+GermanBankPeakBiomassPointGraph <- (ggplot(GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate, col = 'blue')) + 
   geom_point(colour = 'blue', size = 3) +
-  geom_line()
+  geom_line()+
+  legend(2000, 500000, legend= c("German Bank Peak Biomass")))
 
 #print(GermanBankPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Year"))
 
@@ -248,8 +251,21 @@ GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=D
 #plot2 <- print(plot(GermanBankPeakBiomass$Year, GermanBankPeakBiomass$DFO_Estimate, col="green", pch = 19))
 
 CombinedPlot<- print(ggplot() +
-                      geom_point(mapping = aes(x=Group.1, y=x), data = aggregateGB, colour = 'red', size = 2) +
-                      #geom_line(x='Group.1', y = 'x', data=aggregateGB)+ ## Trying to insert trendline
-                      geom_point(mapping = aes (x= Year, y = DFO_Estimate), data = GermanBankPeakBiomass, colour = 'blue', size = 2) +
-                      labs(x='Year', y = 'Total Biomass (mt)')
-                      )
+                      geom_line(data=aggregateGB, aes(x=Year, y = DFO_Estimate), color = 'red') +
+                      geom_line(data=GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate), color = 'blue') +
+                      xlab('Year') +
+                      ylab('TotalBiomass')) 
+                     
+
+CombinedPlot2 <- merge(aggregateGB, GermanBankPeakBiomass, by="Year" )                      
+plot.new()
+ggplot(CombinedPlot2, aes (x=Year)) + 
+  geom_line(aes(y=DFO_Estimate.x), color = 'red') + 
+  geom_line(aes(y=DFO_Estimate.y), color = 'blue') +
+  xlab('Year') + 
+  ylab('Total Biomass') +
+  legend("topright", legend = c("Line 1", "Line 2"))
+
+
+
+                                                                                                                                                                                        
