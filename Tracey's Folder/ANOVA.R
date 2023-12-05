@@ -132,6 +132,41 @@ ScotsBayPeakBiomassPointGraph + scale_fill_discrete(breaks=c("June", "July", "Au
 SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
   summary(SBPeakBiomassANOVA)
   
+### Scots Bay Index trend
+  
+TotalBiomass <- subset(Survey_Factors, select = c("Year","Ground", "DFO_Estimate", "Survey_Date"))
+  TotalBiomass <- na.omit(TotalBiomass)
+  TotalBiomass <- subset(TotalBiomass, Survey_Date < '2023-05-22')
+  
+ScotsBayTotalBiomass <- subset(TotalBiomass, Ground == "SB")
+  ScotsBayTotalBiomass <- ScotsBayTotalBiomass %>% group_by(Year) %>% add_count(Year)
+  aggregateSB <- aggregate(ScotsBayTotalBiomass$DFO_Estimate, list(ScotsBayTotalBiomass$Year), FUN=(sum))
+  colnames(aggregateSB)<-c("Year", "DFO_Estimate")
+  
+SBTotalBiomass <- print(ggplot(aggregateSB, aes(x=Year, y=DFO_Estimate, col = "Yearly Total Biomass")) + 
+                            geom_point(aes(size = 2)) +
+                            geom_line()+
+                            labs(x = "Year", y= "Total Biomass (mt)"))                    
+  
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+  
+ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
+  ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+  
+ScotsBayPeakBiomassPointGraph <- (ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate, col = 'blue')) + 
+                                        geom_point(colour = 'blue', size = 3) +
+                                        geom_line()+
+                                        legend(2000, 500000, legend= c("Scots Bay Peak Biomass")))
+  
+CombinedPlot2 <- merge(aggregateSB, ScotsBayPeakBiomass, by="Year" )                      
+  
+CombinedPlot3 <- print(ggplot(CombinedPlot2, aes(x=Year)) + 
+                           geom_line(aes(y=DFO_Estimate.x, color = "blue")) + 
+                           geom_line(aes(y=DFO_Estimate.y, color = "red")) +
+                           labs(x = "Year", y = "Total Biomass") +
+                           scale_colour_manual(values = c("blue", "red"), labels = c("Scots Bay Total Yearly Biomass", "Scots Bay Peak Biomass")))
 #
 ##
 ### GERMAN BANK
@@ -244,28 +279,11 @@ GermanBankPeakBiomassPointGraph <- (ggplot(GermanBankPeakBiomass, aes(x=Year, y=
   geom_line()+
   legend(2000, 500000, legend= c("German Bank Peak Biomass")))
 
-#print(GermanBankPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Year"))
-
-#plot1 <- print(plot(aggregateGB$Group.1, aggregateGB$x, ylim = c(0, 505000), col='blue', pch = 19) + geom_line())
-
-#plot2 <- print(plot(GermanBankPeakBiomass$Year, GermanBankPeakBiomass$DFO_Estimate, col="green", pch = 19))
-
-CombinedPlot<- print(ggplot() +
-                      geom_line(data=aggregateGB, aes(x=Year, y = DFO_Estimate), color = 'red') +
-                      geom_line(data=GermanBankPeakBiomass, aes(x=Year, y=DFO_Estimate), color = 'blue') +
-                      xlab('Year') +
-                      ylab('TotalBiomass')) 
-                     
-
 CombinedPlot2 <- merge(aggregateGB, GermanBankPeakBiomass, by="Year" )                      
-plot.new()
-ggplot(CombinedPlot2, aes (x=Year)) + 
-  geom_line(aes(y=DFO_Estimate.x), color = 'red') + 
-  geom_line(aes(y=DFO_Estimate.y), color = 'blue') +
-  xlab('Year') + 
-  ylab('Total Biomass') +
-  legend("topright", legend = c("Line 1", "Line 2"))
 
+CombinedPlot3 <- print(ggplot(CombinedPlot2, aes(x=Year)) + 
+  geom_line(aes(y=DFO_Estimate.x, color = "blue")) + 
+  geom_line(aes(y=DFO_Estimate.y, color = "red")) +
+  labs(x = "Year", y = "Total Biomass") +
+  scale_colour_manual(values = c("blue", "red"), labels = c("German Bank Total Yearly Biomass", "German Bank Peak Biomass")))
 
-
-                                                                                                                                                                                        
