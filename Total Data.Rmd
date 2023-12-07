@@ -1637,7 +1637,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 #### Mapped Data {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
+CP <- as(extent(-66.5, -64.5, 44.5, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
 out <- crop(NBNS, CP, byid=TRUE)
 ```
@@ -1645,18 +1645,19 @@ out <- crop(NBNS, CP, byid=TRUE)
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-ggplot(Larval, aes(x=X, y=Y)) + 
+
+ggplot(Larval1, aes(x=X, y=Y)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
+  geom_point(data=Larval1, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
   labs(x=NULL, y=NULL) + 
   coord_map()
 
-TotalCategories <- Larval %>%
+TotalCategories <- Larval1 %>%
   group_by(category) %>%
   dplyr::summarize(n = n()) %>%
   mutate(Percentage = (n/sum(n))*100) %>%
@@ -1679,7 +1680,7 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i)
+Larval1 = Larval %>% filter(Year == i) %>% filter(Ground != "GB")
  
 print(ggplot(Larval1, aes(x=X, y=Y)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -1944,15 +1945,13 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i)
+Larval1 = Larval %>% filter(Year == i) %>% filter()
  
 print(ggplot(Larval1, aes(x=X, y=Y)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
   geom_point(data=Larval1, aes(fill = category, size = Abundance), pch=21, alpha = 0.6) +
   labs(x=NULL, y=NULL) + 
   coord_map())
