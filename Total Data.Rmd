@@ -26,12 +26,14 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
+library(sf)
+library(terra)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -356,7 +358,7 @@ for(i in unique(SSB$Year)) {
 ```{r}
 CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
@@ -408,7 +410,7 @@ for(i in unique(Tag1$Survey)) {
 ```{r message=FALSE, warning=FALSE}
 CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
@@ -461,7 +463,7 @@ for(i in unique(Tag1$Survey)) {
 #Reset spatial extent back to full view
 CP <- as(extent(-69, -63, 42, 45.5), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 ggplot(data = subset(Tag, Lon < -64.1), aes(x=Lon, y=Lat)) + 
  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") + 
@@ -495,7 +497,7 @@ kbl(Annual_Table) %>%
 #Reset spatial extent back to full view
 CP <- as(extent(-69, -61.5, 42, 45.5), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 ggplot(data = Tag, aes(x=Lon, y=Lat)) + 
  geom_polygon(data=out,aes(x=long, y=lat, group=group),fill='burlywood4',col='black') +
@@ -537,7 +539,7 @@ Whatever summarized data the tagger tech has.
 ```{r message=FALSE, warning=FALSE}
 CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ```{r echo=FALSE}
@@ -596,7 +598,7 @@ labs(x="Temperature (°C)", y = "Depth (m)", title = "Temperature (°C) vs. Dept
 ```{r message=FALSE, warning=FALSE}
 CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ```{r echo=FALSE}
@@ -1441,7 +1443,7 @@ print(ggplot(data = subset(atDepth1, Year == i), aes(x = Julian, y = StratSalt, 
 ```{r message=FALSE, warning=FALSE, fig.align='center'}
 CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 ggplot(data = subset(CTD, Ground == "Scots Bay"), aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -1460,7 +1462,7 @@ ggplot(data = subset(CTD, Ground == "Scots Bay"), aes(x=Lon, y=Lat)) +
 ```{r message=FALSE, warning=FALSE, fig.align='center'}
 CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 ggplot(data = subset(CTD, Ground == "German Bank" & In_Box == "1"), aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -1478,7 +1480,7 @@ ggplot(data = subset(CTD, Ground == "German Bank" & In_Box == "1"), aes(x=Lon, y
 #Reset spatial extent back to full view
 CP <- as(extent(-69, -63, 42, 45.5), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 ggplot(data = CTD, aes(x=Lon, y=Lat)) + 
  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") + 
@@ -1494,10 +1496,10 @@ ggplot(data = CTD, aes(x=Lon, y=Lat)) +
 ### Scots Bay {.tabset}
 #### Length Data {.tabset .tabset-pills}
 
-##### Total
+##### Total 
 
-```{r echo=FALSE, fig.align='center'}
-Larval = Larval %>% filter(Ground == "SB")
+```{r, results = "asis", fig.align='center'}
+
 Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
   geom_point() +
   labs(y="Length (mm)", x="Julian Date of Collection")
@@ -1505,6 +1507,7 @@ Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) +
 ggplot(Larval, aes(Year, Lengthmm, colour = Year)) + 
   geom_boxplot() +
   labs(y="Length (mm)")
+
 
 Table = Larval %>%
   group_by(Year) %>%
@@ -1519,6 +1522,7 @@ kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Lengt
   kable_paper("striped", full_width = F)
 ```
 
+
 ```{r, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
@@ -1527,7 +1531,20 @@ for(i in unique(Larval$Year)) {
   cat("\n")
 
 Larval1 = Larval %>% filter(Year == i)
- 
+
+Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
+  geom_point() +
+  labs(y="Length (mm)", x="Julian Date of Collection")
+
+print(ggplot(data = subset(Larval, Year == i), aes(x = Julian, y = Lengthmm, colour = Year)) + 
+  geom_point() + 
+  ylim(c(0,30)) +
+  xlim(c(150, 275)) +
+  ylab("Length (mm)") + 
+  xlab("Julian Day") +
+  ggtitle("Scots Bay"))
+  cat("\n")
+  
 print(ggplot(data = Larval1, (aes(Lengthmm))) + 
   geom_histogram(binwidth=0.5, colour = "white") + 
   theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
@@ -1622,7 +1639,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 ```{r message=FALSE, warning=FALSE}
 CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
@@ -1892,7 +1909,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 ```{r message=FALSE, warning=FALSE}
 CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
@@ -2048,7 +2065,7 @@ NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward 
 
 CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
 proj4string(CP) <- CRS(proj4string(NBNS))
-out <- gIntersection(NBNS, CP, byid=TRUE)
+out <- crop(NBNS, CP, byid=TRUE)
 
 pal <- colorNumeric(
   palette = "Reds",
