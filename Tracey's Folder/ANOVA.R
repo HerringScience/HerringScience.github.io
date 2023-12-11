@@ -175,20 +175,36 @@ CombinedPlot2 <- print(ggplot(CombinedPlot, aes(x=Year)) +
                          labs(x = "Year", y = "Total Biomass (mt)")) 
 
 #Scots Bay 3 year rolling averages
+TotalBiomass <- subset(Survey_Factors, select = c("id", "Year","Ground", "DFO_Estimate", "Survey_Date", "DFO_Turnover_Adjusted"))
+  TotalBiomass <- na.omit(TotalBiomass)
+  TotalBiomass <- subset(TotalBiomass, Survey_Date < '2023-05-22')
+
+ScotsBayTotalBiomass <- subset(TotalBiomass, Ground == "SB")
+  ScotsBayTotalBiomass <- ScotsBayTotalBiomass %>% group_by(Year) %>% add_count(Year)
+aggregateSB <- aggregate(ScotsBayTotalBiomass$DFO_Turnover_Adjusted, list(ScotsBayTotalBiomass$Year), FUN=(sum))
+  colnames(aggregateSB)<-c("Year", "DFO_Turnover_Adjusted")
+
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate", "DFO_Turnover_Adjusted"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+
+ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
+  ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Turnover_Adjusted)
 
 ThreeYearRollingBiomass <- aggregateSB %>%
   arrange(Year) %>%
-  group_by(Year) %>%
-  mutate(avg_biomass3 = rollmean(DFO_Estimate, k = 3, fill = NA, align = 'right'))
+  mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
-ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=DFO_Estimate)) +
+ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=avg_biomass3)) +
                                         geom_point() +
                                         geom_line())
 
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% select(Year, DFO_Turnover_Adjusted)
+  ScotsBayPeakBiomass <- ungroup(ScotsBayPeakBiomass)
+  
 ThreeYearRollingPeak <- ScotsBayPeakBiomass %>%
   arrange(Year) %>%
-  group_by(Year) %>%
-  mutate(avg_biomass3 =rollmean(DFO_Estimate, k=3, fill = NA, align = 'right'))
+  mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
 ThreeYearRollingPeakGraph <- print(ggplot(ThreeYearRollingPeak, aes(x=Year, y=avg_biomass3)) +
                                      geom_point()+
