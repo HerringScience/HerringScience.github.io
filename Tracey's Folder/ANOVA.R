@@ -109,19 +109,19 @@ SBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = ScotsBaySunset
   summary(SBSunsetOneWayANOVA)
   
 ###Scots Bay Peak Biomass
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Turnover_Adjusted"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
   
 ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
   
-ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Turnover_Adjusted)
 ScotsBayPeakBiomass <-ScotsBayPeakBiomass %>% add_column(format(ScotsBayPeakBiomass$Survey_Date, "%B"))
 colnames(ScotsBayPeakBiomass)[6] = "Month"
 ScotsBayPeakBiomass %>% group_by(Month)
 
 ScotsBayPeakBiomass$Month <-factor(ScotsBayPeakBiomass$Month, levels = c("June", "July", "August", "September"))
-ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
+ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO_Turnover_Adjusted)) + 
                                  geom_point(aes(color=Month, size = 3)) + 
                                  geom_label_repel(aes(label=Year), nudge_x = 2)
                                  
@@ -130,7 +130,7 @@ ScotsBayPeakBiomassPointGraph <- ggplot(ScotsBayPeakBiomass, aes(x=Julian, y=DFO
 ScotsBayPeakBiomassPointGraph + scale_fill_discrete(breaks=c("June", "July", "August", "September"))
     print(ScotsBayPeakBiomassPointGraph + labs(y="Peak Survey Biomass(mt)", x = "Julian"))
   
-SBPeakBiomassANOVA = aov(DFO_Estimate~Year, data = ScotsBayPeakBiomass)
+SBPeakBiomassANOVA = aov(DFO_Turnover_Adjusted~Year, data = ScotsBayPeakBiomass)
   summary(SBPeakBiomassANOVA)
   
 ### Scots Bay Index trend
@@ -175,20 +175,36 @@ CombinedPlot2 <- print(ggplot(CombinedPlot, aes(x=Year)) +
                          labs(x = "Year", y = "Total Biomass (mt)")) 
 
 #Scots Bay 3 year rolling averages
+TotalBiomass <- subset(Survey_Factors, select = c("id", "Year","Ground", "DFO_Estimate", "Survey_Date", "DFO_Turnover_Adjusted"))
+  TotalBiomass <- na.omit(TotalBiomass)
+  TotalBiomass <- subset(TotalBiomass, Survey_Date < '2023-05-22')
+
+ScotsBayTotalBiomass <- subset(TotalBiomass, Ground == "SB")
+  ScotsBayTotalBiomass <- ScotsBayTotalBiomass %>% group_by(Year) %>% add_count(Year)
+aggregateSB <- aggregate(ScotsBayTotalBiomass$DFO_Turnover_Adjusted, list(ScotsBayTotalBiomass$Year), FUN=(sum))
+  colnames(aggregateSB)<-c("Year", "DFO_Turnover_Adjusted")
+
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate", "DFO_Turnover_Adjusted"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+
+ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
+  ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Turnover_Adjusted)
 
 ThreeYearRollingBiomass <- aggregateSB %>%
   arrange(Year) %>%
-  group_by(Year) %>%
-  mutate(avg_biomass3 = rollmean(DFO_Estimate, k = 3, fill = NA, align = 'right'))
+  mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
-ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=DFO_Estimate)) +
+ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=avg_biomass3)) +
                                         geom_point() +
                                         geom_line())
 
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% select(Year, DFO_Turnover_Adjusted)
+  ScotsBayPeakBiomass <- ungroup(ScotsBayPeakBiomass)
+  
 ThreeYearRollingPeak <- ScotsBayPeakBiomass %>%
   arrange(Year) %>%
-  group_by(Year) %>%
-  mutate(avg_biomass3 =rollmean(DFO_Estimate, k=3, fill = NA, align = 'right'))
+  mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
 ThreeYearRollingPeakGraph <- print(ggplot(ThreeYearRollingPeak, aes(x=Year, y=avg_biomass3)) +
                                      geom_point()+
@@ -265,18 +281,18 @@ GBSunsetOneWayANOVA <- aov(DFO_Estimate ~ Sunset_Relative, data = GermanBankSuns
   summary(GBSunsetOneWayANOVA)
   
 ###German Bank Peak Biomass
-PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Estimate"))
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year", "Julian", "Ground", "DFO_Turnover_Adjusted"))
   PeakBiomass <- na.omit(PeakBiomass)
   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
   
 GermanBankPeakBiomass <- subset(PeakBiomass, Ground == "GB")  
-  GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+  GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Turnover_Adjusted)
   GermanBankPeakBiomass <-GermanBankPeakBiomass %>% add_column(format(GermanBankPeakBiomass$Survey_Date, "%B"))
   colnames(GermanBankPeakBiomass)[6] = "Month"
   GermanBankPeakBiomass %>% group_by(Month)
   GermanBankPeakBiomass$Month <-factor(GermanBankPeakBiomass$Month, levels = c("August", "September", "October"))
   
-GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Julian, y=DFO_Estimate)) + 
+GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Julian, y=DFO_Turnover_Adjusted)) + 
     geom_point(aes(color=Month, size = 3)) + 
     geom_label_repel(aes(label=Year), nudge_x = 2)
   
@@ -321,29 +337,43 @@ GermanBankPeakBiomassPointGraph <- ggplot(GermanBankPeakBiomass, aes(x=Year, y=D
 
 
 CombinedPlot <- merge(aggregateGB, GermanBankPeakBiomass, by="Year" )
-  #CombinedPlot <- merge (CombinedPlot, ThreeYearRollingBiomass, by = "Year")
 
 CombinedPlot2 <- print(ggplot(CombinedPlot, aes(x=Year)) + 
   geom_line(aes(y=DFO_Estimate.x, color = "German Bank Total Yearly Biomass")) + 
   geom_line(aes(y=DFO_Estimate.y, color = "German Bank Peak Biomass")) +
-  #geom_line(aes(y=avg_biomass3, color="German Bank Three Year Rolling Biomass")) +
   labs(x = "Year", y = "Total Biomass (mt)")) 
 
 #German Bank 3 year rolling averages
+TotalBiomass <- subset(Survey_Factors, select = c("id", "Year","Ground", "DFO_Estimate", "Survey_Date", "DFO_Turnover_Adjusted"))
+  TotalBiomass <- na.omit(TotalBiomass)
+  TotalBiomass <- subset(TotalBiomass, Survey_Date < '2023-05-22')
+
+GermanBankTotalBiomass <- subset(TotalBiomass, Ground == "GB")
+GermanBankTotalBiomass <- GermanBankTotalBiomass %>% group_by(Year) %>% add_count(Year)
+aggregateGB <- aggregate(GermanBankTotalBiomass$DFO_Turnover_Adjusted, list(GermanBankTotalBiomass$Year), FUN=(sum))
+colnames(aggregateGB)<-c("Year", "DFO_Turnover_Adjusted")
+
+PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate", "DFO_Turnover_Adjusted"))
+  PeakBiomass <- na.omit(PeakBiomass)
+  PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+
+GermanBankPeakBiomass <- subset(PeakBiomass, Ground == "GB")  
+GermanBankPeakBiomass <- GermanBankPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Turnover_Adjusted)
 
 ThreeYearRollingBiomass <- aggregateGB %>%
   arrange(Year) %>%
-  group_by(Year) %>%
-  mutate(avg_biomass3 = rollmean(DFO_Estimate, k = 3, fill = NA, align = 'right'))
+  mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
-ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=DFO_Estimate)) +
+ThreeYearRollingBiomassGraph <- print(ggplot(ThreeYearRollingBiomass, aes(x=Year, y=DFO_Turnover_Adjusted)) +
                                         geom_point() +
                                         geom_line())
 
+GermanBankPeakBiomass <- GermanBankPeakBiomass %>% select(Year, DFO_Turnover_Adjusted)
+  GermanBankPeakBiomass <- ungroup(GermanBankPeakBiomass)
+
 ThreeYearRollingPeak <- GermanBankPeakBiomass %>%
                           arrange(Year) %>%
-                          group_by(Year) %>%
-                          mutate(avg_biomass3 =rollmean(DFO_Estimate, k=3, fill = NA, align = 'right'))
+                          mutate(avg_biomass3 = rollmean(DFO_Turnover_Adjusted, k = 3, fill = NA, align = 'right'))
 
 ThreeYearRollingPeakGraph <- print(ggplot(ThreeYearRollingPeak, aes(x=Year, y=avg_biomass3)) +
                                     geom_point()+
