@@ -44,6 +44,7 @@ options(scipen = 999)
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
 
 Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
+Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
 
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
@@ -55,7 +56,7 @@ Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.i
 
 ### SCOTS BAY Julian Date and Survey Biomass
 
-JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate")) +
+JulianAndBiomass <- subset(Survey_Factors, select=c("Survey_Date", "Ground", "Julian", "DFO_Estimate"))
   JulianAndBiomass <- na.omit(JulianAndBiomass)
   JulianAndBiomass<- subset(JulianAndBiomass, Survey_Date < '2023-05-22') #As only one DFO factor for 2023 is in the system, removed to keep years nice.
 
