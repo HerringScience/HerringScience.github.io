@@ -28,6 +28,7 @@ library(hms)
 library(measurements)
 library(tibble)
 library(zoo)
+library(gtools)
 
 Sys.setenv(tz = "America/Halifax")
 
@@ -39,15 +40,14 @@ rm(list = ls())
 #Set information here
 Lat = "45 03 54" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
 Lon = "65 14 93"
-date = "1999-09-10"
+date = "2024-01-02"
 
 ### Code below ###
 
 #Load Sunset Time.csv - Pulls up previous entries.
-SunsetStart <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Desktop/surveyFactorsAll_Tracey with SSB data.csv"))
+#SunsetStart <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/surveyFactorsAll_Tracey with SSB data.csv"))
+SunsetStart <- read_csv(paste0("C:/Users/herri/Desktop/Tracey Local SSB Spreadsheet.csv"))
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder")
-
-SunsetStart <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
 
 #Lat and Lon Converter
 Lon = conv_unit(Lon,"deg_min_sec","dec_deg")
@@ -58,7 +58,7 @@ Lon = -1*Lon
 
 #Calendar date Converter
 date = as.Date(as.POSIXct(date))
-julian = yday(date)
+julian = yday(date) ##Double check julian date
 
 #Data Table of Sunset times - Current Data
 Sunset <- suncalc::getSunlightTimes(date = date, lat = Lat, lon = Lon, keep = c("sunsetStart"), tz = "America/Halifax")
@@ -70,11 +70,29 @@ Sunset$date = as.Date(Sunset$date)
 SunsetStartOnly <- Sunset$sunsetStart
 SunsetStartOnly <- as.POSIXct(SunsetStartOnly)
 
-
-
 #Bind Data
-#SunsetTimeCSV = full_join(SunsetStart, Sunset)
-
-#Save file
-#SunsetTimeCSV %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/surveyFactorsAll_Tracey with SSB data.csv"))
-
+add_data = data.frame(id = "NA", 
+                      Survey_Date = date,
+                      Survey_Number = "NA",
+                      Survey_Type = "NA", 
+                      Counted = "NA", 
+                      Year = "NA", 
+                      No_of_Vessels = "NA", 
+                      Ground = "NA", 
+                      HSC_Estimate = "NA", 
+                      HSC_Turnover= "NA", 
+                      DFO_Estimate = "NA", 
+                      DFO_Turnover = "NA",
+                      Survey_Start = "NA",
+                      High_Tide = "NA", 
+                      Tide_Difference = "NA",
+                      Tide_Relative = "NA",
+                      Sunset_Time = "NA",
+                      Sunset_Difference = "NA",
+                      Sunset_Relative = "NA",
+                      DFO_Area = "NA",
+                      DFO_Density = "NA", 
+                      SurveyStart = "NA",
+                      HighTide = "NA",
+                      sunsetStart = SunsetStartOnly,
+                      Comment = "NA")
