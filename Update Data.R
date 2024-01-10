@@ -2,8 +2,8 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB
-surv2="German Bank" #"German Bank" or "Scots Bay" as written
+surv="GB" #SB or GB or SI
+surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2023"
 surv.no="7"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
@@ -48,12 +48,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
