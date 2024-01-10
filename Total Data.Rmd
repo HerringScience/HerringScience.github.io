@@ -45,6 +45,7 @@ library(leaflet)
 library(rmapshaper)
 library(plotly)
 library(mapproj)
+library(oce) #new CTD Data package
 
 #Tagging Data
 Tag = read_csv("TaggingEvents.csv") #Tagging Data
@@ -1646,18 +1647,20 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 ```{r echo=FALSE, fig.align='center'}
 
-ggplot(Larval1, aes(x=X, y=Y)) + 
+Larval2 <- subset(Larval, Ground == 'SB')
+
+ggplot(Larval2, aes(x=X, y=Y)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
+  geom_point(data=Larval2, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
   labs(x=NULL, y=NULL) + 
   coord_map()
 
-TotalCategories <- Larval1 %>%
+TotalCategories <- Larval2 %>%
   group_by(category) %>%
   dplyr::summarize(n = n()) %>%
   mutate(Percentage = (n/sum(n))*100) %>%
@@ -1759,30 +1762,59 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 #### Spawning Modes {.tabset .tabset-pills}
 
-##### Density
+##### Total
+
+Growth applied to compare spawning modes.
+
 ```{r, fig.align='center'}
+
 ggplot(Larval, aes(LastLength, ..density.., colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Growth applied to compare spawning modes") +
+  ggtitle("Density") +
   labs(y="Density", x="Growth Rate Applied Length (mm)")
-```
 
-##### Count
-
-```{r, fig.align='center'}
 ggplot(Larval, aes(LastLength, colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Growth applied to compare spawning modes") +
+  ggtitle("Count") +
   labs(y="Count", x="Growth Rate Applied Length (mm)")
-```
 
-##### Min vs Max
-
-```{r, fig.align='center'}
 Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) + 
   geom_point(alpha = 0.45, size = 5) + 
-  ggtitle("Approximate spawning times of larvae captured in Scots Bay") +
+  ggtitle("Min and Max") +
   labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
+```
+
+
+```{r, results='asis', fig.align='center'}
+ 
+
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+cat("Growth applied to compare spawning modes.")
+
+Larval1 = Larval %>% filter(Year == i)
+
+print(ggplot(Larval1, aes(LastLength, ..density.., colour = Survey.No)) + 
+  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
+  ggtitle(paste("Scots Bay Density")) +
+  labs(y="Density", x="Growth Rate Applied Length (mm)"))
+  cat("\n")
+  
+print(ggplot(Larval1, aes(LastLength, colour = Survey.No)) + 
+  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
+  ggtitle(paste("Scots Bay Count")) +
+  labs(y="Count", x="Growth Rate Applied Length (mm)"))
+  cat("\n")
+  
+print(ggplot(data=Larval1, (aes(JulianMax, JulianMin, colour = category))) + 
+  geom_point(alpha = 0.45, size = 5) + 
+  ggtitle(paste("Scots Bay Estimated Julian Date.")) +
+  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date"))
+  cat("\n")
+  }
 ```
 
 ### German Bank {.tabset}
@@ -1916,13 +1948,19 @@ out <- crop(NBNS, CP, byid=TRUE)
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-ggplot(Larval, aes(x=X, y=Y)) + 
+
+Larval2 <- subset(Larval, Ground == 'GB')
+
+ggplot(Larval2, aes(x=X, y=Y)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_point(data=Larval, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_point(data=Larval2, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
   labs(x=NULL, y=NULL) + 
   coord_map()
 
-TotalCategories <- Larval %>%
+TotalCategories <- Larval2 %>%
   group_by(category) %>%
   dplyr::summarize(n = n()) %>%
   mutate(Percentage = (n/sum(n))*100) %>%
@@ -1937,6 +1975,8 @@ TotalCategories <- Larval %>%
 kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Abundance", "%"), align = "c") %>%
   kable_paper("striped", full_width = F)
 ```
+
+
 
 ```{r, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
@@ -2022,30 +2062,59 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 #### Spawning Modes {.tabset .tabset-pills}
 
-##### Density
+##### Total
+
+Growth applied to compare spawning modes.
+
 ```{r, fig.align='center'}
+
 ggplot(Larval, aes(LastLength, ..density.., colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Growth applied to compare spawning modes") +
+  ggtitle("Density") +
   labs(y="Density", x="Growth Rate Applied Length (mm)")
-```
 
-##### Count
-
-```{r, fig.align='center'}
 ggplot(Larval, aes(LastLength, colour = Survey.No)) + 
   geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Growth applied to compare spawning modes") +
+  ggtitle("Count") +
   labs(y="Count", x="Growth Rate Applied Length (mm)")
-```
 
-##### Min vs Max
-
-```{r, fig.align='center'}
 Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) + 
   geom_point(alpha = 0.45, size = 5) + 
-  ggtitle("Approximate spawning times of larvae captured in Scots Bay") +
+  ggtitle("Min and Max") +
   labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
+```
+
+
+```{r, results='asis', fig.align='center'}
+ 
+
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+cat("Growth applied to compare spawning modes.")
+
+Larval1 = Larval %>% filter(Year == i)
+
+print(ggplot(Larval1, aes(LastLength, ..density.., colour = Survey.No)) + 
+  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
+  ggtitle(paste("German Bank Density")) +
+  labs(y="Density", x="Growth Rate Applied Length (mm)"))
+  cat("\n")
+  
+print(ggplot(Larval1, aes(LastLength, colour = Survey.No)) + 
+  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
+  ggtitle(paste("German Bank Count")) +
+  labs(y="Count", x="Growth Rate Applied Length (mm)"))
+  cat("\n")
+  
+print(ggplot(data=Larval1, (aes(JulianMax, JulianMin, colour = category))) + 
+  geom_point(alpha = 0.45, size = 5) + 
+  ggtitle(paste("German Bank Estimated Julian Date.")) +
+  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date"))
+  cat("\n")
+  }
 ```
 
 ## Fat Project 
