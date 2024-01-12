@@ -365,7 +365,9 @@ out <- crop(NBNS, CP, byid=TRUE)
 ##### Total
 
 ```{r echo=FALSE}
-Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup()
+
+#Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
+Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
 
 ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -417,7 +419,8 @@ out <- crop(NBNS, CP, byid=TRUE)
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-Plot = Tag %>% subset(Ground == "German Bank" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup()
+#Plot = Tag %>% subset(Ground == "German Bank" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
+Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
 
 ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
