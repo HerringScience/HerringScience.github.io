@@ -48,14 +48,23 @@ LarvalSI = filter(Larval, Ground == "SI")
 LarvalSB = filter(Larval, Ground == "SB")
 LarvalGB = filter(Larval, Ground == "GB")
 
+#LarvalCount <- Larval %>% count(id) #Don't need larval count as already in Larval spreadsheet as 'Abundance'
+
 Larval$DaysFromSpawn <- Larval$Lengthmm/0.24
 Larval$SpawnDate <- Larval$Date-Larval$DaysFromSpawn
-LarvalSI <- merge(LarvalSI, LarvalSICount)
+#Larval <- merge(Larval, LarvalCount)
+  #colnames(Larval)[41] <- "LarvalCount"
 
   
-aggregate(DaysFromSpawn~id, Larval, mean)
+MeanDaysFromSpawn <- aggregate(DaysFromSpawn~id, Larval, mean)
+  colnames(MeanDaysFromSpawn)[2]<- "MeanDaysFromSpawn"
+MinDateOfSpawn <- aggregate(SpawnDate~id, Larval, min)
+  colnames(MinDateOfSpawn)[2] <- "MinDateOfSpawn"
+MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
+  colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
 
-LarvalSICount<- count(LarvalSI, id, wt = NULL) # This gives the correct count, but brings it down to 2 columns, id and count
+Larval2 <- merge(MeanDaysFromSpawn, MinDateOfSpawn)
+Larval3 <- merge(Larval2, MaxDateOfSpawn)
 
-Larval %>% count(id) # same as above
-
+LarvalSum <- Larval %>% select("Ground", "id", "Survey.No", "Abundance", "Preservative", "X", "Y", "TowTime", "MeanLength")
+LarvalSum <- merge(LarvalSum, Larval3)
