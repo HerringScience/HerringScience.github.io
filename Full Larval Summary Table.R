@@ -48,20 +48,25 @@ LarvalSI = filter(Larval, Ground == "SI")
 LarvalSB = filter(Larval, Ground == "SB")
 LarvalGB = filter(Larval, Ground == "GB")
 
+#'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
+# Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this, and added 1 day to age to assume they hatch at ~5mm.
 
-Larval$DaysFromSpawn <- Larval$Lengthmm/0.24
-Larval$SpawnDate <- Larval$Date-Larval$DaysFromSpawn
+Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)+1
+Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
+
   
-MeanDaysFromSpawn <- aggregate(DaysFromSpawn~id, Larval, mean)
-  colnames(MeanDaysFromSpawn)[2]<- "MeanDaysFromSpawn"
+MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
+  colnames(MeanAgeInDays)[2]<- "MeanAgeInDays"
 MinDateOfSpawn <- aggregate(SpawnDate~id, Larval, min)
   colnames(MinDateOfSpawn)[2] <- "MinDateOfSpawn"
 MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
   colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
 
-Larval2 <- merge(MeanDaysFromSpawn, MinDateOfSpawn)
+Larval2 <- merge(MeanAgeInDays, MinDateOfSpawn)
 Larval3 <- merge(Larval2, MaxDateOfSpawn)
 
 LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Preservative", "X", "Y", "TowTime", "MeanLength")
 LarvalSum <- merge(LarvalSum, Larval3)
 LarvalSum <- unique(LarvalSum)
+
+
