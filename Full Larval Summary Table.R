@@ -44,16 +44,12 @@ Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
-LarvalSI <- filter(Larval, Ground == "SI")
-LarvalSB <- filter(Larval, Ground == "SB")
-LarvalGB <- filter(Larval, Ground == "GB")
+#LarvalSI <- filter(Larval, Ground == "SI")
+#LarvalSB <- filter(Larval, Ground == "SB")
+#LarvalGB <- filter(Larval, Ground == "GB")
 
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
-
-Plankton <- select(Plankton, id, TowTime, AvgTowDepth)
-Plankton <- Plankton %>% drop_na(id)
-is.na(Plankton$AvgTowDepth) <- 0
 
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
@@ -77,10 +73,6 @@ Larval3 <- merge(Larval2, MaxDateOfSpawn)
 #AvgTowDepth[is.na(AvgTowDepth)] <- 0
  # colnames(AvgTowDepth)[1] <- "id"
   #colnames(AvgTowDepth)[2] <- "AvgTowDepth"
-  
-Larval4 <- merge(Larval3, AvgTowDepth)
-  
-MeanTowTime <- aggregate(TowTime~id, Plankton, mean)
 
 StartLat <- aggregate(Lat1~id, Plankton, mean)
 StartLon <- aggregate(Lon1~id, Plankton, mean)
@@ -92,10 +84,22 @@ EndCoords <- merge(EndLat, EndLon)
 
 TowCoords <- merge(StartCoords, EndCoords)
 
+Larval4 <- merge(Larval3, TowCoords)
 
+Plankton <- select(Plankton, id, TowTime, AvgTowDepth)
+Plankton <- Plankton %>% drop_na(id)
+Plankton$AvgTowDepth[is.na(Plankton$AvgTowDepth)] <- 0
+
+Plankton2 <- select(Plankton, id, TowTime)
+Plankton2 <- Plankton2 %>% drop_na(TowTime)
+MeanTowTime <- aggregate(TowTime~id, Plankton2, mean)
 
 Larval5 <- merge(Larval4, MeanTowTime)
-Larval6 <- merge(Larval5, TowCoords)
+
+MeanTowDepth <- select(Plankton, id, AvgTowDepth)
+MeanTowDepth$AvgTowDepth[is.na(MeanTowDepth$AvgTowDepth)] <- 0
+
+Larval6 <- merge(Larval5, MeanTowDepth)
 
 LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Preservative", "X", "Y", "TowTime", "MeanLength")
 LarvalSum <- merge(LarvalSum, Larval6)
