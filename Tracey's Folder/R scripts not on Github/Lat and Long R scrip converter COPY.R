@@ -1,0 +1,108 @@
+# remove everything in the workspace
+rm(list = ls())
+
+library(lubridate)
+library(tidyverse)
+library(measurements)
+library(cli)
+library(reprex)
+library(geosphere)
+library(reshape2)
+library(moderndive)
+library(skimr)
+library(ggridges)
+library(weathercan)
+library(GGally)
+library(psych)
+library(raster)
+library(PBSmapping)
+library(rgeos)
+library(knitr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(ggplot2)
+
+#Set lat and long here
+Lat = "43 17 14" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
+Lon = "66 23 18"
+
+Lon = conv_unit(Lon,"deg_min_sec","dec_deg")
+Lon = as.numeric(Lon)
+Lat = conv_unit(Lat, "deg_min_sec", "dec_deg")
+Lat = as.numeric(Lat)
+Lon = -1*Lon
+
+#Set calendar date here
+date = "2023-08-25"
+julian = yday(date)
+
+#Load all of Canada data and extract Atlantic provinces
+can<-getData('GADM', country="CAN", level=1) # provinces
+NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+
+#Set boundaries that you need to map 
+
+# Proper coordinates for Tagging 
+CP1 <- as(extent(-69, -62, 42, 46), "SpatialPolygons")
+# Proper coordinates for GB plankton tow
+CP2 <- as(extent(-67, -65, 43, 43.6), "SpatialPolygons")
+# Coordinates for German Bank and Spec
+CP3 <- as(extent(-67, -65, 43, 44), "SpatialPolygons")
+# Scots
+CP4 <- as(extent(-66, -63, 44, 46), "SpatialPolygons") 
+# Scotia Shelf
+CP5 <- as(extent(-65, -60, 43, 46), "SpatialPolygons") 
+# Grand Manan Area
+CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
+
+#Reduce Province data down to only the above extents/limits
+proj4string(CP1) <- CRS(proj4string(NBNS))
+All <- gIntersection(NBNS, CP1, byid=TRUE)
+
+#Load boxes
+#Import All Boxes
+setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+points = read.csv("Points.csv")
+boxes = read.csv("timGrounds.csv")
+
+#Tim Grounds
+SUA = read.csv("timGrounds.csv")
+#polyST = as.PolySet(SUA, projection="LL")
+
+# Scots Bay plankton and CTD box
+SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
+SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+
+# Scots Bay
+SUA = read.csv("polygon_SBEastern.csv")
+polyEastern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SBNorthern.csv")
+polyNorthern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SB.csv")
+polySB_main = as.PolySet(SUA, projection="LL")
+
+#German Bank CTD box
+GBCTD=boxes[which(boxes$Box == "GBocean"), ]
+
+# German Bank      
+SUA = read.csv("polygon_GB.csv")
+polyGB = as.PolySet(SUA, projection="LL")
+
+# Seal Island      
+SUA = read.csv("polygon_SI.csv")
+polySI = as.PolySet(SUA, projection="LL")
+
+df <- as.data.frame (cbind(Lon,Lat))
+
+
+#All Data at once
+ggplot(boxes,aes(x=X, y=Y)) + 
+  geom_polygon(aes(colour = Box),fill= NA,lwd=1) + 
+  geom_polygon(data=All,aes(x=long, y=lat, group=group)) + 
+  geom_point(data=df, aes(x=Lon, y=Lat), size=3) +
+  coord_map() + 
+  labs(x=NULL, y=NULL)
