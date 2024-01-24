@@ -57,7 +57,7 @@ Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/S
 
 Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)
 Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
-Larval1 <- select(Larval, id, Date, Survey.No, Abundance, Density, TowTime, AvgTowDepth) 
+LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, TowTime, AvgTowDepth) 
 
   
 MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
@@ -68,10 +68,10 @@ MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
   colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
 
    
-Larval2 <- merge(MeanAgeInDays, MinDateOfSpawn)
-Larval3 <- merge(Larval2, MaxDateOfSpawn)
-  Larval3 <- merge(Larval1, Larval3)
-  Larval3 <- unique(Larval3)
+LarvalB <- merge(MeanAgeInDays, MinDateOfSpawn)
+LarvalC <- merge(LarvalB, MaxDateOfSpawn)
+  LarvalC <- merge(LarvalA, LarvalC)
+  LarvalC <- unique(LarvalC)
   
 StartLat <- aggregate(Lat1~id, Plankton, mean)
 StartLon <- aggregate(Lon1~id, Plankton, mean)
@@ -83,7 +83,7 @@ EndCoords <- merge(EndLat, EndLon)
 
 TowCoords <- merge(StartCoords, EndCoords)
 
-Larval4 <- merge(Larval3, TowCoords)
+LarvalD <- merge(LarvalC, TowCoords)
 
 Plankton <- select(Plankton, id, TowTime, AvgTowDepth, Volume)
   Plankton <- Plankton %>% drop_na(id)
@@ -94,14 +94,14 @@ Plankton2 <- select(Plankton, id, TowTime)
   MeanTowTime <- aggregate(TowTime~id, Plankton2, mean)
 
 #Left in because this should update the tow time with means
-Larval5 <- merge(Larval4, MeanTowTime)
+LarvalE <- merge(LarvalD, MeanTowTime)
 
 Volume <- select(Plankton, id, Volume)
 
-Larval6 <- merge(Larval5, Volume)
+LarvalF <- merge(LarvalE, Volume)
 
 LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Density", "Preservative", "TowTime", "MeanLength")
-  LarvalSum <- merge(LarvalSum, Larval6)
+  LarvalSum <- merge(LarvalSum, LarvalF)
   LarvalSum <- unique(LarvalSum)
 
-
+write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
