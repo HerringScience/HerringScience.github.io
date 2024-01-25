@@ -44,12 +44,15 @@ Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
-#LarvalSI <- filter(Larval, Ground == "SI")
-#LarvalSB <- filter(Larval, Ground == "SB")
-#LarvalGB <- filter(Larval, Ground == "GB")
+# 0 is NA in these categories to allow for other data to be pulled.
+Larval$Volume[is.na(Larval$Volume)] <- 0
+Larval$Density[is.na(Larval$Density)] <- 0
+Larval$AvgTowDepth[is.na(Larval$AvgTowDepth)] <- 0
+Larval$TowTime[is.na(Larval$TowTime)] <- 0
 
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
+Plankton$TowTime[is.na(Plankton$TowTime)] <- 0
 
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
@@ -57,7 +60,7 @@ Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/S
 
 Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)
 Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
-LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, TowTime, AvgTowDepth) 
+LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth) 
 
   
 MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
@@ -83,6 +86,10 @@ EndCoords <- merge(EndLat, EndLon)
 
 TowCoords <- merge(StartCoords, EndCoords)
 
+#LarvalC$Density[is.na(LarvalC$Density)] <- 0 
+#LarvalC$AvgTowDepth[is.na(LarvalC$AvgTowDepth)] <- 0
+#LarvalC$TowTime[is.na(LarvalC$TowTime)] <- 0
+
 LarvalD <- merge(LarvalC, TowCoords)
 
 Plankton <- select(Plankton, id, TowTime, AvgTowDepth, Volume)
@@ -96,11 +103,11 @@ Plankton2 <- select(Plankton, id, TowTime)
 #Left in because this should update the tow time with means
 LarvalE <- merge(LarvalD, MeanTowTime)
 
-Volume <- select(Plankton, id, Volume)
+Volume <- aggregate(Volume~id, Larval, mean)
 
 LarvalF <- merge(LarvalE, Volume)
 
-LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Density", "Preservative", "TowTime", "MeanLength")
+LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Density", "Preservative", "TowTime", "MeanLength", "Volume")
   LarvalSum <- merge(LarvalSum, LarvalF)
   LarvalSum <- unique(LarvalSum)
 
