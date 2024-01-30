@@ -37,6 +37,7 @@ library(rmapshaper)
 library(plotly)
 library(mapproj)
 library(oce) #new CTD Data package
+library(ggrepel)
 
 #Larval Data
 Larval <- read_csv("Full Larval.csv")
@@ -45,6 +46,7 @@ Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
 # 0 is NA in these categories to allow for other data to be pulled.
+
 Larval$Volume[is.na(Larval$Volume)] <- 0
 Larval$Density[is.na(Larval$Density)] <- 0
 Larval$AvgTowDepth[is.na(Larval$AvgTowDepth)] <- 0
@@ -86,17 +88,17 @@ EndCoords <- merge(EndLat, EndLon)
 
 TowCoords <- merge(StartCoords, EndCoords)
 
-#LarvalC$Density[is.na(LarvalC$Density)] <- 0 
-#LarvalC$AvgTowDepth[is.na(LarvalC$AvgTowDepth)] <- 0
-#LarvalC$TowTime[is.na(LarvalC$TowTime)] <- 0
+LarvalC$Density[is.na(LarvalC$Density)] <- 0 
+LarvalC$AvgTowDepth[is.na(LarvalC$AvgTowDepth)] <- 0
+LarvalC$TowTime[is.na(LarvalC$TowTime)] <- 0
 
 LarvalD <- merge(LarvalC, TowCoords)
 
-Plankton <- select(Plankton, id, TowTime, AvgTowDepth, Volume)
+#Plankton <- select(Plankton, id, TowTime, AvgTowDepth, Volume)
   Plankton <- Plankton %>% drop_na(id)
   Plankton$AvgTowDepth[is.na(Plankton$AvgTowDepth)] <- 0
 
-Plankton2 <- select(Plankton, id, TowTime)
+Plankton2 <- select(Plankton, id, TowTime, AvgTowDepth)
   Plankton2 <- Plankton2 %>% drop_na(TowTime)
   MeanTowTime <- aggregate(TowTime~id, Plankton2, mean)
 
@@ -110,5 +112,24 @@ LarvalF <- merge(LarvalE, Volume)
 LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Density", "Preservative", "TowTime", "MeanLength", "Volume")
   LarvalSum <- merge(LarvalSum, LarvalF)
   LarvalSum <- unique(LarvalSum)
+  LarvalSum[LarvalSum == 0] <- NA
 
 write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
+
+# Abundance by Year, differentiating Survey Numbers. Need to separate by Ground
+
+print(ggplot(LarvalSum, aes(Year, Abundance, colour = Survey.No)) +
+        geom_point() +
+        geom_label_repel(aes(label = id), size = 3))
+
+print(ggplot(LarvalSum, aes(Year, Density, colour = Survey.No)) +
+        geom_point())
+
+print(ggplot(LarvalSum, aes(Year, MeanLength, colour = Survey.No)) +
+        geom_point())
+
+print(ggplot(LarvalSum, aes(Year, MeanAgeInDays, colour = Survey.No)) +
+        geom_point())
+
+print(ggplot(LarvalSum, aes(Year, Abundance, colour = Survey.No)) +
+        geom_point())
