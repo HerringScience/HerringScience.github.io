@@ -222,7 +222,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
@@ -482,7 +482,7 @@ Annual_Compare2 = SSB %>%
   filter(Year == year-1 & Ground == surv2)}
 
 if(surv=="GB"){Annual_Compare1 = SSB %>%
-  filter(Year == year & Ground == "German Bank" & Survey_Number == 1 | Year == year & Ground == "Seal Island" & Survey_Number == 1) %>%
+  filter(Year == year & Ground == "German Bank" | Year == year & Ground == "Seal Island" ) %>%
   dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
 
 Annual_Compare2 = SSB %>%
@@ -666,9 +666,6 @@ CTD depth profiles for all `r year` `r c` surveys so far.
 #### Sea surface temperatures
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
-
-SST <- SST %>% filter(Date < '2023-08-07')
-SST <- SST %>% filter(Ground == 'German Bank')
 
 a=ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
   geom_point() + 
