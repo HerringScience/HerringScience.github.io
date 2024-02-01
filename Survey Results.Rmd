@@ -12,8 +12,8 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 year = "2023"
-surv.no = "7"
-hightide = "2023-10-09 21:07:00" #for Scots Bay only
+surv.no = "1"
+hightide = "2023-08-06 21:07:00" #for Scots Bay only
 ```
 
 ```{r setup, include=FALSE}
@@ -36,18 +36,21 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
 library(DT)
+library(sp)
+library(sf)
+library(terra)
 
 #Survey Data
 Survey = read_csv("Survey Data.csv") #Survey Data
@@ -100,12 +103,12 @@ NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(GBMap) <- CRS(proj4string(NBNS))
-GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+GBout <- crop(NBNS, GBMap, byid=TRUE)
 
 # Proper coordinates for Scots Bay
 SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
 proj4string(SBMap) <- CRS(proj4string(NBNS))
-SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+SBout <- crop(NBNS, SBMap, byid=TRUE)
 ```
 
 ```{r Box Import, include=FALSE}
@@ -219,7 +222,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and one transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
@@ -479,7 +482,7 @@ Annual_Compare2 = SSB %>%
   filter(Year == year-1 & Ground == surv2)}
 
 if(surv=="GB"){Annual_Compare1 = SSB %>%
-  filter(Year == year & Ground == "German Bank" | Year == year & Ground == "Seal Island") %>%
+  filter(Year == year & Ground == "German Bank" & Survey_Number == 1 | Year == year & Ground == "Seal Island" & Survey_Number == 1) %>%
   dplyr::select(-DFO_Estimate, -DFO_Turnover_Adjusted)
 
 Annual_Compare2 = SSB %>%
@@ -643,12 +646,12 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 ### CTD Data
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
-a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year & Survey == 1), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
 
-b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == year & Survey == 1), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
@@ -663,6 +666,10 @@ CTD depth profiles for all `r year` `r c` surveys so far.
 #### Sea surface temperatures
 
 ```{r, results = "hide", fig.show="first", fig.align='center'}
+
+SST <- SST %>% filter(Date < '2023-08-07')
+SST <- SST %>% filter(Ground == 'German Bank')
+
 a=ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
   geom_point() + 
   geom_line() +
