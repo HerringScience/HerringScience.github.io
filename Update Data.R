@@ -673,9 +673,12 @@ larv<-larv %>% mutate(Julian = yday(Date),
                       JulianMin = yday(MINspawnDate),
                       JulianMax = yday(MAXspawnDate))
 
-#Calculating SE/mean/min/max of larval measurements
+#Calculating SE/mean/min/max of larval measurements.
+
+# Changed group_by to (id, Year, Date) from group_by(Survey.No, Year, Date) to fix abundance to count larvae within the tow, vs abundance of larvae from the survey.
+
 larv <- larv %>%
-  group_by(Survey.No, Year, Date) %>%
+  group_by(id, Year, Date) %>%
   mutate(SD = sd(Lengthmm), 
          MinLength = min(Lengthmm), 
          MaxLength = max(Lengthmm), 
@@ -685,7 +688,7 @@ larv <- larv %>%
          Y = ((Lat1 + Lat2)/2)) %>%
   ungroup()
 
-larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
+larvsummary <- larv %>% group_by(Ground, id, Year) %>%
   summarize(MinLength = mean(MinLength, na.rm = TRUE), 
             MaxLength = mean(MaxLength, na.rm = TRUE), 
             MeanLength = mean(MeanLength, na.rm = TRUE),
