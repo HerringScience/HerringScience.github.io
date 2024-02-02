@@ -45,38 +45,69 @@ Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
+
+#Plankton Data
+Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
+
+
+
+# if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
+# if preservation is alcohol apply L = 0.532 + 0.989 x X1 
+#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation.
+
+
+Larval$LengthAdjustment = with(Larval, ifelse(Larval$Preservative == "4% formalin", (0.984 + 0.993* Larval$Lengthmm),
+                                              ifelse(Larval$Preservative == "70% Alcohol", (0.532 + 0.989*Larval$Lengthmm),
+                                                     ifelse(Larval$Preservative == "Unknown", NA,
+                                                            ifelse(Larval$Preservative == "70% Alcohol (1) 4% Formalin (1)", NA, NA)))))
+
+
 # 0 is NA in these categories to allow for other data to be pulled.
 
 Larval$Volume[is.na(Larval$Volume)] <- 0
 Larval$Density[is.na(Larval$Density)] <- 0
 Larval$AvgTowDepth[is.na(Larval$AvgTowDepth)] <- 0
 Larval$TowTime[is.na(Larval$TowTime)] <- 0
-
-#Plankton Data
-Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
 Plankton$TowTime[is.na(Plankton$TowTime)] <- 0
+
 
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
 # Assumes hatching length is 5mm, day of hatching = day 0
 
-Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)
-Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
-LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth) 
+#Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)
+#Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
+#LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth)
+
+Larval$AdjustedAgeInDays <- ((Larval$LengthAdjustment - 5)/0.24)
+Larval$AdjustedSpawnDate <- Larval$Date-Larval$AdjustedAgeInDays
+
+LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth, LengthAdjustment, AdjustedAgeInDays, AdjustedSpawnDate)
 
   
-MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
-  colnames(MeanAgeInDays)[2]<- "MeanAgeInDays"
-MinDateOfSpawn <- aggregate(SpawnDate~id, Larval, min)
-  colnames(MinDateOfSpawn)[2] <- "MinDateOfSpawn"
-MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
-  colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
+Larval$AdjustedMeanAgeInDays <- aggregate(Larval$AdjustedAgeInDays~id, Larval, mean)
+  colnames(Larval$AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
+AdjustedMinDateOfSpawn <- aggregate(AdjustedSpawnDate~id, Larval, min)
+  colnames(AdjustedMinDateOfSpawn)[2] <- "AdjustedMinDateOfSpawn"
+AdjustedMaxDateOfSpawn <- aggregate(AdjustedSpawnDate~id, Larval, max)
+  colnames(AdjustedMaxDateOfSpawn)[2] <- "AdjustedMaxDateOfSpawn"
+  
+#MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
+#  colnames(MeanAgeInDays)[2]<- "MeanAgeInDays"
+#MinDateOfSpawn <- aggregate(SpawnDate~id, Larval, min)
+#  colnames(MinDateOfSpawn)[2] <- "MinDateOfSpawn"
+#MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
+#  colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
 
-   
-LarvalB <- merge(MeanAgeInDays, MinDateOfSpawn)
-LarvalC <- merge(LarvalB, MaxDateOfSpawn)
+LarvalB <- merge(AdjustedMeanAgeInDays, AdjustedMinDateOfSpawn)
+LarvalC <- merge(LarvalB, AdjustedMaxDateOfSpawn)
   LarvalC <- merge(LarvalA, LarvalC)
-  LarvalC <- unique(LarvalC)
+  LarvalC <- unique(LarvalC)   
+  
+#LarvalB <- merge(MeanAgeInDays, MinDateOfSpawn)
+#LarvalC <- merge(LarvalB, MaxDateOfSpawn)
+#  LarvalC <- merge(LarvalA, LarvalC)
+#  LarvalC <- unique(LarvalC)
   
 StartLat <- aggregate(Lat1~id, Plankton, mean)
 StartLon <- aggregate(Lon1~id, Plankton, mean)
