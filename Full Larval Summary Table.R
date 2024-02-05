@@ -39,12 +39,15 @@ library(mapproj)
 library(oce) #new CTD Data package
 library(ggrepel)
 
+options(ggrepel.max.overlaps = Inf)
+
+## Importing Data
+
 #Larval Data
 Larval <- read_csv("Full Larval.csv")
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
-
 
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
@@ -70,88 +73,85 @@ Larval$AvgTowDepth[is.na(Larval$AvgTowDepth)] <- 0
 Larval$TowTime[is.na(Larval$TowTime)] <- 0
 Plankton$TowTime[is.na(Plankton$TowTime)] <- 0
 
-
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
 # Assumes hatching length is 5mm, day of hatching = day 0
 
-#Larval$AgeInDays <- ((Larval$Lengthmm - 5)/0.24)
-#Larval$SpawnDate <- Larval$Date-Larval$AgeInDays
-#LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth)
-
 Larval$AdjustedAgeInDays <- ((Larval$LengthAdjustment - 5)/0.24)
 Larval$AdjustedSpawnDate <- Larval$Date-Larval$AdjustedAgeInDays
 
-LarvalA <- select(Larval, id, Date, Survey.No, Abundance, Density, Volume, TowTime, AvgTowDepth, LengthAdjustment, AdjustedAgeInDays, AdjustedSpawnDate)
-
-  
-Larval$AdjustedMeanAgeInDays <- aggregate(Larval$AdjustedAgeInDays~id, Larval, mean)
-  colnames(Larval$AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
+AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, Larval, mean)
+  colnames(AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
 AdjustedMinDateOfSpawn <- aggregate(AdjustedSpawnDate~id, Larval, min)
   colnames(AdjustedMinDateOfSpawn)[2] <- "AdjustedMinDateOfSpawn"
 AdjustedMaxDateOfSpawn <- aggregate(AdjustedSpawnDate~id, Larval, max)
   colnames(AdjustedMaxDateOfSpawn)[2] <- "AdjustedMaxDateOfSpawn"
   
-#MeanAgeInDays <- aggregate(AgeInDays~id, Larval, mean)
-#  colnames(MeanAgeInDays)[2]<- "MeanAgeInDays"
-#MinDateOfSpawn <- aggregate(SpawnDate~id, Larval, min)
-#  colnames(MinDateOfSpawn)[2] <- "MinDateOfSpawn"
-#MaxDateOfSpawn <- aggregate(SpawnDate~id, Larval, max)
-#  colnames(MaxDateOfSpawn)[2] <- "MaxDateOfSpawn"
+AdjustedDays <- merge(AdjustedMaxDateOfSpawn, AdjustedMinDateOfSpawn, by = 'id')
+AdjustedDays <- merge(AdjustedDays, AdjustedMeanAgeInDays, by = 'id')
 
-LarvalB <- merge(AdjustedMeanAgeInDays, AdjustedMinDateOfSpawn)
-LarvalC <- merge(LarvalB, AdjustedMaxDateOfSpawn)
-  LarvalC <- merge(LarvalA, LarvalC)
-  LarvalC <- unique(LarvalC)   
-  
-#LarvalB <- merge(MeanAgeInDays, MinDateOfSpawn)
-#LarvalC <- merge(LarvalB, MaxDateOfSpawn)
-#  LarvalC <- merge(LarvalA, LarvalC)
-#  LarvalC <- unique(LarvalC)
-  
-StartLat <- aggregate(Lat1~id, Plankton, mean)
-StartLon <- aggregate(Lon1~id, Plankton, mean)
-StartCoords <- merge(StartLat, StartLon)
+Larval <- merge(Larval, AdjustedDays, by = 'id')
 
-EndLat <- aggregate(Lat2~id, Plankton, mean)
-EndLon <- aggregate(Lon2~id, Plankton, mean)
-EndCoords <- merge(EndLat, EndLon)
+# Adding in Tow start and end coordinates
 
-TowCoords <- merge(StartCoords, EndCoords)
+TowCoords <- data.frame(aggregate(Lat1~id, Plankton, mean),
+                        aggregate(Lon1~id, Plankton, mean),
+                        aggregate(Lat2~id, Plankton, mean),
+                        aggregate(Lon2~id, Plankton, mean))
 
-LarvalC$Density[is.na(LarvalC$Density)] <- 0 
-LarvalC$AvgTowDepth[is.na(LarvalC$AvgTowDepth)] <- 0
-LarvalC$TowTime[is.na(LarvalC$TowTime)] <- 0
+TowCoords <- TowCoords[, !grepl("id.", names(TowCoords))]
 
-LarvalD <- merge(LarvalC, TowCoords)
-
-#Plankton <- select(Plankton, id, TowTime, AvgTowDepth, Volume)
-  Plankton <- Plankton %>% drop_na(id)
-  Plankton$AvgTowDepth[is.na(Plankton$AvgTowDepth)] <- 0
-
-Plankton2 <- select(Plankton, id, TowTime, AvgTowDepth)
-  Plankton2 <- Plankton2 %>% drop_na(TowTime)
-  MeanTowTime <- aggregate(TowTime~id, Plankton2, mean)
-
-#Left in because this should update the tow time with means
-LarvalE <- merge(LarvalD, MeanTowTime)
+Larval <- merge(Larval, TowCoords, by = 'id')
 
 Volume <- aggregate(Volume~id, Larval, mean)
+  colnames(Volume)[2] <- "AverageVolume"
 
-LarvalF <- merge(LarvalE, Volume)
+Larval <- merge(Larval, Volume, by = 'id')
 
-LarvalSum <- Larval %>% select("Ground", "Year", "id", "Survey.No", "Abundance", "Density", "Preservative", "TowTime", "MeanLength", "Volume")
-  LarvalSum <- merge(LarvalSum, LarvalF)
-  LarvalSum <- unique(LarvalSum)
+LarvalSum <- Larval %>% select("Ground", 
+                               "Year", 
+                               "id", 
+                               "Survey.No", 
+                               "Abundance", 
+                               "Density", 
+                               "AverageVolume", 
+                               "Preservative", 
+                               "AdjustedMeanAgeInDays", 
+                               "AdjustedMinDateOfSpawn", 
+                               "AdjustedMaxDateOfSpawn", 
+                               "Lat1",
+                               "Lon1",
+                               "Lat2",
+                               "Lon2",
+                               "TowTime",
+                               "AvgTowDepth")
+
+LarvalSum <- unique(LarvalSum)
+
+
+
+#Left in because this should update the tow time with means
+
+
+#LarvalSum <- merge(LarvalSum, Plankton, by = 'id')
   LarvalSum[LarvalSum == 0] <- NA
+  Larval[Larval == 0] <- NA
 
 write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
 
-# Abundance by Year, differentiating Survey Numbers. Need to separate by Ground
+#### Abundance by Year, differentiating Survey Numbers. Need to separate by Ground
 
-print(ggplot(LarvalSum, aes(Year, Abundance, colour = Survey.No)) +
-        geom_point() +
-        geom_label_repel(aes(label = id), size = 3))
+LarvalSB = subset(Larval, Ground == "SB")
+LarvalGB = subset(Larval, Ground == "GB")
+LarvalSI = subset(Larval, Ground == "SI")
+
+
+print(ggplot(LarvalSB, aes(Year, Abundance, colour = Year) +
+               geom_boxplot()))
+#Scots Bay
+
+print(ggplot(LarvalSB, aes(Survey.No, Abundance, colour = id)) +
+        geom_point())
 
 print(ggplot(LarvalSum, aes(Year, Density, colour = Survey.No)) +
         geom_point())
