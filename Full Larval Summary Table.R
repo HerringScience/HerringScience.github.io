@@ -139,28 +139,41 @@ LarvalSum <- unique(LarvalSum)
 
 write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
 
-#### Abundance by Year, differentiating Survey Numbers. Need to separate by Ground
 
-LarvalSB = subset(Larval, Ground == "SB")
-LarvalGB = subset(Larval, Ground == "GB")
-LarvalSI = subset(Larval, Ground == "SI")
+#Used Boxplot to more accurately see the bulk of abundance. Hard to differentiate individuals and ids in scatterplot.
 
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat(i, "\n")
+  cat("\n")
 
-print(ggplot(LarvalSB, aes(Year, Abundance, colour = Year) +
-               geom_boxplot()))
-#Scots Bay
+print(ggplot(subset(Larval, Ground == "SB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+        geom_boxplot(aes(colour = id)) +
+        scale_x_discrete(name = "Survey Number", drop = FALSE) +
+        ylab("Length (mm)"))
+      cat("\n")
+}
 
-print(ggplot(LarvalSB, aes(Survey.No, Abundance, colour = id)) +
-        geom_point())
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat(i, "\n")
+  cat("\n")
+  
+  print(ggplot(subset(Larval, Ground == "GB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+          geom_boxplot(aes(colour = id)) +
+          scale_x_discrete(name = "Survey Number", drop = FALSE) +
+          ylab("Length (mm)"))
+  cat("\n")
+}
 
-print(ggplot(LarvalSum, aes(Year, Density, colour = Survey.No)) +
-        geom_point())
-
-print(ggplot(LarvalSum, aes(Year, MeanLength, colour = Survey.No)) +
-        geom_point())
-
-print(ggplot(LarvalSum, aes(Year, MeanAgeInDays, colour = Survey.No)) +
-        geom_point())
-
-print(ggplot(LarvalSum, aes(Year, Abundance, colour = Survey.No)) +
-        geom_point())
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat(i, "\n")
+  cat("\n")
+  
+  print(ggplot(subset(Larval, Ground == "SI" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+          geom_boxplot(aes(colour = id)) +
+          scale_x_discrete(name = "Survey Number", drop = FALSE) +
+          ylab("Length (mm)"))
+  cat("\n")
+}
