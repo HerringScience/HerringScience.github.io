@@ -56,7 +56,7 @@ Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/S
 
 # if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
 # if preservation is alcohol apply L = 0.532 + 0.989 x X1 
-#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation.
+#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation. They did suggest that this adjustment would be less accurate the longer the tow period.
 
 
 Larval$LengthAdjustment = with(Larval, ifelse(Larval$Preservative == "4% formalin", (0.984 + 0.993* Larval$Lengthmm),
@@ -108,7 +108,8 @@ Volume <- aggregate(Volume~id, Larval, mean)
 
 Larval <- merge(Larval, Volume, by = 'id')
 
-LarvalSum <- Larval %>% select("Ground", 
+LarvalSum <- Larval %>% select("Ground",
+                               "Date",
                                "Year", 
                                "id", 
                                "Survey.No", 
@@ -137,7 +138,16 @@ LarvalSum <- unique(LarvalSum)
   LarvalSum[LarvalSum == 0] <- NA
   Larval[Larval == 0] <- NA
 
-write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
+  
+#4% Formalin
+4Formaline  
+
+  
+  
+
+  
+#Saving as .csv file. Saved to Main Data on Github. Should change to Larval Data in Source Data.
+  write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
 
 
 #Used Boxplot to more accurately see the bulk of abundance. Hard to differentiate individuals and ids in scatterplot.
