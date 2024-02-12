@@ -48,6 +48,18 @@ Larval <- read_csv("Full Larval.csv")
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
+Larval$Date <- as.Date(Larval$Date)
+
+#Adds TowID based on date
+Larval <- Larval %>% 
+              group_by(Ground) %>%
+              transform(TowID = as.numeric(factor(Date)))
+
+#Add Replicate Tow 1 or 2
+
+Larval1 <- Larval %>%
+              group_by(TowID) %>%
+              transform(summarize(TowReplicate = n_distinct(id)))
 
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
@@ -137,10 +149,7 @@ LarvalSum <- unique(LarvalSum)
 #LarvalSum <- merge(LarvalSum, Plankton, by = 'id')
   LarvalSum[LarvalSum == 0] <- NA
   Larval[Larval == 0] <- NA
-
-  
-#4% Formalin
-4Formaline  
+ 
 
   
   
