@@ -59,7 +59,13 @@ Larval <- Larval %>%
 
 Larval1 <- Larval %>%
               group_by(TowID) %>%
-              transform(summarize(TowReplicate = n_distinct(id)))
+              summarize(TowReplicate = n_distinct(id))
+              
+Larval1$TowReplicate <- as.character(Larval1$TowReplicate)
+  Larval1$TowReplicate[Larval1$TowReplicate == "1"] <- "False"
+  Larval1$TowReplicate[Larval1$TowReplicate == "2"] <- "True"
+
+Larval <- merge(Larval, Larval1, by = "TowID")
 
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
@@ -90,6 +96,10 @@ Plankton$TowTime[is.na(Plankton$TowTime)] <- 0
 # Assumes hatching length is 5mm, day of hatching = day 0
 
 Larval$AdjustedAgeInDays <- ((Larval$LengthAdjustment - 5)/0.24)
+  MeanLengthAdjustment <- aggregate(LengthAdjustment~id, Larval, mean)
+  colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
+Larval <- merge(Larval, MeanLengthAdjustment)
+  
 Larval$AdjustedSpawnDate <- Larval$Date-Larval$AdjustedAgeInDays
 
 AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, Larval, mean)
@@ -116,7 +126,7 @@ TowCoords <- TowCoords[, !grepl("id.", names(TowCoords))]
 Larval <- merge(Larval, TowCoords, by = 'id')
 
 Volume <- aggregate(Volume~id, Larval, mean)
-  colnames(Volume)[2] <- "AverageVolume"
+  colnames(Volume)[2] <- "Volume"
 
 Larval <- merge(Larval, Volume, by = 'id')
 
@@ -124,11 +134,14 @@ LarvalSum <- Larval %>% select("Ground",
                                "Date",
                                "Year", 
                                "id", 
+                               "TowReplicate",
+                               "TowID",
                                "Survey.No", 
                                "Abundance", 
                                "Density", 
-                               "AverageVolume", 
-                               "Preservative", 
+                               "Volume", 
+                               "Preservative",
+                               "MeanLengthAdjustment", 
                                "AdjustedMeanAgeInDays", 
                                "AdjustedMinDateOfSpawn", 
                                "AdjustedMaxDateOfSpawn", 
@@ -149,18 +162,13 @@ LarvalSum <- unique(LarvalSum)
 #LarvalSum <- merge(LarvalSum, Plankton, by = 'id')
   LarvalSum[LarvalSum == 0] <- NA
   Larval[Larval == 0] <- NA
- 
-
-  
-  
-
   
 #Saving as .csv file. Saved to Main Data on Github. Should change to Larval Data in Source Data.
   write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
 
 
 #Used Boxplot to more accurately see the bulk of abundance. Hard to differentiate individuals and ids in scatterplot.
-
+  
 for(i in unique(Larval$Year)) {
   cat("\n")
   cat(i, "\n")
