@@ -82,6 +82,12 @@ Larval$LengthAdjustment = with(Larval, ifelse(Larval$Preservative == "4% formali
                                                      ifelse(Larval$Preservative == "Unknown", NA,
                                                             ifelse(Larval$Preservative == "70% Alcohol (1) 4% Formalin (1)", NA, NA)))))
 
+MeanLengthAdjustment <- aggregate(LengthAdjustment~id, Larval, mean)
+  colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
+
+#Number of observations will drop from Larval when applying Mean Length Adjustment as Unknown and mixed preservatives do not have an adjusted formula. 
+
+Larval <- merge(Larval, MeanLengthAdjustment, by = "id")
 
 # 0 is NA in these categories to allow for other data to be pulled.
 
@@ -91,13 +97,14 @@ Larval$AvgTowDepth[is.na(Larval$AvgTowDepth)] <- 0
 Larval$TowTime[is.na(Larval$TowTime)] <- 0
 Plankton$TowTime[is.na(Plankton$TowTime)] <- 0
 
+Larval$Volume <- as.numeric(Larval$Volume)
+
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
 # Assumes hatching length is 5mm, day of hatching = day 0
 
 Larval$AdjustedAgeInDays <- ((Larval$LengthAdjustment - 5)/0.24)
-  MeanLengthAdjustment <- aggregate(LengthAdjustment~id, Larval, mean)
-  colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
+
 Larval <- merge(Larval, MeanLengthAdjustment)
   
 Larval$AdjustedSpawnDate <- Larval$Date-Larval$AdjustedAgeInDays
@@ -125,8 +132,8 @@ TowCoords <- TowCoords[, !grepl("id.", names(TowCoords))]
 
 Larval <- merge(Larval, TowCoords, by = 'id')
 
-Volume <- aggregate(Volume~id, Larval, mean)
-  colnames(Volume)[2] <- "Volume"
+MeanVolume <- aggregate(Volume~id, Larval, mean)
+  colnames(Volume)[2] <- "MeanVolume"
 
 Larval <- merge(Larval, Volume, by = 'id')
 
@@ -139,7 +146,7 @@ LarvalSum <- Larval %>% select("Ground",
                                "Survey.No", 
                                "Abundance", 
                                "Density", 
-                               "Volume", 
+                               "MeanVolume", 
                                "Preservative",
                                "MeanLengthAdjustment", 
                                "AdjustedMeanAgeInDays", 
