@@ -67,6 +67,10 @@ Larval1$TowReplicate <- as.character(Larval1$TowReplicate)
 
 Larval <- merge(Larval, Larval1, by = "TowID")
 
+Larval <- select(Larval, -...1)
+
+write.csv(Larval, "LarvalWithReplicates.csv")
+
 #Plankton Data
 Plankton <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv")
 
