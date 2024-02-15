@@ -9,12 +9,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -78,7 +78,7 @@ surveysummary = survey %>% dplyr::select(Ground, Survey.No, Year) %>% group_by(G
 surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
-larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
+#larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
@@ -87,4 +87,4 @@ larv = larv %>%
 
 larv = larv %>%
   dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp, Volume)
-larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
+#larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
