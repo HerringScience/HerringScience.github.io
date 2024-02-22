@@ -24,25 +24,25 @@ GB2021-07,1,4% formalin + limestone buffer,8,
 GB2021-08,1,4% formalin + limestone buffer,9,
 GB2021-09,1,4% formalin + limestone buffer,60,
 GB2021-10,1,4% formalin + limestone buffer,77,
-SB2020-01,1,,73,
-SB2020-02,1,,82,
-SB2020-03,1,,76,
-SB2020-04,1,,74,
-SB2020-05,1,,NA,not sorted due to condition
-SB2020-06,1,,NA,not sorted due to condition
-SB2020-07,1,,NA,not sorted due to condition
-SB2020-08,1,,NA,not sorted due to condition
-SB2020-09,2,,NA,not sorted due to condition
-SB2020-10,2,,NA,not sorted due to condition
-SB2020-13,1,,276,appear to be mostly herring
-SB2020-14,1,,148,v. soft. Still measurable but pigment required for ID may be lacking
-GB2020-01,1,,0,"no larvae, but many fish eggs"
-GB2020-02,1,,NA,not sorted due to condition
-GB2020-03,3,,NA,not sorted due to condition
-GB2020-04,2,,NA,not sorted due to condition
-GB2020-05,2,,NA,not sorted due to condition
-GB2020-06,1,,0,"no larvae, very few eggs"
-GB2020-07,1,,1,
+SB2020-01,1,4% formalin + limestone buffer,73,
+SB2020-02,1,4% formalin + limestone buffer,82,
+SB2020-03,1,4% formalin + limestone buffer,76,
+SB2020-04,1,4% formalin + limestone buffer,74,
+SB2020-05,1,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-06,1,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-07,1,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-08,1,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-09,2,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-10,2,4% formalin + limestone buffer,NA,not sorted due to condition
+SB2020-13,1,4% formalin + limestone buffer,276,appear to be mostly herring
+SB2020-14,1,4% formalin + limestone buffer,148,v. soft. Still measurable but pigment required for ID may be lacking
+GB2020-01,1,4% formalin + limestone buffer,0,"no larvae, but many fish eggs"
+GB2020-02,1,4% formalin + limestone buffer,NA,not sorted due to condition
+GB2020-03,3,4% formalin + limestone buffer,NA,not sorted due to condition
+GB2020-04,2,4% formalin + limestone buffer,NA,not sorted due to condition
+GB2020-05,2,4% formalin + limestone buffer,NA,not sorted due to condition
+GB2020-06,1,4% formalin + limestone buffer,0,"no larvae, very few eggs"
+GB2020-07,1,4% formalin + limestone buffer,1,
 SB2019-01,2,70% Alcohol,11,
 SB2019-02,1,70% Alcohol,2,
 SB2019-03,1,70% Alcohol,10,
@@ -68,20 +68,20 @@ GB2019-09,1,70% Alcohol,1,
 GB2019-10,1,70% Alcohol,0,
 SI2019-01,1,4% Formalin,27,
 SI2019-02,1,70% Alcohol,9,
-SB2018-01,1,,26,
-SB2018-02 ,1,,24,
-SB2018-03,2,,4,
-SB2018-04,1,,0,
-SB2018-05,1,,44,
-SB2018-06,1,,7,
-SB2018-07,1,,17,
-SB2018-08,1,,45,
-SB2018-09,1,,NA,
-SB2018-10,1,,3,
-SB2018-11,1,,0,
-GB2018-01,1,,0,
-GB2018-03,1,,0,
-GB2018-04 ,1,,3,
-GB2017-01,1,,4,
-GB2017-03,1,,22,
-GB2017-04,1,,5,
+SB2018-01,1,4% Formalin,26,
+SB2018-02 ,1,4% Formalin,24,
+SB2018-03,2,4% Formalin,4,
+SB2018-04,1,4% Formalin,0,
+SB2018-05,1,4% Formalin,44,
+SB2018-06,1,4% Formalin,7,
+SB2018-07,1,4% Formalin,17,
+SB2018-08,1,4% Formalin,45,
+SB2018-09,1,4% Formalin,NA,
+SB2018-10,1,4% Formalin,3,
+SB2018-11,1,4% Formalin,0,
+GB2018-01,1,4% Formalin,0,
+GB2018-03,1,4% Formalin,0,
+GB2018-04 ,1,4% Formalin,3,
+GB2017-01,1,4% Formalin,4,
+GB2017-03,1,4% Formalin,22,
+GB2017-04,1,4% Formalin,5,

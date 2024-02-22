@@ -17,6 +17,9 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='cente
 
 #Packages
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
+library(ggplot2)
+library(patchwork)
+library(scales)
 library(cli)
 library(lubridate)
 library(reprex)
@@ -85,10 +88,25 @@ LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
 FatData = read_csv("Total Fat Data.csv")
 
 #Larval Data
+#All Adjusted Ages and Dates are originally added in Larval QC script.
+#All preservative length adjustments added in in Larval QC script.
+# if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
+# if preservation is alcohol apply L = 0.532 + 0.989 x X1 
+#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation. They did suggest that this adjustment would be less accurate the longer the tow period.
+# These equations are when the maximum shrinkage has occurred.
 Larval = read_csv("Full Larval.csv")
+
+Larval$Date <- lubridate::ymd(Larval$Date)
+  Larval <- dplyr::arrange(Larval, Date)
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
+Larval$MonthDay <- format(Larval$Date, "%m-%d")
+LarvalSI = filter(Larval, Ground == "SI")
+
+
+LarvalSum = read_csv("LarvalSum.csv")
+LarvalSum$Year <- as.factor(LarvalSum$Year)
 
 #Land Data
 can<-getData('GADM', country="CAN", level=1)
@@ -206,13 +224,40 @@ LRP3 %>%
             buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
 
+#### Seal Island
+
+```{r}
+
+LRP3 %>% filter(Year > 2017) %>%
+  dplyr::select(Year, Seal) %>%
+  dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
+  #breaks=unique(as.integer("x")) %>% #use as as.integer for x axis to reformat to full years?
+  dyOptions(drawPoints = TRUE, pointSize = 2, digitsAfterDecimal = 0) %>%
+  dyHighlight(highlightCircleSize = 5, 
+              highlightSeriesBackgroundAlpha = 0.8,
+              hideOnMouseOut = FALSE)
+```
+
+```{r echo=FALSE}
+LRP3 %>% filter(Year > 2017) %>%
+  dplyr::select(Year, Seal) %>%
+  arrange(desc(Year)) %>%
+  datatable(colnames = c("Year", "Seal Isl."),
+          extensions = 'Buttons',
+          options = list(
+            pagelength = 5,
+            dom = 'lfrtiBp',
+            buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+```
+
+
 ### Total SSB Summaries {.tabset}
 
 #### Total
 
 ```{r echo=FALSE}
 Plot_Summary = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
+  filter(Ground == "Scots Bay" | Ground == "German Bank" | Ground == "Seal Island") %>%
   filter(!is.na(DFO_Turnover_Adjusted)) %>%
   group_by(Year) %>%
   summarize(Biomass = sum(DFO_Turnover_Adjusted), na.rm = FALSE)
@@ -228,7 +273,7 @@ ggplotly(p)
 
 ```{r echo=FALSE}
 Table = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
+  filter(Ground == "Scots Bay" | Ground == "German Bank" | Ground == "Seal Island") %>%
   filter(!is.na(DFO_Turnover_Adjusted)) %>%
   group_by(Year) %>%
   summarize(HSC_Estimate = sum(HSC_Estimate),
@@ -310,6 +355,39 @@ datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Es
   buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
 
+#### Seal Island
+
+```{r echo=FALSE}
+p = ggplot(data=subset(SSB, Ground == "Seal Island"),  aes(x=Year, y=DFO_Turnover_Adjusted, fill= Survey_Number)) +
+  geom_col() +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x="Year", y = "DFO Estimate w/ Turnover") +
+  theme(axis.text.x = element_text(angle = 55), legend.position = "none")
+
+ggplotly(p)
+```
+
+```{r echo=FALSE}
+Table = SSB %>%
+  filter(Ground == "Seal Island") %>%
+  group_by(Year) %>%
+  summarize(HSC_Estimate = sum(HSC_Estimate),
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
+            DFO_Estmate = sum(DFO_Estimate),
+            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
+  ungroup() %>%
+  arrange(desc(Year))
+
+datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover"),
+          extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+
+```
+
+
 ### Annual SSB Estimates {.tabset}
 
 #### Scots Bay {.tabset .tabset-pills}
@@ -320,7 +398,9 @@ for(i in unique(SSB$Year)) {
   cat("\n")
   cat("##### ", i, "\n")
   cat("\n")
-  print(ggplot(data=subset(SSB, Ground == "Scots Bay" & Year == i), aes(x=Survey_Number, y=DFO_Turnover_Adjusted, group=1)) +
+  
+  
+print(ggplot(data=subset(SSB, Ground == "Scots Bay" & Year == i), aes(x=Survey_Number, y=DFO_Turnover_Adjusted, group=1)) +
   geom_point(stat='summary', fun.y=sum) +
   stat_summary(fun.y=sum, geo="line") +
   labs(x="Survey Number", y="DFO Biomass w/ Turnover"))
@@ -339,12 +419,37 @@ for(i in unique(SSB$Year)) {
   cat("\n")
   cat("##### ", i, "\n")
   cat("\n")
-  print(ggplot(data=subset(SSB, Ground == "German Bank" & Year == i), aes(x=Survey_Number, y=DFO_Turnover_Adjusted, group=1)) +
+  
+print(ggplot(data=subset(SSB, Ground == "German Bank" & Year == i), aes(x=Survey_Number, y=DFO_Turnover_Adjusted, group=1)) +
   geom_point(stat='summary', fun.y=sum) +
   stat_summary(fun.y=sum, geo="line") +
   labs(x="Survey Number", y="DFO Biomass w/ Turnover"))
   cat("\n")
   print(kbl(x=subset(DFOSSB, Ground == "German Bank" & Year == i), align = "c", col.names = c("Year", "Ground", "Survey Number", "DFO (Turnover Adjusted)")) %>%
+          kable_paper("striped", full_width = F))
+  cat("\n")
+}
+```
+
+#### Seal Island {.tabset .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+DFOSSB = SSB %>%
+  dplyr::select(Year, Ground, Survey_Number, DFO_Turnover_Adjusted)
+
+SSB1 <- subset(SSB, Year == 2018 | Year == 2019 | Year == 2020 | Year == 2021 )
+  
+for(i in unique(SSB1$Year)) {
+  cat("\n")
+  cat("##### ", i, "\n")
+  cat("\n")
+  
+  print(ggplot(data=subset(SSB, Ground == "Seal Island" & Year == i), aes(x=Survey_Number, y=DFO_Turnover_Adjusted, group=1)) +
+  geom_point(stat='summary', fun.y=sum) +
+  stat_summary(fun.y=sum, geo="line") +
+  labs(x="Survey Number", y="DFO Biomass w/ Turnover"))
+  cat("\n")
+  print(kbl(x=subset(DFOSSB, Ground == "Seal Island" & Year == i), align = "c", col.names = c("Year", "Ground", "Survey Number", "DFO (Turnover Adjusted)")) %>%
           kable_paper("striped", full_width = F))
   cat("\n")
 }
@@ -547,7 +652,10 @@ out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ```{r echo=FALSE}
-ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + 
+
+#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if within the survey season
+
+ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if outside of the survey season. Reset year.
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -558,16 +666,21 @@ ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"),
   coord_map() + 
   labs(x=NULL, y=NULL)
 
-ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + #To use if within the survey season
+ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023), aes(x=Temperature, y=Depth, colour = Julian_factor)) + #To use if outside of the survey season. Reset year.
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
 ```
 
 ```{r, results = "asis"}
+#CTD1 = CTD %>% 
+  # filter(Year == year & Ground == "Scots Bay") %>%
+  # arrange(Survey)                                          # To use within the survey window
+
 CTD1 = CTD %>% 
-  filter(Year == year & Ground == "Scots Bay") %>%
-  arrange(Survey)
+   filter(Year == 2023 & Ground == "Scots Bay") %>%
+   arrange(Survey)                                           # To use outside of Survey window. Reset year.
 
 for(i in unique(CTD1$Survey)) {
   
@@ -606,7 +719,8 @@ out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ```{r echo=FALSE}
-ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + 
+# ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use within the survey window
+ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) +  #To use outside of the survey window. Reset Year. 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -615,7 +729,8 @@ ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"
   coord_map() + 
   labs(x=NULL, y=NULL)
 
-ggplot(data = subset(CTD, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+#ggplot(data = subset(CTD, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) +  #To use within the survey window
+ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023), aes(x=Temperature, y=Depth, colour = Julian_factor)) +   # To use outside of the survey window. Reset Year.
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
@@ -1503,21 +1618,21 @@ ggplot(data = CTD, aes(x=Lon, y=Lat)) +
 ##### Total 
 
 ```{r, results = "asis", fig.align='center'}
+Larval1 <- subset.data.frame(Larval, Ground == "SB")
 
-Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
-  geom_point() +
-  labs(y="Length (mm)", x="Julian Date of Collection")
+Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Survey.No, colour = Year)) + 
+  geom_point(position = "jitter") +
+  labs(y="Length (mm)", x="Survey Number")
 
-ggplot(Larval, aes(Year, Lengthmm, colour = Year)) + 
+ggplot(Larval1, aes(Year, LengthAdjustment, colour = Year)) + 
   geom_boxplot() +
   labs(y="Length (mm)")
 
-
-Table = Larval %>%
+Table = Larval1 %>%
   group_by(Year) %>%
-  summarize(MinLength = min(Lengthmm),
-            MaxLength = max(Lengthmm),
-            AvgLength = mean(Lengthmm),
+  summarize(MinLength = min(LengthAdjustment),
+            MaxLength = max(LengthAdjustment),
+            AvgLength = mean(LengthAdjustment),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
@@ -1530,39 +1645,42 @@ kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Lengt
 ```{r, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
+# In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
+  
   cat("\n")
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i)
+Larval1 <- subset.data.frame(Larval, Ground == "SB")
+Larval1 = Larval1 %>% filter(Year == i)
 
-Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
-  geom_point() +
-  labs(y="Length (mm)", x="Julian Date of Collection")
+Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Survey.No, colour = id)) + 
+  geom_point(position = "jitter") +
+  labs(y="Length (mm)", x="Survey Number")
 
-print(ggplot(data = subset(Larval, Year == i), aes(x = Julian, y = Lengthmm, colour = Year)) + 
-  geom_point() + 
-  ylim(c(0,30)) +
-  xlim(c(150, 275)) +
+print(ggplot(data = subset(Larval1, Year == i), aes(x = Survey.No, y = LengthAdjustment, colour = id)) + 
+  geom_point(position = "jitter") +
   ylab("Length (mm)") + 
-  xlab("Julian Day") +
-  ggtitle("Scots Bay"))
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
+  scale_x_discrete(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "German Bank")))
   cat("\n")
   
-print(ggplot(data = Larval1, (aes(Lengthmm))) + 
+print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
   geom_histogram(binwidth=0.5, colour = "white") + 
   theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
   labs(x = "Length (mm)", y="Count"))
   cat("\n")
-  
-print(ggplot(data=Larval1, aes(Lengthmm, colour = Survey.No)) + 
-  geom_freqpoly(bins=100, linewidth = 1) +
-  labs(y="Count", x="Length (mm)"))
-  cat("\n")
+      
+#print(ggplot(data=Larval1, aes(LengthAdjustment, colour = Survey.No)) + 
+#  geom_freqpoly(bins=100, linewidth = 1) +
+#  labs(y="Count", x="Length (mm)"))
+#  cat("\n")
   
   Table = Larval1 %>% 
   group_by(Survey.No) %>%
-  summarize(AvgLength = mean(Lengthmm),
+  summarize(AvgLength = mean(LengthAdjustment),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
@@ -1578,7 +1696,10 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 
 
 ```{r echo=FALSE, fig.align='center'}
-ggplot(Larval, aes(Julian, Lengthmm, colour = Year)) + 
+
+Larval2 <- subset.data.frame(Larval, Ground == "SB")
+
+ggplot(Larval2, aes(Julian, LengthAdjustment, colour = Year)) + 
   geom_jitter(size = 1.25, width = 3) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1586,7 +1707,7 @@ ggplot(Larval, aes(Julian, Lengthmm, colour = Year)) +
   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
   labs(x= "Julian Date of Collection", y = "Length (mm)") 
 
-TotalCategories <- Larval %>%
+TotalCategories <- Larval2 %>%
   group_by(category) %>%
   dplyr::summarize(n = n()) %>%
   mutate(Percentage = (n/sum(n))*100) %>%
@@ -1615,9 +1736,10 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
+Larval1 <- subset.data.frame(Larval, Ground == "SB")
 Larval1 = Larval %>% filter(Year == i)
  
-print(ggplot(Larval1, aes(Julian, Lengthmm)) + 
+print(ggplot(Larval1, aes(Julian, LengthAdjustment)) + 
   geom_jitter(size = 2) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1652,7 +1774,7 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 Larval2 <- subset(Larval, Ground == 'SB')
 
-ggplot(Larval2, aes(x=X, y=Y)) + 
+ggplot(Larval2, aes(x=Lon1, y=Lat1)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -1686,9 +1808,9 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i) %>% filter(Ground != "GB")
+Larval1 = Larval %>% filter(Year == i) %>% filter(Ground == "SB")
  
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
+print(ggplot(Larval1, aes(x=Lon1, y=Lat1)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -1717,7 +1839,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 
 ```{r echo=FALSE, fig.align='center'}
 Larval %>% 
-  ggplot(aes(Lengthmm, AvgTowDepth, colour = category)) + 
+  ggplot(aes(LengthAdjustment, AvgTowDepth, colour = category)) + 
   geom_jitter(height = 0.25) + 
   scale_y_reverse() +
   labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category")
@@ -1743,7 +1865,7 @@ for(i in unique(Larval$Year)) {
 
 Larval1 = Larval %>% filter(Year == i)
  
-print(ggplot(data=Larval1, (aes(Lengthmm, AvgTowDepth, colour = category))) + 
+print(ggplot(data=Larval1, (aes(LengthAdjustment, AvgTowDepth, colour = category))) + 
   geom_jitter(height = 0.25) + 
   scale_y_reverse() +
   labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category"))
@@ -1771,53 +1893,76 @@ Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
 
-ggplot(Larval, aes(LastLength, ..density.., colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Density") +
-  labs(y="Density", x="Growth Rate Applied Length (mm)")
+Larval1 = LarvalSum %>% filter(Ground == "SB")
 
-ggplot(Larval, aes(LastLength, colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Count") +
-  labs(y="Count", x="Growth Rate Applied Length (mm)")
+print(ggplot(Larval1, aes(x = Survey.No, y = Density, colour = Year)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Larval Density "))
 
-Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) + 
-  geom_point(alpha = 0.45, size = 5) + 
-  ggtitle("Min and Max") +
-  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
+print(ggplot(Larval1, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+  geom_point() + 
+  ylab("Abundance (Count/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Larval Abundance"))
+
+print(ggplot(Larval1, aes(x = Survey.No, y = AdjustedMeanAgeInDays, colour = Year)) + 
+  geom_point() + 
+  ylab("Mean Age (days)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Mean Larval Age of Each Individual Tow"))
+
 ```
 
 
 ```{r, results='asis', fig.align='center'}
  
-
 for(i in unique(Larval$Year)) {
   cat("\n")
   cat("#####", i, "\n")
   cat("\n")
 
-cat("Growth applied to compare spawning modes.")
+Larval1 = Larval %>% filter(Ground == "SB")
+Larval1 = Larval1 %>% filter(Year == i)
 
-Larval1 = Larval %>% filter(Year == i)
+Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
 
-print(ggplot(Larval1, aes(LastLength, ..density.., colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle(paste("Scots Bay Density")) +
-  labs(y="Density", x="Growth Rate Applied Length (mm)"))
-  cat("\n")
   
-print(ggplot(Larval1, aes(LastLength, colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle(paste("Scots Bay Count")) +
-  labs(y="Count", x="Growth Rate Applied Length (mm)"))
+print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Density ")))
   cat("\n")
-  
-print(ggplot(data=Larval1, (aes(JulianMax, JulianMin, colour = category))) + 
-  geom_point(alpha = 0.45, size = 5) + 
-  ggtitle(paste("Scots Bay Estimated Julian Date.")) +
-  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date"))
+
+print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Abundance (Larvae/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Abundance ")))
   cat("\n")
-  }
+
+print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = AdjustedMeanAgeInDays, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Mean Age (days)") + 
+  xlab("Survey Number") +
+  xlim(0, 10) + 
+  scale_y_continuous(limits = c(0, max(Larval1$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, " Mean Larval Age of Each Individual Tow")))
+  cat("\n")
+}
 ```
 
 ### German Bank {.tabset}
@@ -1826,20 +1971,22 @@ print(ggplot(data=Larval1, (aes(JulianMax, JulianMin, colour = category))) +
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-Larval = Larval %>% filter(Ground == "GB")
-Larval %>% ggplot(aes(y=Lengthmm, x=Julian, colour = Year)) + 
-  geom_point() +
-  labs(y="Length (mm)", x="Julian Date of Collection")
 
-ggplot(Larval, aes(Year, Lengthmm, colour = Year)) + 
+Larval = Larval %>% filter(Ground == "GB")
+
+Larval %>% ggplot(aes(y=LengthAdjustment, x=Survey.No, colour = Year)) + 
+  geom_point(position = "jitter") +
+  labs(y="Length (mm)", x="Survey Number")
+
+ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
   geom_boxplot() +
   labs(y="Length (mm)")
 
 Table = Larval %>%
   group_by(Year) %>%
-  summarize(MinLength = min(Lengthmm),
-            MaxLength = max(Lengthmm),
-            AvgLength = mean(Lengthmm),
+  summarize(MinLength = min(LengthAdjustment),
+            MaxLength = max(LengthAdjustment),
+            AvgLength = mean(LengthAdjustment),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
@@ -1849,28 +1996,46 @@ kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Lengt
 ```
 
 ```{r, results = "asis", fig.align='center'}
+
+Larval1 = Larval %>% filter(Ground == "GB")
+
 for(i in unique(Larval$Year)) {
+  
+# In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
   
   cat("\n")
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i)
+Larval1 = Larval1 %>% filter(Year == i)
+
+Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Survey.No, colour = id)) + 
+  geom_point(position = "jitter") +
+  labs(y="Length (mm)", x="Survey Number")
+
+print(ggplot(data = subset(Larval1, Year == i), aes(x = Survey.No, y = LengthAdjustment, colour = id)) + 
+  geom_point(position = "jitter") +
+  ylab("Length (mm)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
+  scale_x_discrete(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "German Bank")))
+  cat("\n")
  
-print(ggplot(data = Larval1, (aes(Lengthmm))) + 
+print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
   geom_histogram(binwidth=0.5, colour = "white") + 
   theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
   labs(x = "Length (mm)", y="Count"))
   cat("\n")
   
-print(ggplot(data=Larval1, aes(Lengthmm, colour = Survey.No)) + 
-  geom_freqpoly(bins=100, linewidth = 1) +
-  labs(y="Count", x="Length (mm)"))
-  cat("\n")
+#print(ggplot(data=Larval1, aes(LengthAdjustment, colour = survey)) + 
+#  geom_freqpoly(bins=100, linewidth = 1) +
+#  labs(y="Count", x="Length (mm)"))
+#  cat("\n")
   
   Table = Larval1 %>% 
   group_by(Survey.No) %>%
-  summarize(AvgLength = mean(Lengthmm),
+  summarize(AvgLength = mean(LengthAdjustment),
             AvgSD = mean(SD),
             Abundance = n()) %>%
   mutate_if(is.numeric, format, digits=2)
@@ -1886,7 +2051,7 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 
 
 ```{r echo=FALSE, fig.align='center'}
-ggplot(Larval, aes(Julian, Lengthmm, colour = Year)) + 
+ggplot(Larval, aes(Julian, LengthAdjustment, colour = Year)) + 
   geom_jitter(size = 2) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1919,7 +2084,7 @@ for(i in unique(Larval$Year)) {
 
 Larval1 = Larval %>% filter(Year == i)
  
-print(ggplot(Larval1, aes(Julian, Lengthmm)) + 
+print(ggplot(Larval1, aes(Julian, LengthAdjustment)) + 
   geom_jitter(size = 2) + 
   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
@@ -1954,7 +2119,7 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 Larval2 <- subset(Larval, Ground == 'GB')
 
-ggplot(Larval2, aes(x=X, y=Y)) + 
+ggplot(Larval2, aes(x=Lon1, y=Lat1)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
@@ -1990,7 +2155,7 @@ for(i in unique(Larval$Year)) {
 
 Larval1 = Larval %>% filter(Year == i) %>% filter()
  
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
+print(ggplot(Larval1, aes(x=Lon1, y=Lat1)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -2017,7 +2182,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 
 ```{r echo=FALSE, fig.align='center'}
 Larval %>% 
-  ggplot(aes(Lengthmm, AvgTowDepth, colour = category)) + 
+  ggplot(aes(LengthAdjustment, AvgTowDepth, colour = category)) + 
   geom_point() + 
   scale_y_reverse() +
   labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category")
@@ -2043,7 +2208,7 @@ for(i in unique(Larval$Year)) {
 
 Larval1 = Larval %>% filter(Year == i)
  
-print(ggplot(data=Larval1, (aes(Lengthmm, AvgTowDepth, colour = category))) + 
+print(ggplot(data=Larval1, (aes(LengthAdjustment, AvgTowDepth, colour = category))) + 
   geom_point() + 
   scale_y_reverse() +
   labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category"))
@@ -2071,64 +2236,444 @@ Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
 
-ggplot(Larval, aes(LastLength, ..density.., colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Density") +
-  labs(y="Density", x="Growth Rate Applied Length (mm)")
+#Should x be Julian date and colour be survey number instead of year?
+#Need to add in Larval summary table within compendium
 
-ggplot(Larval, aes(LastLength, colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle("Count") +
-  labs(y="Count", x="Growth Rate Applied Length (mm)")
+GBLarvalSum = LarvalSum %>% filter(Ground == "GB")
 
-Larval %>% ggplot(aes(JulianMax, JulianMin, colour = category)) + 
-  geom_point(alpha = 0.45, size = 5) + 
-  ggtitle("Min and Max") +
-  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date")
+#GBLarvalSum$Density[is.na(GBLarvalSum$Density)] = 0
+#GBLarvalSum$Abundance[is.na(GBLarvalSum$Abundance)] = 0
+#GBLarvalSum$AdjustedMeanAgeInDays[is.na(GBLarvalSum$AdjustedMeanAgeInDays)] = 0
+
+print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(GBLarvalSum$Density))) +
+  scale_x_continuous(limits = c(1, 10), breaks = seq(1,10,1)) +
+  ggtitle("Larval Density "))
+
+print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+  geom_point() + 
+  ylab("Abundance (Larvae/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(GBLarvalSum$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Larval Abundance "))
+
+print(ggplot(GBLarvalSum, aes(x = Survey.No, y = AdjustedMeanAgeInDays, colour = Year)) + 
+  geom_point() + 
+  ylab("Mean Larval Age (days)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(GBLarvalSum$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Mean Larval Age of Individual Tows"))
+
 ```
 
 
 ```{r, results='asis', fig.align='center'}
  
-
 for(i in unique(Larval$Year)) {
   cat("\n")
   cat("#####", i, "\n")
   cat("\n")
 
-cat("Growth applied to compare spawning modes.")
+Larval1 = LarvalSum %>% filter(Ground == "GB")
+Larval1 = Larval1 %>% filter(Year == i)
+#Larval1$Density[is.na(Larval1$Density)] <- 0
+#Larval1$Abundance[is.na(Larval1$Abundance)] <- 0
+#Larval1$AdjustedMeanAgeInDays[is.na(Larval1$AdjustedMeanAgeInDays)] <- 0
+
+Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
+
+  
+print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Density ")))
+  cat("\n")
+
+print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Abundance (Larvae/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Abundance ")))
+  cat("\n")
+
+print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = AdjustedMeanAgeInDays, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Mean Age (days)") + 
+  xlab("Survey Number") +
+  xlim(0, 10) + 
+  scale_y_continuous(limits = c(0, max(Larval1$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Mean Larval Age in Days")))
+  cat("\n")
+}
+```
+
+### Seal Island {.tabset}
+#### Length Data {.tabset .tabset-pills}
+
+##### Total
+
+```{r echo=FALSE, fig.align='center'}
+
+Larval = LarvalSI
+
+Larval %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) + 
+  geom_point() +
+  scale_x_continuous(labels = scales::label_number(1), limits = c(284, 288)) +
+  labs(y="Length (mm)", x="Julian Date of Collection")
+
+ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
+  geom_boxplot() +
+  labs(y="Length (mm)")
+
+Table = Larval %>%
+  group_by(Year) %>%
+  summarize(MinLength = min(LengthAdjustment),
+            MaxLength = max(LengthAdjustment),
+            AvgLength = mean(LengthAdjustment),
+            AvgSD = mean(SD),
+            Abundance = n()) %>%
+  mutate_if(is.numeric, format, digits=2)
+
+kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+```
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+# In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+Larval1 = LarvalSI %>% filter(Year == i)
+
+Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Survey.No, colour = id)) + 
+  geom_point() +
+  labs(y="Length (mm)", x="Survey Number")
+
+print(ggplot(data = subset(Larval1, Year == i), aes(x = Survey.No, y = LengthAdjustment, colour = id)) + 
+  geom_point(position = "jitter") +
+  ylab("Length (mm)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
+  scale_x_discrete(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Seal Island")))
+  cat("\n")
+ 
+print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
+  geom_histogram(binwidth=0.5, colour = "white") + 
+  theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+  labs(x = "Length (mm)", y="Count"))
+  cat("\n")
+  
+#print(ggplot(data=Larval1, aes(LengthAdjustment, colour = Survey.No)) + 
+#  geom_freqpoly(bins=100, linewidth = 1) +
+#  labs(y="Count", x="Length (mm)"))
+#  cat("\n")
+  
+  Table = Larval1 %>% 
+  group_by(Survey.No) %>%
+  summarize(AvgLength = mean(LengthAdjustment),
+            AvgSD = mean(SD),
+            Abundance = n()) %>%
+  mutate_if(is.numeric, format, digits=2)
+
+print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+  kable_paper("striped", full_width = F))
+  cat("\n")
+}
+```
+
+#### Category Data {.tabset .tabset-pills}
+##### Total
+
+
+```{r echo=FALSE, fig.align='center'}
+
+ggplot(Larval, aes(Julian, LengthAdjustment, colour = Year)) + 
+  geom_jitter(size = 2) + 
+   scale_x_continuous(labels = scales::label_number(1), limits = c(284, 288)) +
+  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
+  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+  labs(x= "Julian Date of Collection", y = "Length (mm)")
+
+TotalCategories <- Larval %>%
+  group_by(category) %>%
+  dplyr::summarize(n = n()) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1) %>%
+  mutate(Length = ifelse(category==1, "<8", 
+                  ifelse(category==2, "8-12",
+                  ifelse(category==3, "12-17",
+                  ifelse(category==4, "17-27",
+                  ifelse(category==5, ">27", NA)))))) %>%
+  relocate(Length, .after = category)
+
+kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Abundance", "%"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+```
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+Larval1 = LarvalSI %>% filter(Year == i)
+ 
+print(ggplot(Larval1, aes(Julian, LengthAdjustment)) + 
+  geom_jitter(size = 2) + 
+  scale_x_continuous(labels = scales::label_number(1), limits = c(284, 288)) +
+  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+  labs(x= "Julian Date of Collection", y = "Length (mm)"))
+  cat("\n")
+  
+  TotalCategories <- Larval1 %>%
+  group_by(category) %>%
+  dplyr::summarize(n = n()) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1)
+
+print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
+  kable_paper("striped", full_width = F))
+  cat("\n")
+}
+```
+
+#### Mapped Data {.tabset .tabset-pills}
+
+```{r message=FALSE, warning=FALSE}
+CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
+proj4string(CP) <- CRS(proj4string(NBNS))
+out <- crop(NBNS, CP, byid=TRUE)
+```
+
+##### Total
+
+```{r echo=FALSE, fig.align='center'}
+
+Larval2 <- subset(Larval, Ground == 'SI')
+
+ggplot(Larval2, aes(x=Lon1, y=Lat1)) + 
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_point(data=Larval2, aes(fill = Year, size = Abundance), pch=21, alpha = 0.6) +
+  labs(x=NULL, y=NULL) + 
+  coord_map()
+
+TotalCategories <- Larval2 %>%
+  group_by(category) %>%
+  dplyr::summarize(n = n()) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1) %>%
+  mutate(Length = ifelse(category==1, "<8", 
+                  ifelse(category==2, "8-12",
+                  ifelse(category==3, "12-17",
+                  ifelse(category==4, "17-27",
+                  ifelse(category==5, ">27", NA)))))) %>%
+  relocate(Length, .after = category)
+
+kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Abundance", "%"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+```
+
+
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+Larval1 = Larval %>% filter(Year == i) %>% filter()
+ 
+print(ggplot(Larval1, aes(x=Lon1, y=Lat1)) + 
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+  geom_point(data=Larval1, aes(fill = category, size = Abundance), pch=21, alpha = 0.6) +
+  labs(x=NULL, y=NULL) + 
+  coord_map())
+  cat("\n")
+  
+  TotalCategories <- Larval1 %>%
+  group_by(category) %>%
+  dplyr::summarize(n = n()) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1)
+
+print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
+  kable_paper("striped", full_width = F))
+  cat("\n")
+}
+```
+
+#### Depth Data {.tabset .tabset-pills}
+##### Total
+
+```{r echo=FALSE, fig.align='center'}
+LarvalSI %>% 
+  ggplot(aes(LengthAdjustment, AvgTowDepth, colour = category)) + 
+  geom_point() + 
+  scale_y_reverse() +
+  labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category")
+
+TotalCategories <- LarvalSI %>%
+  group_by(category) %>%
+  summarize(n = n(),
+            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1) %>%
+  relocate(MeanDepth, .after= Percentage)
+
+kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+```
+
+```{r, results = "asis", fig.align='center'}
+for(i in unique(Larval$Year)) {
+  
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
 
 Larval1 = Larval %>% filter(Year == i)
+ 
+print(ggplot(data=Larval1, (aes(LengthAdjustment, AvgTowDepth, colour = category))) + 
+  geom_point() + 
+  scale_y_reverse() +
+  labs(x = "Length (mm)", y = "Average Tow Depth (m)", colour = "Category"))
+  cat("\n")
+  
+  TotalCategories <- Larval1 %>%
+  group_by(category) %>%
+  summarize(n = n(),
+            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+  mutate(Percentage = (n/sum(n))*100) %>%
+  mutate_if(is.numeric, format, digits = 1) %>%
+  relocate(MeanDepth, .after= Percentage)
 
-print(ggplot(Larval1, aes(LastLength, ..density.., colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle(paste("German Bank Density")) +
-  labs(y="Density", x="Growth Rate Applied Length (mm)"))
+print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+  kable_paper("striped", full_width = F))
   cat("\n")
+}
+```
+
+#### Spawning Modes {.tabset .tabset-pills}
+
+##### Total
+
+Growth applied to compare spawning modes.
+
+```{r, fig.align='center'}
+
+LarvalSum = LarvalSum %>% filter(Ground == "SI")
+
+print(ggplot(LarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Larval Density "))
+
+print(ggplot(LarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+  geom_point() + 
+  ylab("Abundance (Larvae/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Larval Abundance "))
+
+print(ggplot(LarvalSum, aes(x = Survey.No, y = AdjustedMeanAgeInDays, colour = Year)) + 
+  geom_point() + 
+  ylab("Mean Age (days)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(LarvalSum$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle("Mean Larval Age in Days"))
+
+```
+
+
+```{r, results='asis', fig.align='center'}
+ 
+for(i in unique(Larval$Year)) {
+  cat("\n")
+  cat("#####", i, "\n")
+  cat("\n")
+
+LarvalSum = LarvalSum %>% filter(Year == i)
+#LarvalSum$Density[is.na(LarvalSum$Density)] <- 0
+#LarvalSum$Abundance[is.na(LarvalSum$Abundance)] <- 0
+#LarvalSum$AdjustedMeanAgeInDays[is.na(LarvalSum$AdjustedMeanAgeInDays)] <- 0
+
+LarvalSum$MonthDay <- format(LarvalSum$Date, "%m-%d")
+
   
-print(ggplot(Larval1, aes(LastLength, colour = Survey.No)) + 
-  geom_freqpoly(binwidth = 0.5, lwd = 1) + 
-  ggtitle(paste("German Bank Count")) +
-  labs(y="Count", x="Growth Rate Applied Length (mm)"))
+print(ggplot(data = subset(LarvalSum, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Density (Abundance/Volume)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Density ")))
   cat("\n")
-  
-print(ggplot(data=Larval1, (aes(JulianMax, JulianMin, colour = category))) + 
-  geom_point(alpha = 0.45, size = 5) + 
-  ggtitle(paste("German Bank Estimated Julian Date.")) +
-  labs(x = "Max Estimated Julian Date", y= "Min Estimated Julian Date"))
+
+print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Abundance (Larvae/Tow)") + 
+  xlab("Survey Number") +
+  scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Larval Abundance ")))
   cat("\n")
-  }
+
+print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = AdjustedMeanAgeInDays, colour = MonthDay)) + 
+  geom_point() + 
+  ylab("Mean Age (days)") + 
+  xlab("Survey Number") +
+  xlim(0, 10) + 
+  scale_y_continuous(limits = c(0, max(LarvalSum$AdjustedMeanAgeInDays))) +
+  scale_x_continuous(breaks = seq(0, 10, 1)) +
+  ggtitle(paste(i, "Mean Larval Age of Each Individual Tow")))
+  cat("\n")
+}
 ```
 
 ## Fat Project 
 
-### Spatial Analysis
+### Spatial Analysis {.tabset .tabset-pills}
 
 #### By Ground {.tabset .tabset-pills}
 
 ##### Total
 
 ```{r}
+
 can<-getData('GADM', country="CAN", level=1)
 us = getData('GADM', country = "USA", level = 1)
 can1 = rbind(can,us)
@@ -2153,41 +2698,301 @@ leaflet(FatDataSum, options = leafletOptions(preferCanvas = TRUE)) %>%
     title = "Fat Percent (%)",
     labFormat = labelFormat(suffix = "%"),
     opacity = 1)
+
 ```
 
-##### August
-```{r}
-FatData %>%
+##### January {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 1)
+
+print(FatData1 %>%
   ggplot(aes(x=Lon, y=Lat)) + 
   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData, Lat < 46 & Lat > 40 & Month == "8"), aes(color=Fat)) +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
   scale_color_viridis_c(direction=-1) +
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
   coord_map() +
-  theme(legend.position = 'bottom')
-```
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
-```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
+  cat("\n")
+
+}
+```
+  
+##### February {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
   
   cat("\n")
-  cat("#####", i, "\n")
+  cat("######", i, "\n")
   cat("\n")
   
-FatData2 = FatData %>% filter(Year == i)
- 
-print(FatData2 %>%
+FatData1 = FatData %>% filter(Month == 2) 
+
+print(FatData1 %>%
   ggplot(aes(x=Lon, y=Lat)) + 
   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData2, Lat < 46 & Lat > 40), aes(color=Fat)) +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
   scale_color_viridis_c(direction=-1) +
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
   coord_map() +
-  theme(legend.position = 'bottom'))
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10))) 
+
+cat("\n")
+}
+```
+
+##### March {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 3)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+
+```
+
+##### April{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 4)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
 ```
+
+##### May {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 5)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
+##### June{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 6)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+
+```
+
+##### July{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 7)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
+##### August{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 8)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+
+```
+
+##### September{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 9)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
+##### October{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 10)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
+##### November{.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 11)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
+##### December {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center', fig.width = 14} 
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 12)
+
+print(FatData1 %>%
+  ggplot(aes(x=Lon, y=Lat)) + 
+  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+  scale_color_viridis_c(direction=-1) +
+  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+  coord_map() +
+  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+
+  cat("\n")
+}
+```
+
 
 #### By Latitude {.tabset .tabset-pills}
 
@@ -2195,6 +3000,8 @@ print(FatData2 %>%
 
 ```{r}
 library(scales)
+
+
 FatData %>%
   filter(!is.na(Lat)) %>%
   mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
@@ -2202,44 +3009,316 @@ ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
   geom_density_ridges(rel_min_height = 0.01) +
   theme(legend.position = "none") +
   labs(y="Latitude", x="Fat Percentage (%)")
+
 ```
 
-##### August
-
-```{r}
-FatData %>%
-  filter(!is.na(Lat)) %>%
-  filter(Month == "8") %>%
-  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
-ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  theme(legend.position = "none") +
-  labs(y="Latitude", x="Fat Percentage (%)")
-```
+##### January {.tabset .tabset-pills}
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
+
+for(i in unique(FatData$Year)) {
   
   cat("\n")
-  cat("#####", i, "\n")
+  cat("######", i, "\n")
   cat("\n")
   
-FatData2 = FatData %>% filter(Year == i) %>% filter(!is.na(Lat))
- 
-print(FatData2 %>%
+FatData1 = FatData %>% filter(Month == 1) %>% filter(!is.na(Lat))
+
+
+print(FatData1 %>%
+  filter(Year == i) %>%
   mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
 ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
   geom_density_ridges(rel_min_height = 0.01) +
   theme(legend.position = "none") +
   labs(y="Latitude", x="Fat Percentage (%)"))
 
-  cat("\n")
+cat("\n")
+
 }
 ```
 
-### By Year {.tabset .tabset-pills}
+##### February {.tabset .tabset-fade .tabset-pills}
 
-#### Total
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 2) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### March {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 3) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### April {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 4) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### May {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 5) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### June {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 6) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### July {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 7) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### August {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 8) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+
+##### September {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 9) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### October {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 10) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### November {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 11) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+```
+
+##### December {.tabset .tabset-fade .tabset-pills}
+
+```{r, results = "asis", fig.align='center'}
+
+for(i in unique(FatData$Year)) {
+  
+  cat("\n")
+  cat("######", i, "\n")
+  cat("\n")
+  
+FatData1 = FatData %>% filter(Month == 12) %>% filter(!is.na(Lat))
+
+print(FatData1 %>%
+  filter(Year == i) %>%
+  mutate(Lat = format(round(Lat, 1), nsmall = 1)) %>%
+ggplot(aes(x=Fat, y=Lat, group = Lat, fill = Lat)) +
+  geom_density_ridges(rel_min_height = 0.01) +
+  theme(legend.position = "none") +
+  labs(y="Latitude", x="Fat Percentage (%)"))
+
+cat("\n")
+
+}
+
+```
+
+
+#### By Company {.tabset .tabset-pills}
+
+##### Total
 
 ::: row
 ::: col-md-6
@@ -2263,216 +3342,151 @@ FatData %>%
 :::
 :::
 
-#### Connors
+##### Connors {.tabset .tabset-fade .tabset-pills}
 
-::: row
-::: col-md-6
+###### By Year
 ```{r echo=FALSE}
+
 ggplot(data=subset(FatData, Supplier == "Connors"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
-```
-:::
 
-::: col-md-6
-```{r echo=FALSE}
 FatData %>%
   dplyr::filter(Supplier == "Connors") %>%
   group_by(Year) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Year", "Avg Fat (%)")) %>%
   kable_paper("striped", full_width = F)
+
 ```
-:::
-:::
 
-#### Comeaus
+###### By Month
 
-::: row
-::: col-md-6
-```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-FatData %>%
-  dplyr::filter(Supplier == "Comeaus") %>%
-  group_by(Year) %>%
-  summarize(FatMean = mean(Fat)) %>%
-  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
-  kable_paper("striped", full_width = F)
-```
-:::
-:::
-
-#### Scotia
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-FatData %>%
-  dplyr::filter(Supplier == "Scotia") %>%
-  group_by(Year) %>%
-  summarize(FatMean = mean(Fat)) %>%
-  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
-  kable_paper("striped", full_width = F)
-```
-:::
-:::
-
-#### Maine
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Maine"), aes(x=Year, y=Fat)) +
-  geom_boxplot() +
-  labs(y="Fat Percent (%)")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-FatData %>%
-  dplyr::filter(Supplier == "Maine") %>%
-  group_by(Year) %>%
-  summarize(FatMean = mean(Fat)) %>%
-  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
-  kable_paper("striped", full_width = F)
-```
-:::
-:::
-  
-### By Month {.tabset .tabset-pills}
-
-#### Total
-
-::: row
-::: col-md-6
-```{r echo=FALSE}
-FatData$Month = as.factor(FatData$Month)
-ggplot(data=subset(FatData, !is.na(Month)), aes(x=Month, y=Fat)) +
-  geom_boxplot() + 
-  labs(y="Fat Perecent (%)")
-```
-:::
-
-::: col-md-6
-```{r echo=FALSE}
-FatData %>%
-  group_by(Month) %>%
-  summarize(FatMean = mean(Fat)) %>%
-  kbl(col.names = c("Month", "Avg Fat (%)")) %>%
-  kable_paper("striped", full_width = F)
-```
-:::
-:::
-
-#### Connors
-
-::: row
-::: col-md-6
 ```{r echo=FALSE}
 ggplot(data=subset(FatData, Supplier == "Connors" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
+  scale_x_continuous(breaks = round(seq(min(FatData$Month, max(FatData$Month), by = 1), 12)) ) +
   labs(y="Fat Percent (%)")
-```
-:::
 
-::: col-md-6
-```{r echo=FALSE}
 FatData %>%
   dplyr::filter(Supplier == "Connors" & !is.na(Month)) %>%
   group_by(Month) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Month", "Avg Fat (%)")) %>%
   kable_paper("striped", full_width = F)
+
 ```
-:::
-:::
 
-#### Comeaus
+##### Comeaus {.tabset .tabset-fade .tabset-pills}
 
-::: row
-::: col-md-6
+###### By Year
+```{r echo=FALSE}
+
+ggplot(data=subset(FatData, Supplier == "Comeaus"), aes(x=Year, y=Fat)) +
+  geom_boxplot() +
+  labs(y="Fat Percent (%)")
+
+FatData %>%
+  dplyr::filter(Supplier == "Comeaus") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+
+```
+
+###### By Month
+
 ```{r echo=FALSE}
 ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
   geom_boxplot() +
+  scale_x_continuous(breaks = round(seq(min(FatData$Month, max(FatData$Month), by = 1), 12)) ) +
   labs(y="Fat Percent (%)")
-```
-:::
 
-::: col-md-6
-```{r echo=FALSE}
 FatData %>%
-  dplyr::filter(Supplier == "Comeaus" & !is.na(Month)) %>%
+  dplyr::filter(Supplier == "Connors" & !is.na(Month)) %>%
   group_by(Month) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Month", "Avg Fat (%)")) %>%
   kable_paper("striped", full_width = F)
+
 ```
-:::
-:::
 
-#### Scotia
+##### Scotia {.tabset .tabset-fade .tabset-pills}
 
-::: row
-::: col-md-6
+###### By Year
 ```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Scotia" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+
+ggplot(data=subset(FatData, Supplier == "Scotia"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
-```
-:::
 
-::: col-md-6
-```{r echo=FALSE}
 FatData %>%
-  dplyr::filter(Supplier == "Scotia" & !is.na(Month)) %>%
+  dplyr::filter(Supplier == "Scotia") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+
+```
+
+###### By Month 
+
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  scale_x_continuous(breaks = round(seq(min(FatData$Month, max(FatData$Month), by = 1), 12)) ) +
+  labs(y="Fat Percent (%)")
+
+FatData %>%
+  dplyr::filter(Supplier == "Connors" & !is.na(Month)) %>%
   group_by(Month) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Month", "Avg Fat (%)")) %>%
   kable_paper("striped", full_width = F)
+
 ```
-:::
-:::
 
-#### Maine
+##### Maine {.tabset .tabset-fade .tabset-pills}
 
-::: row
-::: col-md-6
+###### By Year
+
+
 ```{r echo=FALSE}
-ggplot(data=subset(FatData, Supplier == "Maine" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+
+ggplot(data=subset(FatData, Supplier == "Maine"), aes(x=Year, y=Fat)) +
   geom_boxplot() +
   labs(y="Fat Percent (%)")
-```
-:::
 
-::: col-md-6
-```{r echo=FALSE}
 FatData %>%
-  dplyr::filter(Supplier == "Maine" & !is.na(Month)) %>%
+  dplyr::filter(Supplier == "Maine") %>%
+  group_by(Year) %>%
+  summarize(FatMean = mean(Fat)) %>%
+  kbl(col.names = c("Year", "Avg Fat (%)")) %>%
+  kable_paper("striped", full_width = F)
+
+```
+
+###### By Month 
+
+
+```{r echo=FALSE}
+ggplot(data=subset(FatData, Supplier == "Comeaus" & !is.na(Month)), aes(x=Month, y=Fat, group=Month)) +
+  geom_boxplot() +
+  scale_x_continuous(breaks = round(seq(min(FatData$Month, max(FatData$Month), by = 1), 12)) ) +
+  labs(y="Fat Percent (%)")
+
+FatData %>%
+  dplyr::filter(Supplier == "Connors" & !is.na(Month)) %>%
   group_by(Month) %>%
   summarize(FatMean = mean(Fat)) %>%
   kbl(col.names = c("Month", "Avg Fat (%)")) %>%
   kable_paper("striped", full_width = F)
-```
-:::
-:::
 
-### Weight At Age
+```
+
+
+#### Weight At Age {.tabset .tabset-fade .tabset-pills}
 
 ::: row
 ::: col-md-6
