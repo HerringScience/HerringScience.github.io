@@ -7,7 +7,7 @@ rm(list = ls())
 #Import all packages, CTD data, and land data
 
 #Packages
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 library(cli)
 library(lubridate)
 library(reprex)
@@ -45,6 +45,10 @@ options(ggrepel.max.overlaps = Inf)
 
 #Larval Data
 Larval <- read_csv("Full Larval.csv")
+#LarvalSum <- read_csv("LarvalSum.csv")
+#LarvalSum <- LarvalSum[c("id", "TowReplicate", "TowID")]
+Larval <- merge(Larval, LarvalSum, by = "id")
+
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
@@ -78,7 +82,9 @@ LarvalSum <- unique(LarvalSum)
 
   
 #Saving as .csv file. Saved to Main Data on Github. Should change to Larval Data in Source Data.
-  write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io//Main Data/LarvalSum.csv" )
+  write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum.csv" )
+#  write.csv(Larval, "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv")
+#  write.csv(Larval, "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Full Larval.csv")
 
 
 #Used Boxplot to more accurately see the bulk of abundance. Hard to differentiate individuals and ids in scatterplot.

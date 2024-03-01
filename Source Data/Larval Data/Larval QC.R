@@ -21,6 +21,8 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 
+LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum.csv"))
+
 larv = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Measurements.csv"))
 arc = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARC Data.csv"))
 arc = arc %>% dplyr::select(id, Larvae_Count, Notes)
@@ -29,7 +31,7 @@ survey = survey %>% mutate(Ground = substr(id,1,2))
 
 larv = left_join(larv, arc, by="id")
 larv = left_join(larv, survey)
-larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Month, Year, Day)
+larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, TowReplicate, TowID, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Month, Year, Day)
 larv$Date = dmy(larv$Date)
 larv$Survey.No = as.factor(larv$Survey.No)
 larv$Year = as.factor(larv$Year)
@@ -67,7 +69,10 @@ larv <- larv %>%
   mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%
   ungroup()
 
-larvsummary <- larv %>% group_by(id) %>%
+larv$SD[is.na(larv$SD)] <- 0
+larv$SD <- as.numeric(larv$SD)
+
+larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
   summarize(MinLength = mean(MinLength, na.rm = TRUE), 
             MaxLength = mean(MaxLength, na.rm = TRUE), 
             MeanLength = mean(MeanLength, na.rm = TRUE),
@@ -86,21 +91,7 @@ larv = larv %>%
   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
   mutate(Density = Larv_per_jar/Volume)
 
-#Adds TowID based on date
-#larv <- larv %>% 
-#  group_by(Ground) %>%
-#  transform(TowID = as.numeric(factor(Date)))
-
-#Replicate True or False
-
-#Larval1 <- larv %>%
-#  group_by(TowID) %>%
-#  summarize(TowReplicate = n_distinct(id))
-
-#Larval1$TowReplicate[Larval1$TowReplicate == "1"] <- "False"
-#Larval1$TowReplicate[Larval1$TowReplicate == "2"] <- "True"
-
-#larv <- merge(larv, Larval1, by = "TowID")
+#Ensure ReplicateTow and TowID are in
 
 # if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
 # if preservation is alcohol apply L = 0.532 + 0.989 x X1 
@@ -123,10 +114,13 @@ colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
 # Assumes hatching length is 5mm, day of hatching = day 0
 
 larv$AdjustedAgeInDays <- ((larv$LengthAdjustment - 5)/0.24)
+larv$AdjustedSpawnDate <- larv$Date-larv$AdjustedAgeInDays
+larv$AdjustedJulianSpawnDate <- format(larv$AdjustedSpawnDate, "%j")
 
 larv <- merge(larv, MeanLengthAdjustment)
 
-larv$AdjustedSpawnDate <- larv$Date-larv$AdjustedAgeInDays
+larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays 
+
 
 AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, larv, mean)
 colnames(AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
@@ -140,25 +134,28 @@ AdjustedDays <- merge(AdjustedDays, AdjustedMeanAgeInDays, by = 'id')
 
 larv <- merge(larv, AdjustedDays, by = 'id')
 
-#Calculating SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
+#Calculating Avgerage SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
-  mutate(AvgSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
+  mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
   ungroup()
 
+larv$AdjSD[is.na(larv$AdjSD)] <- 0
+larv$AdjSD <- as.numeric(larv$AdjSD)
 
 larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
   summarize(MeanAdjustedMinLength = mean(AdjustedMinLength, na.rm = TRUE), 
             MeanAdjustedMaxLength = mean(AdjustedMaxLength, na.rm = TRUE), 
-            MeanAdjustedSD = mean(AvgSD, na.rm = TRUE),
+            MeanAdjustedSD = mean(AdjSD, na.rm = TRUE),
             Abundance = length(LengthAdjustment)) %>%
-  mutate(SE = SD/sqrt(Abundance))
+  mutate(SE =  MeanAdjustedSD/sqrt(Abundance))
 surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
 surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
 larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
+#larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
@@ -205,13 +202,14 @@ larv = larv %>%
                 TowID,
                 TowReplicate,
                 LengthAdjustment,
+                AdjustedSpawnDate,
+                AdjustedJulianSpawnDate,
                 MeanLengthAdjustment,
                 AdjustedMeanAgeInDays,
                 AdjustedMinDateOfSpawn,
-                AdjustedMaxDateOfSpawn,
+                AdjustedMaxDateOfSpawn
                 )
 
-larv[larv == 0] <- NA
 
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Full Larval.csv"))
