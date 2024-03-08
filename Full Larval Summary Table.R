@@ -41,20 +41,22 @@ library(ggrepel)
 
 options(ggrepel.max.overlaps = Inf)
 
-## Importing Data
+## Importing 
+
+### Larval QC also writes larval summary table/ LarvalSum, but is not ready to fully take over this script. Figure out how to fix it and condense it.
 
 #Larval Data
 Larval <- read_csv("Full Larval.csv")
-#LarvalSum <- read_csv("LarvalSum.csv")
+LarvalSum <- read_csv("LarvalSum.csv")
 #LarvalSum <- LarvalSum[c("id", "TowReplicate", "TowID")]
-Larval <- merge(Larval, LarvalSum, by = "id")
+#Larval <- merge(Larval, LarvalSum, by = "id")
 
 Larval$Year <- as.factor(Larval$Year)
 Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 Larval$Date <- as.Date(Larval$Date)
 
-LarvalSum <- Larval %>% select("Ground",
+LarvalSum <- LarvalSum %>% select("Ground",
                                "Date",
                                "Year", 
                                "id", 

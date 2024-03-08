@@ -155,7 +155,9 @@ surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
 larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
-#larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
+
+
+larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
