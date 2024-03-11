@@ -1,6 +1,7 @@
 rm(list=ls())
 
-
+library(lubridate)
+library(ggplot2)
 # Run first few lines of taggingMaster first to load in relINFO
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
@@ -16,8 +17,8 @@ two18=relINFO[which(relINFO$Year == "2018"), ]
 two19=relINFO[which(relINFO$Year == "2019"), ]
 two20=relINFO[which(relINFO$Year == "2020"), ]
 two21=relINFO[which(relINFO$Year == "2021"), ]
-# two22=relINFO[which(relINFO$Year == "2022"), ]
-# two23=relINFO[which(relINFO$Year == "2023"), ]
+two22=relINFO[which(relINFO$Year == "2022"), ]
+two23=relINFO[which(relINFO$Year == "2023"), ]
 
 # Tenporal range of tagging season
 
@@ -27,8 +28,8 @@ unique(two18$Julian)
 unique(two19$Julian)
 unique(two20$Julian)
 unique(two21$Julian)
-# unique(two22$Julian)
-# unique(two23$Julian)
+unique(two22$Julian)
+unique(two23$Julian)
 
 
 #2021
@@ -122,10 +123,9 @@ ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(pa
             x<-aggregate(no_tags~Year, relINFO, FUN=sum)
             head(x)
             ggplot(x, aes(x=Year, y=no_tags)) + 
-              geom_bar(stat = "identity", fill = "blue", width = 0.5) + ggtitle("Tags Applied per Year by the HSC")
-            
-            
-            (size = 5, colour = "red") + theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=20))
+              geom_bar(stat = "identity", fill = "blue", width = 0.5) + ggtitle("Tags Applied per Year by the HSC") + 
+              #aes(size = 5, colour = "red") + 
+              theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=20))
             
             
             
@@ -173,13 +173,13 @@ ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(pa
             # Maps of tagging location
             
             
-            # Mapping
+            # Mapping Took out gIntersections and replaced with crop as package was discontinued.
             
             can<-getData('GADM', country="CAN", level=1) # provinces
             NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
             CP <- as(extent(-67.6, -64, 43, 45.8), "SpatialPolygons")
             proj4string(CP) <- CRS(proj4string(NBNS))
-            out <- gIntersection(NBNS, CP, byid=TRUE)
+            out <- crop(NBNS, CP, byid=TRUE)
             
             boxes = read.csv("grounds_.csv")
             head(boxes)
