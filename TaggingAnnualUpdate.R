@@ -2,6 +2,71 @@ rm(list=ls())
 
 library(lubridate)
 library(ggplot2)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(cli)
+library(lubridate)
+library(reprex)
+library(tidyverse)
+library(geosphere)
+library(reshape2)
+library(moderndive)
+library(skimr)
+library(ggridges)
+#library(weathercan)
+library(GGally)
+library(psych)
+library(raster)
+library(PBSmapping)
+#library(rgeos)
+library(sf)
+library(terra)
+library(knitr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
+library(mapproj)
+library(oce) #new CTD Data package
+library(pander)
+library(janitor)
+
+#Import All Boxes
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+boxes = read.csv("surveyBoxes.csv")
+
+# Scots Bay plankton and CTD box
+SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
+SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+
+# Scots Bay
+SUA = read.csv("polygon_SBEastern.csv")
+polyEastern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SBNorthern.csv")
+polyNorthern = as.PolySet(SUA, projection="LL")
+
+SUA = read.csv("polygon_SB.csv")
+polySB_main = as.PolySet(SUA, projection="LL")
+
+#German Bank CTD box
+GBCTD=boxes[which(boxes$Box == "GBocean"), ]
+
+# German Bank      
+SUA = read.csv("polygon_GB.csv")
+polyGB = as.PolySet(SUA, projection="LL")
+
+# Seal Island      
+SUA = read.csv("polygon_SI.csv")
+polySI = as.PolySet(SUA, projection="LL")
+
+
 # Run first few lines of taggingMaster first to load in relINFO
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
@@ -92,29 +157,41 @@ unique(two21$RELEASE_VESSEL)
             
             
             # per month
-            two19$month = month(two19$RELEASE_DATE)
-            two19$month =as.factor(two19$month)
-            head(two19)
+            two23$month = month(two23$RELEASE_DATE)
+            two23$month =as.factor(two23$month)
+            head(two23)
             
             # figure
-              x<-aggregate(no_tags~month, two21, FUN=sum)
-              y<-aggregate(no_tags~month, two20, FUN=sum)
-              
+              x<-aggregate(no_tags~month, two23, FUN=sum)
+              y<-aggregate(no_tags~month, two23, FUN=sum)
+            
               
               head(x)
-ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(panel.background = element_rect(fill = "white", colour = "grey50"), , text = element_text(size=20))
+              
+ggplot(y, aes(month, no_tags)) + 
+  geom_point(size = 5, colour = "red") + 
+  theme(panel.background = element_rect(fill = "white", colour = "grey50"), , text = element_text(size=20))
+
+TagsPerMonth2023 <- data.frame(y) %>%
+  adorn_totals("row")
+datatable(TagsPerMonth2023)
               
             # Number of tags per person and event
-              ggplot(relINFO, aes(month, no_tags)) + geom_point(aes(size = 5, colour = "red")) + theme(panel.background = element_rect(fill = "white", colour = "grey50"))
+              ggplot(relINFO, aes(month, no_tags)) + 
+                geom_point(aes(size = 5, colour = "red")) + 
+                theme(panel.background = element_rect(fill = "white", colour = "grey50"))
               
             # Taggers
-            x<-aggregate(no_tags~Tagger, two21, FUN=sum)
+            x<-aggregate(no_tags~Tagger, two23, FUN=sum)
             head(x)
+            TotalTagger2023Table <- data.frame(x) %>%
+              adorn_totals("row")
+            datatable(TotalTagger2023Table)
             ggplot(x, aes(Tagger, no_tags)) + geom_point(size = 5, colour = "red") + theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=20))
             
             
             ggplot(x, aes(x=Tagger, y=no_tags)) + 
-              geom_bar(stat = "identity", fill = "blue", width = 0.4) + ggtitle("Tags Applied per Tagger in 2021")
+              geom_bar(stat = "identity", fill = "blue", width = 0.4) + ggtitle("Tags Applied per Tagger in 2023")
             
             
             
@@ -122,6 +199,14 @@ ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(pa
             #tags per year
             x<-aggregate(no_tags~Year, relINFO, FUN=sum)
             head(x)
+TotalYearTable <- data.frame(x) %>%
+  adorn_totals("row")
+
+datatable(TotalYearTable)
+  
+  
+  
+print(TotalYearTable)
             ggplot(x, aes(x=Year, y=no_tags)) + 
               geom_bar(stat = "identity", fill = "blue", width = 0.5) + ggtitle("Tags Applied per Year by the HSC") + 
               #aes(size = 5, colour = "red") + 
@@ -130,10 +215,21 @@ ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(pa
             
             
             
-            # Number of tags per event
-            ggplot(two21, aes(RELEASE_DATE, no_tags)) + geom_point(aes(colour = Tagger),size = 2) + theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=12)) + ggtitle("2021")
+            # Number of tags per event.
+            ggplot(two23, aes(Julian, no_tags)) + 
+              geom_point(aes(colour = Tagger),size = 2) +
+              scale_x_continuous(breaks = seq(150, 300, 10)) +
+              scale_y_continuous(breaks = seq(0, 1000, 50)) +
+              theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=12)) + 
+              ggtitle("2023")
+              
             
-            ggplot(two18, aes(RELEASE_DATE, no_tags)) + geom_point(aes(colour = Tagger),size = 2) + theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=12)) + ggtitle("2018") 
+            ggplot(two18, aes(Julian, no_tags)) + 
+              geom_point(aes(colour = Tagger),size = 2) + 
+              scale_x_continuous(breaks = seq(150, 300, 10)) +
+              scale_y_continuous(breaks = seq(0, 1000, 50)) +
+              theme(panel.background = element_rect(fill = "white", colour = "grey50"), text = element_text(size=12)) + 
+              ggtitle("2018") 
             
                                                                 
                                                                 
@@ -151,72 +247,160 @@ ggplot(y, aes(month, no_tags)) + geom_point(size = 5, colour = "red") + theme(pa
             
             
             # Lisa Houston
-                  lisa=two18[which(two18$RELEASE_VESSEL == "Morning Star"), ]
+lisa=two18[which(two18$RELEASE_VESSEL == "Morning Star"), ]
             
-                    sum(lisa$no_tags)
+sum(lisa$no_tags)
             
-                      dim(lisa)
-            
-            
-            # Manon Holmes          
-            
-            manonA=two19[which(two19$RELEASE_VESSEL == "Lady Melissa"), ]
-            manonB=two19[which(two19$RELEASE_VESSEL == "Fundy Monarch"), ]
-            
-            manon = rbind(manonA, manonB)
-            sum(manon$no_tags)
-            dim(manon)
+ dim(lisa)
             
             
+# Manon Holmes          
             
+manonA=two19[which(two19$RELEASE_VESSEL == "Lady Melissa"), ]
+manonB=two19[which(two19$RELEASE_VESSEL == "Fundy Monarch"), ]
             
-            # Maps of tagging location
-            
-            
-            # Mapping Took out gIntersections and replaced with crop as package was discontinued.
-            
-            can<-getData('GADM', country="CAN", level=1) # provinces
-            NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
-            CP <- as(extent(-67.6, -64, 43, 45.8), "SpatialPolygons")
-            proj4string(CP) <- CRS(proj4string(NBNS))
-            out <- crop(NBNS, CP, byid=TRUE)
-            
-            boxes = read.csv("grounds_.csv")
-            head(boxes)
-            
-            ggplot(two21, aes(x=X, y=Y))+  geom_polygon(data=boxes,aes(x=X, y=Y, group=GROUND, colour = GROUND), fill = "white", colour = "black") + geom_polygon(data=out,aes(x=long, y=lat, group=group), fill = "grey", colour = "black") + geom_point(aes( colour = month), size = 2) + labs(x=NULL, y=NULL)+ coord_map() 
-            
-            
-            ggplot(relINFO, aes(x=X, y=Y))+  geom_polygon(data=boxes,aes(x=X, y=Y, group=GROUND), fill = "white", colour = "black") + geom_polygon(data=out,aes(x=long, y=lat, group=group), fill = "grey", colour = "black") + geom_point(aes(colour = Year), size = 1) + labs(x=NULL, y=NULL)+ coord_map() 
+manon = rbind(manonA, manonB)
+sum(manon$no_tags)
+dim(manon)
             
             
             
             
+# Maps of tagging location
             
             
-            # Look at outlier
+# Mapping Took out gIntersections and replaced with crop as package was discontinued.
+        
+can<-getData('GADM', country="CAN", level=1) # provinces
+NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+CP <- as(extent(-67.6, -64, 43, 45.8), "SpatialPolygons")
+proj4string(CP) <- CRS(proj4string(NBNS))
+out <- crop(NBNS, CP, byid=TRUE)
             
-            head(two21)
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+boxes = read.csv("surveyBoxes.csv")
+#boxes = read.csv("grounds_.csv")
+head(boxes)
+
+two23 <- subset(two23, X < -63.9)
+two23 <- subset(two23, Y < 45.8)
+
+            ggplot(two23, aes(x=X, y=Y))+  
+              geom_polygon(data=boxes,aes(x=X, y=Y, group=Box, colour = box), fill = "white", colour = "black") + 
+              geom_polygon(data=out,aes(x=long, y=lat, group=group), fill = "grey", colour = "black") + 
+              geom_point(aes( colour = month), size = 2) + 
+              labs(x=NULL, y=NULL)+ coord_map() 
             
             
-            out1=two21[which(two21$X > -65.5), ]
-            out2=out1[which(out1$Y < 44.5), ]
-            
-            out3=two21[which(two21$Y > 45.5), ]
-            
-            
-            
-            
-            
-            dates=two20[which(two20$RELEASE_DATE == "2020-06-29"), ]
-            dates2=two20[which(two20$RELEASE_DATE == "2020-06-28"), ]
-            dates3=two20[which(two20$RELEASE_DATE == "2020-06-30"), ]
-            
-            ggplot(dates3, aes(x=X, y=Y))+  geom_polygon(data=boxes,aes(x=X, y=Y, group=GROUND), fill = "white", colour = "black")  + geom_polygon(data=out,aes(x=long, y=lat, group=group))  + geom_point(aes(colour = Tagger), size = 2)   + geom_point(aes(colour = Tagger), size = 2) + labs(x=NULL, y=NULL) + coord_map() + theme(panel.background = element_rect(fill = "grey82"))            
+relINFO <- subset(relINFO, X < -63.9)
+relINFO <- subset(relINFO, Y < 45.8)
+            ggplot(relINFO, aes(x=X, y=Y, colour = Year))+  
+              geom_polygon(data=boxes,aes(x=X, y=Y, group=Box), fill = "white", colour = "black") + 
+              geom_polygon(data=out,aes(x=long, y=lat, group=group), fill = "grey", colour = "black") +
+              geom_point(aes(colour = Year), size = 1) +
+              labs(x=NULL, y=NULL)+ 
+              coord_map() 
             
             
-            outside=two20[which(two20$X >  -65.5), ]
-            outside2=outside[which(outside$Y <  44), ]
             
-            ggplot(outside2, aes(x=X, y=Y))+  geom_polygon(data=boxes,aes(x=X, y=Y, group=GROUND), fill = "white", colour = "black")  + geom_polygon(data=out,aes(x=long, y=lat, group=group))  + geom_point(aes(colour = Tagger), size = 2)   + geom_point(aes(colour = Tagger), size = 2) + labs(x=NULL, y=NULL) + coord_map() + theme(panel.background = element_rect(fill = "grey82"))            
+            
+            
+            
+# Look at outlier
+            
+head(two21)
+            
+            
+out1=two21[which(two21$X > -65.5), ]
+out2=out1[which(out1$Y < 44.5), ]
+            
+out3=two21[which(two21$Y > 45.5), ]
+            
+            
+            
+            
+            
+dates=two20[which(two20$RELEASE_DATE == "2020-06-29"), ]
+dates2=two20[which(two20$RELEASE_DATE == "2020-06-28"), ]
+dates3=two20[which(two20$RELEASE_DATE == "2020-06-30"), ]
+            
+ggplot(dates3, aes(x=X, y=Y))+  
+   geom_polygon(data=boxes,aes(x=X, y=Y, group=Box), fill = "white", colour = "black")  + 
+   geom_polygon(data=out,aes(x=long, y=lat, group=group))  + 
+   geom_point(aes(colour = Tagger), size = 2)   + 
+   geom_point(aes(colour = Tagger), size = 2) + 
+   labs(x=NULL, y=NULL) + 
+   coord_map() + 
+   theme(panel.background = element_rect(fill = "grey82"))            
+            
+            
+outside=two20[which(two20$X >  -65.5), ]
+outside2=outside[which(outside$Y <  44), ]
+            
+ggplot(outside2, aes(x=X, y=Y))+  
+    geom_polygon(data=boxes,aes(x=X, y=Y, group=Box), fill = "white", colour = "black")  + 
+    geom_polygon(data=out,aes(x=long, y=lat, group=group))  + 
+    geom_point(aes(colour = Tagger), size = 2)   + 
+    geom_point(aes(colour = Tagger), size = 2) + 
+    labs(x=NULL, y=NULL) + 
+    coord_map() + 
+    theme(panel.background = element_rect(fill = "grey82"))            
                         
+            
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))        
+TaggingEvents <- read.csv("TaggingEvents.csv")  
+
+
+TaggingEvents <- TaggingEvents %>% filter(Year == "2023")
+TaggingEvents$Month <- month(TaggingEvents$Date)
+
+TaggingEvents <- TaggingEvents %>% group_by("Tagger")
+
+Annik <- subset(TaggingEvents, Tagger == "Annik Doucette")
+
+# TaggingEventsStats <- TaggingEvents %>% group_by(Tagger) %>%
+#       summarise(n_distinct(Tag_Num))
+# 
+# TaggingEventsStats <- TaggingEvents %>% 
+#   group_by(Tagger) %>%
+#   summarise(n_distinct(Tag_Num)) %>%
+#   
+
+TaggingEventsStats <- aggregate(Tag_Num ~ Tagger + Month, data = TaggingEvents, FUN = length )
+TaggingEventsStats %>% group_by(Month)
+
+print(ggplot(TaggingEventsStats, aes(x = Month, y = Tag_Num, fill = Tagger)) +
+  geom_col())
+
+datatable(TaggingEventsStats)
+
+June <- subset(TaggingEventsStats, Month == "6") %>%
+  adorn_totals("row")
+JunePercent <- 8705/38931
+
+July <- subset(TaggingEventsStats, Month == "7") %>%
+  adorn_totals("row")
+JulyPercent <- 10764/38931
+
+August <- subset(TaggingEventsStats, Month == "8") %>%
+  adorn_totals("row")
+AugPercent <- 5820/38931
+
+September <- subset(TaggingEventsStats, Month == "9") %>%
+  adorn_totals("row")
+SeptPercent <- 8156/38931
+
+October <- subset(TaggingEventsStats, Month == "10") %>%
+  adorn_totals("row")
+OctPercent <- 4848/38931
+
+TagsLeft <- 11250
+
+June2024 <- 11250*JunePercent
+July2024 <- 11250*JulyPercent
+Aug2024 <- 11250*AugPercent
+Sept2024 <- 11250*SeptPercent
+
+averagepermonth <- 38931/6
+removeNicktagaverage <- 35589/5
+
