@@ -40,25 +40,65 @@ larv$category =  with(larv, ifelse(larv$Lengthmm < 8 , 1,
                                           ifelse(larv$Lengthmm >= 12  & larv$Lengthmm < 17, 3, 
                                                  ifelse(larv$Lengthmm > 17 & larv$Lengthmm < 27, 4, 5)))))
 larv$category = as.factor(larv$category)
-larv$hatchDate = larv$Date - 10 #incubation duration of 10 days
+larv$hatchDate = larv$Date - 10 #incubation duration of 10 days based on NOAA and DFO data.
 larv$hatchDate = ymd(larv$hatchDate)
 
-#Calculating spawn dates
-larv=larv %>% mutate(MAXspawnDate = ifelse(category == 1, hatchDate-14,
-                                           ifelse(category == 2, hatchDate-35,
-                                                  ifelse(category == 3, hatchDate-56,
-                                                         ifelse(category == 4, hatchDate-98,
-                                                                ifelse(category == 5, hatchDate-99, "NA"))))))
-larv$MAXspawnDate=as.numeric(larv$MAXspawnDate)
-larv$MAXspawnDate=as.Date(larv$MAXspawnDate, origin = "1970-01-01")
+#Calculating spawn dates - This is from Darren. Removing this based on the calculation using the preservative.
+# #larv=larv %>% mutate(MAXspawnDate = ifelse(category == 1, hatchDate-14,
+#                                            ifelse(category == 2, hatchDate-35,
+#                                                   ifelse(category == 3, hatchDate-56,
+#                                                          ifelse(category == 4, hatchDate-98,
+#                                                                 ifelse(category == 5, hatchDate-99, "NA"))))))
+# larv$MAXspawnDate=as.numeric(larv$MAXspawnDate)
+# larv$MAXspawnDate=as.Date(larv$MAXspawnDate, origin = "1970-01-01")
+# 
+# larv=larv %>% mutate(MINspawnDate = ifelse(category == 1, hatchDate,
+#                                            ifelse(category == 2, hatchDate-14,
+#                                                   ifelse(category == 3, hatchDate-35,
+#                                                          ifelse(category == 4, hatchDate-56,
+#                                                                 ifelse(category == 5, hatchDate-98, "NA"))))))
+# larv$MINspawnDate=as.numeric(larv$MINspawnDate)
+# larv$MINspawnDate=as.Date(larv$MINspawnDate, origin = "1970-01-01")
 
-larv=larv %>% mutate(MINspawnDate = ifelse(category == 1, hatchDate,
-                                           ifelse(category == 2, hatchDate-14,
-                                                  ifelse(category == 3, hatchDate-35,
-                                                         ifelse(category == 4, hatchDate-56,
-                                                                ifelse(category == 5, hatchDate-98, "NA"))))))
-larv$MINspawnDate=as.numeric(larv$MINspawnDate)
-larv$MINspawnDate=as.Date(larv$MINspawnDate, origin = "1970-01-01")
+# if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
+# if preservation is alcohol apply L = 0.532 + 0.989 x X1 
+#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation. They did suggest that this adjustment would be less accurate the longer the tow period.
+# These equations are when the maximum shrinkage has occurred.
+
+
+larv$LengthAdjustment = with(larv, ifelse(larv$Preservative == "4% formalin", (0.984 + 0.993* larv$Lengthmm),
+                                          ifelse(larv$Preservative == "70% alcohol", (0.532 + 0.989*larv$Lengthmm),NA)))
+
+MeanLengthAdjustment <- aggregate(LengthAdjustment~id, larv, mean)
+colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
+
+#'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
+# Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
+# Assumes hatching length is 5mm, day of hatching = day 0
+#Adjusted Spawn Date to account for incubation period. Using overall 10 days, as per NOAA info that says 7-10 days, and DFO stock assessment 2020 says 10-12 days.
+
+
+larv <- merge(larv, MeanLengthAdjustment)
+larv$AdjustedAgeInDays <- (larv$LengthAdjustment - 5)/0.24
+larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays 
+
+
+larv$AdjustedJulianSpawnDate <- yday(larv$AdjustedSpawnDate)
+larv$AdjustedJulianSpawnDate <- format(larv$AdjustedSpawnDate, "%j")
+
+
+
+AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, larv, mean)
+colnames(AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
+AdjustedMinDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, min)
+colnames(AdjustedMinDateOfSpawn)[2] <- "AdjustedMinDateOfSpawn"
+AdjustedMaxDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, max)
+colnames(AdjustedMaxDateOfSpawn)[2] <- "AdjustedMaxDateOfSpawn"
+
+AdjustedDays <- merge(AdjustedMaxDateOfSpawn, AdjustedMinDateOfSpawn, by = 'id')
+AdjustedDays <- merge(AdjustedDays, AdjustedMeanAgeInDays, by = 'id')
+
+larv <- merge(larv, AdjustedDays, by = 'id')
 
 #add Julian
 larv<-larv %>% mutate(Julian = yday(Date))
@@ -91,49 +131,6 @@ larv = larv %>%
   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
   mutate(Density = Larv_per_jar/Volume)
 
-#Ensure ReplicateTow and TowID are in
-
-# if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
-# if preservation is alcohol apply L = 0.532 + 0.989 x X1 
-#This is taken from Fox 1996 alcohol vs Formalin paper. They did 5% and 5 minute net capture simulation. They did suggest that this adjustment would be less accurate the longer the tow period.
-# These equations are when the maximum shrinkage has occurred.
-
-
-larv$LengthAdjustment = with(larv, ifelse(larv$Preservative == "4% formalin", (0.984 + 0.993* larv$Lengthmm),
-                                              ifelse(larv$Preservative == "70% alcohol", (0.532 + 0.989*larv$Lengthmm),NA)))
-
-# Changed all NAs to 0 to ensure that they stay within the dataframe. Will change back to NA at the end of the process as none of the values can be 0. 
-#larv[is.na(larv)] <- 0
-
-MeanLengthAdjustment <- aggregate(LengthAdjustment~id, larv, mean)
-colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
-
-
-#'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
-# Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
-# Assumes hatching length is 5mm, day of hatching = day 0
-
-larv$AdjustedAgeInDays <- ((larv$LengthAdjustment - 5)/0.24)
-larv$AdjustedSpawnDate <- larv$Date-larv$AdjustedAgeInDays
-larv$AdjustedJulianSpawnDate <- format(larv$AdjustedSpawnDate, "%j")
-
-larv <- merge(larv, MeanLengthAdjustment)
-
-larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays 
-
-
-AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, larv, mean)
-colnames(AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
-AdjustedMinDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, min)
-colnames(AdjustedMinDateOfSpawn)[2] <- "AdjustedMinDateOfSpawn"
-AdjustedMaxDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, max)
-colnames(AdjustedMaxDateOfSpawn)[2] <- "AdjustedMaxDateOfSpawn"
-
-AdjustedDays <- merge(AdjustedMaxDateOfSpawn, AdjustedMinDateOfSpawn, by = 'id')
-AdjustedDays <- merge(AdjustedDays, AdjustedMeanAgeInDays, by = 'id')
-
-larv <- merge(larv, AdjustedDays, by = 'id')
-
 #Calculating Avgerage SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
@@ -157,7 +154,7 @@ larvsummary = left_join(surveysummary, larvsummary)
 larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
 
 
-larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
+#larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
@@ -181,8 +178,8 @@ larv = larv %>%
                 Larv_per_jar, 
                 Density, 
                 hatchDate, 
-                MINspawnDate, 
-                MAXspawnDate, 
+                # MINspawnDate, 
+                # MAXspawnDate, 
                 Julian, 
                 Day, 
                 Month, 
@@ -212,6 +209,45 @@ larv = larv %>%
                 AdjustedMaxDateOfSpawn
                 )
 
+LarvalSum <- larv %>% 
+  dplyr::select(Ground,
+                id, 
+                Date, 
+                Survey.No, 
+                No_jars, 
+                Abundance,
+                MinLength, 
+                MaxLength, 
+                MeanLength, 
+                SD, 
+                Larv_per_jar, 
+                Density,
+                hatchDate,
+                Julian, 
+                Day, 
+                Month, 
+                Year, 
+                Preservative, 
+                Lon1, 
+                Lat1, 
+                Lon2, 
+                Lat2, 
+                TowTime, 
+                AvgTowDepth, 
+                MaxTowDepth, 
+                CTDAvgTemp, 
+                Volume,
+                TowID,
+                TowReplicate,
+                MeanLengthAdjustment,
+                AdjustedMeanAgeInDays,
+                AdjustedMinDateOfSpawn,
+                AdjustedMaxDateOfSpawn)
+
+LarvalSum <- unique(LarvalSum)
+                
 
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Full Larval.csv"))
+
+#LarvalSum %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/LarvalSum.csv"))
