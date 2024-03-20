@@ -21,7 +21,7 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 
-LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum.csv"))
+LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 
 larv = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Measurements.csv"))
 arc = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARC Data.csv"))
@@ -40,10 +40,10 @@ larv$category =  with(larv, ifelse(larv$Lengthmm < 8 , 1,
                                           ifelse(larv$Lengthmm >= 12  & larv$Lengthmm < 17, 3, 
                                                  ifelse(larv$Lengthmm > 17 & larv$Lengthmm < 27, 4, 5)))))
 larv$category = as.factor(larv$category)
-larv$hatchDate = larv$Date - 10 #incubation duration of 10 days based on NOAA and DFO data.
-larv$hatchDate = ymd(larv$hatchDate)
+# larv$hatchDate = larv$Date - 10 #Unsure what the -10 is for in Darren's code. Removing this based on the calculation using the preservative, it is more exact. No longer using Min and Max spawn dates.
+# larv$hatchDate = ymd(larv$hatchDate)
 
-#Calculating spawn dates - This is from Darren. Removing this based on the calculation using the preservative.
+#Calculating spawn dates - This is from Darren. 
 # #larv=larv %>% mutate(MAXspawnDate = ifelse(category == 1, hatchDate-14,
 #                                            ifelse(category == 2, hatchDate-35,
 #                                                   ifelse(category == 3, hatchDate-56,
@@ -80,7 +80,7 @@ colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
 
 larv <- merge(larv, MeanLengthAdjustment)
 larv$AdjustedAgeInDays <- (larv$LengthAdjustment - 5)/0.24
-larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays 
+larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays - 10 #To get hatch date, remove the -10 that is there due to incubation period.
 
 
 larv$AdjustedJulianSpawnDate <- yday(larv$AdjustedSpawnDate)
@@ -124,14 +124,14 @@ surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
-larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
+larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv")) #I don't think we need this. This is covered by LarvalSum.csv now.
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
   mutate(Density = Larv_per_jar/Volume)
 
-#Calculating Avgerage SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
+#Calculating AVERAGE SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
   mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
@@ -151,10 +151,8 @@ surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
-larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv"))
+larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv")) # I don't think we actually need this table. This will be replaced by LarvalSum.csv
 
-
-#larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
@@ -177,7 +175,7 @@ larv = larv %>%
                 SD, 
                 Larv_per_jar, 
                 Density, 
-                hatchDate, 
+                #hatchDate, 
                 # MINspawnDate, 
                 # MAXspawnDate, 
                 Julian, 
@@ -211,23 +209,20 @@ larv = larv %>%
 
 LarvalSum <- larv %>% 
   dplyr::select(Ground,
-                id, 
-                Date, 
-                Survey.No, 
-                No_jars, 
+                Date,
+                Year,
+                id,
+                TowReplicate,
+                TowID,
+                Survey.No,
                 Abundance,
-                MinLength, 
-                MaxLength, 
-                MeanLength, 
-                SD, 
-                Larv_per_jar, 
                 Density,
-                hatchDate,
-                Julian, 
-                Day, 
-                Month, 
-                Year, 
-                Preservative, 
+                Volume,
+                Preservative,
+                MeanLengthAdjustment,
+                AdjustedMeanAgeInDays,
+                AdjustedMinDateOfSpawn,
+                AdjustedMaxDateOfSpawn,
                 Lon1, 
                 Lat1, 
                 Lon2, 
@@ -236,13 +231,7 @@ LarvalSum <- larv %>%
                 AvgTowDepth, 
                 MaxTowDepth, 
                 CTDAvgTemp, 
-                Volume,
-                TowID,
-                TowReplicate,
-                MeanLengthAdjustment,
-                AdjustedMeanAgeInDays,
-                AdjustedMinDateOfSpawn,
-                AdjustedMaxDateOfSpawn)
+                Volume)
 
 LarvalSum <- unique(LarvalSum)
                 
@@ -250,4 +239,5 @@ LarvalSum <- unique(LarvalSum)
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Full Larval.csv"))
 
-#LarvalSum %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/LarvalSum.csv"))
+LarvalSum %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
+

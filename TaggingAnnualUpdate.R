@@ -282,6 +282,9 @@ boxes = read.csv("surveyBoxes.csv")
 #boxes = read.csv("grounds_.csv")
 head(boxes)
 
+subset23 <- filter(two23, X < -66)
+subset23 <- filter(subset23, Y > 45)
+
 two23 <- subset(two23, X < -63.9)
 two23 <- subset(two23, Y < 45.8)
 
