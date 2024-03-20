@@ -40,6 +40,25 @@ larv$category =  with(larv, ifelse(larv$Lengthmm < 8 , 1,
                                           ifelse(larv$Lengthmm >= 12  & larv$Lengthmm < 17, 3, 
                                                  ifelse(larv$Lengthmm > 17 & larv$Lengthmm < 27, 4, 5)))))
 larv$category = as.factor(larv$category)
+# larv$hatchDate = larv$Date - 10 #Unsure what the -10 is for in Darren's code. Removing this based on the calculation using the preservative, it is more exact. No longer using Min and Max spawn dates.
+# larv$hatchDate = ymd(larv$hatchDate)
+
+#Calculating spawn dates - This is from Darren. 
+# #larv=larv %>% mutate(MAXspawnDate = ifelse(category == 1, hatchDate-14,
+#                                            ifelse(category == 2, hatchDate-35,
+#                                                   ifelse(category == 3, hatchDate-56,
+#                                                          ifelse(category == 4, hatchDate-98,
+#                                                                 ifelse(category == 5, hatchDate-99, "NA"))))))
+# larv$MAXspawnDate=as.numeric(larv$MAXspawnDate)
+# larv$MAXspawnDate=as.Date(larv$MAXspawnDate, origin = "1970-01-01")
+# 
+# larv=larv %>% mutate(MINspawnDate = ifelse(category == 1, hatchDate,
+#                                            ifelse(category == 2, hatchDate-14,
+#                                                   ifelse(category == 3, hatchDate-35,
+#                                                          ifelse(category == 4, hatchDate-56,
+#                                                                 ifelse(category == 5, hatchDate-98, "NA"))))))
+# larv$MINspawnDate=as.numeric(larv$MINspawnDate)
+# larv$MINspawnDate=as.Date(larv$MINspawnDate, origin = "1970-01-01")
 
 # if preservative is formalin, apply L  = 0.984 + 0.993 x X1. (X1 = fixed/preserved length therefore Larval$Lengthmm, L = Live length.) 
 # if preservation is alcohol apply L = 0.532 + 0.989 x X1 
@@ -105,6 +124,8 @@ surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
+larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv")) #I don't think we need this. This is covered by LarvalSum.csv now.
+
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
@@ -130,6 +151,8 @@ surveysummary$Year = as.factor(surveysummary$Year)
 surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
 larvsummary = left_join(surveysummary, larvsummary)
 
+larvsummary %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Summary Table.csv")) # I don't think we actually need this table. This will be replaced by LarvalSum.csv
+
 
 larv = larv %>%
   mutate(Larv_per_jar = Abundance/No_jars) %>%
@@ -152,6 +175,9 @@ larv = larv %>%
                 SD, 
                 Larv_per_jar, 
                 Density, 
+                #hatchDate, 
+                # MINspawnDate, 
+                # MAXspawnDate, 
                 Julian, 
                 Day, 
                 Month, 
