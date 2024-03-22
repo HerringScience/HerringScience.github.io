@@ -78,6 +78,9 @@ larv <- larv %>%
 
 
 #Calculating SE/mean/min/max of larval measurements.
+
+## Do we still need the min and max length here? Is it going to be duplicated in the Larval Sum?
+
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
   mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%

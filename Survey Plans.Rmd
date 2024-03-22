@@ -10,18 +10,18 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
-surv.date = "2023-10-24 19:00:00" #survey date and time, as formatted
-surv.no = "7"
-Allocation = "0" #set to "0" for a non-fishing survey
+surv = "SB"
+surv2 = "Scots Bay"
+surv.date = "2024-05-24 19:00:00" #survey date and time, as formatted
+surv.no = "1"
+Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
-Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+Tagging = "Lady Janice, Sealife II, Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
 vessels = 8
-EVessel = NA #Set NA for GB or excluding box
-NVessel = NA #Set NA for GB or excluding box
+EVessel = "Canada 100" #Set NA for GB or excluding box
+NVessel = "Fundy Monarch" #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
@@ -50,12 +50,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -71,7 +71,7 @@ year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
 
-Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+#Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 #above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 
 vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
@@ -131,12 +131,14 @@ NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(GBMap) <- CRS(proj4string(NBNS))
-GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+#GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+GBout <-crop(NBNS, GBMap, byid=TRUE)
 
 # Proper coordinates for Scots Bay
 SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
 proj4string(SBMap) <- CRS(proj4string(NBNS))
-SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+#SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+SBout <- crop(NBNS, SBMap, byid=TRUE)
 
 #Make CTD Cast Box (GB or SB)
 a = c("4334.320", "4333.600", "4333.600", "4334.320")
