@@ -1,5 +1,8 @@
+# Remove the environment
+
 rm(list = ls())
 
+#Import all the required libraries. The ones commented out have been discontinued, but left in in case something breaks and we need to find an alternative.
 library(cli)
 library(lubridate)
 library(reprex)
@@ -50,41 +53,31 @@ larv$category = as.factor(larv$category)
 larv$LengthAdjustment = with(larv, ifelse(larv$Preservative == "4% formalin", (0.984 + 0.993* larv$Lengthmm),
                                           ifelse(larv$Preservative == "70% alcohol", (0.532 + 0.989*larv$Lengthmm),NA)))
 
-MeanLengthAdjustment <- aggregate(LengthAdjustment~id, larv, mean)
-colnames(MeanLengthAdjustment)[2]<- "MeanLengthAdjustment"
-
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
 # Assumes hatching length is 5mm, day of hatching = day 0
 #Adjusted Spawn Date to account for incubation period. Using overall 10 days, as per NOAA info that says 7-10 days, and DFO stock assessment 2020 says 10-12 days.
+#To get hatch date, remove the -10 that is there due to incubation period.
+
+larv <- larv %>%
+  mutate(AdjustedAgeInDays = ((LengthAdjustment - 5)/0.24)) %>%
+  mutate(AdjustedSpawnDate = as.Date(Date) - AdjustedAgeInDays - 10) %>%
+  mutate(AdjustedJulianSpawnDate = yday(AdjustedSpawnDate)) %>%
+  mutate(Julian = yday(Date))
 
 
-larv <- merge(larv, MeanLengthAdjustment)
-larv$AdjustedAgeInDays <- (larv$LengthAdjustment - 5)/0.24
-larv$AdjustedSpawnDate <- as.Date(larv$Date) - larv$AdjustedAgeInDays - 10 #To get hatch date, remove the -10 that is there due to incubation period.
+#Adding averages into the dataframe
+
+larv <- larv %>%
+  group_by(id) %>%
+  arrange(LengthAdjustment) %>%
+  mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
+  mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
+  mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
+  mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate))
 
 
-larv$AdjustedJulianSpawnDate <- yday(larv$AdjustedSpawnDate)
-larv$AdjustedJulianSpawnDate <- format(larv$AdjustedSpawnDate, "%j")
-
-
-
-AdjustedMeanAgeInDays <- aggregate(AdjustedAgeInDays~id, larv, mean)
-colnames(AdjustedMeanAgeInDays)[2]<- "AdjustedMeanAgeInDays"
-AdjustedMinDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, min)
-colnames(AdjustedMinDateOfSpawn)[2] <- "AdjustedMinDateOfSpawn"
-AdjustedMaxDateOfSpawn <- aggregate(AdjustedSpawnDate~id, larv, max)
-colnames(AdjustedMaxDateOfSpawn)[2] <- "AdjustedMaxDateOfSpawn"
-
-AdjustedDays <- merge(AdjustedMaxDateOfSpawn, AdjustedMinDateOfSpawn, by = 'id')
-AdjustedDays <- merge(AdjustedDays, AdjustedMeanAgeInDays, by = 'id')
-
-larv <- merge(larv, AdjustedDays, by = 'id')
-
-#add Julian
-larv<-larv %>% mutate(Julian = yday(Date))
-
-#Calculating SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
+#Calculating SE/mean/min/max of larval measurements.
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
   mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%

@@ -74,6 +74,7 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 relINFO <- read.csv("relINFO.csv")
 
 head(relINFO)
+
 # Years
 
 two16=relINFO[which(relINFO$Year == "2016"), ]
@@ -85,7 +86,7 @@ two21=relINFO[which(relINFO$Year == "2021"), ]
 two22=relINFO[which(relINFO$Year == "2022"), ]
 two23=relINFO[which(relINFO$Year == "2023"), ]
 
-# Tenporal range of tagging season
+# Temporal range of tagging season
 
 unique(two16$Julian)
 unique(two17$Julian)
@@ -96,31 +97,71 @@ unique(two21$Julian)
 unique(two22$Julian)
 unique(two23$Julian)
 
+#2023
+
+head(two23)
+sum(two23$no_tags)
+unique(two23$RELEASE_VESSEL)
+
+# William Cusack
+william=two23[which(two23$RELEASE_VESSEL == "Canada 100"), ]
+sum(william$no_tags)
+head(william)
+dim(william)
+
+#Lee Surette
+lee=two23[which(two23$RELEASE_VESSEL == "Lady Janice"), ]
+sum(lee$no_tags)
+head(lee)
+dim(lee) #dimensions of the dataframe.
+
+#Joseph Nickerson
+joseph=two23[which(two23$RELEASE_VESSEL == "Lady Melissa"), ]
+sum(joseph$no_tags)
+head(joseph)
+dim(joseph)
+
+#Nicholas d'Entremont
+nick=two23[which(two23$RELEASE_VESSEL == "Morning Star"), ]
+sum(nick$no_tags)
+head(nick)
+dim(nick)
+
+#Annik Doucette
+annik=two23[which(two23$RELEASE_VESSEL == "Sealife"), ]
+sum(lee$no_tags)
+head(annik)
+dim(annik)
+
+#Dale Fitzgerald
+dale=two23[which(two23$RELEASE_VESSEL == "Tasha Marie"), ]
+sum(dale$no_tags)
+head(dale)
+dim(dale)
 
 #2021
 
 head(two21)
 sum(two21$no_tags)
-
-sum(two21$no_tags)
-
-
 unique(two21$RELEASE_VESSEL)
+
+#2020
+
+head(two20)
+sum(two20$no_tags)
+unique(two20$RELEASE_VESSEL)
 
 
 
 # 2019
-    two19
-    head(two19)
-    sum(two19$no_tags)
-    unique(two19$RELEASE_VESSEL)
+head(two19)
+sum(two19$no_tags)
+unique(two19$RELEASE_VESSEL)
 
 # Nicole Seamone
           nicole=two20[which(two20$RELEASE_VESSEL == "Canada 100"), ]
           sum(nicole$no_tags)
-          
           head(nicole)
-          
           dim(nicole)
 
 
@@ -137,7 +178,7 @@ unique(two21$RELEASE_VESSEL)
           sum(lisa$no_tags)
           
           
-          # 2021
+# 2021
           lisa=two21[which(two21$RELEASE_VESSEL == "Morning Star"), ]
           sum(lisa$no_tags)
           
@@ -282,12 +323,6 @@ boxes = read.csv("surveyBoxes.csv")
 #boxes = read.csv("grounds_.csv")
 head(boxes)
 
-subset23 <- filter(two23, X < -66)
-subset23 <- filter(subset23, Y > 45)
-
-two23 <- subset(two23, X < -63.9)
-two23 <- subset(two23, Y < 45.8)
-
             ggplot(two23, aes(x=X, y=Y))+  
               geom_polygon(data=boxes,aes(x=X, y=Y, group=Box, colour = box), fill = "white", colour = "black") + 
               geom_polygon(data=out,aes(x=long, y=lat, group=group), fill = "grey", colour = "black") + 
@@ -319,9 +354,7 @@ out2=out1[which(out1$Y < 44.5), ]
             
 out3=two21[which(two21$Y > 45.5), ]
             
-            
-            
-            
+
             
 dates=two20[which(two20$RELEASE_DATE == "2020-06-29"), ]
 dates2=two20[which(two20$RELEASE_DATE == "2020-06-28"), ]
@@ -376,34 +409,4 @@ print(ggplot(TaggingEventsStats, aes(x = Month, y = Tag_Num, fill = Tagger)) +
   geom_col())
 
 datatable(TaggingEventsStats)
-
-June <- subset(TaggingEventsStats, Month == "6") %>%
-  adorn_totals("row")
-JunePercent <- 8705/38931
-
-July <- subset(TaggingEventsStats, Month == "7") %>%
-  adorn_totals("row")
-JulyPercent <- 10764/38931
-
-August <- subset(TaggingEventsStats, Month == "8") %>%
-  adorn_totals("row")
-AugPercent <- 5820/38931
-
-September <- subset(TaggingEventsStats, Month == "9") %>%
-  adorn_totals("row")
-SeptPercent <- 8156/38931
-
-October <- subset(TaggingEventsStats, Month == "10") %>%
-  adorn_totals("row")
-OctPercent <- 4848/38931
-
-TagsLeft <- 11250
-
-June2024 <- 11250*JunePercent
-July2024 <- 11250*JulyPercent
-Aug2024 <- 11250*AugPercent
-Sept2024 <- 11250*SeptPercent
-
-averagepermonth <- 38931/6
-removeNicktagaverage <- 35589/5
 
