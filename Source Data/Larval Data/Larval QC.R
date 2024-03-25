@@ -74,7 +74,12 @@ larv <- larv %>%
   mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
   mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
   mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
-  mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate))
+  mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate)) %>%
+  mutate(MinLength = min(LengthAdjustment)) %>%
+  mutate(MaxLength = max(LengthAdjustment)) %>%
+  mutate(SD = sd(LengthAdjustment)) %>%
+  mutate(Abundance = length(LengthAdjustment))
+  
 
 
 #Calculating SE/mean/min/max of larval measurements.
@@ -106,7 +111,7 @@ larv = larv %>%
   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
   mutate(Density = Larv_per_jar/Volume)
 
-#Calculating AVERAGE SE/mean/min/max of larval measurements. Changed 'group by' in both larvsummary to (id) from (Ground, Survey.No, Year)
+#Calculating AVERAGE SE/mean/min/max of larval measurements. 
 larv <- larv %>%
   group_by(Ground, Survey.No, Year) %>%
   mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
