@@ -78,64 +78,69 @@ larv <- larv %>%
   mutate(MinLength = min(LengthAdjustment)) %>%
   mutate(MaxLength = max(LengthAdjustment)) %>%
   mutate(SD = sd(LengthAdjustment)) %>%
-  mutate(Abundance = length(LengthAdjustment))
+  mutate(Abundance = length(LengthAdjustment)) %>%
+  mutate(Larv_per_jar = Abundance/No_jars) %>%
+  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+  mutate(Density = Larv_per_jar/Volume)
   
 
 
-#Calculating SE/mean/min/max of larval measurements.
+#####Calculating SE/mean/min/max of larval measurements.
 
-## Do we still need the min and max length here? Is it going to be duplicated in the Larval Sum?
+##### This is Darren's old code. Do we still need all this?
 
-larv <- larv %>%
-  group_by(Ground, Survey.No, Year) %>%
-  mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%
-  ungroup()
+# larv <- larv %>%
+#   group_by(Ground, Survey.No, Year) %>%
+#   mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%
+#   ungroup()
+# 
+# larv$SD[is.na(larv$SD)] <- 0
+# larv$SD <- as.numeric(larv$SD)
+# 
+# larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
+#   summarize(MinLength = mean(MinLength, na.rm = TRUE), 
+#             MaxLength = mean(MaxLength, na.rm = TRUE), 
+#             MeanLength = mean(MeanLength, na.rm = TRUE),
+#             SD = mean(SD, na.rm = TRUE),
+#             Abundance = length(Lengthmm)) %>%
+#   mutate(SE = SD/sqrt(Abundance))
+# surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
+# surveysummary$Year = as.factor(surveysummary$Year)
+# surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
+# larvsummary = left_join(surveysummary, larvsummary)
+# 
+# larv = larv %>%
+#   mutate(Larv_per_jar = Abundance/No_jars) %>%
+#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+#   mutate(Density = Larv_per_jar/Volume)
 
-larv$SD[is.na(larv$SD)] <- 0
-larv$SD <- as.numeric(larv$SD)
+###Calculating AVERAGE SE/mean/min/max of larval measurements. 
+### This is all Darren's old code. Do we still need this?
 
-larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
-  summarize(MinLength = mean(MinLength, na.rm = TRUE), 
-            MaxLength = mean(MaxLength, na.rm = TRUE), 
-            MeanLength = mean(MeanLength, na.rm = TRUE),
-            SD = mean(SD, na.rm = TRUE),
-            Abundance = length(Lengthmm)) %>%
-  mutate(SE = SD/sqrt(Abundance))
-surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
-surveysummary$Year = as.factor(surveysummary$Year)
-surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
-larvsummary = left_join(surveysummary, larvsummary)
-
-larv = larv %>%
-  mutate(Larv_per_jar = Abundance/No_jars) %>%
-  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-  mutate(Density = Larv_per_jar/Volume)
-
-#Calculating AVERAGE SE/mean/min/max of larval measurements. 
-larv <- larv %>%
-  group_by(Ground, Survey.No, Year) %>%
-  mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
-  ungroup()
-
-larv$AdjSD[is.na(larv$AdjSD)] <- 0
-larv$AdjSD <- as.numeric(larv$AdjSD)
-
-larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
-  summarize(MeanAdjustedMinLength = mean(AdjustedMinLength, na.rm = TRUE), 
-            MeanAdjustedMaxLength = mean(AdjustedMaxLength, na.rm = TRUE), 
-            MeanAdjustedSD = mean(AdjSD, na.rm = TRUE),
-            Abundance = length(LengthAdjustment)) %>%
-  mutate(SE =  MeanAdjustedSD/sqrt(Abundance))
-surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
-surveysummary$Year = as.factor(surveysummary$Year)
-surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
-larvsummary = left_join(surveysummary, larvsummary)
-
-
-larv = larv %>%
-  mutate(Larv_per_jar = Abundance/No_jars) %>%
-  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-  mutate(Density = Larv_per_jar/Volume)
+# larv <- larv %>%
+#   group_by(Ground, Survey.No, Year) %>%
+#   mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
+#   ungroup()
+# 
+# larv$AdjSD[is.na(larv$AdjSD)] <- 0
+# larv$AdjSD <- as.numeric(larv$AdjSD)
+# 
+# larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
+#   summarize(MeanAdjustedMinLength = mean(AdjustedMinLength, na.rm = TRUE), 
+#             MeanAdjustedMaxLength = mean(AdjustedMaxLength, na.rm = TRUE), 
+#             MeanAdjustedSD = mean(AdjSD, na.rm = TRUE),
+#             Abundance = length(LengthAdjustment)) %>%
+#   mutate(SE =  MeanAdjustedSD/sqrt(Abundance))
+# surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
+# surveysummary$Year = as.factor(surveysummary$Year)
+# surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
+# larvsummary = left_join(surveysummary, larvsummary)
+# 
+# 
+# larv = larv %>%
+#   mutate(Larv_per_jar = Abundance/No_jars) %>%
+#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+#   mutate(Density = Larv_per_jar/Volume)
 
 
 larv = larv %>%
@@ -147,9 +152,9 @@ larv = larv %>%
                 Abundance, 
                 Lengthmm, 
                 category, 
-                MinLength, 
-                MaxLength, 
-                MeanLength, 
+                #MinLength, 
+                #MaxLength, 
+                #MeanLength, 
                 SD, 
                 Larv_per_jar, 
                 Density, 
