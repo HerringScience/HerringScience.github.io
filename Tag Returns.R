@@ -10,18 +10,31 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
 library(measurements)
+
+#All Tags deployed
+
+Tags = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+
+#Tag Returns from during the AFF 44 funding
+
+TagReturns2021 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2021.csv"))
+  TagReturns2021 = subset()
+
+TagReturns2022 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2022.csv"))
+TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2023.csv"))
+
 
 #Load all of Canada data and extract Atlantic provinces
 can<-getData('GADM', country="CAN", level=1) # provinces
