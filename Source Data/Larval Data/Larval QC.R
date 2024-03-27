@@ -56,15 +56,20 @@ larv$LengthAdjustment = with(larv, ifelse(larv$Preservative == "4% formalin", (0
 #'Exact' spawn date. Growth rate of .24mm/day based on Chenoweth 1989 paper. 
 # Paper says applies estimate growth rates to calculate the number of days back to 5mm. Took 5mm off total length to account for this.
 # Assumes hatching length is 5mm, day of hatching = day 0
-#Adjusted Spawn Date to account for incubation period. Using overall 10 days, as per NOAA info that says 7-10 days, and DFO stock assessment 2020 says 10-12 days.
-#To get hatch date, remove the -10 that is there due to incubation period.
+# Adjusted Spawn Date to account for incubation period. Using 10 days for GB and SI, and 14 days for SB, as per paper "Fisheries Oceanography - 2022 - Burbank - Understanding factors influencing Atlantic herring Clupea harengus recruitment .pdf" and "Messieh, 1987. Some characteristics of atlantic herring spawning in the southern gulf of st lawrence.pdf".
+# To get hatch date, remove the -10 or -14 that is there due to incubation period.
+
 
 larv <- larv %>%
-  mutate(AdjustedAgeInDays = ((LengthAdjustment - 5)/0.24)) %>%
-  mutate(AdjustedSpawnDate = as.Date(Date) - AdjustedAgeInDays - 10) %>%
-  mutate(AdjustedJulianSpawnDate = yday(AdjustedSpawnDate)) %>%
-  mutate(Julian = yday(Date))
+  mutate(AdjustedAgeInDays = ((LengthAdjustment - 5)/0.24))
+  
+larv$AdjustedSpawnDate = (with(larv, ifelse(larv$Ground == "SB", (as.Date(Date) - AdjustedAgeInDays - 14),
+                                             ifelse(larv$Ground == "GB", (as.Date(Date) - AdjustedAgeInDays - 10),
+                                                    ifelse(larv$Ground == "SI", (as.Date(Date) - AdjustedAgeInDays - 10), NA)))))
 
+larv <- larv %>%  
+  mutate(AdjustedJulianSpawnDate = yday(as.Date(AdjustedSpawnDate))) %>%
+  mutate(Julian = yday(Date))
 
 #Adding averages into the dataframe
 
