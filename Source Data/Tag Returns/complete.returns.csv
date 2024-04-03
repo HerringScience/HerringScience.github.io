@@ -1,0 +1,1199 @@
+,TAG_NUMBER,catchAREA,DATE,BOAT,GearType,Company,Catch.t,dataorigin,id
+1,205442,Seal Island,2019-10-14,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Leroy & Barry II
+2,41089,Scots Bay,2020-08-24,Morning Star,Purse Seine,Scotia Garden,126,ScotiaGardenReturns2020.csv,2020-08-24 Morning Star
+3,416008,Scots Bay,2019-08-06,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-08-06 Sealife II
+4,416418,Scots Bay,2020-08-25,Leroy & Barry II,Purse Seine,Scotia Garden,72,ScotiaGardenReturns2020.csv,2020-08-25 Leroy & Barry II
+5,419912,Scots Bay,2017-01-20,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-01-20 Canada 100
+6,42041,Seal Island,2019-10-15,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2019-10-15 Lady Melissa
+7,420572,Tear Drop,2017-06-09,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2017-06-09 Sealife II
+8,420613,Area 1B,2017-02-01,Osprey,Mid Water Trawl,Connors ,NA,rawReturn.csv,2017-02-01 Osprey
+9,42335,Seal Island,2019-10-15,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-10-15 Lady Janice II
+10,42553,Seal Island,2019-10-14,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Morning Star
+11,42648,Seal Island,2019-10-14,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Leroy & Barry II
+12,42737,Seal Island,2019-10-14,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Leroy & Barry II
+13,42739,Seal Island,2019-10-15,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-10-15 Lady Janice II
+14,42749,Seal Island,2019-10-14,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Leroy & Barry II
+15,437082,German Bank,2017-07-19,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2017-07-19 Lady Melissa
+16,439384,Northeast Bank,2017-09-26,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-26 Brunswick Provider
+17,439468,Northeast Bank,2017-09-25,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-25 Brunswick Provider
+18,439523,Northeast Bank,2017-09-19,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-19 Brunswick Provider
+19,439546,Northeast Bank,2017-09-18,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-18 Canada 100
+20,439872,Northeast Bank,2017-09-26,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-26 Brunswick Provider
+21,441773,German Bank,2018-09-25,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-09-25 Leroy & Barry II
+22,444640,Northeast Bank,2017-09-18,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-18 Canada 100
+23,445880,German Bank,2018-09-24,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2018-09-24 Lady Melissa
+24,445969,German Bank,2018-10-02,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-10-02 Morning Star
+25,448912,Scots Bay,2017-07-31,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2017-07-31 Lady Melissa
+26,451520,German Bank,2018-10-04,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2018-10-04 Lady Janice II
+27,454158,German Bank,2017-08-31,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2017-08-31 Leroy & Barry II
+28,454497,German Bank,2017-09-11,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2017-09-11 Morning Star
+29,455076,Scots Bay,2019-07-22,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-07-22 Lady Melissa
+30,455079,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+31,455080,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+32,455143,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+33,455147,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+34,455260,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+35,455308,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+36,455322,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+37,455336,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+38,455352,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+39,455358,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+40,455361,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+41,455365,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+42,455390,Scots Bay,2019-07-22,Leroy & Barry II,Purse Seine,Seacrest,NA,rawReturn.csv,2019-07-22 Leroy & Barry II
+43,455392,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+44,455493,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+45,455499,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+46,455500,Scots Bay,2019-07-22,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2019-07-22 Lady Janice II
+47,456509,Scots Bay,2019-09-16,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-09-16 Morning Star
+48,457012,German Bank,2017-08-16,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2017-08-16 Leroy & Barry II
+49,457449,German Bank,2017-07-26,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2017-07-26 Lady Melissa
+50,457550,German Bank,2017-07-26,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2017-07-26 Lady Janice II
+51,457761,German Bank,2017-07-27,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-07-27 Canada 100
+52,458295,German Bank,2017-07-27,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2017-07-27 Lady Melissa
+53,458336,German Bank,2017-07-27,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2017-07-27 Lady Melissa
+54,458887,German Bank,2017-08-21,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-08-21 Canada 100
+55,459268,Scots Bay,2019-08-20,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2019-08-20 Lady Melissa
+56,459479,Scots Bay,2019-08-06,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-08-06 Lady Melissa
+57,460131,Scots Bay,2019-09-03,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-09-03 Morning Star
+58,460132,German Bank,2019-10-01,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2019-10-01 Lady Melissa
+59,461321,Scots Bay,2018-09-04,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-09-04 Morning Star
+60,461337,Scots Bay,2018-09-04,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-09-04 Morning Star
+61,461768,Seal Island,2018-09-13,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-09-13 Morning Star
+62,462600,SCOTS BAY-AREA 8,2021-08-18,Sealife II,Purse Seine,Comeau - Sea Life,16,ComeauReturns2021.csv,2021-08-18 Sealife II
+63,462648,SCOTS BAY-AREA 8,2021-08-03,Lady Janice II/Sealife II,Purse Seine,Comeau - Sea Life,88,ComeauReturns2021.csv,2021-08-03 Lady Janice II/Sealife II
+64,463346,SCOTS BAY-AREA 8,2021-08-19,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2021.csv,2021-08-19 Lady Melissa
+65,463463,SCOTS BAY-AREA 8,2021-08-19,Lady Janice II/Sealife II,Purse Seine,Comeau - Sea Life,134,ComeauReturns2021.csv,2021-08-19 Lady Janice II/Sealife II
+66,465926,Casper,2020-07-07,Morning Star,Purse Seine,Scotia Garden,101,ScotiaGardenReturns2020.csv,2020-07-07 Morning Star
+67,467016,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+68,467021,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+69,467273,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+70,467344,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+71,467356,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+72,467423,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+73,467545,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+74,467673,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+75,469727,SCOTS BAY-AREA 8,2021-07-20,Lady Janice II,Purse Seine,Comeau - Sea Life,142,ComeauReturns2021.csv,2021-07-20 Lady Janice II
+76,469743,SCOTS BAY-AREA 8,2021-07-19,Sealife II,Purse Seine,Comeau - Sea Life,110,ComeauReturns2021.csv,2021-07-19 Sealife II
+77,469867,SCOTS BAY-AREA 8,2021-07-21,Sealife II,Purse Seine,Comeau - Sea Life,43,ComeauReturns2021.csv,2021-07-21 Sealife II
+78,470090,Scotts Bay ,2022-07-29,Leroy & Barry II,Purse Seine,Scotia Garden,99,ScotiaGardenReturns2022.csv,2022-07-29 Leroy & Barry II
+79,473378,Seal Iland,2022-09-21,Morning Star,Purse Seine,Scotia Garden,106,ScotiaGardenReturns2022.csv,2022-09-21 Morning Star
+80,475008,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+81,475060,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+82,475083,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+83,475464,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+84,480874,Scots Bay,2020-08-25,Leroy & Barry II,Purse Seine,Scotia Garden,72,ScotiaGardenReturns2020.csv,2020-08-25 Leroy & Barry II
+85,481072,GERMAN BANK-AREA 7,2021-09-09,Lady Melissa,Purse Seine,Comeau - Sea Life,104,ComeauReturns2021.csv,2021-09-09 Lady Melissa
+86,481556,German Bank,2020-09-16,Morning Star,Purse Seine,Scotia Garden,60,ScotiaGardenReturns2020.csv,2020-09-16 Morning Star
+87,481720,Seal Island,2020-09-25,Morning Star,Purse Seine,Scotia Garden,83,ScotiaGardenReturns2020.csv,2020-09-25 Morning Star
+88,481753,GERMAN BANK-AREA 7,2021-10-26,Lady Janice II,Purse Seine,Comeau - Sea Life,71,ComeauReturns2021.csv,2021-10-26 Lady Janice II
+89,481979,GERMAN BANK-AREA 7,2021-10-05,Sealife II,Purse Seine,Comeau - Sea Life,139,ComeauReturns2021.csv,2021-10-05 Sealife II
+90,482669,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+91,482882,German Bank,2020-10-05,Leroy & Barry II,Purse Seine,Scotia Garden,64,ScotiaGardenReturns2020.csv,2020-10-05 Leroy & Barry II
+92,486889,SCOTS BAY-AREA 8,2021-08-03,Lady Melissa,Purse Seine,Comeau - Sea Life,55,ComeauReturns2021.csv,2021-08-03 Lady Melissa
+93,486911,SCOTS BAY-AREA 8,2021-08-03,Lady Melissa,Purse Seine,Comeau - Sea Life,55,ComeauReturns2021.csv,2021-08-03 Lady Melissa
+94,491360,German Bank,2022-09-14,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2022.csv,2022-09-14 Leroy & Barry II
+95,491420,German Bank,2022-09-14,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2022.csv,2022-09-14 Leroy & Barry II
+96,493022,GERMAN BANK-AREA 7,2021-10-22,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2021.csv,2021-10-22 Lady Janice II
+97,493151,GERMAN BANK-AREA 7,2021-10-26,Lady Janice II,Purse Seine,Comeau - Sea Life,71,ComeauReturns2021.csv,2021-10-26 Lady Janice II
+98,494330,SCOTS BAY-AREA 8,2021-08-19,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2021.csv,2021-08-19 Lady Melissa
+99,494355,SCOTS BAY-AREA 8,2021-08-19,Sealife II,Purse Seine,Comeau - Sea Life,87,ComeauReturns2021.csv,2021-08-19 Sealife II
+100,494392,SCOTS BAY-AREA 8,2021-08-19,Lady Janice II/Sealife II,Purse Seine,Comeau - Sea Life,134,ComeauReturns2021.csv,2021-08-19 Lady Janice II/Sealife II
+101,494405,SCOTS BAY-AREA 8,2021-08-19,Sealife II,Purse Seine,Comeau - Sea Life,87,ComeauReturns2021.csv,2021-08-19 Sealife II
+102,494476,SCOTS BAY-AREA 8,2021-08-19,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2021.csv,2021-08-19 Lady Melissa
+103,495455,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+104,495458,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+105,495462,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+106,495471,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+107,495479,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+108,495488,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+109,495489,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+110,495498,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+111,495506,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+112,495517,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+113,495553,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+114,495555,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+115,495565,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+116,495566,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+117,495600,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+118,495666,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+119,495848,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+120,495903,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+121,495917,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+122,495962,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+123,495990,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+124,495993,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+125,498282,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+126,498300,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+127,498371,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+128,498466,Seal Iland,2022-09-21,Morning Star,Purse Seine,Scotia Garden,106,ScotiaGardenReturns2022.csv,2022-09-21 Morning Star
+129,498624,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+130,499156,Scotts Bay ,2022-07-28,Leroy & Barry II,Purse Seine,Scotia Garden,55,ScotiaGardenReturns2022.csv,2022-07-28 Leroy & Barry II
+131,499203,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+132,499884,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+133,499954,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+134,500041,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+135,500047,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+136,500052,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+137,500063,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+138,500073,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+139,500103,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+140,500131,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+141,500195,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+142,500225,Scotts Bay ,2022-08-17,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2022.csv,2022-08-17 Leroy & Barry II
+143,500256,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+144,500296,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+145,500330,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+146,502308,German Bank,2022-08-30,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-30 Morning Star
+147,502309,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+148,502337,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+149,502361,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+150,502380,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+151,502496,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+152,502653,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+153,502723,German Bank,2022-08-30,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-30 Morning Star
+154,502724,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+155,502769,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+156,502796,German Bank,2022-08-30,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-30 Morning Star
+157,502797,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+158,502903,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+159,502933,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+160,502976,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+161,502992,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+162,506113,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+163,506117,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+164,506137,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+165,506201,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+166,506209,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+167,506229,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+168,506243,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+169,510529,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+170,510587,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+171,510638,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+172,514221,GERMAN BANK-AREA 7,2021-10-06,Lady Janice II/Lady Melissa,Purse Seine,Comeau - Sea Life,273,ComeauReturns2021.csv,2021-10-06 Lady Janice II/Lady Melissa
+173,515196,SCOTS BAY-AREA 8,2021-07-19,Lady Janice II,Purse Seine,Comeau - Sea Life,154,ComeauReturns2021.csv,2021-07-19 Lady Janice II
+174,515504,SCOTS BAY-AREA 8,2021-07-20,Lady Melissa,Purse Seine,Comeau - Sea Life,72,ComeauReturns2021.csv,2021-07-20 Lady Melissa
+175,516733,GERMAN BANK-AREA 7,2021-10-22,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2021.csv,2021-10-22 Lady Janice II
+176,516784,GERMAN BANK-AREA 7,2021-10-22,Lady Janice II/Lady Melissa,Purse Seine,Comeau - Sea Life,233,ComeauReturns2021.csv,2021-10-22 Lady Janice II/Lady Melissa
+177,518513,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+178,518517,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+179,518626,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+180,518630,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+181,518735,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+182,518748,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+183,518780,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+184,522460,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+185,522469,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+186,522544,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+187,522665,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+188,522747,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+189,522803,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+190,522877,German Bank,2022-08-30,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-30 Morning Star
+191,522891,German Bank,2022-08-26,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2022.csv,2022-08-26 Leroy & Barry II
+192,522911,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+193,522938,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+194,522964,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+195,531273,Scots Bay,2020-06-15,Morning Star,Purse Seine,Scotia Garden,131,ScotiaGardenReturns2020.csv,2020-06-15 Morning Star
+196,531382,Scots Bay,2020-08-13,Leroy & Barry II,Purse Seine,Scotia Garden,68,ScotiaGardenReturns2020.csv,2020-08-13 Leroy & Barry II
+197,550037,Scots Bay,2020-08-12,Leroy & Barry II,Purse Seine,Scotia Garden,71,ScotiaGardenReturns2020.csv,2020-08-12 Leroy & Barry II
+198,580142,GANNET DRY LEDGE-AREA 5,2021-06-29,Sealife II,Purse Seine,Comeau - Sea Life,58,ComeauReturns2021.csv,2021-06-29 Sealife II
+199,581083,SCOTS BAY-AREA 8,2021-06-08,Lady Melissa,Purse Seine,Comeau - Sea Life,151.1,ComeauReturns2021.csv,2021-06-08 Lady Melissa
+200,585852,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+201,585856,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+202,585858,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+203,585860,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+204,585864,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+205,585876,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+206,585885,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+207,585894,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+208,585900,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+209,585910,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+210,585912,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+211,585919,Scotts Bay ,2022-08-10,Leroy & Barry II,Purse Seine,Scotia Garden,98,ScotiaGardenReturns2022.csv,2022-08-10 Leroy & Barry II
+212,585920,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+213,585938,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+214,585942,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+215,585945,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+216,585964,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+217,585967,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+218,585970,Scotts Bay ,2022-08-09,Morning Star,Purse Seine,Scotia Garden,116,ScotiaGardenReturns2022.csv,2022-08-09 Morning Star
+219,586078,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+220,589502,SCOTS BAY-AREA 8,2021-08-03,Lady Melissa,Purse Seine,Comeau - Sea Life,55,ComeauReturns2021.csv,2021-08-03 Lady Melissa
+221,589507,SCOTS BAY-AREA 8,2021-08-03,Lady Melissa,Purse Seine,Comeau - Sea Life,55,ComeauReturns2021.csv,2021-08-03 Lady Melissa
+222,589533,SCOTS BAY-AREA 8,2021-08-03,Sealife II,Purse Seine,Comeau - Sea Life,53,ComeauReturns2021.csv,2021-08-03 Sealife II
+223,589571,SCOTS BAY-AREA 8,2021-08-03,Lady Janice II/Sealife II,Purse Seine,Comeau - Sea Life,88,ComeauReturns2021.csv,2021-08-03 Lady Janice II/Sealife II
+224,589646,SCOTS BAY-AREA 8,2021-08-03,Lady Janice II,Purse Seine,Comeau - Sea Life,35,ComeauReturns2021.csv,2021-08-03 Lady Janice II
+225,589805,SCOTS BAY-AREA 8,2021-08-03,Lady Janice II,Purse Seine,Comeau - Sea Life,35,ComeauReturns2021.csv,2021-08-03 Lady Janice II
+226,589890,SCOTS BAY-AREA 8,2021-08-03,Lady Janice II/Sealife II,Purse Seine,Comeau - Sea Life,88,ComeauReturns2021.csv,2021-08-03 Lady Janice II/Sealife II
+227,590064,SCOTS BAY-AREA 8,2021-08-03,Sealife II,Purse Seine,Comeau - Sea Life,53,ComeauReturns2021.csv,2021-08-03 Sealife II
+228,590065,SCOTS BAY-AREA 8,2021-08-03,Sealife II,Purse Seine,Comeau - Sea Life,53,ComeauReturns2021.csv,2021-08-03 Sealife II
+229,590150,SCOTS BAY-AREA 8,2021-08-19,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2021.csv,2021-08-19 Lady Melissa
+230,590200,SCOTS BAY-AREA 8,2021-08-17,Lady Janice II,Purse Seine,Comeau - Sea Life,109,ComeauReturns2021.csv,2021-08-17 Lady Janice II
+231,590536,SCOTS BAY-AREA 8,2021-08-19,Lady Janice II,Purse Seine,Comeau - Sea Life,47,ComeauReturns2021.csv,2021-08-19 Lady Janice II
+232,590687,SCOTS BAY-AREA 8,2021-08-19,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2021.csv,2021-08-19 Lady Melissa
+233,590731,SCOTS BAY-AREA 8,2021-08-19,Sealife II,Purse Seine,Comeau - Sea Life,87,ComeauReturns2021.csv,2021-08-19 Sealife II
+234,590756,SCOTS BAY-AREA 8,2021-08-19,Lady Janice II/Lady Melissa,Purse Seine,Comeau - Sea Life,126,ComeauReturns2021.csv,2021-08-19 Lady Janice II/Lady Melissa
+235,590796,SCOTS BAY-AREA 8,2021-08-19,Sealife II,Purse Seine,Comeau - Sea Life,87,ComeauReturns2021.csv,2021-08-19 Sealife II
+236,590862,GERMAN BANK-AREA 7,2021-09-01,Lady Melissa,Purse Seine,Comeau - Sea Life,129,ComeauReturns2021.csv,2021-09-01 Lady Melissa
+237,601184,Seal Iland,2022-09-21,Leroy & Barry II,Purse Seine,Scotia Garden,45,ScotiaGardenReturns2022.csv,2022-09-21 Leroy & Barry II
+238,601230,Seal Iland,2022-09-21,Morning Star,Purse Seine,Scotia Garden,106,ScotiaGardenReturns2022.csv,2022-09-21 Morning Star
+239,603036,German Bank,2022-09-01,Morning Star,Purse Seine,Scotia Garden,78,ScotiaGardenReturns2022.csv,2022-09-01 Morning Star
+240,603451,German Bank,2022-09-02,Morning Star,Purse Seine,Scotia Garden,107,ScotiaGardenReturns2022.csv,2022-09-02 Morning Star
+241,603519,German Bank,2022-09-14,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2022.csv,2022-09-14 Leroy & Barry II
+242,603644,German Bank,2022-09-19,Leroy & Barry II,Purse Seine,Scotia Garden,102,ScotiaGardenReturns2022.csv,2022-09-19 Leroy & Barry II
+243,603829,Seal Iland,2022-09-21,Morning Star,Purse Seine,Scotia Garden,106,ScotiaGardenReturns2022.csv,2022-09-21 Morning Star
+244,512376,SCOTS BAY (AREA 8),2022-07-28,Lady Janice II,Purse Seine,Comeau - Sea Life,185,ComeauReturns2022.csv,2022-07-28 Lady Janice II
+245,499124,SCOTS BAY (AREA 8),2022-07-29,Lady Janice II,Purse Seine,Comeau - Sea Life,69,ComeauReturns2022.csv,2022-07-29 Lady Janice II
+246,470031,SCOTS BAY (AREA 8),2022-07-29,Lady Janice II,Purse Seine,Comeau - Sea Life,69,ComeauReturns2022.csv,2022-07-29 Lady Janice II
+247,470267,SCOTS BAY (AREA 8),2022-08-08,Lady Janice II,Purse Seine,Comeau - Sea Life,45,ComeauReturns2022.csv,2022-08-08 Lady Janice II
+248,585903,SCOTS BAY (AREA 8),2022-08-09,Sealife II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-09 Sealife II
+249,495558,SCOTS BAY (AREA 8),2022-08-09,Sealife II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-09 Sealife II
+250,518776,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+251,522385,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+252,495883,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+253,500326,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+254,518726,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+255,500213,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+256,518533,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+257,495876,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+258,522281,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+259,495945,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+260,500115,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+261,518800,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+262,585944,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+263,518644,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+264,522287,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+265,495548,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+266,495944,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+267,500297,SCOTS BAY (AREA 8),2022-08-10,Lady Melissa,Purse Seine,Comeau - Sea Life,111,ComeauReturns2022.csv,2022-08-10 Lady Melissa
+268,495701,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+269,495858,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+270,522399,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+271,495625,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+272,495659,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+273,518601,SCOTS BAY (AREA 8),2022-08-10,Lady Janice II,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-10 Lady Janice II
+274,495912,SCOTS BAY (AREA 8),2022-08-11,Lady Janice II,Purse Seine,Comeau - Sea Life,162,ComeauReturns2022.csv,2022-08-11 Lady Janice II
+275,500249,SCOTS BAY (AREA 8),2022-08-11,Lady Janice II,Purse Seine,Comeau - Sea Life,162,ComeauReturns2022.csv,2022-08-11 Lady Janice II
+276,518791,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+277,500352,SCOTS BAY (AREA 8),2022-08-11,Lady Janice II,Purse Seine,Comeau - Sea Life,162,ComeauReturns2022.csv,2022-08-11 Lady Janice II
+278,500396,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+279,500486,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+280,495866,SCOTS BAY (AREA 8),2022-08-11,Lady Melissa,Purse Seine,Comeau - Sea Life,33,ComeauReturns2022.csv,2022-08-11 Lady Melissa
+281,500598,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+282,522389,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+283,522380,SCOTS BAY (AREA 8),2022-08-11,Sealife II,Purse Seine,Comeau - Sea Life,73,ComeauReturns2022.csv,2022-08-11 Sealife II
+284,500049,SCOTS BAY (AREA 8),2022-08-11,Lady Janice II,Purse Seine,Comeau - Sea Life,162,ComeauReturns2022.csv,2022-08-11 Lady Janice II
+285,522291,SCOTS BAY (AREA 8),2022-08-11,Lady Janice II,Purse Seine,Comeau - Sea Life,162,ComeauReturns2022.csv,2022-08-11 Lady Janice II
+286,499949,GERMAN BANK (AREA 7),2022-08-16,Lady Melissa,Purse Seine,Comeau - Sea Life,99,ComeauReturns2022.csv,2022-08-16 Lady Melissa
+287,499939,GERMAN BANK (AREA 7),2022-08-16,Lady Melissa,Purse Seine,Comeau - Sea Life,99,ComeauReturns2022.csv,2022-08-16 Lady Melissa
+288,499943,GERMAN BANK (AREA 7),2022-08-16,Lady Melissa,Purse Seine,Comeau - Sea Life,99,ComeauReturns2022.csv,2022-08-16 Lady Melissa
+289,499966,GERMAN BANK (AREA 7),2022-08-16,Lady Melissa,Purse Seine,Comeau - Sea Life,99,ComeauReturns2022.csv,2022-08-16 Lady Melissa
+290,522931,Scots Bay,2022-08-22,Lady Janice II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-08-23 Lady Janice II
+291,522223,SCOTS BAY (AREA 8),2022-08-23,Lady Melissa,Purse Seine,Comeau - Sea Life,40,ComeauReturns2022.csv,2022-08-23 Lady Melissa
+292,502516,GERMAN BANK (AREA 7),2022-08-26,Lady Janice II,Purse Seine,Comeau - Sea Life,51,ComeauReturns2022.csv,2022-08-26 Lady Janice II
+293,502885,GERMAN BANK (AREA 7),2022-08-26,Lady Janice II,Purse Seine,Comeau - Sea Life,51,ComeauReturns2022.csv,2022-08-26 Lady Janice II
+294,502718,GERMAN BANK (AREA 7),2022-08-26,Lady Janice II,Purse Seine,Comeau - Sea Life,51,ComeauReturns2022.csv,2022-08-26 Lady Janice II
+295,498552,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+296,502385,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+297,502550,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+298,498250,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+299,499957,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+300,498420,GERMAN BANK (AREA 7),2022-08-26,Lady Janice II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Lady Janice II
+301,502546,GERMAN BANK (AREA 7),2022-08-26,Lady Janice II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Lady Janice II
+302,498479,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+303,502429,GERMAN BANK (AREA 7),2022-08-26,Sealife II,Purse Seine,Comeau - Sea Life,96,ComeauReturns2022.csv,2022-08-26 Sealife II
+304,498441,GERMAN BANK (AREA 7),2022-08-30,Lady Janice II,Purse Seine,Comeau - Sea Life,151,ComeauReturns2022.csv,2022-08-30 Lady Janice II
+305,498533,GERMAN BANK (AREA 7),2022-08-30,Lady Janice II,Purse Seine,Comeau - Sea Life,151,ComeauReturns2022.csv,2022-08-30 Lady Janice II
+306,467433,GERMAN BANK (AREA 7),2022-08-30,Lady Melissa,Purse Seine,Comeau - Sea Life,53,ComeauReturns2022.csv,2022-08-31 Lady Melissa
+307,467085,GERMAN BANK (AREA 7),2022-08-30,Lady Melissa,Purse Seine,Comeau - Sea Life,53,ComeauReturns2022.csv,2022-08-31 Lady Melissa
+308,498641,GERMAN BANK (AREA 7),2022-08-31,Lady Melissa,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-31 Lady Melissa
+309,510570,GERMAN BANK (AREA 7),2022-08-31,Lady Janice II,Purse Seine,Comeau - Sea Life,78,ComeauReturns2022.csv,2022-08-31 Lady Janice II
+310,502850,GERMAN BANK (AREA 7),2022-08-31,Lady Janice II,Purse Seine,Comeau - Sea Life,78,ComeauReturns2022.csv,2022-08-31 Lady Janice II
+311,467076,GERMAN BANK (AREA 7),2022-08-31,Lady Janice II,Purse Seine,Comeau - Sea Life,78,ComeauReturns2022.csv,2022-08-31 Lady Janice II
+312,498315,GERMAN BANK (AREA 7),2022-08-31,Lady Janice II,Purse Seine,Comeau - Sea Life,78,ComeauReturns2022.csv,2022-08-31 Lady Janice II
+313,502315,GERMAN BANK (AREA 7),2022-08-31,Lady Janice II,Purse Seine,Comeau - Sea Life,78,ComeauReturns2022.csv,2022-08-31 Lady Janice II
+314,510611,GERMAN BANK (AREA 7),2022-08-31,Lady Melissa,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-31 Lady Melissa
+315,502622,GERMAN BANK (AREA 7),2022-08-31,Lady Melissa,Purse Seine,Comeau - Sea Life,74,ComeauReturns2022.csv,2022-08-31 Lady Melissa
+316,467067,GERMAN BANK (AREA 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
+317,475127,GERMAN BANK (AREA 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
+318,467367,GERMAN BANK (AREA 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
+319,510552,GERMAN BANK (AREA 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
+320,510467,GERMAN BANK (AREA 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
+321,498868,SCOTS BAY (AREA 8),2022-09-06,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-09-06 Sealife II
+322,475834,SCOTS BAY (AREA 8),2022-09-07,Lady Janice II,Purse Seine,Comeau - Sea Life,98,ComeauReturns2022.csv,2022-09-07 Lady Janice II
+323,502044,SCOTS BAY (AREA 8),2002-09-08,Lady Janice II,Purse Seine,Comeau - Sea Life,20,ComeauReturns2022.csv,2002-09-08 Lady Janice II
+324,491540,GERMAN BANK (AREA 7),2022-09-14,Sealife II,Purse Seine,Comeau - Sea Life,86,ComeauReturns2022.csv,2022-09-14 Sealife II
+325,491543,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+326,491590,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+327,491594,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+328,603511,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+329,491582,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+330,491577,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+331,491701,GERMAN BANK (AREA 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
+332,489322,SEAL ISLAND (AREA 6),2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
+333,601148,SEAL ISLAND (AREA 6),2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
+334,570527,GERMAN BANK (AREA 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
+335,570583,GERMAN BANK (AREA 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
+336,570488,GERMAN BANK (AREA 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
+337,522397,Scotts Bay ,2022-08-17,Morning Star,Purse Seine,Scotia Garden,113,ScotiaGardenReturns2022.csv,2022-08-17 Morning Star
+338,500270,Scotts Bay ,2022-08-17,Morning Star,Purse Seine,Scotia Garden,113,ScotiaGardenReturns2022.csv,2022-08-17 Morning Star
+339,499078,Scotts Bay ,2022-08-17,Morning Star,Purse Seine,Scotia Garden,113,ScotiaGardenReturns2022.csv,2022-08-17 Morning Star
+340,495992,Scotts Bay ,2022-08-17,Morning Star,Purse Seine,Scotia Garden,113,ScotiaGardenReturns2022.csv,2022-08-17 Morning Star
+341,522563,Scotts Bay ,2022-08-17,Morning Star,Purse Seine,Scotia Garden,113,ScotiaGardenReturns2022.csv,2022-08-17 Morning Star
+342,522854,German Bank,2022-08-26,Morning Star,Purse Seine,Scotia Garden,89,ScotiaGardenReturns2022.csv,2022-08-26 Morning Star
+343,491388,German Bank,2022-09-14,Morning Star,Purse Seine,Scotia Garden,59,ScotiaGardenReturns2022.csv,2022-09-14 Morning Star
+344,603503,German Bank,2022-09-14,Morning Star,Purse Seine,Scotia Garden,59,ScotiaGardenReturns2022.csv,2022-09-14 Morning Star
+345,600479,Seal Iland,2022-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,135,ScotiaGardenReturns2022.csv,2022-10-07 Leroy & Barry II
+346,600440,Seal Iland,2022-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,135,ScotiaGardenReturns2022.csv,2022-10-07 Leroy & Barry II
+347,600457,Seal Iland,2022-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,135,ScotiaGardenReturns2022.csv,2022-10-07 Leroy & Barry II
+348,487227,Grand Manan ,2022-10-17,Leroy & Barry II,Purse Seine,Scotia Garden,103,ScotiaGardenReturns2022.csv,2022-10-17 Leroy & Barry II
+349,491315,,2022-09-14,Brunswick Provider,Purse Seine,Scotia Garden,NA,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider
+350,491430,,2022-09-14,Brunswick Provider,Purse Seine,Scotia Garden,NA,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider
+351,516698,North East Banks,2021-10-06,Canada 100,Purse Seine,Connors,95902,ConnorsReturns2022.csv,2021-10-05 Canada 100
+352,493287,South West Bank,2022-06-02,Canada 100,Purse Seine,Connors,89.6,ConnorsReturns2022.csv,2022-06-02 Canada 100
+353,585563,South East Banks,2022-06-14,Fundy Monarch,Purse Seine,Connors,108,ConnorsReturns2022.csv,2022-06-14 Fundy Monarch
+354,496891,White Head,2022-07-08,Brunswick Provider,Purse Seine,Connors,75,ConnorsReturns2022.csv,2022-07-08 Brunswick Provider
+355,507389,White Head,2022-07-08,Canada 100,Purse Seine,Connors,72.5,ConnorsReturns2022.csv,2022-07-08 Canada 100
+356,507308,Patch,2022-07-07,Fundy Monarch,Purse Seine,Connors,37.6,ConnorsReturns2022.csv,2022-07-07 Fundy Monarch
+357,496387,White Head,2022-07-07,Brunswick Provider,Purse Seine,Connors,81.8,ConnorsReturns2022.csv,2022-07-06 Brunswick Provider
+358,507737,White Head,2022-07-08,Brunswick Provider,Purse Seine,Connors,75,ConnorsReturns2022.csv,2022-07-08 Brunswick Provider
+359,507736,White Head,2022-07-08,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2022.csv,2022-07-08 Brunswick Provider
+360,490487, Scots Bay,2022-07-11,Fundy Monarch,Purse Seine,Connors,182,ConnorsReturns2022.csv,2022-07-11 Fundy Monarch
+361,585683,Scots Bay,2022-07-12,Brunswick Provider,Purse Seine,Connors,150,ConnorsReturns2022.csv,2022-07-12 Brunswick Provider
+362,507438,White Head,2022-07-15,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2022.csv,2022-07-15 Brunswick Provider
+363,507609,White Head,2022-07-15,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2022.csv,2022-07-15 Brunswick Provider
+364,496592,White Head,2022-07-15,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2022.csv,2022-07-15 Brunswick Provider
+365,496468,White Head,2022-07-15,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2022.csv,2022-07-15 Brunswick Provider
+366,507716,White Head,2022-07-15,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2022.csv,2022-07-15 Brunswick Provider
+367,551575,White Head,2022-07-15,Canada 100,Purse Seine,Connors,65,ConnorsReturns2022.csv,2022-07-15 Canada 100
+368,585004,Brier,2022-07-19,Brunswick Provider,Purse Seine,Connors,42.9,ConnorsReturns2022.csv,2022-07-19 Brunswick Provider
+369,585308,Sandy Cove,2022-07-21,Brunswick Provider,Purse Seine,Connors,122.5,ConnorsReturns2022.csv,2022-07-21 Brunswick Provider
+370,469756,Scots Bay,2022-08-02,Canada 100,Purse Seine,Connors,149.4,ConnorsReturns2022.csv,2022-08-02 Canada 100
+371,495520,Scots Bay,2022-08-09,Brunswick Provider,Purse Seine,Connors,139.5,ConnorsReturns2022.csv,2022-08-09 Brunswick Provider
+372,495463,Scots Bay,2022-08-09,Brunswick Provider,Purse Seine,Connors,139.5,ConnorsReturns2022.csv,2022-08-09 Brunswick Provider
+373,507351,Seelys Head,2022-08-04,Caroline B,Shut off,Connors,16.87,ConnorsReturns2022.csv,2022-08-04 Caroline B
+374,516366,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+375,500306,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+376,585883,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+377,506114,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+378,500223,Scots Bay,2022-08-11,Canada 100,Purse Seine,Connors,124.6,ConnorsReturns2022.csv,2022-08-11 Canada 100
+379,500253,Scots Bay,2022-08-11,Canada 100,Purse Seine,Connors,124.6,ConnorsReturns2022.csv,2022-08-11 Canada 100
+380,500952,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,139,ConnorsReturns2022.csv,2022-08-12 Canada 100
+381,522501,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,139,ConnorsReturns2022.csv,2022-08-12 Canada 100
+382,522002,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-08-10 Canada 100
+383,500184,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+384,500252,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+385,500301,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+386,495675,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-10 Canada 100
+387,500226,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-10 Canada 100
+388,500056,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-10 Canada 100
+389,500283,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-10 Canada 100
+390,495496,Scots Bay,2022-08-10,Canada 100,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-10 Canada 100
+391,522275,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+392,506149,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
+393,500245,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+394,498101,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+395,500658,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+396,522025,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+397,500961,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+398,498122,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+399,498150,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+400,498124,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+401,498853,Scots Bay,2022-08-11,Canada 100,Purse Seine,Connors,124.6,ConnorsReturns2022.csv,2022-08-11 Canada 100
+402,551388,White Head,2022-08-17,Canada 100,Purse Seine,Connors,102,ConnorsReturns2022.csv,2022-08-17 Canada 100
+403,495826,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+404,498923,Scots Bay,2022-08-23,Canada 100,Purse Seine,Connors,145,ConnorsReturns2022.csv,2022-08-23 Canada 100
+405,498769,Scots Bay,2022-08-23,Canada 100,Purse Seine,Connors,145,ConnorsReturns2022.csv,2022-08-23 Canada 100
+406,498896,Scots Bay,2022-08-23,Canada 100,Purse Seine,Connors,145,ConnorsReturns2022.csv,2022-08-23 Canada 100
+407,498899,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+408,498866,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+409,498900,Scots Bay,2022-08-23,Canada 100,Purse Seine,Connors,145,ConnorsReturns2022.csv,2022-08-23 Canada 100
+410,498732,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+411,498935,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+412,498795,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+413,480599,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,57,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+414,498778,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,57,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+415,502079,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,57,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+416,498747,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,57,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+417,500558,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+418,498828,Scots Bay,2022-08-24,Fundy Monarch,Purse Seine,Connors,111,ConnorsReturns2022.csv,2022-08-24 Fundy Monarch
+419,491020,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,105,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+420,495779,Scots Bay,2022-08-24,Brunswick Provider,Purse Seine,Connors,105,ConnorsReturns2022.csv,2022-08-24 Brunswick Provider
+421,498911,Scots Bay,2022-08-25,Canada 100,Purse Seine,Connors,145,ConnorsReturns2022.csv,2022-08-23 Canada 100
+422,507157,White Head,2022-08-17,Canada 100,Purse Seine,Connors,102,ConnorsReturns2022.csv,2022-08-17 Canada 100
+423,549139,White Head,2022-08-15,Canada 100,Purse Seine,Connors,102,ConnorsReturns2022.csv,2022-08-15 Canada 100
+424,522029,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+425,498114,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+426,500392,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+427,500695,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+428,500342,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+429,500458,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+430,498082,Scots Bay,2022-08-12,Canada 100,Purse Seine,Connors,149,ConnorsReturns2022.csv,2022-08-12 Canada 100
+431,517337,Sandy Cove,2022-08-22,Canada 100,Purse Seine,Connors,117,ConnorsReturns2022.csv,2022-08-23 Canada 100
+432,499869,German Bank,2022-08-16,Brunswick Provider,Purse Seine,Connors,124,ConnorsReturns2022.csv,2022-08-16 Brunswick Provider
+433,481051,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+434,498647,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+435,502898,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+436,502692,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+437,499931,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+438,498408,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+439,500735,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+440,522754,German Bank,2022-08-30,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-30 Fundy Monarch
+441,502664,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+442,498158,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+443,502801,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+444,498289,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+445,498427,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+446,502660,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+447,590964,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+448,498433,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+449,498598,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+450,502431,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+451,522687,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+452,502304,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+453,498443,German Bank,2022-08-31,Fundy Monarch,Purse Seine,Connors,224,ConnorsReturns2022.csv,2022-08-31 Fundy Monarch
+454,502129,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+455,502148,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+456,502095,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+457,502111,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+458,502190,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+459,484666,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+460,594164,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+461,522021,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+462,498963,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+463,498814,Scots Bay,2022-09-06,Canada 100,Purse Seine,Connors,106,ConnorsReturns2022.csv,2022-09-06 Canada 100
+464,594007,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+465,502247,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+466,594185,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+467,502094,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+468,475773,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+469,475771,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+470,475889,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+471,475760,Scots Bay,2022-09-06,Brunswick Provider,Purse Seine,Connors,113,ConnorsReturns2022.csv,2022-09-06 Brunswick Provider
+472,502292,Scots Bay,2022-09-08,Canada 100,Purse Seine,Connors,68,ConnorsReturns2022.csv,2022-09-08 Canada 100
+473,475812,Scots Bay,2022-09-08,Canada 100,Purse Seine,Connors,68,ConnorsReturns2022.csv,2022-09-08 Canada 100
+474,475807,Scots Bay,2022-09-08,Canada 100,Purse Seine,Connors,68,ConnorsReturns2022.csv,2022-09-08 Canada 100
+475,498352,Scots Bay,2022-09-02,Canada 100,Purse Seine,Connors,68,ConnorsReturns2022.csv,2022-09-06 Canada 100
+476,585545,Seal Cove,2022-07-22,Brunswick Provider,Purse Seine,Connors,17,ConnorsReturns2022.csv,2022-07-22 Brunswick Provider
+477,500217,Scots Bay,2022-09-07,Fundy Monarch,Purse Seine,Connors,172,ConnorsReturns2022.csv,2022-09-07 Fundy Monarch
+478,500271,Long Island Shore,2022-08-11,Brunswick Provider,Purse Seine,Connors,25,ConnorsReturns2022.csv,2022-08-11 Brunswick Provider
+479,491365,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+480,603505,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+481,603522,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+482,603526,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+483,603527,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+484,491282,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+485,473252,German Bank,2022-09-13,Fundy Monarch,Purse Seine,Connors,105,ConnorsReturns2022.csv,2022-09-13 Fundy Monarch
+486,502085,Scots Bay,2022-09-19,Fundy Monarch,Purse Seine,Connors,203,ConnorsReturns2022.csv,2022-09-19 Fundy Monarch
+487,475710,Scots Bay,2022-09-19,Canada 100,Purse Seine,Connors,126,ConnorsReturns2022.csv,2022-09-19 Canada 100
+488,506218,Scots Bay,2022-09-19,Canada 100,Purse Seine,Connors,126,ConnorsReturns2022.csv,2022-09-19 Canada 100
+489,475939,Scots Bay,2022-09-19,Fundy Monarch,Purse Seine,Connors,203,ConnorsReturns2022.csv,2022-09-19 Fundy Monarch
+490,473184,German Bank,2022-09-14,Fundy Monarch,Purse Seine,Connors,103,ConnorsReturns2022.csv,2022-09-13 Fundy Monarch
+491,473264,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+492,603546,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+493,475984,Scots Bay,2022-09-19,Canada 100,Purse Seine,Connors,126,ConnorsReturns2022.csv,2022-09-19 Canada 100
+494,499155,Scots Bay,2022-09-18,Canada 100,Purse Seine,Connors,126,ConnorsReturns2022.csv,2022-09-19 Canada 100
+495,499381,White Head,2022-10-13,Canada 100,Purse Seine,Connors,35.5,ConnorsReturns2022.csv,2022-10-13 Canada 100
+496,491344,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+497,491352,German Bank,2022-09-14,Brunswick Provider,Purse Seine,Connors,125,ConnorsReturns2022.csv,2022-09-14 Brunswick Provider
+498,601412,German Bank,2022-09-30,Leroy & Barry II,Purse Seine,Cape Breeze,83,CapeBreezeReturns2022.csv,2022-09-30 Leroy & Barry II
+499,491324,German Bank,2022-09-19,Lady Melissa,Purse Seine,Cape Breeze,115,CapeBreezeReturns2022.csv,2022-09-19 Lady Melissa
+500,467290,German Bank,2022-09-02,Tasha Marie,Purse Seine,Cape Breeze,66,CapeBreezeReturns2022.csv,2022-09-02 Tasha Marie
+501,475150,German Bank,2022-09-02,Tasha Marie,Purse Seine,Cape Breeze,66,CapeBreezeReturns2022.csv,2022-09-02 Tasha Marie
+502,522875,German Bank,2022-09-02,Tasha Marie,Purse Seine,Cape Breeze,66,CapeBreezeReturns2022.csv,2022-09-02 Tasha Marie
+503,510594,German Bank,2022-09-01,Tasha Marie,Purse Seine,Cape Breeze,19,CapeBreezeReturns2022.csv,2022-09-01 Tasha Marie
+504,467488,German Bank,2022-09-01,Tasha Marie,Purse Seine,Cape Breeze,19,CapeBreezeReturns2022.csv,2022-09-01 Tasha Marie
+505,475107,German Bank,2022-09-01,Tasha Marie,Purse Seine,Cape Breeze,19,CapeBreezeReturns2022.csv,2022-09-01 Tasha Marie
+506,502847,German Bank,2022-08-31,Morning Star,Purse Seine,Cape Breeze,13,CapeBreezeReturns2022.csv,2022-08-31 Morning Star
+507,495691,Scots Bay,2022-08-10,Leroy & Barry II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Leroy & Barry II
+508,495670,Scots Bay,2022-08-10,Leroy & Barry II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Leroy & Barry II
+509,495703,Scots Bay,2022-08-10,Leroy & Barry II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Leroy & Barry II
+510,500048,Scots Bay,2022-08-10,Lady Melissa,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Lady Melissa
+511,522370,Scots Bay,2022-08-10,Lady Melissa,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Lady Melissa
+512,518505,Scots Bay,2022-08-10,Lady Melissa,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-10 Lady Melissa
+513,518667,Scots Bay,2022-08-11,Lady Janice II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-11 Lady Janice II
+514,495560,Scots Bay,2022-08-09,Lady Janice II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-09 Lady Janice II
+515,585855,Scots Bay,2022-08-09,Lady Janice II,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-09 Lady Janice II
+516,522729,German Bank,2022-08-26,Morning Star,Purse Seine,Cape Breeze,NA,CapeBreezeReturns2022.csv,2022-08-26 Morning Star
+517,511150,GANNET DRY LEDGE-AREA 5,2021-06-14,Sealife II,Purse Seine,Comeau - Sea Life,34,ComeauReturns2021.csv,2021-06-14 Sealife II
+518,511097,GANNET DRY LEDGE-AREA 5,2021-06-14,Lady Melissa,Purse Seine,Comeau - Sea Life,56,ComeauReturns2021.csv,2021-06-14 Lady Melissa
+519,580175,SCOTS BAY-AREA 8,2021-08-31,Sealife II,Purse Seine,Comeau - Sea Life,146,ComeauReturns2021.csv,2021-08-31 Sealife II
+520,581226,Scotts Bay,2021-06-10,Fundy Monarch,Purse Seine,Connors,67,ConnorsReturns2021.csv,2021-06-10 Fundy Monarch
+521,513256,Long Island Shore,2021-07-05,Brunswick Provider,Purse Seine,Connors,100,ConnorsReturns2021.csv,2021-07-05 Brunswick Provider
+522,485775,Prong,2021-07-14,Brunswick Provider,Purse Seine,Connors,92,ConnorsReturns2021.csv,2021-07-14 Brunswick Provider
+523,469895,"45 18,81N 690 52,34W",2021-07-21,Lady Melissa,Purse Seine,Connors,42,ConnorsReturns2021.csv,2021-07-21 Lady Melissa
+524,511454,Scotts Bay,2021-08-02,Fundy Monarch,Purse Seine,Connors,68,ConnorsReturns2021.csv,2021-08-02 Fundy Monarch
+525,515215,McDormand Patch,2021-08-04,Brunswick Provider,Purse Seine,Connors,46,ConnorsReturns2021.csv,2021-08-04 Brunswick Provider
+526,511675,McDormand Patch,2021-08-04,Brunswick Provider,Purse Seine,Connors,46,ConnorsReturns2021.csv,2021-08-04 Brunswick Provider
+527,511729,Scotts Bay,2021-08-03,Canada 100,Purse Seine,Connors,67,ConnorsReturns2021.csv,2021-08-03 Canada 100
+528,462846,N/A,2021-08-06,Brunswick Provider,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-08-06 Brunswick Provider
+529,589877,Scotts Bay,2021-08-03,Brunswick Provider,Purse Seine,Connors,86,ConnorsReturns2021.csv,2021-08-03 Brunswick Provider
+530,512543,Moores Ledge & Prong,2021-08-10,Canada 100,Purse Seine,Connors,31,ConnorsReturns2021.csv,2021-08-10 Canada 100
+531,589836,Scots Bay,2021-08-03,Canada 100,Purse Seine,Connors,86,ConnorsReturns2021.csv,2021-08-03 Canada 100
+532,512567,Moores Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
+533,512503,Moores Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
+534,484725,Prong,2021-08-09,Fundy Monarch,Purse Seine,Connors,95,ConnorsReturns2021.csv,2021-08-09 Fundy Monarch
+535,463444,Scotts Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
+536,463270,Scotts Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
+537,590768,Scotts Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
+538,590663,Scotts Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
+539,590714,Scotts Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
+540,460583,Scotts Bay,2021-08-18,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2021.csv,2021-08-18 Brunswick Provider
+541,590170,Scotts Bay,2021-08-18,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2021.csv,2021-08-18 Brunswick Provider
+542,51378,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,Connors,98,ConnorsReturns2021.csv,2021-08-16 Brunswick Provider
+543,513483,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,Connors,98,ConnorsReturns2021.csv,2021-08-16 Brunswick Provider
+544,584493,North East Banks,2021-08-13,Brunswick Provider,Purse Seine,Connors,42,ConnorsReturns2021.csv,2021-08-13 Brunswick Provider
+545,583902,White Head,2021-08-11,Fundy Monarch,Purse Seine,Connors,44,ConnorsReturns2021.csv,2021-08-11 Fundy Monarch
+546,494445,Scotts Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
+547,494379,Scotts Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
+548,480665,Scotts Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
+549,511323,Scotts Bay,2021-08-25,Canada 100,Purse Seine,Connors,76,ConnorsReturns2021.csv,2021-08-25 Canada 100
+550,464212,Scotts Bay,2021-08-25,Canada 100,Purse Seine,Connors,76,ConnorsReturns2021.csv,2021-08-25 Canada 100
+551,579872,Scotts Bay,2021-08-25,Canada 100,Purse Seine,Connors,776,ConnorsReturns2021.csv,2021-08-25 Canada 100
+552,511121,Scotts Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
+553,494378,Scotts Bay,2021-08-25,Fundy Monarch,Purse Seine,Connors,102,ConnorsReturns2021.csv,2021-08-25 Fundy Monarch
+554,494446,Scotts Bay,2021-08-27,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-08-27 Canada 100
+555,590330,Scotts Bay,2021-08-27,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-08-27 Canada 100
+556,485856,Scotts Bay,2021-08-27,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-08-27 Canada 100
+557,494768,Scotts Bay,2021-08-27,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-08-27 Canada 100
+558,494720,Scotts Bay,2021-08-27,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-08-27 Canada 100
+559,463875,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,64,ConnorsReturns2021.csv,2021-09-01 Canada 100
+560,488244,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+561,510055,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+562,587582,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+563,587290,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+564,488070,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+565,494962,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+566,488138,Scotts Bay,2021-09-01,Brunswick Provider,Purse Seine,Connors,27,ConnorsReturns2021.csv,2021-09-01 Brunswick Provider
+567,587637,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+568,488052,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+569,463831,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+570,587744,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+571,463935,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+572,488101,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+573,463807,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+574,463789,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+575,488203,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+576,510072,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+577,488081,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+578,527118,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+579,587730,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+580,463783,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+581,587583,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+582,587360,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+583,488248,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+584,587334,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-09-01 Canada 100
+585,488355,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
+586,488266,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
+587,488618,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
+588,488534,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
+589,488533,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
+590,579635,N/A,2021-08-31,Lady Melissa,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-08-31 Lady Melissa
+591,581796,German Bank,2021-09-08,Fundy Monarch,Purse Seine,Connors,104,ConnorsReturns2021.csv,2021-09-08 Fundy Monarch
+592,464297,German Bank,2021-09-08,Canada 100,Purse Seine,Connors,83,ConnorsReturns2021.csv,2021-09-08 Canada 100
+593,580818,German Bank,2021-09-08,Fundy Monarch,Purse Seine,Connors,104,ConnorsReturns2021.csv,2021-09-08 Fundy Monarch
+594,469366,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,24.18,ConnorsReturns2021.csv,2021-09-06 Silver King
+595,515768,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,24.18,ConnorsReturns2021.csv,2021-09-06 Silver King
+596,583368,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,24.18,ConnorsReturns2021.csv,2021-09-06 Silver King
+597,488502,German Bank,2021-09-08,Fundy Monarch,Purse Seine,Connors,104,ConnorsReturns2021.csv,2021-09-08 Fundy Monarch
+598,463776,Scotts Bay,2021-09-01,Canada 100,Purse Seine,Connors,100,ConnorsReturns2021.csv,2021-09-01 Canada 100
+599,463962,German Bank,2021-09-09,Brunswick Provider,Purse Seine,Connors,83,ConnorsReturns2021.csv,2021-09-09 Brunswick Provider
+600,581803,Scotts Bay,2021-09-14,Brunswick Provider,Purse Seine,Connors,130,ConnorsReturns2021.csv,2021-09-14 Brunswick Provider
+601,463779,German Bank,2021-09-15,Canada 100,Purse Seine,Connors,97,ConnorsReturns2021.csv,2021-09-15 Canada 100
+602,580835,German Bank,2021-09-15,Canada 100,Purse Seine,Connors,97,ConnorsReturns2021.csv,2021-09-15 Canada 100
+603,463482,German Bank,2021-09-15,Canada 100,Purse Seine,Connors,97,ConnorsReturns2021.csv,2021-09-15 Canada 100
+604,511231,German Bank,2021-09-15,Canada 100,Purse Seine,Connors,97,ConnorsReturns2021.csv,2021-09-15 Canada 100
+605,488198,German Bank,2021-09-15,Canada 100,Purse Seine,Connors,97,ConnorsReturns2021.csv,2021-09-15 Canada 100
+606,490522,Scotts Bay,2021-09-14,Brunswick Provider,Purse Seine,Connors,130,ConnorsReturns2021.csv,2021-09-14 Brunswick Provider
+607,514777,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
+608,514729,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
+609,514801,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
+610,514668,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
+611,514635,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
+612,580027,North East Banks,2021-10-05,Fundy Monarch,Purse Seine,Connors,43,ConnorsReturns2021.csv,2021-10-05 Fundy Monarch
+613,469700,Grand Manan Banks,2021-10-14,Brunswick Provider,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-10-14 Brunswick Provider
+614,584951,Grand Manan Banks,2021-10-24,Canada 100,Purse Seine,Connors,137,ConnorsReturns2021.csv,2021-10-24 Canada 100
+615,515650,Deer Island NB,2021-10-15,Senator Neil,Weir/Black Water,Connors,14,ConnorsReturns2021.csv,2021-10-15 Senator Neil
+616,510156,German Bank,2021-10-21,Brunswick Provider,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-10-21 Brunswick Provider
+617,42544,German Bank,2021-10-26,Brunswick Provider,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-10-26 Brunswick Provider
+618,583187,,2021-10-24,Brunswick Provider,N/A,Connors,NA,ConnorsReturns2021.csv,2021-10-24 Brunswick Provider
+619,580326,Gannet Dry Ledge,2021-06-18,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-06-18 Leroy & Barry II
+620,580683,Gannet Dry Ledge,2021-06-19,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-06-19 Leroy & Barry II
+621,581777,German Bank,2021-06-24,Leroy & Barry II,Purse Seine,Scotia Garden,90,ScotiaGardenReturns2021.csv,2021-06-24 Leroy & Barry II
+622,5153193,Scots Bay,2021-07-19,Morning Star,Purse Seine,Scotia Garden,57,ScotiaGardenReturns2021.csv,2021-07-19 Morning Star
+623,580083,Scots Bay,2021-07-19,Morning Star,Purse Seine,Scotia Garden,57,ScotiaGardenReturns2021.csv,2021-07-19 Morning Star
+624,469668,Scots Bay ,2021-07-19,Morning Star,Purse Seine,Scotia Garden,57,ScotiaGardenReturns2021.csv,2021-07-19 Morning Star
+625,515202,Scots Bay,2021-07-20,Leroy & Barry II,Purse Seine,Scotia Garden,82,ScotiaGardenReturns2021.csv,2021-07-20 Leroy & Barry II
+626,469701,Scots Bay,2021-07-20,Leroy & Barry II,Purse Seine,Scotia Garden,82,ScotiaGardenReturns2021.csv,2021-07-20 Leroy & Barry II
+627,469891,Scots Bay,2021-07-20,Leroy & Barry II,Purse Seine,Scotia Garden,82,ScotiaGardenReturns2021.csv,2021-07-20 Leroy & Barry II
+628,464823,Gannet Dry Ledge,2021-07-28,Leroy & Barry II,Purse Seine,Scotia Garden,94,ScotiaGardenReturns2021.csv,2021-07-28 Leroy & Barry II
+629,512092,Scots Bay,2021-08-03,Leroy & Barry II,Purse Seine,Scotia Garden,27,ScotiaGardenReturns2021.csv,2021-08-03 Leroy & Barry II
+630,589826,Scots Bay,2021-08-03,Leroy & Barry II,Purse Seine,Scotia Garden,27,ScotiaGardenReturns2021.csv,2021-08-03 Leroy & Barry II
+631,589875,Scots Bay,2021-08-03,Leroy & Barry II,Purse Seine,Scotia Garden,27,ScotiaGardenReturns2021.csv,2021-08-03 Leroy & Barry II
+632,589933,Scots Bay,2021-08-03,Leroy & Barry II,Purse Seine,Scotia Garden,27,ScotiaGardenReturns2021.csv,2021-08-03 Leroy & Barry II
+633,512080,Scots Bay,2021-08-03,Morning Star,Purse Seine,Scotia Garden,16,ScotiaGardenReturns2021.csv,2021-08-03 Morning Star
+634,589884,Scots Bay,2021-08-03,Morning Star,Purse Seine,Scotia Garden,16,ScotiaGardenReturns2021.csv,2021-08-03 Morning Star
+635,512098,Scots Bay,2021-08-03,Morning Star,Purse Seine,Scotia Garden,16,ScotiaGardenReturns2021.csv,2021-08-03 Morning Star
+636,589705,Scots Bay,2021-08-03,Morning Star,Purse Seine,Scotia Garden,16,ScotiaGardenReturns2021.csv,2021-08-03 Morning Star
+637,589736,Scots Bay,2021-08-03,Morning Star,Purse Seine,Scotia Garden,16,ScotiaGardenReturns2021.csv,2021-08-03 Morning Star
+638,512120,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+639,5900081,Scots Bay,2021-08-04,Leroy & Barry II,Purse Seine,Scotia Garden,22,ScotiaGardenReturns2021.csv,2021-08-04 Leroy & Barry II
+640,462879,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+641,462835,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+642,486910,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+643,589935,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+644,589949,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+645,462740,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+646,462553,Scots Bay,2021-08-04,Morning Star,Purse Seine,Scotia Garden,28,ScotiaGardenReturns2021.csv,2021-08-04 Morning Star
+647,484789,Scots Bay,2021-08-17,Morning Star,Purse Seine,Scotia Garden,61,ScotiaGardenReturns2021.csv,2021-08-17 Morning Star
+648,590321,Scots Bay,2021-08-18,Morning Star,Purse Seine,Scotia Garden,50,ScotiaGardenReturns2021.csv,2021-08-18 Morning Star
+649,590372,Scots Bay ,2021-08-18,Morning Star,Purse Seine,Scotia Garden,50,ScotiaGardenReturns2021.csv,2021-08-18 Morning Star
+650,494402,Scots Bay,2021-08-18,Leroy & Barry II,Purse Seine,Scotia Garden,42,ScotiaGardenReturns2021.csv,2021-08-18 Leroy & Barry II
+651,494299,Scots Bay,2021-08-18,Morning Star,Purse Seine,Scotia Garden,50,ScotiaGardenReturns2021.csv,2021-08-18 Morning Star
+652,494285,Scots Bay,2021-08-19,Leroy & Barry II,Purse Seine,Scotia Garden,42,ScotiaGardenReturns2021.csv,2021-08-19 Leroy & Barry II
+653,464224,Scots Bay,2021-08-19,Leroy & Barry II,Purse Seine,Scotia Garden,42,ScotiaGardenReturns2021.csv,2021-08-19 Leroy & Barry II
+654,590156,Scots Bay,2021-08-19,Leroy & Barry II,Purse Seine,Scotia Garden,42,ScotiaGardenReturns2021.csv,2021-08-19 Leroy & Barry II
+655,587293,Scots Bay,2021-08-31,Leroy & Barry II,Purse Seine,Scotia Garden,70,ScotiaGardenReturns2021.csv,2021-08-31 Leroy & Barry II
+656,463797,Scots Bay,2021-09-01,Morning Star,Purse Seine,Scotia Garden,72,ScotiaGardenReturns2021.csv,2021-09-01 Morning Star
+657,488145,Scots Bay,2021-09-02,Leroy & Barry II,Purse Seine,Scotia Garden,103,ScotiaGardenReturns2021.csv,2021-09-02 Leroy & Barry II
+658,205155,German Bank,2021-09-08,Leroy & Barry II,Purse Seine,Scotia Garden,101,ScotiaGardenReturns2021.csv,2021-09-08 Leroy & Barry II
+659,489754,German Bank,2021-09-09,Leroy & Barry II,Purse Seine,Scotia Garden,33,ScotiaGardenReturns2021.csv,2021-09-09 Leroy & Barry II
+660,488595,German Bank,2021-09-09,Morning Star,Purse Seine,Scotia Garden,66,ScotiaGardenReturns2021.csv,2021-09-09 Morning Star
+661,488585,German Bank,2021-09-09,Morning Star,Purse Seine,Scotia Garden,66,ScotiaGardenReturns2021.csv,2021-09-09 Morning Star
+662,463335,Scots Bay,2021-09-16,Leroy & Barry II,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-09-16 Leroy & Barry II
+663,489473,German Bank,2021-09-23,Morning Star,Purse Seine,Scotia Garden,95,ScotiaGardenReturns2021.csv,2021-09-23 Morning Star
+664,514422,German Bank,2021-10-06,Morning Star,Purse Seine,Scotia Garden,137,ScotiaGardenReturns2021.csv,2021-10-06 Morning Star
+665,514447,German Bank,2021-10-06,Morning Star,Purse Seine,Scotia Garden,137,ScotiaGardenReturns2021.csv,2021-10-06 Morning Star
+666,514164,German Bank,2021-10-06,Morning Star,Purse Seine,Scotia Garden,137,ScotiaGardenReturns2021.csv,2021-10-06 Morning Star
+667,514759,Seal Island ,2021-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,108,ScotiaGardenReturns2021.csv,2021-10-07 Leroy & Barry II
+668,514778,Seal Island ,2021-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,39,ScotiaGardenReturns2021.csv,2021-10-07 Leroy & Barry II
+669,514724,Seal Island ,2021-10-07,Leroy & Barry II,Purse Seine,Scotia Garden,39,ScotiaGardenReturns2021.csv,2021-10-07 Leroy & Barry II
+670,526523,Seal Island ,2021-10-08,Morning Star,Purse Seine,Scotia Garden,40,ScotiaGardenReturns2021.csv,2021-10-08 Morning Star
+671,516640,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+672,493029,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+673,526873,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+674,510146,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+675,516715,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+676,516775,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+677,516835,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+678,516976,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+679,510089,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,115,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+680,516656,German Bank,2021-10-21,Morning Star,Purse Seine,Scotia Garden,53,ScotiaGardenReturns2021.csv,2021-10-21 Morning Star
+681,516759,German Bank,2021-10-22,Morning Star,Purse Seine,Scotia Garden,53,ScotiaGardenReturns2021.csv,2021-10-22 Morning Star
+682,510101,German Bank,2021-10-22,Morning Star,Purse Seine,Scotia Garden,53,ScotiaGardenReturns2021.csv,2021-10-22 Morning Star
+683,516745,German Bank,2021-10-22,Morning Star,Purse Seine,Scotia Garden,53,ScotiaGardenReturns2021.csv,2021-10-22 Morning Star
+684,516963,German Bank,2021-10-26,Leroy & Barry II,Purse Seine,Scotia Garden,88,ScotiaGardenReturns2021.csv,2021-10-26 Leroy & Barry II
+685,516760,German Bank,2021-10-26,Leroy & Barry II,Purse Seine,Scotia Garden,88,ScotiaGardenReturns2021.csv,2021-10-26 Leroy & Barry II
+686,493025,German Bank,2021-10-26,Leroy & Barry II,Purse Seine,Scotia Garden,88,ScotiaGardenReturns2021.csv,2021-10-26 Leroy & Barry II
+687,531034,SCOTS BAY-AREA 8,2020-06-16,Lady Janice II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-06-16 Lady Janice II
+688,465602,SW GROUNDS AREA 11,2020-07-02,Lady Janice II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-07-02 Lady Janice II
+689,465034,SW GROUNDS AREA 11,2020-07-06,Sealife II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-07-06 Sealife II
+690,465834,SW GROUNDS AREA 11,2020-07-06,Sealife II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-07-06 Sealife II
+691,550158,SCOTS BAY-AREA 8,2020-08-11,Sealife II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-11 Sealife II
+692,550166,SCOTS BAY-AREA 8,2020-08-11,Lady Janice II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-11 Lady Janice II
+693,480600,SCOTS BAY-AREA 8,2020-08-12,Lady Melissa,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-12 Lady Melissa
+694,550173,SCOTS BAY-AREA 8,2020-08-12,Lady Janice II/Lady Melissa,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-12 Lady Janice II/Lady Melissa
+695,531383,SCOTS BAY-AREA 8,2020-08-12,Lady Melissa,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-12 Lady Melissa
+696,531356,SCOTS BAY-AREA 8,2020-08-12,Lady Melissa,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-12 Lady Melissa
+697,480442,SCOTS BAY-AREA 8,2020-08-12,Lady Melissa,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-12 Lady Melissa
+698,480616,SCOTS BAY-AREA 8,2020-08-25,Lady Janice II,Purse Seine,COMEAU-SEA LIFE,NA,ComeauReturns2020.csv,2020-08-25 Lady Janice II
+699,483841,Lurcher,2020-09-10,Canada 100,Purse Seine,Connors,24,ConnorsReturns2020.csv,2020-09-10 Canada 100
+700,482046,Lurcher,2020-09-10,Canada 100,Purse Seine,Connors,24,ConnorsReturns2020.csv,2020-09-10 Canada 100
+701,480898,Lurcher,2020-09-08,Fundy Monarch,Purse Seine,Connors,159,ConnorsReturns2020.csv,2020-09-08 Fundy Monarch
+702,480705,Scots Bay,2020-08-25,Canada 100,Purse Seine,Connors,135,ConnorsReturns2020.csv,2020-08-25 Canada 100
+703,480757,Scots Bay,2020-08-25,Canada 100,Purse Seine,Connors,135,ConnorsReturns2020.csv,2020-08-25 Canada 100
+704,480712,Scots Bay,2020-08-25,Canada 100,Purse Seine,Connors,135,ConnorsReturns2020.csv,2020-08-25 Canada 100
+705,527057,Scots Bay,2020-08-24,Fundy Monarch,Purse Seine,Connors,223,ConnorsReturns2020.csv,2020-08-24 Fundy Monarch
+706,480894,Scots Bay,2020-08-25,Canada 100,Purse Seine,Connors,135,ConnorsReturns2020.csv,2020-08-25 Canada 100
+707,550123,Scots Bay,2020-08-24,Fundy Monarch,Purse Seine,Connors,223,ConnorsReturns2020.csv,2020-08-24 Fundy Monarch
+708,480396,Scots Bay,2020-08-24,Fundy Monarch,Purse Seine,Connors,223,ConnorsReturns2020.csv,2020-08-24 Fundy Monarch
+709,204921,Scots Bay,2020-08-12,Canada 100,Purse Seine,Connors,86,ConnorsReturns2020.csv,2020-08-12 Canada 100
+710,206567,Long Island Shore,2020-08-17,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2020.csv,2020-08-17 Brunswick Provider
+711,206575,Long Island Shore,2020-08-18,Brunswick Provider,Purse Seine,Connors,84,ConnorsReturns2020.csv,2020-08-18 Brunswick Provider
+712,550167,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+713,480623,Scots Bay,2020-08-12,Canada 100,Purse Seine,Connors,86,ConnorsReturns2020.csv,2020-08-12 Canada 100
+714,480667,Scots Bay,2020-08-12,Canada 100,Purse Seine,Connors,86,ConnorsReturns2020.csv,2020-08-12 Canada 100
+715,550014,Scots Bay,2020-08-12,Canada 100,Purse Seine,Connors,86,ConnorsReturns2020.csv,2020-08-12 Canada 100
+716,206562,North West Ledge,2020-09-03,Brunswick Provider,Purse Seine,Connors,114,ConnorsReturns2020.csv,2020-09-03 Brunswick Provider
+717,480591,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+718,550036,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+719,480692,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+720,480639,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+721,550074,Scots Bay,2020-08-10,Canada 100,Purse Seine,Connors,110,ConnorsReturns2020.csv,2020-08-10 Canada 100
+722,550194,Scots Bay,2020-08-11,Canada 100,Purse Seine,Connors,80,ConnorsReturns2020.csv,2020-08-11 Canada 100
+723,480601,White Head,2020-08-12,Brunswick Provider,Purse Seine,Connors,74,ConnorsReturns2020.csv,2020-08-12 Brunswick Provider
+724,41265,Sandy Cove,2020-07-29,Brunswick Provider,Purse Seine,Connors,92,ConnorsReturns2020.csv,2020-07-29 Brunswick Provider
+725,206160,Sandy Cove,2020-07-28,Brunswick Provider,Purse Seine,Connors,88,ConnorsReturns2020.csv,2020-07-28 Brunswick Provider
+726,207933,Sandy Cove,2020-07-28,Brunswick Provider,Purse Seine,Connors,88,ConnorsReturns2020.csv,2020-07-28 Brunswick Provider
+727,206632,Sandy Cove,2020-07-28,Brunswick Provider,Purse Seine,Connors,88,ConnorsReturns2020.csv,2020-07-28 Brunswick Provider
+728,204869,Sandy Cove,2020-07-28,Brunswick Provider,Purse Seine,Connors,88,ConnorsReturns2020.csv,2020-07-28 Brunswick Provider
+729,207368,McDormand Patch,2020-07-22,Canada 100,Purse Seine,Connors,71,ConnorsReturns2020.csv,2020-07-22 Canada 100
+730,204908,Lurcher,2020-07-17,Fundy Monarch,Purse Seine,Connors,37,ConnorsReturns2020.csv,2020-07-17 Fundy Monarch
+731,460375,Scots Bay,2019-07-17,Lady Janice II,Purse Seine,Connors,NA,ConnorsReturns2020.csv,2019-07-17 Lady Janice II
+732,460200,"Mill Cove, Campobello ",2020-03-06,Capelco,Shut off,Connors,NA,ConnorsReturns2020.csv,2020-03-06 Capelco
+733,480952,Scots Bay,2020-09-21,Fundy Monarch,Purse Seine,Connors,NA,ConnorsReturns2020.csv,2020-09-21 Fundy Monarch
+734,414230,German Bank,2020-09-28,Canada 100,Purse Seine,Connors,118,ConnorsReturns2020.csv,2020-09-28 Canada 100
+735,552159,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+736,552489,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+737,552428,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+738,552282,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+739,552132,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+740,552444,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+741,552006,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
+742,552051,Wolves,2020-10-07,Brunswick Provider,Purse Seine,Connors,126,ConnorsReturns2020.csv,2020-10-07 Brunswick Provider
+743,553350,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+744,552014,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+745,553507,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+746,553430,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Canada 100
+747,553853,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Canada 100
+748,554419,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Canada 100
+749,206566,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Canada 100
+750,554798,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+751,553675,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+752,553597,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+753,553023,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+754,553671,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,70,ConnorsReturns2020.csv,2020-10-13 Canada 100
+755,553378,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,70,ConnorsReturns2020.csv,2020-10-13 Canada 100
+756,552758,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,70,ConnorsReturns2020.csv,2020-10-13 Canada 100
+757,553519,Wolves,2020-10-13,Canada 100,Purse Seine,Connors,70,ConnorsReturns2020.csv,2020-10-13 Canada 100
+758,553500,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+759,552826,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+760,553967,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+761,553399,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+762,552293,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+763,553900,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+764,554500,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+765,552456,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+766,554001,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+767,554610,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+768,553089,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+769,554021,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+770,553369,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+771,554416,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+772,553467,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+773,552683,Wolves,2020-10-14,Brunswick Provider,Purse Seine,Connors,76,ConnorsReturns2020.csv,2020-10-14 Brunswick Provider
+774,554713,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+775,552588,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+776,482292,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+777,554694,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+778,554687,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+779,554718,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+780,552085,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+781,554722,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+782,554792,German Bank,2020-10-14,Fundy Monarch,Purse Seine,Connors,134,ConnorsReturns2020.csv,2020-10-14 Fundy Monarch
+783,554067,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+784,552463,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+785,554410,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+786,207185,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+787,551130,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+788,553976,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+789,552390,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+790,554228,Wolves,2020-10-16,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-16 Canada 100
+791,554626,Wolves,2020-10-15,Brunswick Provider,Purse Seine,Connors,55,ConnorsReturns2020.csv,2020-10-15 Brunswick Provider
+792,554063,Wolves,2020-10-15,Brunswick Provider,Purse Seine,Connors,55,ConnorsReturns2020.csv,2020-10-15 Brunswick Provider
+793,552817,Wolves,2020-10-15,Brunswick Provider,Purse Seine,Connors,55,ConnorsReturns2020.csv,2020-10-15 Brunswick Provider
+794,553909,Wolves,2020-10-15,Brunswick Provider,Purse Seine,Connors,55,ConnorsReturns2020.csv,2020-10-15 Brunswick Provider
+795,552010,Wolves,2020-10-15,Canada 100,Purse Seine,Connors,60,ConnorsReturns2020.csv,2020-10-15 Canada 100
+796,553679,Wolves,2020-10-13,Brunswick Provider,Purse Seine,Connors,72,ConnorsReturns2020.csv,2020-10-13 Brunswick Provider
+797,553247,Wolves,2020-10-15,Canada 100,Purse Seine,Connors,59,ConnorsReturns2020.csv,2020-10-15 Canada 100
+798,551097,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+799,552867,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+800,554891,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+801,551214,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+802,554518,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+803,554699,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+804,554550,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+805,552081,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+806,553280,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+807,551142,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+808,554402,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+809,553019,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+810,554869,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+811,553003,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+812,554994,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+813,553795,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+814,552635,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+815,554678,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+816,554654,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+817,554437,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+818,552318,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+819,552975,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+820,552378,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+821,554103,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+822,551110,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+823,552845,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+824,554485,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
+825,41118,NE Bank,2020-10-21,Brunswick Provider,Purse Seine,Connors,29,ConnorsReturns2020.csv,2020-10-21 Brunswick Provider
+826,552271,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+827,554603,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+828,552707,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+829,554926,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+830,554941,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+831,552243,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+832,553947,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+833,554885,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+834,554368,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+835,553403,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+836,553314,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+837,553511,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+838,553962,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+839,553422,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+840,553929,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+841,554261,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+842,554430,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+843,552305,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
+844,554015,Wolves,2020-10-20,Brunswick Provider,Purse Seine,Connors,11,ConnorsReturns2020.csv,2020-10-20 Brunswick Provider
+845,552177,Wolves,2020-10-20,Brunswick Provider,Purse Seine,Connors,11,ConnorsReturns2020.csv,2020-10-20 Brunswick Provider
+846,554579,Wolves,2020-10-20,Brunswick Provider,Purse Seine,Connors,11,ConnorsReturns2020.csv,2020-10-20 Brunswick Provider
+847,554677,Wolves,2020-10-20,Brunswick Provider,Purse Seine,Connors,11,ConnorsReturns2020.csv,2020-10-20 Brunswick Provider
+848,554300,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+849,554810,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+850,553686,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+851,552341,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+852,553826,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+853,554802,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+854,554313,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+855,553562,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+856,554468,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+857,552673,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+858,553230,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+859,554761,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+860,552056,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+861,553910,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+862,552437,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+863,553265,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+864,554600,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+865,553670,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+866,554393,Wolves,2020-10-19,Canada 100,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Canada 100
+867,552828,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+868,551067,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+869,552330,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+870,554918,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+871,552229,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+872,552112,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+873,553178,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+874,554682,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+875,551047,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+876,553789,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+877,551123,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+878,554878,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+879,553949,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+880,552854,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+881,552176,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+882,552443,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+883,553147,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+884,553118,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+885,552092,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+886,553210,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+887,554379,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+888,552771,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+889,552882,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+890,553212,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+891,554781,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+892,553405,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+893,552616,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+894,554077,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+895,554050,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+896,554834,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+897,552419,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+898,552395,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+899,552583,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+900,554877,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+901,552818,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+902,551063,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+903,552992,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+904,552939,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+905,554011,Wolves,2020-10-19,Brunswick Provider,Purse Seine,Connors,81,ConnorsReturns2020.csv,2020-10-19 Brunswick Provider
+906,40597,Scots Bay,2020-08-24,Fundy Monarch,Purse Seine,Connors,223,ConnorsReturns2020.csv,2020-08-24 Fundy Monarch
+907,481652,Seal Island,2020-09-25,Leroy & Barry II,Purse Seine,Scotia Garden,69,ScotiaGardenReturns2020.csv,2020-09-25 Leroy & Barry II
+908,481022,German Bank,2020-10-05,Leroy & Barry II,Purse Seine,Scotia Garden,64,ScotiaGardenReturns2020.csv,2020-10-05 Leroy & Barry II
+909,531489,German Bank,2020-08-18,Lady Melissa,Purse Seine,Cape Breeze,99,CapeBreezeReturns2020.csv,2020-08-18 Lady Melissa
+910,480864,Scots Bay,2020-08-25,Morning Star,Purse Seine,Cape Breeze,66,CapeBreezeReturns2020.csv,2020-08-25 Morning Star
+911,40619,Moore's Ledge,2020-09-04,Morning Star,Purse Seine,Cape Breeze,34,CapeBreezeReturns2020.csv,2020-09-04 Morning Star
+912,483667,Lurcher,2020-09-10,Morning Star,Purse Seine,Cape Breeze,56,CapeBreezeReturns2020.csv,2020-09-10 Morning Star
+913,34171,Scots Bay,2019-08-05,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-08-05 Canada 100
+914,34340,Scots Bay,2019-07-08,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-08 Brunswick Provider
+915,34429,Scots Bay,2019-07-21,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-07-21 Canada 100
+916,34493,McDormant Patch,2019-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Canada 100
+917,34586,Scots Bay,2019-08-19,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-19 Brunswick Provider
+918,34613,Scots Bay,2019-07-22,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-22 Brunswick Provider
+919,42425,Seal Island,2019-10-15,Lady Melissa,Purse Seine,CapeBreeze,NA,rawReturn.csv,2019-10-15 Lady Melissa
+920,42804,Seal Island,2019-10-15,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-15 Morning Star
+921,42937,Seal Island,2019-10-15,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-15 Morning Star
+922,44089,Crow Island Weir,2019-08-27,Caroline B,Weir,Connors,NA,rawReturn.csv,2019-08-27 Caroline B
+923,44186,Prong,2019-06-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-17 Brunswick Provider
+924,44217,Prong,2019-06-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Brunswick Provider
+925,44358,Flagg Cove,2019-08-27,Silver Harvester,Weir,Connors,NA,rawReturn.csv,2019-08-27 Silver Harvester
+926,44374,Cora Bell Weir Grand Manan,2019-08-21,Silver Harvester,ShutOff,Connors,NA,rawReturn.csv,2019-08-21 Silver Harvester
+927,44639,Spruce Island Weir,2019-09-09,Senator Neil,Weir,Connors,NA,rawReturn.csv,2019-09-09 Senator Neil
+928,44790,Tuckers Cove,2019-08-15,Silver King,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-08-15 Silver King
+929,44882,Prong,2019-06-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-17 Brunswick Provider
+930,44979,Prong,2019-06-18,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-18 Canada 100
+931,111573,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+932,111602,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+933,111608,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+934,111612,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+935,111617,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+936,111660,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
+937,111829,Wolfs Bank,2019-10-15,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-10-15 Canada 100
+938,204235,Northeast Bank,2019-06-18,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-18 Brunswick Provider
+939,204236,Prong,2019-06-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Brunswick Provider
+940,204314,Spruce Island Weir,2019-09-09,Senator Neil,Weir,Connors,NA,rawReturn.csv,2019-09-09 Senator Neil
+941,208065,German Bank,2019-09-27,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-09-27 Morning Star
+942,208140,German Bank,2019-09-27,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-09-27 Leroy & Barry II
+943,408257,German Bank,2019-09-27,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-27 Brunswick Provider
+944,414521,McDormant Patch,2019-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Canada 100
+945,414703,Scots Bay,2019-09-04,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-04 Canada 100
+946,414708,Scots Bay,2019-09-03,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-03 Brunswick Provider
+947,414738,Scots Bay,2019-09-16,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-16 Brunswick Provider
+948,414789,Scots Bay,2019-09-04,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-04 Canada 100
+949,414867,Scots Bay,2019-09-04,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-04 Canada 100
+950,415483,McDormant Patch,2019-07-29,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-07-29 Canada 100
+951,416345,Scots Bay,2019-08-06,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-08-06 Fundy Monarch
+952,416352,Scots Bay,2019-08-06,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2019-08-06 Lady Janice II
+953,416466,Sandy Cove NS,2019-09-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-17 Brunswick Provider
+954,416516,Scots Bay,2019-08-05,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-08-05 Canada 100
+955,416636,Sandy Cove NS,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
+956,416653,Scots Bay,2019-08-21,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-08-21 Fundy Monarch
+957,416691,Scots Bay,2019-08-21,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-08-21 Fundy Monarch
+958,417007,Southwest Bank,2016-07-14,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-07-14 Canada 100
+959,417029,Southwest Bank,2016-08-11,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Canada 100
+960,417050,Northeast Bank,2016-08-18,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-18 Canada 100
+961,417180,Southwest Bank,2016-08-04,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-04 Canada 100
+962,417442,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+963,417451,Northeast Bank,2016-08-24,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-24 Margaret Elizabeth
+964,417464,Northeast Bank,2016-08-29,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-29 Margaret Elizabeth
+965,417479,Southwest Bank,2016-08-22,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-22 Canada 100
+966,417500,Southwest Bank,2016-07-14,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-07-14 Margaret Elizabeth
+967,417512,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+968,417617,Northeast Bank,2016-08-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Brunswick Provider
+969,417623,Southwest Bank,2016-07-25,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-25 Brunswick Provider
+970,417729,Southwest Bank,2016-08-08,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-08 Canada 100
+971,417874,Northeast Bank,2016-08-31,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-31 Brunswick Provider
+972,417887,Northeast Bank,2016-09-07,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-07 Margaret Elizabeth
+973,417955,Southwest Bank,2016-08-22,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-22 Canada 100
+974,418119,Northeast Bank,2016-09-09,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-09 Canada 100
+975,418175,Northeast Bank,2016-09-01,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-01 Canada 100
+976,418251,Grand Manan,2016-11-08,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-11-08 Margaret Elizabeth
+977,418584,Scots Bay,2016-07-19,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2016-07-19 Silver Harvester
+978,418802,Southwest Bank,2016-07-13,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-07-13 Margaret Elizabeth
+979,418828,Northeast Bank,2016-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Canada 100
+980,418844,Northeast Bank,2016-08-16,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-16 Canada 100
+981,419130,Southwest Bank,2016-07-27,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-27 Brunswick Provider
+982,419252,German Bank,2016-06-21,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-06-21 Lady Melissa
+983,419373,German Bank,2016-08-25,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-25 Sealife II
+984,419513,Tear Drop,2016-06-28,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-06-28 Morning Star
+985,419530,Tear Drop,2016-06-17,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-06-17 Lady Janice II
+986,419581,German Bank,2016-06-17,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-06-17 Lady Janice II
+987,419705,Tear Drop,2016-06-27,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-06-27 Margaret Elizabeth
+988,419770,Scots Bay,2016-07-19,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-07-19 Margaret Elizabeth
+989,420289,Area 1B,2017-03-01,Dyrsten,Mid Water Trawl,Connors,NA,rawReturn.csv,2017-03-01 Dyrsten
+990,420714,Scots Bay,2016-07-31,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-07-31 Morning Star
+991,420881,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+992,420894,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+993,420908,German Bank,2016-09-02,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-09-02 Lady Janice II
+994,420925,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+995,420927,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+996,420971,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+997,420973,NW of German Bank,2016-07-05,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-07-05 Sealife II
+998,421170,Scots Bay,2016-08-15,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-15 Canada 100
+999,421549,German Bank,2016-08-29,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-29 Lady Janice II
+1000,421619,Scots Bay,2016-08-16,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-16 Morning Star
+1001,421726,German Bank,2016-08-25,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-25 Leroy & Barry II
+1002,421727,Tear Drop,2016-07-06,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2016-07-06 Lady Melissa
+1003,421745,German Bank,2016-08-22,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-22 Morning Star
+1004,421877,SpawnTow,2016-08-24,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-24 Sealife II
+1005,422113,Tear Drop,2016-07-07,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2016-07-07 Silver Harvester
+1006,422173,Northeast Bank,2016-09-30,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-30 Canada 100
+1007,422315,German Bank,2016-07-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-06 Brunswick Provider
+1008,422345,German Bank,2016-08-30,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-30 Sealife II
+1009,422788,German Bank,2016-08-31,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-31 Leroy & Barry II
+1010,422812,Northeast Bank,2016-10-14,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-14 Margaret Elizabeth
+1011,422951,German Bank,2016-08-16,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2016-08-16 Silver Harvester
+1012,423063,German Bank,2016-08-25,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-25 Margaret Elizabeth
+1013,423308,Gully 4Xq,2016-08-04,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-04 Morning Star
+1014,423309,White Head Grand Manan,2016-10-31,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Margaret Elizabeth
+1015,423592,German Bank,2016-08-11,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-11 Morning Star
+1016,423786,German Bank,2017-09-07,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-07 Brunswick Provider
+1017,424951,German Bank,2016-08-17,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Lady Janice II
+1018,424996,German Bank,2016-08-10,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-10 Leroy & Barry II
+1019,425060,Southwest Bank,2016-07-22,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-22 Brunswick Provider
+1020,425061,Northeast Bank,2016-08-24,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-24 Margaret Elizabeth
+1021,425064,Northeast Bank,2016-09-01,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-01 Margaret Elizabeth
+1022,425379,White Head Grand Manan,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
+1023,425765,Northeast Bank,2016-09-07,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-07 Canada 100
+1024,425773,Southwest Bank,2016-07-28,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-28 Brunswick Provider
+1025,425809,Northeast Bank,2016-08-22,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-22 Canada 100
+1026,426117,White Head Grand Manan,2016-10-20,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-20 Margaret Elizabeth
+1027,426125,Northeast Bank,2016-08-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Brunswick Provider
+1028,426139,Southwest Bank,2016-08-11,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Margaret Elizabeth
+1029,426195,Northeast Bank,2016-09-07,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-07 Canada 100
+1030,426234,Northeast Bank,2016-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-02 Canada 100
+1031,426247,White Head Grand Manan,2016-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-14 Brunswick Provider
+1032,426370,Prong,2016-11-16,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-11-16 Canada 100
+1033,426400,Southwest Bank,2016-08-11,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Margaret Elizabeth
+1034,426486,Northeast Bank,2016-09-08,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-08 Margaret Elizabeth
+1035,426494,Grand Manan Banks,2016-08-31,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-31 Margaret Elizabeth
+1036,426501,Prong,2016-09-20,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-20 Canada 100
+1037,426600,Prong,2016-09-20,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-20 Canada 100
+1038,426633,Northeast Bank,2016-09-09,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-09-09 Brunswick Provider
+1039,426682,Prong,2016-09-20,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-20 Margaret Elizabeth
+1040,426821,German Bank,2016-09-07,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-09-07 Morning Star
+1041,426936,Northeast Bank,2016-08-19,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-19 Sealife II
+1042,427393,Northeast Bank,2016-08-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Brunswick Provider
+1043,427496,Northeast Bank,2016-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Canada 100
+1044,427727,Northeast Bank,2016-08-25,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-25 Canada 100
+1045,427813,Northeast Bank,2016-08-25,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-25 Canada 100
+1046,427820,Northeast Bank,2016-08-19,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-19 Brunswick Provider
+1047,427865,Southwest Bank,2016-08-09,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-09 Margaret Elizabeth
+1048,428167,Northeast Bank,2016-08-19,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-19 Canada 100
+1049,428374,Northeast Bank,2016-08-23,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-23 Canada 100
+1050,428401,Northeast Bank,2016-09-06,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Margaret Elizabeth
+1051,428420,Prong,2016-09-16,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-16 Margaret Elizabeth
+1052,428424,Southwest Bank,2016-08-23,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-23 Canada 100
+1053,428528,Northeast Bank,2016-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Canada 100
+1054,428586,Northeast Bank,2016-08-11,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Canada 100
+1055,428673,Northeast Bank,2016-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Canada 100
+1056,430067,Bradfords Cove Weir,2016-09-27,Andrew & Deane,Weir,Connors,NA,rawReturn.csv,2016-09-27 Andrew & Deane
+1057,430078,Northeast Bank,2016-08-30,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-30 Margaret Elizabeth
+1058,430121,Northeast Bank,2016-09-08,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-08 Margaret Elizabeth
+1059,430142,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1060,430283,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1061,430295,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1062,430464,Northeast Bank,2016-08-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Brunswick Provider
+1063,430522,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1064,430705,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1065,430859,Northeast Bank,2016-08-17,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Canada 100
+1066,430868,Northeast Bank,2016-08-19,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-19 Margaret Elizabeth
+1067,431162,German Bank,2016-08-22,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-22 Morning Star
+1068,431354,German Bank,2016-08-16,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-16 Sealife II
+1069,431444,Long Island,2016-09-14,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-09-14 Lady Janice II
+1070,431506,German Bank,2016-08-25,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-25 Lady Janice II
+1071,431509,German Bank,2016-08-23,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-23 Sealife II
+1072,431543,German Bank,2016-08-23,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-23 Sealife II
+1073,431545,German Bank,2016-08-17,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Lady Janice II
+1074,431555,German Bank,2016-08-23,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-23 Sealife II
+1075,431604,Scots Bay,2016-08-16,Lady Melissa,Purse Seine,Connors,NA,rawReturn.csv,2016-08-16 Lady Melissa
+1076,431628,Undetermined,2016-08-15,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2016-08-15 Silver Harvester
+1077,431629,SpawnTow,2016-08-24,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-24 Sealife II
+1078,431635,German Bank,2016-08-23,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-23 Morning Star
+1079,431647,German Bank,2016-08-15,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-15 Sealife II
+1080,431662,German Bank,2016-08-17,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-17 Sealife II
+1081,431690,German Bank,2016-08-25,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-25 Sealife II
+1082,431699,German Bank,2016-08-22,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-22 Leroy & Barry II
+1083,431880,German Bank,2016-09-02,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-09-02 Morning Star
+1084,432950,Scots Bay,2019-09-03,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-03 Brunswick Provider
+1085,433341,Northeast Bank,2016-09-09,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-09 Canada 100
+1086,433477,Prong,2016-09-15,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-15 Margaret Elizabeth
+1087,433596,Long Island,2016-10-04,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-04 Brunswick Provider
+1088,433731,Southwest Bank,2016-08-23,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-23 Canada 100
+1089,435040,German Bank,2016-08-22,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-22 Lady Melissa
+1090,435283,White Head Grand Manan,2016-10-17,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-17 Margaret Elizabeth
+1091,435461,German Bank,2016-08-12,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-12 Lady Janice II
+1092,435502,German Bank,2016-09-13,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-09-13 Lady Janice II
+1093,436142,Northeast Bank,2016-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-02 Canada 100
+1094,436331,Northeast Bank,2016-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-09-06 Brunswick Provider
+1095,437173,German Bank,2016-09-13,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-09-13 Lady Janice II
+1096,437718,North West Ledge,2016-10-03,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-03 Brunswick Provider
+1097,437865,German Bank,2016-08-22,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-22 Lady Melissa
+1098,438411,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1099,438662,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1100,438666,Prong,2019-06-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Brunswick Provider
+1101,438680,Scots Bay,2019-06-24,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-24 Canada 100
+1102,438687,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1103,438742,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1104,438877,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1105,438889,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1106,438897,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1107,438969,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1108,439800,Northeast Bank,2017-09-26,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-26 Brunswick Provider
+1109,440021,German Bank,2016-08-15,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-08-15 Sealife II
+1110,440150,North West Ledge,2016-10-04,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-04 Brunswick Provider
+1111,440222,White Head Grand Manan,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
+1112,440261,Scots Bay,2016-08-16,Lady Melissa,Purse Seine,Connors,NA,rawReturn.csv,2016-08-16 Lady Melissa
+1113,440457,German Bank,2016-08-17,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Lady Janice II
+1114,440591,German Bank,2016-08-25,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-25 Leroy & Barry II
+1115,440787,German Bank,2016-08-23,Sealife II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-23 Sealife II
+1116,440888,German Bank,2016-09-13,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-09-13 Morning Star
+1117,440910,German Bank,2016-08-12,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-08-12 Sealife II
+1118,441801,Scots Bay,2019-08-05,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-05 Brunswick Provider
+1119,442133,Mumps weir Shutoff,2018-08-18,Capelco,Weir_ShutOff,Sealife,NA,rawReturn.csv,2018-08-17 Capelco
+1120,442510,The Mumps Weir,2018-07-09,Michael Eileen,Weir,CapeBreeze,NA,rawReturn.csv,2018-07-09 Michael Eileen
+1121,442788,Mill Cove Back Bay,2018-08-10,Silver King,ShutOff,Sealife,NA,rawReturn.csv,2018-08-10 Silver King
+1122,442815,Bradfords Cove Weir,2019-01-17,Strathburn,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-17 Strathburn
+1123,443903,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1124,443922,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
+1125,443926,Prong,2019-06-19,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-19 Canada 100
+1126,443946,Prong,2019-06-06,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Fundy Monarch
+1127,443959,Flagg Cove,2019-08-28,Andrew & Deane,Weir,Connors,NA,rawReturn.csv,2019-08-28 Andrew & Deane
+1128,443983,Prong,2019-06-21,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-06-21 Fundy Monarch
+1129,444649,Northeast Bank,2017-09-19,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-19 Margaret Elizabeth
+1130,444728,Bradfords Cove Weir,2017-09-12,Senator Neil,Weir,Connors ,NA,rawReturn.csv,2017-09-12 Senator Neil
+1131,445100,Prong,2019-06-20,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Canada 100
+1132,445366,Campobello Ship Head Weir,2019-01-17,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-17 Capelco
+1133,445793,McDormant Patch,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
+1134,446597,Sandy Cove NS,2019-07-11,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-07-11 Canada 100
+1135,448003,German Bank,2017-07-27,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-07-27 Margaret Elizabeth
+1136,448029,Scots Bay,2017-08-14,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-08-14 Canada 100
+1137,448030,Scots Bay,2017-08-27,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2017-08-27 Lady Janice II
+1138,448191,Trinity,2017-07-14,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2017-07-14 Silver Harvester
+1139,448505,Scots Bay,2017-08-13,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-08-13 Brunswick Provider
+1140,448906,Scots Bay,2017-07-29,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-07-29 Brunswick Provider
+1141,449347,Mill Cove Back Bay,2018-08-13,Andrew & Deane,ShutOff,Sealife,NA,rawReturn.csv,2018-08-13 Andrew & Deane
+1142,449455,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-08 Capelco
+1143,449786,Money Cove Weir,2018-08-07,Andrew & Deane,Weir,Sealife,NA,rawReturn.csv,2018-08-07 Andrew & Deane
+1144,450446,Money Cove Weir,2018-07-29,Andrew & Deane,Weir,CapeBreeze,NA,rawReturn.csv,2018-07-29 Andrew & Deane
+1145,450645,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-08 Capelco
+1146,450689,Money Cove Weir,2018-08-06,Michael Eileen,Weir,Sealife,NA,rawReturn.csv,2018-08-06 Michael Eileen
+1147,450805,Campobello North Road Shut Off,2019-01-16,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-16 Capelco
+1148,452321,Chattis Point,2019-08-28,Caroline B,Weir,Connors,NA,rawReturn.csv,2019-08-28 Caroline B
+1149,452393,Sandy Cove NS,2019-07-10,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-10 Brunswick Provider
+1150,452549,Scots Bay,2019-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-02 Canada 100
+1151,452653,Flagg Cove,2019-08-30,Capelco,Weir,Connors,NA,rawReturn.csv,2019-08-30 Capelco
+1152,452940,Scots Bay,2019-08-19,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-19 Brunswick Provider
+1153,453163,Long Island,2018-06-01,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2018-06-01 Canada 100
+1154,453773,Scots Bay,2018-08-06,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2018-08-06 Morning Star
+1155,455068,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
+1156,455086,Scots Bay,2019-07-22,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-07-22 Leroy & Barry II
+1157,455133,Scots Bay,2019-07-22,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-07-22 Leroy & Barry II
+1158,455193,Scots Bay,2019-07-22,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-07-22 Leroy & Barry II
+1159,455333,McDormant Patch,2019-08-01,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-01 Brunswick Provider
+1160,455355,Scots Bay,2019-07-22,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-07-22 Leroy & Barry II
+1161,455602,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
+1162,455750,McDormant Patch,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
+1163,455887,Scots Bay,2019-09-16,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-16 Canada 100
+1164,455889,Scots Bay,2019-09-03,Lady Janice II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-09-03 Lady Janice II
+1165,455976,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
+1166,456401,Sandy Cove NS,2019-08-28,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-08-28 Canada 100
+1167,456629,Seelys Head,2019-09-05,Senator Neil,Weir,Connors,NA,rawReturn.csv,2019-09-05 Senator Neil
+1168,457452,Northeast Bank,2017-09-12,Canada 100,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-12 Canada 100
+1169,457506,German Bank,2017-08-17,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-08-17 Brunswick Provider
+1170,457674,German Bank,2017-07-27,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2017-07-27 Lady Melissa
+1171,458234,German Bank,2017-09-11,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-11 Margaret Elizabeth
+1172,459121,Scots Bay,2019-07-22,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-22 Brunswick Provider
+1173,459126,White Head Grand Manan,2019-07-23,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-07-23 Fundy Monarch
+1174,459313,Sandy Cove NS,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
+1175,459364,Sandy Cove NS,2019-08-29,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-29 Brunswick Provider
+1176,459394,Sandy Cove NS,2019-08-28,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-08-28 Canada 100
+1177,459473,Long Island,2019-08-19,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-08-19 Leroy & Barry II
+1178,459703,Scots Bay,2019-08-21,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-21 Brunswick Provider
+1179,459943,Scots Bay,2019-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-02 Canada 100
+1180,459975,Scots Bay,2019-09-03,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-03 Brunswick Provider
+1181,459985,Scots Bay,2019-09-04,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-04 Canada 100
+1182,460003,Sandy Cove NS,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
+1183,460094,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
+1184,460183,Sandy Cove NS,2019-09-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-17 Brunswick Provider
+1185,460329,McDormant Patch,2019-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Canada 100
+1186,444659,NE Bank,2017-09-19,Margaret Elizabeth,,,NA,DFOmailedin2023.csv,2017-09-19 Margaret Elizabeth
+1187,439808,NE Bank,2017-09-26,Brunswick Provider,,,NA,DFOmailedin2023.csv,2017-09-26 Brunswick Provider
+1188,461393,Scots Bay,2018-09-04,Morning Star,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2018-09-04 Morning Star
+1189,459573,Leroy Island Shore (4WX),2019-08-19,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2019-08-19 Leroy & Barry II
+1190,550159,Scots Bay,2020-08-11,Morning Star,Purse Seine,Cape Breeze Seafoods,NA,DFOmailedin2023.csv,2020-08-11 Morning Star
+1191,522937,Scot's Bay,2022-08-18,Morning Star,Purse Seine,,113,DFOmailedin2023.csv,2022-08-18 Morning Star
+1192,488050,Scot's Bay,2021-09-01,Fundy Monarch,Purse Seine,Cape Breeze,51,Mail in Tag Returns.csv,2021-09-01 Fundy Monarch
+1193,488122,Scot's Bay,2021-09-01,Fundy Monarch,Purse Seine,Cape Breeze,51,Mail in Tag Returns.csv,2021-09-01 Fundy Monarch
+1194,488142,Scot's Bay,2021-09-01,Morning Star,Purse Seine,Cape Breeze,78,Mail in Tag Returns.csv,2021-09-01 Morning Star
+1195,494926,Scot's Bay,2021-09-01,Fundy Monarch,Purse Seine,Cape Breeze,51,Mail in Tag Returns.csv,2021-09-01 Fundy Monarch
+1196,494947,Scot's Bay,2021-09-01,Morning Star,Purse Seine,Cape Breeze,78,Mail in Tag Returns.csv,2021-09-01 Morning Star
+1197,493430,German Bank,2021-11-03,Brunswick Provider,Purse Seine,Cape Breeze,143,Mail in Tag Returns.csv,2021-11-03 Brunswick Provider
+1198,488738,German Bank,2021-09-09,Morning Star,Purse Seine,Cape Breeze,67,Mail in Tag Returns.csv,2021-09-09 Morning Star

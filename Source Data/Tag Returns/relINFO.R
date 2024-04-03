@@ -31,7 +31,8 @@ library(cowplot)
 
 # tagging events in Jenna's workspace updated November 2023
 
-rel <- read.csv("TaggingEvents.csv") 
+rel <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+#rel <- read.csv("TaggingEvents.csv") 
 
 #%>%
 #  rename("TAG_NUMBER"= 1,
