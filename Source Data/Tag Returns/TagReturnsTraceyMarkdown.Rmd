@@ -1,37 +1,18 @@
-rm(list = ls())
+---
+title: "tagReturnsTracey Markdown"
+output: html_document
+date: "2024-04-05"
+---
 
-#Import all the required libraries. The ones commented out have been discontinued, but left in in case something breaks and we need to find an alternative.
-#install.packages("geonames")
+```{r setup, include=FALSE}
+year= substr(Sys.Date(),1,4)
+knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
+```
 
-library(cli)
-library(lubridate)
-library(reprex)
-library(tidyverse)
-library(geosphere)
-library(reshape2)
-library(moderndive)
-library(skimr)
-library(ggridges)
-#library(weathercan)
-library(GGally)
-library(psych)
-library(raster)
-library(PBSmapping)
-#library(rgeos)
-library(knitr)
-library(kableExtra)
-library(grid)
-library(gridExtra)
-library(cowplot)
-library(dplyr)
-library(geonames)
-library(dplyr)
-library(mgcv)
+## Data Import
 
-
-
-# Set working directory to github source data
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data"))
+```{r Data Import, include=FALSE}
 
 completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
 TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
@@ -86,7 +67,7 @@ r = data.frame( TAG_NUMBER=ids,
 
 
 
-# Assigning fishing grounds to sets
+# Assigning fishing grounds to sets. This takes  a few minutes to run through.
 for (i in 1:nrow(r)){
   test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"])
   test1 = TaggingEvents[test, ]
@@ -107,6 +88,7 @@ for (i in 1:nrow(r)){
   r$Lurcher[i] = point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE)
   
 }
+
 
 # Ground                        
 r$FishingGround = NA        
@@ -133,7 +115,7 @@ TaggingEvents <- merge(TaggingEvents, r[, c("TAG_NUMBER", "FishingGround")], by 
 TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
 
 # Histogram showing average time differences between tagging in Days. Split into categories.
-# Cateogry 1 = 0 to 2 days. These should mostly be removed from analysis due to them being caught almost instantly.
+# Category 1 = 0 to 2 days. These should mostly be removed from analysis due to them being caught almost instantly.
 # Category 2 = 3 to 10 days. This is the period that the survey window covers.
 # Cat. 3 = 11 to 30 days. Rest of the first month.
 # Cat. 4 = 31 to 183 days. Caught after the first month, before the 6 month mark.
@@ -155,6 +137,11 @@ TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
   
 TagReturns$category <- as.numeric(TagReturns$category)
 
+```
+
+## Including Plots
+
+```{r pressure, echo=FALSE}
 TagReturns = TagReturns %>%
   group_by(category) %>%
   mutate(AvgtimeDifference = mean(timeDifference)) %>%
@@ -167,8 +154,9 @@ TagReturns$timeDifferenceMin <- as.numeric(TagReturns$timeDifferenceMin)
 TagReturns$timeDifferenceMax <- as.numeric(TagReturns$timeDifferenceMax)
 TagReturns$timeDifference <- as.numeric(TagReturns$timeDifference)
 
+# Not sure why stat = "count" needs to be in there but causes the histogram to run so...
 print(ggplot(data = TagReturns, (aes(category, fill = AvgtimeDifference))) + 
-        geom_histogram(binwidth=1, colour = "white") + 
+        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
         labs(x = "Category", y="Count"))
 
@@ -187,14 +175,24 @@ Table <- TagReturns %>%
                 No.InCategory,
                 No.ofSameNumberOfDays)
 
-Table1 <- unique(Table)
+ Table1 <- unique(Table) %>%
+             arrange(timeDifference)
+
+kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+  kable_paper("striped", full_width = F)
 
 Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
+```
 
+## Tag Returns Scots Bay to German Bank, and German Bank to Scots Bay
+
+```{r pressure, echo=FALSE}
 TagReturnsSubset <- TagReturns[sample(1:nrow(TagReturns), 100, replace = FALSE),]
 
 GBtoSB <- subset(TagReturns, subset = (FishingGround == "Scots Bay" & catchAREA == "German Bank" |
-                                       FishingGround == "German Bank" & catchAREA == "Scots Bay"))
+                                       FishingGround == "German Bank" & catchAREA == "Scots Bay" |
+                                       FishingGround == "Scots Bay" & catchAREA == "German Bank (Area 7)" |
+                                      FishingGround == "German" & TagReturns$catchAREA == "Scots (Area 8)" ))
 
 GBtoSB$TagLocation <- with(GBtoSB, ifelse(GBtoSB$FishingGround == "Scots Bay", "SB to GB",
                                           ifelse(GBtoSB$FishingGround == "German Bank", "GB to SB","Other")))
@@ -208,16 +206,40 @@ ggplot(GBtoSB, aes(x=TagLocation, y = Count, fill = factor(timeDifference))) +
         ggtitle("Tag Returns that started in either Scots Bay or German Bank, and were returned to the opposite ground") +
         labs(fill = "Days between tagging event and tag return")
 
-#Trial with all
 
-TagReturns$TagLocation <- with(TagReturns, ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank", "SB to GB",
-                                          ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay", "GB to SB",
+Table <- GBtoSB %>% 
+  dplyr::select(TAG_NUMBER,
+                category,
+                Date,
+                FishingGround,
+                DATE,
+                catchAREA,
+                timeDifference,
+                AvgtimeDifference,
+                timeDifferenceMin,
+                timeDifferenceMax,
+                No.InCategory,
+                No.ofSameNumberOfDays)
+
+
+kbl(Table1, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+
+```
+## All Tag returns associated with tagging events that started in either German Bank or Scots Bay
+
+```{r pressure, echo=FALSE}
+
+TagReturns$TagLocation <- with(TagReturns, ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank" |
+                                                  TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank (Area 7)"  , "SB to GB",
+                                          ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay" |
+                                                   TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay (Area 8)", "GB to SB",
                                                  ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "German Bank", "GB to GB",
                                                         ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "Scots Bay", "SB to SB",
                                                                ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA != "Scots Bay" | 
-                                                               TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA != "German Bank", "SB to Other Ground",
+                                                               TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA != "German Bank", "SB to Other",
                                                                ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA != "Scots Bay" |
-                                                                      TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA != "German Bank", "GB to Other Ground", "Other")))))))
+                                                                      TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA != "German Bank", "GB to Other", "Other")))))))
 
 TagReturns$Count <- 1
 
@@ -225,10 +247,14 @@ ggplot(TagReturns, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 
-#German Bank
+```
+
+## Tag Returns from German Bank Tagging Events
+
+```{r pressure, echo=FALSE}
 TagReturnsGB <- subset(TagReturns, subset = (FishingGround == "German Bank"))
 
 TagReturnsGB$TagLocation <- with(TagReturnsGB, ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "German Bank" |
@@ -254,7 +280,7 @@ ggplot(TagReturnsGB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("German Bank Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
@@ -265,7 +291,12 @@ ggplot(TagReturnsGB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("German Bank Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+
+
+```
+## Tag Returns from NB Coastal Tagging Events
+```{r pressure, echo=FALSE}
 
 #NB Coastal
 TagReturnsNBC <- subset(TagReturns, subset = (FishingGround == "NB Coastal"))
@@ -291,7 +322,7 @@ ggplot(TagReturnsNBC, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("NB Coastal Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -301,9 +332,13 @@ ggplot(TagReturnsNBC, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("NB Coastal Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+
+```
 
 #Grand Manan
+```{r pressure, echo=FALSE}
+
 TagReturnsGM <- subset(TagReturns, subset = (FishingGround == "Grand Manan"))
 
 TagReturnsGM$TagLocation <- with(TagReturnsGM, ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "German Bank" |
@@ -327,7 +362,7 @@ ggplot(TagReturnsGM, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Grand Manan Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -337,9 +372,13 @@ ggplot(TagReturnsGM, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Grand Manan Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+
+```
 
 #Grand Manan Banks
+```{r pressure, echo=FALSE}
+
 TagReturnsGMB <- subset(TagReturns, subset = (FishingGround == "Grand Manan Banks"))
 
 TagReturnsGMB$TagLocation <- with(TagReturnsGMB, ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "German Bank" |
@@ -363,7 +402,7 @@ ggplot(TagReturnsGMB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Grand Manan Banks Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -373,9 +412,12 @@ ggplot(TagReturnsGMB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Grand Manan Banks Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+
+```
 
 #Long Island
+```{r pressure, echo=FALSE}
 TagReturnsLI <- subset(TagReturns, subset = (FishingGround == "Long Island"))
 
 TagReturnsLI$TagLocation <- with(TagReturnsLI, ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "German Bank" |
@@ -399,7 +441,7 @@ ggplot(TagReturnsLI, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Long Island Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -409,9 +451,11 @@ ggplot(TagReturnsLI, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Long Island Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Seal Island 
+```{r pressure, echo=FALSE}
 TagReturnsSI <- subset(TagReturns, subset = (FishingGround == "Seal Island"))
 
 TagReturnsSI$TagLocation <- with(TagReturnsSI, ifelse(TagReturnsSI$FishingGround == "Seal Island" & TagReturnsSI$catchAREA == "German Bank" |
@@ -435,7 +479,7 @@ ggplot(TagReturnsSI, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Seal Island Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -445,9 +489,12 @@ ggplot(TagReturnsSI, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Seal Island Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Scots Bay
+
+```{r pressure, echo=FALSE}
 TagReturnsSB <- subset(TagReturns, subset = (FishingGround == "Scots Bay"))
 
 TagReturnsSB$TagLocation <- with(TagReturnsSB, ifelse(TagReturnsSB$FishingGround == "Scots Bay" & TagReturnsSB$catchAREA == "German Bank" |
@@ -471,7 +518,7 @@ ggplot(TagReturnsSB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Scots Bay Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -481,9 +528,12 @@ ggplot(TagReturnsSB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Scots Bay Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Yankee Bank
+
+```{r pressure, echo=FALSE}
 TagReturnsYB <- subset(TagReturns, subset = (FishingGround == "Yankee Bank"))
 
 TagReturnsYB$TagLocation <- with(TagReturnsYB, ifelse(TagReturnsYB$FishingGround == "Yankee Bank" & TagReturnsYB$catchAREA == "German Bank" |
@@ -507,7 +557,7 @@ ggplot(TagReturnsYB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Yankee Bank Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -517,9 +567,12 @@ ggplot(TagReturnsYB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Yankee Bank Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Trinity
+
+```{r pressure, echo=FALSE}
 TagReturnsT <- subset(TagReturns, subset = (FishingGround == "Trinity"))
 
 TagReturnsT$TagLocation <- with(TagReturnsT, ifelse(TagReturnsT$FishingGround == "Trinity" & TagReturnsT$catchAREA == "German Bank" |
@@ -543,7 +596,7 @@ ggplot(TagReturnsT, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Trinity Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -553,9 +606,12 @@ ggplot(TagReturnsT, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Trinity Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Browns Bank
+
+```{r pressure, echo=FALSE}
 TagReturnsBB <- subset(TagReturns, subset = (FishingGround == "Browns Bank"))
 
 TagReturnsBB$TagLocation <- with(TagReturnsBB, ifelse(TagReturnsBB$FishingGround == "Browns Bank" & TagReturnsBB$catchAREA == "German Bank" |
@@ -579,7 +635,7 @@ ggplot(TagReturnsBB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Browns Bank Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -589,9 +645,12 @@ ggplot(TagReturnsBB, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Browns Bank Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #SW Ground
+
+```{r pressure, echo=FALSE}
 TagReturnsSWG <- subset(TagReturns, subset = (FishingGround == "SW Grounds"))
 
 TagReturnsSWG$TagLocation <- with(TagReturnsSWG, ifelse(TagReturnsSWG$FishingGround == "SW Grounds" & TagReturnsSWG$catchAREA == "German Bank" |
@@ -616,7 +675,7 @@ ggplot(TagReturnsSWG, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("SW Grounds Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -626,9 +685,13 @@ ggplot(TagReturnsSWG, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("SW Grounds Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+
+```
 
 #Gannet Dry Ledge
+
+```{r pressure, echo=FALSE}
 TagReturnsGDL <- subset(TagReturns, subset = (FishingGround == "Gannet Dry Ledge"))
 
 TagReturnsGDL$TagLocation <- with(TagReturnsGDL, ifelse(TagReturnsGDL$FishingGround == "Gannet Dry Ledge" & TagReturnsGDL$catchAREA == "German Bank" |
@@ -652,7 +715,7 @@ ggplot(TagReturnsGDL, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Gannet Dry Ledge Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -662,9 +725,12 @@ ggplot(TagReturnsGDL, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Gannet Dry Ledge Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
+```
 
 #Lurcher
+
+```{r pressure, echo=FALSE}
 TagReturnsL <- subset(TagReturns, subset = (FishingGround == "Lurcher"))
 
 TagReturnsL$TagLocation <- with(TagReturnsL, ifelse(TagReturnsL$FishingGround == "Lurcher" & TagReturnsL$catchAREA == "German Bank" |
@@ -688,7 +754,7 @@ ggplot(TagReturnsL, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Lurcher Tag Returns") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Category")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -698,5 +764,8 @@ ggplot(TagReturnsL, aes(x=TagLocation, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Tag to Catch Location") +
   ggtitle("Lurcher Tag Returns excluding fish caught within 2 days of being tagged") +
-  labs(fill = "Category classifying days between tagging event and tag return")
+  labs(fill = "Categor")
+
+```
+
 

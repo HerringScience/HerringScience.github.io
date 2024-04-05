@@ -1,13 +1,32 @@
+
+rm(list = ls())
+
 #### Set up ####
 
-RLibrary( "tidyverse", "lubridate", "ggplot2", "reshape", "pastecs", "raster", "psych", "Hmisc", "plyr", "PBSmapping", "mapdata","PBSmodelling","maptools","RColorBrewer", "classInt", "rgeos", "mapproj", "ggmap", "ggthemes", "maps", "stringr", "reshape2", "pander", "measurements", "sp", "ggrepel")
-
-
+library(ggrepel)
+library(sp)
+library(measurements)
+library(pander)
+library(reshape2)
+library(stringr)
+library(maps)
+library(ggthemes)
+library(ggmap)
+library(mapproj)
+library(classInt)
+library(RColorBrewer)
+#library(maptools)
+library(PBSmodelling)
+library(mapdata)
+library(plyr)
+library(psych)
+library(Hmisc)
+library(pastecs)
+library(reshape)
 library(tidyverse)
 library(cli)
 library(lubridate)
 library(reprex)
-library(tidyverse)
 library(geosphere)
 library(reshape2)
 library(moderndive)
@@ -24,6 +43,7 @@ library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
+library(ggplot2)
 
 # we need to add NAFO subunit to this DF:
 # First load the release data and ensure consistent column names with previous worksheet to match tagEve() function (TaggingEvents2020.csv)
@@ -155,7 +175,7 @@ RLibrary("dplyr")
   
     
 # Load NAFO subunits
-  polysNAFO <- read.csv("NAFO_subunits.csv")
+  polysNAFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"))
   
       unique(polysNAFO$Area) #Displays the names of the NAFO areas
 # select 5Yb, 4Xr, 4Xq, 4Xs
@@ -235,7 +255,7 @@ RLibrary("dplyr")
 
             head(r)
               
-            write.table(r, file= "r.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+            #write.table(r, file= "r.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
             
             
 # NAFO Subunit
@@ -422,7 +442,7 @@ RLibrary("dplyr")
   
 
   
-  write.csv(relINFO, 'relINFO.csv')
-  write.csv(rel, 'alltags.csv')
+  #write.csv(relINFO, 'relINFO.csv')
+  #write.csv(rel, 'alltags.csv')
   
   relINFO <- read.csv('relINFO.csv')
