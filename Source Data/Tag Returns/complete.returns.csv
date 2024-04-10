@@ -371,7 +371,7 @@
 370,469756,Scots Bay,2022-08-02,Canada 100,Purse Seine,Connors,149.4,ConnorsReturns2022.csv,2022-08-02 Canada 100
 371,495520,Scots Bay,2022-08-09,Brunswick Provider,Purse Seine,Connors,139.5,ConnorsReturns2022.csv,2022-08-09 Brunswick Provider
 372,495463,Scots Bay,2022-08-09,Brunswick Provider,Purse Seine,Connors,139.5,ConnorsReturns2022.csv,2022-08-09 Brunswick Provider
-373,507351,Seelys Head,2022-08-04,Caroline B,Shut off,Connors,16.87,ConnorsReturns2022.csv,2022-08-04 Caroline B
+373,507351,Seelys Head,2022-08-04,Caroline B,Shut-Off,Connors,16.87,ConnorsReturns2022.csv,2022-08-04 Caroline B
 374,516366,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
 375,500306,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
 376,585883,Scots Bay,2022-08-10,Brunswick Provider,Purse Seine,Connors,49.5,ConnorsReturns2022.csv,2022-08-10 Brunswick Provider
@@ -730,7 +730,7 @@
 729,207368,McDormand Patch,2020-07-22,Canada 100,Purse Seine,Connors,71,ConnorsReturns2020.csv,2020-07-22 Canada 100
 730,204908,Lurcher,2020-07-17,Fundy Monarch,Purse Seine,Connors,37,ConnorsReturns2020.csv,2020-07-17 Fundy Monarch
 731,460375,Scots Bay,2019-07-17,Lady Janice II,Purse Seine,Connors,NA,ConnorsReturns2020.csv,2019-07-17 Lady Janice II
-732,460200,"Mill Cove, Campobello ",2020-03-06,Capelco,Shut off,Connors,NA,ConnorsReturns2020.csv,2020-03-06 Capelco
+732,460200,"Mill Cove, Campobello ",2020-03-06,Capelco,Shut-Off,Connors,NA,ConnorsReturns2020.csv,2020-03-06 Capelco
 733,480952,Scots Bay,2020-09-21,Fundy Monarch,Purse Seine,Connors,NA,ConnorsReturns2020.csv,2020-09-21 Fundy Monarch
 734,414230,German Bank,2020-09-28,Canada 100,Purse Seine,Connors,118,ConnorsReturns2020.csv,2020-09-28 Canada 100
 735,552159,Wolves,2020-10-07,Canada 100,Purse Seine,Connors,122,ConnorsReturns2020.csv,2020-10-07 Canada 100
@@ -924,9 +924,9 @@
 923,44186,Prong,2019-06-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-17 Brunswick Provider
 924,44217,Prong,2019-06-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Brunswick Provider
 925,44358,Flagg Cove,2019-08-27,Silver Harvester,Weir,Connors,NA,rawReturn.csv,2019-08-27 Silver Harvester
-926,44374,Cora Bell Weir Grand Manan,2019-08-21,Silver Harvester,ShutOff,Connors,NA,rawReturn.csv,2019-08-21 Silver Harvester
+926,44374,Cora Bell Weir Grand Manan,2019-08-21,Silver Harvester,Shut-Off,Connors,NA,rawReturn.csv,2019-08-21 Silver Harvester
 927,44639,Spruce Island Weir,2019-09-09,Senator Neil,Weir,Connors,NA,rawReturn.csv,2019-09-09 Senator Neil
-928,44790,Tuckers Cove,2019-08-15,Silver King,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-08-15 Silver King
+928,44790,Tuckers Cove,2019-08-15,Silver King,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-08-15 Silver King
 929,44882,Prong,2019-06-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-17 Brunswick Provider
 930,44979,Prong,2019-06-18,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-18 Canada 100
 931,111573,Wolfs Bank,2019-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-10-14 Brunswick Provider
@@ -1117,10 +1117,10 @@
 1116,440888,German Bank,2016-09-13,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-09-13 Morning Star
 1117,440910,German Bank,2016-08-12,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-08-12 Sealife II
 1118,441801,Scots Bay,2019-08-05,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-05 Brunswick Provider
-1119,442133,Mumps weir Shutoff,2018-08-18,Capelco,Weir_ShutOff,Sealife,NA,rawReturn.csv,2018-08-17 Capelco
+1119,442133,Mumps weir Shutoff,2018-08-18,Capelco,Weir/Shut-Off,Sealife,NA,rawReturn.csv,2018-08-17 Capelco
 1120,442510,The Mumps Weir,2018-07-09,Michael Eileen,Weir,CapeBreeze,NA,rawReturn.csv,2018-07-09 Michael Eileen
-1121,442788,Mill Cove Back Bay,2018-08-10,Silver King,ShutOff,Sealife,NA,rawReturn.csv,2018-08-10 Silver King
-1122,442815,Bradfords Cove Weir,2019-01-17,Strathburn,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-17 Strathburn
+1121,442788,Mill Cove Back Bay,2018-08-10,Silver King,Shut-Off,Sealife,NA,rawReturn.csv,2018-08-10 Silver King
+1122,442815,Bradfords Cove Weir,2019-01-17,Strathburn,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-01-17 Strathburn
 1123,443903,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
 1124,443922,Prong,2019-06-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-06-06 Brunswick Provider
 1125,443926,Prong,2019-06-19,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-19 Canada 100
@@ -1130,7 +1130,7 @@
 1129,444649,Northeast Bank,2017-09-19,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-19 Margaret Elizabeth
 1130,444728,Bradfords Cove Weir,2017-09-12,Senator Neil,Weir,Connors ,NA,rawReturn.csv,2017-09-12 Senator Neil
 1131,445100,Prong,2019-06-20,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-06-20 Canada 100
-1132,445366,Campobello Ship Head Weir,2019-01-17,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-17 Capelco
+1132,445366,Campobello Ship Head Weir,2019-01-17,Capelco,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-01-17 Capelco
 1133,445793,McDormant Patch,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
 1134,446597,Sandy Cove NS,2019-07-11,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-07-11 Canada 100
 1135,448003,German Bank,2017-07-27,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-07-27 Margaret Elizabeth
@@ -1139,13 +1139,13 @@
 1138,448191,Trinity,2017-07-14,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2017-07-14 Silver Harvester
 1139,448505,Scots Bay,2017-08-13,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-08-13 Brunswick Provider
 1140,448906,Scots Bay,2017-07-29,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-07-29 Brunswick Provider
-1141,449347,Mill Cove Back Bay,2018-08-13,Andrew & Deane,ShutOff,Sealife,NA,rawReturn.csv,2018-08-13 Andrew & Deane
-1142,449455,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-08 Capelco
+1141,449347,Mill Cove Back Bay,2018-08-13,Andrew & Deane,Shut-Off,Sealife,NA,rawReturn.csv,2018-08-13 Andrew & Deane
+1142,449455,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-01-08 Capelco
 1143,449786,Money Cove Weir,2018-08-07,Andrew & Deane,Weir,Sealife,NA,rawReturn.csv,2018-08-07 Andrew & Deane
 1144,450446,Money Cove Weir,2018-07-29,Andrew & Deane,Weir,CapeBreeze,NA,rawReturn.csv,2018-07-29 Andrew & Deane
-1145,450645,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-08 Capelco
+1145,450645,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-01-08 Capelco
 1146,450689,Money Cove Weir,2018-08-06,Michael Eileen,Weir,Sealife,NA,rawReturn.csv,2018-08-06 Michael Eileen
-1147,450805,Campobello North Road Shut Off,2019-01-16,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019-01-16 Capelco
+1147,450805,Campobello North Road Shut Off,2019-01-16,Capelco,Weir/Shut-Off,Connors,NA,rawReturn.csv,2019-01-16 Capelco
 1148,452321,Chattis Point,2019-08-28,Caroline B,Weir,Connors,NA,rawReturn.csv,2019-08-28 Caroline B
 1149,452393,Sandy Cove NS,2019-07-10,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-10 Brunswick Provider
 1150,452549,Scots Bay,2019-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-02 Canada 100
@@ -1184,8 +1184,8 @@
 1183,460094,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
 1184,460183,Sandy Cove NS,2019-09-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-17 Brunswick Provider
 1185,460329,McDormant Patch,2019-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Canada 100
-1186,444659,NE Bank,2017-09-19,Margaret Elizabeth,,,NA,DFOmailedin2023.csv,2017-09-19 Margaret Elizabeth
-1187,439808,NE Bank,2017-09-26,Brunswick Provider,,,NA,DFOmailedin2023.csv,2017-09-26 Brunswick Provider
+1186,444659,NE Bank,2017-09-19,Margaret Elizabeth,N/A,,NA,DFOmailedin2023.csv,2017-09-19 Margaret Elizabeth
+1187,439808,NE Bank,2017-09-26,Brunswick Provider,N/A,,NA,DFOmailedin2023.csv,2017-09-26 Brunswick Provider
 1188,461393,Scots Bay,2018-09-04,Morning Star,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2018-09-04 Morning Star
 1189,459573,Leroy Island Shore (4WX),2019-08-19,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2019-08-19 Leroy & Barry II
 1190,550159,Scots Bay,2020-08-11,Morning Star,Purse Seine,Cape Breeze Seafoods,NA,DFOmailedin2023.csv,2020-08-11 Morning Star
