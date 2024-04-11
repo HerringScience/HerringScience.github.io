@@ -9,6 +9,8 @@ year= substr(Sys.Date(),1,4)
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
+
+
 library(cli)
 library(lubridate)
 library(reprex)
@@ -36,6 +38,15 @@ library(mgcv)
 library(scales)
 
 
+
+```
+
+``` {css, echo = FALSE}
+.scoll-100 {
+max-height: 100px;
+overflow-y: auto;
+background-colour: inherit;
+}
 
 ```
 
@@ -168,10 +179,12 @@ TagReturns$Count <- 1
 
 ```
 
+# Tag Returns {.tabset}
+
 ## Average Time Difference Across All Grounds  {.tabset .tabset-fade .tabset-pills}
 
 
-```{r, results = "asis", fig.align='center'}
+```{r, results = "asis", fig.align='center', class.output= "scoll-100"}
 TagReturns = TagReturns %>%
   group_by(category) %>%
   mutate(AvgtimeDifference = mean(timeDifference)) %>%
@@ -210,14 +223,15 @@ Table <- TagReturns %>%
              arrange(timeDifference)
 
 kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+  kable_paper("striped", full_width = F) %>%
+  kable_styling(full_width = F, fixed_thead = T, )
 
 Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
 ```
 
-## Scots Bay and German Bank Tags {.tabset .tabset-fade .tabset-pills}
+## Scots Bay, German Bank and Seal Island Tags {.tabset .tabset-fade .tabset-pills}
 
-### Tag Returns Scots Bay to German Bank, and German Bank to Scots Bay {.tabset .tabset-fade .tabset-pills}
+### Tag Returns between German Bank and Scots Bay
 
 ```{r, results = "asis", fig.align='center'}
 #TagReturnsSubset <- TagReturns[sample(1:nrow(TagReturns), 100, replace = FALSE),]
@@ -260,7 +274,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 
 ```
-### All Tag returns associated with tagging events that started in either German Bank or Scots Bay
+### Tag returns that started in either German Bank or Scots Bay
 
 ```{r, results = "asis", fig.align='center'}
 
@@ -349,7 +363,9 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
 ```
 
 
-### Tag Returns from German Bank Tagging Events
+## By Ground {.tabset .tabset-fade .tabset-pills}
+
+### German Bank 
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsGB <- subset(TagReturns, subset = (FishingGround == "German Bank"))
@@ -429,9 +445,8 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
 
 ```
 
-## Tag Returns from Individual Grounds {.tabset .tabset-fade .tabset-pills}
+### NB Coastal
 
-### NB Coastal Tagging Events
 ```{r, results = "asis", fig.align='center'}
 
 #NB Coastal
@@ -513,7 +528,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
 
 ```
 
-### Grand Manan Tag Returns
+### Grand Manan
 
 ```{r, results = "asis", fig.align='center'}
 
@@ -594,7 +609,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
 
 ```
 
-### Grand Manan Banks Tag Returns 
+### Grand Manan Banks
 
 ```{r, results = "asis", fig.align='center'}
 
@@ -675,7 +690,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
 
 ```
 
-### Long Island Tag Returns
+### Long Island
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsLI <- subset(TagReturns, subset = (FishingGround == "Long Island"))
@@ -755,7 +770,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Seal Island Tag Returns
+### Seal Island
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsSI <- subset(TagReturns, subset = (FishingGround == "Seal Island"))
@@ -835,7 +850,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Scots Bay Tag Returns 
+### Scots Bay
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsSB <- subset(TagReturns, subset = (FishingGround == "Scots Bay"))
@@ -914,7 +929,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Yankee Bank Tag Returns
+### Yankee Bank
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsYB <- subset(TagReturns, subset = (FishingGround == "Yankee Bank"))
@@ -993,7 +1008,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Trinity Tag Returns 
+### Trinity
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsT <- subset(TagReturns, subset = (FishingGround == "Trinity"))
@@ -1072,7 +1087,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Browns Bank Tag Returns
+### Browns Bank
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsBB <- subset(TagReturns, subset = (FishingGround == "Browns Bank"))
@@ -1152,7 +1167,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### SW Ground Tag Returns
+### SW Ground
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsSWG <- subset(TagReturns, subset = (FishingGround == "SW Grounds"))
@@ -1232,7 +1247,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Gannet Dry Ledge Tag Returns 
+### Gannet Dry Ledge
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsGDL <- subset(TagReturns, subset = (FishingGround == "Gannet Dry Ledge"))
@@ -1311,7 +1326,7 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Lurcher Tag Returns 
+### Lurcher
 
 ```{r, results = "asis", fig.align='center'}
 TagReturnsL <- subset(TagReturns, subset = (FishingGround == "Lurcher"))
@@ -1389,7 +1404,9 @@ kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground",
   kable_paper("striped", full_width = F)
 ```
 
-### Gear Types
+## Gear Types {.tabset .tabset-fade .tabset-pills}
+
+### All Gear
 
 ```{r, results = "asis", fig.align='center'}
 
@@ -1429,7 +1446,8 @@ ggplot(GearWithout1, aes(x=GearType, y = Count, fill = factor(category))) +
 
 
 ```
-### Weirs
+
+### Removal of Purse Seine 
 
 ```{r, results = "asis", fig.align='center'}
 
@@ -1446,6 +1464,6 @@ ggplot(WeirTable, aes(x=GearType, y = Count, fill = factor(FishingGround))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Gear Type") +
   ggtitle("Tag Return to gear type from specific tagging ground") +
-  labs(fill = "Category")
+  labs(fill = "Tagging Ground")
 
 ```
