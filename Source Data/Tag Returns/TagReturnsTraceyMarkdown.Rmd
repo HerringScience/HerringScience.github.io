@@ -104,6 +104,7 @@ r = data.frame( TAG_NUMBER=ids,
                 Lurcher = NA) 
 
 
+#This part takes a really long time to run.
 
 # Assigning fishing grounds to sets. This takes  a few minutes to run through.
 for (i in 1:nrow(r)){
@@ -132,21 +133,22 @@ for (i in 1:nrow(r)){
 r$FishingGround = NA        
          
 r$FishingGround = with(r, ifelse(r$NB_Coastal > 0, "NB Coastal",
-                                 ifelse(r$Grand_Manan > 0, "Grand Manan",
-                                        ifelse(r$Grand_Manan_Banks > 0, "Grand Manan Banks",
-                                               ifelse(r$Long_Island > 0, "Long Island", 
-                                                      ifelse(r$German_Bank > 0, "German Bank", 
-                                                             ifelse(r$Seal_Island > 0, "Seal Island",
-                                                                    ifelse(r$Scots_Bay > 0, "Scots Bay",
-                                                                           ifelse(r$Yankee_Bank > 0, "Yankee Bank",
-                                                                                  ifelse(r$Trinity > 0, "Trinity",
-                                                                                         ifelse(r$Browns_Bank > 0, "Brown Bank",
-                                                                                                ifelse(r$SW_Grounds > 0, "SW Grounds",
-                                                                                                       ifelse(r$Gannet_Dry_Ledge > 0, "Gannet Dry Ledge",
-                                                                                                              ifelse(r$Lurcher > 0, "Lurcher", "Other"))))))))))))))
+                          ifelse(r$Grand_Manan > 0, "Grand Manan",
+                          ifelse(r$Grand_Manan_Banks > 0, "Grand Manan Banks",
+                          ifelse(r$Long_Island > 0, "Long Island", 
+                           ifelse(r$German_Bank > 0, "German Bank", 
+                          ifelse(r$Seal_Island > 0, "Seal Island",
+                          ifelse(r$Scots_Bay > 0, "Scots Bay",
+                          ifelse(r$Yankee_Bank > 0, "Yankee Bank",
+                          ifelse(r$Trinity > 0, "Trinity",
+                          ifelse(r$Browns_Bank > 0, "Brown Bank",
+                          ifelse(r$SW_Grounds > 0, "SW Grounds",
+                          ifelse(r$Gannet_Dry_Ledge > 0, "Gannet Dry Ledge",
+                          ifelse(r$Lurcher > 0, "Lurcher", 
+                                                "Other"))))))))))))))
+
 TaggingEvents <- merge(TaggingEvents, r[, c("TAG_NUMBER", "FishingGround")], by = "TAG_NUMBER")
 #TaggingSubset <- TaggingEvents[sample(1:nrow(TaggingEvents), 25, replace = FALSE),]
-
 
 
 #Combining complete Returns and Tagging events by tag number
@@ -165,12 +167,12 @@ TagReturns$timeDifference <- TagReturns$DATE - TagReturns$Date
   TagReturns$timeDifference <- as.numeric(TagReturns$timeDifference)
   TagReturns <- TagReturns[TagReturns$timeDifference >= 0,]
 TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
-                                              ifelse(TagReturns$timeDifference < 11 & TagReturns$timeDifference >= 3, 2,
-                                                     ifelse(TagReturns$timeDifference < 31 & TagReturns$timeDifference >= 11, 3,
-                                                            ifelse(TagReturns$timeDifference < 184 & TagReturns$timeDifference >= 31, 4,
-                                                                   ifelse(TagReturns$timeDifference < 366 & TagReturns$timeDifference >= 184, 5,
-                                                                          ifelse(TagReturns$timeDifference < 731 & TagReturns$timeDifference >= 366, 6,
-                                                                                 ifelse(TagReturns$timeDifference < 1095 & TagReturns$timeDifference >= 731, 7, 8))))))))
+                                       ifelse(TagReturns$timeDifference < 11 & TagReturns$timeDifference >= 3, 2,
+                                       ifelse(TagReturns$timeDifference < 31 & TagReturns$timeDifference >= 11, 3,
+                                       ifelse(TagReturns$timeDifference < 184 & TagReturns$timeDifference >= 31, 4,
+                                       ifelse(TagReturns$timeDifference < 366 & TagReturns$timeDifference >= 184, 5,
+                                       ifelse(TagReturns$timeDifference < 731 & TagReturns$timeDifference >= 366, 6,
+                                       ifelse(TagReturns$timeDifference < 1095 & TagReturns$timeDifference >= 731, 7, 8))))))))
                                                    
   
 TagReturns$category <- as.numeric(TagReturns$category)
@@ -185,6 +187,7 @@ TagReturns$Count <- 1
 
 
 ```{r, results = "asis", fig.align='center', class.output= "scoll-100"}
+
 TagReturns = TagReturns %>%
   group_by(category) %>%
   mutate(AvgtimeDifference = mean(timeDifference)) %>%
@@ -193,15 +196,13 @@ TagReturns = TagReturns %>%
   mutate(timeDifferenceMax= max(timeDifference)) %>%
   mutate_if(is.numeric, format, digits = 2)
 
-TagReturns$timeDifferenceMin <- as.numeric(TagReturns$timeDifferenceMin)
-TagReturns$timeDifferenceMax <- as.numeric(TagReturns$timeDifferenceMax)
-TagReturns$timeDifference <- as.numeric(TagReturns$timeDifference)
+TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '133', '365', '715', '743'))
 
-# Not sure why stat = "count" needs to be in there but causes the histogram to run so...
-print(ggplot(data = TagReturns, (aes(category, fill = AvgtimeDifference))) + 
+ggplot(data = TagReturns, (aes(category, fill = timeDifferenceMax))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Category", y="Count"))
+        labs(x = "Category", y="Count") +
+        scale_fill_discrete(name = "Max. number of days to recapture")
 
 TagReturns = TagReturns %>%
   group_by(timeDifference) %>%
@@ -217,16 +218,24 @@ Table <- TagReturns %>%
                 timeDifferenceMax,
                 No.InCategory,
                 No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
+  arrange(category)
 
  Table1 <- unique(Table) %>%
-             arrange(timeDifference)
+             arrange(category)
 
 kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
   kable_paper("striped", full_width = F) %>%
   kable_styling(full_width = F, fixed_thead = T, )
 
 Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
+
+# SummaryTable <- subset(Table, select = -c(timeDifference, No.ofSameNumberOfDays))
+# SummaryTable <- unique(SummaryTable) %>%
+#   arrange(category)
+# 
+# kbl(SummaryTable, col.names=c("Category", "Average Time Difference (days)", "Minimum Time Difference (Days)", "Maximum Time Difference (Days)", "Category Abundance"), align = "c") %>%
+
+
 ```
 
 ## Scots Bay, German Bank and Seal Island Tags {.tabset .tabset-fade .tabset-pills}
@@ -272,6 +281,10 @@ Table <- GBtoSB %>%
 
 kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
 ```
 ### Tag returns that started in either German Bank or Scots Bay
