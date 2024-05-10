@@ -1,124 +1,124 @@
 Year,Ground,Notes,Date, Biomass ,Annual Total,Identify Max survey
-2018,German Bank #1,,12-Aug-18,"12,170",,
-2018,German Bank #2,,26-Aug-18,"13,693",,
-2018,German Bank #3,,09-Sep-18,"37,490",,
-2018,German Bank #4,,20-Sep-18,"24,298",,
-2018,German Bank #5,,01-Oct-18,"7,218",,
-2018,German Bank #6,,14-Oct-18, -   ,"94,869",
-2017,German Bank #1,,21-Aug-17,"33,839",,
-2017,German Bank #2,,08-Sep-17,"60,745",,
-2017,German Bank #3,,17-Sep-17,"42,053",,
-2017,German Bank #4,,06-Oct-17,-10,,
-2017,German Bank #5,,18-Oct-17,"29,155","165,783",
-2016,German Bank #1,,21-Aug-16,"35,565",,
-2016,German Bank #2,,01-Sep-16,"18,010",,
-2016,German Bank #3,,12-Sep-16,"80,119",,
-2016,German Bank #4,,19-Sep-16, -   ,,
-2016,German Bank #5,,26-Sep-16,"29,667",,
-2016,German Bank #6,,07-Oct-16, -   ,"163,361",
-2015,German Bank #1,,17-Aug-15,"16,156",,
-2015,German Bank #2,,01-Sep-15,"61,324",,
-2015,German Bank #2a,,13-Sep-15,"37,271",,
-2015,German Bank #3,,21-Sep-15,-10,,
-2015,German Bank #4,,27-Sep-15,"25,547",,
-2015,German Bank #5,,12-Oct-15,-10,"140,278",
-2014,2014 German Bank 1,,12-Aug-14,"51,496",,
-2014,2014 German Bank 2,,25-Aug-14,"59,467",,
-2014,2014 German Bank 3,,08-Sep-14,"63,342",,
-2014,2014 German Bank 3a,,26-Sep-14, -   ,,
-2014,2014 German Bank 4,,06-Oct-14,"15,580","189,884",
-2013,2013 German Bank 1,Interval 0,03-Sep-13,"53,509",,
-2013,2013 German Bank 2,14,17-Sep-13,"108,500",,
-2013,2013 German Bank 3,13,29-Sep-13,"13,384",,
-2013,2013 German Bank 4,13,05-Oct-13,"33,432",,
-2013,2013 German Bank 4a,15,14-Oct-13, -   ,,
-2013,2013 German Bank 5a,,21-Oct-13, -   ,"208,825",
-2012,2012 German Bank 1,Interval 0,12-Aug-12,"33,541",,estimate w/o CIF as 0.8 x CIF
-2012,2012 German Bank 2,14,26-Aug-12,"101,453",,estimate w/o CIF as 0.8 x CIF
-2012,2012 German Bank 3,13,09-Sep-12,"37,651",,estimate w/o CIF as 0.8 x CIF
-2012,2012 German Bank 4,13,22-Sep-12,"41,725",,estimate w/o CIF as 0.8 x CIF
-2012,2012 German Bank 5,15,07-Oct-12,"8,711",,Max survey
-2012,2012 German Bank 6,17d-protocol not followed,24-Oct-12,"3,072","226,153",
-2011,2011 German Bank 1,preliminary,26-Aug-11,"30,405",,
-2011,2011 German Bank 2,preliminary,08-Sep-11,"110,062",,
-2011,2011 German Bank 3,preliminary,21-Sep-11,"117,625",,
-2011,2011 German Bank 4,preliminary,10-Oct-11, -   ,,
-2011,2011 German Bank 5,not included in overall,23-Oct-11, -   ,"258,091",
-2010,2010 German Bank 1,,18-Aug-10,"85,180",,
-2010,2010 German Bank 2,,31-Aug-10,"40,510",,
-2010,2010 German Bank 3,,15-Sep-10,"51,673",,Max survey
-2010,2010 German Bank 4,,05-Oct-10,"28,686",,
-2010,2010 German Bank 5,,19-Oct-10,"1,687","207,736",
-2009,2009 German Bank 1,,12-Aug-09,"90,118",,
-2009,2009 German Bank 2,1375/1737t outbox,25-Aug-09,"96,977",,
-2009,2009 German Bank 3,not included in overall,14-Sep-09,"56,887",,
-2009,2009 German Bank 4,,24-Sep-09,"27,894",,Max survey
-2009,2009 German Bank 5,,05-Oct-09,"52,328","324,204",
-2008,2008 German Bank 1,1727/2387t wo/w CIF Outbox not included,22-Aug-08,"25,445",,
-2008,2008 German Bank 2,,05-Sep-08,"67,338",,Max survey
-2008,2008 German Bank 3,,19-Sep-08,"17,145",,
-2008,2008 German Bank 4,,06-Oct-08,"106,207",,Max survey
-2008,2008 German Bank 5,not included in overall,21-Oct-08, -   ,"216,135",
-2007,2007 German Bank 1,"41,965 t w/ CIF ( + 2,820t or 3955 t w/CIF north of box)",24-Aug-07,"45,920",,
-2007,2007 German Bank 2,"32,769 t w/ CIF and Morning Star",07-Sep-07,"23,814",,
-2007,2007 German Bank 3,"191,802 t w/ CIF and Morning Star",21-Sep-07,"183,761",,
-2007,2007 German Bank 4,"228,870 t w/ CIF (no MS)",05-Oct-07,"190,288",,Max survey
-2007,2007 German Bank 5,not included in overall,17-Oct-07, -   ,"443,782",
-2006,2006 German Bank 1,8/9t outbox,25-Aug-06,"114,069",,
-2006,2006 German Bank 2,1170/3561t outbox,15-Sep-06,"96,009",,Max survey
-2006,2006 German Bank 3,2940/1353t outbox,01-Oct-06,"33,200",,
-2006,2006 German Bank 4,"22,787 t w/ CIF",15-Oct-06,"10,696","253,974",
-2005,2005 German Bank 1,"91,701 t w/ integration factor",07-Sep-05,"91,701",,Max survey
-2005,2005 German Bank 2,"128,825 t w/ integration factor",21-Sep-05,"110,942",,
-2005,2005 German Bank 3,"48,084 t w/ integration factor",04-Oct-05,"16,678","219,321",
-2004,2004 German Bank 1,,02-Sep-04,"113,333",,
-2004,2004 German Bank 2,,16-Sep-04,"145,400",,
-2004,2004 German Bank 3,,30-Sep-04,"74,380","333,113",
-2003,2003 German Bank 1,,29-Aug-03,"107,204",,
-2003,2003 German Bank 2,,08-Sep-03,"72,263",,Max survey
-2003,2003 German Bank 3,,18-Sep-03,"13,017",,
-2003,2003 German Bank 4,,10-Oct-03,"61,964",,
-2003,2003 German Bank 5,,20-Oct-03,"2,400","256,847",
-2002,2002 German Bank F1,,11-Aug-02,"3,843",,
-2002,2002 German Bank 1,,26-Aug-02,"113,430",,Max survey
-2002,2002 German Bank 2,,10-Sep-02,"88,312",,dup with/w-o
-2002,2002 German Bank F2,,19-Sep-02,"133,642",,
-2002,2002 German Bank F3,,29-Sep-02, -   ,,dup with/w-o
-2002,2002 German Bank F4,,08-Oct-02, -   ,"339,227",dup with/w-o
-2001,2001 German Bank 1,,27-Aug-01,"39,160",,dup with/w-o
-2001,2001 German Bank 2,,09-Sep-01,"28,178",,Max survey
-2001,2001 German Bank 3,,13-Sep-01,"99,932",,dup with/w-o
-2001,2001 German Bank 4,"not used, Spec Buoy instead",03-Oct-01,"41,653","208,924",Max survey
-2000,2000 German Bank 1,,29-Aug-00,"100,250",,dup with/w-o
-2000,2000 German Bank 2,,12-Sep-00,"112,849",,dup with/w-o
-2000,2000 German Bank 3,,27-Sep-00,"54,402",,dup with/w-o
-2000,2000 German Bank F1,,14-Oct-00,"8,193","275,694",Max survey
-1999,1999 German Bank 1,,27-Aug-99,"165,085",,dup with/w-o
-1999,1999 German Bank 2,,10-Sep-99,"208,259",,dup with/w-o
-1999,1999 German Bank 3,,25-Sep-99,"38,201",,dup with/w-o
-1999,1999 German Bank 4,,08-Oct-99, -   ,"411,545",dup with/w-o
-2019,German Bank #1,,11-Aug-19,"12,319",,2019 - 2022 add from 1997 - 2022 acoustic surveys overall-bubble spreadsheet. 2024-05-08
-2019,German Bank #2,,25-Aug-19,"25,125",,
-2019,German Bank #3,,09-Sep-19,"29,498",,
-2019,German Bank #4,,25-Sep-19,"65,077",,
-2019,German Bank #5,,08-Oct-19,1,,
-2019,German Bank #6,,21-Oct-19,"15,120",,
-2019,German Bank #7,,03-Nov-19,1,"147,141",
-2020,German Bank #1,,16-Aug-20,"12,895",,
-2020,German Bank #2,,31-Aug-20,"26,279",,
-2020,German Bank #3,,13-Sep-20,"56,738",,
-2020,German Bank #4,,27-Sep-20,875,,
-2020,German Bank #5,,11-Oct-20,"5,692",,
-2020,German Bank #6,,25-Oct-20,"5,514","107,993",
-2021,German Bank #1,,8/23/2021,"7,460",,
-2021,German Bank #2,,9/5/2021,"46,441",,
-2021,German Bank #3,,9/20/2021,"71,574",,
-2021,German Bank #4,,10/3/2021,1,,
-2021,German Bank #5,,10/18/2021,145,,
-2021,German Bank #6,,11/3/2021,"10,009","135,630",
-2022,German Bank #1,,8/14/2022,"22,081",,
-2022,German Bank #2,,8/28/2022,"7,393",,
-2022,German Bank #3,,9/11/2022,"8,826",,
-2022,German Bank #4,,9/25/2022,"9,761",,
-2022,German Bank #5,,10/10/2022,"17,675",,
-2022,German Bank #6,10/23/2022,10/23/2022,"10,823","76,559",
+1999,1999 German Bank 1,,1999-08-27,165085,,dup with/w-o
+1999,1999 German Bank 2,,1999-09-10,208259,,dup with/w-o
+1999,1999 German Bank 3,,1999-09-25,38201,,dup with/w-o
+1999,1999 German Bank 4,,1999-10-08, -   ,"411,545",dup with/w-o
+2000,2000 German Bank 1,,2000-08-29,100250,,dup with/w-o
+2000,2000 German Bank 2,,2000-09-12,112849,,dup with/w-o
+2000,2000 German Bank 3,,2000-09-27,54402,,dup with/w-o
+2000,2000 German Bank F1,,2000-10-14,8193,"275,694",Max survey
+2001,2001 German Bank 1,,2001-08-27,39160,,dup with/w-o
+2001,2001 German Bank 2,,2001-09-09,28178,,Max survey
+2001,2001 German Bank 3,,2001-09-13,99932,,dup with/w-o
+2001,2001 German Bank 4,"not used, Spec Buoy instead",2001-10-03,41653,"208,924",Max survey
+2002,2002 German Bank F1,,2002-08-11,3843,,
+2002,2002 German Bank 1,,2002-08-26,113430,,Max survey
+2002,2002 German Bank 2,,2002-09-10,88312,,dup with/w-o
+2002,2002 German Bank F2,,2002-09-19,133642,,
+2002,2002 German Bank F3,,2002-09-29, -   ,,dup with/w-o
+2002,2002 German Bank F4,,2002-10-08, -   ,"339,227",dup with/w-o
+2003,2003 German Bank 1,,2003-08-29,107204,,
+2003,2003 German Bank 2,,2003-09-08,72263,,Max survey
+2003,2003 German Bank 3,,2003-09-18,13017,,
+2003,2003 German Bank 4,,2003-10-10,61964,,
+2003,2003 German Bank 5,,2003-10-20,2400,"256,847",
+2004,2004 German Bank 1,,2004-09-02,113333,,
+2004,2004 German Bank 2,,2004-09-16,145400,,
+2004,2004 German Bank 3,,2004-09-30,74380,"333,113",
+2005,2005 German Bank 1,"91,701 t w/ integration factor",2005-09-07,91701,,Max survey
+2005,2005 German Bank 2,"128,825 t w/ integration factor",2005-09-21,110942,,
+2005,2005 German Bank 3,"48,084 t w/ integration factor",2005-10-04,16678,"219,321",
+2006,2006 German Bank 1,8/9t outbox,2006-08-25,114069,,
+2006,2006 German Bank 2,1170/3561t outbox,2006-09-15,96009,,Max survey
+2006,2006 German Bank 3,2940/1353t outbox,2006-10-01,33200,,
+2006,2006 German Bank 4,"22,787 t w/ CIF",2006-10-15,10696,"253,974",
+2007,2007 German Bank 1,"41,965 t w/ CIF ( + 2,820t or 3955 t w/CIF north of box)",2007-08-24,45920,,
+2007,2007 German Bank 2,"32,769 t w/ CIF and Morning Star",2007-09-07,23814,,
+2007,2007 German Bank 3,"191,802 t w/ CIF and Morning Star",2007-09-21,183761,,
+2007,2007 German Bank 4,"228,870 t w/ CIF (no MS)",2007-10-05,190288,,Max survey
+2007,2007 German Bank 5,not included in overall,2007-10-17, -   ,"443,782",
+2008,2008 German Bank 1,1727/2387t wo/w CIF Outbox not included,2008-08-22,25445,,
+2008,2008 German Bank 2,,2008-09-05,67338,,Max survey
+2008,2008 German Bank 3,,2008-09-19,17145,,
+2008,2008 German Bank 4,,2008-10-06,106207,,Max survey
+2008,2008 German Bank 5,not included in overall,2008-10-21, -   ,"216,135",
+2009,2009 German Bank 1,,2009-08-12,90118,,
+2009,2009 German Bank 2,1375/1737t outbox,2009-08-25,96977,,
+2009,2009 German Bank 3,not included in overall,2009-09-14,56887,,
+2009,2009 German Bank 4,,2009-09-24,27894,,Max survey
+2009,2009 German Bank 5,,2009-10-05,52328,"324,204",
+2010,2010 German Bank 1,,2010-08-18,85180,,
+2010,2010 German Bank 2,,2010-08-31,40510,,
+2010,2010 German Bank 3,,2010-09-15,51673,,Max survey
+2010,2010 German Bank 4,,2010-10-05,28686,,
+2010,2010 German Bank 5,,2010-10-19,1687,"207,736",
+2011,2011 German Bank 1,preliminary,2011-08-26,30405,,
+2011,2011 German Bank 2,preliminary,2011-09-08,110062,,
+2011,2011 German Bank 3,preliminary,2011-09-21,117625,,
+2011,2011 German Bank 4,preliminary,2011-10-10, -   ,,
+2011,2011 German Bank 5,not included in overall,2011-10-23, -   ,"258,091",
+2012,2012 German Bank 1,Interval 0,2012-08-12,33541,,estimate w/o CIF as 0.8 x CIF
+2012,2012 German Bank 2,14,2012-08-26,101453,,estimate w/o CIF as 0.8 x CIF
+2012,2012 German Bank 3,13,2012-09-09,37651,,estimate w/o CIF as 0.8 x CIF
+2012,2012 German Bank 4,13,2012-09-22,41725,,estimate w/o CIF as 0.8 x CIF
+2012,2012 German Bank 5,15,2012-10-07,8711,,Max survey
+2012,2012 German Bank 6,17d-protocol not followed,2012-10-24,3072,"226,153",
+2013,2013 German Bank 1,Interval 0,2013-09-03,53509,,
+2013,2013 German Bank 2,14,2013-09-17,108500,,
+2013,2013 German Bank 3,13,2013-09-29,13384,,
+2013,2013 German Bank 4,13,2013-10-05,33432,,
+2013,2013 German Bank 4a,15,2013-10-14, -   ,,
+2013,2013 German Bank 5a,,2013-10-21, -   ,"208,825",
+2014,2014 German Bank 1,,2014-08-12,51496,,
+2014,2014 German Bank 2,,2014-08-25,59467,,
+2014,2014 German Bank 3,,2014-09-08,63342,,
+2014,2014 German Bank 3a,,2014-09-26, -   ,,
+2014,2014 German Bank 4,,2014-10-06,15580,"189,884",
+2015,German Bank #1,,2015-08-17,16156,,
+2015,German Bank #2,,2015-09-01,61324,,
+2015,German Bank #2a,,2015-09-13,37271,,
+2015,German Bank #3,,2015-09-21,-10,,
+2015,German Bank #4,,2015-09-27,25547,,
+2015,German Bank #5,,2015-10-12,-10,"140,278",
+2016,German Bank #1,,2016-08-21,35565,,
+2016,German Bank #2,,2016-09-01,18010,,
+2016,German Bank #3,,2016-09-12,80119,,
+2016,German Bank #4,,2016-09-19, -   ,,
+2016,German Bank #5,,2016-09-26,29667,,
+2016,German Bank #6,,2016-10-07, -   ,"163,361",
+2017,German Bank #1,,2017-08-21,33839,,
+2017,German Bank #2,,2017-09-08,60745,,
+2017,German Bank #3,,2017-09-17,42053,,
+2017,German Bank #4,,2017-10-06,-10,,
+2017,German Bank #5,,2017-10-18,29155,"165,783",
+2018,German Bank #1,,2018-08-12,12170,,
+2018,German Bank #2,,2018-08-26,13693,,
+2018,German Bank #3,,2018-09-09,37490,,
+2018,German Bank #4,,2018-09-20,24298,,
+2018,German Bank #5,,2018-10-01,7218,,
+2018,German Bank #6,,2018-10-14, -   ,"94,869",
+2019,German Bank #1,,2019-08-11,12319,,2019 - 2022 add from 1997 - 2022 acoustic surveys overall-bubble spreadsheet. 2024-05-08
+2019,German Bank #2,,2019-08-25,25125,,
+2019,German Bank #3,,2019-09-09,29498,,
+2019,German Bank #4,,2019-09-25,65077,,
+2019,German Bank #5,,2019-10-08,1,,
+2019,German Bank #6,,2019-10-21,15120,,
+2019,German Bank #7,,2019-11-03,1,"147,141",
+2020,German Bank #1,,2020-08-16,12895,,
+2020,German Bank #2,,2020-08-31,26279,,
+2020,German Bank #3,,2020-09-13,56738,,
+2020,German Bank #4,,2020-09-27,875,,
+2020,German Bank #5,,2020-10-11,5692,,
+2020,German Bank #6,,2020-10-25,5514,"107,993",
+2022,German Bank #5,,2022-10-10,17675,,
+2021,German Bank #5,,2021-10-18,145,,
+2022,German Bank #6,10/23/2022,2022-10-23,10823,"76,559",
+2021,German Bank #4,,2021-10-03,1,,
+2021,German Bank #6,,2021-11-03,10009,"135,630",
+2022,German Bank #1,,2022-08-14,22081,,
+2021,German Bank #1,,2021-08-23,7460,,
+2022,German Bank #2,,2022-08-28,7393,,
+2022,German Bank #3,,2022-09-11,8826,,
+2021,German Bank #3,,2021-09-20,71574,,
+2022,German Bank #4,,2022-09-25,9761,,
+2021,German Bank #2,,2021-09-05,46441,,
