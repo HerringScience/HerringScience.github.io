@@ -12,27 +12,27 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2024-05-24 19:00:00" #survey date and time, as formatted
-surv.no = "1"
-Allocation = "100" #set to "0" for a non-fishing survey
+surv.date = "2024-05-20 20:00:00" #survey date and time, as formatted
+surv.no = "2"
+Allocation = "0" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
-Tagging = "Lady Janice, Sealife II, Lady Melissa" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+Tagging = "NA" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 8
+vessels = 4
 EVessel = "Canada 100" #Set NA for GB or excluding box
 NVessel = "Fundy Monarch" #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Canada 100"
-V2 = "Leroy and Barry"
-V3 = "Lady Melissa"
-V4 = "Morning Star"
-V5 = "Fundy Monarch"
-V6 = "Sealife II"
-V7 = "Brunswick Provider"
-V8 = PlanktonVessel
+V1 = "Morning Star"
+V2 = PlanktonVessel
+V3 = NA
+V4 = NA
+V5 = NA
+V6 = NA
+V7 = NA
+V8 = NA
 V9 = NA
 
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
@@ -357,7 +357,7 @@ Plan %>%
 
 1. Plan to arrive at the starting point 30 minutes before the start time of `r StartTime`.
 
-2. Start the EK80 software and load the ‘Herring Survey 2023’ settings. When you are ready to
+2. Start the EK80 software and load the ‘Herring Survey 2024’ settings. When you are ready to
 begin, Record Raw should be turned ‘ON’ and the ‘REC’ dot in the upper left should turn
 from black to red. Finally, check that the lat and long in the top center of the screen is
 changing.

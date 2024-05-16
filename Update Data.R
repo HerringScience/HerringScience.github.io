@@ -2,16 +2,16 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB or SI
-surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
-year="2023"
-surv.no="7"
+surv="SB" #SB or GB or SI
+surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+year="2024"
+surv.no="1"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("C1", "FM", "LM", "LJ", "SL", "MS", "LB", "BP")
+ids = c("BP", "LM", "MS")
 
 #Area and TS values - From table C
 SB1= 661 #SB main area
@@ -177,6 +177,9 @@ setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.githu
 Survey = read_csv("planktonsamplingData.csv")
 
 SurveyTotal$TowTime = as.numeric(SurveyTotal$TowTime)
+#not joining x$Lat1 and y$Lat1
+#SurveyTotal$Lat1 <- as.character()
+
 Total = full_join(Survey, SurveyTotal)
 
 Total = Total %>%
@@ -231,15 +234,15 @@ us = getData('GADM', download = FALSE, country = "USA", level = 1, path = paste0
 can1 = rbind(can,us)
 NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 
-# Proper coordinates for German Bank
+# Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(GBMap) <- CRS(proj4string(NBNS))
-GBout <- gIntersection(NBNS, GBMap, byid=TRUE)
+GBout <- crop(NBNS, GBMap, byid=TRUE)
 
-# Proper coordinates for Scots Bay
+# Proper coordinates for Scots Bay. eplaced gIntersection with crop
 SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
 proj4string(SBMap) <- CRS(proj4string(NBNS))
-SBout <- gIntersection(NBNS, SBMap, byid=TRUE)
+SBout <- crop(NBNS, SBMap, byid=TRUE)
 
 #Import All Boxes
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))

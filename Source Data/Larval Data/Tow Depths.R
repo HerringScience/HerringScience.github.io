@@ -236,4 +236,5 @@ GBstartDates %>% write.csv(paste0("C:/Users/herri/Herring Science Council/Scienc
 
 #Plankton tow depths
 
-towDepths <- 
+SBtowDepths <- TowTimes %>%
+  select(Ground = "GB")

@@ -1,4 +1,4 @@
-### Survey Plans 2020
+### Survey Plans
 
 rm(list = ls())
 
@@ -116,12 +116,12 @@ out <- crop(NBNS, CP, byid=TRUE)
 # Example of a Scots Bay Survey 
 
 # Plan with all the transects, main, northern and eastern:
- setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/2024/SB1/"))
+ setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/2024/SB2/"))
 #trackSB = read.csv("july7_plan_ScotsBay.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
  
  #trackSB = read.csv("may29_2022Plan.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
  
- trackSB = read.csv("May_05_2024SurveyPlanMain.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+ trackSB = read.csv("May_20_2024SurveyPlanMain.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
 
 
 
@@ -155,13 +155,13 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 # Plot the transects: Scots Bay
 
-setwd(paste0("C:/Users/herri/Desktop/"))
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/2024/SB2/"))
 
-track1 = read.csv("May_05_2024SurveyPlanNorthxlsx.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+track1 = read.csv("May_20_2024SurveyPlanNorthxlsx.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
 
-track1 = read.csv("May_05_2024SurveyPlanEastern.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+track1 = read.csv("May_20_2024SurveyPlanEastern.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
 
-track1 = read.csv("May_05_2024SurveyPlanMain.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+track1 = read.csv("May_20_2024SurveyPlanMain.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
 
 
 
@@ -175,37 +175,37 @@ ggplot(track1, aes(x=X, y=Y)) +
   labs(x=NULL, y=NULL, caption = "Figure 1. Survey lines to be completed by participating vessels.")
 
 
-
-ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Scots Bay Survey Plan July 7, 2019")
-
-
-# May 2021
-ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Scots Bay Survey Plan May 2021")
-
-
-
-
-trackSB = read.csv("sep20_2020plan.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
-
-trackSB = read.csv("planSep20_20.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
-
-trackSB = read.csv("CplanSep20_20.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
-
-ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77") + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Option C")
-
-
-
-
-# Plot the transects: German Bank/Seal Island
-# ggplot(trackGB, aes(x=X, y=Y))+ geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_polygon(data=polySI,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("")+ ggtitle("German Bank Seal Island Survey Plan August 30, 2020")
+# 
+# ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Scots Bay Survey Plan July 7, 2019")
 # 
 # 
-
-
-# Determine the ordering of polygon points
-ggplot(polyEastern, aes(x=X, y=Y))+ geom_polygon(fill="transparent")+ geom_text(aes(label=POS))
-
-# Lines for the Eastern and Northern Boxes
-track = read.csv("easternLines2020.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
-track = read.csv("northernLines2020.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+# # May 2021
+# ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Scots Bay Survey Plan May 2021")
+# 
+# 
+# 
+# 
+# trackSB = read.csv("sep20_2020plan.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+# 
+# trackSB = read.csv("planSep20_20.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+# 
+# trackSB = read.csv("CplanSep20_20.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+# 
+# ggplot(trackSB, aes(x=X, y=Y))+ geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77") + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("") + ggtitle("Option C")
+# 
+# 
+# 
+# 
+# # Plot the transects: German Bank/Seal Island
+# # ggplot(trackGB, aes(x=X, y=Y))+ geom_polygon(data = out, aes(x=long, y=lat, group=group), fill = "grey77")+ geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_polygon(data=polySI,aes(x=X, y=Y, group=PID),fill='white',col='black') + geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID),fill='white',col='black')+ geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), size = 1) + coord_map() + xlab("")+ ylab("")+ ggtitle("German Bank Seal Island Survey Plan August 30, 2020")
+# # 
+# # 
+# 
+# 
+# # Determine the ordering of polygon points
+# ggplot(polyEastern, aes(x=X, y=Y))+ geom_polygon(fill="transparent")+ geom_text(aes(label=POS))
+# 
+# # Lines for the Eastern and Northern Boxes
+# track = read.csv("easternLines2020.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
+# track = read.csv("northernLines2020.csv", header=TRUE, sep=",", row.names = NULL, stringsAsFactors=FALSE)
 
