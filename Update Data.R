@@ -14,9 +14,9 @@ Tow = "Y" #whether or not plankton tow(s) were conducted
 ids = c("BP", "LM", "MS")
 
 #Area and TS values - From table C
-SB1= 661 #SB main area
-SB2= 77 #SB north area
-SB3= 115 #SB east area
+SB1= 387.3 #SB main area
+SB2= 83.3 #SB north area
+SB3= 73.9 #SB east area
 
 GB1 = 796 #GB main area
 GB2 = 272 #Seal Island area
@@ -38,6 +38,8 @@ SB_y = 0.364102758434224
 SB_x_var = 0.436969270679439
 SB_days = 29
 
+#install.packages("weathercan", repos = "https://dev.ropensci.org")
+
 library(rlang)
 library(cli)
 library(lubridate)
@@ -48,7 +50,7 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
+library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
@@ -115,7 +117,9 @@ if(is.na(first(Plankton$CTD_ID))){
 if(Tow == "Y"){
   TowData = read_excel(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Ruskin.xlsx"), skip = 1, sheet = 'Data')
   TowData$DateTime = TowData$Time
-  TowData$DateTime = TowData$DateTime-hours(3)
+  
+#Changed to UTC  
+  #TowData$DateTime = TowData$DateTime-hours(3)
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Time = substr(TowData$DateTime,12,19)
   TowData$Time = hms::as_hms(TowData$Time)
@@ -157,6 +161,7 @@ TowTbl1 = tibble_row(Tow_No = 1, AvgTowDepth = first(Tow1$AvgTowDepth), MaxTowDe
 TowTbl2 = tibble_row(Tow_No = 2, AvgTowDepth = first(Tow2$AvgTowDepth), MaxTowDepth = first(Tow2$MaxTowDepth))
 TowCalcs = full_join(TowTbl1, TowTbl2)
 
+
 Plankton = full_join(Plankton, TowCalcs, by = "Tow_No")
 
 #convert lat/lon before combining
@@ -177,8 +182,6 @@ setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.githu
 Survey = read_csv("planktonsamplingData.csv")
 
 SurveyTotal$TowTime = as.numeric(SurveyTotal$TowTime)
-#not joining x$Lat1 and y$Lat1
-#SurveyTotal$Lat1 <- as.character()
 
 Total = full_join(Survey, SurveyTotal)
 
@@ -306,9 +309,21 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
   map = mapDat(x = Map)
   x = Region
   trans = transects(x= Region, TS38 = TS1, TS50 = NA)
-  northern = trans[which((trans$Vessel == NVessel)), ]
-  eastern = trans[which((trans$Vessel == EVessel)), ]
-  main = trans[which((trans$Vessel %in% ids)), ]
+#These IDs are specifically for SB1 due to manual survey
+  
+  ids = c("MS_T02","MS_T03", "MS_T04", "MS_T05")
+  northern = trans[which((trans$RegionName %in% ids)), ]
+  
+  
+  ids = c("LM_T02","LM_T03")
+  eastern = trans[which((trans$RegionName %in% ids)), ]
+  
+  ids =c("MS_T01","LM_T01", "LM_T04", "BP_T01","BP_T02")
+  main = trans[which((trans$RegionName %in% ids)), ]
+  
+  #northern = trans[which((trans$Vessel == NVessel)), ]
+  #eastern = trans[which((trans$Vessel == EVessel)), ]
+  #main = trans[which((trans$Vessel %in% ids)), ]
   PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
 
   # Results
