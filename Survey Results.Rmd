@@ -6,20 +6,24 @@ output:
 ---
 
 ```{r, include=FALSE}
+
 rm(list = ls())
 
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2024"
-surv.no = "1"
-hightide = "2024-05-05 22:19:00" #for Scots Bay only
+surv.no = "2"
+hightide = "2024-05-20 22:39:00" #for Scots Bay only
+
 ```
 
 ```{r setup, include=FALSE}
+
 ## Global options
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
 ```
 
 ```{r Data Import, include=FALSE}
@@ -36,7 +40,7 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
+library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
@@ -350,6 +354,9 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 ### Transect Details 
 
 ```{r}
+
+#id Y X Yend Xend shouldn't be in table
+
 TransDetails = SurveyTotal %>%
   filter(Type == "Actual") %>%
   filter(!is.na(Vessel)) %>%
@@ -473,6 +480,9 @@ plot(a)
 ### Annual Summaries
 
 ```{r}
+
+### This chunk is running when I hit the play button.
+
 year = as.numeric(year)
 if(surv=="SB"){Annual_Compare1 = SSB %>%
   filter(Year == year & Ground == surv2) %>%
@@ -497,10 +507,12 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
   kable_paper("striped") %>% 
   column_spec(3:5, background = "Grey", color= "White") %>%
   add_header_above(c(" "=2, "Current Year"=3, "Previous Year"=5), bold = TRUE, align = "l", underline=TRUE, font_size = 20)
+
 ```
 
 
 ```{r}
+
 Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
   group_by(Year, Ground) %>%
   summarize("HSC Estimate" = sum(HSC_Estimate),
@@ -511,7 +523,9 @@ Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
 
 kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
   kable_paper("striped", full_width=F)
+
 ```
+
 
 ## Tagging, Plankton, and CTD Data {.tabset}
 

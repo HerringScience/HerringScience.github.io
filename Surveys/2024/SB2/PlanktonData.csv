@@ -1,1 +1,3 @@
-Set_Number,No_jars,Lon1,Lat1,Lon2,Lat2,Time1,Time2,TideDirection,Observer,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon
+Set_Number,No_jars,Tow_No,Lon1,Lat1,Lon2,Lat2,Time1,Time2,TideDirection,Observer,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon,
+SB2024-03,1,1,65 14.92,45 03.02,65 13.57,45 02.98,18:22,18:32,against,Tracey,SW,2,0,17,806021,863503,8,7,10K100766_20240520_220848,45.0552,-65.2135,
+SB2024-04,1,2,65 13.42,45 03.53,65 12.76,45 04.56,18:39,18:49,with,Tracey,SW,2,0,17,863503,863508,8,7,10K100766_20240520_220848,45.0552,-65.2135,*depth probe got tangled in prop.

@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="1"
+surv.no="2"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("BP", "LM", "MS")
+ids = c("BP", "LM", "MS", "C1")
 
 #Area and TS values - From table C
-SB1= 387.3 #SB main area
-SB2= 83.3 #SB north area
-SB3= 73.9 #SB east area
+SB1= 518 #SB main area
+SB2= 85 #SB north area
+SB3= 101 #SB east area
 
 GB1 = 796 #GB main area
 GB2 = 272 #Seal Island area
@@ -119,12 +119,12 @@ if(Tow == "Y"){
   TowData$DateTime = TowData$Time
   
 #Changed to UTC  
-  #TowData$DateTime = TowData$DateTime-hours(3)
+  TowData$DateTime = TowData$DateTime-hours(3)
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Time = substr(TowData$DateTime,12,19)
   TowData$Time = hms::as_hms(TowData$Time)
 
-#Filter tow data based on Time1 + Time2
+#Filter tow data based on Time1 + Time
 Tow1 = TowData[TowData$Time >= first(Plankton$Time1) & TowData$Time <= first(Plankton$Time2),]
 Tow2 = TowData[TowData$Time >= last(Plankton$Time1) & TowData$Time <= last(Plankton$Time2),]
 
@@ -309,22 +309,26 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
   map = mapDat(x = Map)
   x = Region
   trans = transects(x= Region, TS38 = TS1, TS50 = NA)
-#These IDs are specifically for SB1 due to manual survey
   
-  ids = c("MS_T02","MS_T03", "MS_T04", "MS_T05")
+#These IDs are specifically for SB2 due to manual survey
+  ### Region has start and end times within it.
+  
+  ids = c("C1_T02","C1_T03", "C1_T04", "C1_T05", "C1_T06")
   northern = trans[which((trans$RegionName %in% ids)), ]
   
   
-  ids = c("LM_T02","LM_T03")
+  ids = c("LM_T02","LM_T03", "BP_T02", "BP_T03")
   eastern = trans[which((trans$RegionName %in% ids)), ]
   
-  ids =c("MS_T01","LM_T01", "LM_T04", "BP_T01","BP_T02")
+  ids =c("C1_T01", "MS_T01", "MS_T02", "MS_T03","LM_T01", "LM_T04", "BP_T01","BP_T04")
   main = trans[which((trans$RegionName %in% ids)), ]
   
   #northern = trans[which((trans$Vessel == NVessel)), ]
   #eastern = trans[which((trans$Vessel == EVessel)), ]
   #main = trans[which((trans$Vessel %in% ids)), ]
-  PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
+  PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
+    geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
+    labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
 
   # Results
   resultsa = biomassCalc(x = main, areaKm = SB1)
