@@ -512,7 +512,6 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
 
 
 ```{r}
-
 Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
   group_by(Year, Ground) %>%
   summarize("HSC Estimate" = sum(HSC_Estimate),
@@ -523,7 +522,6 @@ Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
 
 kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
   kable_paper("striped", full_width=F)
-
 ```
 
 
@@ -534,70 +532,71 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 ::: row
 ::: col-md-6
 ```{r, results = "hide", fig.show="first", fig.align='center'}
- 
-CTD_Sum = CTD %>%
-  group_by(ID) %>%
-  summarize(Lat = mean(Lat),
-            Lon = mean(Lon)) %>%
-  rename(Vessel = ID) %>%
-  mutate(Vessel = "CTD Cast",
-         Tag_Count = 300)
 
-if(!is.na(unique(Survey$PlanktonVessel))){
-  Tows_Sum = 
-  Survey %>%
-  group_by(id, PlanktonVessel) %>%
-  summarize(Lon=mean(Lon1, Lon2),
-            Lat=mean(Lat1, Lat2)) %>% 
-  rename(Vessel = PlanktonVessel) %>%
-  mutate(Vessel = "Plankton Tow",
-         Tag_Count = 300)}
+# CTD_Sum = CTD %>%
+#   group_by(ID) %>%
+#   summarize(Lat = mean(Lat),
+#             Lon = mean(Lon)) %>%
+#   rename(Vessel = ID) %>%
+#   mutate(Vessel = "CTD Cast",
+#          Tag_Count = 300)
 
-if(is.na(unique(Survey$PlanktonVessel))){Tows_Sum = CTD_Sum}
-  
-Tag_Sum = Tag %>%
-  group_by(Lat, Lon, Vessel, Tagger) %>%
-  summarize(Tag_Count=n_distinct(Tag_Num),
-            Lat=mean(Lat),
-            Lon=mean(Lon))
+# if(!is.na(unique(Survey$PlanktonVessel))){
+#   Tows_Sum = 
+#   Survey %>%
+#   group_by(id, PlanktonVessel) %>%
+#   summarize(Lon=mean(Lon1, Lon2),
+#             Lat=mean(Lat1, Lat2)) %>% 
+#   rename(Vessel = PlanktonVessel) %>%
+#   mutate(Vessel = "Plankton Tow",
+#          Tag_Count = 300)}
+# 
+# if(is.na(unique(Survey$PlanktonVessel))){Tows_Sum = CTD_Sum}
+#   
+# Tag_Sum = Tag %>%
+#   group_by(Lat, Lon, Vessel, Tagger) %>%
+#   summarize(Tag_Count=n_distinct(Tag_Num),
+#             Lat=mean(Lat),
+#             Lon=mean(Lon))
+# 
+# ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
+# ScienceData2 = full_join(ScienceData, Tag_Sum)
+# 
+# if(surv == "SB"){
+# a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+# {if(!is.na(unique(Survey$NVessel)))geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+# {if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
+#   geom_point(aes(colour = Vessel, size = Tag_Count)) +
+#   coord_map() + 
+#   labs(x=NULL, y=NULL)}
+# 
+# if(surv == "GB"){
+# a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_point(aes(colour = Vessel, size = Tag_Count)) +
+#   coord_map() + 
+#   labs(x=NULL, y=NULL)}
+# 
+# plot(a)
 
-ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
-ScienceData2 = full_join(ScienceData, Tag_Sum)
-
-if(surv == "SB"){
-a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=SBout,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-{if(!is.na(unique(Survey$NVessel)))geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
-{if(!is.na(unique(Survey$EVessel)))geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3)} +
-  geom_point(aes(colour = Vessel, size = Tag_Count)) +
-  coord_map() + 
-  labs(x=NULL, y=NULL)}
-
-if(surv == "GB"){
-a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=GBout,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(colour = Vessel, size = Tag_Count)) +
-  coord_map() + 
-  labs(x=NULL, y=NULL)}
-
-plot(a)
 ```
 :::
 
 ::: col-md-6
 ```{r echo=FALSE, fig.align='center'}
-Tag_Sum = Tag_Sum %>%
-  group_by(Vessel) %>%
-  summarize(Tags = sum(Tag_Count))
-
-kbl(Tag_Sum)%>%
-  kable_paper("striped", full_width = F)
+# Tag_Sum = Tag_Sum %>%
+#   group_by(Vessel) %>%
+#   summarize(Tags = sum(Tag_Count))
+# 
+# kbl(Tag_Sum)%>%
+#   kable_paper("striped", full_width = F)
 ```
 :::
 :::
