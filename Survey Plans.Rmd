@@ -12,23 +12,23 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2024-06-02 20:00:00" #survey date and time, as formatted
-surv.no = "3"
-Allocation = "150" #set to "0" for a non-fishing survey
+surv.date = "2024-06-16 20:00:00" #survey date and time, as formatted
+surv.no = "4"
+Allocation = "200" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = "NA" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
 vessels = 6
-EVessel = "Bruswick Provider" #Set NA for GB or excluding box
-NVessel = "Lady Janice" #Set NA for GB or excluding box
-PlanktonVessel = "Lady Melissa"
+EVessel = "Canada 100" #Set NA for GB or excluding box
+NVessel = "Leroy and Barry" #Set NA for GB or excluding box
+PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Fundy Monarch"
-V2 = PlanktonVessel
-V3 = "Morning Star"
-V4 = "Canada 100"
+V1 = PlanktonVessel
+V2 = "Brunswick Provider"
+V3 = "Fundy Monarch"
+V4 = "Lady Melissa"
 V5 = NA
 V6 = NA
 V7 = NA
@@ -76,11 +76,12 @@ Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScie
 # 
 # vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
 #            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
+#            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
 #            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
-#            NA)))
+#            NA))))
 # 
 # Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
-# #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels. 
+# #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
 # 
 # if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
 # #if there is a NVessel this will load the North_Box.csv box outline
@@ -120,7 +121,7 @@ Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScie
 #   mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
 #   mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
 # write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
-# #Comment out to here for manual plans.
+#Comment out to here for manual plans.
 
 #Land Data - loads the land data the same way as Jenna's previous scripts
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/"))
@@ -315,38 +316,60 @@ if(surv=="GB"){
 
 ```{r}
 
-if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
-           NA)))}
-if(surv=="GB"){vessels2=vessels}
-
-Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
-
-if(surv=="SB"){
-if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
-if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
-if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
-if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
-if(!is.na(NVessel) & !is.na(EVessel)){
-  Plan = full_join(Main, North)
-  Plan = full_join(Plan, East)}
-if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
-if(surv=="GB"){Plan=Main}
+Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/2024/", surv, surv.no, "/", "Table.csv"))
 
 #Add vessel names to Plan
-Plan = Plan %>% 
-  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+Plan = Main %>% 
+  mutate(Vessel = replace(Vessel, Vessel == "LJ", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "C1", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "FM", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "LM", V4)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
+  mutate(Vessel = replace(Vessel, Vessel == "LB", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "BP", EVessel))
+
+#if manual plan, read Table file and comment out below
+
+# if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+#            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+#            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
+#            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+#            NA))))}
+# if(surv=="GB"){vessels2=vessels}
+# 
+# Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
+# 
+# 
+# if(surv=="SB"){
+# if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+# if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+# if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+# if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+# if(!is.na(NVessel) & !is.na(EVessel)){
+#   Plan = full_join(Main, North)
+#   Plan = full_join(Plan, East)}
+# if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
+# if(surv=="GB"){Plan=Main}
+
+#Comment out to here
+
+#Add vessel names to Plan
+# Plan = Plan %>% 
+#   mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
+#   mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
 
 Plan %>%
   arrange(Vessel) %>%

@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="2"
+surv.no="3"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ids = c("BP", "LM", "MS", "C1")
 
 #Area and TS values - From table C
-SB1= 518 #SB main area
-SB2= 85 #SB north area
-SB3= 101 #SB east area
+SB1= 632 #SB main area
+SB2= 88 #SB north area
+SB3= 121 #SB east area
 
 GB1 = 796 #GB main area
 GB2 = 272 #Seal Island area
@@ -313,19 +313,20 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
 #These IDs are specifically for SB2 due to manual survey
   ### Region has start and end times within it.
   
-  ids = c("C1_T02","C1_T03", "C1_T04", "C1_T05", "C1_T06")
-  northern = trans[which((trans$RegionName %in% ids)), ]
+  # ids = c("C1_T02","C1_T03", "C1_T04", "C1_T05", "C1_T06")
+  # northern = trans[which((trans$RegionName %in% ids)), ]
+  # 
+  # 
+  # ids = c("LM_T02","LM_T03", "BP_T02", "BP_T03")
+  # eastern = trans[which((trans$RegionName %in% ids)), ]
+  # 
+  # ids =c("C1_T01", "MS_T01", "MS_T02", "MS_T03","LM_T01", "LM_T04", "BP_T01","BP_T04")
+  # main = trans[which((trans$RegionName %in% ids)), ]
   
   
-  ids = c("LM_T02","LM_T03", "BP_T02", "BP_T03")
-  eastern = trans[which((trans$RegionName %in% ids)), ]
-  
-  ids =c("C1_T01", "MS_T01", "MS_T02", "MS_T03","LM_T01", "LM_T04", "BP_T01","BP_T04")
-  main = trans[which((trans$RegionName %in% ids)), ]
-  
-  #northern = trans[which((trans$Vessel == NVessel)), ]
-  #eastern = trans[which((trans$Vessel == EVessel)), ]
-  #main = trans[which((trans$Vessel %in% ids)), ]
+  northern = trans[which((trans$Vessel == NVessel)), ]
+  eastern = trans[which((trans$Vessel == EVessel)), ]
+  main = trans[which((trans$Vessel %in% ids)), ]
   PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
     geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
     labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
@@ -489,6 +490,7 @@ if(surv=="GB"){SSB = full_join(SSB, SealIsland)}
 SSB = SSB %>% arrange(Year)
 SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 
+#Not adding time into Date.Time.Start etc. Just pulling the date.
 ###Performance data import and filtering###
 actual = A
 actual = actual %>% mutate(Type = "Actual")
