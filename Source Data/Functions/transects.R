@@ -19,9 +19,15 @@ transects = function(x, TS38, TS50) {
   
       # Changed format with Echoview v11
   t = parse_date_time(x$Time_S, orders="HMS", tz = "America/Moncton")
+#TL added this as the hours kept getting dropped.  
+  t=format(t, "%H:%M:%S")
   y = parse_date_time(x$Date_S, orders= "ymd", tz = "America/Moncton")
-  w = substring(as.character (t), 12,50)
-  z = paste(y, w)
+  
+  z = paste(y, t)
+#this removes the hours.
+  # w = substring(as.character (t), 12,50)
+  # z = paste(y, w)
+  
   z = as.POSIXct(z)
   x$Date_Time_S  = z
   x$Date_S = NULL
@@ -29,9 +35,17 @@ transects = function(x, TS38, TS50) {
   
   # Now End Date/Time
   t = parse_date_time(x$Time_E, orders="HMS", tz = "America/Moncton")
+#TL added this as the hours kept getting dropped.
+  t=format(t, "%H:%M:%S")
   y = parse_date_time(x$Date_E, orders= "ymd", tz = "America/Moncton")
-  w  = substring(as.character (t), 12,50)
-  z = paste(y, w)
+  
+  z= paste(y,t)
+  
+#This was removing the hours and just leaving the minutes and seconds.  
+  # w  = substring(as.character (t), 12,50)
+  # z = paste(y, w)
+  
+  
   z = as.POSIXct(z)
   x$Date_Time_E  = z
   x$Date_E = NULL

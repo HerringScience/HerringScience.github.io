@@ -321,7 +321,7 @@ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringSci
 #Add vessel names to Plan
 Plan = Main %>% 
   mutate(Vessel = replace(Vessel, Vessel == "LJ", V1)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "C1", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "BP", V2)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "FM", V3)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "LM", V4)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
@@ -330,7 +330,7 @@ Plan = Main %>%
   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "LB", NVessel)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "BP", EVessel))
+  mutate(Vessel = replace(Vessel, Vessel == "C1", EVessel))
 
 #if manual plan, read Table file and comment out below
 
