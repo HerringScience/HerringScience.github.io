@@ -506,10 +506,10 @@ Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist.
 
 #calculate time/speed
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
-  mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
-#Duration in seconds 
+mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
+#Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-  mutate(Speed = ((Distance*1000)/(Duration))/60)
+   mutate(Speed = ((Distance*1000)/(Duration)))#/60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
