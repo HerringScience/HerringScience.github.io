@@ -523,13 +523,15 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 ```
 
 
-## Tagging, Plankton, and CTD Data {.tabset}
+## Plankton, and CTD Data {.tabset}
 
-### Tag Data
+### Summary map
 
 ::: row
 ::: col-md-6
 ```{r, results = "hide", fig.show="first", fig.align='center'}
+
+## This tabset used to be called Tagging, Plankton, and CTD Data {.tabset}
 
  CTD_Sum = CTD %>%
    group_by(ID) %>%
@@ -551,14 +553,14 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 
  if(is.na(unique(Survey$PlanktonVessel))){Tows_Sum = CTD_Sum}
 
- # Tag_Sum = Tag %>%
- #   group_by(Lat, Lon, Vessel, Tagger) %>%
- #   summarize(Tag_Count=n_distinct(Tag_Num),
- #             Lat=mean(Lat),
- #             Lon=mean(Lon))
- # 
- # ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
- # ScienceData2 = full_join(ScienceData, Tag_Sum)
+ Tag_Sum = Tag %>%
+   group_by(Lat, Lon, Vessel, Tagger) %>%
+   summarize(Tag_Count=n_distinct(Tag_Num),
+             Lat=mean(Lat),
+             Lon=mean(Lon))
+
+ ScienceData = full_join(Tows_Sum, CTD_Sum, by = c("Vessel", "Lat", "Lon", "Tag_Count"))
+ ScienceData2 = full_join(ScienceData, Tag_Sum)
 
  if(surv == "SB"){
  a = ggplot(ScienceData2, aes(x=Lon, y=Lat)) +
