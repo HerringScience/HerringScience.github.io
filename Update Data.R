@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="3"
+surv.no="16"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("LM", "FM", "MS", "C1")
+ids = c("LJ", "BP", "FM", "LM")
 
 #Area and TS values - From table C
-SB1= 632 #SB main area
-SB2= 88 #SB north area
-SB3= 120 #SB east area
+SB1= 533 #SB main area
+SB2= 85 #SB north area
+SB3= 122 #SB east area
 
 GB1 = 796 #GB main area
 GB2 = 272 #Seal Island area
@@ -101,7 +101,7 @@ if(!is.na(first(Plankton$CTD_ID))){
   CTDData$Year = as.numeric(CTDData$Year)
   CTDData$Survey = as.numeric(CTDData$Survey)
   CTDTotal = full_join(CTDRaw, CTDData)
-  #CTDTotal %>% write_csv("CTD_Raw.csv")
+  CTDTotal %>% write_csv("CTD_Raw.csv")
   Plankton = Plankton %>%
     mutate(AvgTemp = mean(CTDData$Temperature),
            AvgSalinity = mean(CTDData$Salinity))
@@ -204,9 +204,9 @@ Total = Total %>%
                 DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
                 SurfaceTemp, WaterDepth1, WaterDepth2)
 
-#Total %>% write_csv("planktonsamplingData.csv")
+Total %>% write_csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
-#Total %>% write_csv("Survey Data.csv")
+Total %>% write_csv("Survey Data.csv")
 }
 
 if(Tow == "N"){
@@ -216,8 +216,8 @@ if(Tow == "N"){
   PlanData$Survey.No = as.character(PlanData$Survey.No)
   Total = full_join(Total, PlanData)
   Survey = full_join(Survey, PlanData)
-  #Total = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
-  #Survey = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+  Total = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+  Survey = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
   
   setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
   Depth=1
@@ -314,20 +314,20 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
 #These IDs are specifically for SB4 due to manual survey
   ### Region has start and end times within it.
   
-  ids = c("LJ_T01","LJ_T02", "LJ_T03", "LJ_T04")
-  northern = trans[which((trans$RegionName %in% ids)), ]
-   
-   
-  ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
-  eastern = trans[which((trans$RegionName %in% ids)), ]
-   
-  ids =c("LM_T01", "LM_T02", "FM_T01", "FM_T02","MS_T01", "MS_T02", "C1_T01","C1_T02")
-  main = trans[which((trans$RegionName %in% ids)), ]
+  # ids = c("LJ_T01","LJ_T02", "LJ_T03", "LJ_T04")
+  # northern = trans[which((trans$RegionName %in% ids)), ]
+  #  
+  #  
+  # ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
+  # eastern = trans[which((trans$RegionName %in% ids)), ]
+  #  
+  # ids =c("LM_T01", "LM_T02", "FM_T01", "FM_T02","MS_T01", "MS_T02", "C1_T01","C1_T02")
+  # main = trans[which((trans$RegionName %in% ids)), ]
   
   
-  # northern = trans[which((trans$Vessel == NVessel)), ]
-  # eastern = trans[which((trans$Vessel == EVessel)), ]
-  # main = trans[which((trans$Vessel %in% ids)), ]
+  northern = trans[which((trans$Vessel == NVessel)), ]
+  eastern = trans[which((trans$Vessel == EVessel)), ]
+  main = trans[which((trans$Vessel %in% ids)), ]
   PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
     geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
     labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
@@ -489,10 +489,11 @@ Current$Survey_Number = as.integer(surv.no)
 SSB = full_join(SSB, Current)
 if(surv=="GB"){SSB = full_join(SSB, SealIsland)}
 SSB = SSB %>% arrange(Year)
-#SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
+SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 
 #Not adding time into Date.Time.Start etc. Just pulling the date. #Went into transform function to keep the time.
 ###Performance data import and filtering###
+A = read_csv("DarrenA.csv")
 actual = A
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
@@ -653,9 +654,9 @@ Strat = Strat %>%
 
 CTD30 = Strat
 
-#CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
-#CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
-#SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
+CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
+CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
+SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
 
 #Larval Data
 
@@ -755,4 +756,4 @@ larv = left_join(larv,CTDLarval)
 
 larv = larv %>%
   dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, JulianMin, JulianMax, LastLength, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, X, Y, TowTime, AvgTowDepth, MaxTowDepth, CTDTemp, CTDSalinity, Volume)
-#larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
+larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))

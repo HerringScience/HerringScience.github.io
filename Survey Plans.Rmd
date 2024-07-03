@@ -12,23 +12,23 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2024-06-16 20:00:00" #survey date and time, as formatted
-surv.no = "4"
+surv.date = "2024-07-01 21:00:00" #survey date and time, as formatted
+surv.no = "5"
 Allocation = "200" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = "NA" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 6
-EVessel = "Canada 100" #Set NA for GB or excluding box
-NVessel = "Leroy and Barry" #Set NA for GB or excluding box
-PlanktonVessel = "Lady Janice"
+vessels = 4
+EVessel = NA #Set NA for GB or excluding box
+NVessel = "Canada 100" #Set NA for GB or excluding box
+PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = PlanktonVessel
 V2 = "Brunswick Provider"
-V3 = "Fundy Monarch"
-V4 = "Lady Melissa"
+V3 = "Leroy and Barry"
+V4 = NA
 V5 = NA
 V6 = NA
 V7 = NA
@@ -320,17 +320,17 @@ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringSci
 
 #Add vessel names to Plan
 Plan = Main %>% 
-  mutate(Vessel = replace(Vessel, Vessel == "LJ", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "LM", V1)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "BP", V2)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "FM", V3)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "LM", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "LB", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "LB", NVessel)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "C1", EVessel))
+  mutate(Vessel = replace(Vessel, Vessel == "C1", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V10", EVessel))
 
 #if manual plan, read Table file and comment out below
 
