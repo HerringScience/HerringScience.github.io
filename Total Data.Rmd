@@ -105,7 +105,7 @@ Larval$MonthDay <- format(Larval$Date, "%m-%d")
 LarvalSI = filter(Larval, Ground == "SI")
 
 
-LarvalSum = read_csv("LarvalSum.csv")
+LarvalSum = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
 LarvalSum$Year <- as.factor(LarvalSum$Year)
 
 #Land Data
