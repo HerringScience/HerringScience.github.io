@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="16"
+surv.no="7"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("LJ", "BP", "FM", "LM")
+ids = c("BP", "FM", "LJ", "MS")
 
 #Area and TS values - From table C
-SB1= 533 #SB main area
-SB2= 85 #SB north area
-SB3= 122 #SB east area
+SB1= 474 #SB main area
+SB2= 0 #SB north area
+SB3= 0 #SB east area
 
 GB1 = 796 #GB main area
 GB2 = 272 #Seal Island area
@@ -216,8 +216,9 @@ if(Tow == "N"){
   PlanData$Survey.No = as.character(PlanData$Survey.No)
   Total = full_join(Total, PlanData)
   Survey = full_join(Survey, PlanData)
-  Total = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
-  Survey = write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+  #changed write_csv to write.csv
+  Total = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+  Survey = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
   
   setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
   Depth=1
@@ -311,19 +312,21 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
   x = Region
   trans = transects(x= Region, TS38 = TS1, TS50 = NA)
   
-#These IDs are specifically for SB4 due to manual survey
+#These IDs are specifically for adjusted surveys
   ### Region has start and end times within it.
   
-  # ids = c("LJ_T01","LJ_T02", "LJ_T03", "LJ_T04")
+  # ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
   # northern = trans[which((trans$RegionName %in% ids)), ]
-  #  
-  #  
+  # 
+  # 
   # ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
   # eastern = trans[which((trans$RegionName %in% ids)), ]
-  #  
-  # ids =c("LM_T01", "LM_T02", "FM_T01", "FM_T02","MS_T01", "MS_T02", "C1_T01","C1_T02")
+  # 
+  # ids =c("C1_T01", "C1_T02", "LJ_T01", "LJ_T02","LM_T01", "LM_T02", "LB_T01", "LB_T02")
   # main = trans[which((trans$RegionName %in% ids)), ]
+#To here
   
+  ### Comment out chunk below if needed to adjust. 
   
   northern = trans[which((trans$Vessel == NVessel)), ]
   eastern = trans[which((trans$Vessel == EVessel)), ]
@@ -332,6 +335,8 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
     geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
     labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
 
+  #To here
+  
   # Results
   resultsa = biomassCalc(x = main, areaKm = SB1)
   resultsb = biomassCalc(x = northern, areaKm = SB2)
@@ -493,7 +498,7 @@ SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringS
 
 #Not adding time into Date.Time.Start etc. Just pulling the date. #Went into transform function to keep the time.
 ###Performance data import and filtering###
-A = read_csv("DarrenA.csv")
+A = read_csv("tableA.csv")
 actual = A
 actual = actual %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
@@ -511,7 +516,7 @@ Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = ((Distance*1000)/(Duration)))#/60)
+   mutate(Speed = (((Distance*1000)/(Duration))) /60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 

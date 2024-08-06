@@ -13,8 +13,8 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2024"
-surv.no = "4"
-hightide = "2024-06-16 20:31:00" #for Scots Bay only
+surv.no = "7"
+hightide = "2024-07-29 19:13:00" #for Scots Bay only
 
 ```
 
@@ -144,7 +144,7 @@ current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
 
 if(surv == "SB"){
   if(!is.na(unique(Survey$EVessel))){
-   SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
+    SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
    polyEastern = as.PolySet(SUA, projection="LL")}
 
 if(!is.na(unique(Survey$NVessel))){
