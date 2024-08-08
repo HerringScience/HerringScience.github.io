@@ -2,10 +2,10 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB or SI
-surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="GB" #SB or GB or SI
+surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="7"
+surv.no="1"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
@@ -18,8 +18,8 @@ SB1= 474 #SB main area
 SB2= 0 #SB north area
 SB3= 0 #SB east area
 
-GB1 = 796 #GB main area
-GB2 = 272 #Seal Island area
+GB1 = 803 #GB main area
+GB2 = 281 #Seal Island area
 GB3 = NA #Ad-hoc school survey area
 
 ##
