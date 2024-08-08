@@ -10,27 +10,27 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
-surv.date = "2024-08-04 20:00:00" #survey date and time, as formatted
-surv.no = "1"
-Allocation = "100" #set to "0" for a non-fishing survey
-SIAllocation = "100" #Seal Island allocation for GB-only
+surv = "SB"
+surv2 = "Scots Bay"
+surv.date = "2024-08-11 20:00:00" #survey date and time, as formatted
+surv.no = "8"
+Allocation = "200" #set to "0" for a non-fishing survey
+SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = "NA" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 6
+vessels = 4
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Lady Janice"
+PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Lady Melissa"
-V2 = "Fundy Monarch"
-V3 = "Canada 100"
-V4 = "Morning Star"
-V5 = "Leroy and Barry"
-V6 = PlanktonVessel
+V1 = "Morning Star"
+V2 = PlanktonVessel
+V3 = "Brunswick Provider"
+V4 = "Canada 100"
+V5 = NA
+V6 = NA
 V7 = NA
 V8 = NA
 V9 = NA
@@ -64,10 +64,12 @@ library(cowplot)
 library(measurements)
 
 #Parse date time
+
 surv.date = as.POSIXlt(surv.date, format="%Y-%m-%d %H:%M:%S")
 StartTime = substr(surv.date, 12,19) #turns the 12th-19th section of surv.date into the start time (the 20:00:00 time of surv.date)
 StartDate = substr(surv.date, 1,10) #turns the 1st-10th section of surv.date into the start date (the 2023-01-01 date of surv.date)
 year = substr(surv.date, 1,4)
+
 
 #Create Plan by combining main box with any extra boxes
 
@@ -322,15 +324,15 @@ if(surv=="GB"){
 
 #Add vessel names to Plan
 Plan = Main %>%
-  mutate(Vessel = replace(Vessel, Vessel == "LM", V1)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "FM", V2)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "C1", V3)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "MS", V4)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "LB", V5)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "LJ", V6)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V6", V7)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V7", V8)) %>%
-  mutate(Vessel = replace(Vessel, Vessel == "V8", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "MS", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "LM", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "BP", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "C1", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V10", NVessel)) %>%
   mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
 

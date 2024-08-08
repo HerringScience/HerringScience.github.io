@@ -389,11 +389,11 @@ if(surv=="GB"){
   ggplot(trans2, aes(x=X, y=Y)) + geom_polygon(data=polyAD,aes(x=X, y=Y, group=PID), fill = "white", colour = "black")  + geom_segment(aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), linewidth = 1)  + labs(x=NULL, y=NULL) + coord_map()
   }
   
-  ids = c("T01", "T02", "T03")
+  ids = c("T01", "T02", "T03", "T04")
   map1 = map[which((map$Transect_No %in% ids)), ]
   
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
-  SI = trans[which(trans$Transect_No == c("T03")), ]
+  SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
   ids = c("T01", "T02")
   GB = trans[which((trans$Transect_No %in% ids)), ]
   
