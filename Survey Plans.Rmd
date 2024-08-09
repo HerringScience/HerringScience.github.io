@@ -14,7 +14,7 @@ surv = "SB"
 surv2 = "Scots Bay"
 surv.date = "2024-08-11 20:00:00" #survey date and time, as formatted
 surv.no = "8"
-Allocation = "200" #set to "0" for a non-fishing survey
+Allocation = "250" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = "NA" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
