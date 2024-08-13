@@ -6,11 +6,11 @@ library(tidyverse)
 library(measurements)
 
 # Set all tagging log data here
-Tag_Num = c(520001:520050) #Can add any tag entries, including breaks/gaps in the sequences
-Date = "2023-10-15" #"YYYY-MM-DD"
-Lat = "44 16 11" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
-Lon = "67 00 76"
-Vessel = "Sealife II" #As written unless changed in script below: "Lady Melissa", "Sealife II", "Tasha Marie", "Lady Janice", "Morning Star"
+Tag_Num = c(519488:519681) #Can add any tag entries, including breaks/gaps in the sequences
+Date = "2024-08-12" #"YYYY-MM-DD"
+Lat = "45 10 65" #Degree-Min-Sec format from the boat but only the numbers written with spaces (e.g. "44 16 23")
+Lon = "65 56 11"
+Vessel = "Lady Melissa" #As written unless changed in script below: "Lady Melissa", "Sealife II", "Tasha Marie", "Lady Janice", "Morning Star"
 Survey = NA #Survey number for Scots Bay or German Bank when tags were applied, otherwise "NA"
 CTD = NA #Add the CTD id only if a TAGGER completed a cast (not the cast by the HSC tech)
 
@@ -33,10 +33,10 @@ Lon = -1*Lon #convert longitude to negative
 Tags = tibble(Tag_Num, Date, Lon, Lat, Vessel, Survey, CTD) #saves all the values into a tibble (a tidyverse dataframe)
 Tags$Date = ymd(Tags$Date) #convert the Date to a year-month-day (ymd) format
 Tags = Tags %>% #this entire pipeline (%>%) will take the Tags dataframe, and mutate (create or modify) a variable named Tagger
-  mutate(Tagger = ifelse(Vessel == "Lady Melissa", "Joseph Nickerson", #this is used to link each tagger to their vessel
+  mutate(Tagger = ifelse(Vessel == "Lady Melissa", "Tracey Leask", #this is used to link each tagger to their vessel
                   ifelse(Vessel == "Sealife II", "Annik Doucette", #if the vessel-tagger assignments change it needs to be edited here
                   ifelse(Vessel == "Tasha Marie", "Dale Fitzgerald",
-                  ifelse(Vessel == "Lady Janice", "Lee Surette",
+                  ifelse(Vessel == "Lady Janice", "Tracey Leask",
                   ifelse(Vessel == "Morning Star", "Nicholas D'entremont",
                   ifelse(Vessel == "Fundy Monarch", "William Cusack",
                   ifelse(Vessel == "Canada 100", "William Cusack",
