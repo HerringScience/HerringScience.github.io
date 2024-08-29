@@ -10,27 +10,27 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
-surv.date = "2024-08-25 20:00:00" #survey date and time, as formatted
-surv.no = "9"
-Allocation = "250" #set to "0" for a non-fishing survey
-SIAllocation = NA #Seal Island allocation for GB-only
-Tagging = "Lady Janice" #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
+surv = "GB"
+surv2 = "German Bank"
+surv.date = "2024-09-01 20:00:00" #survey date and time, as formatted
+surv.no = "3"
+Allocation = "150" #set to "0" for a non-fishing survey
+SIAllocation = "150" #Seal Island allocation for GB-only
+Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 4
+vessels = 6
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Lady Janice"
+PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Canada 100"
-V2 = PlanktonVessel
-V3 = "Morning Star"
-V4 = "Fundy Monarch"
-V5 = NA
-V6 = NA
+V1 = "Morning Star"
+V2 = "Lady Janice"
+V3 = "Canada 100"
+V4 = "Brunswick Provider"
+V5 = "Lady Melissa"
+V6 = "Leroy and Barry"
 V7 = NA
 V8 = NA
 V9 = NA
