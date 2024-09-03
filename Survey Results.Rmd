@@ -14,7 +14,7 @@ surv = "GB"
 surv2 = "German Bank"
 year = "2024"
 surv.no = "1"
-hightide = "2024-07-29 19:13:00" #for Scots Bay only
+hightide = "2024-08-04 23:52:00" #for Scots Bay only
 
 ```
 
@@ -523,7 +523,7 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 ```
 
 
-## Plankton, and CTD Data {.tabset}
+## Tagging, Plankton, and CTD Data {.tabset}
 
 ### Summary map
 
@@ -591,12 +591,12 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 
 ::: col-md-6
 ```{r echo=FALSE, fig.align='center'}
- # Tag_Sum = Tag_Sum %>%
- #   group_by(Vessel) %>%
- #   summarize(Tags = sum(Tag_Count))
- # 
- # kbl(Tag_Sum)%>%
- #   kable_paper("striped", full_width = F)
+ Tag_Sum = Tag_Sum %>%
+   group_by(Vessel) %>%
+   summarize(Tags = sum(Tag_Count))
+
+ kbl(Tag_Sum)%>%
+   kable_paper("striped", full_width = F)
 
 ```
 :::

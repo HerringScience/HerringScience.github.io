@@ -2,19 +2,19 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB or SI
-surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="SB" #SB or GB or SI
+surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="1"
+surv.no="8"
 adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("BP", "FM", "LJ", "MS")
+ids = c("BP", "C1", "LM", "MS")
 
 #Area and TS values - From table C
-SB1= 474 #SB main area
+SB1= 480#SB main area
 SB2= 0 #SB north area
 SB3= 0 #SB east area
 
@@ -261,8 +261,7 @@ SUA = read.csv("polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
-if(surv == "SB") 
-  {
+if(surv == "SB") {
   if(!is.na(PlanData$EVessel)){SUA = read.csv("polygon_SBEastern.csv")
    polyEastern = as.PolySet(SUA, projection="LL")}
   if(!is.na(PlanData$NVessel)){SUA = read.csv("polygon_SBNorthern.csv")
