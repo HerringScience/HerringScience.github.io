@@ -13,7 +13,7 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 year = "2024"
-surv.no = "2"
+surv.no = "3"
 hightide = "2024-08-18 22:30:00" #for Scots Bay only
 
 ```

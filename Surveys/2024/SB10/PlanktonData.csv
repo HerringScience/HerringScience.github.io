@@ -1,3 +1,3 @@
 Set_Number,No_jars,Tow_No,Lat1,Lon1,Lat2,Lon2,Time1,Time2,TideDirection,Speed,Heading,Observers,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
+SB2024-17,1,1,45 02.46,65 14.48,45 03.14,65 14.25,18:43,18:53,with,5,1,Tracey,SW,11,0.5,15,599420,665543,7,6,10K100766_20240908_222133,45.0532,-65.2048
+SB2024-18,1,2,45 03.13,65 13.18,45 03.16,65 42.36,19:06,19:16,against,4.2,77,Tracey,SW,11,0.5,15,665543,725094,7,6,10K100766_20240908_222133,45.0532,-65.2048
