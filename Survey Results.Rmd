@@ -10,11 +10,11 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
+surv = "SB"
+surv2 = "Scots Bay"
 year = "2024"
-surv.no = "3"
-hightide = "2024-08-18 22:30:00" #for Scots Bay only
+surv.no = "9"
+hightide = "2024-08-25 16:53:00" #for Scots Bay only
 
 ```
 
@@ -339,13 +339,15 @@ d=tableC %>% filter(Layer == "Seal Island")
 d=d$'Biomass (tons)'
 d=format(d, big.mark=(","), digits=2)
 if(surv.no == 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt."))}
-if(surv.no > 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt."))}
+if(surv.no > 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass prediction for German Bank using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt. The preliminary biomass estimate for Seal Island is ", d, "mt."), paste0("Preliminary biomass prediction for Scots Bay using standardized parallel transects is ", b, "mt, and with turnover applied ", c, "mt." ))}
 f=f[1:1]
 ```
 
 The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength. 
 
 **`r f`**
+
+**The true estimate will likely be lower than presented due to a large amount of speed-based noise that was unable to be separated from biomass.**
 
 ```{r, fig.align='center'}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRCplot.jpg"), rel_path = FALSE)
@@ -726,6 +728,8 @@ a=ifelse(Vessel_Speed$AvgSpeed > 8, paste0("Average vessel speed was ", round(Ve
 ```
 
 `r a`
+
+The speed for each transect are rudimentary and are calculated based on distance. If a significant amount of distance is cut, the speed will appear slower.
 
 ### Distance
 
