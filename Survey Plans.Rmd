@@ -73,29 +73,29 @@ year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
 
-#Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 #above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 
-vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
-           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
-           ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
-           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
-           NA))))
-
-Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
-#the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
-
-if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
-#if there is a NVessel this will load the North_Box.csv box outline
-if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
-#if there is a EVessel this will load the East_Box.csv box outline
-
-if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
-if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
-if(!is.na(NVessel) & !is.na(EVessel)){
-  Plan = full_join(Main, North)
-  Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
-if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
+# vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
+#            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
+#            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
+#            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
+#            NA))))
+# 
+# Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+# #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
+# 
+# if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+# #if there is a NVessel this will load the North_Box.csv box outline
+# if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+# #if there is a EVessel this will load the East_Box.csv box outline
+# 
+# if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
+# if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
+# if(!is.na(NVessel) & !is.na(EVessel)){
+#   Plan = full_join(Main, North)
+#   Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
+# if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
 
 #Add vessel names to Plan
 Plan = Plan %>% #renames the base "V#" Vessels in the plan to the actual vessel names manually listed in the first code chunk.
@@ -122,7 +122,7 @@ Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorth
   mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
-write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+#write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 #Comment out to here for manual plans.
 
 #Land Data - loads the land data the same way as Jenna's previous scripts
@@ -320,7 +320,7 @@ if(surv=="GB"){
 
 ```{r}
 
- #Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/2024/", surv, surv.no, "/", "Table.csv"))
+ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/2024/", surv, surv.no, "/", "Table.csv"))
 # use the above if manual plan.
 
 #Add vessel names to Plan
@@ -339,26 +339,26 @@ Plan = Main %>%
 
 #if manual plan, read Table file and comment out below
 
-if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
-            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
-            NA))))}
- if(surv=="GB"){vessels2=vessels}
-
- Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
-
-
- if(surv=="SB"){
- if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
- if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
- if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
- if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
- if(!is.na(NVessel) & !is.na(EVessel)){
-   Plan = full_join(Main, North)
-   Plan = full_join(Plan, East)}
- if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
- if(surv=="GB"){Plan=Main}
+# if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+#             ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+#             ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
+#             ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+#             NA))))}
+#  if(surv=="GB"){vessels2=vessels}
+# 
+#  Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
+# 
+# 
+#  if(surv=="SB"){
+#  if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
+#  if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
+#  if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+#  if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+#  if(!is.na(NVessel) & !is.na(EVessel)){
+#    Plan = full_join(Main, North)
+#    Plan = full_join(Plan, East)}
+#  if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
+#  if(surv=="GB"){Plan=Main}
 
 #Comment out to here
 

@@ -13,8 +13,8 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2024"
-surv.no = "9"
-hightide = "2024-08-25 16:53:00" #for Scots Bay only
+surv.no = "10"
+hightide = "2024-09-08 15:58:00" #for Scots Bay only
 
 ```
 
@@ -346,8 +346,6 @@ f=f[1:1]
 The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength. 
 
 **`r f`**
-
-**The true estimate will likely be lower than presented due to a large amount of speed-based noise that was unable to be separated from biomass.**
 
 ```{r, fig.align='center'}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/PRCplot.jpg"), rel_path = FALSE)
