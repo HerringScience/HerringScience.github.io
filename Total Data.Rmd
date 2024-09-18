@@ -437,7 +437,7 @@ print(ggplot(data=subset(SSB, Ground == "German Bank" & Year == i), aes(x=Survey
 DFOSSB = SSB %>%
   dplyr::select(Year, Ground, Survey_Number, DFO_Turnover_Adjusted)
 
-SSB1 <- subset(SSB, Year == 2018 | Year == 2019 | Year == 2020 | Year == 2021 )
+SSB1 <- subset(SSB, Year == 2018:2024) # | Year == 2019 | Year == 2020 | Year == 2021 )
   
 for(i in unique(SSB1$Year)) {
   cat("\n")
@@ -471,8 +471,8 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 ```{r echo=FALSE}
 
-#Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
-Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
+Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
+#Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
 
 ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -524,8 +524,8 @@ out <- crop(NBNS, CP, byid=TRUE)
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-#Plot = Tag %>% subset(Ground == "German Bank" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
-Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
+Plot = Tag %>% subset(Ground == "German Bank" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
+#Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
 
 ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
@@ -653,9 +653,9 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 ```{r echo=FALSE}
 
-#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if within the survey season
+ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if within the survey season
 
-ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if outside of the survey season. Reset year.
+#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if outside of the survey season. Reset year.
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -674,13 +674,13 @@ labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Tempe
 ```
 
 ```{r, results = "asis"}
-#CTD1 = CTD %>% 
-  # filter(Year == year & Ground == "Scots Bay") %>%
-  # arrange(Survey)                                          # To use within the survey window
-
 CTD1 = CTD %>% 
-   filter(Year == 2023 & Ground == "Scots Bay") %>%
-   arrange(Survey)                                           # To use outside of Survey window. Reset year.
+   filter(Year == year & Ground == "Scots Bay") %>%
+   arrange(Survey)                                          # To use within the survey window
+
+# CTD1 = CTD %>% 
+#    filter(Year == 2023 & Ground == "Scots Bay") %>%
+#    arrange(Survey)                                           # To use outside of Survey window. Reset year.
 
 for(i in unique(CTD1$Survey)) {
   
@@ -719,8 +719,8 @@ out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ```{r echo=FALSE}
-# ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use within the survey window
-ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) +  #To use outside of the survey window. Reset Year. 
+ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use within the survey window
+#ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) +  #To use outside of the survey window. Reset Year. 
   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +

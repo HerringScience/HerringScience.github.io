@@ -23,17 +23,18 @@ library(gridExtra)
 library(cowplot)
 library(measurements)
 
+
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/"))
 #All Tags deployed
 
 Tags = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
 
 #Tag Returns from during the AFF 44 funding
 
-TagReturns2021 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2021.csv"))
-  TagReturns2021 = subset()
-
-TagReturns2022 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2022.csv"))
-TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns 2023.csv"))
+TagReturns2021 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2021.csv"))
+TagReturns2022 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2022.csv"))
+TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2023.csv"))
+TagReturns2024 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2023.csv"))
 
 
 #Load all of Canada data and extract Atlantic provinces
@@ -57,7 +58,7 @@ CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
 
 #Reduce Province data down to only the above extents/limits
 proj4string(CP1) <- CRS(proj4string(NBNS))
-All <- gIntersection(NBNS, CP1, byid=TRUE)
+All <- crop(NBNS, CP1, byid=TRUE)
 
 #Load boxes
 #Import All Boxes
@@ -99,16 +100,7 @@ setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.githu
 tags = read.csv("TaggingEvents.csv")
 
 Tag1 = tags %>%
-    filter(Tag_Num == 555955 |         
-           Tag_Num == 555352 |
-           Tag_Num == 505883 |
-           Tag_Num == 556380 |
-           Tag_Num == 508798 |
-           Tag_Num == 508679 |
-           Tag_Num == 509188 |
-           Tag_Num == 565723 |
-           Tag_Num == 476485 |
-           Tag_Num == 524866)
+    filter(
 
 
 Tag1 = Tag1 %>%
@@ -116,14 +108,14 @@ Tag1 = Tag1 %>%
 
 CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
 proj4string(CP6) <- CRS(proj4string(NBNS))
-GM <- gIntersection(NBNS, CP6, byid=TRUE)
+GM <- crop(NBNS, CP6, byid=TRUE)
 
 
 #All Data at once
 ggplot(boxes,aes(x=X, y=Y)) + 
   geom_polygon(aes(colour = Box),fill= NA,lwd=1) + 
   geom_polygon(data=All,aes(x=long, y=lat, group=group)) + 
-  geom_point(data=Tag1, aes(x=Lon, y=Lat, colour = Date), size=3) +
+  geom_point(data=TagReturns2024, aes(x=Lon, y=Lat, colour = Date), size=3) +
   coord_map() + 
   labs(x=NULL, y=NULL)
 
