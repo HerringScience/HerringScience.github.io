@@ -2,13 +2,13 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB or SI
-surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="GB" #SB or GB or SI
+surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="9"
-adhoc = "FALSE" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
+surv.no="3B"
+adhoc = "true" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
-Tow = "Y" #whether or not plankton tow(s) were conducted
+Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ids = c("C1", "FM", "LJ", "MS")
@@ -18,9 +18,9 @@ SB1= 476#SB main area
 SB2= 0 #SB north area
 SB3= 0 #SB east area
 
-GB1 = 811 #GB main area
+GB1 = 826 #GB main area
 GB2 = 287 #Seal Island area
-GB3 = NA #Ad-hoc school survey area
+GB3 = 65 #Ad-hoc school survey area
 
 ##
 ###
@@ -85,7 +85,7 @@ SurveyData$StartDate = as.Date(SurveyData$Date, format = "%d/%m/%Y")
 if(!is.na(first(Plankton$CTD_ID))){
   CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
   CTDData = CTDData %>%
-    dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)", 
+    dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)",
                   Salinity = "Salinity (Practical Salinity Scale)", Sound_velocity = "Sound velocity (Meters per Second)", Density = "Density (Kilograms per Cubic Meter)")
   CTDData = CTDData %>%
     mutate(plankton_ID = paste0(first(Plankton$Set_Number), "/", last(Plankton$Set_Number)),
@@ -515,7 +515,7 @@ Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = (((Distance*1000)/(Duration))) /60)
+   mutate(Speed = (((Distance*1000)/(Duration)))) /60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
@@ -761,3 +761,4 @@ larv = left_join(larv,CTDLarval)
 larv = larv %>%
   dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, JulianMin, JulianMax, LastLength, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, X, Y, TowTime, AvgTowDepth, MaxTowDepth, CTDTemp, CTDSalinity, Volume)
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
+
