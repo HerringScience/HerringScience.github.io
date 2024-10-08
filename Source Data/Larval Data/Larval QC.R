@@ -25,19 +25,28 @@ library(gridExtra)
 library(cowplot)
 
 LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
-
 larv = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Measurements.csv"))
 arc = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARC Data.csv"))
 arc = arc %>% dplyr::select(id, Larvae_Count, Notes)
 survey = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
 survey = survey %>% mutate(Ground = substr(id,1,2))
+  survey$Date = dmy(survey$Date)
 
-larv = left_join(larv, arc, by="id")
+larv = merge(larv, LarvalSum, by= c("id", "Preservative"))
+  larv$Survey.No = as.character(larv$Survey.No)
+
+#larv = left_join(larv, arc, by= "id") #Removed arc as it appears that all data used is already within larval measurements
+  
 larv = left_join(larv, survey)
-larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, Condition, Yolk_sac, Preservative, TowReplicate, TowID, ARC_Count=Larvae_Count, ARC_Notes=Notes, Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Month, Year, Day)
-larv$Date = dmy(larv$Date)
+larv1 = larv
+larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, MeanLengthAdjustment, AdjustedMeanAgeInDays, Number = Abundance, Condition, Yolk_sac, Preservative, TowReplicate, TowID,  Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Day, Month, Year) #ARC_Count=Larvae_Count, ARC_Notes=Notes,
+    
+  #larv$Date = dmy(larv$Date)
+    #larv$Month = format(larv$Date, "%m")
+    #larv$Day = format(larv$Date, "%d")
 larv$Survey.No = as.factor(larv$Survey.No)
 larv$Year = as.factor(larv$Year)
+larv$Month = as.factor(larv$Month)
 larv$category =  with(larv, ifelse(larv$Lengthmm < 8 , 1, 
                                    ifelse(larv$Lengthmm < 12 & larv$Lengthmm >= 8, 2, 
                                           ifelse(larv$Lengthmm >= 12  & larv$Lengthmm < 17, 3, 
@@ -63,32 +72,35 @@ larv$LengthAdjustment = with(larv, ifelse(larv$Preservative == "4% formalin", (0
 larv <- larv %>%
   mutate(AdjustedAgeInDays = ((LengthAdjustment - 5)/0.24))
   
-larv$AdjustedSpawnDate = (with(larv, ifelse(larv$Ground == "SB", (as.Date(Date) - AdjustedAgeInDays - 14),
-                                             ifelse(larv$Ground == "GB", (as.Date(Date) - AdjustedAgeInDays - 10),
-                                                    ifelse(larv$Ground == "SI", (as.Date(Date) - AdjustedAgeInDays - 10), NA)))))
 
-larv <- larv %>%  
-  mutate(AdjustedJulianSpawnDate = yday(as.Date(AdjustedSpawnDate))) %>%
-  mutate(Julian = yday(Date))
+# Taking this out as the dates are not working properly at this moment. Need to adjust for Spawn Date.
+
+# larv$AdjustedSpawnDate = (with(larv, ifelse(larv$Ground == "SB", (as.Date(Date) - AdjustedAgeInDays - 14),
+#                                              ifelse(larv$Ground == "GB", (as.Date(Date) - AdjustedAgeInDays - 10),
+#                                                     ifelse(larv$Ground == "SI", (as.Date(Date) - AdjustedAgeInDays - 10), NA)))))
+# 
+# larv <- larv %>%  
+#   mutate(AdjustedJulianSpawnDate = yday(as.Date(AdjustedSpawnDate))) %>%
+#   mutate(Julian = yday(Date))
 
 #Adding averages into the dataframe
 
-larv <- larv %>%
-  group_by(id) %>%
-  arrange(LengthAdjustment) %>%
-  mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
-  mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
-  mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
-  mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate)) %>%
-  mutate(MinLength = min(LengthAdjustment)) %>%
-  mutate(MaxLength = max(LengthAdjustment)) %>%
-  mutate(SD = sd(LengthAdjustment)) %>%
-  mutate(Abundance = length(LengthAdjustment)) %>%
-  mutate(Larv_per_jar = Abundance/No_jars) %>%
-  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-  mutate(Density = Larv_per_jar/Volume)
-  
-
+# larv <- larv %>%
+#   group_by(id) %>%
+#   arrange(LengthAdjustment) %>%
+#   mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
+#   mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
+#   mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
+#   mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate)) %>%
+#   mutate(MinLength = min(LengthAdjustment)) %>%
+#   mutate(MaxLength = max(LengthAdjustment)) %>%
+#   mutate(SD = sd(LengthAdjustment)) %>%
+#   mutate(Abundance = length(LengthAdjustment)) %>%
+#   mutate(Larv_per_jar = Abundance/No_jars) %>%
+#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+#   mutate(Density = Larv_per_jar/Volume)
+#   
+# 
 
 #####Calculating SE/mean/min/max of larval measurements.
 
