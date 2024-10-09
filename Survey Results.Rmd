@@ -137,6 +137,7 @@ polySI = as.PolySet(SUA, projection="LL")
 ```
 
 ```{r Set Ground and Survey #, include=FALSE}
+
 Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
@@ -162,6 +163,7 @@ if(surv == "GB"){
    }
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
+#setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/ 2024/SB11")
 
 Map = list.files(pattern = "Map*") %>% 
   map_df(~read_csv(.))
@@ -737,7 +739,8 @@ The speed for each transect are rudimentary and are calculated based on distance
 ```{r, fig.align='center'}
 Distance = Distance %>%
   filter(Difference < 0) %>%
-  filter(Difference > -10) %>%
+  #changed filter(Difference >-10) %>% to below as it was removing large cuts from line.
+  filter(Difference < -10) %>%
   mutate(Difference = abs(Difference))
 
 ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() + 
