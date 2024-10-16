@@ -237,4 +237,5 @@ larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringS
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Full Larval.csv"))
 
 LarvalSum %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Source Data/Larval Data/LarvalSum.csv"))
+LarvalSum %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/Github/HerringScience.github.io/Main Data/LarvalSum.csv"))
 
