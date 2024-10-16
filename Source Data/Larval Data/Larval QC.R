@@ -39,11 +39,11 @@ larv = merge(larv, LarvalSum, by= c("id", "Preservative"))
   
 larv = left_join(larv, survey)
 larv1 = larv
-larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Lengthmm, MeanLengthAdjustment, AdjustedMeanAgeInDays, Number = Abundance, Condition, Yolk_sac, Preservative, TowReplicate, TowID,  Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Day, Month, Year) #ARC_Count=Larvae_Count, ARC_Notes=Notes,
+larv = larv %>% dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, MeanLengthAdjustment, AdjustedMeanAgeInDays, Condition, Yolk_sac, Preservative, TowReplicate, TowID,  Lon1, Lat1, Lon2, Lat2, TowTime, AvgTowDepth, MaxTowDepth, CTDAvgTemp=AvgTemp, Volume, Density, Day, Month, Year) #ARC_Count=Larvae_Count, ARC_Notes=Notes,
     
   #larv$Date = dmy(larv$Date)
-    #larv$Month = format(larv$Date, "%m")
-    #larv$Day = format(larv$Date, "%d")
+  #larv$Month = format(larv$Date, "%m")
+  #larv$Day = format(larv$Date, "%d")
 larv$Survey.No = as.factor(larv$Survey.No)
 larv$Year = as.factor(larv$Year)
 larv$Month = as.factor(larv$Month)
@@ -75,89 +75,89 @@ larv <- larv %>%
 
 # Taking this out as the dates are not working properly at this moment. Need to adjust for Spawn Date.
 
-# larv$AdjustedSpawnDate = (with(larv, ifelse(larv$Ground == "SB", (as.Date(Date) - AdjustedAgeInDays - 14),
-#                                              ifelse(larv$Ground == "GB", (as.Date(Date) - AdjustedAgeInDays - 10),
-#                                                     ifelse(larv$Ground == "SI", (as.Date(Date) - AdjustedAgeInDays - 10), NA)))))
-# 
-# larv <- larv %>%  
-#   mutate(AdjustedJulianSpawnDate = yday(as.Date(AdjustedSpawnDate))) %>%
-#   mutate(Julian = yday(Date))
+larv$AdjustedSpawnDate = (with(larv, ifelse(larv$Ground == "SB", (as.Date(Date) - AdjustedAgeInDays - 14),
+                                             ifelse(larv$Ground == "GB", (as.Date(Date) - AdjustedAgeInDays - 10),
+                                                    ifelse(larv$Ground == "SI", (as.Date(Date) - AdjustedAgeInDays - 10), NA)))))
+
+larv <- larv %>%  
+   mutate(AdjustedJulianSpawnDate = yday(as.Date(AdjustedSpawnDate))) %>%
+   mutate(Julian = yday(Date))
 
 #Adding averages into the dataframe
 
-# larv <- larv %>%
-#   group_by(id) %>%
-#   arrange(LengthAdjustment) %>%
-#   mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
-#   mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
-#   mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
-#   mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate)) %>%
-#   mutate(MinLength = min(LengthAdjustment)) %>%
-#   mutate(MaxLength = max(LengthAdjustment)) %>%
-#   mutate(SD = sd(LengthAdjustment)) %>%
-#   mutate(Abundance = length(LengthAdjustment)) %>%
-#   mutate(Larv_per_jar = Abundance/No_jars) %>%
-#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-#   mutate(Density = Larv_per_jar/Volume)
-#   
-# 
+larv <- larv %>%
+  group_by(id) %>%
+  arrange(LengthAdjustment) %>%
+  mutate(MeanLengthAdjustment = mean(LengthAdjustment)) %>%
+  mutate(AdjustedMeanAgeInDays = mean(AdjustedAgeInDays)) %>%
+  mutate(AdjustedMinDateOfSpawn = min(AdjustedSpawnDate)) %>%
+  mutate(AdjustedMaxDateOfSpawn = max(AdjustedSpawnDate)) %>%
+  mutate(MinLength = min(LengthAdjustment)) %>%
+  mutate(MaxLength = max(LengthAdjustment)) %>%
+  mutate(SD = sd(LengthAdjustment)) %>%
+  mutate(Abundance = length(LengthAdjustment)) %>%
+  mutate(Larv_per_jar = Abundance/No_jars) %>%
+  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+  mutate(Density = Larv_per_jar/Volume)
+
+
 
 #####Calculating SE/mean/min/max of larval measurements.
 
 ##### This is Darren's old code. Do we still need all this?
 
-# larv <- larv %>%
-#   group_by(Ground, Survey.No, Year) %>%
-#   mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%
-#   ungroup()
-# 
-# larv$SD[is.na(larv$SD)] <- 0
-# larv$SD <- as.numeric(larv$SD)
-# 
-# larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
-#   summarize(MinLength = mean(MinLength, na.rm = TRUE), 
-#             MaxLength = mean(MaxLength, na.rm = TRUE), 
-#             MeanLength = mean(MeanLength, na.rm = TRUE),
-#             SD = mean(SD, na.rm = TRUE),
-#             Abundance = length(Lengthmm)) %>%
-#   mutate(SE = SD/sqrt(Abundance))
-# surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
-# surveysummary$Year = as.factor(surveysummary$Year)
-# surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
-# larvsummary = left_join(surveysummary, larvsummary)
-# 
-# larv = larv %>%
-#   mutate(Larv_per_jar = Abundance/No_jars) %>%
-#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-#   mutate(Density = Larv_per_jar/Volume)
+larv <- larv %>%
+  group_by(Ground, Survey.No, Year) %>%
+  mutate(SD = sd(Lengthmm), MinLength = min(Lengthmm), MaxLength = max(Lengthmm), MeanLength = mean(Lengthmm), Abundance = length(Lengthmm)) %>%
+  ungroup()
 
-###Calculating AVERAGE SE/mean/min/max of larval measurements. 
+larv$SD[is.na(larv$SD)] <- 0
+larv$SD <- as.numeric(larv$SD)
+
+larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
+  summarize(MinLength = mean(MinLength, na.rm = TRUE),
+            MaxLength = mean(MaxLength, na.rm = TRUE),
+            MeanLength = mean(MeanLength, na.rm = TRUE),
+            SD = mean(SD, na.rm = TRUE),
+            Abundance = length(Lengthmm)) %>%
+  mutate(SE = SD/sqrt(Abundance))
+surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
+surveysummary$Year = as.factor(surveysummary$Year)
+surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
+larvsummary = left_join(surveysummary, larvsummary)
+
+larv = larv %>%
+  mutate(Larv_per_jar = Abundance/No_jars) %>%
+  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+  mutate(Density = Larv_per_jar/Volume)
+
+###Calculating AVERAGE SE/mean/min/max of larval measurements.
 ### This is all Darren's old code. Do we still need this?
 
-# larv <- larv %>%
-#   group_by(Ground, Survey.No, Year) %>%
-#   mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
-#   ungroup()
-# 
-# larv$AdjSD[is.na(larv$AdjSD)] <- 0
-# larv$AdjSD <- as.numeric(larv$AdjSD)
-# 
-# larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
-#   summarize(MeanAdjustedMinLength = mean(AdjustedMinLength, na.rm = TRUE), 
-#             MeanAdjustedMaxLength = mean(AdjustedMaxLength, na.rm = TRUE), 
-#             MeanAdjustedSD = mean(AdjSD, na.rm = TRUE),
-#             Abundance = length(LengthAdjustment)) %>%
-#   mutate(SE =  MeanAdjustedSD/sqrt(Abundance))
-# surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
-# surveysummary$Year = as.factor(surveysummary$Year)
-# surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
-# larvsummary = left_join(surveysummary, larvsummary)
-# 
-# 
-# larv = larv %>%
-#   mutate(Larv_per_jar = Abundance/No_jars) %>%
-#   mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
-#   mutate(Density = Larv_per_jar/Volume)
+larv <- larv %>%
+  group_by(Ground, Survey.No, Year) %>%
+  mutate(AdjSD = sd(LengthAdjustment), AdjustedMinLength = min(LengthAdjustment), AdjustedMaxLength = max(LengthAdjustment), MeanLengthAdjustment = MeanLengthAdjustment, Abundance = length(LengthAdjustment)) %>%
+  ungroup()
+
+larv$AdjSD[is.na(larv$AdjSD)] <- 0
+larv$AdjSD <- as.numeric(larv$AdjSD)
+
+larvsummary <- larv %>% group_by(Ground, Survey.No, Year) %>%
+  summarize(MeanAdjustedMinLength = mean(AdjustedMinLength, na.rm = TRUE),
+            MeanAdjustedMaxLength = mean(AdjustedMaxLength, na.rm = TRUE),
+            MeanAdjustedSD = mean(AdjSD, na.rm = TRUE),
+            Abundance = length(LengthAdjustment)) %>%
+  mutate(SE =  MeanAdjustedSD/sqrt(Abundance))
+surveysummary = survey %>% dplyr::select(id, Ground, Survey.No, Year) %>% group_by(id, Ground, Survey.No, Year) %>% summarize(Survey.No = Survey.No, Year = Year)
+surveysummary$Year = as.factor(surveysummary$Year)
+surveysummary$Survey.No = as.factor(surveysummary$Survey.No)
+larvsummary = left_join(surveysummary, larvsummary)
+
+
+larv = larv %>%
+  mutate(Larv_per_jar = Abundance/No_jars) %>%
+  mutate(Volume = ifelse(Volume < 0.01, NA, Volume)) %>%
+  mutate(Density = Larv_per_jar/Volume)
 
 
 larv = larv %>%
@@ -169,9 +169,9 @@ larv = larv %>%
                 Abundance, 
                 Lengthmm, 
                 category, 
-                #MinLength, 
-                #MaxLength, 
-                #MeanLength, 
+                MinLength, 
+                MaxLength, 
+                MeanLength, 
                 SD, 
                 Larv_per_jar, 
                 Density, 
@@ -182,8 +182,8 @@ larv = larv %>%
                 Condition, 
                 Yolk_sac, 
                 Preservative, 
-                ARC_Count, 
-                ARC_Notes, 
+                #ARC_Count, 
+                #ARC_Notes, 
                 Lon1, 
                 Lat1, 
                 Lon2, 
