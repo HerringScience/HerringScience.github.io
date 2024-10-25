@@ -69,7 +69,7 @@ polySI = as.PolySet(SUA, projection="LL")
 
 # Run first few lines of taggingMaster first to load in relINFO
 
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns"))
 
 relINFO <- read.csv("relINFO.csv")
 
@@ -85,6 +85,7 @@ two20=relINFO[which(relINFO$Year == "2020"), ]
 two21=relINFO[which(relINFO$Year == "2021"), ]
 two22=relINFO[which(relINFO$Year == "2022"), ]
 two23=relINFO[which(relINFO$Year == "2023"), ]
+two24=relINFO[which(relINFO$Year == "2024"),]
 
 # Temporal range of tagging season
 
