@@ -54,8 +54,8 @@ background-colour: inherit;
 
 completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
 TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-    TaggingEvents <- TaggingEvents %>%  
-        rename(TAG_NUMBER = Tag_Num)
+    # TaggingEvents <- TaggingEvents %>%  
+    #     rename(TAG_NUMBER = Tag_Num)
 rawReturn <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/rawReturn.csv"))
 relINFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/relINFO.csv"))
 polysNAFO <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"))

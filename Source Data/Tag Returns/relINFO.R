@@ -44,6 +44,7 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 library(ggplot2)
+library(dplyr)
 
 # we need to add NAFO subunit to this DF:
 # First load the release data and ensure consistent column names with previous worksheet to match tagEve() function (TaggingEvents2020.csv)
@@ -52,8 +53,9 @@ library(ggplot2)
 # tagging events in Jenna's workspace updated November 2023
 
 rel <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-rel <- read.csv("TaggingEvents.csv") %>%
- rename("TAG_NUMBER"= 1,
+#rel <- read.csv("TaggingEvents.csv") 
+
+rel <-  rename("TAG_NUMBER"= 1,
        "RELEASE_DATE"= 2,
       "X" = 3,
      "Y" = 4,
@@ -154,7 +156,7 @@ tagEve = function(rel) {
 
 
 head(x)
-RLibrary("dplyr")
+#RLibrary("dplyr")
 
 
 #### Produce all tag return DF's ####
