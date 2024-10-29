@@ -5,7 +5,7 @@ rm(list = ls())
 surv="GB" #SB or GB or SI
 surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="5"
+surv.no="6"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
@@ -233,9 +233,11 @@ if(Tow == "N"){
 }
 
 ##ECHOVIEW DATA##
-#Land Data
-can<-getData('GADM', download = FALSE, country="CAN", level=1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
-us = getData('GADM', download = FALSE, country = "USA", level = 1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
+#Land Data 
+## added raster:: in front as it was throwing an error without it.
+
+can<-raster::getData('GADM', download = FALSE, country="CAN", level=1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
+us = raster::getData('GADM', download = FALSE, country = "USA", level = 1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
 can1 = rbind(can,us)
 NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 

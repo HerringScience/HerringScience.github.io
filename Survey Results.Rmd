@@ -13,7 +13,7 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 year = "2024"
-surv.no = "5"
+surv.no = "6"
 hightide = "2024-09-23 16:33:00" #for Scots Bay only
 
 ```
@@ -347,8 +347,6 @@ f=f[1:1]
 ```
 
 The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength.
-
-There were large plankton clouds which have affected this estimate. This estimate may be more conservative due to editing processes taking this into account. There will be more uncertainty regarding this estimate until a review is completed. 
 
 **`r f`**
 

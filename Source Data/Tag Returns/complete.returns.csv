@@ -321,7 +321,7 @@
 320,510467,German Bank (Area 7),2022-09-01,Sealife II,Purse Seine,Comeau - Sea Life,36,ComeauReturns2022.csv,2022-09-01 Sealife II
 321,498868,Scots Bay (Area 8),2022-09-06,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-09-06 Sealife II
 322,475834,Scots Bay (Area 8),2022-09-07,Lady Janice II,Purse Seine,Comeau - Sea Life,98,ComeauReturns2022.csv,2022-09-07 Lady Janice II
-323,502044,Scots Bay (Area 8),2002-09-08,Lady Janice II,Purse Seine,Comeau - Sea Life,20,ComeauReturns2022.csv,2002-09-08 Lady Janice II
+323,502044,Scots Bay (Area 8),2022-09-08,Lady Janice II,Purse Seine,Comeau - Sea Life,20,ComeauReturns2022.csv,2022-09-08 Lady Janice II
 324,491540,German Bank (Area 7),2022-09-14,Sealife II,Purse Seine,Comeau - Sea Life,86,ComeauReturns2022.csv,2022-09-14 Sealife II
 325,491543,German Bank (Area 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
 326,491590,German Bank (Area 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
@@ -330,8 +330,8 @@
 329,491582,German Bank (Area 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
 330,491577,German Bank (Area 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
 331,491701,German Bank (Area 7),2022-09-14,Lady Melissa,Purse Seine,Comeau - Sea Life,79,ComeauReturns2022.csv,2022-09-14 Lady Melissa
-332,489322,SEAL ISLAND (AREA 6),2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
-333,601148,SEAL ISLAND (AREA 6),2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
+332,489322,Seal Island,2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
+333,601148,Seal Island,2022-09-21,Lady Janice II,Purse Seine,Comeau - Sea Life,41,ComeauReturns2022.csv,2022-09-21 Lady Janice II
 334,570527,German Bank (Area 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
 335,570583,German Bank (Area 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
 336,570488,German Bank (Area 7),2022-10-13,Sealife II,Purse Seine,Comeau - Sea Life,NA,ComeauReturns2022.csv,2022-10-13 Sealife II
@@ -349,8 +349,8 @@
 348,487227,Grand Manan ,2022-10-17,Leroy & Barry II,Purse Seine,Scotia Garden,103,ScotiaGardenReturns2022.csv,2022-10-17 Leroy & Barry II
 349,491315,,2022-09-14,Brunswick Provider,Purse Seine,Scotia Garden,NA,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider
 350,491430,,2022-09-14,Brunswick Provider,Purse Seine,Scotia Garden,NA,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider
-351,516698,North East Banks,2021-10-06,Canada 100,Purse Seine,Connors,95902,ConnorsReturns2022.csv,2021-10-05 Canada 100
-352,493287,South West Bank,2022-06-02,Canada 100,Purse Seine,Connors,89.6,ConnorsReturns2022.csv,2022-06-02 Canada 100
+351,516698,Northeast Bank,2021-10-06,Canada 100,Purse Seine,Connors,95902,ConnorsReturns2022.csv,2021-10-05 Canada 100
+352,493287,Southwest Bank,2022-06-02,Canada 100,Purse Seine,Connors,89.6,ConnorsReturns2022.csv,2022-06-02 Canada 100
 353,585563,South East Banks,2022-06-14,Fundy Monarch,Purse Seine,Connors,108,ConnorsReturns2022.csv,2022-06-14 Fundy Monarch
 354,496891,White Head,2022-07-08,Brunswick Provider,Purse Seine,Connors,75,ConnorsReturns2022.csv,2022-07-08 Brunswick Provider
 355,507389,White Head,2022-07-08,Canada 100,Purse Seine,Connors,72.5,ConnorsReturns2022.csv,2022-07-08 Canada 100
@@ -526,12 +526,11 @@
 525,515215,McDormand Patch,2021-08-04,Brunswick Provider,Purse Seine,Connors,46,ConnorsReturns2021.csv,2021-08-04 Brunswick Provider
 526,511675,McDormand Patch,2021-08-04,Brunswick Provider,Purse Seine,Connors,46,ConnorsReturns2021.csv,2021-08-04 Brunswick Provider
 527,511729,Scots Bay,2021-08-03,Canada 100,Purse Seine,Connors,67,ConnorsReturns2021.csv,2021-08-03 Canada 100
-528,462846,N/A,2021-08-06,Brunswick Provider,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-08-06 Brunswick Provider
 529,589877,Scots Bay,2021-08-03,Brunswick Provider,Purse Seine,Connors,86,ConnorsReturns2021.csv,2021-08-03 Brunswick Provider
-530,512543,Moores Ledge & Prong,2021-08-10,Canada 100,Purse Seine,Connors,31,ConnorsReturns2021.csv,2021-08-10 Canada 100
+530,512543,Moore's Ledge & Prong,2021-08-10,Canada 100,Purse Seine,Connors,31,ConnorsReturns2021.csv,2021-08-10 Canada 100
 531,589836,Scots Bay,2021-08-03,Canada 100,Purse Seine,Connors,86,ConnorsReturns2021.csv,2021-08-03 Canada 100
-532,512567,Moores Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
-533,512503,Moores Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
+532,512567,Moore's Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
+533,512503,Moore's Ledge,2021-08-10,Canada 100,Purse Seine,Connors,48,ConnorsReturns2021.csv,2021-08-10 Canada 100
 534,484725,Prong,2021-08-09,Fundy Monarch,Purse Seine,Connors,95,ConnorsReturns2021.csv,2021-08-09 Fundy Monarch
 535,463444,Scots Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
 536,463270,Scots Bay,2021-08-19,Fundy Monarch,Purse Seine,Connors,36,ConnorsReturns2021.csv,2021-08-19 Fundy Monarch
@@ -542,7 +541,7 @@
 541,590170,Scots Bay,2021-08-18,Brunswick Provider,Purse Seine,Connors,65,ConnorsReturns2021.csv,2021-08-18 Brunswick Provider
 542,51378,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,Connors,98,ConnorsReturns2021.csv,2021-08-16 Brunswick Provider
 543,513483,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,Connors,98,ConnorsReturns2021.csv,2021-08-16 Brunswick Provider
-544,584493,North East Banks,2021-08-13,Brunswick Provider,Purse Seine,Connors,42,ConnorsReturns2021.csv,2021-08-13 Brunswick Provider
+544,584493,Northeast Bank,2021-08-13,Brunswick Provider,Purse Seine,Connors,42,ConnorsReturns2021.csv,2021-08-13 Brunswick Provider
 545,583902,White Head,2021-08-11,Fundy Monarch,Purse Seine,Connors,44,ConnorsReturns2021.csv,2021-08-11 Fundy Monarch
 546,494445,Scots Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
 547,494379,Scots Bay,2021-08-23,Brunswick Provider,Purse Seine,Connors,110,ConnorsReturns2021.csv,2021-08-23 Brunswick Provider
@@ -588,7 +587,6 @@
 587,488618,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
 588,488534,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
 589,488533,German Bank,2021-09-02,Fundy Monarch,Purse Seine,Connors,156,ConnorsReturns2021.csv,2021-09-02 Fundy Monarch
-590,579635,N/A,2021-08-31,Lady Melissa,Purse Seine,Connors,NA,ConnorsReturns2021.csv,2021-08-31 Lady Melissa
 591,581796,German Bank,2021-09-08,Fundy Monarch,Purse Seine,Connors,104,ConnorsReturns2021.csv,2021-09-08 Fundy Monarch
 592,464297,German Bank,2021-09-08,Canada 100,Purse Seine,Connors,83,ConnorsReturns2021.csv,2021-09-08 Canada 100
 593,580818,German Bank,2021-09-08,Fundy Monarch,Purse Seine,Connors,104,ConnorsReturns2021.csv,2021-09-08 Fundy Monarch
@@ -610,7 +608,7 @@
 609,514801,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
 610,514668,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
 611,514635,Seal Island,2021-10-07,Brunswick Provider,Purse Seine,Connors,129,ConnorsReturns2021.csv,2021-10-07 Brunswick Provider
-612,580027,North East Banks,2021-10-05,Fundy Monarch,Purse Seine,Connors,43,ConnorsReturns2021.csv,2021-10-05 Fundy Monarch
+612,580027,Northeast Bank,2021-10-05,Fundy Monarch,Purse Seine,Connors,43,ConnorsReturns2021.csv,2021-10-05 Fundy Monarch
 613,469700,Grand Manan Banks,2021-10-14,Brunswick Provider,Purse Seine,Connors,80,ConnorsReturns2021.csv,2021-10-14 Brunswick Provider
 614,584951,Grand Manan Banks,2021-10-24,Canada 100,Purse Seine,Connors,137,ConnorsReturns2021.csv,2021-10-24 Canada 100
 615,515650,Deer Island NB,2021-10-15,Senator Neil,Weir/Black Water,Connors,14,ConnorsReturns2021.csv,2021-10-15 Senator Neil
@@ -823,7 +821,7 @@
 822,551110,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
 823,552845,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
 824,554485,Wolves,2020-10-15,Fundy Monarch,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-15 Fundy Monarch
-825,41118,NE Bank,2020-10-21,Brunswick Provider,Purse Seine,Connors,29,ConnorsReturns2020.csv,2020-10-21 Brunswick Provider
+825,41118,Northeast Bank,2020-10-21,Brunswick Provider,Purse Seine,Connors,29,ConnorsReturns2020.csv,2020-10-21 Brunswick Provider
 826,552271,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,78,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
 827,554603,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
 828,552707,Wolves,2020-10-16,Brunswick Provider,Purse Seine,Connors,38,ConnorsReturns2020.csv,2020-10-16 Brunswick Provider
@@ -1012,7 +1010,7 @@
 1011,422951,German Bank,2016-08-16,Silver Harvester,Purse Seine,CapeBreeze,NA,rawReturn.csv,2016-08-16 Silver Harvester
 1012,423063,German Bank,2016-08-25,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-25 Margaret Elizabeth
 1013,423308,Gully 4Xq,2016-08-04,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-04 Morning Star
-1014,423309,White Head Grand Manan,2016-10-31,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Margaret Elizabeth
+1014,423309,White Head,2016-10-31,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Margaret Elizabeth
 1015,423592,German Bank,2016-08-11,Morning Star,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-11 Morning Star
 1016,423786,German Bank,2017-09-07,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-07 Brunswick Provider
 1017,424951,German Bank,2016-08-17,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Lady Janice II
@@ -1020,16 +1018,16 @@
 1019,425060,Southwest Bank,2016-07-22,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-22 Brunswick Provider
 1020,425061,Northeast Bank,2016-08-24,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-24 Margaret Elizabeth
 1021,425064,Northeast Bank,2016-09-01,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-01 Margaret Elizabeth
-1022,425379,White Head Grand Manan,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
+1022,425379,White Head,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
 1023,425765,Northeast Bank,2016-09-07,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-07 Canada 100
 1024,425773,Southwest Bank,2016-07-28,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-07-28 Brunswick Provider
 1025,425809,Northeast Bank,2016-08-22,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-22 Canada 100
-1026,426117,White Head Grand Manan,2016-10-20,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-20 Margaret Elizabeth
+1026,426117,White Head,2016-10-20,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-20 Margaret Elizabeth
 1027,426125,Northeast Bank,2016-08-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Brunswick Provider
 1028,426139,Southwest Bank,2016-08-11,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Margaret Elizabeth
 1029,426195,Northeast Bank,2016-09-07,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-07 Canada 100
 1030,426234,Northeast Bank,2016-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-02 Canada 100
-1031,426247,White Head Grand Manan,2016-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-14 Brunswick Provider
+1031,426247,White Head,2016-10-14,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-14 Brunswick Provider
 1032,426370,Prong,2016-11-16,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-11-16 Canada 100
 1033,426400,Southwest Bank,2016-08-11,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-08-11 Margaret Elizabeth
 1034,426486,Northeast Bank,2016-09-08,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-09-08 Margaret Elizabeth
@@ -1088,7 +1086,7 @@
 1087,433596,Long Island,2016-10-04,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-04 Brunswick Provider
 1088,433731,Southwest Bank,2016-08-23,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-08-23 Canada 100
 1089,435040,German Bank,2016-08-22,Lady Melissa,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-22 Lady Melissa
-1090,435283,White Head Grand Manan,2016-10-17,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-17 Margaret Elizabeth
+1090,435283,White Head,2016-10-17,Margaret Elizabeth,Purse Seine,Connors,NA,rawReturn.csv,2016-10-17 Margaret Elizabeth
 1091,435461,German Bank,2016-08-12,Lady Janice II,Purse Seine,Sealife,NA,rawReturn.csv,2016-08-12 Lady Janice II
 1092,435502,German Bank,2016-09-13,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-09-13 Lady Janice II
 1093,436142,Northeast Bank,2016-09-02,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-09-02 Canada 100
@@ -1109,7 +1107,7 @@
 1108,439800,Northeast Bank,2017-09-26,Brunswick Provider,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-26 Brunswick Provider
 1109,440021,German Bank,2016-08-15,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2016-08-15 Sealife II
 1110,440150,North West Ledge,2016-10-04,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2016-10-04 Brunswick Provider
-1111,440222,White Head Grand Manan,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
+1111,440222,White Head,2016-10-31,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2016-10-31 Canada 100
 1112,440261,Scots Bay,2016-08-16,Lady Melissa,Purse Seine,Connors,NA,rawReturn.csv,2016-08-16 Lady Melissa
 1113,440457,German Bank,2016-08-17,Lady Janice II,Purse Seine,Connors,NA,rawReturn.csv,2016-08-17 Lady Janice II
 1114,440591,German Bank,2016-08-25,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2016-08-25 Leroy & Barry II
@@ -1171,7 +1169,7 @@
 1170,457674,German Bank,2017-07-27,Lady Melissa,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2017-07-27 Lady Melissa
 1171,458234,German Bank,2017-09-11,Margaret Elizabeth,Purse Seine,Connors ,NA,rawReturn.csv,2017-09-11 Margaret Elizabeth
 1172,459121,Scots Bay,2019-07-22,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-07-22 Brunswick Provider
-1173,459126,White Head Grand Manan,2019-07-23,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-07-23 Fundy Monarch
+1173,459126,White Head,2019-07-23,Fundy Monarch,Purse Seine,Connors,NA,rawReturn.csv,2019-07-23 Fundy Monarch
 1174,459313,Sandy Cove NS,2019-09-06,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Brunswick Provider
 1175,459364,Sandy Cove NS,2019-08-29,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-29 Brunswick Provider
 1176,459394,Sandy Cove NS,2019-08-28,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-08-28 Canada 100
@@ -1184,8 +1182,8 @@
 1183,460094,Sandy Cove NS,2019-08-20,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-08-20 Brunswick Provider
 1184,460183,Sandy Cove NS,2019-09-17,Brunswick Provider,Purse Seine,Connors,NA,rawReturn.csv,2019-09-17 Brunswick Provider
 1185,460329,McDormant Patch,2019-09-06,Canada 100,Purse Seine,Connors,NA,rawReturn.csv,2019-09-06 Canada 100
-1186,444659,NE Bank,2017-09-19,Margaret Elizabeth,N/A,,NA,DFOmailedin2023.csv,2017-09-19 Margaret Elizabeth
-1187,439808,NE Bank,2017-09-26,Brunswick Provider,N/A,,NA,DFOmailedin2023.csv,2017-09-26 Brunswick Provider
+1186,444659,Northeast Bank,2017-09-19,Margaret Elizabeth,N/A,,NA,DFOmailedin2023.csv,2017-09-19 Margaret Elizabeth
+1187,439808,Northeast Bank,2017-09-26,Brunswick Provider,N/A,,NA,DFOmailedin2023.csv,2017-09-26 Brunswick Provider
 1188,461393,Scots Bay,2018-09-04,Morning Star,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2018-09-04 Morning Star
 1189,459573,Leroy Island Shore (4WX),2019-08-19,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,DFOmailedin2023.csv,2019-08-19 Leroy & Barry II
 1190,550159,Scots Bay,2020-08-11,Morning Star,Purse Seine,Cape Breeze Seafoods,NA,DFOmailedin2023.csv,2020-08-11 Morning Star
@@ -1197,3 +1195,609 @@
 1196,494947,Scots Bay,2021-09-01,Morning Star,Purse Seine,Cape Breeze,78,Mail in Tag Returns.csv,2021-09-01 Morning Star
 1197,493430,German Bank,2021-11-03,Brunswick Provider,Purse Seine,Cape Breeze,143,Mail in Tag Returns.csv,2021-11-03 Brunswick Provider
 1198,488738,German Bank,2021-09-09,Morning Star,Purse Seine,Cape Breeze,67,Mail in Tag Returns.csv,2021-09-09 Morning Star
+1199,453405,Scots Bay,2023-04-19,Lady Janice II,N/A,N/A,NA,Tag returns from website or email 2025 Draw.xlxs,2023-04-19 Lady Janice II
+1200,498968,German Bank,2022-10-11,Unknown,Purse Seine,Connors,,Tag returns from website or email 2024 Draw.xlxs,2022-10-11 Unknown
+1201,551485,Gannet Dry Ledge,2022-07-14,Unknown,Purse Seine,Connors,,Tag returns from website or email 2024 Draw.xlxs,2022-07-14 Unknown
+1202,577836,Scots Bay,2023-09-11,Lady Melissa,Purse Seine,Comeaus,,Tag returns from website or email 2024 Draw.xlxs,2023-09-11 Lady Melissa
+1203,468757,The Patch ,2023-07-02,Morning Star,Purse Seine,Scotia Gardens,63,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-02 Morning Star
+1204,497303,Scots Bay,2023-07-03,Leroy & Barry,Purse Seine,Scotia Gardens,63,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-03 Leroy & Barry
+1205,497202,Scots Bay,2023-07-03,Leroy & Barry,Purse Seine,Scotia Gardens,63,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-03 Leroy & Barry
+1206,497450,White Head,2023-07-11,Leroy & Barry,Purse Seine,Scotia Gardens,65,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-11 Leroy & Barry
+1207,524812,Grand Manan,2023-07-20,Leroy & Barry,Purse Seine,Scotia Gardens,62,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-20 Leroy & Barry
+1208,559016,Grand Manan,2023-07-20,Leroy & Barry,Purse Seine,Scotia Gardens,62,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-07-20 Leroy & Barry
+1209,471228,German Bank,2023-08-24,Leroy & Barry,Purse Seine,Scotia Gardens,60,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-24 Leroy & Barry
+1210,471237,Seal Island,2023-08-24,Morning Star,Purse Seine,Scotia Gardens,20,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-24 Morning Star
+1211,521280,Seal Island,2023-08-24,Morning Star,Purse Seine,Scotia Gardens,20,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-24 Morning Star
+1212,500644,Scots Bay,2023-08-29,Morning Star,Purse Seine,Scotia Gardens,69,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-29 Morning Star
+1213,564113,Scots Bay,2023-08-29,Morning Star,Purse Seine,Scotia Gardens,69,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-29 Morning Star
+1214,572422,Scots Bay,2023-08-29,Morning Star,Purse Seine,Scotia Gardens,69,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-29 Morning Star
+1215,572298,Scots Bay,2023-08-29,Morning Star,Purse Seine,Scotia Gardens,69,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-29 Morning Star
+1216,564084,Scots Bay,2023-08-29,Morning Star,Purse Seine,Scotia Gardens,69,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-08-29 Morning Star
+1217,593116,Northeast Bank,2023-09-01,Leroy & Barry,Purse Seine,Scotia Gardens,66,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-01 Leroy & Barry
+1218,559359,Northeast Bank,2023-09-01,Leroy & Barry,Purse Seine,Scotia Gardens,66,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-01 Leroy & Barry
+1219,501835,Northeast Bank,2023-09-01,Leroy & Barry,Purse Seine,Scotia Gardens,66,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-01 Leroy & Barry
+1220,577024,German Bank,2023-09-05,Leroy & Barry,Purse Seine,Scotia Gardens,116,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-05 Leroy & Barry
+1221,467003,German Bank,2023-09-05,Leroy & Barry,Purse Seine,Scotia Gardens,116,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-05 Leroy & Barry
+1222,577080,German Bank,2023-09-05,Leroy & Barry,Purse Seine,Scotia Gardens,116,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-05 Leroy & Barry
+1223,498467,German Bank,2023-09-05,Leroy & Barry,Purse Seine,Scotia Gardens,116,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-05 Leroy & Barry
+1224,577167,German Bank,2023-09-05,Leroy & Barry,Purse Seine,Scotia Gardens,116,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-05 Leroy & Barry
+1225,578643,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1226,532001,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1227,567542,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1228,578658,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1229,577160,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,98,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1230,577260,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,98,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1231,532020,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1232,567576,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1233,567454,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1234,532029,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1235,532110,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1236,567443,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1237,567494,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1238,567475,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1239,577724,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1240,528099,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1241,567624,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1242,567481,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1243,577411,German Bank,2023-09-06,Leroy & Barry,Purse Seine,Scotia Gardens,102,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-06 Leroy & Barry
+1244,528138,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1245,567369,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1246,577185,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1247,528133,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1248,567416,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1249,578599,German Bank,2023-09-07,Leroy & Barry,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-07 Leroy & Barry
+1250,502038,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1251,567078,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1252,471622,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1253,471763,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1254,471817,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1255,567228,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1256,564912,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1257,564820,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1258,564499,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1259,564525,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1260,567237,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1261,567203,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1262,564954,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1263,567113,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1264,471890,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1265,572459,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1266,471797,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1267,471910,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1268,564874,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1269,569124,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1270,564657,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1271,567151,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1272,564811,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1273,564514,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1274,564603,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1275,471489,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1276,564777,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1277,471716,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1278,564798,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1279,564667,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1280,567215,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1281,567240,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1282,569157,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1283,564759,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1284,567174,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1285,567173,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1286,502154,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1287,567255,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1288,559461,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1289,471756,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1290,572285,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1291,471903,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1292,564888,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1293,564725,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1294,471645,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1295,471626,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1296,569529,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1297,471787,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1298,471490,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1299,564172,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1300,567155,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1301,564721,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1302,567080,Scots Bay,2023-09-08,Morning Star,Purse Seine,Scotia Gardens,119,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-08 Morning Star
+1303,577847,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1304,567024,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1305,567202,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1306,471494,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1307,564723,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1308,564853,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1309,577931,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1310,577763,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1311,471824,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1312,569617,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1313,569582,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1314,578846,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1315,471773,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1316,564749,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1317,578951,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1318,578962,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1319,578970,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1320,564754,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1321,578875,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1322,577853,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1323,564782,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1324,577934,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1325,578805,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1326,577754,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1327,502060,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1328,560363,Scots Bay,2023-09-12,Morning Star,Purse Seine,Scotia Gardens,94,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-12 Morning Star
+1329,532355,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1330,532421,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1331,528173,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1332,528274,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1333,532267,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1334,567598,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1335,567546,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1336,567628,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1337,528203,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1338,567533,German Bank,2023-09-15,Morning Star,Purse Seine,Scotia Gardens,96,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-15 Morning Star
+1339,510905,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1340,567420,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1341,578413,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1342,532365,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1343,467543,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1344,532385,German Bank,2023-09-18,Morning Star,Purse Seine,Scotia Gardens,121,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-18 Morning Star
+1345,577556,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1346,532375,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1347,577608,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1348,532427,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1349,574192,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1350,528313,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1351,532392,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1352,578202,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1353,573304,German Bank,2023-09-19,Leroy & Barry,Purse Seine,Scotia Gardens,108,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-19 Leroy & Barry
+1354,532462,Seal Island,2023-09-25,Leroy & Barry,Purse Seine,Scotia Gardens,126,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-25 Leroy & Barry
+1355,569841,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1356,56774,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1357,567852,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1358,567811,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1359,567978,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1360,567827,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1361,564900,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1362,528685,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1363,528662,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1364,567921,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1365,567742,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1366,528600,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1367,564455,Scots Bay,2023-09-26,Morning Star,Purse Seine,Scotia Gardens,110,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-09-26 Morning Star
+1368,521299,Long Island,2023-10-13,Leroy & Barry,Purse Seine,Scotia Gardens,97,Scotia Garden Herring Research Tags Collected Information 2023.xlsx,2023-10-13 Leroy & Barry
+1369,473477,White Head,2023-07-21,Brunswick Provider,Seiner/Frozen,Connors,48,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-07-21 Brunswick Provider
+1370,557301,White Head,2023-07-05,Brunswick Provider,Seiner/Frozen,Connors,48,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-07-05 Brunswick Provider
+1371,523994,White Head,2023-07-05,Brunswick Provider,Seiner/Frozen,Connors,48,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-07-05 Brunswick Provider
+1372,508845,White Head,2023-07-05,Brunswick Provider,Seiner/Frozen,Connors,48,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-07-05 Brunswick Provider
+1373,567141,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1374,567191,German Bank ,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1375,564321,Scots Bay,2023-09-10,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-10 Brunswick Provider
+1376,567423,German Bank ,2023-09-05,Fundy Monarch,Seiner,Connors,216,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-05 Fundy Monarch
+1377,498755,Scots Bay,2023-09-07,Brunswick Provider,Seiner ,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1378,567187,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1379,564948,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1380,564390,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1381,567283,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1382,567195,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1383,564552,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1384,564006,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1385,567124,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1386,471801,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1387,569083,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1388,471782,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1389,471864,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1390,564001,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1391,564177,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1392,471882,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1393,567276,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1394,567190,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1395,471828,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1396,564522,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1397,567159,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1398,564576,Scots Bay,2023-09-07,Brunswick Provider,Seiner ,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1399,564150,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1400,564538,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1401,564414,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1402,567092,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1403,471740,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1404,471820,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1405,471816,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1406,567225,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1407,564846,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1408,471641,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1409,471766,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1410,564193,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1411,567273,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1412,564636,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1413,564304,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1414,564769,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1415,564307,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1416,569115,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1417,564412,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1418,564015,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1419,567241,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1420,569212,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1421,564712,Scots Bay,2023-09-07,Brunswick Provider,Seiner ,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1422,572481,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1423,564708,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1424,567193,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1425,564901,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1426,567249,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1427,564930,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1428,564841,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1429,564970,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1430,567025,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1431,564343,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1432,502285,Scots Bay,2023-09-07,Brunswick Provider,Seiner,Connors,129,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1433,577188,German Bank ,2023-09-05,Canada 100,Seiner,Connors,145,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-05 Canada 100
+1434,471554,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,40,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1435,572454,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,40,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1436,564875,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,40,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1437,564957,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,40,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1438,564403,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,40,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1439,564002,Scots Bay ,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1440,564010,Scots Bay ,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1441,572251,Northeast Bank,2023-08-31,Brunswick Provider,Seiner,Connors,26,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-31 Brunswick Provider
+1442,564061,Northeast Bank,2023-08-31,Brunswick Provider,Seiner,Connors,26,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-31 Brunswick Provider
+1443,473086,Northeast Bank,2023-08-31,Brunswick Provider,Seiner,Connors,26,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-31 Brunswick Provider
+1444,567119,Northeast Bank,2023-08-31,Brunswick Provider,Seiner,Connors,26,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-31 Brunswick Provider
+1445,530309,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1446,577897,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1447,569644,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1448,569804,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1449,530126,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1450,577865,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1451,530012,Scots Bay ,2023-09-11,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-11 Fundy Monarch
+1452,564442,Scots Bay ,2023-09-07,Brunswick Provider,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-07 Brunswick Provider
+1453,569550,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1454,569645,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1455,530118,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1456,567112,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1457,578804,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1458,569594,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1459,471788,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1460,569480,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1461,577896,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1462,578996,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1463,567149,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1464,577765,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1465,530062,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1466,530003,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1467,577889,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1468,567264,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1469,569632,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1470,497255,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1471,530032,Scots Bay,2023-09-12,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Fundy Monarch
+1472,567580,Scots Bay,2023-09-15,Fundy Monarch,Seiner,Connors,165,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Fundy Monarch
+1473,569222,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1474,564577,German Bank ,2023-09-15,Canada 100,Seiner,Connors,43,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Canada 100
+1475,471671,German Bank ,2023-09-15,Canada 100,Seiner ,Connors,106,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Canada 100
+1476,471605,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,39,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1477,564641,Scots Bay ,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1478,564517,Scots Bay,2023-09-17,Canada 100,Seiner,Connors,106,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-17 Canada 100
+1479,471705,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,39,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1480,564317,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,39,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1481,564925,German Bank ,2023-09-15,Canada 100,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Canada 100
+1482,564033,German Bank ,2023-09-15,Canada 100,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Canada 100
+1483,572437,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1484,564346,Scots Bay ,2023-08-30,Canada 100,Seiner,Connors,39,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-30 Canada 100
+1485,564465,Scots Bay ,2023-09-15,Canada 100,Seiner ,Connors,116,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Canada 100
+1486,569220,Scots Bay ,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1487,502232,Scots Bay,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1488,502078,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1489,577857,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1490,577764,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1491,578869,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1492,569611,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1493,577933,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1494,495472,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1495,578964,Scots Bay,2023-09-12,Brunswick Provider,Seiner,Connors,11,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-12 Brunswick Provider
+1496,572434,Scots Bay,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1497,567558,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1498,567504,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1499,532380,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1500,528334,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1501,567366,German Bank ,2023-09-15,Brunswick Provider,Seiner ,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1502,567456,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1503,532379,German Bank ,2023-09-15,Brunswick Provider,Seiner ,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1504,528252,German Bank ,2023-09-15,Brunswick Provider,Seiner,Connors,107,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-15 Brunswick Provider
+1505,564556,Scots Bay,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1506,564167,Scots Bay,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1507,564234,Scots Bay ,2023-08-29,Canada 100,Seiner,Connors,102,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-08-29 Canada 100
+1508,532328,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1509,573297,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1510,567517,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1511,528223,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1512,574256,German Bank ,2023-09-19,Fundy Monarch,Seiner ,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1513,528317,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1514,532306,German Bank ,2023-09-19,Fundy Monarch,Seiner ,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1515,574299,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1516,567425,German Bank ,2023-09-19,Fundy Monarch,Seiner,Connors,171,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Fundy Monarch
+1517,567564,German Bank ,2023-09-19,Brunswick Provider,Seiner,Connors,47,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Brunswick Provider
+1518,528373,German Bank ,2023-09-19,Brunswick Provider,Seiner,Connors,47,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-19 Brunswick Provider
+1519,574585,German Bank ,2023-09-21,Brunswick Provider,Seiner,Connors,121,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Brunswick Provider
+1520,477328,German Bank ,2023-09-21,Brunswick Provider,Seiner,Connors,121,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Brunswick Provider
+1521,567738,Scots Bay,2023-09-26,Canada 100,Seiner,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1522,567844,Scots Bay ,2023-09-26,Canada 100,Seiner ,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1523,577890,German Bank ,2023-09-26,Canada 100,Seiner ,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1524,567940,Scots Bay ,2023-09-26,Canada 100,Seiner,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1525,528553,Scots Bay ,2023-09-26,Canada 100,Seiner ,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1526,567863,Scots Bay,2023-09-26,Canada 100,Seiner ,Connors,136,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-26 Canada 100
+1527,567948,Scots Bay ,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1528,567858,Scots Bay ,2023-09-25,Brunswick Provider,Seiner,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1529,569797,Scots Bay ,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1530,567883,Scots Bay,2023-09-25,Brunswick Provider,Seiner,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1531,567780,Scots Bay ,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1532,528601,Scots Bay ,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1533,528701,Scots Bay ,2023-09-25,Brunswick Provider,Seiner,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1534,567819,Scots Bay,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1535,567922,Scots Bay ,2023-09-25,Brunswick Provider,Seiner ,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1536,574191,German Bank ,2023-09-21,Fundy Monarch,Seiner ,Connors,194,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Fundy Monarch
+1537,567566,German Bank ,2023-09-21,Fundy Monarch,Seiner,Connors,194,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Fundy Monarch
+1538,532316,German Bank ,2023-09-21,Fundy Monarch,Seiner ,Connors,194,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Fundy Monarch
+1539,574007,German Bank ,2023-09-21,Canada 100,Seiner,Connors,117,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-21 Canada 100
+1540,528253,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1541,510561,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1542,564541,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1543,564929,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1544,532386,Seal Island,2023-09-25,Brunswick Provider,Seiner,Connors,126,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-25 Brunswick Provider
+1545,532319,German Bank ,2023-09-28,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-28 Brunswick Provider
+1546,569079,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1547,564391,German Bank,2023-09-29,Brunswick Provider ,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider 
+1548,528796,German Bank ,2023-09-29,Brunswick Provider,Seiner,Connors,82,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-09-29 Brunswick Provider
+1549,557922,Wolves ,2023-10-02,Canada 100,Seiner,Connors,58,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-02 Canada 100
+1550,556606,Wolves ,2023-10-02,Canada 100,Seiner,Connors,58,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-02 Canada 100
+1551,529172,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1552,603008,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1553,523371,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1554,529315,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1555,556565,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1556,529172,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1557,533762,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1558,521558,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1559,593730,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1560,533753,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1561,529109,White Head ,2023-10-03,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Brunswick Provider
+1562,529367,White Head ,2023-10-03,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-03 Canada 100
+1563,524121,White Head ,2023-10-04,Fundy Monarch,Seiner,Connors,123,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Fundy Monarch
+1564,524164,White Head ,2023-10-04,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Brunswick Provider
+1565,557866,White Head ,2023-10-04,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Brunswick Provider
+1566,529282,White Head ,2023-10-04,Brunswick Provider,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Brunswick Provider
+1567,533981,White Head ,2023-10-04,Brunswick Provider ,Seiner,Connors,56,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Brunswick Provider 
+1568,565378,White Head ,2023-10-04,Fundy Monarch,Seiner,Connors,123,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Fundy Monarch
+1569,529014,White Head ,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1570,533777,White Head,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1571,529298,White Head ,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1572,572173,White Head ,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1573,556931,White Head ,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1574,529311,White Head ,2023-10-04,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Canada 100
+1575,529230,White Head ,2023-10-04,Fundy Monarch,Seiner,Connors,123,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-04 Fundy Monarch
+1576,487600,White Head,2023-10-05,Canada 100,Seiner,Connors,63,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-05 Canada 100
+1577,567512,White Head,2023-10-05,Fundy Monarch,Seiner,Connors,123,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-05 Fundy Monarch
+1578,574029,White Head,2023-10-05,Fundy Monarch,Seiner,Connors,123,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-05 Fundy Monarch
+1579,573468,German Bank ,2023-10-11,Fundy Monarch,Seiner,Connors,186,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-11 Fundy Monarch
+1580,564309,German Bank ,2023-10-11,Fundy Monarch,Seiner,Connors,186,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-11 Fundy Monarch
+1581,533779,White Head,2023-10-12,Brunswick Provider,Seiner,Connors,118,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-12 Brunswick Provider
+1582,529159,White Head,2023-10-12,Brunswick Provider,Seiner,Connors,118,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-12 Brunswick Provider
+1583,564618,White Head,2023-10-12,Brunswick Provider ,Seiner,Connors,31,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-12 Brunswick Provider 
+1584,569479,White Head,2023-10-19,Brunswick Provider ,Seiner,Connors,31,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-19 Brunswick Provider 
+1585,533766,White Head,2023-10-19,Brunswick Provider ,Seiner,Connors,31,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-19 Brunswick Provider 
+1586,487835,White Head,2023-10-13,Fundy Monarch,Seiner,Connors,46,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Fundy Monarch
+1587,487541,White Head,2023-10-13,Fundy Monarch,Seiner,Connors,46,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Fundy Monarch
+1588,585870,White Head,2023-10-13,Fundy Monarch,Seiner,Connors,46,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Fundy Monarch
+1589,529268,White Head,2023-10-13,Fundy Monarch,Seiner,Connors,46,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Fundy Monarch
+1590,557790,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1591,602821,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1592,564219,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1593,564220,White Head,2023-10-13,Brunswick Provider ,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider 
+1594,529390,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1595,533778,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1596,529251,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1597,529291,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1598,529193,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1599,563743,White Head,2023-10-13,Brunswick Provider,Seiner,Connors,96,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-13 Brunswick Provider
+1600,564854,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1601,529272,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1602,529121,Wolves ,2023-10-16,Fundy Monarch,Seiner,Connors,143,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Fundy Monarch
+1603,533931,Wolves ,2023-10-16,Fundy Monarch,Seiner,Connors,143,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Fundy Monarch
+1604,557814,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1605,505237,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1606,565484,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1607,593126,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1608,497211,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1609,524208,White Head,2023-10-16,Brunswick Provider ,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider 
+1610,521492,White Head ,2023-10-16,Brunswick Provider ,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider 
+1611,533937,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1612,521788,White Head,2023-10-16,Brunswick Provider ,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider 
+1613,505150,White Head ,2023-10-16,Brunswick Provider ,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider 
+1614,529286,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1615,523345,White Head,2023-10-16,Brunswick Provider,Seiner,Connors,110,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-16 Brunswick Provider
+1616,529158,White Head,2023-10-17,Brunswick Provider ,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-17 Brunswick Provider 
+1617,529289,White Head,2023-10-17,Brunswick Provider ,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-17 Brunswick Provider 
+1618,509019,White Head,2023-10-17,Brunswick Provider ,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-17 Brunswick Provider 
+1619,524053,White Head,2023-10-18,Canada 100,Seiner,Connors,62,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Canada 100
+1620,473474,White Head,2023-10-18,Canada 100,Seiner,Connors,62,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Canada 100
+1621,577882,White Head,2023-10-18,Canada 100,Seiner,Connors,62,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Canada 100
+1622,560195,White Head,2023-10-18,Canada 100,Seiner,Connors,62,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Canada 100
+1623,529221,White Head,2023-10-18,Canada 100,Seiner,Connors,62,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Canada 100
+1624,533772,White Head,2023-10-18,Brunswick Provider,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Brunswick Provider
+1625,498195,White Head,2023-10-18,Brunswick Provider,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Brunswick Provider
+1626,521981,White Head,2023-10-18,Brunswick Provider,Seiner,Connors,115,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-18 Brunswick Provider
+1627,533867,White Head,2023-10-20,Brunswick Provider,Seiner,Connors,109,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-20 Brunswick Provider
+1628,556552,North West Ledge,2023-10-19,Fundy Monarch,Seiner,Connors,125,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-19 Fundy Monarch
+1629,529254,North West Ledge,2023-10-19,Fundy Monarch,Seiner,Connors,125,Connor Bros Copy of Fish Tag Data 2023.xlsx,2023-10-19 Fundy Monarch
+1630,591121,Scots Bay (Area 8),2023-06-08,SEALIFE II / MELISSA MIX,SEINER,Comeau,45,Comeau Tag Retrievals 2023.xlsx,2023-06-08 SEALIFE II / MELISSA MIX
+1631,593181,AREA 25 GM BANKS,2023-06-21,LADY JANICE II,SEINER,Comeau,10,Comeau Tag Retrievals 2023.xlsx,2023-06-21 LADY JANICE II
+1632,593841,AREA 1 GRAND MANAN,2023-07-07,LADY JANICE II,SEINER,Comeau,125,Comeau Tag Retrievals 2023.xlsx,2023-07-07 LADY JANICE II
+1633,509990,AREA 1 GRAND MANAN,2023-07-11,LADY JANICE II,SEINER,Comeau,20,Comeau Tag Retrievals 2023.xlsx,2023-07-11 LADY JANICE II
+1634,556394,AREA 1 GRAND MANAN,2023-07-11,LADY JANICE II,SEINER,Comeau,20,Comeau Tag Retrievals 2023.xlsx,2023-07-11 LADY JANICE II
+1635,558924,AREA 1 GRAND MANAN,2023-07-11,LADY JANICE II,SEINER,Comeau,20,Comeau Tag Retrievals 2023.xlsx,2023-07-11 LADY JANICE II
+1636,558827,AREA 1 GRAND MANAN,2023-07-19,LADY MELISSA,SEINER,Comeau,60,Comeau Tag Retrievals 2023.xlsx,2023-07-19 LADY MELISSA
+1637,558935,AREA 1 GRAND MANAN,2023-07-19,LADY MELISSA,SEINER,Comeau,60,Comeau Tag Retrievals 2023.xlsx,2023-07-19 LADY MELISSA
+1638,559893,AREA 1 GRAND MANAN,2023-07-19,LADY MELISSA,SEINER,Comeau,60,Comeau Tag Retrievals 2023.xlsx,2023-07-19 LADY MELISSA
+1639,475395,AREA 1 GRAND MANAN,2023-07-19,MELISSA / SEALIFE II MIX,SEINER,Comeau,95,Comeau Tag Retrievals 2023.xlsx,2023-07-19 MELISSA / SEALIFE II MIX
+1640,557233,AREA 1 GRAND MANAN,2023-07-19,MELISSA / SEALIFE II MIX,SEINER,Comeau,95,Comeau Tag Retrievals 2023.xlsx,2023-07-19 MELISSA / SEALIFE II MIX
+1641,501859,AREA 1 GRAND MANAN,2023-07-20,LADY MELISSA,SEINER,Comeau,46,Comeau Tag Retrievals 2023.xlsx,2023-07-20 LADY MELISSA
+1642,559752,AREA 1 GRAND MANAN,2023-07-20,LADY MELISSA,SEINER,Comeau,46,Comeau Tag Retrievals 2023.xlsx,2023-07-20 LADY MELISSA
+1643,562360,AREA 1 GRAND MANAN,2023-07-20,LADY MELISSA,SEINER,Comeau,46,Comeau Tag Retrievals 2023.xlsx,2023-07-20 LADY MELISSA
+1644,549606,AREA 1 GRAND MANAN,2023-07-20,MELISSA / SEALIFE II MIX,SEINER,Comeau,63,Comeau Tag Retrievals 2023.xlsx,2023-07-20 MELISSA / SEALIFE II MIX
+1645,558199,AREA 1 GRAND MANAN,2023-07-20,MELISSA / SEALIFE II MIX,SEINER,Comeau,63,Comeau Tag Retrievals 2023.xlsx,2023-07-20 MELISSA / SEALIFE II MIX
+1646,563867,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1647,564044,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1648,564208,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1649,564311,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1650,564326,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1651,564381,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1652,564385,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1653,564409,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1654,564548,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1655,572488,Scots Bay (Area 8),2023-08-29,LADY MELISSA,SEINER,Comeau,34,Comeau Tag Retrievals 2023.xlsx,2023-08-29 LADY MELISSA
+1656,564004,Scots Bay (Area 8),2023-08-29,SEALIFE II,SEINER,Comeau,17,Comeau Tag Retrievals 2023.xlsx,2023-08-29 SEALIFE II
+1657,572293,Scots Bay (Area 8),2023-08-29,SEALIFE II,SEINER,Comeau,17,Comeau Tag Retrievals 2023.xlsx,2023-08-29 SEALIFE II
+1658,572780,German Bank (Area 7),2023-08-30,LADY JANICE II,SEINER,Comeau,63,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY JANICE II
+1659,471488,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1660,471497,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1661,471555,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1662,471570,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1663,471600,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1664,471601,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1665,471608,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1666,471619,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1667,471682,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1668,564012,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1669,564016,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1670,564043,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1671,564047,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1672,564052,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1673,564083,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1674,564111,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1675,564331,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1676,564335,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1677,564348,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1678,564373,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1679,564374,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1680,564379,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1681,564384,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1682,564407,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1683,564408,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1684,564410,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1685,564441,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1686,564451,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1687,564458,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1688,564474,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1689,564478,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1690,564481,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1691,564494,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1692,564500,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1693,564513,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1694,564550,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1695,564553,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1696,564555,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1697,564571,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1698,564575,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1699,564578,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1700,564579,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1701,564595,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1702,564597,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1703,564605,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1704,564611,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1705,564630,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1706,564632,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1707,564635,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1708,564647,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1709,564651,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1710,564659,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1711,564706,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1712,564710,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1713,564722,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1714,564744,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1715,564747,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1716,564748,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1717,564763,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1718,564778,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1719,564780,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1720,564785,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1721,564809,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1722,564813,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1723,564814,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1724,564826,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1725,564838,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1726,564879,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1727,564895,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1728,564904,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1729,564941,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1730,564943,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1731,564951,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1732,564967,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1733,564978,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1734,564979,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1735,564980,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1736,569033,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1737,569034,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1738,569050,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1739,569054,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1740,569151,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1741,572406,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1742,572412,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1743,572419,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1744,572438,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1745,572460,Scots Bay (Area 8),2023-08-30,LADY MELISSA,SEINER,Comeau,74,Comeau Tag Retrievals 2023.xlsx,2023-08-30 LADY MELISSA
+1746,577051,German Bank (Area 7),2023-09-01,LADY JANICE II,SEINER,Comeau,84,Comeau Tag Retrievals 2023.xlsx,2023-09-01 LADY JANICE II
+1747,577064,German Bank (Area 7),2023-09-01,LADY JANICE II,SEINER,Comeau,84,Comeau Tag Retrievals 2023.xlsx,2023-09-01 LADY JANICE II
+1748,577204,German Bank (Area 7),2023-09-05,LADY JANICE II,SEINER,Comeau,78,Comeau Tag Retrievals 2023.xlsx,2023-09-05 LADY JANICE II
+1749,577295,German Bank (Area 7),2023-09-05,SEALIFE II,SEINER,Comeau,37,Comeau Tag Retrievals 2023.xlsx,2023-09-05 SEALIFE II
+1750,567373,AREA 1 GRAND MANAN,2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1751,567462,German Bank (Area 7),2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1752,567466,German Bank (Area 7),2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1753,567515,German Bank (Area 7),2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1754,567641,AREA 1 GRAND MANAN,2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1755,567648,AREA 1 GRAND MANAN,2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1756,577351,German Bank (Area 7),2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1757,577577,AREA 1 GRAND MANAN,2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1758,56741?,German Bank (Area 7),2023-09-06,LADY MELISSA,SEINER,Comeau,148,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA
+1759,564345,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1760,564445,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1761,567112,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1762,567213,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1763,567268,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1764,569057,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1765,569499,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1766,577842,Scots Bay (Area 8),2023-09-07,LADY JANICE II,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY JANICE II
+1767,564787,German Bank (Area 7),2023-09-07,LADY MELISSA,SEINER,Comeau,147,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY MELISSA
+1768,567435,German Bank (Area 7),2023-09-07,LADY MELISSA,SEINER,Comeau,94,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY MELISSA
+1769,567650,German Bank (Area 7),2023-09-07,LADY MELISSA,SEINER,Comeau,94,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY MELISSA
+1770,577420,German Bank (Area 7),2023-09-07,LADY MELISSA,SEINER,Comeau,94,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY MELISSA
+1771,577602,German Bank (Area 7),2023-09-07,LADY MELISSA,SEINER,Comeau,94,Comeau Tag Retrievals 2023.xlsx,2023-09-07 LADY MELISSA
+1772,564652,Scots Bay (Area 8),2023-09-07,SEALIFE II,SEINER,Comeau,29,Comeau Tag Retrievals 2023.xlsx,2023-09-07 SEALIFE II
+1773,577774,Scots Bay (Area 8),2023-09-07,SEALIFE II,SEINER,Comeau,29,Comeau Tag Retrievals 2023.xlsx,2023-09-07 SEALIFE II
+1774,471559,Scots Bay (Area 8),2023-09-12,LADY JANICE II,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY JANICE II
+1775,530065,Scots Bay (Area 8),2023-09-12,LADY JANICE II,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY JANICE II
+1776,530103,Scots Bay (Area 8),2023-09-12,LADY JANICE II,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY JANICE II
+1777,578820,Scots Bay (Area 8),2023-09-12,LADY JANICE II,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY JANICE II
+1778,578830,Scots Bay (Area 8),2023-09-12,LADY JANICE II,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY JANICE II
+1779,475910,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1780,530064,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1781,530332,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1782,569661,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1783,569808,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1784,569817,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1785,569831,Scots Bay (Area 8),2023-09-12,LADY MELISSA,SEINER,Comeau,38,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA
+1786,530023,Scots Bay (Area 8),2023-09-12,LADY MELISSA /JANICE MIX,SEINER,Comeau,80,Comeau Tag Retrievals 2023.xlsx,2023-09-12 LADY MELISSA /JANICE MIX
+1787,528778,Seal Island,2023-09-13,LADY MELISSA,SEINER,Comeau,136,Comeau Tag Retrievals 2023.xlsx,2023-09-13 LADY MELISSA
+1788,532366,German Bank (Area 7),2023-09-15,LADY MELISSA,SEINER,Comeau,171,Comeau Tag Retrievals 2023.xlsx,2023-09-15 LADY MELISSA
+1789,574037,German Bank (Area 7),2023-09-15,LADY MELISSA,SEINER,Comeau,17,Comeau Tag Retrievals 2023.xlsx,2023-09-15 LADY MELISSA
+1790,574087,German Bank (Area 7),2023-09-15,SEALIFE II,SEINER,Comeau,65,Comeau Tag Retrievals 2023.xlsx,2023-09-15 SEALIFE II
+1791,567461,Seal Island,2023-09-18,JANICE/SEALIFE II MIXED,SEINER,Comeau,105,Comeau Tag Retrievals 2023.xlsx,2023-09-18 JANICE/SEALIFE II MIXED
+1792,574074,Seal Island,2023-09-18,LADY JANICE II,SEINER,Comeau,69,Comeau Tag Retrievals 2023.xlsx,2023-09-18 LADY JANICE II
+1793,477062,Seal Island,2023-09-19,SEALIFE II,SEINER,Comeau,99,Comeau Tag Retrievals 2023.xlsx,2023-09-19 SEALIFE II
+1794,528281,Seal Island,2023-09-19,SEALIFE II,SEINER,Comeau,99,Comeau Tag Retrievals 2023.xlsx,2023-09-19 SEALIFE II
+1795,530634,Seal Island,2023-09-19,SEALIFE II,SEINER,Comeau,99,Comeau Tag Retrievals 2023.xlsx,2023-09-19 SEALIFE II
+1796,573913,German Bank (Area 7),2023-09-22,SEALIFE II,SEINER,Comeau,67,Comeau Tag Retrievals 2023.xlsx,2023-09-22 SEALIFE II
+1797,574420,German Bank (Area 7),2023-09-22,SEALIFE II,SEINER,Comeau,67,Comeau Tag Retrievals 2023.xlsx,2023-09-22 SEALIFE II
+1798,477238,Seal Island,2023-09-25,LADY JANICE II,SEINER,Comeau,70,Comeau Tag Retrievals 2023.xlsx,2023-09-25 LADY JANICE II
+1799,530338,Scots Bay (Area 8),2023-09-26,LADY MELISSA,SEINER,Comeau,43,Comeau Tag Retrievals 2023.xlsx,2023-09-26 LADY MELISSA
+1800,567759,Scots Bay (Area 8),2023-09-26,LADY MELISSA,SEINER,Comeau,43,Comeau Tag Retrievals 2023.xlsx,2023-09-26 LADY MELISSA
+1801,567848,Scots Bay (Area 8),2023-09-26,LADY MELISSA,SEINER,Comeau,43,Comeau Tag Retrievals 2023.xlsx,2023-09-26 LADY MELISSA
+1802,529022,AREA 1 GRAND MANAN,2023-10-02,LADY MELISSA,SEINER,Comeau,42,Comeau Tag Retrievals 2023.xlsx,2023-10-02 LADY MELISSA
+1803,529626,German Bank (Area 7),2023-10-06,LADY MELISSA,SEINER,Comeau,17,Comeau Tag Retrievals 2023.xlsx,2023-10-06 LADY MELISSA
+1804,575759,AREA 25 GM BANKS,2023-10-16,LADY MELISSA,SEINER,Comeau,91,Comeau Tag Retrievals 2023.xlsx,2023-10-16 LADY MELISSA
