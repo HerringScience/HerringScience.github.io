@@ -5,9 +5,9 @@ rm(list = ls())
 surv="GB" #SB or GB or SI
 surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2024"
-surv.no="6"
+surv.no="7"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
@@ -18,8 +18,8 @@ SB1= 476#SB main area
 SB2= 0 #SB north area
 SB3= 0 #SB east area
 
-GB1 = 826 #GB main area
-GB2 = 287 #Seal Island area
+GB1 = 693 #GB main area
+GB2 = 233 #Seal Island area
 GB3 = 0 #Ad-hoc school survey area
 
 ##
@@ -119,7 +119,8 @@ if(Tow == "Y"){
   TowData$DateTime = TowData$Time
   
 #Changed to UTC  
-  TowData$DateTime = TowData$DateTime-hours(3)
+  #TowData$DateTime = TowData$DateTime-hours(3) #Summer daylight savings
+  TowData$DateTime = TowData$DateTime-hours(4) #Fall daylight savings
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Time = substr(TowData$DateTime,12,19)
   TowData$Time = hms::as_hms(TowData$Time)

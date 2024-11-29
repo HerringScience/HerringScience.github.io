@@ -13,7 +13,7 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 year = "2024"
-surv.no = "6"
+surv.no = "7"
 hightide = "2024-09-23 16:33:00" #for Scots Bay only
 
 ```
@@ -229,7 +229,8 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "The Morning Star was able to complete two transects each in the German Bank and Seal Island Box. The Lady Melissa completed two transects in each the German Bank and Seal Island Box, but was unable to record for the two transects in the German Bank box by an unknown cause. The Brunswick Provider completed two transects in the German Bank box and did not complete their transects in the Seal Island box.",
+                #"All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
