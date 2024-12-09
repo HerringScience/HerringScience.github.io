@@ -34,7 +34,7 @@ Tags = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io
 TagReturns2021 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2021.csv"))
 TagReturns2022 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2022.csv"))
 TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2023.csv"))
-TagReturns2024 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2023.csv"))
+TagReturns2024 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2024.csv"))
 
 
 #Load all of Canada data and extract Atlantic provinces
@@ -99,12 +99,13 @@ polySI = as.PolySet(SUA, projection="LL")
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
 tags = read.csv("TaggingEvents.csv")
 
-Tag1 = tags %>%
-    filter(
+# Tag1 = tags %>%
+#     filter(
 
 
-Tag1 = Tag1 %>%
-  dplyr::select(Tag_Num, Date, Lon, Lat, Vessel)
+#Tag1 = Tag1 %>%
+Tags = Tags %>% 
+ dplyr::select(Tag_Num, Date, Lon, Lat, Vessel)
 
 CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
 proj4string(CP6) <- CRS(proj4string(NBNS))
