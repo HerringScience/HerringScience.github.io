@@ -18,7 +18,7 @@ SB1= 476#SB main area
 SB2= 0 #SB north area
 SB3= 0 #SB east area
 
-GB1 = 693 #GB main area
+GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
 GB3 = 0 #Ad-hoc school survey area
 
