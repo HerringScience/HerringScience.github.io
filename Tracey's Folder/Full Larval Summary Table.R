@@ -84,45 +84,45 @@ LarvalSum <- unique(LarvalSum)
 
   
 #Saving as .csv file. Saved to Main Data on Github. Should change to Larval Data in Source Data.
-  write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum.csv" )
+ # write.csv(LarvalSum,"C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum.csv" )
 #  write.csv(Larval, "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv")
 #  write.csv(Larval, "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Full Larval.csv")
 
 
 #Used Boxplot to more accurately see the bulk of abundance. Hard to differentiate individuals and ids in scatterplot.
   
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat(i, "\n")
-  cat("\n")
-
-print(ggplot(subset(Larval, Ground == "SB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
-        geom_boxplot(aes(colour = id)) +
-        scale_x_discrete(name = "Survey Number", drop = FALSE) +
-        ylab("Length (mm)"))
-      cat("\n")
-}
-
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat(i, "\n")
-  cat("\n")
-  
-  print(ggplot(subset(Larval, Ground == "GB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
-          geom_boxplot(aes(colour = id)) +
-          scale_x_discrete(name = "Survey Number", drop = FALSE) +
-          ylab("Length (mm)"))
-  cat("\n")
-}
-
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat(i, "\n")
-  cat("\n")
-  
-  print(ggplot(subset(Larval, Ground == "SI" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
-          geom_boxplot(aes(colour = id)) +
-          scale_x_discrete(name = "Survey Number", drop = FALSE) +
-          ylab("Length (mm)"))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat(i, "\n")
+#   cat("\n")
+# 
+# print(ggplot(subset(Larval, Ground == "SB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+#         geom_boxplot(aes(colour = id)) +
+#         scale_x_discrete(name = "Survey Number", drop = FALSE) +
+#         ylab("Length (mm)"))
+#       cat("\n")
+# }
+# 
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat(i, "\n")
+#   cat("\n")
+#   
+#   print(ggplot(subset(Larval, Ground == "GB" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+#           geom_boxplot(aes(colour = id)) +
+#           scale_x_discrete(name = "Survey Number", drop = FALSE) +
+#           ylab("Length (mm)"))
+#   cat("\n")
+# }
+# 
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat(i, "\n")
+#   cat("\n")
+#   
+#   print(ggplot(subset(Larval, Ground == "SI" & Year == i), aes(x=Survey.No, y=Lengthmm)) +
+#           geom_boxplot(aes(colour = id)) +
+#           scale_x_discrete(name = "Survey Number", drop = FALSE) +
+#           ylab("Length (mm)"))
+#   cat("\n")
+# }
