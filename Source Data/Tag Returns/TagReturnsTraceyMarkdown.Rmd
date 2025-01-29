@@ -10,7 +10,7 @@ knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/Gi
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
 
-
+install.packages("geonames")
 library(cli)
 library(lubridate)
 library(reprex)
