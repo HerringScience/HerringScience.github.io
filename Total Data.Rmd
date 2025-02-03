@@ -1164,9 +1164,20 @@ Table <- TagReturnsGB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1205,13 +1216,13 @@ kbl(SummaryTable, col.names=c("Category", "Fishing Area", "Catch Area", "Average
 
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
 #   kable_paper("striped", full_width = F)
-# 
-# SummaryTable <- TagReturnsGB %>%
-#   group_by(TagLocation, category) %>%
-#   count()
-# 
-# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+
+SummaryTable <- TagReturnsGB %>%
+  group_by(TagLocation, category) %>%
+  count()
+
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
+  kable_paper("striped", full_width = F)
 
 ```
 
@@ -1263,9 +1274,18 @@ Table <- TagReturnsNBC %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
  
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1305,13 +1325,13 @@ kbl(SummaryTable, col.names=c("Category", "Fishing Area", "Catch Area", "Average
 
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
 #   kable_paper("striped", full_width = F)
-# 
-# SummaryTable <- TagReturnsNBC %>%
-#   group_by(TagLocation, category) %>%
-#   count()
-# 
-# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+
+SummaryTable <- TagReturnsNBC %>%
+  group_by(TagLocation, category) %>%
+  count()
+
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
+  kable_paper("striped", full_width = F)
 
 ```
 
@@ -1361,6 +1381,15 @@ Table <- TagReturnsGM %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
 
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
 #   kable_paper("striped", full_width = F)
@@ -1402,13 +1431,13 @@ kbl(SummaryTable, col.names=c("Category", "Fishing Area", "Catch Area", "Average
 
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
 #   kable_paper("striped", full_width = F)
-# 
-# SummaryTable <- TagReturnsGM %>%
-#   group_by(TagLocation, category) %>%
-#   count()
-# 
-# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+
+SummaryTable <- TagReturnsGM %>%
+  group_by(TagLocation, category) %>%
+  count()
+
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
+  kable_paper("striped", full_width = F)
 
 ```
 
@@ -1459,8 +1488,16 @@ Table <- TagReturnsGMB %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1488,9 +1525,18 @@ Table <- TagReturnsGMB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(TableGMB, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGMB %>%
   group_by(TagLocation, category) %>%
@@ -1547,9 +1593,18 @@ Table <- TagReturnsLI %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1577,10 +1632,20 @@ Table <- TagReturnsLI %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(TableLI, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
 
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+# 
 SummaryTable <- TagReturnsLI %>%
   group_by(TagLocation, category) %>%
   count()
@@ -1636,8 +1701,16 @@ Table <- TagReturnsSI %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1665,10 +1738,20 @@ Table <- TagReturnsSI %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(TableSI, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
 
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+# 
 SummaryTable <- TagReturnsSI %>%
   group_by(TagLocation, category) %>%
   count()
@@ -1725,8 +1808,15 @@ Table <- TagReturnsSB %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1754,10 +1844,20 @@ Table <- TagReturnsSB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(TableSB, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
 
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+# 
 SummaryTable <- TagReturnsSB %>%
   group_by(TagLocation, category) %>%
   count()
@@ -1813,9 +1913,19 @@ Table <- TagReturnsYB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1843,9 +1953,19 @@ Table <- TagReturnsYB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsYB %>%
   group_by(TagLocation, category) %>%
@@ -1903,13 +2023,23 @@ Table <- TagReturnsT %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
-TagReturnsT <- subset(TagReturnsT, subset = (category != "1"))
+TagReturnsT <- subset(Table, subset = (category != "1"))
 
 ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
@@ -1933,9 +2063,19 @@ Table <- TagReturnsT %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(TagReturnsT, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsT %>%
   group_by(TagLocation, category) %>%
@@ -1993,9 +2133,18 @@ Table <- TagReturnsBB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -2023,9 +2172,9 @@ Table <- TagReturnsBB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsBB %>%
   group_by(TagLocation, category) %>%
@@ -2081,9 +2230,18 @@ Table <- TagReturnsSWG %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 #Not sure why an NA has popped up
@@ -2113,8 +2271,8 @@ Table <- TagReturnsSWG %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSWG %>%
   group_by(TagLocation, category) %>%
@@ -2171,9 +2329,18 @@ Table <- TagReturnsGDL %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -2202,8 +2369,8 @@ Table <- TagReturnsGDL %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGDL %>%
   group_by(TagLocation, category) %>%
@@ -2261,8 +2428,18 @@ Table <- TagReturnsL %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- SummaryTable %>%
+  group_by(category) %>%
+  mutate(amountInCategory = length(category))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+
+kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -2291,8 +2468,8 @@ Table <- TagReturnsL %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsL %>%
   group_by(TagLocation, category) %>%
@@ -2327,6 +2504,8 @@ GearTable <- TagReturns %>%
 
 GearTable$Count = 1
 GearTable<-subset(GearTable, subset = (GearType != "N/A"))
+GearTable$GearType [which(GearTable$GearType == "SEINER")] <- "Purse Seine"
+GearTable$GearType [which(GearTable$GearType == "Seiner")] <- "Purse Seine"
 
 ggplot(GearTable, aes(x=GearType, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
@@ -2334,7 +2513,7 @@ ggplot(GearTable, aes(x=GearType, y = Count, fill = factor(category))) +
   ggtitle("Tag Return") +
   labs(fill = "Category")
 
-GearWithout1 <- subset(GearTable, subset = (category != 1))
+GearWithout1<- subset(GearTable, subset = (category != 1))
 
 ggplot(GearWithout1, aes(x=GearType, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
@@ -2348,6 +2527,7 @@ SummaryTable <- GearWithout1 %>%
 
 kbl(SummaryTable, col.names = c("Gear Type", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
 
 
 ```
