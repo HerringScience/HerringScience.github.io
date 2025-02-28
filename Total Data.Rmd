@@ -2039,7 +2039,7 @@ kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Avera
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
-TagReturnsT <- subset(Table, subset = (category != "1"))
+TagReturnsT <- subset(TagReturnsT, subset = (category != "1"))
 
 ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
@@ -2063,7 +2063,7 @@ Table <- TagReturnsT %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-SummaryTable <- subset(TagReturnsT, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
+SummaryTable <- subset(Table, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays, TAG_NUMBER, No.InCategory))
 SummaryTable <- SummaryTable %>%
   group_by(category) %>%
   mutate(amountInCategory = length(category))
