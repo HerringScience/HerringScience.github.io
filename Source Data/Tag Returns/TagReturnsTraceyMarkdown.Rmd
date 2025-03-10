@@ -9,8 +9,7 @@ year= substr(Sys.Date(),1,4)
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
-
-install.packages("geonames")
+install.packages('RMySQL', repos='http://cran.us.r-project.org')
 library(cli)
 library(lubridate)
 library(reprex)
@@ -464,33 +463,42 @@ TagReturnsGB$TagLocation <- with(TagReturnsGB, ifelse(TagReturnsGB$FishingGround
 
 TagReturnsGB  <- subset(TagReturnsGB, TagLocation != "Other")
 
-ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Category", y="Count") +
-        ggtitle("German Bank Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsGB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsGB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
+# ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Category", y="Count") +
+#         ggtitle("German Bank Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsGB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+
 #Removed category 1 larvae - any caught within 2 days of tagging.
+
+
 
 TagReturnsGB <- subset(TagReturnsGB, subset = (category != "1"))
 
@@ -502,23 +510,23 @@ ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) +
         ggtitle("German Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsGB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsGB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGB %>%
   group_by(TagLocation, category) %>%
@@ -555,31 +563,38 @@ TagReturnsNBC$TagLocation <- with(TagReturnsNBC, ifelse(TagReturnsNBC$FishingGro
 
 TagReturnsNBC  <- subset(TagReturnsNBC, TagLocation != "Other")
 
-ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch location", y="Number of Events") +
-        ggtitle("NB Coastal Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsNBC %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsNBC %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch location", y="Number of Events") +
+#         ggtitle("NB Coastal Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsNBC %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
  
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -593,24 +608,24 @@ ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) +
         scale_y_continuous(breaks= pretty_breaks())
 
 
-Table <- TagReturnsNBC %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
+# Table <- TagReturnsNBC %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsNBC %>%
   group_by(TagLocation, category) %>%
@@ -645,31 +660,38 @@ TagReturnsGM$TagLocation <- with(TagReturnsGM, ifelse(TagReturnsGM$FishingGround
                                                                                                                                      ))))))))))))))
 TagReturnsGM  <- subset(TagReturnsGM, TagLocation != "Other")
 
-ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Grand Manan Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsGM %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsGM %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Grand Manan Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsGM %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -682,24 +704,24 @@ ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) +
         ggtitle("Grand Manan Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsGM %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsGM %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGM %>%
   group_by(TagLocation, category) %>%
@@ -734,31 +756,38 @@ TagReturnsGMB$TagLocation <- with(TagReturnsGMB, ifelse(TagReturnsGMB$FishingGro
                                                                                                                                    ))))))))))))))
 TagReturnsGMB <- subset(TagReturnsGMB, TagLocation != "Other")
 
-ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Grand Manan Banks Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsGMB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsGMB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Grand Manan Banks Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsGMB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -771,24 +800,24 @@ ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) +
         ggtitle("Grand Manan Banks Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsGMB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsGMB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGMB %>%
   group_by(TagLocation, category) %>%
@@ -823,31 +852,38 @@ TagReturnsLI$TagLocation <- with(TagReturnsLI, ifelse(TagReturnsLI$FishingGround
 
 TagReturnsLI <- subset(TagReturnsLI, TagLocation != "Other")
 
-ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Long Island Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsLI %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsLI %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Long Island Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsLI %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -860,24 +896,24 @@ ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) +
         ggtitle("Long Island Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsLI %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsLI %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsLI %>%
   group_by(TagLocation, category) %>%
@@ -911,31 +947,38 @@ TagReturnsSI$TagLocation <- with(TagReturnsSI, ifelse(TagReturnsSI$FishingGround
 
 TagReturnsSI <- subset(TagReturnsSI, TagLocation != "Other")
 
-ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Seal Island Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsSI %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsSI %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Seal Island Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsSI %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -948,24 +991,24 @@ ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) +
         ggtitle("Seal Island Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsSI %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsSI %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSI %>%
   group_by(TagLocation, category) %>%
@@ -1000,31 +1043,39 @@ TagReturnsSB$TagLocation <- with(TagReturnsSB, ifelse(TagReturnsSB$FishingGround
 
 TagReturnsSB <- subset(TagReturnsSB, TagLocation != "Other")
 
-ggplot(data = TagReturnsSB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Scots Bay Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsSB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsSB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+
+# ggplot(data = TagReturnsSB, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Scots Bay Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsSB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1037,24 +1088,24 @@ ggplot(data = TagReturnsSB, (aes(TagLocation, fill = category))) +
         ggtitle("Scots Bay Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsSB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsSB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSB %>%
   group_by(TagLocation, category) %>%
@@ -1089,31 +1140,38 @@ TagReturnsYB$TagLocation <- with(TagReturnsYB, ifelse(TagReturnsYB$FishingGround
 
 TagReturnsYB <- subset(TagReturnsYB, TagLocation != "Other")
 
-ggplot(data = TagReturnsYB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Yankee Bank Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsYB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsYB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsYB, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Yankee Bank Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsYB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1126,24 +1184,24 @@ ggplot(data = TagReturnsYB, (aes(TagLocation, fill = category))) +
         ggtitle("Yankee Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsYB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsYB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsYB %>%
   group_by(TagLocation, category) %>%
@@ -1179,31 +1237,38 @@ TagReturnsT$TagLocation <- with(TagReturnsT, ifelse(TagReturnsT$FishingGround ==
 
 TagReturnsT <- subset(TagReturnsT, TagLocation != "Other")
 
-ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Trinity Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsT %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsT %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Trinity Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsT %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1216,24 +1281,24 @@ ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) +
         ggtitle("Trinity Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsT %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsT %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsT %>%
   group_by(TagLocation, category) %>%
@@ -1269,31 +1334,38 @@ TagReturnsBB$TagLocation <- with(TagReturnsBB, ifelse(TagReturnsBB$FishingGround
 
 TagReturnsBB <- subset(TagReturnsBB, TagLocation != "Other")
 
-ggplot(data = TagReturnsBB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Browns Bank Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsBB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsBB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsBB, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Browns Bank Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+# 
+# Table <- TagReturnsBB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1306,24 +1378,24 @@ ggplot(data = TagReturnsBB, (aes(TagLocation, fill = category))) +
         ggtitle("Browns Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsBB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsBB %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsBB %>%
   group_by(TagLocation, category) %>%
@@ -1357,31 +1429,38 @@ TagReturnsSWG$TagLocation <- with(TagReturnsSWG, ifelse(TagReturnsSWG$FishingGro
 
 TagReturnsSWG <- subset(TagReturnsSWG, TagLocation != "Other")
 
-ggplot(data = TagReturnsSWG, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("SW Grounds Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsSWG %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsSWG %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsSWG, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("SW Grounds Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsSWG %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 #Not sure why an NA has popped up
@@ -1395,24 +1474,24 @@ ggplot(data = TagReturnsSWG, (aes(TagLocation, fill = category))) +
         ggtitle("SW Grounds Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsSWG %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsSWG %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSWG %>%
   group_by(TagLocation, category) %>%
@@ -1447,31 +1526,41 @@ TagReturnsGDL$TagLocation <- with(TagReturnsGDL, ifelse(TagReturnsGDL$FishingGro
 
 TagReturnsGDL <- subset(TagReturnsGDL, TagLocation != "Other")
 
-ggplot(data = TagReturnsGDL, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Gannet Dry Ledge Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsGDL %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsGDL %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsGDL, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Gannet Dry Ledge Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsGDL %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+
+
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+
+
+
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1484,24 +1573,24 @@ ggplot(data = TagReturnsGDL, (aes(TagLocation, fill = category))) +
         ggtitle("Gannet Dry Ledget Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsGDL %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
+# Table <- TagReturnsGDL %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGDL %>%
   group_by(TagLocation, category) %>%
@@ -1537,30 +1626,37 @@ TagReturnsL$TagLocation <- with(TagReturnsL, ifelse(TagReturnsL$FishingGround ==
 
 TagReturnsL <- subset(TagReturnsL, TagLocation != "Other")
 
-ggplot(data = TagReturnsL, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Lurcher Tag Returns") +
-        scale_y_continuous(breaks= pretty_breaks())
+SummaryTable <- TagReturnsL %>%
+  group_by(TagLocation, category) %>%
+  count()
 
-Table <- TagReturnsL %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
+# ggplot(data = TagReturnsL, (aes(TagLocation, fill = category))) + 
+#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
+#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#         labs(x = "Tag to Catch Location", y="Number of Events") +
+#         ggtitle("Lurcher Tag Returns") +
+#         scale_y_continuous(breaks= pretty_breaks())
+
+# Table <- TagReturnsL %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1573,24 +1669,24 @@ ggplot(data = TagReturnsL, (aes(TagLocation, fill = category))) +
         ggtitle("Lurcher Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsL %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Table <- TagReturnsL %>% 
+#   dplyr::select(TAG_NUMBER,
+#                 category,
+#                 Date,
+#                 FishingGround,
+#                 DATE,
+#                 catchAREA,
+#                 timeDifference,
+#                 AvgtimeDifference,
+#                 timeDifferenceMin,
+#                 timeDifferenceMax,
+#                 No.InCategory,
+#                 No.ofSameNumberOfDays)%>%
+#   arrange(timeDifference)
+# 
+# 
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsL %>%
   group_by(TagLocation, category) %>%
