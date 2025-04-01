@@ -996,7 +996,7 @@ ggplot(SBGB, aes(x=category, y = Count, fill = factor(timeDifference))) +
 # SummaryTable <- unique(SummaryTable) %>%
 #   arrange(category)
 #German Bank Area 7 was a duplicate for everything, except for the catchAREA being German Bank Area 7 vs just German Bank. Removed.
-SummaryTable %>% filter(!row_number() %in% c(2))
+#
    
  
 kbl(SummaryTable, col.names=c("Category", "Fishing Ground", "Catch Area", "Average Age in Days", "Minimum Age in Days", "Maximum Age in Days", "Category Abundance"), align = "c")
