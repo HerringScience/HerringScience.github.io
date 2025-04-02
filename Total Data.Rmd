@@ -63,10 +63,8 @@ library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
-devtools::install_github("ropensci/rnaturalearthhires")
 
-install.packages('GADMTools')
-install.packages("Rtools44")
+
 
 
 state_prov <- rnaturalearth::ne_states(c("united states of america", "canada"))
@@ -145,7 +143,6 @@ LarvalSI = merge(LarvalSI, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "i
 
 Larval = merge(Larval, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 
-#options(geodata_default_path = "c:/you/geodata/path")
 #Land Data
 #can<-getData('GADM', country="CAN", level=1) #getData is discontinued
 can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
@@ -156,7 +153,8 @@ NBNS = can1
 
 
 #NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
+#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
+NBNS <- sf::st_as_sf(NBNS) 
 
 
 #For Tag Returns
@@ -219,28 +217,51 @@ r = data.frame( TAG_NUMBER=ids,
 
 #This part takes a really long time to run.
 
-# Assigning fishing grounds to sets. This takes  a few minutes to run through.
+# Assigning fishing grounds to sets. This takes  a few minutes to run through. This chunk between the ## is the slowest bit.
+#  for (i in 1:nrow(r)){
+#    test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"]) #
+#    test1 = TaggingEvents[test, ]
+#    r$Y[i] = test1$Lat
+#    r$X[i] = test1$Lon
+#    r$NB_Coastal[i] = point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE)
+#    r$Grand_Manan[i] = point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE)
+#    r$Grand_Manan_Banks[i] = point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE)
+#    r$Long_Island[i] = point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE)
+#    r$German_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE)
+#    r$Seal_Island[i] = point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE)
+#    r$Scots_Bay[i] = point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE)
+#    r$Yankee_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE)
+#    r$Trinity[i] = point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE)
+#    r$Browns_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE)
+#    r$SW_Grounds[i] = point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE)
+#    r$Gannet_Dry_Ledge[i] = point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE)
+#    r$Lurcher[i] = point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE)
+# 
+# }
+
 for (i in 1:nrow(r)){
   test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"])
   test1 = TaggingEvents[test, ]
   r$Y[i] = test1$Lat
   r$X[i] = test1$Lon
-  r$NB_Coastal[i] = point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE)
-  r$Grand_Manan[i] = point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE)
-  r$Grand_Manan_Banks[i] = point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE)
-  r$Long_Island[i] = point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE)
-  r$German_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE)
-  r$Seal_Island[i] = point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE)
-  r$Scots_Bay[i] = point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE)
-  r$Yankee_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE)
-  r$Trinity[i] = point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE)
-  r$Browns_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE)
-  r$SW_Grounds[i] = point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE)
-  r$Gannet_Dry_Ledge[i] = point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE)
-  r$Lurcher[i] = point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE)
-  
-}
-
+    with (test1, ifelse(r$Scots_Bay[i] == point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE), 1,
+          ifelse(r$German_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE), 1,
+          ifelse(r$Seal_Island[i] == point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE), 1,
+          ifelse(r$Gannet_Dry_Ledge[i] == point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE), 1,
+          ifelse(r$Grand_Manan_Banks[i] == point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE), 1,
+          ifelse(r$Long_Island[i] == point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE), 1, 
+          ifelse(r$Lurcher[i] == point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE), 1,
+          ifelse(r$SW_Grounds[i] == point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE), 1,
+          ifelse(r$NB_Coastal[i] == point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE), 1,
+          ifelse(r$Grand_Manan[i] == point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE), 1,
+          ifelse(r$Trinity[i] == point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE), 1,
+          ifelse(r$Yankee_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE), 1, 
+          ifelse(r$Browns_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE), 1,
+                 NA
+              ))))))))))))))
+          
+    }
+##
 
 # Ground                        
 r$FishingGround = NA        
@@ -249,7 +270,7 @@ r$FishingGround = with(r, ifelse(r$NB_Coastal > 0, "NB Coastal",
                           ifelse(r$Grand_Manan > 0, "Grand Manan",
                           ifelse(r$Grand_Manan_Banks > 0, "Grand Manan Banks",
                           ifelse(r$Long_Island > 0, "Long Island", 
-                           ifelse(r$German_Bank > 0, "German Bank", 
+                          ifelse(r$German_Bank > 0, "German Bank", 
                           ifelse(r$Seal_Island > 0, "Seal Island",
                           ifelse(r$Scots_Bay > 0, "Scots Bay",
                           ifelse(r$Yankee_Bank > 0, "Yankee Bank",
