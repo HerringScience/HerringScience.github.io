@@ -37,9 +37,18 @@ TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience
 TagReturns2024 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2024.csv"))
 
 
-#Load all of Canada data and extract Atlantic provinces
-can<-getData('GADM', country="CAN", level=1) # provinces
-NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+#Land Data
+#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
+can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
+us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
+can1 = rbind(can,us)
+NBNS = can1
+
+
+#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
+#NBNS <- sf::st_as_sf(NBNS) 
 
 #Set boundaries that you need to map 
 
@@ -97,7 +106,7 @@ polySI = as.PolySet(SUA, projection="LL")
 
 #Add tagging data
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
-tags = read.csv("TaggingEvents.csv")
+Tags = read.csv("TaggingEvents.csv")
 
 # Tag1 = tags %>%
 #     filter(
@@ -106,6 +115,10 @@ tags = read.csv("TaggingEvents.csv")
 #Tag1 = Tag1 %>%
 Tags = Tags %>% 
  dplyr::select(Tag_Num, Date, Lon, Lat, Vessel)
+
+#changing Date from character class to Date class
+Tags$Date <- ymd(Tags$Date)
+Tags$Year <- as.numeric(format(Tags$Date, "%Y"))
 
 CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
 proj4string(CP6) <- CRS(proj4string(NBNS))
@@ -116,7 +129,7 @@ GM <- crop(NBNS, CP6, byid=TRUE)
 ggplot(boxes,aes(x=X, y=Y)) + 
   geom_polygon(aes(colour = Box),fill= NA,lwd=1) + 
   geom_polygon(data=All,aes(x=long, y=lat, group=group)) + 
-  geom_point(data=TagReturns2024, aes(x=Lon, y=Lat, colour = Date), size=3) +
+  geom_point(data=Tags, aes(x=Lon, y=Lat, colour = as.factor(Year)), size=1) +
   coord_map() + 
   labs(x=NULL, y=NULL)
 
