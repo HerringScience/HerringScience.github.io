@@ -56,10 +56,10 @@ rel <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScie
 #rel <- read.csv("TaggingEvents.csv") 
 
 rel <-  rename("TAG_NUMBER"= 1,
-       "RELEASE_DATE"= 2,
-      "X" = 3,
-     "Y" = 4,
-    "RELEASE_VESSEL" = 5)
+               "RELEASE_DATE"= 2,
+               "X" = 3,
+               "Y" = 4,
+               "RELEASE_VESSEL" = 5)
 
 
 #### Load Relevant functions ####

@@ -59,7 +59,8 @@ TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/H
 names(TaggingEvents)[names(TaggingEvents) == 'Tag_Num'] <- 'TAG_NUMBER'
 
 rawReturn <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/rawReturn.csv"))
-relINFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/relINFO.csv"))
+#relINFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/relINFO.csv"))
+completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
 polysNAFO <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"))
 polysT <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv"))
 
@@ -466,6 +467,7 @@ TagReturnsGB  <- subset(TagReturnsGB, TagLocation != "Other")
 SummaryTable <- TagReturnsGB %>%
   group_by(TagLocation, category) %>%
   count()
+
 
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
