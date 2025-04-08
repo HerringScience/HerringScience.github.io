@@ -32,7 +32,6 @@ library(gridExtra)
 library(cowplot)
 library(dplyr)
 library(geonames)
-library(dplyr)
 library(mgcv)
 library(scales)
 
@@ -67,7 +66,7 @@ polysT <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github
                            
 #Combining complete Returns and Tagging events by tag number
 TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
-
+#rm(TagReturns)
 
 
 
@@ -197,11 +196,11 @@ TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
 
 TagReturns <- TagReturns %>%
   group_by(category) %>%
-  mutate(AvgtimeDifference = mean(timeDifference)) %>%
-  mutate(No.InCategory = length(category)) %>%
-  mutate(timeDifferenceMin =min(timeDifference)) %>%
-  mutate(timeDifferenceMax= max(timeDifference)) %>%
-  mutate_if(is.numeric, format, digits = 2)
+  mutate(AvgtimeDifference = mean(timeDifference)) #%>%
+  # mutate(No.InCategory = length(category)) %>%
+  #  mutate(timeDifferenceMin =min(timeDifference)) %>%
+  #  mutate(timeDifferenceMax= max(timeDifference)) %>%
+  #  mutate_if(is.numeric, format, digits = 2)
 
 ##
 
