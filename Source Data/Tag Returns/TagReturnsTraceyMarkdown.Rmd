@@ -468,9 +468,8 @@ SummaryTable <- TagReturnsGB %>%
   group_by(TagLocation, category) %>%
   count()
 
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
 # ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
 #         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
