@@ -181,6 +181,9 @@ TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
 TagReturns$category <- as.numeric(TagReturns$category)
 TagReturns$Count <- 1
 
+#When combining there are NAs that are being counted. This is to remove those.
+
+TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
 
 ```
 
@@ -190,14 +193,17 @@ TagReturns$Count <- 1
 
 
 ```{r, results = "asis", fig.align='center', class.output= "scoll-100"}
+##something is creating NAs in this chunk between ##
 
-TagReturns = TagReturns %>%
+TagReturns <- TagReturns %>%
   group_by(category) %>%
   mutate(AvgtimeDifference = mean(timeDifference)) %>%
   mutate(No.InCategory = length(category)) %>%
   mutate(timeDifferenceMin =min(timeDifference)) %>%
   mutate(timeDifferenceMax= max(timeDifference)) %>%
   mutate_if(is.numeric, format, digits = 2)
+
+##
 
 TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '133', '365', '715', '743'))
 
@@ -511,19 +517,19 @@ ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) +
         ggtitle("German Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-# Table <- TagReturnsGB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)
+Table <- TagReturnsGB %>%
+  dplyr::select(TAG_NUMBER,
+                category,
+                Date,
+                FishingGround,
+                DATE,
+                catchAREA,
+                timeDifference,
+                AvgtimeDifference,
+                timeDifferenceMin,
+                timeDifferenceMax,
+                No.InCategory,
+                No.ofSameNumberOfDays)
 # 
 # 
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
