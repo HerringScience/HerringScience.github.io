@@ -197,12 +197,12 @@ TagReturns <- TagReturns %>%
   group_by(category) %>%
   mutate(AvgtimeDifference = mean(timeDifference)) %>%
   mutate(No.InCategory = length(category)) %>%
-   mutate(timeDifferenceMin =min(timeDifference)) %>%
-   mutate(timeDifferenceMax= max(timeDifference)) %>%
-   mutate_if(is.numeric, format, digits = 2)
+  mutate(timeDifferenceMin = min(timeDifference)) %>%
+  mutate(timeDifferenceMax= max(timeDifference)) #%>%
+  #mutate_if(is.numeric, format, digits = 2)
 
 
-ggplot(data = TagReturns, (aes(category, fill = timeDifferenceMax))) + 
+ggplot(data = TagReturns,(aes(category, fill = timeDifferenceMax))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
         labs(x = "Category", y="Count") +
