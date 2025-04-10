@@ -192,19 +192,15 @@ TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
 
 
 ```{r, results = "asis", fig.align='center', class.output= "scoll-100"}
-##something is creating NAs in this chunk between ##
 
 TagReturns <- TagReturns %>%
   group_by(category) %>%
-  mutate(AvgtimeDifference = mean(timeDifference)) #%>%
-  # mutate(No.InCategory = length(category)) %>%
-  #  mutate(timeDifferenceMin =min(timeDifference)) %>%
-  #  mutate(timeDifferenceMax= max(timeDifference)) %>%
-  #  mutate_if(is.numeric, format, digits = 2)
+  mutate(AvgtimeDifference = mean(timeDifference)) %>%
+  mutate(No.InCategory = length(category)) %>%
+   mutate(timeDifferenceMin =min(timeDifference)) %>%
+   mutate(timeDifferenceMax= max(timeDifference)) %>%
+   mutate_if(is.numeric, format, digits = 2)
 
-##
-
-TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '133', '365', '715', '743'))
 
 ggplot(data = TagReturns, (aes(category, fill = timeDifferenceMax))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
@@ -218,7 +214,7 @@ TagReturns = TagReturns %>%
   mutate_if(is.numeric, format, digits = 2)
 
 
-Table <- TagReturns %>% 
+Table <- TagReturns %>%
   dplyr::select(category,
                 timeDifference,
                 AvgtimeDifference,
@@ -231,9 +227,9 @@ Table <- TagReturns %>%
  Table1 <- unique(Table) %>%
              arrange(category)
 
-kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F) %>%
-  kable_styling(full_width = F, fixed_thead = T, )
+# kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F) %>%
+#   kable_styling(full_width = F, fixed_thead = T, )
 
 Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
 
