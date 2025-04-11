@@ -199,14 +199,21 @@ TagReturns <- TagReturns %>%
   mutate(No.InCategory = length(category)) %>%
   mutate(timeDifferenceMin = min(timeDifference)) %>%
   mutate(timeDifferenceMax= max(timeDifference)) #%>%
-  #mutate_if(is.numeric, format, digits = 2)
+  # mutate_if(is.numeric, format, digits = 2)
 
+TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '183', '365', '730', '1094', '>1095'))
 
-ggplot(data = TagReturns,(aes(category, fill = timeDifferenceMax))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Category", y="Count") +
-        scale_fill_discrete(name = "Max. number of days to recapture")
+ggplot(TagReturns,(aes(x = category, fill = timeDifferenceMax))) +
+          geom_histogram(binwidth=1, colour = "white", stat = "count") +
+          theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
+          labs(x = "Category", y="Count") +
+          scale_fill_discrete(name = "Maximum time diference between tag and recapture")
+
+# ggplot(TagReturns,(aes(x = category, fill = timeDifferenceMax))) +
+#           geom_histogram(binwidth=1, colour = "white", stat = "count") +
+#           theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
+#           labs(x = "Category", y="Count") +
+#           scale_fill_discrete(name = "Maximum time diference between tag and recapture")
 
 TagReturns = TagReturns %>%
   group_by(timeDifference) %>%
