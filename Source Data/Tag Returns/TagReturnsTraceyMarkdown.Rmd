@@ -203,11 +203,13 @@ TagReturns <- TagReturns %>%
 
 #TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '183', '365', '730', '1094', '>1095'))
 
-ggplot(TagReturns,(aes(x = category, group = timeDifferenceMax, fill = timeDifferenceMax))) +
-          geom_histogram(binwidth = 1) + 
+ggplot(TagReturns,(aes(x = category, group = category, fill = timeDifferenceMax))) +
+          geom_histogram(stat = "count", binwidth = 1, show.legend = TRUE) + 
           theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
           labs(x = "Category", y="Count") +
           scale_fill_discrete(breaks = c('2', '10', '30', '183', '365', '730', '1094', '>1095'), name = "Maximum time diference between tag and recapture")
+
+
 #breaks is only showing the first few values, not the last few.
 
 #This one works, but mixes up the legend
