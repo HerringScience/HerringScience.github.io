@@ -201,24 +201,11 @@ TagReturns <- TagReturns %>%
   mutate(timeDifferenceMax= max(timeDifference)) %>%
   mutate_if(is.numeric, format, digits = 2)
 
-#TagReturns$timeDifferenceMax <- factor(TagReturns$timeDifferenceMax, levels=c('2', '10', '30', '183', '365', '730', '1094', '>1095'))
-
-ggplot(TagReturns,(aes(x = category, group = category, fill = timeDifferenceMax))) +
-          geom_histogram(stat = "count", binwidth = 1, show.legend = TRUE) + 
+ggplot(TagReturns,(aes(x = category, fill = timeDifferenceMax))) +
+          geom_histogram(binwidth=1, colour = "white", stat = "count") +
           theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
           labs(x = "Category", y="Count") +
-          scale_fill_discrete(breaks = c('2', '10', '30', '183', '365', '730', '1094', '>1095'), name = "Maximum time diference between tag and recapture")
-
-
-#breaks is only showing the first few values, not the last few.
-
-#This one works, but mixes up the legend
-
-# ggplot(TagReturns,(aes(x = category, fill = timeDifferenceMax))) +
-#           geom_histogram(binwidth=1, colour = "white", stat = "count") +
-#           theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
-#           labs(x = "Category", y="Count") +
-#           scale_fill_discrete(name = "Maximum time diference between tag and recapture")
+          scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")
 
 TagReturns = TagReturns %>%
   group_by(timeDifference) %>%
@@ -295,10 +282,11 @@ GBtoSB$TagLocation <- with(GBtoSB, ifelse(GBtoSB$FishingGround == "Scots Bay", "
 GBtoSB$timeDifference <- as.numeric(GBtoSB$timeDifference)
 
 GBSB <- subset(GBtoSB, TagLocation == "GB to SB" )
-#  GBSB$timeDifference <- as.numeric(GBSB$timeDifference)
+ GBSB$timeDifference <- as.numeric(GBSB$timeDifference)
 
 SBGB <- subset(GBtoSB, TagLocation == "SB to GB")
-#  SBGB$timeDifference <- as.numeric(GBSB$timeDifference)
+ #SBGB$timeDifference <- as.numeric(GBSB$timeDifference)
+
 
 ggplot(GBSB, aes(x=category, y = Count, fill = factor(timeDifference))) +
         geom_bar(stat="identity") +
@@ -321,12 +309,17 @@ TableGBSB <- GBSB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-kbl(TableGBSB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(TableGBSB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
-SummaryTable <- subset(TableGBSB, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(TableGBSB, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
+
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+
+
 
 ggplot(SBGB, aes(x=category, y = Count, fill = factor(timeDifference))) +
         geom_bar(stat="identity") +
@@ -350,12 +343,15 @@ TableSBGB <- SBGB %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-kbl(TableSBGB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# kbl(TableSBGB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 
-SummaryTable <- subset(TableSBGB, select = -c(timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(TableSBGB, select = -c(TAG_NUMBER, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
+
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+  kable_paper("striped", full_width = F)
 
 
 ```
@@ -403,7 +399,14 @@ Table <- TagReturns1 %>%
   arrange(timeDifference)
 
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+
+SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
 
@@ -445,7 +448,14 @@ Table <- TagReturnsGBSI %>%
                 No.ofSameNumberOfDays) %>%
   arrange(timeDifference)
 
-kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
+
+SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(category)
+
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
 ```
