@@ -9,7 +9,7 @@ year= substr(Sys.Date(),1,4)
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
-install.packages('RMySQL', repos='http://cran.us.r-project.org')
+#install.packages('RMySQL', repos='http://cran.us.r-project.org')
 library(cli)
 library(lubridate)
 library(reprex)
@@ -283,16 +283,26 @@ GBtoSB$timeDifference <- as.numeric(GBtoSB$timeDifference)
 
 GBSB <- subset(GBtoSB, TagLocation == "GB to SB" )
  GBSB$timeDifference <- as.numeric(GBSB$timeDifference)
+ 
+GBSB <- GBSB %>%
+  group_by(category) %>%
+  mutate(No.InCategory = length(category))
 
 SBGB <- subset(GBtoSB, TagLocation == "SB to GB")
  #SBGB$timeDifference <- as.numeric(GBSB$timeDifference)
 
+SBGB <- SBGB %>%
+  group_by(category) %>%
+  mutate(No.InCategory = length(category))
 
-ggplot(GBSB, aes(x=category, y = Count, fill = factor(timeDifference))) +
+
+ggplot(GBSB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
         geom_bar(stat="identity") +
         labs(y = "Number of Events", x = "Category") +
         ggtitle("Tag Returns that started in German Bank and were retrieved in Scots Bay") +
-        labs(fill = "Days between tagging event and tag return")
+        labs(fill = "Days between tagging event and tag return") +
+        scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")
+
 
 TableGBSB <- GBSB %>% 
   dplyr::select(TAG_NUMBER,
@@ -321,11 +331,12 @@ kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retri
 
 
 
-ggplot(SBGB, aes(x=category, y = Count, fill = factor(timeDifference))) +
+ggplot(SBGB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
         geom_bar(stat="identity") +
         labs(y = "Number of Events", x = "Category") +
         ggtitle("Tag Returns that started in Scots Bay and were retrieved in German Bank") +
-        labs(fill = "Days between tagging event and tag return")
+        labs(fill = "Days between tagging event and tag return") +
+        scale_fill_discrete(breaks = c("10", "30", "133", "715"), name = "Maximum time difference between tag and recapture")
 
 
 TableSBGB <- SBGB %>% 
@@ -359,8 +370,6 @@ kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retri
 
 ```{r, results = "asis", fig.align='center'}
 
-# Missing GB to SB now, not sure why. When removing category 1 items for GB to SB show up. Possibly it's because there is more category difference when going from GB to SB, so it ends up not showing?
-
 TagReturns$TagLocation <- with(TagReturns, ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank" |
                                                   TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank (Area 7)"  , "SB to GB",
                                            ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay" |
@@ -375,6 +384,10 @@ TagReturns$TagLocation <- with(TagReturns, ifelse(TagReturns$FishingGround == "S
 TagReturns1 <- subset(TagReturns, TagLocation != "Other")
 TagReturns1 <- subset(TagReturns1, TagLocation != "SB to Other")
 TagReturns1 <- subset(TagReturns1, TagLocation != "GB to Other")
+
+TagReturns1 <- TagReturns1 %>%
+  group_by(TagLocation, category) %>%
+  mutate(No.InCategory = length(category))
 
 ggplot(data = TagReturns1, (aes(TagLocation, fill = category))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
@@ -402,7 +415,7 @@ Table <- TagReturns1 %>%
 # kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
 #   kable_paper("striped", full_width = F)
 
-SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(Table, select = -c(TAG_NUMBER,TagLocation, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
 
@@ -425,6 +438,10 @@ TagReturnsGBSI$TagLocation <- with(TagReturnsGBSI, ifelse(TagReturnsGBSI$Fishing
                                                         TagReturnsGBSI$FishingGround == "Seal Island" & TagReturnsGBSI$catchAREA == "German Bank (Area 7)", "SI to GB", "Other")))))
                                                  
 TagReturnsGBSI <- subset(TagReturnsGBSI, subset = (TagLocation == "GB to SI" | TagLocation == "SI to GB"))
+
+TagReturnsGBSI <- TagReturnsGBSI %>%
+  group_by(TagLocation, category) %>%
+  mutate(No.InCategory = length(category))
 
 ggplot(data = TagReturnsGBSI, (aes(TagLocation, fill = category))) + 
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
