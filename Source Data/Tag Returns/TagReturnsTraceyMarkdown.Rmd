@@ -205,7 +205,8 @@ ggplot(TagReturns,(aes(x = category, fill = timeDifferenceMax))) +
           geom_histogram(binwidth=1, colour = "white", stat = "count") +
           theme(panel.background = element_rect(fill = "white", colour = "grey50")) +
           labs(x = "Category", y="Count") +
-          scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")
+          scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")+
+          scale_x_discrete(guide = guide_axis(n.dodge = 3))
 
 TagReturns = TagReturns %>%
   group_by(timeDifference) %>%
@@ -258,7 +259,8 @@ ggplot(data = Cat1, (aes(FishingGround, fill = catchAREA))) +
         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
         labs(x = "Tagging Ground", y="Count") +
-        scale_fill_discrete(name = "Recapture area")
+        scale_fill_discrete(name = "Recapture area")+
+        scale_x_discrete(guide = guide_axis(n.dodge = 3))
 
 
 ```
@@ -1767,7 +1769,8 @@ ggplot(GearTable, aes(x=GearType, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Gear Type") +
   ggtitle("Tag Return") +
-  labs(fill = "Category")
+  labs(fill = "Category") +
+  scale_x_discrete(guide = guide_axis(n.dodge = 3))
 
 GearWithout1 <- subset(GearTable, subset = (category != 1))
 
@@ -1775,7 +1778,8 @@ ggplot(GearWithout1, aes(x=GearType, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
   labs(y = "Number of Events", x = "Gear Type") +
   ggtitle("Tag Return") +
-  labs(fill = "Category")
+  labs(fill = "Category")+
+  scale_x_discrete(guide = guide_axis(n.dodge = 3))
 
 SummaryTable <- GearWithout1 %>%
   group_by(GearType, category) %>%
@@ -1793,6 +1797,7 @@ kbl(SummaryTable, col.names = c("Gear Type", "Category", "Abundance in Category"
 
 WeirTable <- subset(GearTable, subset = (GearType != "Purse Seine"))
 WeirTable <- subset(WeirTable, subset = (GearType != "Mid Water Trawl"))
+WeirTable <- subset(WeirTable, subset = (GearType != "Purse Seine/Frozen"))
 
 ggplot(WeirTable, aes(x=GearType, y = Count, fill = factor(category))) +
   geom_bar(stat="identity") +
