@@ -125,8 +125,6 @@ Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 Larval$MonthDay <- format(Larval$Date, "%m-%d")
 
-#Fix this
-#Larval$AdjustedJulianSpawnDate <- as.numeric(Larval$AdjustedJulianSpawnDate) #AdjustedJulianSpawnDate is the median of the min and the max spawn date provided.
 
 #Changed to X and Y to fit in better with compendium code. These are the tow start and finish coordinates.
 
@@ -154,7 +152,7 @@ NBNS = can1
 
 #NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
-#NBNS <- sf::st_as_sf(NBNS) 
+
 
 
 #For Tag Returns
@@ -162,8 +160,7 @@ NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 
 
 completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
 TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-    # TaggingEvents <- TaggingEvents %>%  
-    #      rename(Tag_Num = TAG_NUMBER)
+
 
 names(TaggingEvents)[names(TaggingEvents) == 'Tag_Num'] <- 'TAG_NUMBER'
 
@@ -239,31 +236,6 @@ r = data.frame( TAG_NUMBER=ids,
 
 }
 
-#Trying for loop to speed up process. Currently not working. 
-
-# for (i in 1:nrow(r)){
-#   test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"])
-#   test1 = TaggingEvents[test, ]
-#   r$Y[i] = test1$Lat
-#   r$X[i] = test1$Lon
-#     with (r, ifelse(r$Scots_Bay[i] == point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE), 1,
-#           ifelse(r$German_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE), 1,
-#           ifelse(r$Seal_Island[i] == point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE), 1,
-#           ifelse(r$Gannet_Dry_Ledge[i] == point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE), 1,
-#           ifelse(r$Grand_Manan_Banks[i] == point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE), 1,
-#           ifelse(r$Long_Island[i] == point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE), 1, 
-#           ifelse(r$Lurcher[i] == point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE), 1,
-#           ifelse(r$SW_Grounds[i] == point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE), 1,
-#           ifelse(r$NB_Coastal[i] == point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE), 1,
-#           ifelse(r$Grand_Manan[i] == point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE), 1,
-#           ifelse(r$Trinity[i] == point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE), 1,
-#           ifelse(r$Yankee_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE), 1, 
-#           ifelse(r$Browns_Bank[i] == point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE), 1,
-#                  NA
-#               ))))))))))))))
-#           
-#     }
-##
 
 # Ground                        
 r$FishingGround = NA        
@@ -284,7 +256,6 @@ r$FishingGround = with(r, ifelse(r$NB_Coastal > 0, "NB Coastal",
                                                 "Other"))))))))))))))
 
 TaggingEvents <- merge(TaggingEvents, r[, c("TAG_NUMBER", "FishingGround")], by = "TAG_NUMBER")
-#TaggingSubset <- TaggingEvents[sample(1:nrow(TaggingEvents), 25, replace = FALSE),]
 
 
 #Combining complete Returns and Tagging events by tag number
@@ -314,6 +285,9 @@ TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
 TagReturns$category <- as.numeric(TagReturns$category)
 TagReturns$Count <- 1
 
+#When combining there are NAs that are being counted. This is to remove those.
+
+TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
 
 
 ```
@@ -434,7 +408,6 @@ LRP3 %>%
 LRP3 %>% filter(Year > 2017) %>%
   dplyr::select(Year, Seal) %>%
   dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
-  #breaks=unique(as.integer("x")) %>% #use as as.integer for x axis to reformat to full years?
   dyOptions(drawPoints = TRUE, pointSize = 2, digitsAfterDecimal = 0) %>%
   dyHighlight(highlightCircleSize = 5, 
               highlightSeriesBackgroundAlpha = 0.8,
