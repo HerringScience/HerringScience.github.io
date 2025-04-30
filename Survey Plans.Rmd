@@ -19,15 +19,15 @@ SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 3
-EVessel = "Lady Melissa" #Set NA for GB or excluding box
-NVessel = "Brunswick Provider" #Set NA for GB or excluding box
-PlanktonVessel = "Lady Melissa"
+vessels = 2
+EVessel = "Brunswick Provider" #Set NA for GB or excluding box
+NVessel = "Fundy Monarch" #Set NA for GB or excluding box
+PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Brunswick Provider"
-V2 = "Morning Star"
-V3 = PlanktonVessel
+V2 = "Fundy Monarch"
+V3 = NA
 V4 = NA
 V5 = NA
 V6 = NA
@@ -41,6 +41,9 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='cente
 
 ```{r Data Import, include=FALSE}
 #Import all packages and data
+library(ggplot2)
+library(patchwork)
+library(scales)
 library(cli)
 library(lubridate)
 library(reprex)
@@ -56,12 +59,31 @@ library(psych)
 library(raster)
 library(PBSmapping)
 #library(rgeos)
+library(sf)
+library(terra)
 library(knitr)
 library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
-library(measurements)
+library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
+library(mapproj)
+library(oce) #new CTD Data package
+library(pander)
+library(geodata)
+library(pacman)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(raster)
+library(devtools)
+library(maps)
+library(dplyr)
+
+
 
 #Parse date time
 
@@ -328,8 +350,8 @@ if(surv=="GB"){
 
 ```{r}
 
-Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/2024/", surv, surv.no, "/", "Table.csv"))
-# use the above if manual plan.
+Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/2025/", surv, surv.no, "/", "Table.csv"))
+# use the above if manual plan. Remember to change year if needed.
 
 #Add vessel names to Plan
 Plan = Main %>%
