@@ -19,15 +19,15 @@ SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 2
+vessels = 3
 EVessel = "Brunswick Provider" #Set NA for GB or excluding box
-NVessel = "Fundy Monarch" #Set NA for GB or excluding box
+NVessel = "Canada 100" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Brunswick Provider"
-V2 = "Fundy Monarch"
-V3 = NA
+V2 = "Lady Melissa"
+V3 = "Canada 100"
 V4 = NA
 V5 = NA
 V6 = NA
@@ -247,8 +247,9 @@ This `r a` survey will include `r vessels` participating vessels.
 ```{r echo=FALSE}
 #various combinations of which boxes are being used (north, east, none, etc), to determine a statement of which lines vessels are running
 a=if(surv == "SB" & !is.na(EVessel) & !is.na(NVessel)){
-  paste(EVessel, "and", NVessel, "will run 4 lines in the East and North boxes, and all other vessels will be running 2 lines in the Main Survey Box")
-}
+  #paste(EVessel, "and", NVessel, "will run 4 lines in the East and North boxes, and all other vessels will be running 2 lines in the Main Survey Box")
+  paste(EVessel, "will run 2 lines in the Main Box and 2 lines in the East Box and", NVessel, "will run 1 line in the Main Box and 4 lines in the North box.")
+  }
 
 b=if(surv == "SB" & is.na(EVessel) & !is.na(NVessel)){
   paste(NVessel, "will run 4 lines in the North box, and all other vessels will be running 2 lines in the Main Survey Box")
