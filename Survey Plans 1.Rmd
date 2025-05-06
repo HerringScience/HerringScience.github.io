@@ -248,7 +248,7 @@ This `r a` survey will include `r vessels` participating vessels.
 #various combinations of which boxes are being used (north, east, none, etc), to determine a statement of which lines vessels are running
 a=if(surv == "SB" & !is.na(EVessel) & !is.na(NVessel)){
   #paste(EVessel, "and", NVessel, "will run 4 lines in the East and North boxes, and all other vessels will be running 2 lines in the Main Survey Box")
-  paste(EVessel, " and Brunswick Provider will each run 2 lines in the Main Box and 2 lines in the East Box, and", NVessel, "will run 1 line in the Main Box and 4 lines in the North box. Fundy Monarch will run 3 lines in the main box.")
+  paste(EVessel, " and Brunswick Provider will each run 2 lines in the Main Box and 2 lines in the East Box, and", NVessel, "will run 1 line in the Main Box and 4 lines in the North box. Fundy Monarch will run 4 lines in the main box.")
   }
 
 b=if(surv == "SB" & is.na(EVessel) & !is.na(NVessel)){
@@ -298,8 +298,8 @@ c="Vessels are reminded to complete their assigned transects as listed, straight
 #Not sure why the dplyr::select isn't working (2025) when it worked all 2024 season.
 
 Plan2 = Plan %>%
-  # dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
-  dplyr::select(X, Y, Xend, Yend, Vessel)
+  dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
+  #dplyr::select(X, Y, Xend, Yend, Vessel)
 
 if(surv=="GB"){
   a = 
