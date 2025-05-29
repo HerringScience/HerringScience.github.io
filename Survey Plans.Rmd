@@ -12,23 +12,23 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2025-05-18 20:00:00" #survey date and time, as formatted
+surv.date = "2025-05-20 20:00:00" #survey date and time, as formatted
 surv.no = "2"
-Allocation = "0" #set to "0" for a non-fishing survey
+Allocation = "100" #set to "0" for a non-fishing survey
 SIAllocation = "0" #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 4
-EVessel = "Morning Star" #Set NA for GB or excluding box
+vessels = 3
+EVessel = "Canada 100" #Set NA for GB or excluding box
 NVessel = "Lady Melissa" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Morning Star"
+V1 = "Canada 100"
 V2 = "Brunswick Provider"
-V3 = "Fundy Monarch"
-V4 = "Lady Melissa"
+V3 = "Lady Melissa"
+V4 = NA
 V5 = NA
 V6 = NA
 V7 = NA
@@ -58,7 +58,7 @@ library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
+library(rgeos) #this is an old version, and downloaded from archieve.
 library(sf)
 library(terra)
 library(knitr)
@@ -74,7 +74,7 @@ library(plotly)
 library(mapproj)
 library(oce) #new CTD Data package
 library(pander)
-library(geodata)
+#library(geodata) #this is an old version, and downloaded from archive.
 library(pacman)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -83,6 +83,7 @@ library(devtools)
 library(maps)
 library(dplyr)
 
+source("/Users/herri/Herring Science Council/Science Team - Documents/R Functions/getData.R")
 
 
 #Parse date time
@@ -156,8 +157,8 @@ can1 = rbind(can,us)
 NBNS = can1
 
 
-#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
+NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
@@ -248,7 +249,7 @@ This `r a` survey will include `r vessels` participating vessels.
 #various combinations of which boxes are being used (north, east, none, etc), to determine a statement of which lines vessels are running
 a=if(surv == "SB" & !is.na(EVessel) & !is.na(NVessel)){
   #paste(EVessel, "and", NVessel, "will run 4 lines in the East and North boxes, and all other vessels will be running 2 lines in the Main Survey Box")
-  paste(EVessel, " and Brunswick Provider will each run 2 lines in the Main Box and 2 lines in the East Box, and", NVessel, "will run 1 line in the Main Box and 4 lines in the North box. Fundy Monarch will run 3 lines in the main box.")
+  paste(EVessel, "will each run 2 lines in the Main Box and 2 lines in the East Box, and", NVessel, "will run 1 line in the Main Box and 4 lines in the North box. Brunswick Provider will run 3 lines in the main box.")
   }
 
 b=if(surv == "SB" & is.na(EVessel) & !is.na(NVessel)){
@@ -298,7 +299,7 @@ c="Vessels are reminded to complete their assigned transects as listed, straight
 #Not sure why the dplyr::select isn't working (2025) when it worked all 2024 season.
 
 Plan2 = Plan %>%
-  # dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
+  #dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
   dplyr::select(X, Y, Xend, Yend, Vessel)
 
 if(surv=="GB"){
