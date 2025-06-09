@@ -20,7 +20,7 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 
 #Set vessels below
 vessels = 5
-EVessel = "Leroy & Barry" #Set NA for GB or excluding box
+EVessel = "Morning Star" #Set NA for GB or excluding box
 NVessel = "Lady Janice" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
