@@ -20,17 +20,17 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 
 #Set vessels below
 vessels = 8
-EVessel = "V2" #Set NA for GB or excluding box
-NVessel = "V1" #Set NA for GB or excluding box
+EVessel = "V8" #Set NA for GB or excluding box
+NVessel = "V7" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "V3"
-V2 = "V4"
-V3 = "V5"
-V4 = "V6"
-V5 = "V7"
-V6 = "V8"
+V1 = "V1"
+V2 = "V2"
+V3 = "V3"
+V4 = "V4"
+V5 = "V5"
+V6 = "V6"
 V7 = NA
 V8 = NA
 V9 = NA
@@ -418,7 +418,7 @@ Plan %>%
 
 1. Plan to arrive at the starting point 30 minutes before the start time of `r StartTime`.
 
-2. Start the EK80 software and load the ‘Herring Survey 2024’ settings. When you are ready to
+2. Start the EK80 software and load the ‘Herring Survey 2025’ settings. When you are ready to
 begin, Record Raw should be turned ‘ON’ and the ‘REC’ dot in the upper left should turn
 from black to red. Finally, check that the lat and long in the top center of the screen is
 changing.
