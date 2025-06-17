@@ -2,21 +2,21 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB or SI
-surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
-year="2024"
-surv.no="7"
+surv="SB" #SB or GB or SI
+surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+year="2025"
+surv.no="3"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
-Sample = "N" #whether ("Y") or not ("N") they caught fish during this survey window
-Tow = "Y" #whether or not plankton tow(s) were conducted
+Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
+Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("C1", "FM", "LJ", "MS")
+ids = c("LM", "BP", "C1")
 
 #Area and TS values - From table C
-SB1= 476#SB main area
-SB2= 0 #SB north area
-SB3= 0 #SB east area
+SB1= 642#SB main area
+SB2= 87 #SB north area
+SB3= 116 #SB east area
 
 GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
@@ -50,7 +50,7 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
@@ -64,6 +64,28 @@ library(cowplot)
 library(readxl)
 library(hms)
 library(measurements)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(sf)
+library(terra)
+library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
+library(mapproj)
+library(oce) #new CTD Data package
+library(pander)
+library(geodata) #this is an old version, and downloaded from archive.
+library(pacman)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(raster)
+library(devtools)
+library(maps)
+library(dplyr)
+
 
 ##Survey Data import and filtering
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
@@ -234,13 +256,17 @@ if(Tow == "N"){
 }
 
 ##ECHOVIEW DATA##
-#Land Data 
-## added raster:: in front as it was throwing an error without it.
-
-can<-raster::getData('GADM', download = FALSE, country="CAN", level=1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
-us = raster::getData('GADM', download = FALSE, country = "USA", level = 1, path = paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io"))
+#Land Data
+#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
+can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
+us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
 can1 = rbind(can,us)
-NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+NBNS = can1
+
+
+# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
 
 # Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
