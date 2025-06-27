@@ -13,8 +13,8 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2025"
-surv.no = "3"
-hightide = "2025-06-03 19:03:00" #for Scots Bay only
+surv.no = "2"
+hightide = "2025-05-20 18:15:00" #for Scots Bay only
 
 ```
 
@@ -264,9 +264,9 @@ g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the Ger
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("The Canada 100 ran 3 lines in the Main Survey Box, the Brunswick Provider ran 2 lines in both the Main and Eastern Survey Box, and the Lady Melissa ran 1 line in the Main Survey Box and 4 line in the Northern Survey Box."),
-            
-            #"All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
+          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("The Brunswick Provider ran 2 in each the Main and the Eastern Survey Box, the Lady Melissa ran one line in the Main Survey Box and 4 lines in the Northern Survey Box, and the Canada 100 ran 3 lines in the Main Survey Box."),
+                                                                          
+                                                                          #"All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern Survey Box"),
          "NA"))))))
 
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))

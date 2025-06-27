@@ -5,18 +5,18 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="1"
+surv.no="3"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("LM", "BP", "C1")
+ids = c("BP", "C1", "LM", "LJ", "MS")
 
 #Area and TS values - From table C
-SB1= 215#SB main area
+SB1= 642 #SB main area
 SB2= 87 #SB north area
-SB3= 16 #SB east area
+SB3= 116 #SB east area
 
 GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
@@ -50,7 +50,7 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
+library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
@@ -93,8 +93,9 @@ Plankton = read_csv("PlanktonData.csv")
 Plankton = Plankton %>%
   mutate(Year = year,
          Ground = surv,
-         Survey.No = surv.no,
-         TowTime = difftime(Time2, Time1, units = "mins"))
+         Survey.No = surv.no)
+if(Tow == "Y") {Plankton$TowTime = difftime(Time2, Time1, units = "mins")}
+if(Tow == "N") {Plankton$TowTime = 0}
 Plankton$Year = as.numeric(Plankton$Year)
 Plankton$Swell = as.character(Plankton$Swell)
 if(Sample == "Y"){Plankton$Sample = "Y"}
@@ -239,9 +240,14 @@ if(Tow == "N"){
   PlanData$Survey.No = as.character(PlanData$Survey.No)
   Total = full_join(Total, PlanData)
   Survey = full_join(Survey, PlanData)
+Survey = Survey %>%
+  mutate(Day = as.numeric(substr(Date, 1, 2)),
+Month = as.numeric(substr(Date, 4, 5)),
+Year = as.numeric(substr(Date, 7, 10)))
   #changed write_csv to write.csv
   Total = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
   Survey = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+    
   
   setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
   Depth=1
@@ -524,7 +530,6 @@ if(surv=="GB"){SSB = full_join(SSB, SealIsland)}
 SSB = SSB %>% arrange(Year)
 SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv"))
 
-#Not adding time into Date.Time.Start etc. Just pulling the date. #Went into transform function to keep the time.
 ###Performance data import and filtering###
 A = read_csv("tableA.csv")
 actual = A
@@ -535,8 +540,12 @@ wd = getwd()
 Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
 Perform = Perform %>% rename(End.Lat="End Lat", End.Lon="End Lon", Start.Lat="Start Lat", Start.Lon="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 
-#why is distance being divided by 1000? These two lines don't seem to make much of a difference, as it changes the distance by around 2km then back to the original km.
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
+
+#added below
+#Perform = Perform %>% mutate(Distance = distHaversine(cbind(Y,X), cbind(Yend,Xend))) %>% mutate(Distance = Distance/1000)
+
+#OG
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
 
 #calculate time/speed
@@ -544,10 +553,12 @@ Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = (((Distance*1000)/(Duration))) /60)
+   mutate(Speed = (((Distance*1000)/(Duration)))) #/60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
+
+#Perform <- read_csv(paste0("Performance Total.csv"))
 
 #summarize speed by Transect
 Speed<-Perform %>%
@@ -566,6 +577,8 @@ Distance<-Perform %>%
 Speed %>% write_csv("Speed.csv")
 Distance %>% write_csv("Distance.csv")
 Perform %>% write_csv("Performance Total.csv")
+
+
 
 ##CTD Data import and filtering
 CTD <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv"))
