@@ -10,11 +10,11 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "GB"
-surv2 = "German Bank"
-year = "2024"
-surv.no = "7"
-hightide = "2024-09-23 16:33:00" #for Scots Bay only
+surv = "SB"
+surv2 = "Scots Bay"
+year = "2025"
+surv.no = "3"
+hightide = "2025-06-03 19:03:00" #for Scots Bay only
 
 ```
 
@@ -31,6 +31,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 
 #Packages
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data"))
+library(rlang)
 library(cli)
 library(lubridate)
 library(reprex)
@@ -51,10 +52,30 @@ library(kableExtra)
 library(grid)
 library(gridExtra)
 library(cowplot)
-library(DT)
-library(sp)
+library(readxl)
+library(hms)
+library(measurements)
+library(ggplot2)
+library(patchwork)
+library(scales)
 library(sf)
 library(terra)
+library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
+library(mapproj)
+library(oce) #new CTD Data package
+library(pander)
+library(geodata) #this is an old version, and downloaded from archive.
+library(pacman)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(raster)
+library(devtools)
+library(maps)
+library(dplyr)
 
 #Survey Data
 Survey = read_csv("Survey Data.csv") #Survey Data
@@ -99,10 +120,16 @@ Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
 #Land Data
-can<-getData('GADM', country="CAN", level=1)
-us = getData('GADM', country = "USA", level = 1)
+#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
+can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
+us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
 can1 = rbind(can,us)
-NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+NBNS = can1
+
+
+# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
@@ -138,11 +165,14 @@ polySI = as.PolySet(SUA, projection="LL")
 
 ```{r Set Ground and Survey #, include=FALSE}
 
+#setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
+
 Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 CTD = CTD %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
 current=paste0(unique(Survey$Ground), unique(Survey$Survey.No))
-
+#current = "SB1"
+  
 if(surv == "SB"){
   if(!is.na(unique(Survey$EVessel))){
     SUA = read.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/polygon_SBEastern.csv"))
@@ -163,6 +193,7 @@ if(surv == "GB"){
    }
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
+#setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/2025/SB1")
 #setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/ 2024/SB11")
 
 Map = list.files(pattern = "Map*") %>% 
@@ -229,12 +260,13 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "The Morning Star and the Lady Melissa were able to complete two transects each in the German Bank and Seal Island Box. The Brunswick Provider completed two transects in the German Bank box but were unable to complete the lines in Seal Island due to problems with the boat and weather.",
-                #"All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
+          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("The Canada 100 ran 3 lines in the Main Survey Box, the Brunswick Provider ran 2 lines in both the Main and Eastern Survey Box, and the Lady Melissa ran 1 line in the Main Survey Box and 4 line in the Northern Survey Box."),
+            
+            #"All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern            Survey Box"),
          "NA"))))))
 
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))

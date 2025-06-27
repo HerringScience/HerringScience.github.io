@@ -5,7 +5,7 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="3"
+surv.no="1"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
@@ -14,9 +14,9 @@ Tow = "N" #whether or not plankton tow(s) were conducted
 ids = c("LM", "BP", "C1")
 
 #Area and TS values - From table C
-SB1= 642#SB main area
+SB1= 215#SB main area
 SB2= 87 #SB north area
-SB3= 116 #SB east area
+SB3= 16 #SB east area
 
 GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
