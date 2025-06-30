@@ -20,7 +20,7 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 
 #Set vessels below
 vessels = 7
-EVessel = "Fundy Monarch" #Set NA for GB or excluding box
+EVessel = NA #Set NA for GB or excluding box
 NVessel = "Morning Star" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
@@ -30,7 +30,7 @@ V2 = "Lady Melissa"
 V3 = "Canada 100"
 V4 = "Leroy and Barry"
 V5 = "Lady Janice"
-V6 = NA
+V6 = "Fundy Monarch"
 V7 = NA
 V8 = NA
 V9 = NA
@@ -41,6 +41,8 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='cente
 
 ```{r Data Import, include=FALSE}
 #Import all packages and data
+#install.packages("devtools")
+library(devtools)
 library(ggplot2)
 library(patchwork)
 library(scales)
@@ -58,6 +60,8 @@ library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
+rgeos <- "https://cran.r-project.org/src/contrib/Archive/rgeos/rgeos_0.6-4.tar.gz"
+install.packages(rgeos, repos = NULL, type = "source")
 library(rgeos) #this is an old version, and downloaded from archieve.
 library(sf)
 library(terra)
@@ -74,16 +78,19 @@ library(plotly)
 library(mapproj)
 library(oce) #new CTD Data package
 library(pander)
+#install.packages("geodata")
 library(geodata) #this is an old version, and downloaded from archive.
 library(pacman)
 library(rnaturalearth)
 library(rnaturalearthdata)
+raster <- "https://cran.r-project.org/src/contrib/raster_3.6-32.tar.gz"
+install.packages(raster, repos = NULL, type = "source")
 library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
 
-source("/Users/herri/Herring Science Council/Science Team - Documents/R Functions/getData.R")
+#source("/Users/herri/Herring Science Council/Science Team - Documents/R Functions/getData.R")
 
 
 #Parse date time
@@ -105,12 +112,12 @@ vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north 
            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
            NA))))
 
-Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+Main = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
 #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
 
-if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+if(!is.na(NVessel)){North = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
 #if there is a NVessel this will load the North_Box.csv box outline
-if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+if(!is.na(EVessel)){East = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
 #if there is a EVessel this will load the East_Box.csv box outline
 
 if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
@@ -157,7 +164,7 @@ can1 = rbind(can,us)
 NBNS = can1
 
 
-# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
 
 # Proper coordinates for German Bank
