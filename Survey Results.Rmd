@@ -13,8 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2025"
-surv.no = "2"
-hightide = "2025-05-20 18:15:00" #for Scots Bay only
+surv.no = "4"
+hightide = "2025-06-16 16:04:00" #for Scots Bay only
+mainBoxVessels = 4
 
 ```
 
@@ -129,7 +130,7 @@ NBNS = can1
 
 
 # NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
+NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes up to 30minutes to process.
 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
@@ -164,8 +165,6 @@ polySI = as.PolySet(SUA, projection="LL")
 ```
 
 ```{r Set Ground and Survey #, include=FALSE}
-
-#setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
 
 Survey = Survey %>% filter(Ground == surv & Survey.No == surv.no & Year == year)
 Tag = Tag %>% filter(Ground == surv2 & Survey == surv.no & Year == year)
@@ -264,9 +263,7 @@ g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the Ger
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste("The Brunswick Provider ran 2 in each the Main and the Eastern Survey Box, the Lady Melissa ran one line in the Main Survey Box and 4 lines in the Northern Survey Box, and the Canada 100 ran 3 lines in the Main Survey Box."),
-                                                                          
-                                                                          #"All vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern Survey Box"),
+          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste( mainBoxVessels, "vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern Survey Box"),
          "NA"))))))
 
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))

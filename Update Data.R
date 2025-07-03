@@ -5,16 +5,17 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="3"
+surv.no="4"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
-ids = c("BP", "C1", "LM", "LJ", "MS")
+## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
+ids = c("LB", "MS", "FM", "LJ", "LM", "C1")
 
 #Area and TS values - From table C
-SB1= 642 #SB main area
+SB1= 640 #SB main area
 SB2= 87 #SB north area
 SB3= 116 #SB east area
 
@@ -228,6 +229,9 @@ Total = Total %>%
                 DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
                 SurfaceTemp, WaterDepth1, WaterDepth2)
 
+
+#These are not writing properly. 2025 season.
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
 Total %>% write_csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 Total %>% write_csv("Survey Data.csv")
