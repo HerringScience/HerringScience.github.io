@@ -5,7 +5,7 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="4"
+surv.no="88"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
@@ -39,8 +39,6 @@ SB_y = 0.364102758434224
 SB_x_var = 0.436969270679439
 SB_days = 29
 
-#install.packages("weathercan", repos = "https://dev.ropensci.org")
-
 library(rlang)
 library(cli)
 library(lubridate)
@@ -56,7 +54,7 @@ library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
+library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -86,6 +84,8 @@ library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
+library(sp)
+
 
 
 ##Survey Data import and filtering
@@ -229,9 +229,6 @@ Total = Total %>%
                 DiscDepthD, DiscDepthA, CTD_ID, CTD_Lat, CTD_Lon, AvgTemp, AvgSalinity, 
                 SurfaceTemp, WaterDepth1, WaterDepth2)
 
-
-#These are not writing properly. 2025 season.
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/"))
 Total %>% write_csv("planktonsamplingData.csv")
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 Total %>% write_csv("Survey Data.csv")
@@ -242,15 +239,29 @@ if(Tow == "N"){
   Total = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
   PlanData = read_csv((paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
   PlanData$Survey.No = as.character(PlanData$Survey.No)
+#Sample = Did they catch fish within the survey window. 
+   PlanData$Sample = as.character(Sample)
+#To set the plankton tow data to NA since a plankton tow did not happen.
+   PlanData$FlowmeterType = NA
+  PlanData$TowType = NA
+  PlanData$Gear = NA
+  PlanData$Net = NA
   Total = full_join(Total, PlanData)
+  #Total = full_join(Total, Plankton)
+Total = Total %>%
+    mutate(Day = as.numeric(substr(Date, 1, 2)),
+           Month = as.numeric(substr(Date, 4, 5)),
+           Year = as.numeric(substr(Date, 7, 10)))
+  
   Survey = full_join(Survey, PlanData)
 Survey = Survey %>%
   mutate(Day = as.numeric(substr(Date, 1, 2)),
-Month = as.numeric(substr(Date, 4, 5)),
-Year = as.numeric(substr(Date, 7, 10)))
-  #changed write_csv to write.csv
-  Total = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
-  Survey = write.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+         Month = as.numeric(substr(Date, 4, 5)),
+         Year = as.numeric(substr(Date, 7, 10)))
+
+
+write_csv(Total, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
+write_csv(Survey, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
     
   
   setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
@@ -275,8 +286,9 @@ can1 = rbind(can,us)
 NBNS = can1
 
 
-# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
+#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
+#NBNS <- spatVectorToSpatial(NBNS)
+NBNS <- as(NBNS, "Spatial") #NEW 2024 - This causes it to run very slowly - takes around 30 minutes to process.
 
 # Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
