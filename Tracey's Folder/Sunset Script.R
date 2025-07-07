@@ -38,11 +38,11 @@ rm(list = ls())
 
 
 #Set information here
-date = "2024-01-03"
-Ground="SI" #SB or GB or SI
+date = "2024-05-05"
+Ground="SB" #SB or GB or SI
 Survey.No="7"
 Survey_Type = "Structured" # Structured or Adhoc
-Counted = "Yes" #Biomass counted to the total SSB number. Surveys should be minimum 10 days aprt, largest biomass number counted.
+Counted = "Yes" #Biomass counted to the total SSB number. Surveys should be minimum 10 days apart, largest biomass number counted.
 Comments = "NA" #Input any comments about the survey here. Example- The vessel Morning Star 
 
 
