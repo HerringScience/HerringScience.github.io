@@ -12,25 +12,25 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2025-06-30 20:00:00" #survey date and time, as formatted
-surv.no = "5"
+surv.date = "2025-07-14 20:00:00" #survey date and time, as formatted
+surv.no = "6"
 Allocation = '150' #set to "0" for a non-fishing survey
 SIAllocation = NA #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 7
+vessels = 6
 EVessel = NA #Set NA for GB or excluding box
-NVessel = "Morning Star" #Set NA for GB or excluding box
+NVessel = "Fundy Monarch" #Set NA for GB or excluding box
 PlanktonVessel = NA
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Brunswick Provider"
+V1 = "Morning Star"
 V2 = "Lady Melissa"
-V3 = "Canada 100"
-V4 = "Leroy and Barry"
-V5 = "Lady Janice"
-V6 = "Fundy Monarch"
+V3 = "Brunswick Provider"
+V4 = "Lady Janice"
+V5 = "Leroy & Barry"
+V6 = NA
 V7 = NA
 V8 = NA
 V9 = NA
@@ -302,11 +302,13 @@ c="Vessels are reminded to complete their assigned transects as listed, straight
 
 ```{r, fig.width=7, fig.height=4}
 
-#Not sure why the dplyr::select isn't working (2025) when it worked all 2024 season.
+#Not sure why the dplyr::select isn't working (2025) when it worked all 2024 season. Have commented out various lines depending on how it is being written.
 
 Plan2 = Plan %>%
-  dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
+  #dplyr::select(X = "Start Lon", Y = "Start Lat", Xend = "End Lon", Yend = "End Lat", Vessel)
   #dplyr::select(X, Y, Xend, Yend, Vessel)
+  dplyr::select(X = "Start.Lon", Y = "Start.Lat", Xend = "End.Lon", Yend = "End.Lat", Vessel)
+
 
 if(surv=="GB"){
   a = 
