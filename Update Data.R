@@ -5,17 +5,17 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="88"
+surv.no="5"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LB", "MS", "FM", "LJ", "LM", "C1")
+ids = c("BP", "C1", "LJ", "LM", "LB", "FM", "MS")
 
 #Area and TS values - From table C
-SB1= 640 #SB main area
+SB1= 632 #SB main area
 SB2= 87 #SB north area
 SB3= 116 #SB east area
 
@@ -247,7 +247,6 @@ if(Tow == "N"){
   PlanData$Gear = NA
   PlanData$Net = NA
   Total = full_join(Total, PlanData)
-  #Total = full_join(Total, Plankton)
 Total = Total %>%
     mutate(Day = as.numeric(substr(Date, 1, 2)),
            Month = as.numeric(substr(Date, 4, 5)),
@@ -554,7 +553,8 @@ plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
 wd = getwd()
 Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
-Perform = Perform %>% rename(End.Lat="End Lat", End.Lon="End Lon", Start.Lat="Start Lat", Start.Lon="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
+#Perform = Perform %>% rename(End.Lat="End Lat", End.Lon="End Lon", Start.Lat="Start Lat", Start.Lon="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
+Perform = Perform %>% rename(Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
 
@@ -562,7 +562,7 @@ Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat)
 #Perform = Perform %>% mutate(Distance = distHaversine(cbind(Y,X), cbind(Yend,Xend))) %>% mutate(Distance = Distance/1000)
 
 #OG
-Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
+#Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
 
 #calculate time/speed
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
@@ -819,4 +819,3 @@ larv = left_join(larv,CTDLarval)
 larv = larv %>%
   dplyr::select(Ground, id, Date, Survey.No, No_jars, Abundance, Lengthmm, category, MinLength, MaxLength, MeanLength, SD, Abundance, Larv_per_jar, Density, hatchDate, MINspawnDate, MAXspawnDate, Julian, JulianMin, JulianMax, LastLength, Day, Month, Year, Condition, Yolk_sac, Preservative, ARC_Count, ARC_Notes, X, Y, TowTime, AvgTowDepth, MaxTowDepth, CTDTemp, CTDSalinity, Volume)
 larv %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval.csv"))
-
