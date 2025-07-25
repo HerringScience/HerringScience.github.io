@@ -5,19 +5,19 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="6"
+surv.no="5"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("BP", "LJ", "LM", "LB", "MS")
+ids = c("BP", "LJ", "LM", "LB", "MS", "FM", "C1")
 
 #Area and TS values - From table C
-SB1= 633 #SB main area
+SB1= 632 #SB main area
 SB2= 87 #SB north area
-SB3= 0 #SB east area
+SB3= 116 #SB east area
 
 GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
@@ -569,7 +569,7 @@ Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = (((Distance*1000)/(Duration)))/60)
+   mutate(Speed = (((Distance*1000)/(Duration)))) #/60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
