@@ -13,9 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2025"
-surv.no = "4"
-hightide = "2025-06-16 16:04:00" #for Scots Bay only
-mainBoxVessels = 4
+surv.no = "5"
+hightide = "2025-07-14 16:48:00" #for Scots Bay only
+mainBoxVessels = 5
 
 ```
 

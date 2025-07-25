@@ -5,19 +5,19 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2025"
-surv.no="5"
+surv.no="6"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("BP", "C1", "LJ", "LM", "LB", "FM", "MS")
+ids = c("BP", "LJ", "LM", "LB", "MS")
 
 #Area and TS values - From table C
-SB1= 632 #SB main area
+SB1= 633 #SB main area
 SB2= 87 #SB north area
-SB3= 116 #SB east area
+SB3= 0 #SB east area
 
 GB1 = 844 #GB main area
 GB2 = 233 #Seal Island area
@@ -553,8 +553,8 @@ plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
 wd = getwd()
 Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
-#Perform = Perform %>% rename(End.Lat="End Lat", End.Lon="End Lon", Start.Lat="Start Lat", Start.Lon="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
-Perform = Perform %>% rename(Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
+Perform = Perform %>% rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
+#Perform = Perform %>% rename(Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
 
@@ -562,14 +562,14 @@ Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat)
 #Perform = Perform %>% mutate(Distance = distHaversine(cbind(Y,X), cbind(Yend,Xend))) %>% mutate(Distance = Distance/1000)
 
 #OG
-#Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
+Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
 
 #calculate time/speed
 Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-01")) %>% 
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = (((Distance*1000)/(Duration)))) #/60)
+   mutate(Speed = (((Distance*1000)/(Duration)))/60)
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
