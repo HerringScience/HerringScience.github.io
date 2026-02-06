@@ -1,7 +1,7 @@
 ---
 title: "Larval Project Portion of Compendium"
-output: html_document
-date: "2024-02-28"
+output: pdf_document
+date: "2026-02-05"
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +10,7 @@ date: "2024-02-28"
 rm(list=ls())
 
 year= substr(Sys.Date(),1,4)
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+#knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
 
@@ -68,7 +68,7 @@ library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
-devtools::install_github("ropensci/rnaturalearthhires")
+#devtools::install_github("ropensci/rnaturalearthhires")
 
 install.packages('GADMTools')
 install.packages("Rtools44")
@@ -153,15 +153,24 @@ Larval = merge(Larval, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 #options(geodata_default_path = "c:/you/geodata/path")
 #Land Data
 #can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-can1 = rbind(can,us)
-NBNS = can1
 
+
+
+
+can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia"))
+NBNS <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia"), ]
+
+#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
+#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
+#can1 = rbind(can,us)
+#NBNS = can1
+NBNS_sf <- sf::st_as_sf(NBNS)
+
+
+NBNS = NBNS_sf
 
 #NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
+#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
 
 
 #Trying new map to run faster
@@ -173,32 +182,80 @@ NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few min
 ```{r Box Import}
 #Import All Boxes
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
-boxes = read.csv("surveyBoxes.csv")
+boxes <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/surveyBoxes.csv")
 
-# Scots Bay plankton and CTD box
+# convert to sf
+# Scots Bay plankton 
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
-SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+SBplankton_sf <- SBplankton %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
 
-# Scots Bay
+# Scots Bay CTD
+SBCTD=boxes[which(boxes$Box == "SBocean"), ]
+SBCTD_sf <- SBCTD %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+
+
+# Scots Bay Eastern
 SUA = read.csv("polygon_SBEastern.csv")
 polyEastern = as.PolySet(SUA, projection="LL")
+polyEastern_sf <- polyEastern %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
 
+# Scots Bay Northern
 SUA = read.csv("polygon_SBNorthern.csv")
 polyNorthern = as.PolySet(SUA, projection="LL")
+polyNorthern_sf <- polyNorthern %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
 
+# Scots Bay Main
 SUA = read.csv("polygon_SB.csv")
 polySB_main = as.PolySet(SUA, projection="LL")
+polySB_main_sf <- polySB_main %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+
 
 #German Bank CTD box
 GBCTD=boxes[which(boxes$Box == "GBocean"), ]
+GBCTD_sf <- GBCTD %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+
 
 # German Bank      
 SUA = read.csv("polygon_GB.csv")
 polyGB = as.PolySet(SUA, projection="LL")
+polyGB_sf <- polyGB %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
 
 # Seal Island      
 SUA = read.csv("polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
+polySI_sf <- polySI %>%
+  st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
+  group_by(PID) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
 ```
 
 ## Larval Project {.tabset}
@@ -342,9 +399,15 @@ print(kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Age", "Abunda
 
 ```{r message=FALSE, warning=FALSE}
 
-CP <- as(extent(-66.5, -64.5, 44.5, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+#CP <- as(extent(-66.5, -64.5, 44.5, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
+#proj4string(CP) <- CRS(proj4string(NBNS))
+#out <- crop(NBNS, CP, byid=TRUE)
+
+CP <- ext(-66.5, -64.5, 44.5, 45.5)
+CP <- as.polygons(CP)
+crs(CP) <- crs(NBNS)
+CP_sf <- sf::st_as_sf(CP)
+
 
 ```
 
@@ -352,18 +415,23 @@ out <- crop(NBNS, CP, byid=TRUE)
 
 ```{r echo=FALSE, fig.align='center'}
 Larval2 <- subset(Larval, Ground == 'SB')
-#Larval2 <- subset(Larval2, X > -66)
 
-ggplot(Larval2, aes(x=X, y=Y)) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map()
+print(
+  ggplot() +
+    geom_sf(data = NBNS_sf, fill = "lightgray", color = "black") +
+    geom_sf(data = polySB_main_sf, fill = "white", color = "black", linetype = 3) +
+    geom_sf(data = SBplankton_sf, fill = "white", color = "black", linetype = 3) +
+    geom_sf(data = SBCTD_sf, fill = "white", color = "black", linetype = 3) +
+    geom_sf(data = polyNorthern_sf, fill = "white", color = "black", linetype = 3) +
+    geom_sf(data = polyEastern_sf, fill = "white", color = "black", linetype = 3) +
+    geom_point(data = Larval2,
+               aes(x = X, y = Y, fill = category),
+               pch = 21, alpha = 0.6) +
+    coord_sf() +
+    labs(x = NULL, y = NULL)
+)
+
+
 ```
 
 ```{r, results = "asis", fig.align='center'}
@@ -373,32 +441,51 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i) %>% filter(Ground == "SB")
-Larval1 <- subset(Larval1, X > -66)
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
+  Larval1 <- Larval %>% 
+    filter(Year == i, Ground == "SB")
+
+  print(
+    ggplot(data = Larval1, aes(AvgTowDepth, LengthAdjustment, colour = id)) +
+      geom_jitter(size = 1.25, width = 3) +
+      geom_hline(yintercept = 8,  linetype = "longdash", size = 1, colour = "red") +
+      geom_hline(yintercept = 12, linetype = "longdash", size = 1, colour = "blue") +
+      geom_hline(yintercept = 17, linetype = "longdash", size = 1, colour = "forestgreen") +
+      geom_hline(yintercept = 27, linetype = "longdash", size = 1, colour = "grey70") +
+      scale_y_reverse() +
+      labs(x = "Average Tow Depth (m)", 
+           y = "Larval Length (mm)", 
+           colour = "id")
+  )
+
   cat("\n")
   
   TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
+    group_by(category) %>%
+    summarize(n = n(),
+              MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+    mutate(Percentage = (n/sum(n))*100) %>%
+    mutate_if(is.numeric, format, digits = 1) %>%
+    relocate(MeanDepth, .after = Percentage)
 
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
+  print(
+    kbl(TotalCategories,
+        col.names = c("Category", "Abundance", "%", "Avg Tow Depth (m)"),
+        align = "c") %>%
+      kable_paper("striped", full_width = FALSE)
+  )
+
   cat("\n")
 }
+
 ```
+
+
+
+
+
+
+
+
 
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
@@ -436,29 +523,40 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i)
-Larval1 = Larval1 %>% filter(Ground == "SB")
- 
-print(ggplot(data=Larval1, (aes(AvgTowDepth, LengthAdjustment, colour = id))) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "id")) 
+  Larval1 <- Larval %>% 
+    filter(Year == i, Ground == "SB")
+
+  print(
+    ggplot(data = Larval1, 
+           aes(AvgTowDepth, LengthAdjustment, colour = id)) +
+      geom_jitter(size = 1.25, width = 3) +
+      geom_hline(yintercept = 8,  linetype = "longdash", size = 1, colour = "red") +
+      geom_hline(yintercept = 12, linetype = "longdash", size = 1, colour = "blue") +
+      geom_hline(yintercept = 17, linetype = "longdash", size = 1, colour = "forestgreen") +
+      geom_hline(yintercept = 27, linetype = "longdash", size = 1, colour = "grey70") +
+      scale_y_reverse() +
+      labs(x = "Average Tow Depth (m)", 
+           y = "Larval Length (mm)", 
+           colour = "id")
+  )
+
   cat("\n")
   
   TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
+    group_by(category) %>%
+    summarize(n = n(),
+              MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+    mutate(Percentage = (n/sum(n))*100) %>%
+    mutate_if(is.numeric, format, digits = 1) %>%
+    relocate(MeanDepth, .after = Percentage)
 
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F))
+  print(
+    kbl(TotalCategories,
+        col.names = c("Category", "Abundance", "%", "Avg Tow Depth (m)"),
+        align = "c") %>%
+      kable_paper("striped", full_width = FALSE)
+  )
+
   cat("\n")
 }
 ```
@@ -467,7 +565,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 ##### Total
 
-Growth applied to compare spawning modes.
+#Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
 
@@ -758,24 +856,35 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 #### Mapped Data {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.75, 43, 43.7), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+
+CP_sf <- st_as_sfc(
+  st_bbox(c(
+    xmin = -66.5,
+    xmax = -65.75,
+    ymin = 43,
+    ymax = 43.7
+  ), crs = st_crs(NBNS_sf))
+)
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
 
-Larval2 <- subset(Larval, Ground == 'GB')
+Larval2 <- subset(Larval, Ground == "GB")
 
-ggplot(Larval2, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) +   coord_map()
+ggplot() +
+  geom_sf(data = CP_sf, fill = "grey90", color = "black") +
+  geom_sf(data = polyGB_sf, fill = "white", color = "black", linetype = 3) +
+  geom_sf(data = GBCTD_sf, fill = "white", color = "black", linetype = 3) +
+  geom_sf(data = polySI_sf, fill = "white", color = "black", linetype = 3) +
+  geom_point(
+    data = Larval2,
+    aes(x = X, y = Y, fill = Year),
+    pch = 21, alpha = 0.6
+  ) +
+  labs(x = NULL, y = NULL) +
+  coord_sf()
 
 ```
 
@@ -788,28 +897,42 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i) %>% filter()
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
+  Larval1 <- Larval %>%
+    filter(Year == i, Ground == "GB")
 
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
+  print(
+    ggplot() +
+      geom_sf(data = CP_sf, fill = "grey90", color = "black") +
+      geom_sf(data = GBCTD_sf, fill = "white", color = "black", linetype = 3) +
+      geom_sf(data = polyGB_sf, fill = "white", color = "black", linetype = 3) +
+      geom_sf(data = polySI_sf, fill = "white", color = "black", linetype = 3) +
+      geom_point(
+        data = Larval1,
+        aes(x = X, y = Y, fill = category),
+        pch = 21, alpha = 0.6
+      ) +
+      labs(x = NULL, y = NULL) +
+      coord_sf()
+  )
+
+  cat("\n")
+
+  TotalCategories <- Larval1 %>%
+    group_by(category) %>%
+    summarize(n = n()) %>%
+    mutate(Percentage = (n/sum(n)) * 100) %>%
+    mutate_if(is.numeric, format, digits = 1)
+
+  print(
+    kbl(TotalCategories,
+        col.names = c("Category", "Abundance", "%"),
+        align = "c") %>%
+      kable_paper("striped", full_width = FALSE)
+  )
+
   cat("\n")
 }
+
 ```
 
 #### Depth Data {.tabset .tabset-pills}
@@ -1180,26 +1303,39 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 #### Mapped Data {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+
+# bounding box
+CP_sf <- st_as_sfc(
+  st_bbox(c(
+    xmin = -66.5,
+    xmax = -65.5,
+    ymin = 43,
+    ymax = 44
+  ), crs = st_crs(NBNS_sf))
+)
+
+# crop NBNS to bounding box
+out_sf <- st_intersection(NBNS_sf, CP_sf)
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
 
-Larval2 <- subset(Larval, Ground == 'SI')
+Larval2 <- subset(Larval, Ground == "SI")
 
-ggplot(Larval2, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map()
-
+ggplot() +
+  geom_sf(data = out_sf, fill = "grey90", color = "black") +
+  geom_sf(data = polyGB_sf, fill = "white", color = "black", linetype = 3) +
+  geom_sf(data = GBCTD_sf, fill = "white", color = "black", linetype = 3) +
+  geom_sf(data = polySI_sf, fill = "white", color = "black", linetype = 3) +
+  geom_point(
+    data = Larval2,
+    aes(x = X, y = Y, fill = Year),
+    pch = 21, alpha = 0.6
+  ) +
+  labs(x = NULL, y = NULL) +
+  coord_sf()
 ```
 
 
@@ -1211,26 +1347,39 @@ for(i in unique(Larval$Year)) {
   cat("#####", i, "\n")
   cat("\n")
 
-Larval1 = Larval %>% filter(Year == i) %>% filter()
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
+  Larval1 <- Larval %>%
+    filter(Year == i, Ground == "SI")   # or GB/SI depending on your region
 
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
+  print(
+    ggplot() +
+      geom_sf(data = out_sf, fill = "grey90", color = "black") +
+      geom_sf(data = GBCTD_sf, fill = "white", color = "black", linetype = 3) +
+      geom_sf(data = polyGB_sf, fill = "white", color = "black", linetype = 3) +
+      geom_sf(data = polySI_sf, fill = "white", color = "black", linetype = 3) +
+      geom_point(
+        data = Larval1,
+        aes(x = X, y = Y, fill = category),
+        pch = 21, alpha = 0.6
+      ) +
+      labs(x = NULL, y = NULL) +
+      coord_sf()
+  )
+
+  cat("\n")
+
+  TotalCategories <- Larval1 %>%
+    group_by(category) %>%
+    summarize(n = n()) %>%
+    mutate(Percentage = (n/sum(n)) * 100) %>%
+    mutate_if(is.numeric, format, digits = 1)
+
+  print(
+    kbl(TotalCategories,
+        col.names = c("Category", "Abundance", "%"),
+        align = "c") %>%
+      kable_paper("striped", full_width = FALSE)
+  )
+
   cat("\n")
 }
 ```
