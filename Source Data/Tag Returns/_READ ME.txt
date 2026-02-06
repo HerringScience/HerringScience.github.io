@@ -1,0 +1,6 @@
+rawReturn is earlier in the time series from 2016 to 2019.
+
+complete.returns seems to have the whole time series (1989 returns)
+
+tagReturnsTracy seems to have most of the tag returns from the time series (1875, missing 114 from complete.returns)
+
