@@ -29,7 +29,6 @@ local({r <- getOption("repos")
 })
 
 #Packages
-#setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 library(ggplot2)
 library(patchwork)
 library(scales)
@@ -42,12 +41,10 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
 library(sf)
 library(terra)
 library(knitr)
@@ -71,33 +68,29 @@ library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
-#devtools::install_github("ropensci/rnaturalearthhires")
 
 install.packages('GADMTools')
 install.packages("Rtools44")
-
-
 state_prov <- rnaturalearth::ne_states(c("united states of america", "canada"))
 
-#Survey Data
+# Survey Data
 surveyData <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
-
+# Grounds Data for Polygons
 polysT = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv") #Tagging Data
-
 #CTD Data
 SST = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") #SST
 CTD = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
-atDepth = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
-SST$Year <- as.factor(SST$Year)
-SST$Month <- as.factor(SST$Month)
-atDepth$Year <- as.factor(atDepth$Year)
-atDepth$Month <- as.factor(atDepth$Month)
-CTD$Year <- as.factor(CTD$Year)
-CTD$Month <- as.factor(CTD$Month)
-CTD$Survey <- as.factor(CTD$Survey)
-CTD <- CTD %>%
-  mutate(Julian_factor = Julian)
-CTD$Julian_factor <- as.factor(CTD$Julian_factor)
+          atDepth = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+          SST$Year <- as.factor(SST$Year)
+          SST$Month <- as.factor(SST$Month)
+          atDepth$Year <- as.factor(atDepth$Year)
+          atDepth$Month <- as.factor(atDepth$Month)
+          CTD$Year <- as.factor(CTD$Year)
+          CTD$Month <- as.factor(CTD$Month)
+          CTD$Survey <- as.factor(CTD$Survey)
+          CTD <- CTD %>%
+            mutate(Julian_factor = Julian)
+          CTD$Julian_factor <- as.factor(CTD$Julian_factor)
 
 #SSB Data
 SSB = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
@@ -117,7 +110,10 @@ FatData = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Mai
 #All preservative length adjustments added in in Larval QC script.
 #Changed code within compendium from Lengthmm to LengthAdjustment
 
-Larval = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval Jan 2025.csv"))
+
+# The larval data
+Larval = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Full Larval.csv"))
+#original was from Main Data, Jan 2025
 LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
 LarvalSum$Year <- as.factor(LarvalSum$Year)
 
@@ -142,35 +138,13 @@ names(Larval)[names(Larval) =="Lat2"] <- "Yend"
 LarvalSI = filter(Larval, Ground == "SI")
 LarvalSI = merge(LarvalSI, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 
-
-
 Larval = merge(Larval, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 
-#options(geodata_default_path = "c:/you/geodata/path")
-#Land Data
-#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-
-
-
-
+# Map data
 can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia"))
-NBNS <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia"), ]
-
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-#can1 = rbind(can,us)
-#NBNS = can1
-NBNS_sf <- sf::st_as_sf(NBNS)
-
-
-NBNS = NBNS_sf
-
-#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes a few minutes to process.
-
-
-#Trying new map to run faster
-
+  NBNS <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia"), ]
+  NBNS_sf <- sf::st_as_sf(NBNS)
+  NBNS = NBNS_sf
 
 
 ```
