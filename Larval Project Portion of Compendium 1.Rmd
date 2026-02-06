@@ -1,6 +1,9 @@
 ---
 title: "Larval Project Portion of Compendium"
-output: pdf_document
+output:
+  pdf_document:
+    fig_width: 6
+    fig_height: 4
 date: "2026-02-05"
 ---
 
@@ -26,7 +29,7 @@ local({r <- getOption("repos")
 })
 
 #Packages
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
+#setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
 library(ggplot2)
 library(patchwork)
 library(scales)
@@ -79,19 +82,12 @@ state_prov <- rnaturalearth::ne_states(c("united states of america", "canada"))
 #Survey Data
 surveyData <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
-#Tagging Data
-Tag = read_csv("TaggingEvents.csv") #Tagging Data
-polysT = read_csv("timGrounds.csv") #Coloured ground maps
-Tag$Year = as.factor(Tag$Year)
-Tag$Vessel = as.factor(Tag$Vessel)
-Tag$Survey = as.factor(Tag$Survey)
-Tag$Tagger = as.factor(Tag$Tagger)
+polysT = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv") #Tagging Data
 
 #CTD Data
-SST = read_csv("CTD SST.csv") #SST
-polysT = read_csv("timGrounds.csv") #coloured ground maps
-CTD = read_csv("CTD Full.csv") #All Data
-atDepth = read_csv("CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+SST = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") #SST
+CTD = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
+atDepth = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
 SST$Year <- as.factor(SST$Year)
 SST$Month <- as.factor(SST$Month)
 atDepth$Year <- as.factor(atDepth$Year)
@@ -104,17 +100,17 @@ CTD <- CTD %>%
 CTD$Julian_factor <- as.factor(CTD$Julian_factor)
 
 #SSB Data
-SSB = read_csv("SSB Estimates.csv")
+SSB = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 SSB$Year <- as.factor(SSB$Year)
 SSB$Survey_Number <- as.factor(SSB$Survey_Number)
 SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
-LRP2 = read_csv("LRP Data.csv")
+LRP2 = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/LRP Data.csv")
 LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
 
 #Fat Data
-FatData = read_csv("Total Fat Data.csv")
+FatData = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
 
 #Larval Data
 #All Adjusted Ages and Dates are originally added in Larval QC script.
@@ -181,7 +177,6 @@ NBNS = NBNS_sf
 
 ```{r Box Import}
 #Import All Boxes
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
 boxes <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/surveyBoxes.csv")
 
 # convert to sf
@@ -203,7 +198,7 @@ SBCTD_sf <- SBCTD %>%
 
 
 # Scots Bay Eastern
-SUA = read.csv("polygon_SBEastern.csv")
+SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBEastern.csv")
 polyEastern = as.PolySet(SUA, projection="LL")
 polyEastern_sf <- polyEastern %>%
   st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
@@ -212,7 +207,7 @@ polyEastern_sf <- polyEastern %>%
   st_cast("POLYGON")
 
 # Scots Bay Northern
-SUA = read.csv("polygon_SBNorthern.csv")
+SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBNorthern.csv")
 polyNorthern = as.PolySet(SUA, projection="LL")
 polyNorthern_sf <- polyNorthern %>%
   st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
@@ -221,7 +216,7 @@ polyNorthern_sf <- polyNorthern %>%
   st_cast("POLYGON")
 
 # Scots Bay Main
-SUA = read.csv("polygon_SB.csv")
+SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SB.csv")
 polySB_main = as.PolySet(SUA, projection="LL")
 polySB_main_sf <- polySB_main %>%
   st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
@@ -240,7 +235,7 @@ GBCTD_sf <- GBCTD %>%
 
 
 # German Bank      
-SUA = read.csv("polygon_GB.csv")
+SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_GB.csv")
 polyGB = as.PolySet(SUA, projection="LL")
 polyGB_sf <- polyGB %>%
   st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
@@ -249,7 +244,7 @@ polyGB_sf <- polyGB %>%
   st_cast("POLYGON")
 
 # Seal Island      
-SUA = read.csv("polygon_SI.csv")
+SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 polySI_sf <- polySI %>%
   st_as_sf(coords = c("X", "Y"), crs = st_crs(NBNS_sf)) %>%
