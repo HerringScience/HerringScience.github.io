@@ -1,10 +1,10 @@
 ---
 title: "Larval Project Portion of Compendium"
 output:
-  pdf_document:
+  html_document:
     fig_width: 6
     fig_height: 4
-date: "2026-02-05"
+date: "2026-02-11"
 ---
 
 ```{r setup, include=FALSE}
@@ -114,7 +114,7 @@ FatData = read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Mai
 # The larval data
 Larval = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Full Larval.csv"))
 #original was from Main Data, Jan 2025
-LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
+LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/LarvalSum.csv"))
 LarvalSum$Year <- as.factor(LarvalSum$Year)
 
 Larval$Date <- lubridate::ymd(Larval$Date)
@@ -235,7 +235,7 @@ polySI_sf <- polySI %>%
 
 ##### Total 
 
-```{r, results = "asis", fig.align='center'}
+```{r greenToad, results = "asis", fig.align='center'}
 Larval1 <- subset.data.frame(Larval, Ground == "SB")
 
 Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) +
@@ -290,7 +290,7 @@ kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Age", "Abundance", 
 ```
 
 
-```{r, results = "asis", fig.align='center'}
+```{r giantGrouse, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
 # In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
@@ -366,7 +366,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Age", "Abunda
 
 #### Mapped Data {.tabset .tabset-pills}
 
-```{r message=FALSE, warning=FALSE}
+```{r tickingTime, message=FALSE, warning=FALSE}
 
 #CP <- as(extent(-66.5, -64.5, 44.5, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
 #proj4string(CP) <- CRS(proj4string(NBNS))
@@ -382,7 +382,7 @@ CP_sf <- sf::st_as_sf(CP)
 
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r upUP, echo=FALSE, fig.align='center'}
 Larval2 <- subset(Larval, Ground == 'SB')
 
 print(
@@ -403,7 +403,7 @@ print(
 
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r LaLaLand, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -459,7 +459,7 @@ for(i in unique(Larval$Year)) {
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r yellowSub, echo=FALSE, fig.align='center'}
 
 Larval1 = Larval %>% filter(Ground == "SB")
 
@@ -485,7 +485,7 @@ kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m
   kable_paper("striped", full_width = F)
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r pinkPanther, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -536,7 +536,7 @@ for(i in unique(Larval$Year)) {
 
 #Growth applied to compare spawning modes.
 
-```{r, fig.align='center'}
+```{r blueBoat, fig.align='center'}
 
 # The following survey's did not use a flowmeter, therefore does not have water volume or larval density. This is only applicable to surveys that larvae were caught.
 # Scots Bay 2017 Survey 1, 2, 6 & 7
@@ -576,7 +576,7 @@ print(ggplot(Larval1, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) +
 
 ```
 
-```{r, results='asis', fig.align='center'}
+```{r organic, results='asis', fig.align='center'}
  
 for(i in unique(Larval$Year)) {
   cat("\n")
@@ -625,7 +625,7 @@ print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour =
 
 Dates individual larvae were spawned. Used an incubation period of 14 days.
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r temper, results = 'asis', echo=FALSE, fig.align='center'}
 # Changed AdjustedJulianSpawnDate to JulianSpawnDate
 
 Larval1 <- Larval %>% filter(Ground == "SB")
@@ -650,7 +650,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Year {.tabset}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r couscous, results = 'asis', echo=FALSE, fig.align='center'}
 
 for(i in unique(Larval$Year)) {
   
@@ -693,7 +693,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r brownCow, results = 'asis', echo=FALSE, fig.align='center'}
 Larval1 <- subset(Larval, Ground == "SB")
 
 for(i in unique(Larval1$TowID)) {
@@ -738,7 +738,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r whiteWagon, echo=FALSE, fig.align='center'}
 
 Larval = Larval %>% filter(Ground == "GB")
 
@@ -771,7 +771,7 @@ kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Lengt
   kable_paper("striped", full_width = F)
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r tieDye, results = "asis", fig.align='center'}
 
 Larval1 = Larval %>% filter(Ground == "GB")
 
@@ -824,7 +824,7 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 
 #### Mapped Data {.tabset .tabset-pills}
 
-```{r message=FALSE, warning=FALSE}
+```{r creative, message=FALSE, warning=FALSE}
 
 CP_sf <- st_as_sfc(
   st_bbox(c(
@@ -838,7 +838,7 @@ CP_sf <- st_as_sfc(
 
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r constant, echo=FALSE, fig.align='center'}
 
 Larval2 <- subset(Larval, Ground == "GB")
 
@@ -859,7 +859,7 @@ ggplot() +
 
 
 
-```{r, results = "asis", fig.align='center'}
+```{r cutlery, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -907,7 +907,7 @@ for(i in unique(Larval$Year)) {
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r cruBaby, echo=FALSE, fig.align='center'}
 
 Larval1 = Larval %>% filter(Ground == "GB")
 
@@ -933,7 +933,7 @@ kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m
   kable_paper("striped", full_width = F)
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r littleLemon, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -973,7 +973,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 Growth applied to compare spawning modes.
 
-```{r, fig.align='center'}
+```{r TRex, fig.align='center'}
 
 #Should x be Julian date and colour be survey number instead of year?
 #Need to add in Larval summary table within compendium
@@ -1011,7 +1011,7 @@ print(ggplot(GBLarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) 
 ```
 
 
-```{r, results='asis', fig.align='center'}
+```{r Booster, results='asis', fig.align='center'}
  
 for(i in unique(Larval$Year)) {
   cat("\n")
@@ -1063,7 +1063,7 @@ print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour =
 
 Dates individual larvae were spawned. Used an incubation period of 10 days.
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r BlackPanther, results = 'asis', echo=FALSE, fig.align='center'}
 
 Larval1 <- Larval %>% filter(Ground == "GB")
 
@@ -1087,7 +1087,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Year {.tabset}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r lavender, results = 'asis', echo=FALSE, fig.align='center'}
 
 for(i in unique(Larval$Year)) {
   
@@ -1130,7 +1130,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r lilac, results = 'asis', echo=FALSE, fig.align='center'}
 Larval1 <- subset(Larval, Ground == "GB")
 
 for(i in unique(Larval$TowID)) {
@@ -1174,7 +1174,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r lesson, echo=FALSE, fig.align='center'}
 
 Larval = LarvalSI
 
@@ -1208,7 +1208,7 @@ kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Lengt
   kable_paper("striped", full_width = F)
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r wordUP, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
 # In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
@@ -1271,7 +1271,7 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 
 #### Mapped Data {.tabset .tabset-pills}
 
-```{r message=FALSE, warning=FALSE}
+```{r crankyCat, message=FALSE, warning=FALSE}
 
 # bounding box
 CP_sf <- st_as_sfc(
@@ -1289,7 +1289,7 @@ out_sf <- st_intersection(NBNS_sf, CP_sf)
 
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r beautifulbee, echo=FALSE, fig.align='center'}
 
 Larval2 <- subset(Larval, Ground == "SI")
 
@@ -1309,7 +1309,7 @@ ggplot() +
 
 
 
-```{r, results = "asis", fig.align='center'}
+```{r funnyFace, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -1356,7 +1356,7 @@ for(i in unique(Larval$Year)) {
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
 
-```{r echo=FALSE, fig.align='center'}
+```{r riotAct, echo=FALSE, fig.align='center'}
 
 LarvalSI %>% 
   ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
@@ -1380,7 +1380,7 @@ kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m
   kable_paper("striped", full_width = F)
 ```
 
-```{r, results = "asis", fig.align='center'}
+```{r annex, results = "asis", fig.align='center'}
 for(i in unique(Larval$Year)) {
   
   cat("\n")
@@ -1419,7 +1419,7 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 
 Growth applied to compare spawning modes.
 
-```{r, fig.align='center'}
+```{r CanadaRules, fig.align='center'}
 
 LarvalSum = LarvalSum %>% filter(Ground == "SI")
 
@@ -1450,7 +1450,7 @@ print(ggplot(LarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) +
 ```
 
 
-```{r, results='asis', fig.align='center'}
+```{r Neverneverland, results='asis', fig.align='center'}
  
 for(i in unique(Larval$Year)) {
   cat("\n")
@@ -1501,7 +1501,7 @@ print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour
 
 Dates individual larvae were spawned. Used an incubation period of 10 days.
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r AWHOLEnewWorld, results = 'asis', echo=FALSE, fig.align='center'}
 
 Larval1 <- Larval %>% filter(Ground == "SI")
 
@@ -1523,7 +1523,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Year {.tabset}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r ToyStory, results = 'asis', echo=FALSE, fig.align='center'}
 
 Larval1 <- subset.data.frame(Larval, Ground == "SI")
 
@@ -1566,7 +1566,7 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
-```{r, results = 'asis', echo=FALSE, fig.align='center'}
+```{r BelleandBeast, results = 'asis', echo=FALSE, fig.align='center'}
 Larval1 <- subset(Larval, Ground == "SI")
 
 for(i in unique(Larval$TowID)) {
