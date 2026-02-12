@@ -41,7 +41,14 @@ plank = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringSci
 
 ## Look at original Larval Measurements to check out Abundance as it seems wrong from Larval Sum
 measure = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/Larval Measurements.csv"))
+measure$Yolk_sac= as.factor(measure$Yolk_sac)
 
+# redid the yolksac for 2017-2019. Seems like there is data for 2020 so just need to review 2021.
+
+# Use ARC data to see how many tows couldn't be processes
+arc = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARC Data.csv"))
+
+arc = arc %>% dplyr::select(id, Larvae_Count, Notes)
 
 ################################################################
 
@@ -70,13 +77,7 @@ LarvalSI = merge(LarvalSI, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "i
 
 Larval = merge(Larval, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 
-head(Larval)
-
-
-
-
 # Calculate the average number of larvae per tow within each year. plot totals.
-
 
 LarvalSumSB=LarvalSum[which(LarvalSum$Ground == "SB"), ]
 #only 1 year 2019
@@ -84,14 +85,89 @@ LarvalSumSI=LarvalSum[which(LarvalSum$Ground == "SI"), ]
 #only 1 year 2021
 LarvalSumGB=LarvalSum[which(LarvalSum$Ground == "GB"), ]
 
-head(LarvalSumSB)
+
+### Use ARC data to see how many samples couldn't be processed due to quality issues:
+head(arc)
+arcD = arc[!is.na(arc$Notes), ]
+
+write.table(arcD, file= "arcD.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+# in Excel created a column name called Quality, where G is Good and B is Bad for unable to be sorted.
+
+arcD = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/arcD.csv"))
+
+head(arcD)
+
+ids = arcD$id
 
 
+dim(arc)
+arc_ <- arc[!arc$id %in% ids, ]
+dim(arc_)
+dim(arcD)
+
+68+18
+
+arc_$Condition = ("G")
+
+ARCwC = rbind (arc_, arcD)
+dim(ARCwC)
+
+ARCwC$Condition = as.factor(ARCwC$Condition)
+
+save(ARCwC, file = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Larval Data/ARCwC.RData")
+
+summary(ARCwC$Condition)
+
+count(ARCwC$Condition)
+
+Bad=ARCwC[which(ARCwC$Condition == "B"), ]
+
+write.table(Bad, file= "BadConditionSamples.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+##############################################
+
+# YOLK SAC - newly hatched. Determine summaries for larvae captured with yolk sacs
+
+head(measure)
+unique(measure$Yolk_sac)
+
+yolks=measure[which(measure$Yolk_sac == "Y"), ]
+dim(measure)
+dim(yolks)
+
+# this doesn't make sense. there were alot more larvae that had yolk sacs then 10 and only in 2020.
+
+head(measure)
+measure <- measure %>%
+  mutate(Year = substr(id, start = 3, stop = 6))
+
+head(measure)
+measure$Year = as.factor(measure$Year)
+
+Measure2017=measure[which(measure$Year == "2017"), ]
+Measure2018=measure[which(measure$Year == "2018"), ]
+Measure2019=measure[which(measure$Year == "2019"), ]
+
+older = rbind(Measure2017, Measure2018, Measure2019)
+dim(measure)
+dim(older)
+
+
+#measureD has 2017,2018 and 2019 with the proper yolk sac information.
+
+df_no_na <- measureD %>% 
+  filter(!is.na(Yolk_sac))
+
+
+
+####################################################
 se <- function(x) sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))
 
 # Scots Bay
 # mean number captured
 mean(LarvalSumSB$Abundance)
+sum(LarvalSumSB$Abundance)
 se(LarvalSumSB$Abundance)
 
 # mean length
@@ -102,6 +178,7 @@ se(LarvalSumSB$LengthAdjustment)
             # mean number captured
             mean(LarvalSumGB$Abundance)
             se(LarvalSumGB$Abundance)
+            sum(LarvalSumGB$Abundance)
             
             # mean length
             mean(LarvalSumGB$LengthAdjustment)
@@ -111,11 +188,15 @@ se(LarvalSumSB$LengthAdjustment)
                           
                           # mean number captured
                           mean(LarvalSumSI$Abundance)
-                          se(LarvalSumSI$Abundance)
-                          
+                          se(LarvalSumSI$Abundance)  
+                          sum(LarvalSumSI$Abundance)
                           # mean length
                           mean(LarvalSumSI$LengthAdjustment)
                           se(LarvalSumSI$LengthAdjustment)
+                          
+                          
+                          
+                          
 
 
 ###
