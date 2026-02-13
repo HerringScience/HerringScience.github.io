@@ -234,10 +234,119 @@ unique(plankHist$Year)
 
 colnames(plankHist)
 
+# need to bring is corrected flowmeter volume calcs
+
+
+vol = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/larvalFlowmeterVolumeCalcCorrections.csv"))
+
+
+head(vol)
+volU <- vol[ , c("id", "FlowReading1", "FlowReading2", "NoRevs", "DistanceCalc", "Volume")]
+head(volU)
+volU= volU %>%
+  mutate(Year = substr(id, start = 3, stop = 6))
+
+volU= volU %>%
+  mutate(Ground = substr(id, start = 1, stop = 2))
+unique(volU$Ground)
+
+head(volU)
+
+dim(volU)
+
+volU2017=volU[which(volU$Year == "2017"), ]
+volU2018=volU[which(volU$Year == "2018"), ]
+volU2019=volU[which(volU$Year == "2019"), ]
+volU2020=volU[which(volU$Year == "2020"), ]
+volU2021=volU[which(volU$Year == "2021"), ]
+
+volUH = rbind (volU2017, volU2018, volU2019, volU2020, volU2021)
+
+
+volUSB=volUH[which(volUH$Ground == "SB"), ]
+#only 1 year 2019
+volUSI=volUH[which(volUH$Ground == "SI"), ]
+#only 1 year 2021
+volUGB=volUH[which(volUH$Ground == "GB"), ]
+
+volUT = rbind(volUSB, volUSI, volUGB)
+
+dim(volUT)
+dim(plankHist)
+
+
+
 # unique dates
 
-length(unique(plankHist$Date))
-dim(plankHist)
+# Smumaries for Tow time
+
+plankHist$TowTime = as.numeric(plankHist$TowTime, units = "mins")
+
+boxplot(plankHist$TowTime,  main = "Distribution of Tow Times",
+        ylab = "Time (minutes)",
+        col = "skyblue"
+)
+
+mean(plankHist$TowTime, na.rm = TRUE)
+se(plankHist$TowTime)
+
+#### Vessel
+
+plankHist$PlanktonVessel = as.factor(plankHist$PlanktonVessel)
+unique(plankHist$PlanktonVessel)
+
+barplot(table(plankHist$PlanktonVessel),
+        horiz = TRUE,
+        col = "skyblue")
+
+## Flowmeter;
+
+#general oceanics
+# calculate the difference in revolutions from tow end to tow start (R)
+#D = multiple the number of revolution by R *(26873/999999)
+# =3.14159 * (1)^ 2 * D
+
+plankHist$FlowmeterType = as.factor(plankHist$FlowmeterType)
+barplot(table(plankHist$FlowmeterType, useNA = "ifany"),
+        horiz = TRUE,
+        col = "skyblue")
+
+
+names(plankHist$FlowmeterType)[is.na(names(plankHist$FlowmeterType))] <- "No Flowmeter"
+
+barplot(plankHist$FlowmeterType,
+        main = "FlowmeterType",
+        ylab = "Count",
+        col = "steelblue")
+
+
+tab <- table(plankHist$FlowmeterType, useNA = "ifany")
+names(tab)[is.na(names(tab))] <- "Missing"
+
+barplot(tab,
+        main = "Flowmeter",
+        ylab = "Count",
+        col = "skyblue")
+
+
+subset_df <- plankHist[is.na(plankHist$FlowmeterType), ]
+dim(subset_df)
+
+## Volume
+
+
+plankHist$Volume = as.numeric(plankHist$Volume)
+mean(plankHist$Volume, na.rm = TRUE)
+se(plankHist$Volume)
+
+hist(plankHist$Volume,
+     main = "Distribution of Variable",
+     xlab = "Value",
+     col = "skyblue",
+     breaks = 20)
+
+
+#######################
 
 94-58
 36/2
