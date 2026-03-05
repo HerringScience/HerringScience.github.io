@@ -9,6 +9,16 @@ build_Oceans_df <- function (
 
 {
  
+  
+  
+  #### load packages
+  
+  library(dplyr)
+  library(sf)
+  library(tibble)
+  
+  
+  
    read_dfo_one <- function(path) {
     x <- readr::read_csv(path, show_col_types = FALSE)
     
@@ -83,12 +93,8 @@ build_Oceans_df <- function (
   # Returns conductivity [mS/cm]
   
   
+  
   # Load polygons for Scots Bay and German Bank
-  
-  library(dplyr)
-  library(sf)
-  library(tibble)
-  
   # Polygon (lon/lat) from the vertices
   
   #Scots Bay
@@ -224,7 +230,7 @@ build_Oceans_df <- function (
         
         # Removes data from grounds other than Scots Bay and German Bank
         Oceans <- Oceans %>%
-          dplyr::filter(ground != "Other")
+          dplyr::filter(ground %in% c("Scots Bay", "German Bank"))
         
         return(Oceans)
 
