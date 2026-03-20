@@ -39,6 +39,17 @@ library(devtools)
 library(maps)
 library(dplyr)
 library(coin)
+library(readr)
+library(stringr)
+###logistic GAM bias test:
+library(purrr)
+library(tidyr)
+library(mgcv)
+library(readr)
+### appenidx export:
+library(writexl)
+library(perm)
+
 
 
 # CTD DATA
@@ -50,43 +61,39 @@ source("build_Oceans_df.R")
 
 Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
 
-head(Oceans)
-unique(Oceans$Year)
-
-
-
-#QC oceans for extreme temps
 colnames(Oceans)
-hist(Oceans$Temperature)
-
-#OceansCheck=Oceans[which(Oceans$Temperature > 25), ]
-#OceansSB=Oceans[which(Oceans$ground == "Scots Bay"), ]
-#OceansGB=Oceans[which(Oceans$ground == "German Bank"), ]
-
-se <- function(x, na.rm = TRUE) {
-  x <- if (na.rm) x[!is.na(x)] else x
-  stats::sd(x) / sqrt(length(x))
-}
 
 
-## Look at depth 
-
-ggplot(data = Oceans, aes(x = JulianDay, y = Depth, colour = Source)) + geom_jitter() + ggtitle("Depth Distribution of Samples in German Bank")
-
-# Add lat and long to these dataframes
+# Functions
+source("se.R")
+source("Layer_Oceans.R")
 source("surface_Oceans.R")
-source("depth_Oceans.R")
+
+surface <- Layer_Oceans(Oceans, mode = "range", depth_lower = 0, depth_upper = 5,
+                     add_JD_bin = TRUE, min_n = 10, return = "summary")
+
+
+write.table(surface, file= "surface.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+
+colnames(surface)
+
+
+deep <- Layer_Oceans(Oceans, mode = "range", depth_lower = 29, depth_upper = 31,
+                         add_JD_bin = TRUE, min_n = 10, return = "summary")
+
+both <- dplyr::left_join(surf, deep, by = c("id", "ground", "Source", "Date", "Year", "JulianDay", "Lat", "Lon"))
+
+write.table(deep, file= "deep.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+
+write.table(surface, file= "surface.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+
+#source("surface_Oceans.R")
+#source("depth_Oceans.R")
 source("strat_Oceans.R")
 
-#Run Functions on Oceans
-
-#1.)
-surface <- surface_Oceans(Oceans)
-
-#2.)
-atDep <- depth_Oceans(Oceans, depth_lower = 29, depth_upper = 31)
-
-#3.)
 strat <- strat_index(
   data      = Oceans,
   upper_min = 0,
@@ -96,8 +103,6 @@ strat <- strat_index(
 )
 
 
-write.table(surface, file= "surface.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
-
 write.table(atDep, file= "atDep.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
 
 write.table(strat, file= "strat.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
@@ -105,113 +110,758 @@ write.table(strat, file= "strat.csv", sep = ",", quote=FALSE, row.names=FALSE, c
 
 
 #################################################
-# Surface Works:
+# Binning
 
-surface <- surface %>%
+# surface
+
+
+write.table(surface, file= "surface.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+# looks at ground, HSC v DFO for avgTemp1
+colnames(surface)
+
+surface %>%
+  filter(Source %in% c("HSC", "DFO"),
+         ground %in% c("Scots Bay", "German Bank"),
+         !is.na(avgTemp)) %>%
+  ggplot(aes(x = avgTemp, fill = Source)) +
+  geom_histogram(
+    position = "identity",   # overlay HSC + DFO
+    alpha = 0.45,
+    bins = 30,
+    color = "grey20"
+  ) +
+  facet_wrap(~ ground, ncol = 1) +
+  labs(
+    title = "Histogram of SST (avgTemp): HSC vs DFO by Ground",
+    x = "SST",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_classic()
+
+
+# looks at ground, HSC v DFO for avgTemp1, adds JD_bin
+
+surface %>%
+  filter(Source %in% c("HSC", "DFO"),
+         ground %in% c("Scots Bay", "German Bank"),
+         !is.na(avgTemp),
+         !is.na(JD_bin)) %>%
   mutate(
-    JD_bin = case_when(
-      JulianDay >= 181 & JulianDay <= 220 ~ "EarlySummer",
-      JulianDay >= 221 & JulianDay <= 260 ~ "LateSummer",
-      JulianDay >= 261 & JulianDay <= 300 ~ "Fall",
-      TRUE ~ NA_character_
+    JD_bin = factor(
+      JD_bin,
+      levels = c("EarlySummer", "LateSummer", "Fall")
     )
   ) %>%
-  filter(!is.na(JD_bin))
+  ggplot(aes(x = avgTemp, fill = Source)) +
+  geom_histogram(
+    position = "identity",
+    alpha = 0.45,
+    bins = 30,
+    color = "grey20"
+  ) +
+  facet_grid(ground ~ JD_bin) +
+  labs(
+    title = "Histogram of SST (avgTemp): HSC vs DFO by Ground and Seasonal Bin",
+    x = "SST",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_classic()
 
-hist(surface$depth1)
+
+# At depth
+
+deep %>%
+  filter(Source %in% c("HSC", "DFO"),
+         ground %in% c("Scots Bay", "German Bank"),
+         !is.na(avgTemp),
+         !is.na(JD_bin)) %>%
+  mutate(
+    JD_bin = factor(
+      JD_bin,
+      levels = c("EarlySummer", "LateSummer", "Fall")
+    )
+  ) %>%
+  ggplot(aes(x = avgTemp, fill = Source)) +
+  geom_histogram(
+    position = "identity",
+    alpha = 0.45,
+    bins = 30,
+    color = "grey20"
+  ) +
+  facet_grid(ground ~ JD_bin) +
+  labs(
+    title = "Histogram of Temp at ~30m (avgTemp): HSC vs DFO by Ground and Seasonal Bin",
+    x = "30m Temperature",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_classic()
+
+
+# Look at julian day spread:
+
+surface %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin)
+  ) %>%
+  mutate(
+    JD_bin = factor(
+      JD_bin,
+      levels = c("EarlySummer", "LateSummer", "Fall")
+    )
+  ) %>%
+  ggplot(aes(x = JulianDay, fill = Source)) +
+  geom_histogram(
+    position = "identity",
+    alpha = 0.45,
+    bins = 20,
+    color = "grey20"
+  ) +
+  facet_grid(ground ~ JD_bin) +
+  labs(
+    title = "Julian Day Sampling Distribution: HSC vs DFO by Ground and Seasonal Bin",
+    x = "Julian Day",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_classic()
+
+
+# at depth
+deep %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin)
+  ) %>%
+  mutate(
+    JD_bin = factor(
+      JD_bin,
+      levels = c("EarlySummer", "LateSummer", "Fall")
+    )
+  ) %>%
+  ggplot(aes(x = JulianDay, fill = Source)) +
+  geom_histogram(
+    position = "identity",
+    alpha = 0.45,
+    bins = 20,
+    color = "grey20"
+  ) +
+  facet_grid(ground ~ JD_bin) +
+  labs(
+    title = "Julian Day Sampling Distribution: HSC vs DFO by Ground and Seasonal Bin",
+    x = "Julian Day",
+    y = "Count",
+    fill = "Source"
+  ) +
+  theme_classic()
+
+
 
 # table for paper
-bin_counts_wide <- bin_counts %>%
-  tidyr::pivot_wider(
+final_bin_table <- surface %>%
+  filter(!is.na(JD_bin)) %>%
+  group_by(ground, JD_bin, Source) %>%
+  summarise(
+    n = n(),
+    years = str_c(sort(unique(Year)), collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
     names_from = Source,
-    values_from = n_samples,
-    values_fill = 0
-  )
+    values_from = c(n, years),
+    values_fill = list(n = 0, years = "")
+  ) %>%
+  # Ensure columns exist even if one Source is absent in some groups
+  mutate(
+    n_DFO = if (!"n_DFO" %in% names(.)) 0 else n_DFO,
+    n_HSC = if (!"n_HSC" %in% names(.)) 0 else n_HSC,
+    years_DFO = if (!"years_DFO" %in% names(.)) "" else years_DFO,
+    years_HSC = if (!"years_HSC" %in% names(.)) "" else years_HSC
+  ) %>%
+  transmute(
+    ground, JD_bin,
+    DFO_n = n_DFO,
+    HSC_n = n_HSC,
+    DFO_years = years_DFO,
+    HSC_years = years_HSC,
+    usable_for_inference = DFO_n >= 10 & HSC_n >= 10
+  ) %>%
+  arrange(ground, JD_bin)
 
-          bin_counts_wide
-          
-          bin_counts_wide <- bin_counts_wide %>%
-            mutate(
-              usable_for_inference = DFO >= 10 & HSC >= 10
-            )
-          
-          bin_counts_wide
-          
-          bin_years <- surface %>%
-            filter(!is.na(JD_bin)) %>%
-            group_by(ground, Source, JD_bin) %>%
-            summarise(
-              years = paste(sort(unique(Year)), collapse = ", "),
-              .groups = "drop"
-            )
-          
-          write.table(bin_years, file= "surfaceBinYears.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+final_bin_table
 
-#Bin Stats:
 
-unique(surface$JD_bin)          
-          
-          
+
+write.table(final_bin_table, file= "surfinYears.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+
+# at depth:
+final_bin_table <- deep %>%
+  filter(!is.na(JD_bin)) %>%
+  group_by(ground, JD_bin, Source) %>%
+  summarise(
+    n = n(),
+    years = str_c(sort(unique(Year)), collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = c(n, years),
+    values_fill = list(n = 0, years = "")
+  ) %>%
+  # Ensure columns exist even if one Source is absent in some groups
+  mutate(
+    n_DFO = if (!"n_DFO" %in% names(.)) 0 else n_DFO,
+    n_HSC = if (!"n_HSC" %in% names(.)) 0 else n_HSC,
+    years_DFO = if (!"years_DFO" %in% names(.)) "" else years_DFO,
+    years_HSC = if (!"years_HSC" %in% names(.)) "" else years_HSC
+  ) %>%
+  transmute(
+    ground, JD_bin,
+    DFO_n = n_DFO,
+    HSC_n = n_HSC,
+    DFO_years = years_DFO,
+    HSC_years = years_HSC,
+    usable_for_inference = DFO_n >= 10 & HSC_n >= 10
+  ) %>%
+  arrange(ground, JD_bin)
+
+final_bin_table
+
+
+write.table(final_bin_table, file= "deepinYears.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE) 
+
+
+
+# Statistics:
+
+#Bin Stats and permutation tests
+
+# Valid bins used for inference
+
+# surface
 valid_bins <- tibble::tribble(
-  ~ground,         ~JD_bin, ~use,
-  "Scots Bay",     "EarlySummer",   TRUE,
-  "Scots Bay",     "LateSummer",  TRUE,
-  "Scots Bay",     "Fall",  FALSE,
-  "German Bank",   "EarlySummer",   FALSE,
-  "German Bank",   "LateSummer",  TRUE,
-  "German Bank",   "Fall",  TRUE
+  ~ground,         ~JD_bin,        ~use,
+  "Scots Bay",     "EarlySummer",  TRUE,
+  "Scots Bay",     "LateSummer",   TRUE,
+  "Scots Bay",     "Fall",         FALSE,
+  "German Bank",   "EarlySummer",  FALSE,
+  "German Bank",   "LateSummer",   TRUE,
+  "German Bank",   "Fall",         TRUE
 )
+
+# deep
+valid_bins <- tibble::tribble(
+  ~ground,         ~JD_bin,        ~use,
+  "Scots Bay",     "EarlySummer",  FALSE,
+  "Scots Bay",     "LateSummer",   FALSE,
+  "Scots Bay",     "Fall",         FALSE,
+  "German Bank",   "EarlySummer",  FALSE,
+  "German Bank",   "LateSummer",   FALSE,
+  "German Bank",   "Fall",         TRUE
+)
+
 
 source("run_perm_test.R")
 
-results <- surface %>%
-  filter(Source %in% c("DFO", "HSC")) %>%
-  inner_join(valid_bins, by = c("ground", "JD_bin")) %>%
-  filter(use) %>%
-  group_by(ground, JD_bin) %>%
-  group_modify(~ run_perm_test(.x, response = "avgTemp1")) %>%
-  ungroup()
+# Filter data once, reuse everywhere
 
-results
+      #surface
+      analysis_data <- surface %>%
+        filter(Source %in% c("DFO", "HSC")) %>%
+        inner_join(filter(valid_bins, use),
+                   by = c("ground", "JD_bin"))
 
-sample_sizes <- surface %>%
-  filter(Source %in% c("DFO", "HSC")) %>%
-  group_by(ground, JD_bin, Source) %>%
-  summarise(n = n(), .groups = "drop") %>%
-  tidyr::pivot_wider(names_from = Source, values_from = n)
+      # deep
+      analysis_data <- deep %>%
+        filter(Source %in% c("DFO", "HSC")) %>%
+        inner_join(filter(valid_bins, use),
+                   by = c("ground", "JD_bin"))
+      
 
-final_results <- results %>%
-  left_join(sample_sizes, by = c("ground", "JD_bin"))
+        # Permutation test results
+        results <- analysis_data %>%
+          group_by(ground, JD_bin) %>%
+          group_modify(~ run_perm_test(.x, response = "avgTemp")) %>%
+          ungroup()
 
-final_results <- final_results %>%
-  mutate(p_adj = p.adjust(p_value, method = "BH"))
+              # Sample sizes (matched to analysis bins)
+              sample_sizes <- analysis_data %>%
+                group_by(ground, JD_bin, Source) %>%
+                summarise(n = n(), .groups = "drop") %>%
+                pivot_wider(names_from = Source, values_from = n, values_fill = 0)
+                      
+                      
+                      # Final results table
+                      # surface
+                      final_results <- results %>%
+                        left_join(sample_sizes, by = c("ground", "JD_bin")) %>%
+                        mutate(
+                          p_adj = p.adjust(p_value, method = "BH")
+                        )
+                      
+                          
+                          final_results <- results %>%
+                            left_join(sample_sizes, by = c("ground", "JD_bin")) %>%
+                            mutate(
+                              p_adj = p.adjust(p_value, method = "BH")
+                            )
 
 
-final_results
+          write_csv(final_results, "T_results_HSC_vs_DFO.csv")
 
-# Seasonality and results
-#Is SST changing through the season within a ground?
-ggplot(surface, aes(JulianDay, avgTemp1, colour = Source)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "loess", se = TRUE) +
-  facet_wrap(~ ground) +
-  labs(
-    x = "Julian Day",
-    y = "SST (0–5 m)",
-    colour = "Data source"
-  ) +
-  theme_bw()
+### up to here good and QCed
 
-colnames(surface)
 
-# Model
 
-lm_season <- lm(
-  avgTemp1 ~ JulianDay * Source,
-  data = surface
+
+
+
+
+
+          
+          
+          
+          
+          
+          
+          #Is SST changing through the season within a ground?
+                  
+
+
+
+source("run_JDbin_bias_overlap_GAM.R")
+
+res_all <- run_JDbin_bias_overlap_GAM(
+  surface = surface,
+  response = "avgTemp",
+  min_n = 10,
+  k_cap = 6,
+  exclude = NULL,        # <— no exclusions
+  export_csv = FALSE
 )
 
-summary(lm_season)
+res_all$bias_table
+res_all$counts_table
+
+# ---- prep ----
+# assumes surface already has JD_bin
+dat <- surface %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin)
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),  # DFO baseline
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+
+
+### GAM-based bias test. Are my bins biased? models to test for seasonality bias within the bins
+
+dat <- surface %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin),
+    # ---- REMOVE these two strata ----
+    !(ground == "German Bank" & JD_bin == "EarlySummer"),
+    !(ground == "Scots Bay"   & JD_bin == "Fall")
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+bias_table <- dat %>%
+  group_by(ground, JD_bin) %>%
+  group_modify(~ fit_bias_gam(.x, k_cap = 6)) %>%
+  ungroup() %>%
+  mutate(
+    p_adj_BH = p.adjust(p_value, method = "BH"),
+    bias_flag_p05 = !is.na(p_value) & p_value < 0.05
+  )
+
+bias_table
+
+dat %>%
+  count(ground, JD_bin, Source) %>%
+  arrange(ground, JD_bin, Source)
+
+
+# -------------------------
+# Prep + EXCLUSIONS
+# Remove: German Bank EarlySummer and Scots Bay Fall
+# -------------------------
+dat <- surface %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin),
+    !(ground == "German Bank" & JD_bin == "EarlySummer"),
+    !(ground == "Scots Bay"   & JD_bin == "Fall")
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+# ============================================================
+# A) OVERLAP + JulianDay summaries by Source within each ground × JD_bin
+# ============================================================
+summ_by_source <- dat %>%
+  group_by(ground, JD_bin, Source) %>%
+  summarise(
+    n = n(),
+    jd_min    = min(JulianDay),
+    jd_q25    = quantile(JulianDay, 0.25, na.rm = TRUE),
+    jd_median = median(JulianDay, na.rm = TRUE),
+    jd_q75    = quantile(JulianDay, 0.75, na.rm = TRUE),
+    jd_max    = max(JulianDay),
+    .groups = "drop"
+  )
+
+summ_wide <- summ_by_source %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = c(n, jd_min, jd_q25, jd_median, jd_q75, jd_max),
+    names_sep = "_"
+  ) %>%
+  mutate(
+    # median sampling shift (HSC - DFO)
+    median_diff_HSC_minus_DFO = jd_median_HSC - jd_median_DFO,
+    
+    # overlap of min/max ranges
+    overlap_start = pmax(jd_min_HSC, jd_min_DFO, na.rm = TRUE),
+    overlap_end   = pmin(jd_max_HSC, jd_max_DFO, na.rm = TRUE),
+    overlap_width = pmax(0, overlap_end - overlap_start),
+    
+    # total combined span for scaling overlap
+    combined_span = pmax(jd_max_HSC, jd_max_DFO, na.rm = TRUE) -
+      pmin(jd_min_HSC, jd_min_DFO, na.rm = TRUE),
+    
+    overlap_fraction = ifelse(combined_span > 0, overlap_width / combined_span, NA_real_),
+    
+    # readable summary string for appendix
+    window_summary = paste0(
+      "DFO: ", jd_min_DFO, "–", jd_max_DFO, " (med ", jd_median_DFO, ") | ",
+      "HSC: ", jd_min_HSC, "–", jd_max_HSC, " (med ", jd_median_HSC, ") | ",
+      "Overlap: ", overlap_start, "–", overlap_end,
+      " (w=", round(overlap_width, 1), ")"
+    )
+  )
+
+# ============================================================
+# B) Bias test per ground × JD_bin  (uses your robust fit_bias_gam)
+# ============================================================
+bias_table <- dat %>%
+  group_by(ground, JD_bin) %>%
+  group_modify(~ fit_bias_gam(.x, k_cap = 6)) %>%
+  ungroup() %>%
+  mutate(
+    p_adj_BH = p.adjust(p_value, method = "BH"),
+    bias_flag_p05 = !is.na(p_value) & p_value < 0.05
+  )
+
+# ============================================================
+# C) MERGE into one appendix table
+# ============================================================
+appendix_table <- summ_wide %>%
+  left_join(bias_table, by = c("ground", "JD_bin")) %>%
+  arrange(ground, JD_bin) %>%
+  mutate(
+    # light rounding for readability (optional)
+    median_diff_HSC_minus_DFO = round(median_diff_HSC_minus_DFO, 1),
+    overlap_width = round(overlap_width, 1),
+    overlap_fraction = round(overlap_fraction, 3),
+    dev_expl = round(dev_expl, 3),
+    p_value = signif(p_value, 3),
+    p_adj_BH = signif(p_adj_BH, 3)
+  )
+
+appendix_table
+colnames(appendix_table)
+# ============================================================
+# D) EXPORT
+# ============================================================
+
+appendix_table_reduced <- appendix_table %>%
+  select(
+    ground,
+    JD_bin,
+    n_DFO,
+    n_HSC,
+    overlap_width,
+    overlap_fraction,
+    median_diff_HSC_minus_DFO,
+    p_adj_BH,
+    bias_flag_p05
+  ) %>%
+  arrange(ground, JD_bin)
+
+
+write_csv(appendix_table_reduced, "Appendix_JDbin_bias_overlap_GAM_filtered.csv")
+
+
+
+
+
+
+
+
+#### repeat with deep:
+
+# assumes surface already has JD_bin
+dat <- deep %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin)
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),  # DFO baseline
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+
+
+### GAM-based bias test. Are my bins biased? models to test for seasonality bias within the bins
+
+dat <- deep %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin),
+    # ---- REMOVE these two strata ----
+    !(ground == "German Bank" & JD_bin == "EarlySummer"),
+    !(ground == "Scots Bay"   & JD_bin == "Fall")
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+bias_table <- dat %>%
+  group_by(ground, JD_bin) %>%
+  group_modify(~ fit_bias_gam(.x, k_cap = 6)) %>%
+  ungroup() %>%
+  mutate(
+    p_adj_BH = p.adjust(p_value, method = "BH"),
+    bias_flag_p05 = !is.na(p_value) & p_value < 0.05
+  )
+
+bias_table
+
+dat %>%
+  count(ground, JD_bin, Source) %>%
+  arrange(ground, JD_bin, Source)
+
+
+
+
+
+### appenidx export:
+library(writexl)
+
+# -------------------------
+# Prep + EXCLUSIONS
+# Remove: German Bank EarlySummer and Scots Bay Fall
+# -------------------------
+dat <- surface %>%
+  filter(
+    Source %in% c("HSC", "DFO"),
+    ground %in% c("Scots Bay", "German Bank"),
+    !is.na(JulianDay),
+    !is.na(JD_bin),
+    !(ground == "German Bank" & JD_bin == "EarlySummer"),
+    !(ground == "Scots Bay"   & JD_bin == "Fall")
+  ) %>%
+  mutate(
+    JD_bin = factor(JD_bin, levels = c("EarlySummer", "LateSummer", "Fall")),
+    Source = factor(Source, levels = c("DFO", "HSC")),
+    is_HSC = as.integer(Source == "HSC")
+  )
+
+# ============================================================
+# A) OVERLAP + JulianDay summaries by Source within each ground × JD_bin
+# ============================================================
+summ_by_source <- dat %>%
+  group_by(ground, JD_bin, Source) %>%
+  summarise(
+    n = n(),
+    jd_min    = min(JulianDay),
+    jd_q25    = quantile(JulianDay, 0.25, na.rm = TRUE),
+    jd_median = median(JulianDay, na.rm = TRUE),
+    jd_q75    = quantile(JulianDay, 0.75, na.rm = TRUE),
+    jd_max    = max(JulianDay),
+    .groups = "drop"
+  )
+
+summ_wide <- summ_by_source %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = c(n, jd_min, jd_q25, jd_median, jd_q75, jd_max),
+    names_sep = "_"
+  ) %>%
+  mutate(
+    # median sampling shift (HSC - DFO)
+    median_diff_HSC_minus_DFO = jd_median_HSC - jd_median_DFO,
+    
+    # overlap of min/max ranges
+    overlap_start = pmax(jd_min_HSC, jd_min_DFO, na.rm = TRUE),
+    overlap_end   = pmin(jd_max_HSC, jd_max_DFO, na.rm = TRUE),
+    overlap_width = pmax(0, overlap_end - overlap_start),
+    
+    # total combined span for scaling overlap
+    combined_span = pmax(jd_max_HSC, jd_max_DFO, na.rm = TRUE) -
+      pmin(jd_min_HSC, jd_min_DFO, na.rm = TRUE),
+    
+    overlap_fraction = ifelse(combined_span > 0, overlap_width / combined_span, NA_real_),
+    
+    # readable summary string for appendix
+    window_summary = paste0(
+      "DFO: ", jd_min_DFO, "–", jd_max_DFO, " (med ", jd_median_DFO, ") | ",
+      "HSC: ", jd_min_HSC, "–", jd_max_HSC, " (med ", jd_median_HSC, ") | ",
+      "Overlap: ", overlap_start, "–", overlap_end,
+      " (w=", round(overlap_width, 1), ")"
+    )
+  )
+
+# ============================================================
+# B) Bias test per ground × JD_bin  (uses your robust fit_bias_gam)
+# ============================================================
+bias_table <- dat %>%
+  group_by(ground, JD_bin) %>%
+  group_modify(~ fit_bias_gam(.x, k_cap = 6)) %>%
+  ungroup() %>%
+  mutate(
+    p_adj_BH = p.adjust(p_value, method = "BH"),
+    bias_flag_p05 = !is.na(p_value) & p_value < 0.05
+  )
+
+# ============================================================
+# C) MERGE into one appendix table
+# ============================================================
+appendix_table <- summ_wide %>%
+  left_join(bias_table, by = c("ground", "JD_bin")) %>%
+  arrange(ground, JD_bin) %>%
+  mutate(
+    # light rounding for readability (optional)
+    median_diff_HSC_minus_DFO = round(median_diff_HSC_minus_DFO, 1),
+    overlap_width = round(overlap_width, 1),
+    overlap_fraction = round(overlap_fraction, 3),
+    dev_expl = round(dev_expl, 3),
+    p_value = signif(p_value, 3),
+    p_adj_BH = signif(p_adj_BH, 3)
+  )
+
+appendix_table
+colnames(appendix_table)
+# ============================================================
+# D) EXPORT
+# ============================================================
+
+appendix_table_reduced <- appendix_table %>%
+  select(
+    ground,
+    JD_bin,
+    n_DFO,
+    n_HSC,
+    overlap_width,
+    overlap_fraction,
+    median_diff_HSC_minus_DFO,
+    p_adj_BH,
+    bias_flag_p05
+  ) %>%
+  arrange(ground, JD_bin)
+
+
+write_csv(appendix_table_reduced, "Appendix_JDbin_bias_overlap_GAM_filtered.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# adjust for julian day in late summer Scots Bay:
+
+
+scots_late <- surface %>%
+  filter(
+    ground == "Scots Bay",
+    JD_bin == "LateSummer",
+    Source %in% c("DFO", "HSC"),
+    !is.na(avgTemp1),
+    !is.na(JulianDay)
+  ) %>%
+  mutate(Source = factor(Source, levels = c("DFO", "HSC")))
+
+# GAM-adjusted comparison
+m_sst_scots_late <- gam(
+  avgTemp1 ~ Source + s(JulianDay, k = 6),
+  data = scots_late,
+  method = "REML"
+)
+
+summary(m_sst_scots_late)
+
+
+write_csv(t, "adjustedScotsLatSumme.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### QC
 
