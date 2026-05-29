@@ -1,0 +1,5 @@
+ground,JD_bin,mean_DFO,mean_HSC,diff_HSC_minus_DFO,p_value,alpha,significant_99,sig_label,note
+German Bank,Fall,10.25,13.09,2.85,0.00,0.01,TRUE,***,"Permutation test (coin), alpha=0.01"
+German Bank,LateSummer,11.29,12.88,1.59,0.00,0.01,TRUE,***,"Permutation test (coin), alpha=0.01"
+Scots Bay,EarlySummer,12.62,11.64,-0.98,0.02,0.01,FALSE,*,"Permutation test (coin), alpha=0.01"
+Scots Bay,LateSummer,12.84,13.40,0.56,0.06,0.01,FALSE,ns,"Permutation test (coin), alpha=0.01"
