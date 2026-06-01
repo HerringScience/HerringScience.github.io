@@ -10,12 +10,13 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2025"
-surv.no = "5"
-hightide = "2025-07-14 16:48:00" #for Scots Bay only
+surv.no = "1"
+hightide = "2025-07-28 15:30:00" #for Scots Bay only
 mainBoxVessels = 5
+Tow = "N"
 
 ```
 
@@ -121,16 +122,20 @@ Larval$category <- as.factor(Larval$category)
 Larval$Survey.No <- as.factor(Larval$Survey.No)
 
 #Land Data
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+can=readRDS("gadm36_CAN_1_sp.rds")
+NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+
 #can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+#can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
 #us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-can1 = rbind(can,us)
-NBNS = can1
+#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
+#can1 = rbind(can,us)
+#NBNS = can1
 
 
 # NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes up to 30minutes to process.
+#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes up to 30minutes to process.
 
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
@@ -303,10 +308,10 @@ l = g
 `r h`.
 
 ```{r}
-Tag_Summary = Tag %>%
+if(surv == "SB"){Tag_Summary = Tag %>%
   group_by(Date, Vessel, Lon, Lat) %>%
-  summarize(Tag_Count = n_distinct(Tag_Num))
-
+  summarize(Tag_Count = n_distinct(Tag_Num))}
+if(surv == "GB"){Tag_Summary = Tag}
 a=sum(Tag_Summary$Tag_Count)
 a=format(a, big.mark=",")
 b=length(unique(Tag_Summary$Lat))
@@ -545,15 +550,15 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
 
 
 ```{r}
-Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
-  group_by(Year, Ground) %>%
-  summarize("HSC Estimate" = sum(HSC_Estimate),
-            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted, na.rm=TRUE),
-            "DFO Estimate" = sum(DFO_Estimate),
-            "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
-Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
+#Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
+#  group_by(Year, Ground) %>%
+#  summarize("HSC Estimate" = sum(HSC_Estimate),
+#            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted, na.rm=TRUE),
+ #           "DFO Estimate" = sum(DFO_Estimate),
+#            "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
+#Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
 
-kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
+kbl(Annual_Compare1, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
   kable_paper("striped", full_width=F)
 ```
 
@@ -564,7 +569,7 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 
 ::: row
 ::: col-md-6
-```{r, results = "hide", fig.show="first", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.show="first", include=FALSE, results="hide"}
 
 ## This tabset used to be called Tagging, Plankton, and CTD Data {.tabset}
 
@@ -625,7 +630,7 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 :::
 
 ::: col-md-6
-```{r echo=FALSE, fig.align='center'}
+```{r eval=FALSE, fig.align='center', include=FALSE}
  Tag_Sum = Tag_Sum %>%
    group_by(Vessel) %>%
    summarize(Tags = sum(Tag_Count))
@@ -641,8 +646,8 @@ kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(b
 
 #### Tow Summary Table
 
-```{r, Tow table}
-Plankton = Survey %>%
+```{r Tow table, eval=FALSE, include=FALSE}
+if(Tow=="Y"){Plankton = Survey %>%
   rename(Vessel = PlanktonVessel) %>%
   dplyr::select(Vessel, id, Ground, Date, WindDirection, Swell, AirTemp, Time1, Time2, Lat1, Lat2, Lon1, Lon2, AvgTowDepth, Speed, Heading, TideDirection, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DiscDepthD, DiscDepthA) %>%
   rename("Set Number" = id, "Wind Direction (km/h)" = WindDirection, "Swell (m)" = Swell, "Air Temp (c)" = AirTemp, "Tow Start" = Time1, "Tow End" = Time2, "Start Lat" = Lat1, "End Lat" = Lat2, "Start Lon" = Lon1, "End Lon" = Lon2, "Avg Tow Depth (m)" = AvgTowDepth, "Tide Direction" = TideDirection, "Flow Start" = FlowReading1, "Flow End" = FlowReading2, "No. Revolutions" = NoRevs, "Distance (m)" = DistanceCalc, "Secchi Disappear (m)" = DiscDepthD, "Secchi Reappear (m)" = DiscDepthA)
@@ -654,10 +659,10 @@ kbl(Plankton) %>%
   add_header_above(c("", "Tow 1", "Tow 2")) %>%
   pack_rows("Base Details", 1, 7) %>%
   pack_rows("Tow Details", 8, 17) %>%
-  pack_rows("Other Data Collection", 18, 24)
+  pack_rows("Other Data Collection", 18, 24)}
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 a=first(Survey$id)
 b=Survey %>% slice(1L) 
 c=b$TideDirection
@@ -672,29 +677,29 @@ h=unique(f$AvgTowDepth)
 
 ::: row
 ::: col-md-6
-```{r, fig.cap="Plankton tow depth profile #1", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.cap="Plankton tow depth profile #1", include=FALSE}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 1.jpg"), rel_path = FALSE)
 ```
 :::
 
 ::: col-md-6
-```{r, fig.cap="Plankton tow depth profile #2", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.cap="Plankton tow depth profile #2", include=FALSE}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 2.jpg"), rel_path = FALSE)
+
+The first tow is `r a`, which was `r c` the tide and had an average depth of `r d`m. The second tow is `r e`, which was `r g` the tide and had an average depth of `r h`m.
 ```
 :::
 :::
 
-The first tow is `r a`, which was `r c` the tide and had an average depth of `r d`m. The second tow is `r e`, which was `r g` the tide and had an average depth of `r h`m.
-
 #### Captured plankton
 
-```{r, fig.cap="Captured plankton from the surface tows", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.cap="Captured plankton from the surface tows", include=FALSE}
 knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Plankton.jpg"), rel_path = FALSE)
 ```
 
 ### CTD Data
 
-```{r, results = "hide", fig.show="first", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.show="first", include=FALSE, results="hide"}
 #removed & Survey == 1 to ensure all surveys from the current year are included.
 a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
 geom_path(size = 1.5) + 
@@ -710,13 +715,14 @@ labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Tempe
 ifelse(Survey$Ground == "SB", plot(a), plot(b))
 
 c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
-```
 
 CTD depth profiles for all `r year` `r c` surveys so far.
+```
+
 
 #### Sea surface temperatures
 
-```{r, results = "hide", fig.show="first", fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.show="first", include=FALSE, results="hide"}
 
 a=ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
   geom_point() + 
@@ -734,9 +740,8 @@ ifelse(Survey$Ground == "SB", plot(a), plot(b))
 
 c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
 
-```
-
 Annual average sea surface temperatures (SST) for `r c`.
+```
 
 ## Vessel Performance {.tabset}
 
