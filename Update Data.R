@@ -4,23 +4,23 @@ rm(list = ls())
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
-year="2025"
-surv.no="5"
+year="2026"
+surv.no="2"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("BP", "LJ", "LM", "LB", "MS", "FM", "C1")
+ids = c("LM", "BP", "FM")
 
 #Area and TS values - From table C
-SB1= 632 #SB main area
-SB2= 87 #SB north area
-SB3= 116 #SB east area
+SB1= 370.4243 #SB main area
+SB2= 80.94466 #SB north area
+SB3= 55.79467 #SB east area
 
-GB1 = 844 #GB main area
-GB2 = 233 #Seal Island area
+GB1 = 826 #GB main area
+GB2 = 274  #Seal Island area
 GB3 = 0 #Ad-hoc school survey area
 
 ##
@@ -85,8 +85,6 @@ library(devtools)
 library(maps)
 library(dplyr)
 library(sp)
-
-
 
 ##Survey Data import and filtering
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
@@ -277,17 +275,22 @@ write_csv(Survey, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringS
 
 ##ECHOVIEW DATA##
 #Land Data
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+can=readRDS("gadm36_CAN_1_sp.rds")
+NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+
+#Land Data
 #can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+#can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
 #us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-can1 = rbind(can,us)
-NBNS = can1
-
-
+#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
+#can1 = rbind(can,us)
+#NBNS = can1
 #NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
 #NBNS <- spatVectorToSpatial(NBNS)
-NBNS <- as(NBNS, "Spatial") #NEW 2024 - This causes it to run very slowly - takes around 30 minutes to process.
+#NBNS <- as(NBNS, "Spatial") #NEW 2024 - This causes it to run very slowly - takes around 30 minutes to process.
+# Load land data
+#NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
 
 # Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
@@ -364,23 +367,23 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
 #These IDs are specifically for adjusted surveys
   ### Region has start and end times within it.
   
-  # ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
-  # northern = trans[which((trans$RegionName %in% ids)), ]
+   ids = c("BP_T02","BP_T03", "BP_T04", "BP_T05")
+   northern = trans[which((trans$RegionName %in% ids)), ]
   # 
   # 
-  # ids = c("BP_T01","BP_T02", "BP_T03", "BP_T04")
-  # eastern = trans[which((trans$RegionName %in% ids)), ]
+   ids = c("LM_T02","LM_T03")
+   eastern = trans[which((trans$RegionName %in% ids)), ]
   # 
-  # ids =c("C1_T01", "C1_T02", "LJ_T01", "LJ_T02","LM_T01", "LM_T02", "LB_T01", "LB_T02")
-  # main = trans[which((trans$RegionName %in% ids)), ]
+   ids =c("LM_T01", "LM_T04", "BP_T01", "FM_T01", "FM_T02", "FM_T03")
+   main = trans[which((trans$RegionName %in% ids)), ]
 #To here
   
   ### Comment out chunk below if needed to adjust. 
   
-  northern = trans[which((trans$Vessel == NVessel)), ]
-  eastern = trans[which((trans$Vessel == EVessel)), ]
-  main = trans[which((trans$Vessel %in% ids)), ]
-  PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
+#northern = trans[which((trans$Vessel == NVessel)), ]
+#eastern = trans[which((trans$Vessel == EVessel)), ]
+#main = trans[which((trans$Vessel %in% ids)), ]
+PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
     geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
     labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
 
@@ -556,10 +559,10 @@ Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Locati
 Perform = Perform %>% rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 #Perform = Perform %>% rename(Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 
-Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
+#Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
 
 #added below
-#Perform = Perform %>% mutate(Distance = distHaversine(cbind(Y,X), cbind(Yend,Xend))) %>% mutate(Distance = Distance/1000)
+Perform = Perform %>% mutate(Distance = distHaversine(cbind(X,Y), cbind(Xend,Yend))) %>% mutate(Distance = Distance/1000)
 
 #OG
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
@@ -569,7 +572,7 @@ Perform<-Perform %>% mutate(Start=as.POSIXct(Date.Time.Start, origin = "1970-01-
 mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
-   mutate(Speed = (((Distance*1000)/(Duration)))) #/60)
+   mutate(Speed = (((Distance*1000)/(Duration))))
 Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
