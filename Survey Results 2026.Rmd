@@ -13,9 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2026"
-surv.no = "2"
-hightide = "2026-24-05 19:30:00" #for Scots Bay only; YYYY-DD-MM (for some reason)
-mainBoxVessels = 3
+surv.no = "3"
+hightide = "2026-07-06 18:00:00" #for Scots Bay only; YYYY-DD-MM (for some reason)
+mainBoxVessels = 5
 Tow = "N"
 
 ```
@@ -268,7 +268,7 @@ g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the Ger
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
-          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste( mainBoxVessels, "vessels ran two transects each in the Main Survey Box, the ", e, "ran four lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern Survey Box"),
+          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "Both", paste( mainBoxVessels, "vessels ran various transects each in the Main Survey Box, the Fundy Monarch and ", e, "ran various lines in the Eastern Survey Box, and the ", f, "ran four lines in the Northern Survey Box"),
          "NA"))))))
 
 h=unique(ifelse(is.na(Survey$PlanktonVessel), "There was no plankton tow or CTD cast conducted", paste("There was a plankton tow and replicate conducted and CTD cast by ", unique(Survey$PlanktonVessel))))
@@ -287,7 +287,7 @@ tidediff = as.double(difftime(tidestring, hightide, units = "hours"))
 j = ifelse(tidediff < 0, "before", "after")
 k = abs(round(tidediff, digits = 2))
 if(surv == "SB")
-  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hours ", j, " hide tide.")}
+  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hour ", j, " hide tide.")}
 if(surv == "GB")
 {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ".")}
 
@@ -360,7 +360,7 @@ if(surv == "GB"){t=cat("\n")
 
 ### Acoustic Equipment
 
-Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer prior to the survey that contains a 38kHz split beam and 200 kHz single beam transducer. Data was logged to the computer hard-drive for post-processing. All participating boats were calibrated on 38kHz before the survey.
+Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer prior to the survey that contains a 38kHz split beam and 200 kHz single beam transducer. Data was logged to the computer hard-drive for post-processing.
 
 ## Survey Results {.tabset}
 
