@@ -22,6 +22,7 @@ local({r <- getOption("repos")
 
 #Packages
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
+library(devtools)
 library(ggplot2)
 library(patchwork)
 library(scales)
@@ -32,14 +33,16 @@ library(tidyverse)
 library(geosphere)
 library(reshape2)
 library(moderndive)
-library(skimr)  
+library(skimr)
 library(ggridges)
 #library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
+#rgeos <- "https://cran.r-project.org/src/contrib/Archive/rgeos/rgeos_0.6-4.tar.gz"
+#install.packages(rgeos, repos = NULL, type = "source")
+library(rgeos) #this is an old version, and downloaded from archieve.
 library(sf)
 library(terra)
 library(knitr)
@@ -55,10 +58,13 @@ library(plotly)
 library(mapproj)
 library(oce) #new CTD Data package
 library(pander)
-library(geodata)
+#install.packages("geodata")
+library(geodata) #this is an old version, and downloaded from archive.
 library(pacman)
 library(rnaturalearth)
 library(rnaturalearthdata)
+#raster <- "https://cran.r-project.org/src/contrib/raster_3.6-32.tar.gz"
+#install.packages(raster, repos = NULL, type = "source")
 library(raster)
 library(devtools)
 library(maps)
@@ -74,6 +80,9 @@ surveyData <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io
 
 #Tagging Data
 Tag = read_csv("TaggingEvents.csv") #Tagging Data
+TaggingEvents <- Tag %>%
+  rename(TAG_NUMBER = Tag_Num)
+completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv") #Tag Return data
 polysT = read_csv("timGrounds.csv") #Coloured ground maps
 Tag$Year = as.factor(Tag$Year)
 Tag$Vessel = as.factor(Tag$Vessel)
@@ -142,153 +151,81 @@ LarvalSI = merge(LarvalSI, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "i
 Larval = merge(Larval, LarvalSum[,c("id", "TowReplicate", "TowID")], by = "id")
 
 #Land Data
-#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-can1 = rbind(can,us)
-NBNS = can1
+can <- gadm(country='CAN', level=1, path = "geodata_default_path", version="latest", 
+            resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
+us  <- gadm(country='USA', level=1, path = "geodata_default_path", version="latest", 
+            resolution = 1, regions = c("Maine"))
 
+can1 <- rbind(can, us)
 
-#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
+NBNS_spat <- can1[can1$NAME_1 %in% c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec", "Maine"), ]
+
+NBNS <- st_as_sf(NBNS_spat)
+
+GBMap <- ext(-66.5, -65.5, 43.2, 44)
+GBout_sf <- st_as_sf(crop(NBNS_spat, GBMap))
+
+SBMap <- ext(-65.5, -64.5, 45, 45.5)
+SBout_sf <- st_as_sf(crop(NBNS_spat, SBMap))
 
 
 
 #For Tag Returns
 
+tag_points_df <- TaggingEvents %>%
+  filter(!is.na(Lon) & !is.na(Lat)) %>%
+  distinct(TAG_NUMBER, .keep_all = TRUE)
 
-completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
-TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
+tag_points_sf <- st_as_sf(tag_points_df, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
+polysT_sf <- polysT %>%
+  filter(!is.na(X) & !is.na(Y)) %>%
+  group_by(Box) %>%
+  do({
+    df <- .
+    if (!all(df[1, c("X", "Y")] == df[nrow(df), c("X", "Y")])) {
+      df <- rbind(df, df[1, ])
+    }
+    mat <- as.matrix(df[, c("X", "Y")])
+    st_sf(FishingGround = unique(df$Box), geometry = st_sfc(st_polygon(list(mat)), crs = 4326))
+  }) %>%
+  ungroup() %>%
+  st_as_sf()
 
-names(TaggingEvents)[names(TaggingEvents) == 'Tag_Num'] <- 'TAG_NUMBER'
+joined_spatial <- st_join(tag_points_sf, polysT_sf, join = st_intersects)
 
-rawReturn <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/rawReturn.csv"))
-relINFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/relINFO.csv"))
-polysNAFO <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"))
-polysT <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv"))
+r_final <- joined_spatial %>%
+  st_drop_geometry() %>%
+  dplyr::select(TAG_NUMBER, FishingGround) %>%
+  mutate(FishingGround = case_when(
+    is.na(FishingGround)       ~ "Other",
+    FishingGround == "Browns Bank" ~ "Brown Bank",
+    TRUE                       ~ FishingGround
+  ))
+# FishingGround.y is where they were initially released based on coordinates, catchAREA is where they were caught again.
 
-                           
-#Combining complete Returns and Tagging events by tag number
-TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
+TaggingEvents <- TaggingEvents %>%
+  left_join(r_final, by = "TAG_NUMBER") %>%
+  mutate(FishingGround = coalesce(FishingGround, "Other"))
 
-
-
-
-# Assigning of Grounds
-
-area1=polysT[which(polysT$Box == "NB Coastal"), ]
-area2=polysT[which(polysT$Box == "Grand Manan"), ]
-area3=polysT[which(polysT$Box == "Grand Manan Banks"), ]
-area4=polysT[which(polysT$Box == "Long Island"), ]
-area5=polysT[which(polysT$Box == "German Bank"), ]
-area6=polysT[which(polysT$Box == "Seal Island"), ]
-area7=polysT[which(polysT$Box == "Scots Bay"), ]
-area8=polysT[which(polysT$Box == "Yankee Bank"), ]
-area9=polysT[which(polysT$Box == "Trinity"), ]
-area10=polysT[which(polysT$Box == "Browns Bank"), ]
-area11=polysT[which(polysT$Box == "SW Grounds"), ]
-area12=polysT[which(polysT$Box == "Gannet Dry Ledge"), ]
-area13=polysT[which(polysT$Box == "Lurcher"), ]
-
-
-ids = (TaggingEvents$TAG_NUMBER)
-r = data.frame( TAG_NUMBER=ids, 
-                X = NA, 
-                Y = NA, 
-                NB_Coastal = NA, 
-                Grand_Manan = NA, 
-                Grand_Manan_Banks = NA,
-                Long_Island = NA, 
-                German_Bank = NA, 
-                Seal_Island = NA, 
-                Scots_Bay = NA,
-                Yankee_Bank = NA,
-                Trinity = NA,
-                Browns_Bank = NA,
-                SW_Grounds = NA,
-                Gannet_Dry_Ledge = NA,
-                Lurcher = NA) 
-
-
-#This part takes a really long time to run.
-
-# Assigning fishing grounds to sets. This takes  a few minutes to run through. This chunk between the ## is the slowest bit.
- for (i in 1:nrow(r)){
-   test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"]) #
-   test1 = TaggingEvents[test, ]
-   r$Y[i] = test1$Lat
-   r$X[i] = test1$Lon
-   r$NB_Coastal[i] = point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE)
-   r$Grand_Manan[i] = point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE)
-   r$Grand_Manan_Banks[i] = point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE)
-   r$Long_Island[i] = point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE)
-   r$German_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE)
-   r$Seal_Island[i] = point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE)
-   r$Scots_Bay[i] = point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE)
-   r$Yankee_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE)
-   r$Trinity[i] = point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE)
-   r$Browns_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE)
-   r$SW_Grounds[i] = point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE)
-   r$Gannet_Dry_Ledge[i] = point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE)
-   r$Lurcher[i] = point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE)
-
-}
-
-
-# Ground                        
-r$FishingGround = NA        
-         
-r$FishingGround = with(r, ifelse(r$NB_Coastal > 0, "NB Coastal",
-                          ifelse(r$Grand_Manan > 0, "Grand Manan",
-                          ifelse(r$Grand_Manan_Banks > 0, "Grand Manan Banks",
-                          ifelse(r$Long_Island > 0, "Long Island", 
-                          ifelse(r$German_Bank > 0, "German Bank", 
-                          ifelse(r$Seal_Island > 0, "Seal Island",
-                          ifelse(r$Scots_Bay > 0, "Scots Bay",
-                          ifelse(r$Yankee_Bank > 0, "Yankee Bank",
-                          ifelse(r$Trinity > 0, "Trinity",
-                          ifelse(r$Browns_Bank > 0, "Brown Bank",
-                          ifelse(r$SW_Grounds > 0, "SW Grounds",
-                          ifelse(r$Gannet_Dry_Ledge > 0, "Gannet Dry Ledge",
-                          ifelse(r$Lurcher > 0, "Lurcher", 
-                                                "Other"))))))))))))))
-
-TaggingEvents <- merge(TaggingEvents, r[, c("TAG_NUMBER", "FishingGround")], by = "TAG_NUMBER")
-
-
-#Combining complete Returns and Tagging events by tag number
-TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
-
-# Histogram showing average time differences between tagging in Days. Split into categories.
-# Category 1 = 0 to 2 days. These should mostly be removed from analysis due to them being caught almost instantly.
-# Category 2 = 3 to 10 days. This is the period that the survey window covers.
-# Cat. 3 = 11 to 30 days. Rest of the first month.
-# Cat. 4 = 31 to 183 days. Caught after the first month, before the 6 month mark.
-# Cat. 5 = 184 to 365. Minimum time of 6 months between tagging event and being recaptured.
-# Cat. 6 = 366 to 730. Caught a minimum of a year, up to two years after the tagging event.
-# Cat. 7 = Anything after two years since tagging event.
-
-TagReturns$timeDifference <- TagReturns$DATE - TagReturns$Date
-  TagReturns$timeDifference <- as.numeric(TagReturns$timeDifference)
-  TagReturns <- TagReturns[TagReturns$timeDifference >= 0,]
-TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
-                                       ifelse(TagReturns$timeDifference < 11 & TagReturns$timeDifference >= 3, 2,
-                                       ifelse(TagReturns$timeDifference < 31 & TagReturns$timeDifference >= 11, 3,
-                                       ifelse(TagReturns$timeDifference < 184 & TagReturns$timeDifference >= 31, 4,
-                                       ifelse(TagReturns$timeDifference < 366 & TagReturns$timeDifference >= 184, 5,
-                                       ifelse(TagReturns$timeDifference < 731 & TagReturns$timeDifference >= 366, 6,
-                                       ifelse(TagReturns$timeDifference < 1095 & TagReturns$timeDifference >= 731, 7, 8))))))))
-                                                   
-  
-TagReturns$category <- as.numeric(TagReturns$category)
-TagReturns$Count <- 1
-
-#When combining there are NAs that are being counted. This is to remove those.
-
-TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
-
+TagReturns <- TaggingEvents %>%
+  inner_join(completeReturns, by = "TAG_NUMBER") %>%
+  filter(!is.na(TAG_NUMBER)) %>%
+  mutate(
+    timeDifference = as.numeric(DATE - Date),
+    Count = 1
+  ) %>%
+  filter(timeDifference >= 0) %>%
+  mutate(category = case_when(
+    timeDifference < 3    ~ 1,
+    timeDifference < 11   ~ 2,
+    timeDifference < 31   ~ 3,
+    timeDifference < 184  ~ 4,
+    timeDifference < 366  ~ 5,
+    timeDifference < 731  ~ 6,
+    timeDifference < 1095 ~ 7,
+    TRUE                  ~ 8
+  ))
 
 ```
 
@@ -638,9 +575,9 @@ for(i in unique(SSB1$Year)) {
 #### Scots Bay {.tabset .tabset-pills}
 
 ```{r}
-CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+CP <- ext(-65.5, -64.5, 45, 45.5)
+out <- st_as_sf(crop(NBNS_spat, SBMap))
+
 ```
 
 ##### Total
@@ -648,43 +585,69 @@ out <- crop(NBNS, CP, byid=TRUE)
 ```{r echo=FALSE}
 
 #Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
+
 Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
 
-ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(fill = group2), pch=21, size = 2) +
-  coord_map() + 
-  labs(x=NULL, y=NULL, fill="Survey, # of Tags")
+Plot <- Tag %>% 
+  filter(Ground == "Scots Bay" & Year == Year) %>% 
+  group_by(Survey) %>% 
+  mutate(group2 = paste0(Survey, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
+  ungroup()
+
+Plot_sf <- st_as_sf(Plot, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
+
+ggplot() + 
+  geom_sf(data = SBout_sf, fill = "gray80", color = "darkgray") +  
+  geom_polygon(data = polySB_main, aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = SBplankton,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = SBCTD,       aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = polyNorthern, aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = polyEastern,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_sf(data = Plot_sf, aes(fill = group2), pch = 21, size = 2, color = "black") +
+  coord_sf(xlim = c(-65.5, -64.5), ylim = c(45.0, 45.5), expand = FALSE) + 
+  theme_minimal() +
+  labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
+  theme(
+    panel.background = element_rect(fill = "aliceblue", color = NA),
+    legend.position = "right"
+  )
+
 ```
 
 ```{r, results = "asis"}
 Tag1 = Tag %>% 
-  filter(Year == year & Ground == "Scots Bay") %>%
+  filter(Year == Year & Ground == "Scots Bay") %>%
   arrange(Survey) %>%
   group_by(Vessel, Survey) %>%
-  mutate(group2=paste0(Vessel, ", n=", length(Vessel))) %>%
+    mutate(group2 = paste0(Vessel, ", n=", n())) %>% # Upgraded length() to n()
   ungroup()
+
+Tag1_sf <- st_as_sf(Tag1, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
 for(i in unique(Tag1$Survey)) {
   cat("\n")
   cat("##### Survey", i, "\n")
   cat("\n")
   
-  print(ggplot(data = subset(Tag1, Survey == i), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(fill = group2), pch=21, size = 2) +
-  coord_map() + 
-  labs(x=NULL, y=NULL, fill = "Vessel, # of Tags"))
+survey_tags_sf <- Tag1_sf %>% filter(Survey == i)
+
+p <- ggplot() +
+    geom_sf(data = SBout_sf, fill = "gray80", color = "darkgray") +  
+    geom_polygon(data = polySB_main,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = SBplankton,   aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = SBCTD,       aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = polyNorthern, aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = polyEastern,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_sf(data = survey_tags_sf, aes(fill = group2), pch = 21, size = 2.5, color = "black") +
+    coord_sf(xlim = c(-65.5, -64.5), ylim = c(45.0, 45.5), expand = FALSE) + 
+    theme_minimal() +
+    labs(x = NULL, y = NULL, fill = "Vessel, # of Tags") +
+    theme(
+      panel.background = element_rect(fill = "aliceblue", color = NA),
+      legend.position = "right"
+    )
+  
+  print(p)
   cat("\n")
 }
 ```
@@ -692,50 +655,78 @@ for(i in unique(Tag1$Survey)) {
 #### German Bank {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+
+CP <- ext(-66.8, -65.5, 43, 44)
+out <- st_as_sf(crop(NBNS_spat, GBMap))
+
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-# Plot = Tag %>% subset(Ground == "German Bank" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
+#Plot = Tag %>% subset(Ground == "German Bank" & Year == Year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
+
 Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
 
-ggplot(data = Plot, aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(fill = group2), pch=21, size = 2) +
-  coord_map() + 
-  labs(x=NULL, y=NULL, fill="Survey, # of Tags")
+Plot <- Tag %>% 
+  filter(Ground == "German Bank" & Year == Year) %>% 
+  group_by(Survey) %>% 
+  mutate(group2 = paste0(Survey, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
+  ungroup()
+
+Plot_sf <- st_as_sf(Plot, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
+
+ggplot() + 
+  geom_sf(data = GBout_sf, fill = "gray80", color = "darkgray") + 
+  geom_polygon(data = polyGB, aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = GBCTD,       aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_polygon(data = polySI, aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+  geom_sf(data = Plot_sf, aes(fill = group2), pch = 21, size = 2, color = "black") +
+  coord_sf(xlim = c(-66.8, -65.5), ylim = c(43, 44), expand = FALSE) + 
+  theme_minimal() +
+  labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
+  theme(
+    panel.background = element_rect(fill = "aliceblue", color = NA),
+    legend.position = "right"
+  )
+
 ```
 
 ```{r, results = "asis"}
 Tag1 = Tag %>% 
-  filter(Year == year & Ground == "German Bank") %>%
+  filter(Year == Year & Ground == "German Bank") %>%
   arrange(Survey) %>%
   group_by(Vessel, Survey) %>%
-  mutate(group2=paste0(Vessel, ", n=", length(Vessel))) %>%
+    mutate(group2 = paste0(Vessel, ", n=", n())) %>% # Upgraded length() to n()
   ungroup()
+
+Tag1_sf <- st_as_sf(Tag1, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
 for(i in unique(Tag1$Survey)) {
   cat("\n")
   cat("##### Survey", i, "\n")
   cat("\n")
   
-  print(ggplot(data = subset(Tag1, Survey == i), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(fill = group2), pch=21, size = 2) +
-  coord_map() + 
-  labs(x=NULL, y=NULL, fill="Vessel, # of Tags"))
+survey_tags_sf <- Tag1_sf %>% filter(Survey == i)
+
+p <- ggplot() +
+    geom_sf(data = GBout_sf, fill = "gray80", color = "darkgray") +  
+    geom_polygon(data = polyGB,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = GBCTD,       aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_polygon(data = polySI,  aes(x = X, y = Y, group = PID), color = "black", fill = NA, linetype = 3) +
+    geom_sf(data = survey_tags_sf, aes(fill = group2), pch = 21, size = 2.5, color = "black") +
+    coord_sf(xlim = c(-66.8, -65.5), ylim = c(43, 44), expand = FALSE) + 
+    theme_minimal() +
+    labs(x = NULL, y = NULL, fill = "Vessel, # of Tags") +
+    theme(
+      panel.background = element_rect(fill = "aliceblue", color = NA),
+      legend.position = "right"
+    )
+  
+  print(p)
   cat("\n")
 }
+
 ```
 
 ### Tag Summaries {.tabset}
@@ -746,17 +737,20 @@ for(i in unique(Tag1$Survey)) {
 ::: col-md-6
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #Reset spatial extent back to full view
-CP <- as(extent(-69, -63, 42, 45.5), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+CP <- ext(-69, -63, 42, 45.5)
+out <- st_as_sf(crop(NBNS_spat, CP))
 
-ggplot(data = subset(Tag, Lon < -64.1), aes(x=Lon, y=Lat)) + 
- geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") + 
- geom_polygon(data=out,aes(x=long, y=lat, group=group),fill='burlywood4',col='black') +
- geom_point(pch=21, size = 2, fill = "White") + 
+Plot_points <- Tag %>% 
+  filter(Lon < -63) %>% 
+  st_as_sf(coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
+
+ggplot() +
+ geom_sf(data = out, fill = "burlywood4", color = "black") +
+ geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), color = "black", alpha = 0.5) + 
+ geom_sf(data = Plot_points, pch = 21, size = 2, fill = "white", color = "black") + 
  ggtitle("Tagging Locations") + 
  labs(x=NULL, y=NULL) + 
- coord_map() + 
+ coord_sf(xlim = c(-69, -63), ylim = c(42, 45.5), expand = FALSE) +
  theme(panel.background = element_rect(fill = "grey68"))
 ```
 :::
@@ -780,17 +774,21 @@ kbl(Annual_Table) %>%
 ::: col-md-6
 ```{r echo=FALSE}
 #Reset spatial extent back to full view
-CP <- as(extent(-69, -61.5, 42, 45.5), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+CP <- ext(-69, -63, 42, 45.5)
+out <- st_as_sf(crop(NBNS_spat, CP))
 
-ggplot(data = Tag, aes(x=Lon, y=Lat)) + 
- geom_polygon(data=out,aes(x=long, y=lat, group=group),fill='burlywood4',col='black') +
- geom_point(data = Tag, aes(fill = Tagger), pch=21, size = 2)+ 
-  ggtitle("Tagging Locations") + 
+Plot_points <- Tag %>% 
+  filter(Lon < -63) %>% 
+  st_as_sf(coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
+
+ggplot() +
+ geom_sf(data = out, fill = "burlywood4", color = "black") +
+ geom_sf(data = Plot_points, aes(fill = Tagger), pch = 21, size = 2, color = "black") + 
+ ggtitle("Tagging Locations") + 
  labs(x=NULL, y=NULL) + 
- coord_map() + 
+ coord_sf(xlim = c(-69, -63), ylim = c(42, 45.5), expand = FALSE) +
  theme(panel.background = element_rect(fill = "grey68"))
+
 ```
 :::
 
@@ -848,10 +846,6 @@ Table <- TagReturns %>%
  Table1 <- unique(Table) %>%
              arrange(category)
 
-# kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F) %>%
-#   kable_styling(full_width = F, fixed_thead = T, )
-
 Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
 
 SummaryTable <- subset(Table1, select = -c(timeDifference, No.ofSameNumberOfDays))
@@ -876,14 +870,18 @@ Cat1 <- subset(Cat1, subset = (catchAREA == "German Bank" |
                                  catchAREA =="SW Grounds"|
                                  catchAREA =="Gannet Dry Ledge" ))
 
-ggplot(data = Cat1, (aes(FishingGround, fill = catchAREA))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tagging Ground", y="Count") +
-        scale_fill_discrete(name = "Recapture area")+
-        scale_x_discrete(guide = guide_axis(n.dodge = 3))
-
-
+ggplot(data = Cat1, aes(x = catchAREA, fill = catchAREA)) +
+  geom_bar(data = Cat1, colour = "white", position = "stack") +
+  labs(x = "Tagging Ground", 
+       y = "Count", 
+       fill = "Recapture area") +
+  scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
+  scale_fill_discrete() +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "white", colour = "grey50"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 ```
 
 ### Scots Bay, German Bank and Seal Island Tags {.tabset .tabset-fade .tabset-pills}
@@ -912,7 +910,6 @@ GBSB <- GBSB %>%
   mutate(No.InCategory = length(category))
 
 SBGB <- subset(GBtoSB, TagLocation == "SB to GB")
- #SBGB$timeDifference <- as.numeric(GBSB$timeDifference)
 
 SBGB <- SBGB %>%
   group_by(category) %>%
@@ -941,9 +938,6 @@ TableGBSB <- GBSB %>%
                 No.InCategory,
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
-
-# kbl(TableGBSB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- subset(TableGBSB, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
@@ -976,9 +970,6 @@ TableSBGB <- SBGB %>%
                 No.InCategory,
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
-
-# kbl(TableSBGB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- subset(TableSBGB, select = -c(TAG_NUMBER, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
@@ -1034,10 +1025,6 @@ Table <- TagReturns1 %>%
                 No.ofSameNumberOfDays)%>%
   arrange(timeDifference)
 
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 SummaryTable <- subset(Table, select = -c(TAG_NUMBER,TagLocation, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
@@ -1088,9 +1075,6 @@ Table <- TagReturnsGBSI %>%
                 No.ofSameNumberOfDays) %>%
   arrange(timeDifference)
 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
@@ -1131,38 +1115,7 @@ SummaryTable <- TagReturnsGB %>%
   group_by(TagLocation, category) %>%
   count()
 
-# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Category", y="Count") +
-#         ggtitle("German Bank Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
-
-
 
 TagReturnsGB <- subset(TagReturnsGB, subset = (category != "1"))
 
@@ -1187,10 +1140,6 @@ Table <- TagReturnsGB %>%
                 timeDifferenceMax,
                 No.InCategory,
                 No.ofSameNumberOfDays)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGB %>%
   group_by(TagLocation, category) %>%
@@ -1233,32 +1182,6 @@ SummaryTable <- TagReturnsNBC %>%
 
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch location", y="Number of Events") +
-#         ggtitle("NB Coastal Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsNBC %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
  
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1270,26 +1193,6 @@ ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("NB Coastal Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-
-# Table <- TagReturnsNBC %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsNBC %>%
   group_by(TagLocation, category) %>%
@@ -1331,32 +1234,6 @@ SummaryTable <- TagReturnsGM %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Grand Manan Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsGM %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsGM <- subset(TagReturnsGM, subset = (category != "1"))
@@ -1367,25 +1244,6 @@ ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Grand Manan Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGM %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGM %>%
   group_by(TagLocation, category) %>%
@@ -1427,32 +1285,6 @@ SummaryTable <- TagReturnsGMB %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Grand Manan Banks Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGMB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsGMB <- subset(TagReturnsGMB, subset = (category != "1"))
@@ -1463,25 +1295,6 @@ ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Grand Manan Banks Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGMB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGMB %>%
   group_by(TagLocation, category) %>%
@@ -1523,32 +1336,6 @@ SummaryTable <- TagReturnsLI %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Long Island Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsLI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsLI <- subset(TagReturnsLI, subset = (category != "1"))
@@ -1559,25 +1346,6 @@ ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Long Island Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsLI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsLI %>%
   group_by(TagLocation, category) %>%
@@ -1618,32 +1386,6 @@ SummaryTable <- TagReturnsSI %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Seal Island Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsSI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsSI <- subset(TagReturnsSI, subset = (category != "1"))
@@ -1654,25 +1396,6 @@ ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Seal Island Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsSI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSI %>%
   group_by(TagLocation, category) %>%
@@ -1714,33 +1437,6 @@ SummaryTable <- TagReturnsSB %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-
-# ggplot(data = TagReturnsSB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Scots Bay Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsSB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsSB <- subset(TagReturnsSB, subset = (category != "1"))
@@ -1751,25 +1447,6 @@ ggplot(data = TagReturnsSB, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Scots Bay Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsSB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSB %>%
   group_by(TagLocation, category) %>%
@@ -1811,32 +1488,6 @@ SummaryTable <- TagReturnsYB %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsYB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Yankee Bank Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsYB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsYB <- subset(TagReturnsYB, subset = (category != "1"))
@@ -1847,25 +1498,6 @@ ggplot(data = TagReturnsYB, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Yankee Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsYB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsYB %>%
   group_by(TagLocation, category) %>%
@@ -1908,32 +1540,6 @@ SummaryTable <- TagReturnsT %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Trinity Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsT %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsT <- subset(TagReturnsT, subset = (category != "1"))
@@ -1944,25 +1550,6 @@ ggplot(data = TagReturnsT, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Trinity Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsT %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsT %>%
   group_by(TagLocation, category) %>%
@@ -2005,32 +1592,6 @@ SummaryTable <- TagReturnsBB %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsBB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Browns Bank Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsBB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsBB <- subset(TagReturnsBB, subset = (category != "1"))
@@ -2041,25 +1602,6 @@ ggplot(data = TagReturnsBB, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Browns Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsBB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsBB %>%
   group_by(TagLocation, category) %>%
@@ -2100,32 +1642,6 @@ SummaryTable <- TagReturnsSWG %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsSWG, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("SW Grounds Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsSWG %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 #Not sure why an NA has popped up
 
@@ -2137,25 +1653,6 @@ ggplot(data = TagReturnsSWG, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("SW Grounds Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsSWG %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSWG %>%
   group_by(TagLocation, category) %>%
@@ -2197,35 +1694,6 @@ SummaryTable <- TagReturnsGDL %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsGDL, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Gannet Dry Ledge Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGDL %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-
-
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsGDL <- subset(TagReturnsGDL, subset = (category != "1"))
@@ -2236,25 +1704,6 @@ ggplot(data = TagReturnsGDL, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Gannet Dry Ledget Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGDL %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsGDL %>%
   group_by(TagLocation, category) %>%
@@ -2297,31 +1746,6 @@ SummaryTable <- TagReturnsL %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsL, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Lurcher Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsL %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsL <- subset(TagReturnsL, subset = (category != "1"))
@@ -2332,25 +1756,6 @@ ggplot(data = TagReturnsL, (aes(TagLocation, fill = category))) +
         labs(x = "Tag to Catch Location", y="Number of Events") +
         ggtitle("Lurcher Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsL %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsL %>%
   group_by(TagLocation, category) %>%
@@ -2456,47 +1861,54 @@ kbl(SummaryTable, col.names = c("Gear Type", "Category", "Abundance in Category"
 ##### Total
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+CP <- ext(-65.5, -64.5, 45, 45.5)
+out <- st_as_sf(crop(NBNS_spat, SBMap))
 ```
 
 ```{r echo=FALSE}
 
-#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if within the survey season
-
-ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use if outside of the survey season. Reset year.
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(fill = Survey), pch=21, size = 2) +
-  coord_map() + 
+ggplot() + 
+  geom_sf(data=out) + 
+  geom_polygon(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use a specific year change the Year == 2023 or whatever year needed. Currently will use the system year.)
+  geom_polygon(data=polySB_main, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=SBplankton, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=SBCTD, aes(x=X, y=Y, group=PID), colour = "black", fill = NA, linetype = 3) +
+  geom_polygon(data=polyNorthern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=polyEastern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_point(data = subset(CTD, Ground == "Scots Bay" & In_Box == "1"),
+             aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
+  coord_sf() + 
   labs(x=NULL, y=NULL)
 
-#ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + #To use if within the survey season
-ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == 2023), aes(x=Temperature, y=Depth, colour = Julian_factor)) + #To use if outside of the survey season. Reset year.
-geom_path(size = 1.5) + 
-scale_y_reverse() + 
-labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
+ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) +#To use a specific year change the Year == 2023 or whatever year needed. Currently will use the system year.)
+  geom_path(size = 1.5) + 
+  scale_y_reverse() + 
+  labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
 ```
 
 ```{r, results = "asis"}
-#CTD1 = CTD %>% 
-  # filter(Year == year & Ground == "Scots Bay") %>%
-  # arrange(Survey)                                          # To use within the survey window
+CTD1 = CTD %>%
+filter(Year == year & Ground == "Scots Bay") %>%
+arrange(Survey)                                         
 
-CTD1 = CTD %>% 
-   filter(Year == 2023 & Ground == "Scots Bay") %>%
-   arrange(Survey)                                           # To use outside of Survey window. Reset year.
 
 for(i in unique(CTD1$Survey)) {
   
   cat("\n")
   cat("##### Survey", i, "\n")
   cat("\n")
+  
+ggplot() + 
+  geom_polygon(data= subset (CTD1, Survey == i), aes(x=Lon, y=Lat)) +  
+  geom_polygon(data=polySB_main, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=SBplankton, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=SBCTD, aes(x=X, y=Y, group=PID), colour = "black", fill = NA, linetype = 3) +
+  geom_polygon(data=polyNorthern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_polygon(data=polyEastern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
+  geom_point(data = subset(CTD, Ground == "Scots Bay" & Year == Year & In_Box == "1"),
+             aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
+  coord_sf() + 
+  labs(x=NULL, y=NULL)  
   
 print(ggplot(data = subset(CTD1, Survey == i), aes(x=Lon, y=Lat)) + 
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
@@ -2523,24 +1935,35 @@ labs(x="Temperature (°C)", y = "Depth (m)", title = "Temperature (°C) vs. Dept
 ##### Total
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+##Full Map
+# CP <- ext(-69, -63, 42, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, CP))
+# 
+# #Scots Bay
+# CP <- ext(-65.5, -64.5, 45, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, SBMap))
+
+#German Bank
+
+CP <- ext(-66.8, -65.5, 43, 44)
+out <- st_as_sf(crop(NBNS_spat, GBMap))
+
 ```
 
 ```{r echo=FALSE}
-# ggplot(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To use within the survey window
-ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023 & In_Box == "1"), aes(x=Lon, y=Lat)) +  #To use outside of the survey window. Reset Year. 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+ggplot() +
+  geom_sf(data=out) + 
+  geom_polygon(data = subset(CTD, Ground == "German Bank" & Year == year & In_Box == "1"), aes(x=Lon, y=Lat)) + #To specify year change Year == to specific year. This will currently use the system year.
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(fill = Survey), pch=21, size = 2) +
-  coord_map() + 
+  geom_point(data = subset(CTD, Ground == "German Bank" & In_Box == "1"),
+             aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
+  coord_sf() + 
   labs(x=NULL, y=NULL)
 
-#ggplot(data = subset(CTD, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) +  #To use within the survey window
-ggplot(data = subset(CTD, Ground == "German Bank" & Year == 2023), aes(x=Temperature, y=Depth, colour = Julian_factor)) +   # To use outside of the survey window. Reset Year.
+
+ggplot(data = subset(CTD, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) +   # Change value 'Year ==' to look at specific year..
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
 labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
@@ -3370,36 +2793,54 @@ print(ggplot(data = subset(atDepth1, Year == i), aes(x = Julian, y = StratSalt, 
 ##### Scots Bay
 
 ```{r message=FALSE, warning=FALSE, fig.align='center'}
-CP <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+##Full Map
+# CP <- ext(-69, -63, 42, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, CP))
+# 
+#Scots Bay
+CP <- ext(-65.5, -64.5, 45, 45.5)
+out <- st_as_sf(crop(NBNS_spat, SBMap))
 
-ggplot(data = subset(CTD, Ground == "Scots Bay"), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+##German Bank
+
+# CP <- ext(-66.8, -65.5, 43, 44)
+# out <- st_as_sf(crop(NBNS_spat, GBMap))
+
+ggplot() +
+  geom_sf(data = out) +
   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(aes(fill = Year), pch=21, size = 2) +
-  coord_map() + 
+  geom_point(data = subset(CTD, Ground == "Scots Bay"), aes(x = Lon, y = Lat, fill = Year), pch=21, size = 2) +
+  coord_sf() + 
   labs(x=NULL, y=NULL)
 ```
 
 ##### German Bank
 
 ```{r message=FALSE, warning=FALSE, fig.align='center'}
-CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+##Full Map
+# CP <- ext(-69, -63, 42, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, CP))
+# 
+# #Scots Bay
+# CP <- ext(-65.5, -64.5, 45, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, SBMap))
 
-ggplot(data = subset(CTD, Ground == "German Bank" & In_Box == "1"), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#German Bank
+
+CP <- ext(-66.8, -65.5, 43, 44)
+out <- st_as_sf(crop(NBNS_spat, GBMap))
+
+ggplot()+
+  geom_sf(data = out) + 
   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(aes(fill = Year), pch=21, size = 2) +
-  coord_map() + 
+  geom_point(data = subset(CTD, Ground == "German Bank"), aes(x=Lon, y=Lat, fill = as.factor(Year)), pch=21, size = 2) +
+  coord_sf() + 
   labs(x=NULL, y=NULL)
 ```
 
@@ -3407,20 +2848,32 @@ ggplot(data = subset(CTD, Ground == "German Bank" & In_Box == "1"), aes(x=Lon, y
 
 ```{r echo=FALSE, fig.height=9, fig.width=15, message=FALSE, warning=FALSE}
 #Reset spatial extent back to full view
-CP <- as(extent(-69, -63, 42, 45.5), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+#Full Map
+CP <- ext(-69, -63, 42, 45.5)
+out <- st_as_sf(crop(NBNS_spat, CP))
+ 
+# #Scots Bay
+# CP <- ext(-65.5, -64.5, 45, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, SBMap))
 
-ggplot(data = CTD, aes(x=Lon, y=Lat)) + 
- geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") + 
- geom_polygon(data=out,aes(x=long, y=lat, group=group),fill='burlywood4',col='black') +
- geom_point(pch=21, size = 2, fill = "White")+ ggtitle("CTD Cast Locations") + 
+# #German Bank
+# 
+# CP <- ext(-66.8, -65.5, 43, 44)
+# out <- st_as_sf(crop(NBNS_spat, GBMap))
+
+ggplot() +
+ geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+ geom_sf(data = out) +
+ #geom_polygon(data = CTD, aes(x=Lon, y=Lat)) + 
+ #geom_polygon(data=out,aes(x=long, y=lat, group=group),fill='burlywood4',col='black') +
+ geom_point(data = CTD, aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2, fill = "White")+ 
+ ggtitle("CTD Cast Locations") + 
  labs(x=NULL, y=NULL) + 
- coord_map() + 
+ coord_sf() + 
  theme(panel.background = element_rect(fill = "grey68"))
 ```
 
-## Larval Project {.tabset}
+## Larval Project DISABLED Line 2876 - Line 4170{.tabset} 
 
 ### Scots Bay {.tabset}
 
@@ -3561,62 +3014,71 @@ print(kbl(TotalCategories, col.names=c("Category", "Length (mm)", "Age", "Abunda
 
 ```{r message=FALSE, warning=FALSE}
 
-CP <- as(extent(-66.5, -64.5, 44.5, 45.5), "SpatialPolygons") #set boundaries for Scots Bay before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+# #Full Map
+# CP <- ext(-69, -63, 42, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, CP))
+
+#Scots Bay
+CP <- ext(-65.5, -64.5, 45, 45.5)
+out <- st_as_sf(crop(NBNS_spat, SBMap))
+
+# #German Bank
+# 
+# CP <- ext(-66.8, -65.5, 43, 44)
+# out <- st_as_sf(crop(NBNS_spat, GBMap))
 
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-Larval2 <- subset(Larval, Ground == 'SB')
-#Larval2 <- subset(Larval2, X > -66)
-
-ggplot(Larval2, aes(x=X, y=Y)) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map()
+# Larval2 <- subset(Larval, Ground == 'SB')
+# #Larval2 <- subset(Larval2, X > -66)
+# 
+# ggplot(Larval2, aes(x=X, y=Y)) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+#   geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) + 
+#   coord_map()
 ```
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Year == i) %>% filter(Ground == "SB")
-Larval1 <- subset(Larval1, X > -66)
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Year == i) %>% filter(Ground == "SB")
+# Larval1 <- subset(Larval1, X > -66)
+#  
+# print(ggplot(Larval1, aes(x=X, y=Y)) + 
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+#   geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) + 
+#   coord_map())
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   dplyr::summarize(n = n()) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Depth Data {.tabset .tabset-pills}
@@ -3624,62 +3086,62 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c
 
 ```{r echo=FALSE, fig.align='center'}
 
-Larval1 = Larval %>% filter(Ground == "SB")
-
-Larval1 %>% 
-  ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category")
-
-TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# Larval1 = Larval %>% filter(Ground == "SB")
+# 
+# Larval1 %>% 
+#   ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category")
+# 
+# TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 ```
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Year == i)
-Larval1 = Larval1 %>% filter(Ground == "SB")
- 
-print(ggplot(data=Larval1, (aes(AvgTowDepth, LengthAdjustment, colour = id))) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "id")) 
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Year == i)
+# Larval1 = Larval1 %>% filter(Ground == "SB")
+#  
+# print(ggplot(data=Larval1, (aes(AvgTowDepth, LengthAdjustment, colour = id))) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "id")) 
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Spawning Modes {.tabset .tabset-pills}
@@ -3689,86 +3151,86 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
-
-# The following survey's did not use a flowmeter, therefore does not have water volume or larval density. This is only applicable to surveys that larvae were caught.
-# Scots Bay 2017 Survey 1, 2, 6 & 7
-# Scots Bay 2019 Survey 8
-# Scots Bay 2020 Survey 7
-# Scots Bay 2021 Survey 9 & 10
-# German Bank 2021 Survey 4 & 5
-# Seal Island 2019 Survey unknown, no record in raw data of this survey.
-# Overall summary can be found in Volume and Density Investigation - NAs in Full Larval Spreadsheet. Saved under science team, larval project. 
-
-
-Larval1 = LarvalSum %>% filter(Ground == "SB")
-
-print(ggplot(Larval1, aes(x = Survey.No, y = Density, colour = Year)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Larval Density "))
-
-print(ggplot(Larval1, aes(x = Survey.No, y = Abundance, colour = Year)) + 
-  geom_point() + 
-  ylab("Abundance (Count/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Larval Abundance"))
-
-print(ggplot(Larval1, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
-  geom_point() + 
-  ylab("Mean Age (days)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Mean Larval Age of Each Individual Tow"))
+# 
+# # The following survey's did not use a flowmeter, therefore does not have water volume or larval density. This is only applicable to surveys that larvae were caught.
+# # Scots Bay 2017 Survey 1, 2, 6 & 7
+# # Scots Bay 2019 Survey 8
+# # Scots Bay 2020 Survey 7
+# # Scots Bay 2021 Survey 9 & 10
+# # German Bank 2021 Survey 4 & 5
+# # Seal Island 2019 Survey unknown, no record in raw data of this survey.
+# # Overall summary can be found in Volume and Density Investigation - NAs in Full Larval Spreadsheet. Saved under science team, larval project. 
+# 
+# 
+# Larval1 = LarvalSum %>% filter(Ground == "SB")
+# 
+# print(ggplot(Larval1, aes(x = Survey.No, y = Density, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Larval Density "))
+# 
+# print(ggplot(Larval1, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Abundance (Count/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Larval Abundance"))
+# 
+# print(ggplot(Larval1, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Mean Age (days)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Mean Larval Age of Each Individual Tow"))
 
 ```
 
 ```{r, results='asis', fig.align='center'}
- 
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Ground == "SB")
-Larval1 = Larval1 %>% filter(Year == i)
-
-Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
-
-  
-print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Density ")))
-  cat("\n")
-
-print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Abundance (Larvae/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Abundance ")))
-  cat("\n")
-
-print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Mean Age (days)") + 
-  xlab("Survey Number") +
-  xlim(0, 10) + 
-  scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, " Mean Larval Age of Each Individual Tow")))
-  cat("\n")
-}
+#  
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Ground == "SB")
+# Larval1 = Larval1 %>% filter(Year == i)
+# 
+# Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
+# 
+#   
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Density ")))
+#   cat("\n")
+# 
+# print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Abundance (Larvae/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Abundance ")))
+#   cat("\n")
+# 
+# print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Mean Age (days)") + 
+#   xlab("Survey Number") +
+#   xlim(0, 10) + 
+#   scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, " Mean Larval Age of Each Individual Tow")))
+#   cat("\n")
+# }
 ```
 
 #### Individual Spawn Dates {.tabset}
@@ -3778,25 +3240,25 @@ print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour =
 Dates individual larvae were spawned. Used an incubation period of 14 days.
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-# Changed AdjustedJulianSpawnDate to JulianSpawnDate
-
-Larval1 <- Larval %>% filter(Ground == "SB")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Spawn Date(Julian)")
-
-#Possibly summarize this table? Use individual points for other graphs?
-
-
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
-
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
+# # Changed AdjustedJulianSpawnDate to JulianSpawnDate
+# 
+# Larval1 <- Larval %>% filter(Ground == "SB")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Spawn Date(Julian)")
+# 
+# #Possibly summarize this table? Use individual points for other graphs?
+# 
+# 
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
+# 
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
 
 ```
 
@@ -3804,85 +3266,85 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
 
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-  
-  
-Larval1 <- subset.data.frame(Larval, Ground == "SB")
-Larval1 = Larval1 %>% filter(Year == i)
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-        geom_jitter(size = 1.25, width = 3) + 
-        geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-        geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-        geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-        geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-        ylab("Length (mm)") + 
-        xlab("Spawn Date (Julian)") +
-        scale_y_continuous(limits = c(0,32)) + 
-        scale_x_continuous(breaks = seq(from = 100, to = 300, by = 20)) +
-        ggtitle(paste(i, "Scots Bay")))
-        cat("\n")
-  
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
-    
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+#   
+#   
+# Larval1 <- subset.data.frame(Larval, Ground == "SB")
+# Larval1 = Larval1 %>% filter(Year == i)
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#         geom_jitter(size = 1.25, width = 3) + 
+#         geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#         geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#         geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#         geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#         ylab("Length (mm)") + 
+#         xlab("Spawn Date (Julian)") +
+#         scale_y_continuous(limits = c(0,32)) + 
+#         scale_x_continuous(breaks = seq(from = 100, to = 300, by = 20)) +
+#         ggtitle(paste(i, "Scots Bay")))
+#         cat("\n")
+#   
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
+#     
+# }
 ```
 
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-Larval1 <- subset(Larval, Ground == "SB")
-
-for(i in unique(Larval1$TowID)) {
-  
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
-    geom_jitter(size = 1.25, width = 3) +
-    geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
-    geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
-    geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
-    geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-    labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-#when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
-print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-          geom_jitter(size = 1.25, width = 3) + 
-          geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-          geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-          geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-          geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-          ylab("Length (mm)") + 
-          xlab("Spawn Date (Julian)") +
-          scale_y_continuous(limits = c(0,32)) + 
-          scale_x_continuous(limits = c(100, 300)) +
-          ggtitle(paste("Tow ID", i, "Scots Bay")))
-          cat("\n")
-
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") %>% filter(TowID == i)
-          
-print(kbl(TotalCategories, align = "c") %>%
-        kable_paper("striped", full_width = F))
-        cat("\n")
-}
+# Larval1 <- subset(Larval, Ground == "SB")
+# 
+# for(i in unique(Larval1$TowID)) {
+#   
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
+#     geom_jitter(size = 1.25, width = 3) +
+#     geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
+#     geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
+#     geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
+#     geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#     labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# #when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
+# print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#           geom_jitter(size = 1.25, width = 3) + 
+#           geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#           geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#           geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#           geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#           ylab("Length (mm)") + 
+#           xlab("Spawn Date (Julian)") +
+#           scale_y_continuous(limits = c(0,32)) + 
+#           scale_x_continuous(limits = c(100, 300)) +
+#           ggtitle(paste("Tow ID", i, "Scots Bay")))
+#           cat("\n")
+# 
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") %>% filter(TowID == i)
+#           
+# print(kbl(TotalCategories, align = "c") %>%
+#         kable_paper("striped", full_width = F))
+#         cat("\n")
+# }
 ```
 
 ### German Bank {.tabset}
@@ -3891,207 +3353,207 @@ print(kbl(TotalCategories, align = "c") %>%
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-Larval = Larval %>% filter(Ground == "GB")
-
-Larval %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 0.75) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Julian Date")
-
-ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
-  geom_boxplot() +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)")
-
-Table = Larval %>%
-  group_by(Year) %>%
-  summarize(MinLength = min(LengthAdjustment),
-            MaxLength = max(LengthAdjustment),
-            AvgLength = mean(LengthAdjustment),
-            AvgSD = mean(SD),
-            Abundance = n()) %>%
-  mutate_if(is.numeric, format, digits=2)
-
-kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# 
+# Larval = Larval %>% filter(Ground == "GB")
+# 
+# Larval %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 0.75) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Julian Date")
+# 
+# ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
+#   geom_boxplot() +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)")
+# 
+# Table = Larval %>%
+#   group_by(Year) %>%
+#   summarize(MinLength = min(LengthAdjustment),
+#             MaxLength = max(LengthAdjustment),
+#             AvgLength = mean(LengthAdjustment),
+#             AvgSD = mean(SD),
+#             Abundance = n()) %>%
+#   mutate_if(is.numeric, format, digits=2)
+# 
+# kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 ```
 
 ```{r, results = "asis", fig.align='center'}
 
-Larval1 = Larval %>% filter(Ground == "GB")
-
-for(i in unique(Larval$Year)) {
-  
-# In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval1 %>% filter(Year == i)
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = id)) + 
-  geom_point() +
-  labs(y="Length (mm)", x="Julian Day")
-
-print(ggplot(data = subset(Larval1, Year == i), aes(x = Julian, y = LengthAdjustment, colour = id)) + 
-  geom_point() +
-  geom_jitter(width = .5) +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  ylab("Length (mm)") + 
-  xlab("Julian Day") +
-  scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
-  scale_x_continuous(breaks = seq(from = min(Larval1$Julian), to = max(Larval1$Julian), by = 2)) +
-  ggtitle(paste(i, "German Bank")))
-  cat("\n")
- 
-print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
-  geom_histogram(binwidth=0.5, colour = "white") + 
-  theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-  labs(x = "Length (mm)", y="Count"))
-  cat("\n")
-  
-  Table = Larval1 %>% 
-  group_by(Survey.No) %>%
-  summarize(AvgLength = mean(LengthAdjustment),
-            AvgSD = mean(SD),
-            Abundance = n()) %>%
-  mutate_if(is.numeric, format, digits=2)
-
-print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# Larval1 = Larval %>% filter(Ground == "GB")
+# 
+# for(i in unique(Larval$Year)) {
+#   
+# # In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval1 %>% filter(Year == i)
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = id)) + 
+#   geom_point() +
+#   labs(y="Length (mm)", x="Julian Day")
+# 
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = Julian, y = LengthAdjustment, colour = id)) + 
+#   geom_point() +
+#   geom_jitter(width = .5) +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   ylab("Length (mm)") + 
+#   xlab("Julian Day") +
+#   scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
+#   scale_x_continuous(breaks = seq(from = min(Larval1$Julian), to = max(Larval1$Julian), by = 2)) +
+#   ggtitle(paste(i, "German Bank")))
+#   cat("\n")
+#  
+# print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
+#   geom_histogram(binwidth=0.5, colour = "white") + 
+#   theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#   labs(x = "Length (mm)", y="Count"))
+#   cat("\n")
+#   
+#   Table = Larval1 %>% 
+#   group_by(Survey.No) %>%
+#   summarize(AvgLength = mean(LengthAdjustment),
+#             AvgSD = mean(SD),
+#             Abundance = n()) %>%
+#   mutate_if(is.numeric, format, digits=2)
+# 
+# print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Mapped Data {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.75, 43, 43.7), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+# CP <- as(extent(-66.5, -65.75, 43, 43.7), "SpatialPolygons") #set boundaries for German Bank before plotting
+# proj4string(CP) <- CRS(proj4string(NBNS))
+# out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-Larval2 <- subset(Larval, Ground == 'GB')
-
-ggplot(Larval2, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) +   coord_map()
+# 
+# Larval2 <- subset(Larval, Ground == 'GB')
+# 
+# ggplot(Larval2, aes(x=X, y=Y)) + 
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) +   coord_map()
 
 ```
 
 
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Year == i) %>% filter()
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Year == i) %>% filter()
+#  
+# print(ggplot(Larval1, aes(x=X, y=Y)) + 
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+#   geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) + 
+#   coord_map())
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   dplyr::summarize(n = n()) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-Larval1 = Larval %>% filter(Ground == "GB")
-
-Larval1 %>% 
-  ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category") 
-
-TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# 
+# Larval1 = Larval %>% filter(Ground == "GB")
+# 
+# Larval1 %>% 
+#   ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category") 
+# 
+# TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 ```
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Year == i)
-Larval1 = Larval1 %>% filter(Ground == "GB")
- 
-print(ggplot(data = Larval1, aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category"))
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Year == i)
+# Larval1 = Larval1 %>% filter(Ground == "GB")
+#  
+# print(ggplot(data = Larval1, aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category"))
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Spawning Modes {.tabset .tabset-pills}
@@ -4101,87 +3563,87 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
-
-#Should x be Julian date and colour be survey number instead of year?
-#Need to add in Larval summary table within compendium
-
-GBLarvalSum = LarvalSum %>% filter(Ground == "GB")
-
-#GBLarvalSum$Density[is.na(GBLarvalSum$Density)] = 0
-#GBLarvalSum$Abundance[is.na(GBLarvalSum$Abundance)] = 0
-#GBLarvalSum$MeanAgeInDays[is.na(GBLarvalSum$MeanAgeInDays)] = 0
-
-print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(GBLarvalSum$Density))) +
-  scale_x_continuous(limits = c(1, 10), breaks = seq(1,10,1)) +
-  ggtitle("Larval Density "))
-
-print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
-  geom_point() + 
-  ylab("Abundance (Larvae/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(GBLarvalSum$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Larval Abundance "))
-
-print(ggplot(GBLarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
-  geom_point() + 
-  ylab("Mean Larval Age (days)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(GBLarvalSum$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Mean Larval Age of Individual Tows"))
+# 
+# #Should x be Julian date and colour be survey number instead of year?
+# #Need to add in Larval summary table within compendium
+# 
+# GBLarvalSum = LarvalSum %>% filter(Ground == "GB")
+# 
+# #GBLarvalSum$Density[is.na(GBLarvalSum$Density)] = 0
+# #GBLarvalSum$Abundance[is.na(GBLarvalSum$Abundance)] = 0
+# #GBLarvalSum$MeanAgeInDays[is.na(GBLarvalSum$MeanAgeInDays)] = 0
+# 
+# print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(GBLarvalSum$Density))) +
+#   scale_x_continuous(limits = c(1, 10), breaks = seq(1,10,1)) +
+#   ggtitle("Larval Density "))
+# 
+# print(ggplot(GBLarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Abundance (Larvae/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(GBLarvalSum$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Larval Abundance "))
+# 
+# print(ggplot(GBLarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Mean Larval Age (days)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(GBLarvalSum$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Mean Larval Age of Individual Tows"))
 
 ```
 
 
 ```{r, results='asis', fig.align='center'}
- 
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = LarvalSum %>% filter(Ground == "GB")
-Larval1 = Larval1 %>% filter(Year == i)
-#Larval1$Density[is.na(Larval1$Density)] <- 0
-#Larval1$Abundance[is.na(Larval1$Abundance)] <- 0
-#Larval1$MeanAgeInDays[is.na(Larval1$MeanAgeInDays)] <- 0
-
-Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
-
-  
-print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Density))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Density ")))
-  cat("\n")
-
-print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Abundance (Larvae/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Abundance ")))
-  cat("\n")
-
-print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Mean Age (days)") + 
-  xlab("Survey Number") +
-  xlim(0, 10) + 
-  scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Mean Larval Age in Days")))
-  cat("\n")
-}
+#  
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = LarvalSum %>% filter(Ground == "GB")
+# Larval1 = Larval1 %>% filter(Year == i)
+# #Larval1$Density[is.na(Larval1$Density)] <- 0
+# #Larval1$Abundance[is.na(Larval1$Abundance)] <- 0
+# #Larval1$MeanAgeInDays[is.na(Larval1$MeanAgeInDays)] <- 0
+# 
+# Larval1$MonthDay <- format(Larval1$Date, "%m-%d")
+# 
+#   
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Density))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Density ")))
+#   cat("\n")
+# 
+# print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Abundance (Larvae/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(Larval1$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Abundance ")))
+#   cat("\n")
+# 
+# print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Mean Age (days)") + 
+#   xlab("Survey Number") +
+#   xlim(0, 10) + 
+#   scale_y_continuous(limits = c(0, max(Larval1$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Mean Larval Age in Days")))
+#   cat("\n")
+# }
 ```
 
 #### Individual Spawn Dates {.tabset}
@@ -4191,110 +3653,110 @@ print(ggplot(Larval1, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour =
 Dates individual larvae were spawned. Used an incubation period of 10 days.
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-
-Larval1 <- Larval %>% filter(Ground == "GB")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  scale_y_continuous(limits = c(0,32)) + 
-  scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
-  labs(y="Length (mm)", x="Spawn Date(Julian)")
-
-#Possibly summarize this table? Use individual points for other graphs?
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
-
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
+# 
+# Larval1 <- Larval %>% filter(Ground == "GB")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   scale_y_continuous(limits = c(0,32)) + 
+#   scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
+#   labs(y="Length (mm)", x="Spawn Date(Julian)")
+# 
+# #Possibly summarize this table? Use individual points for other graphs?
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
+# 
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
 
 ```
 
 ##### Year {.tabset}
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-  
-  
-Larval1 <- subset.data.frame(Larval, Ground == "GB")
-Larval1 = Larval1 %>% filter(Year == i)
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-        geom_jitter(size = 1.25, width = 3) + 
-        geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-        geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-        geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-        geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-        ylab("Length (mm)") + 
-        xlab("Spawn Date (Julian)") +
-        scale_y_continuous(limits = c(0,32)) + 
-        scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
-        ggtitle(paste(i, "German Bank")))
-        cat("\n")
-  
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
-    
-}
+# 
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+#   
+#   
+# Larval1 <- subset.data.frame(Larval, Ground == "GB")
+# Larval1 = Larval1 %>% filter(Year == i)
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#         geom_jitter(size = 1.25, width = 3) + 
+#         geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#         geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#         geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#         geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#         ylab("Length (mm)") + 
+#         xlab("Spawn Date (Julian)") +
+#         scale_y_continuous(limits = c(0,32)) + 
+#         scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
+#         ggtitle(paste(i, "German Bank")))
+#         cat("\n")
+#   
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
+#     
+# }
 ```
 
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-Larval1 <- subset(Larval, Ground == "GB")
-
-for(i in unique(Larval$TowID)) {
-  
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
-    geom_jitter(size = 1.25, width = 3) +
-    geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
-    geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
-    geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
-    geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-    labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-#when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
-print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-          geom_jitter(size = 1.25, width = 3) + 
-          geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-          geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-          geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-          geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-          ylab("Length (mm)") + 
-          xlab("Spawn Date (Julian)") +
-          scale_y_continuous(limits = c(0,32)) + 
-          scale_x_continuous(limits = c(100, 300)) +
-          ggtitle(paste("Tow ID", i, "German Bank")))
-          cat("\n")
-
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
-          
-print(kbl(TotalCategories, align = "c") %>%
-        kable_paper("striped", full_width = F))
-        cat("\n")
-}
+# Larval1 <- subset(Larval, Ground == "GB")
+# 
+# for(i in unique(Larval$TowID)) {
+#   
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
+#     geom_jitter(size = 1.25, width = 3) +
+#     geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
+#     geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
+#     geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
+#     geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#     labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# #when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
+# print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#           geom_jitter(size = 1.25, width = 3) + 
+#           geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#           geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#           geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#           geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#           ylab("Length (mm)") + 
+#           xlab("Spawn Date (Julian)") +
+#           scale_y_continuous(limits = c(0,32)) + 
+#           scale_x_continuous(limits = c(100, 300)) +
+#           ggtitle(paste("Tow ID", i, "German Bank")))
+#           cat("\n")
+# 
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
+#           
+# print(kbl(TotalCategories, align = "c") %>%
+#         kable_paper("striped", full_width = F))
+#         cat("\n")
+# }
 ```
 ### Seal Island {.tabset}
 #### Length Data {.tabset .tabset-pills}
@@ -4302,96 +3764,96 @@ print(kbl(TotalCategories, align = "c") %>%
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-Larval = LarvalSI
-
-Larval %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) + 
-  geom_point() +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  scale_x_continuous(labels = scales::label_number(1), limits = c(284, 288)) +
-  labs(y="Length (mm)", x="Julian Date of Collection")
-
-ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
-  geom_boxplot() +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)")
-
-Table = Larval %>%
-  group_by(Year) %>%
-  summarize(MinLength = min(LengthAdjustment),
-            MaxLength = max(LengthAdjustment),
-            AvgLength = mean(LengthAdjustment),
-            AvgSD = mean(SD),
-            Abundance = n()) %>%
-  mutate_if(is.numeric, format, digits=2)
-
-kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# 
+# Larval = LarvalSI
+# 
+# Larval %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = Year)) + 
+#   geom_point() +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   scale_x_continuous(labels = scales::label_number(1), limits = c(284, 288)) +
+#   labs(y="Length (mm)", x="Julian Date of Collection")
+# 
+# ggplot(Larval, aes(Year, LengthAdjustment, colour = Year)) + 
+#   geom_boxplot() +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)")
+# 
+# Table = Larval %>%
+#   group_by(Year) %>%
+#   summarize(MinLength = min(LengthAdjustment),
+#             MaxLength = max(LengthAdjustment),
+#             AvgLength = mean(LengthAdjustment),
+#             AvgSD = mean(SD),
+#             Abundance = n()) %>%
+#   mutate_if(is.numeric, format, digits=2)
+# 
+# kbl(Table, col.names=c("Year", "Min Length (mm)", "Max Length (mm)", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 ```
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-# In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = LarvalSI %>% filter(Year == i)
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = id)) + 
-  geom_point() +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Julian Day")
-
-print(ggplot(data = subset(Larval1, Year == i), aes(x = Julian, y = LengthAdjustment, colour = id)) + 
-  geom_point() +
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  geom_jitter(width = .5) +
-  ylab("Length (mm)") + 
-  xlab("Julian Day") +
-  scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
-  scale_x_continuous(breaks = seq(from = min(Larval1$Julian), to = max(Larval1$Julian), by = 2)) +
-  ggtitle(paste(i, "Seal Island")))
-  cat("\n")
- 
-print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
-  geom_histogram(binwidth=0.5, colour = "white") + 
-  theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-  labs(x = "Length (mm)", y="Count"))
-  cat("\n")
-  
-## This is the same plot but a different format.
-  
-#print(ggplot(data=Larval1, aes(LengthAdjustment, colour = Survey.No)) + 
-#  geom_freqpoly(bins=100, linewidth = 1) +
-#  labs(y="Count", x="Length (mm)"))
-#  cat("\n")
-  
-  Table = Larval1 %>% 
-  group_by(Survey.No) %>%
-  summarize(AvgLength = mean(LengthAdjustment),
-            AvgSD = mean(SD),
-            Abundance = n()) %>%
-  mutate_if(is.numeric, format, digits=2)
-
-print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+# # In histogram, count is the number of individuals that fall into that length category over the whole year. It is split by colour into each individual survey. Each length category is therefore split up by number of individuals per survey.
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = LarvalSI %>% filter(Year == i)
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=Julian, colour = id)) + 
+#   geom_point() +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Julian Day")
+# 
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = Julian, y = LengthAdjustment, colour = id)) + 
+#   geom_point() +
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   geom_jitter(width = .5) +
+#   ylab("Length (mm)") + 
+#   xlab("Julian Day") +
+#   scale_y_continuous(limits = c(0, max(Larval1$LengthAdjustment))) + 
+#   scale_x_continuous(breaks = seq(from = min(Larval1$Julian), to = max(Larval1$Julian), by = 2)) +
+#   ggtitle(paste(i, "Seal Island")))
+#   cat("\n")
+#  
+# print(ggplot(data = Larval1, (aes(LengthAdjustment, fill = id))) + 
+#   geom_histogram(binwidth=0.5, colour = "white") + 
+#   theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
+#   labs(x = "Length (mm)", y="Count"))
+#   cat("\n")
+#   
+# ## This is the same plot but a different format.
+#   
+# #print(ggplot(data=Larval1, aes(LengthAdjustment, colour = Survey.No)) + 
+# #  geom_freqpoly(bins=100, linewidth = 1) +
+# #  labs(y="Count", x="Length (mm)"))
+# #  cat("\n")
+#   
+#   Table = Larval1 %>% 
+#   group_by(Survey.No) %>%
+#   summarize(AvgLength = mean(LengthAdjustment),
+#             AvgSD = mean(SD),
+#             Abundance = n()) %>%
+#   mutate_if(is.numeric, format, digits=2)
+# 
+# print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abundance"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 
@@ -4399,119 +3861,119 @@ print(kbl(Table, col.names=c("Survey #", "Mean Length (mm)", "+/- SD (mm)", "Abu
 #### Mapped Data {.tabset .tabset-pills}
 
 ```{r message=FALSE, warning=FALSE}
-CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+# CP <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons") #set boundaries for German Bank before plotting
+# proj4string(CP) <- CRS(proj4string(NBNS))
+# out <- crop(NBNS, CP, byid=TRUE)
 ```
 
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-Larval2 <- subset(Larval, Ground == 'SI')
-
-ggplot(Larval2, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map()
+# 
+# Larval2 <- subset(Larval, Ground == 'SI')
+# 
+# ggplot(Larval2, aes(x=X, y=Y)) + 
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_point(data=Larval2, aes(fill = Year), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) + 
+#   coord_map()
 
 ```
 
 
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = Larval %>% filter(Year == i) %>% filter()
- 
-print(ggplot(Larval1, aes(x=X, y=Y)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
-  geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
-  labs(x=NULL, y=NULL) + 
-  coord_map())
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  dplyr::summarize(n = n()) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = Larval %>% filter(Year == i) %>% filter()
+#  
+# print(ggplot(Larval1, aes(x=X, y=Y)) + 
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) + 
+#   geom_point(data=Larval1, aes(fill = category), pch=21, alpha = 0.6) +
+#   labs(x=NULL, y=NULL) + 
+#   coord_map())
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   dplyr::summarize(n = n()) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Depth Data {.tabset .tabset-pills}
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-
-LarvalSI %>% 
-  ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category") 
-
-TotalCategories <- LarvalSI %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# 
+# LarvalSI %>% 
+#   ggplot(aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category") 
+# 
+# TotalCategories <- LarvalSI %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F)
 ```
 
 ```{r, results = "asis", fig.align='center'}
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-Larval1 = LarvalSI %>% filter(Year == i)
- 
-print(ggplot(data = Larval1, aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
-  scale_y_reverse() +
-  labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category"))
-  cat("\n")
-  
-  TotalCategories <- Larval1 %>%
-  group_by(category) %>%
-  summarize(n = n(),
-            MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
-  mutate(Percentage = (n/sum(n))*100) %>%
-  mutate_if(is.numeric, format, digits = 1) %>%
-  relocate(MeanDepth, .after= Percentage)
-
-print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
-  kable_paper("striped", full_width = F))
-  cat("\n")
-}
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# Larval1 = LarvalSI %>% filter(Year == i)
+#  
+# print(ggplot(data = Larval1, aes(AvgTowDepth, LengthAdjustment, colour = Year)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") + 
+#   scale_y_reverse() +
+#   labs(x = "Average Tow Depth (m)", y = "Larval Length (mm)", colour = "Category"))
+#   cat("\n")
+#   
+#   TotalCategories <- Larval1 %>%
+#   group_by(category) %>%
+#   summarize(n = n(),
+#             MeanDepth = mean(AvgTowDepth, na.rm = TRUE)) %>%
+#   mutate(Percentage = (n/sum(n))*100) %>%
+#   mutate_if(is.numeric, format, digits = 1) %>%
+#   relocate(MeanDepth, .after= Percentage)
+# 
+# print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow Depth (m)"), align = "c") %>%
+#   kable_paper("striped", full_width = F))
+#   cat("\n")
+# }
 ```
 
 #### Spawning Modes {.tabset .tabset-pills}
@@ -4521,79 +3983,79 @@ print(kbl(TotalCategories, col.names=c("Category", "Abundance", "%", "Avg Tow De
 Growth applied to compare spawning modes.
 
 ```{r, fig.align='center'}
-
-LarvalSum = LarvalSum %>% filter(Ground == "SI")
-
-print(ggplot(LarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Larval Density "))
-
-print(ggplot(LarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
-  geom_point() + 
-  ylab("Abundance (Larvae/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Larval Abundance "))
-
-print(ggplot(LarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
-  geom_point() + 
-  ylab("Mean Age (days)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(LarvalSum$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle("Mean Larval Age in Days"))
+# 
+# LarvalSum = LarvalSum %>% filter(Ground == "SI")
+# 
+# print(ggplot(LarvalSum, aes(x = Survey.No, y = Density, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Larval Density "))
+# 
+# print(ggplot(LarvalSum, aes(x = Survey.No, y = Abundance, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Abundance (Larvae/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Larval Abundance "))
+# 
+# print(ggplot(LarvalSum, aes(x = Survey.No, y = MeanAgeInDays, colour = Year)) + 
+#   geom_point() + 
+#   ylab("Mean Age (days)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(LarvalSum$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle("Mean Larval Age in Days"))
 
 ```
 
 
 ```{r, results='asis', fig.align='center'}
- 
-for(i in unique(Larval$Year)) {
-  cat("\n")
-  cat("#####", i, "\n")
-  cat("\n")
-
-LarvalSum = LarvalSum %>% filter(Year == i)
-#LarvalSum$Density[is.na(LarvalSum$Density)] <- 0
-#LarvalSum$Abundance[is.na(LarvalSum$Abundance)] <- 0
-#LarvalSum$MeanAgeInDays[is.na(LarvalSum$MeanAgeInDays)] <- 0
-
-LarvalSum$MonthDay <- format(LarvalSum$Date, "%m-%d")
-
-  
-print(ggplot(data = subset(LarvalSum, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Density (Abundance/Volume)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Density ")))
-  cat("\n")
-
-print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Abundance (Larvae/Tow)") + 
-  xlab("Survey Number") +
-  scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Larval Abundance ")))
-  cat("\n")
-
-print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
-  geom_point() + 
-  ylab("Mean Age (days)") + 
-  xlab("Survey Number") +
-  xlim(0, 10) + 
-  scale_y_continuous(limits = c(0, max(LarvalSum$MeanAgeInDays))) +
-  scale_x_continuous(breaks = seq(0, 10, 1)) +
-  ggtitle(paste(i, "Mean Larval Age of Each Individual Tow")))
-  cat("\n")
-}
+#  
+# for(i in unique(Larval$Year)) {
+#   cat("\n")
+#   cat("#####", i, "\n")
+#   cat("\n")
+# 
+# LarvalSum = LarvalSum %>% filter(Year == i)
+# #LarvalSum$Density[is.na(LarvalSum$Density)] <- 0
+# #LarvalSum$Abundance[is.na(LarvalSum$Abundance)] <- 0
+# #LarvalSum$MeanAgeInDays[is.na(LarvalSum$MeanAgeInDays)] <- 0
+# 
+# LarvalSum$MonthDay <- format(LarvalSum$Date, "%m-%d")
+# 
+#   
+# print(ggplot(data = subset(LarvalSum, Year == i), aes(x = as.numeric(Survey.No), y = Density, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Density (Abundance/Volume)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(LarvalSum$Density))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Density ")))
+#   cat("\n")
+# 
+# print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = Abundance, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Abundance (Larvae/Tow)") + 
+#   xlab("Survey Number") +
+#   scale_y_continuous(limits = c(0, max(LarvalSum$Abundance))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Larval Abundance ")))
+#   cat("\n")
+# 
+# print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour = MonthDay)) + 
+#   geom_point() + 
+#   ylab("Mean Age (days)") + 
+#   xlab("Survey Number") +
+#   xlim(0, 10) + 
+#   scale_y_continuous(limits = c(0, max(LarvalSum$MeanAgeInDays))) +
+#   scale_x_continuous(breaks = seq(0, 10, 1)) +
+#   ggtitle(paste(i, "Mean Larval Age of Each Individual Tow")))
+#   cat("\n")
+# }
 ```
 
 #### Individual Spawn Dates {.tabset}
@@ -4603,108 +4065,108 @@ print(ggplot(LarvalSum, aes(x = as.numeric(Survey.No), y = MeanAgeInDays, colour
 Dates individual larvae were spawned. Used an incubation period of 10 days.
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-
-Larval1 <- Larval %>% filter(Ground == "SI")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Spawn Date(Julian)")
-
-#Possibly summarize this table? Use individual points for other graphs?
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
-
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
+# 
+# Larval1 <- Larval %>% filter(Ground == "SI")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = Year)) +
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Spawn Date(Julian)")
+# 
+# #Possibly summarize this table? Use individual points for other graphs?
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
+# 
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
 
 ```
 
 ##### Year {.tabset}
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-
-Larval1 <- subset.data.frame(Larval, Ground == "SI")
-
-for(i in unique(Larval$Year)) {
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-  
-Larval1 = Larval1 %>% filter(Year == i)
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
-  geom_jitter(size = 1.25, width = 3) + 
-  geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-  geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-  geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-  geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-  labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-        geom_jitter(size = 1.25, width = 3) + 
-        geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-        geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-        geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-        geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-        ylab("Length (mm)") + 
-        xlab("Spawn Date (Julian)") +
-        scale_y_continuous(limits = c(0,30)) + 
-        scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
-        ggtitle(paste(i, "Seal Island")))
-        cat("\n")
-  
-print(kbl(TotalCategories, align = "c") %>%
-      kable_paper("striped", full_width = F))
-    
-}
+# 
+# Larval1 <- subset.data.frame(Larval, Ground == "SI")
+# 
+# for(i in unique(Larval$Year)) {
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+#   
+# Larval1 = Larval1 %>% filter(Year == i)
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID") 
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) + 
+#   geom_jitter(size = 1.25, width = 3) + 
+#   geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#   geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#   geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#   geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#   labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# print(ggplot(data = subset(Larval1, Year == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#         geom_jitter(size = 1.25, width = 3) + 
+#         geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#         geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#         geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#         geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#         ylab("Length (mm)") + 
+#         xlab("Spawn Date (Julian)") +
+#         scale_y_continuous(limits = c(0,30)) + 
+#         scale_x_continuous(breaks = seq(from = 150, to = 300, by = 20)) +
+#         ggtitle(paste(i, "Seal Island")))
+#         cat("\n")
+#   
+# print(kbl(TotalCategories, align = "c") %>%
+#       kable_paper("striped", full_width = F))
+#     
+# }
 ```
 
 
 ##### Tow ID {.tabset .tabset-fade .tabset-pills}
 
 ```{r, results = 'asis', echo=FALSE, fig.align='center'}
-Larval1 <- subset(Larval, Ground == "SI")
-
-for(i in unique(Larval$TowID)) {
-  
-  
-  cat("\n")
-  cat("######", i, "\n")
-  cat("\n")
-
-Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
-    geom_jitter(size = 1.25, width = 3) +
-    geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
-    geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
-    geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
-    geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-    labs(y="Length (mm)", x="Spawn Date (Julian)")
-
-#when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
-print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
-          geom_jitter(size = 1.25, width = 3) + 
-          geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
-          geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
-          geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
-          geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
-          ylab("Length (mm)") + 
-          xlab("Spawn Date (Julian)") +
-          scale_y_continuous(limits = c(0,32)) + 
-          scale_x_continuous(limits = c(100, 300)) +
-          ggtitle(paste("Tow ID", i, "Seal Island")))
-          cat("\n")
-
-TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
-          
-print(kbl(TotalCategories, align = "c") %>%
-        kable_paper("striped", full_width = F))
-        cat("\n")
-}
+# Larval1 <- subset(Larval, Ground == "SI")
+# 
+# for(i in unique(Larval$TowID)) {
+#   
+#   
+#   cat("\n")
+#   cat("######", i, "\n")
+#   cat("\n")
+# 
+# Larval1 %>% ggplot(aes(y=LengthAdjustment, x=JulianSpawnDate, colour = id)) +
+#     geom_jitter(size = 1.25, width = 3) +
+#     geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  +
+#     geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  +
+#     geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") +
+#     geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#     labs(y="Length (mm)", x="Spawn Date (Julian)")
+# 
+# #when putting in the y_continuous max it drops a point. So have set to 32 and that seems to have solved the problem. Figure out a solution that can be more long term.
+# print(ggplot(data = subset(Larval1, TowID == i), aes(x = JulianSpawnDate, y = LengthAdjustment, colour = id))+
+#           geom_jitter(size = 1.25, width = 3) + 
+#           geom_hline(yintercept = 8, linetype = "longdash", size =1, colour = "red")  + 
+#           geom_hline(yintercept = 12, linetype = "longdash", size =1, colour = "blue")  + 
+#           geom_hline(yintercept = 17, linetype = "longdash", size =1, colour = "forestgreen") + 
+#           geom_hline(yintercept = 27, linetype = "longdash", size =1, colour = "grey70") +
+#           ylab("Length (mm)") + 
+#           xlab("Spawn Date (Julian)") +
+#           scale_y_continuous(limits = c(0,32)) + 
+#           scale_x_continuous(limits = c(100, 300)) +
+#           ggtitle(paste("Tow ID", i, "Seal Island")))
+#           cat("\n")
+# 
+# TotalCategories <- Larval1 %>% select("id", "Date", "Survey.No", "LengthAdjustment", "JulianSpawnDate", "TowReplicate", "TowID")
+#           
+# print(kbl(TotalCategories, align = "c") %>%
+#         kable_paper("striped", full_width = F))
+#         cat("\n")
+# }
 ```
 
 ## Fat Project 
@@ -4717,14 +4179,18 @@ print(kbl(TotalCategories, align = "c") %>%
 
 ```{r}
 
-# can<-getData('GADM', country="CAN", level=1)
-# us = getData('GADM', country = "USA", level = 1)
-# can1 = rbind(can,us)
-# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine", "New Hampshire", "Massachusetts", "Connecticut", "Rhode Island", "New York", "Vermont", "New Jersey"),]
+#Full Map
+CP <- ext(-69, -63, 42, 45.5)
+out <- st_as_sf(crop(NBNS_spat, CP))
+ 
+# #Scots Bay
+# CP <- ext(-65.5, -64.5, 45, 45.5)
+# out <- st_as_sf(crop(NBNS_spat, SBMap))
 
-CP <- as(extent(-73, -61, 40.5, 46), "SpatialPolygons")
-proj4string(CP) <- CRS(proj4string(NBNS))
-out <- crop(NBNS, CP, byid=TRUE)
+# #German Bank
+# 
+# CP <- ext(-66.8, -65.5, 43, 44)
+# out <- st_as_sf(crop(NBNS_spat, GBMap))
 
 FatData$Fat <- as.numeric(FatData$Fat)
 
@@ -4757,14 +4223,29 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 1)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+
+# ggplot() +
+#   
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_sf(data = out) +
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_sf() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10))
 
   cat("\n")
 
@@ -4782,14 +4263,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 2) 
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10))) 
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10))) 
 
 cat("\n")
 }
@@ -4806,14 +4299,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 3)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4831,14 +4336,27 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 4)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4855,14 +4373,27 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 5)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4879,14 +4410,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 6)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4904,14 +4447,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 7)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4928,14 +4483,27 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 8)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4953,14 +4521,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 9)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -4977,14 +4557,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 10)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -5001,14 +4593,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 11)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
@@ -5025,14 +4629,26 @@ for(i in unique(FatData$Year)) {
   
 FatData1 = FatData %>% filter(Month == 12)
 
-print(FatData1 %>%
-  ggplot(aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
-  geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
-  scale_color_viridis_c(direction=-1) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
-  coord_map() +
-  theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
+ggplot() +
+  geom_sf(data = out, fill = "grey80", colour = "black") +
+  geom_polygon(data = polysT, aes(x = X, y = Y, group = Box, fill = Box), colour = "black") +
+  geom_point(data = subset(FatData1, Lat < 46 & Lat > 40 & Year == i), 
+             aes(x = Lon, y = Lat, color = Fat), size = 2) +
+  scale_color_viridis_c(direction = -1) +
+  coord_sf() +
+  theme(
+    legend.position = 'bottom', 
+    legend.title = element_text(size = 10), 
+    legend.text = element_text(size = 10)
+  )
+# print(FatData1 %>%
+#   ggplot(aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polysT,aes(x=X, y=Y, group=Box, fill = Box), colour = "black") +
+#   geom_point(data=subset(FatData1, Lat < 46 & Lat > 40 & Year == i), aes(color=Fat)) +
+#   scale_color_viridis_c(direction=-1) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +
+#   coord_map() +
+#   theme(legend.position = 'bottom', legend.title = element_text(size = 10), legend.text = element_text(size=10)))
 
   cat("\n")
 }
