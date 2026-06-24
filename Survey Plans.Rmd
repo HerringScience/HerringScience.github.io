@@ -13,7 +13,7 @@ rm(list = ls()) #removes everything in the current environment
 surv = "SB"
 surv2 = "Scots Bay"
 surv.date = "2026-06-21 19:00:00" #survey date and time, as formatted
-surv.no = "4"
+surv.no = "5"
 Allocation = '150' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
@@ -104,6 +104,7 @@ year = substr(surv.date, 1,4)
 #Create Plan by combining main box with any extra boxes
 
 Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+
 #above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 # 
 # vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
@@ -126,33 +127,35 @@ Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScie
 #   Plan = full_join(Main, North)
 #   Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
 # if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
-# 
-# #Add vessel names to Plan
-# Plan = Plan %>% #renames the base "V#" Vessels in the plan to the actual vessel names manually listed in the first code chunk.
-#   mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
-# 
-# #Short-hand names and save for Update Data script usage
-# Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorthand forms for other tools to use
-#   mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Fundy Monarch", "FM")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Brunswick Provider", "BP")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Lady Melissa", "LM")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
-# write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+
+#Add vessel names to Plan
+Plan = Plan %>% #renames the base "V#" Vessels in the plan to the actual vessel names manually listed in the first code chunk.
+  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V3", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V4", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "NVessel", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "EVessel", EVessel))
+
+#Short-hand names and save for Update Data script usage
+
+Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorthand forms for other tools to use
+  mutate(Vessel = replace(Vessel, Vessel == "Leroy and Barry", "LB")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Morning Star", "MS")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Canada 100", "C1")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Fundy Monarch", "FM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Brunswick Provider", "BP")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Melissa", "LM")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
+write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+
 #Comment out to here for manual plans.
 
 # Land Data
@@ -359,20 +362,20 @@ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringSci
 # use the above if manual plan. Remember to change year if needed.
 
 #Add vessel names to Plan
-# Plan = Main %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "v3", V3)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "v4", V4)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V10", NVessel)) %>%
-#   mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
-# 
-# #if manual plan, read Table file and comment out below
+Plan = Main %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V1", V1)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V2", V2)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "v3", V3)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "v4", V4)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V5", V5)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V6", V6)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V7", V7)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V8", V8)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V9", V9)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V10", NVessel)) %>%
+  mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
+
+#if manual plan, read Table file and comment out below
 # 
 # if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
 #             ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
@@ -393,7 +396,7 @@ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringSci
 #    Plan = full_join(Main, North)
 #    Plan = full_join(Plan, East)}
 #  if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
-#  if(surv=="GB"){Plan=Main} 
+#  if(surv=="GB"){Plan=Main}
 
 #Comment out to here
 
