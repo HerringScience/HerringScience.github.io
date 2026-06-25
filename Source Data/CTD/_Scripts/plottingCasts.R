@@ -5,22 +5,24 @@
 # manually change from salinity to temperature with # out
 
 
-# casts with only 1 measurement are showing up as a blank cast:
-#180380002-121038
+# casts with only 1 measurement are showing up as blank in the plot
 
 
 # Remove casts that do not reach at least 1m Depth
-valid_casts <- Oceans %>%
+# might only want to do this for HSC data casts?
+valid_casts <- Oceans_filtered %>%
   group_by(id) %>%
   summarise(max_depth = max(Depth, na.rm = TRUE), .groups = "drop") %>%
   filter(is.finite(max_depth), max_depth >= 1) %>%
   pull(id)
 
-out_dir <- "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/Casts"
+out_dir <- "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/Casts/LateSummer_Fall"
 
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
 failed_casts <- c()
+
+
 
 for (cast in valid_casts) {
   
@@ -78,30 +80,44 @@ for (cast in valid_casts) {
   # -------------------------
   
   # Temperature profile
- p_Tprofile <- ggplot(cast_data, aes(x = Temperature, y = Depth)) +
-   geom_path(color = "red", linewidth = 1) +
+  p_Tprofile <- ggplot(cast_data, aes(x = Temperature, y = Depth)) +
+    geom_path(color = "red", linewidth = 1) +
+    geom_hline(yintercept = 5, linetype = "dashed", colour = "black", linewidth = 0.8) +
     scale_y_reverse() +
-    labs(title = paste("Temperature Profile -", cast),
-        x = "Temperature (°C)", y = "Depth (m)") +
+    labs(
+      title = paste("Temperature Profile -", cast),
+      x = "Temperature (°C)", y = "Depth (m)"
+    ) +
     theme_bw()
+  
   
   
   
   # Salinity
+  
   p_Sprofile <- ggplot(cast_data, aes(x = Salinity, y = Depth)) +
-     geom_path(color = "blue", linewidth = 1) +
-     scale_y_reverse() +
-     labs(title = paste("Salinity Profile -", cast),
-          x = "Salinity (PSU)", y = "Depth (m)") +
-     theme_bw()
+    geom_path(color = "blue", linewidth = 1) +
+    geom_hline(yintercept = 5, linetype = "dashed", colour = "black", linewidth = 0.8) +
+    scale_y_reverse() +
+    labs(
+      title = paste("Salinity Profile -", cast),
+      x = "Salinity (PSU)", y = "Depth (m)"
+    ) +
+    theme_bw()
+  
   
   #Density
+  
   p_Dprofile <- ggplot(cast_data, aes(x = Density, y = Depth)) +
     geom_path(color = "green", linewidth = 1) +
+    geom_hline(yintercept = 5, linetype = "dashed", colour = "black", linewidth = 0.8) +
     scale_y_reverse() +
-    labs(title = paste("Density Profile -", cast),
-         x = "Density (kg m-3)", y = "Depth (m)") +
+    labs(
+      title = paste("Density Profile -", cast),
+      x = "Density (kg m-3)", y = "Depth (m)"
+    ) +
     theme_bw()
+  
   
   
   

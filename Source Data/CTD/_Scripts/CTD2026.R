@@ -1,53 +1,14 @@
 
-library(ggplot2)
-library(patchwork)
-library(scales)
-library(cli)
-library(lubridate)
-library(reprex)
-library(tidyverse)
-library(geosphere)
-library(reshape2)
-library(moderndive)
-library(skimr)
-library(ggridges)
-library(GGally)
-library(psych)
-library(raster)
-library(PBSmapping)
-library(sf)
-library(terra)
-library(knitr)
-library(kableExtra)
-library(grid)
-library(gridExtra)
-library(cowplot)
-library(DT)
-library(dygraphs)
-library(leaflet)
-library(rmapshaper)
-library(plotly)
-library(mapproj)
-library(oce) #new CTD Data package
-library(pander)
-library(geodata)
-library(pacman)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(raster)
-library(devtools)
-library(maps)
-library(dplyr)
-library(coin)
-library(readr)
-library(stringr)
-library(purrr)
-library(tidyr)
-library(mgcv)
-library(readr)
-library(writexl)
-library(perm)
-library(ggplot2)
+pacman::p_load(
+  tidyverse, patchwork, scales, cli, lubridate, reprex,
+  geosphere, reshape2, moderndive, skimr, ggridges, GGally, psych,
+  raster, terra, sf, PBSmapping,
+  knitr, kableExtra, grid, gridExtra, cowplot,
+  DT, dygraphs, leaflet, plotly, rmapshaper,
+  mapproj, maps, rnaturalearth, rnaturalearthdata, geodata,
+  oce, pander, devtools,
+  coin, mgcv, writexl, perm
+)
 
 # CTD DATA
 # Look at DFO and HSC data
@@ -58,7 +19,11 @@ source("build_Oceans_df.R")
 
 Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
 
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD")
+
 write.table(Oceans, file= "Oceans.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
+
+head(Oceans)
 
 HSC=Oceans[which(Oceans$Source == "HSC"), ]
 
