@@ -41,6 +41,24 @@ library(dplyr)
 
 ### Mapping for CTD data with DFO
 
+
+# Mapping
+
+one=DFO[which(DFO$stn_id == "001"), ]
+one$time
+
+ggplot(one, aes(x = temperature, y = depth)) +
+  geom_path(color = "red", linewidth = 1) +
+  scale_y_reverse() +
+  labs(
+    x = "Temperature (°C)",
+    y = "Depth (m)",
+    title = "CTD Temperature Profile"
+  ) +
+  theme_classic()
+
+
+
 # Plot positions
 
 #load base data
@@ -99,6 +117,9 @@ surveySB_poly <- polySB_main %>%
   summarise(geometry = st_combine(geometry)) %>%
   st_cast("POLYGON")
 
+
+
+
 # German Bank survey Box
 SUA = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_GB.csv")
 polyGB = as.PolySet(SUA, projection="LL")
@@ -140,18 +161,16 @@ GermanBank_sf <- st_polygon(list(poly_coords)) |>
   st_sf(Box = "German Bank", geometry = _)
 
 
-head(Oceans)
-CTD=Oceans[which(Oceans$Source == "HSC"), ]
-DFO=Oceans[which(Oceans$Source == "DFO"), ]
-
 
 # actual map
 ggplot(NBNS_sf) +
   geom_sf(data = NBNS_sf, fill = "lightgray", color = "black") +
-  geom_sf(data = SB_poly, fill = "lightblue", color = "black") + geom_sf(data = GermanBank_sf, fill = "purple", color = "black")+ geom_sf(data = surveyGB_poly, fill = "pink", color = "black") + geom_sf(data = surveySI_poly, fill = "pink", color = "black") + geom_sf(data = surveySB_poly, fill = "navy", color = "black") + geom_point(data = CTD, aes(x=Lon, y=Lat), size=2, colour="red")+ geom_point(data = DFO, aes(x=Lon, y=Lat), size = 2, colour = "blue")
-
-
-test=CTD[which(CTD$Lon > -62 ), ]
+  geom_sf(data = SB_poly, fill = "lightblue", color = "black")+ geom_sf(data = GermanBank_sf, fill = "purple", color = "black")+ geom_sf(data = surveyGB_poly, fill = "pink", color = "black")+ geom_sf(data = surveySI_poly, fill = "pink", color = "black") + geom_sf(data = surveySB_poly, fill = "navy", color = "black") +
+  geom_point(data = CTD, aes(x=Lon, y=Lat), size=2, colour="red")+
+  geom_sf(data = DFO)+
+  coord_sf(xlim = c(-67, -64.5), ylim = c(43, 45.5)) +
+  geom_text(data = labels_df, aes(x = x, y = y, label = label), size = 5) +
+  theme(axis.title.x = element_blank(),axis.title.y = element_blank()) + ggtitle("Figure 1. Spawning Ground Locations")
 
 
 
