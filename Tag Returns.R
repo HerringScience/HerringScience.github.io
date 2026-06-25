@@ -22,8 +22,8 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 library(measurements)
-
-
+library(geodata)
+library(terra)
 setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/"))
 #All Tags deployed
 
@@ -36,40 +36,27 @@ TagReturns2022 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience
 TagReturns2023 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2023.csv"))
 TagReturns2024 = read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/Tag Returns 2024.csv"))
 
+# 1. Load Land Data (Returns terra SpatVector objects natively)
+can <- gadm(country='CAN', level=1, path = "geodata_default_path", version="latest", 
+            resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
 
-#Land Data
-#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-can1 = rbind(can,us)
-NBNS = can1
+us  <- gadm(country='USA', level=1, path = "geodata_default_path", version="latest", 
+            resolution = 1, regions = c("Maine"))
 
+NBNS <- rbind(can, us)
 
-#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes about 20 minutes to process.
-#NBNS <- sf::st_as_sf(NBNS) 
+CP1 <- ext(-69, -62, 42, 46) # Proper coordinates for Tagging 
+CP2 <- ext(-67, -65, 43, 43.6) # Proper coordinates for GB plankton tow
+CP3 <- ext(-67, -65, 43, 44)   # Coordinates for German Bank and Spec
+CP4 <- ext(-66, -63, 44, 46)   # Scots
+CP5 <- ext(-65, -60, 43, 46)   # Scotia Shelf
+CP6 <- ext(-68, -66, 44, 45)   # Grand Manan Area
 
-#Set boundaries that you need to map 
+All <- crop(NBNS, CP1)
 
-# Proper coordinates for Tagging 
-CP1 <- as(extent(-69, -62, 42, 46), "SpatialPolygons")
-# Proper coordinates for GB plankton tow
-CP2 <- as(extent(-67, -65, 43, 43.6), "SpatialPolygons")
-# Coordinates for German Bank and Spec
-CP3 <- as(extent(-67, -65, 43, 44), "SpatialPolygons")
-# Scots
-CP4 <- as(extent(-66, -63, 44, 46), "SpatialPolygons") 
-# Scotia Shelf
-CP5 <- as(extent(-65, -60, 43, 46), "SpatialPolygons") 
-# Grand Manan Area
-CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
-
-#Reduce Province data down to only the above extents/limits
-proj4string(CP1) <- CRS(proj4string(NBNS))
-All <- crop(NBNS, CP1, byid=TRUE)
 
 #Load boxes
+
 #Import All Boxes
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
 points = read.csv("Points.csv")
@@ -108,28 +95,26 @@ polySI = as.PolySet(SUA, projection="LL")
 setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/"))
 Tags = read.csv("TaggingEvents.csv")
 
-# Tag1 = tags %>%
-#     filter(
-
-
-#Tag1 = Tag1 %>%
 Tags = Tags %>% 
  dplyr::select(Tag_Num, Date, Lon, Lat, Vessel)
 
-#changing Date from character class to Date class
 Tags$Date <- ymd(Tags$Date)
 Tags$Year <- as.numeric(format(Tags$Date, "%Y"))
 
-CP6 <- as(extent(-68, -66, 44, 45), "SpatialPolygons")
-proj4string(CP6) <- CRS(proj4string(NBNS))
-GM <- crop(NBNS, CP6, byid=TRUE)
-
+CP6 <- ext(-68, -66, 44, 45)
+GM <- crop(NBNS, CP6)
 
 #All Data at once
-ggplot(boxes,aes(x=X, y=Y)) + 
-  geom_polygon(aes(colour = Box),fill= NA,lwd=1) + 
-  geom_polygon(data=All,aes(x=long, y=lat, group=group)) + 
-  geom_point(data=Tags, aes(x=Lon, y=Lat, colour = as.factor(Year)), size=1) +
-  coord_map() + 
-  labs(x=NULL, y=NULL)
+
+All_sf <- sf::st_as_sf(All)
+
+ggplot() + 
+  geom_sf(data = All_sf, fill = "grey70", color = "grey50") + 
+  
+  # Draw your tracking boxes
+  geom_polygon(data = boxes, aes(x = X, y = Y, colour = Box), fill = NA, lwd = 1) + 
+  geom_point(data = Tags, aes(x = Lon, y = Lat, colour = as.factor(Year)), size = 1) +
+  coord_sf(xlim = c(-69, -62), ylim = c(42, 46)) + 
+  labs(x = NULL, y = NULL, colour = "Year / Box") +
+  theme_minimal()
 
