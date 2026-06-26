@@ -1,12 +1,63 @@
 
+# Load Prince 5 Data from 
+# https://www.frdr-dfdr.ca/repo/dataset/167e21b2-7eb9-466a-9b80-3980de093b15
+
+
 getwd()
-
-install.packages("ncdf4")
-library(ncdf4)
-
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
-#load data # test 1993
+library(ncdf4)
+
+years <- 2017:2024
+files <- paste0(years, ".nc")
+
+
+nc_list <- lapply(files, nc_open)
+
+# Get variable names from first file
+var_names <- names(nc_list[[1]]$var)
+
+# Create a list to store ALL variables
+all_data <- list()
+
+for (var in var_names) {
+  
+  all_data[[var]] <- lapply(nc_list, function(nc) {
+    ncvar_get(nc, var)
+  })
+  
+}
+
+
+
+# Combine variables from the different years:
+
+for (var in var_names) {
+  
+  # Check if variable is 2D (like temp/sal)
+  if (length(dim(all_data[[var]][[1]])) == 2) {
+    all_data[[var]] <- do.call(cbind, all_data[[var]])
+  } else {
+    all_data[[var]] <- unlist(all_data[[var]])
+  }
+}
+
+
+time_raw <- all_data$time
+
+origin <- as.POSIXct("1900-01-01", tz = "UTC")
+time_all <- origin + time_raw
+
+
+# close files
+lapply(nc_list, nc_close)
+
+
+
+
+
+
+#load data
 # One cast per month
 
 nc <- nc_open("1993.nc")
