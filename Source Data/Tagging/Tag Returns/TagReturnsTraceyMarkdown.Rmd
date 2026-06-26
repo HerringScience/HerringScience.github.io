@@ -9,7 +9,6 @@ year= substr(Sys.Date(),1,4)
 knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 
-#install.packages('RMySQL', repos='http://cran.us.r-project.org')
 library(cli)
 library(lubridate)
 library(reprex)
@@ -19,12 +18,10 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -34,6 +31,146 @@ library(dplyr)
 library(geonames)
 library(mgcv)
 library(scales)
+
+location_lookup <- c(
+  "German Bank" = "GB",
+  "German Bank (Area 7)" = "GB",
+  "Scots Bay" = "SB",
+  "Scots Bay (Area 8)" = "SB",
+  "NB Coastal" = "NBC",
+  "Grand Manan" = "GM",
+  "Grand Manan Banks" = "GMB",
+  "Long Island" = "LI",
+  "Seal Island" = "SI",
+  "Yankee Bank" = "YB",
+  "Trinity" = "T",
+  "Browns Bank" = "BB",
+  "SW Grounds" = "SWG",
+  "Gannet Dry Ledge" = "GDL",
+  "Lurcher" = "L"
+)
+
+create_tag_returns <- function(data, tagging_ground) {
+
+  origin_code <- unname(location_lookup[tagging_ground])
+
+  data %>%
+    filter(FishingGround == tagging_ground) %>%
+    mutate(
+      DestinationCode = location_lookup[catchAREA],
+      TagLocation = ifelse(
+        is.na(DestinationCode),
+        "Other",
+        paste(origin_code, "to", DestinationCode)
+      )
+    ) %>%
+    filter(TagLocation != "Other")
+}
+
+create_summary_table <- function(data) {
+
+  data %>%
+    count(
+      #Tim
+      TagLocation,
+      category,
+      name = "Abundance"
+    ) %>%
+    arrange(TagLocation, category)
+}
+
+ground_report <- function(data, tagging_ground, remove_cat1 = TRUE) {
+
+  tag_data <- create_tag_returns(
+    data,
+    tagging_ground
+  )
+
+  if (remove_cat1) {
+    tag_data <- tag_data %>%
+      filter(category != 1)
+  }
+
+  summary_table <- tag_data %>%
+    count(
+      TagLocation,
+      category,
+      name = "Abundance"
+    ) %>%
+    arrange(
+      TagLocation,
+      category
+    )
+
+  plot <- ggplot(
+    tag_data,
+    aes(
+      x = TagLocation,
+      fill = factor(category)
+    )
+  ) +
+    geom_bar(colour = "white") +
+    theme(
+      panel.background = element_rect(
+        fill = "white",
+        colour = "grey50"
+      )
+    ) +
+    labs(
+      x = "Tag to Catch Location",
+      y = "Number of Events",
+      fill = "Category"
+    ) +
+    ggtitle(
+      paste0(
+        tagging_ground,
+        " Tag Returns"
+      )
+    ) +
+    scale_y_continuous(
+      breaks = pretty_breaks()
+    )
+
+  list(
+    data = tag_data,
+    summary = summary_table,
+    plot = plot
+  )
+}
+
+plot_tag_returns <- function(data, title) {
+
+  ggplot(
+    data,
+    aes(
+      x = TagLocation,
+      fill = factor(category)
+    )
+  ) +
+    geom_bar(colour = "white") +
+    theme(
+      panel.background = element_rect(
+        fill = "white",
+        colour = "grey50"
+      )
+    ) +
+    labs(
+      x = "Tag to Catch Location",
+      y = "Number of Events",
+      fill = "Category"
+    ) +
+    ggtitle(title) +
+    scale_y_continuous(
+      breaks = pretty_breaks()
+    )
+}
+
+remove_category1 <- function(data) {
+
+  data %>%
+    filter(category != 1)
+}
+
 
 
 
@@ -50,25 +187,19 @@ background-colour: inherit;
 
 ```{r Data Import, include=FALSE}
 
-completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
+completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/complete.returns.csv"))
 TaggingEvents <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"))
-    # TaggingEvents <- TaggingEvents %>%  
-    #      rename(Tag_Num = TAG_NUMBER)
 
 names(TaggingEvents)[names(TaggingEvents) == 'Tag_Num'] <- 'TAG_NUMBER'
 
-rawReturn <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/rawReturn.csv"))
+rawReturn <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/rawReturn.csv"))
 #relINFO <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/relINFO.csv"))
-completeReturns <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv"))
 polysNAFO <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"))
 polysT <- read_csv(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv"))
 
                            
 #Combining complete Returns and Tagging events by tag number
 TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
-#rm(TagReturns)
-
-
 
 # Assigning of Grounds
 
@@ -105,55 +236,49 @@ r = data.frame( TAG_NUMBER=ids,
                 Gannet_Dry_Ledge = NA,
                 Lurcher = NA) 
 
-
-#This part takes a really long time to run.
-
-# Assigning fishing grounds to sets. This takes  a few minutes to run through.
-for (i in 1:nrow(r)){
-  test = which(TaggingEvents$TAG_NUMBER==r[i, "TAG_NUMBER"])
-  test1 = TaggingEvents[test, ]
-  r$Y[i] = test1$Lat
-  r$X[i] = test1$Lon
-  r$NB_Coastal[i] = point.in.polygon(r$Y[i], r$X[i], area1$Y, area1$X, mode.checked=FALSE)
-  r$Grand_Manan[i] = point.in.polygon(r$Y[i], r$X[i], area2$Y, area2$X, mode.checked=FALSE)
-  r$Grand_Manan_Banks[i] = point.in.polygon(r$Y[i], r$X[i], area3$Y, area3$X, mode.checked=FALSE)
-  r$Long_Island[i] = point.in.polygon(r$Y[i], r$X[i], area4$Y, area4$X, mode.checked=FALSE)
-  r$German_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area5$Y, area5$X, mode.checked=FALSE)
-  r$Seal_Island[i] = point.in.polygon(r$Y[i], r$X[i], area6$Y, area6$X, mode.checked=FALSE)
-  r$Scots_Bay[i] = point.in.polygon(r$Y[i], r$X[i], area7$Y, area7$X, mode.checked=FALSE)
-  r$Yankee_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area8$Y, area8$X, mode.checked=FALSE)
-  r$Trinity[i] = point.in.polygon(r$Y[i], r$X[i], area9$Y, area9$X, mode.checked=FALSE)
-  r$Browns_Bank[i] = point.in.polygon(r$Y[i], r$X[i], area10$Y, area10$X, mode.checked=FALSE)
-  r$SW_Grounds[i] = point.in.polygon(r$Y[i], r$X[i], area11$Y, area11$X, mode.checked=FALSE)
-  r$Gannet_Dry_Ledge[i] = point.in.polygon(r$Y[i], r$X[i], area12$Y, area12$X, mode.checked=FALSE)
-  r$Lurcher[i] = point.in.polygon(r$Y[i], r$X[i], area13$Y, area13$X, mode.checked=FALSE)
-  
-}
+r <- r %>%
+  left_join(TaggingEvents %>% dplyr::select(TAG_NUMBER, Lat, Lon), by = "TAG_NUMBER") %>%
+  mutate(
+    Y = Lat,
+    X = Lon
+  ) %>%
+  dplyr::select(-Lat, -Lon)
 
 
-# Ground                        
-r$FishingGround = NA        
-         
-r$FishingGround = with(r, ifelse(r$NB_Coastal > 0, "NB Coastal",
-                          ifelse(r$Grand_Manan > 0, "Grand Manan",
-                          ifelse(r$Grand_Manan_Banks > 0, "Grand Manan Banks",
-                          ifelse(r$Long_Island > 0, "Long Island", 
-                           ifelse(r$German_Bank > 0, "German Bank", 
-                          ifelse(r$Seal_Island > 0, "Seal Island",
-                          ifelse(r$Scots_Bay > 0, "Scots Bay",
-                          ifelse(r$Yankee_Bank > 0, "Yankee Bank",
-                          ifelse(r$Trinity > 0, "Trinity",
-                          ifelse(r$Browns_Bank > 0, "Brown Bank",
-                          ifelse(r$SW_Grounds > 0, "SW Grounds",
-                          ifelse(r$Gannet_Dry_Ledge > 0, "Gannet Dry Ledge",
-                          ifelse(r$Lurcher > 0, "Lurcher", 
-                                                "Other"))))))))))))))
+r$NB_Coastal        <- point.in.polygon(r$Y, r$X, area1$Y, area1$X, mode.checked=FALSE)
+r$Grand_Manan       <- point.in.polygon(r$Y, r$X, area2$Y, area2$X, mode.checked=FALSE)
+r$Grand_Manan_Banks <- point.in.polygon(r$Y, r$X, area3$Y, area3$X, mode.checked=FALSE)
+r$Long_Island       <- point.in.polygon(r$Y, r$X, area4$Y, area4$X, mode.checked=FALSE)
+r$German_Bank       <- point.in.polygon(r$Y, r$X, area5$Y, area5$X, mode.checked=FALSE)
+r$Seal_Island       <- point.in.polygon(r$Y, r$X, area6$Y, area6$X, mode.checked=FALSE)
+r$Scots_Bay         <- point.in.polygon(r$Y, r$X, area7$Y, area7$X, mode.checked=FALSE)
+r$Yankee_Bank       <- point.in.polygon(r$Y, r$X, area8$Y, area8$X, mode.checked=FALSE)
+r$Trinity           <- point.in.polygon(r$Y, r$X, area9$Y, area9$X, mode.checked=FALSE)
+r$Browns_Bank       <- point.in.polygon(r$Y, r$X, area10$Y, area10$X, mode.checked=FALSE)
+r$SW_Grounds        <- point.in.polygon(r$Y, r$X, area11$Y, area11$X, mode.checked=FALSE)
+r$Gannet_Dry_Ledge  <- point.in.polygon(r$Y, r$X, area12$Y, area12$X, mode.checked=FALSE)
+r$Lurcher           <- point.in.polygon(r$Y, r$X, area13$Y, area13$X, mode.checked=FALSE)
+
+r <- r %>%
+  mutate(FishingGround = case_when(
+    NB_Coastal > 0        ~ "NB Coastal",
+    Grand_Manan > 0       ~ "Grand Manan",
+    Grand_Manan_Banks > 0 ~ "Grand Manan Banks",
+    Long_Island > 0       ~ "Long Island",
+    German_Bank > 0       ~ "German Bank",
+    Seal_Island > 0       ~ "Seal Island",
+    Scots_Bay > 0         ~ "Scots Bay",
+    Yankee_Bank > 0       ~ "Yankee Bank",
+    Trinity > 0           ~ "Trinity",
+    Browns_Bank > 0       ~ "Browns Bank", 
+    SW_Grounds > 0        ~ "SW Grounds",
+    Gannet_Dry_Ledge > 0  ~ "Gannet Dry Ledge",
+    Lurcher > 0           ~ "Lurcher",
+    TRUE                  ~ "Other"
+  ))
 
 TaggingEvents <- merge(TaggingEvents, r[, c("TAG_NUMBER", "FishingGround")], by = "TAG_NUMBER")
-#TaggingSubset <- TaggingEvents[sample(1:nrow(TaggingEvents), 25, replace = FALSE),]
 
-
-#Combining complete Returns and Tagging events by tag number
 TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
 
 # Histogram showing average time differences between tagging in Days. Split into categories.
@@ -165,24 +290,23 @@ TagReturns <- merge(TaggingEvents, completeReturns, by = "TAG_NUMBER")
 # Cat. 6 = 366 to 730. Caught a minimum of a year, up to two years after the tagging event.
 # Cat. 7 = Anything after two years since tagging event.
 
-TagReturns$timeDifference <- TagReturns$DATE - TagReturns$Date
-  TagReturns$timeDifference <- as.numeric(TagReturns$timeDifference)
-  TagReturns <- TagReturns[TagReturns$timeDifference >= 0,]
-TagReturns$category = with(TagReturns, ifelse(TagReturns$timeDifference < 3, 1,
-                                       ifelse(TagReturns$timeDifference < 11 & TagReturns$timeDifference >= 3, 2,
-                                       ifelse(TagReturns$timeDifference < 31 & TagReturns$timeDifference >= 11, 3,
-                                       ifelse(TagReturns$timeDifference < 184 & TagReturns$timeDifference >= 31, 4,
-                                       ifelse(TagReturns$timeDifference < 366 & TagReturns$timeDifference >= 184, 5,
-                                       ifelse(TagReturns$timeDifference < 731 & TagReturns$timeDifference >= 366, 6,
-                                       ifelse(TagReturns$timeDifference < 1095 & TagReturns$timeDifference >= 731, 7, 8))))))))
-                                                   
-  
-TagReturns$category <- as.numeric(TagReturns$category)
-TagReturns$Count <- 1
 
-#When combining there are NAs that are being counted. This is to remove those.
-
-TagReturns <- TagReturns[!is.na(TagReturns$TAG_NUMBER),]
+TagReturns <- TagReturns %>%
+  mutate(
+    timeDifference = as.numeric(DATE - Date),
+    category = cut(
+      timeDifference,
+      breaks = c(-Inf, 3, 11, 31, 184, 366, 731, 1095, Inf),
+      labels = 1:8,
+      right = FALSE
+    ),
+    category = as.numeric(as.character(category)),
+    Count = 1
+  ) %>%
+  filter(
+    timeDifference >= 0,
+    !is.na(TAG_NUMBER)
+  )
 
 ```
 
@@ -227,11 +351,7 @@ Table <- TagReturns %>%
  Table1 <- unique(Table) %>%
              arrange(category)
 
-# kbl(Table1, col.names=c("Category", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F) %>%
-#   kable_styling(full_width = F, fixed_thead = T, )
-
-Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/tagReturnsTracey.csv"))
+Table1 %>% write.csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/tagReturnsTracey.csv"))
 
 SummaryTable <- subset(Table1, select = -c(timeDifference, No.ofSameNumberOfDays))
  SummaryTable <- unique(SummaryTable) %>%
@@ -270,212 +390,308 @@ ggplot(data = Cat1, (aes(FishingGround, fill = catchAREA))) +
 ### Tag Returns between German Bank and Scots Bay
 
 ```{r, results = "asis", fig.align='center'}
-#TagReturnsSubset <- TagReturns[sample(1:nrow(TagReturns), 100, replace = FALSE),]
 
-GBtoSB <- subset(TagReturns, subset = (FishingGround == "Scots Bay" & catchAREA == "German Bank" |
-                                       FishingGround == "German Bank" & catchAREA == "Scots Bay" |
-                                       FishingGround == "Scots Bay" & catchAREA == "German Bank (Area 7)" |
-                                       FishingGround == "German Bank" & catchAREA == "Scots Bay (Area 8)" ))
+GBtoSB <- TagReturns %>%
+  filter(
+    (FishingGround == "Scots Bay"   & catchAREA %in% c("German Bank", "German Bank (Area 7)")) |
+    (FishingGround == "German Bank" & catchAREA %in% c("Scots Bay",  "Scots Bay (Area 8)"))
+  ) %>%
+  mutate(
+    TagLocation = case_when(
+      FishingGround == "Scots Bay"   ~ "SB to GB",
+      FishingGround == "German Bank" ~ "GB to SB",
+      TRUE ~ "Other"
+    ),
+    timeDifference = as.numeric(timeDifference)
+  )
 
-
-GBtoSB$TagLocation <- with(GBtoSB, ifelse(GBtoSB$FishingGround == "Scots Bay", "SB to GB",
-                                          ifelse(GBtoSB$FishingGround == "German Bank", "GB to SB","Other")))
-
-GBtoSB$timeDifference <- as.numeric(GBtoSB$timeDifference)
-
-GBSB <- subset(GBtoSB, TagLocation == "GB to SB" )
- GBSB$timeDifference <- as.numeric(GBSB$timeDifference)
- 
-GBSB <- GBSB %>%
+GBSB <- GBtoSB %>%
+  filter(TagLocation == "GB to SB") %>%
   group_by(category) %>%
-  mutate(No.InCategory = length(category))
+  mutate(No.InCategory = n()) %>%
+  ungroup()
 
-SBGB <- subset(GBtoSB, TagLocation == "SB to GB")
- #SBGB$timeDifference <- as.numeric(GBSB$timeDifference)
-
-SBGB <- SBGB %>%
+SBGB <- GBtoSB %>%
+  filter(TagLocation == "SB to GB") %>%
   group_by(category) %>%
-  mutate(No.InCategory = length(category))
+  mutate(No.InCategory = n()) %>%
+  ungroup()
 
+ggplot(GBSB,
+       aes(
+         x = factor(category),
+         y = Count,
+         fill = factor(timeDifferenceMax)
+       )) +
+  geom_col() +
+  labs(
+    title = "Tag Returns that started in German Bank and were retrieved in Scots Bay",
+    x = "Category",
+    y = "Number of Events",
+    fill = "Maximum time difference between tag and recapture"
+  )
 
-ggplot(GBSB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
-        geom_bar(stat="identity") +
-        labs(y = "Number of Events", x = "Category") +
-        ggtitle("Tag Returns that started in German Bank and were retrieved in Scots Bay") +
-        labs(fill = "Days between tagging event and tag return") +
-        scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")
+ggplot(SBGB,
+       aes(
+         x = factor(category),
+         y = Count,
+         fill = factor(timeDifferenceMax)
+       )) +
+  geom_col() +
+  labs(
+    title = "Tag Returns that started in Scots Bay and were retrieved in German Bank",
+    x = "Category",
+    y = "Number of Events",
+    fill = "Maximum time difference between tag and recapture"
+  )
 
+create_summary_table <- function(data) {
 
-TableGBSB <- GBSB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
+  data %>%
+    select(
+      category,
+      FishingGround,
+      catchAREA,
+      AvgtimeDifference,
+      timeDifferenceMin,
+      timeDifferenceMax,
+      No.InCategory
+    ) %>%
+    distinct() %>%
+    arrange(category)
+}
 
-# kbl(TableGBSB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-SummaryTable <- subset(TableGBSB, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
-SummaryTable <- unique(SummaryTable) %>%
+SummaryTable_GBSB <- GBSB %>%
+  dplyr::select(
+    category,
+    FishingGround,
+    catchAREA,
+    AvgtimeDifference,
+    timeDifferenceMin,
+    timeDifferenceMax,
+    No.InCategory
+  ) %>%
+  distinct() %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable_GBSB,
+  col.names = c(
+    "Category",
+    "Initial Tagging Ground",
+    "Tag Retrieval Ground",
+    "Average Time from Tagging Event",
+    "Minimum Time Difference",
+    "Maximum Time Difference",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
-
-
-ggplot(SBGB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
-        geom_bar(stat="identity") +
-        labs(y = "Number of Events", x = "Category") +
-        ggtitle("Tag Returns that started in Scots Bay and were retrieved in German Bank") +
-        labs(fill = "Days between tagging event and tag return") +
-        scale_fill_discrete(breaks = c("10", "30", "133", "715"), name = "Maximum time difference between tag and recapture")
-
-
-TableSBGB <- SBGB %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
-
-# kbl(TableSBGB, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-SummaryTable <- subset(TableSBGB, select = -c(TAG_NUMBER, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
-SummaryTable <- unique(SummaryTable) %>%
+SummaryTable_SBGB <- SBGB %>%
+  dplyr::select(
+    category,
+    FishingGround,
+    catchAREA,
+    AvgtimeDifference,
+    timeDifferenceMin,
+    timeDifferenceMax,
+    No.InCategory
+  ) %>%
+  distinct() %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
+kbl(
+  SummaryTable_SBGB,
+  col.names = c(
+    "Category",
+    "Initial Tagging Ground",
+    "Tag Retrieval Ground",
+    "Average Time from Tagging Event",
+    "Minimum Time Difference",
+    "Maximum Time Difference",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
 ```
 ### Tag returns that started in either German Bank or Scots Bay
 
 ```{r, results = "asis", fig.align='center'}
 
-TagReturns$TagLocation <- with(TagReturns, ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank" |
-                                                  TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "German Bank (Area 7)"  , "SB to GB",
-                                           ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay" |
-                                                  TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "Scots Bay (Area 8)", "GB to SB",
-                                           ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA == "German Bank", "GB to GB",
-                                           ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA == "Scots Bay", "SB to SB",
-                                           ifelse(TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA != "Scots Bay" | 
-                                                  TagReturns$FishingGround == "Scots Bay" & TagReturns$catchAREA != "German Bank", "SB to Other",
-                                           ifelse(TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA != "Scots Bay" |
-                                                  TagReturns$FishingGround == "German Bank" & TagReturns$catchAREA != "German Bank", "GB to Other", "Other")))))))
+TagReturns <- TagReturns %>%
+  mutate(
+    TagLocation = case_when(
+      FishingGround == "Scots Bay" &
+        catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "SB to GB",
 
-TagReturns1 <- subset(TagReturns, TagLocation != "Other")
-TagReturns1 <- subset(TagReturns1, TagLocation != "SB to Other")
-TagReturns1 <- subset(TagReturns1, TagLocation != "GB to Other")
+      FishingGround == "German Bank" &
+        catchAREA %in% c("Scots Bay", "Scots Bay (Area 8)") ~ "GB to SB",
+
+      FishingGround == "German Bank" &
+        catchAREA == "German Bank" ~ "GB to GB",
+
+      FishingGround == "Scots Bay" &
+        catchAREA == "Scots Bay" ~ "SB to SB",
+
+      FishingGround == "Scots Bay" ~ "SB to Other",
+
+      FishingGround == "German Bank" ~ "GB to Other",
+
+      TRUE ~ "Other"
+    )
+  )
+
+TagReturns1 <- TagReturns %>%
+  filter(!TagLocation %in% c("Other", "SB to Other", "GB to Other"))
 
 TagReturns1 <- TagReturns1 %>%
   group_by(TagLocation, category) %>%
-  mutate(No.InCategory = length(category))
+  mutate(No.InCategory = n()) %>%
+  ungroup()
 
-ggplot(data = TagReturns1, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Category", y="Count")+
-        scale_y_continuous(breaks= pretty_breaks())
-
-
-Table <- TagReturns1 %>% 
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
-  arrange(timeDifference)
+ggplot(TagReturns1,
+       aes(x = TagLocation, fill = factor(category))) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(fill = "white", colour = "grey50")
+  ) +
+  labs(
+    x = "Tag Location",
+    y = "Count",
+    fill = "Category"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
 
 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-SummaryTable <- subset(Table, select = -c(TAG_NUMBER,TagLocation, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
-SummaryTable <- unique(SummaryTable) %>%
+SummaryTable <- TagReturns1 %>%
+  dplyr::select(
+    category,
+    FishingGround,
+    catchAREA,
+    AvgtimeDifference,
+    timeDifferenceMin,
+    timeDifferenceMax,
+    No.InCategory
+  ) %>%
+  distinct() %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Category",
+    "Initial Tagging Ground",
+    "Tag Retrieval Ground",
+    "Average Time from Tagging Event",
+    "Minimum Time Difference",
+    "Maximum Time Difference",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
 ```
 ### Tag Returns between German Bank and Seal Island
 
 ```{r, results = "asis", fig.align='center'}
-TagReturnsGBSI <- subset(TagReturns, subset = (FishingGround == "German Bank" | FishingGround == "Seal Island"))
-TagReturnsGBSI <- subset(TagReturnsGBSI, subset = (catchAREA == "German Bank") | catchAREA == "Seal Island" | catchAREA == "German Bank (Area 7)")
 
-TagReturnsGBSI$TagLocation <- with(TagReturnsGBSI, ifelse(TagReturnsGBSI$FishingGround == "German Bank" & TagReturnsGBSI$catchAREA == "German Bank" |
-                                                        TagReturnsGBSI$FishingGround == "German Bank" & TagReturnsGBSI$catchAREA == "German Bank (Area 7)", "GB to GB",
-                                                 ifelse(TagReturnsGBSI$FishingGround == "German Bank" & TagReturnsGBSI$catchAREA == "Seal Island", "GB to SI", 
-                                                 ifelse(TagReturnsGBSI$FishingGround == "Seal Island" & TagReturnsGBSI$catchAREA == "Seal Island", "SI to SI",
-                                                 ifelse(TagReturnsGBSI$FishingGround == "Seal Island" & TagReturnsGBSI$catchAREA == "German Bank" |
-                                                        TagReturnsGBSI$FishingGround == "Seal Island" & TagReturnsGBSI$catchAREA == "German Bank (Area 7)", "SI to GB", "Other")))))
-                                                 
-TagReturnsGBSI <- subset(TagReturnsGBSI, subset = (TagLocation == "GB to SI" | TagLocation == "SI to GB"))
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(kableExtra)
 
-TagReturnsGBSI <- TagReturnsGBSI %>%
+TagReturnsGBSI <- TagReturns %>%
+  filter(
+    FishingGround %in% c("German Bank", "Seal Island"),
+    catchAREA %in% c("German Bank", "German Bank (Area 7)", "Seal Island")
+  ) %>%
+  mutate(
+    TagLocation = case_when(
+      FishingGround == "German Bank" &
+        catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "GB to GB",
+
+      FishingGround == "German Bank" &
+        catchAREA == "Seal Island" ~ "GB to SI",
+
+      FishingGround == "Seal Island" &
+        catchAREA == "Seal Island" ~ "SI to SI",
+
+      FishingGround == "Seal Island" &
+        catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "SI to GB",
+
+      TRUE ~ "Other"
+    )
+  ) %>%
+  filter(TagLocation %in% c("GB to SI", "SI to GB")) %>%
   group_by(TagLocation, category) %>%
-  mutate(No.InCategory = length(category))
+  mutate(No.InCategory = n()) %>%
+  ungroup()
 
-ggplot(data = TagReturnsGBSI, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Category", y="Count") +
-        scale_y_continuous(breaks= pretty_breaks())
+ggplot(TagReturnsGBSI,
+       aes(x = TagLocation, fill = factor(category))) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "grey50"
+    )
+  ) +
+  labs(
+    x = "Tag Location",
+    y = "Count",
+    fill = "Category"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
 
-Table <- TagReturnsGBSI %>% 
-  group_by(timeDifference) %>%
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays) %>%
+Table_GBSI <- TagReturnsGBSI %>%
+  dplyr::select(
+    TAG_NUMBER,
+    category,
+    Date,
+    FishingGround,
+    DATE,
+    catchAREA,
+    timeDifference,
+    AvgtimeDifference,
+    timeDifferenceMin,
+    timeDifferenceMax,
+    No.InCategory,
+    No.ofSameNumberOfDays
+  ) %>%
   arrange(timeDifference)
 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
-SummaryTable <- unique(SummaryTable) %>%
+SummaryTable_GBSI <- Table_GBSI %>%
+  dplyr::select(
+    category,
+    FishingGround,
+    catchAREA,
+    AvgtimeDifference,
+    timeDifferenceMin,
+    timeDifferenceMax,
+    No.InCategory
+  ) %>%
+  distinct() %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable_GBSI,
+  col.names = c(
+    "Category",
+    "Initial Tagging Ground",
+    "Tag Retrieval Ground",
+    "Average Time from Tagging Event",
+    "Minimum Time Difference",
+    "Maximum Time Difference",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
 ```
 
@@ -485,98 +701,103 @@ kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retri
 ### German Bank 
 
 ```{r, results = "asis", fig.align='center'}
-TagReturnsGB <- subset(TagReturns, subset = (FishingGround == "German Bank"))
+GB <- ground_report(
+  TagReturns,
+  "German Bank"
+)
 
-TagReturnsGB$TagLocation <- with(TagReturnsGB, ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "German Bank" |
-                                                      TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "German Bank (Area 7)", "GB to GB",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Scots Bay" |
-                                                      TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Scots Bay (Area 8)", "GB to SB",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "NB Coastal", "GB to NBC",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Grand Manan", "GB to GM",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Grand Manan Banks", "GB to GMB",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Long Island", "GB to LI",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Seal Island", "GB to SI",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Yankee Bank", "GB to YB",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Trinity", "GB to T",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Browns Bank", "GB to BB",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "SW Grounds", "GB to SWG",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Gannet Dry Ledge", "GB to GDL",
-                                               ifelse(TagReturnsGB$FishingGround == "German Bank" & TagReturnsGB$catchAREA == "Lurcher", "GB to L","Other" ))))))))))))))
+GB$plot
 
+kbl(
+  GB$summary,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance"
+  ),
+  align = "c"
+) %>%
+  kable_paper(
+    "striped",
+    full_width = FALSE
+  )
 
-TagReturnsGB  <- subset(TagReturnsGB, TagLocation != "Other")
-
-SummaryTable <- TagReturnsGB %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-# kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Category", y="Count") +
-#         ggtitle("German Bank Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
+# TagReturnsGB <- create_tag_returns(
+#   TagReturns,
+#   "German Bank"
+# )
 # 
+# SummaryTable <- create_summary_table(
+#   TagReturnsGB
+# )
 # 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-#Removed category 1 larvae - any caught within 2 days of tagging.
-
-
-
-TagReturnsGB <- subset(TagReturnsGB, subset = (category != "1"))
-
-
-ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(y = "Number of Events", x = "Tag to Catch Location") +
-        ggtitle("German Bank Tag Returns excluding fish caught within 2 days of being tagged") +
-        scale_y_continuous(breaks= pretty_breaks())
-
-Table <- TagReturnsGB %>%
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                FishingGround,
-                DATE,
-                catchAREA,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)
+# kbl(
+#   SummaryTable,
+#   col.names = c(
+#     "Time Difference",
+#     "Tag Location",
+#     "Category",
+#     "Abundance in Category"
+#   ),
+#   align = "c"
+# ) %>%
+#   kable_paper("striped", full_width = FALSE)
 # 
+# TagReturnsGB_noCat1 <- TagReturnsGB %>%
+#   filter(category != 1)
 # 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-SummaryTable <- TagReturnsGB %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+# ggplot(
+#   TagReturnsGB_noCat1,
+#   aes(x = TagLocation, fill = factor(category))
+# ) +
+#   geom_bar(colour = "white") +
+#   theme(
+#     panel.background = element_rect(
+#       fill = "white",
+#       colour = "grey50"
+#     )
+#   ) +
+#   labs(
+#     x = "Tag to Catch Location",
+#     y = "Number of Events",
+#     fill = "Category"
+#   ) +
+#   ggtitle(
+#     "German Bank Tag Returns Excluding Fish Caught Within 2 Days of Tagging"
+#   ) +
+#   scale_y_continuous(breaks = pretty_breaks())
+# 
+# Table_GB <- TagReturnsGB_noCat1 %>%
+#   dplyr::select(
+#     TAG_NUMBER,
+#     category,
+#     Date,
+#     FishingGround,
+#     DATE,
+#     catchAREA,
+#     timeDifference,
+#     AvgtimeDifference,
+#     timeDifferenceMin,
+#     timeDifferenceMax,
+#     No.InCategory,
+#     No.ofSameNumberOfDays
+#   )
+# 
+# SummaryTable <- TagReturnsGB_noCat1 %>%
+#   count(TagLocation, category, name = "Abundance")
+# 
+# kbl(
+#   SummaryTable,
+#   col.names = c(
+#     "Time Difference", 
+#     "Tag Location",
+#     "Category",
+#     "Abundance in Category"
+#   ),
+#   align = "c"
+# ) %>%
+#   kable_paper("striped", full_width = FALSE)
 
 ```
 
@@ -584,98 +805,71 @@ kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Catego
 
 ```{r, results = "asis", fig.align='center'}
 
-#NB Coastal
-TagReturnsNBC <- subset(TagReturns, subset = (FishingGround == "NB Coastal"))
-
-TagReturnsNBC$TagLocation <- with(TagReturnsNBC, ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "German Bank" |
-                                                        TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "German Bank (Area 7)", "NBC to GB",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Scots Bay" |
-                                                        TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Scots Bay (Area 8)", "NBC to SB",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "NB Coastal", "NBC to NBC",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Grand Manan", "NBC to GM",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Grand Manan Banks", "NBC to GMB",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Long Island", "NBC to LI",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Seal Island", "NBC to SI",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Yankee Bank", "NBC to YB",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Trinity", "NBC to T",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Browns Bank", "NBC to BB",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "SW Grounds", "NBC to SWG",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Gannet Dry Ledge", "NBC to GDL",
-                                                 ifelse(TagReturnsNBC$FishingGround == "NB Coastal" & TagReturnsNBC$catchAREA == "Lurcher", "NBC to L","Other"
-                                                 ))))))))))))))
-
-TagReturnsNBC  <- subset(TagReturnsNBC, TagLocation != "Other")
-
-SummaryTable <- TagReturnsNBC %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch location", y="Number of Events") +
-#         ggtitle("NB Coastal Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsNBC %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
- 
-#Removed category 1 larvae - any caught within 2 days of tagging.
-
-TagReturnsNBC <- subset(TagReturnsNBC, subset = (category != "1"))
-
-ggplot(data = TagReturnsNBC, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("NB Coastal Tag Returns excluding fish caught within 2 days of being tagged") +
-        scale_y_continuous(breaks= pretty_breaks())
-
-
-# Table <- TagReturnsNBC %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-
-
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+# NB Coastal Tag Returns
+TagReturnsNBC <- TagReturns %>%
+  filter(FishingGround == "NB Coastal") %>%
+  mutate(
+    TagLocation = case_when(
+      catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "NBC to GB",
+      catchAREA %in% c("Scots Bay", "Scots Bay (Area 8)") ~ "NBC to SB",
+      catchAREA == "NB Coastal" ~ "NBC to NBC",
+      catchAREA == "Grand Manan" ~ "NBC to GM",
+      catchAREA == "Grand Manan Banks" ~ "NBC to GMB",
+      catchAREA == "Long Island" ~ "NBC to LI",
+      catchAREA == "Seal Island" ~ "NBC to SI",
+      catchAREA == "Yankee Bank" ~ "NBC to YB",
+      catchAREA == "Trinity" ~ "NBC to T",
+      catchAREA == "Browns Bank" ~ "NBC to BB",
+      catchAREA == "SW Grounds" ~ "NBC to SWG",
+      catchAREA == "Gannet Dry Ledge" ~ "NBC to GDL",
+      catchAREA == "Lurcher" ~ "NBC to L",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  filter(TagLocation != "Other")
 
 SummaryTable <- TagReturnsNBC %>%
-  group_by(TagLocation, category) %>%
-  count()
+  count(TagLocation, category, name = "Abundance") %>%
+  ungroup()
 
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
+TagReturnsNBC <- TagReturnsNBC %>%
+  filter(category != 1)
+
+TagReturnsNBC <- TagReturnsNBC %>%
+  filter(category != "1")
+
+ggplot(
+  TagReturnsNBC,
+  aes(x = TagLocation, fill = factor(category))
+) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "grey50"
+    )
+  ) +
+  labs(
+    x = "Tag to Catch Location",
+    y = "Number of Events",
+    fill = "Category"
+  ) +
+  ggtitle(
+    "NB Coastal Tag Returns Excluding Fish Caught Within 2 Days of Tagging"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
 
 ```
 
@@ -683,95 +877,82 @@ kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Catego
 
 ```{r, results = "asis", fig.align='center'}
 
-TagReturnsGM <- subset(TagReturns, subset = (FishingGround == "Grand Manan"))
-
-TagReturnsGM$TagLocation <- with(TagReturnsGM, ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "German Bank" |
-                                                      TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "German Bank (Area 7)", "GM to GB",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Scots Bay" |
-                                                      TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Scots Bay (Area 8)", "GM to SB",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "NB Coastal", "GM to NBC",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Grand Manan", "GM to GM",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Grand Manan Banks", "GM to GMB",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Long Island", "GM to LI",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Seal Island", "GM to SI",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Yankee Bank", "GM to YB",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Trinity", "GM to T",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Browns Bank", "GM to BB",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "SW Grounds", "GM to SWG",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Gannet Dry Ledge", "GM to GDL",
-                                               ifelse(TagReturnsGM$FishingGround == "Grand Manan" & TagReturnsGM$catchAREA == "Lurcher", "GM to L", "Other"
-                                                                                                                                     ))))))))))))))
-TagReturnsGM  <- subset(TagReturnsGM, TagLocation != "Other")
-
-SummaryTable <- TagReturnsGM %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Grand Manan Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsGM %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-#Removed category 1 larvae - any caught within 2 days of tagging.
-
-TagReturnsGM <- subset(TagReturnsGM, subset = (category != "1"))
-
-ggplot(data = TagReturnsGM, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Grand Manan Tag Returns excluding fish caught within 2 days of being tagged") +
-        scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGM %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+# Grand Manan tag returns
+TagReturnsGM <- TagReturns %>%
+  filter(FishingGround == "Grand Manan") %>%
+  mutate(
+    TagLocation = case_when(
+      catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "GM to GB",
+      catchAREA %in% c("Scots Bay", "Scots Bay (Area 8)")     ~ "GM to SB",
+      catchAREA == "NB Coastal"                               ~ "GM to NBC",
+      catchAREA == "Grand Manan"                              ~ "GM to GM",
+      catchAREA == "Grand Manan Banks"                        ~ "GM to GMB",
+      catchAREA == "Long Island"                              ~ "GM to LI",
+      catchAREA == "Seal Island"                              ~ "GM to SI",
+      catchAREA == "Yankee Bank"                              ~ "GM to YB",
+      catchAREA == "Trinity"                                  ~ "GM to T",
+      catchAREA == "Browns Bank"                              ~ "GM to BB",
+      catchAREA == "SW Grounds"                               ~ "GM to SWG",
+      catchAREA == "Gannet Dry Ledge"                         ~ "GM to GDL",
+      catchAREA == "Lurcher"                                  ~ "GM to L",
+      TRUE                                                    ~ "Other"
+    )
+  ) %>%
+  filter(TagLocation != "Other")
 
 SummaryTable <- TagReturnsGM %>%
-  group_by(TagLocation, category) %>%
-  count()
+  count(TagLocation, category, name = "Abundance")
 
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
+TagReturnsGM <- TagReturnsGM %>%
+  filter(category != 1)
+
+ggplot(
+  TagReturnsGM,
+  aes(x = TagLocation, fill = factor(category))
+) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "grey50"
+    )
+  ) +
+  labs(
+    x = "Tag to Catch Location",
+    y = "Number of Events",
+    fill = "Category"
+  ) +
+  ggtitle(
+    "Grand Manan Tag Returns Excluding Fish Caught Within 2 Days of Being Tagged"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
+
+SummaryTable <- TagReturnsGM %>%
+  count(TagLocation, category, name = "Abundance")
+
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
 ```
 
@@ -779,191 +960,172 @@ kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Catego
 
 ```{r, results = "asis", fig.align='center'}
 
-TagReturnsGMB <- subset(TagReturns, subset = (FishingGround == "Grand Manan Banks"))
-
-TagReturnsGMB$TagLocation <- with(TagReturnsGMB, ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "German Bank" |
-                                                        TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "German Bank (Area 7)", "GMB to GB",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Scots Bay" |
-                                                        TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Scots Bay (Area 8)", "GMB to SB",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "NB Coastal", "GMB to NBC",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Grand Manan", "GMB to GM",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Grand Manan Banks", "GMB to GMB",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Long Island", "GMB to LI",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Seal Island", "GMB to SI",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Yankee Bank", "GMB to YB",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Trinity", "GMB to T",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Browns Bank", "GMB to BB",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "SW Grounds", "GMB to SWG",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Gannet Dry Ledge", "GMB to GDL",
-                                                 ifelse(TagReturnsGMB$FishingGround == "Grand Manan Banks" & TagReturnsGMB$catchAREA == "Lurcher", "GMB to L","Other"
-                                                                                                                                   ))))))))))))))
-TagReturnsGMB <- subset(TagReturnsGMB, TagLocation != "Other")
-
-SummaryTable <- TagReturnsGMB %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Grand Manan Banks Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGMB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-#Removed category 1 larvae - any caught within 2 days of tagging.
-
-TagReturnsGMB <- subset(TagReturnsGMB, subset = (category != "1"))
-
-ggplot(data = TagReturnsGMB, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Grand Manan Banks Tag Returns excluding fish caught within 2 days of being tagged") +
-        scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsGMB %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+# Grand Manan Banks tag returns
+TagReturnsGMB <- TagReturns %>%
+  filter(FishingGround == "Grand Manan Banks") %>%
+  mutate(
+    TagLocation = case_when(
+      catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "GMB to GB",
+      catchAREA %in% c("Scots Bay", "Scots Bay (Area 8)")     ~ "GMB to SB",
+      catchAREA == "NB Coastal"                               ~ "GMB to NBC",
+      catchAREA == "Grand Manan"                              ~ "GMB to GM",
+      catchAREA == "Grand Manan Banks"                        ~ "GMB to GMB",
+      catchAREA == "Long Island"                              ~ "GMB to LI",
+      catchAREA == "Seal Island"                              ~ "GMB to SI",
+      catchAREA == "Yankee Bank"                              ~ "GMB to YB",
+      catchAREA == "Trinity"                                  ~ "GMB to T",
+      catchAREA == "Browns Bank"                              ~ "GMB to BB",
+      catchAREA == "SW Grounds"                               ~ "GMB to SWG",
+      catchAREA == "Gannet Dry Ledge"                         ~ "GMB to GDL",
+      catchAREA == "Lurcher"                                  ~ "GMB to L",
+      TRUE                                                    ~ "Other"
+    )
+  ) %>%
+  filter(TagLocation != "Other")
 
 SummaryTable <- TagReturnsGMB %>%
-  group_by(TagLocation, category) %>%
-  count()
+  count(TagLocation, category, name = "Abundance")
 
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
+TagReturnsGMB <- TagReturnsGMB %>%
+  filter(category != 1)
+
+TagReturnsGMB <- TagReturnsGMB %>%
+  filter(category != "1")
+
+ggplot(
+  TagReturnsGMB,
+  aes(x = TagLocation, fill = factor(category))
+) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "grey50"
+    )
+  ) +
+  labs(
+    x = "Tag to Catch Location",
+    y = "Number of Events",
+    fill = "Category"
+  ) +
+  ggtitle(
+    "Grand Manan Banks Tag Returns Excluding Fish Caught Within 2 Days of Being Tagged"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
+
+SummaryTable <- TagReturnsGMB %>%
+  count(TagLocation, category, name = "Abundance")
+
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Time Difference",
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
 
 ```
 
 ### Long Island
 
 ```{r, results = "asis", fig.align='center'}
-TagReturnsLI <- subset(TagReturns, subset = (FishingGround == "Long Island"))
 
-TagReturnsLI$TagLocation <- with(TagReturnsLI, ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "German Bank" |
-                                                      TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "German Bank (Area 7)", "LI to GB",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Scots Bay" |
-                                                      TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Scots Bay (Area 8)", "LI to SB",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "NB Coastal", "LI to NBC",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Grand Manan", "LI to GM",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Grand Manan Banks", "LI to GMB",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Long Island", "LI to LI",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Seal Island", "LI to SI",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Yankee Bank", "LI to YB",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Trinity", "LI to T",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Browns Bank", "LI to BB",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "SW Grounds", "LI to SWG",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Gannet Dry Ledge", "LI to GDL",
-                                               ifelse(TagReturnsLI$FishingGround == "Long Island" & TagReturnsLI$catchAREA == "Lurcher", "LI to L","Other"
-                                                                                                                                     ))))))))))))))
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(scales)
 
-TagReturnsLI <- subset(TagReturnsLI, TagLocation != "Other")
-
-SummaryTable <- TagReturnsLI %>%
-  group_by(TagLocation, category) %>%
-  count()
-
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
-
-# ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Long Island Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsLI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
-
-#Removed category 1 larvae - any caught within 2 days of tagging.
-
-TagReturnsLI <- subset(TagReturnsLI, subset = (category != "1"))
-
-ggplot(data = TagReturnsLI, (aes(TagLocation, fill = category))) + 
-        geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-        theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-        labs(x = "Tag to Catch Location", y="Number of Events") +
-        ggtitle("Long Island Tag Returns excluding fish caught within 2 days of being tagged") +
-        scale_y_continuous(breaks= pretty_breaks())
-
-# Table <- TagReturnsLI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
+# Long Island tag returns
+TagReturnsLI <- TagReturns %>%
+  filter(FishingGround == "Long Island") %>%
+  mutate(
+    TagLocation = case_when(
+      catchAREA %in% c("German Bank", "German Bank (Area 7)") ~ "LI to GB",
+      catchAREA %in% c("Scots Bay", "Scots Bay (Area 8)")     ~ "LI to SB",
+      catchAREA == "NB Coastal"                               ~ "LI to NBC",
+      catchAREA == "Grand Manan"                              ~ "LI to GM",
+      catchAREA == "Grand Manan Banks"                        ~ "LI to GMB",
+      catchAREA == "Long Island"                              ~ "LI to LI",
+      catchAREA == "Seal Island"                              ~ "LI to SI",
+      catchAREA == "Yankee Bank"                              ~ "LI to YB",
+      catchAREA == "Trinity"                                  ~ "LI to T",
+      catchAREA == "Browns Bank"                              ~ "LI to BB",
+      catchAREA == "SW Grounds"                               ~ "LI to SWG",
+      catchAREA == "Gannet Dry Ledge"                         ~ "LI to GDL",
+      catchAREA == "Lurcher"                                  ~ "LI to L",
+      TRUE                                                    ~ "Other"
+    )
+  ) %>%
+  filter(TagLocation != "Other")
 
 SummaryTable <- TagReturnsLI %>%
-  group_by(TagLocation, category) %>%
-  count()
+  count(TagLocation, category, name = "Abundance")
 
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
-  kable_paper("striped", full_width = F)
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
+TagReturnsLI <- TagReturnsLI %>%
+  filter(category != 1)
+
+ggplot(
+  TagReturnsLI,
+  aes(x = TagLocation, fill = factor(category))
+) +
+  geom_bar(colour = "white") +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "grey50"
+    )
+  ) +
+  labs(
+    x = "Tag to Catch Location",
+    y = "Number of Events",
+    fill = "Category"
+  ) +
+  ggtitle(
+    "Long Island Tag Returns Excluding Fish Caught Within 2 Days of Being Tagged"
+  ) +
+  scale_y_continuous(breaks = pretty_breaks())
+
+SummaryTable <- TagReturnsLI %>%
+  count(TagLocation, category, name = "Abundance")
+
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Tag Location",
+    "Category",
+    "Abundance in Category"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
 ```
 
 ### Seal Island
@@ -997,31 +1159,6 @@ SummaryTable <- TagReturnsSI %>%
 kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
-# ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) + 
-#         geom_histogram(binwidth=1, colour = "white", stat = "count") + 
-#         theme(panel.background = element_rect(fill = "white", colour = "grey50")) + 
-#         labs(x = "Tag to Catch Location", y="Number of Events") +
-#         ggtitle("Seal Island Tag Returns") +
-#         scale_y_continuous(breaks= pretty_breaks())
-# 
-# Table <- TagReturnsSI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
@@ -1034,24 +1171,6 @@ ggplot(data = TagReturnsSI, (aes(TagLocation, fill = category))) +
         ggtitle("Seal Island Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-# Table <- TagReturnsSI %>% 
-#   dplyr::select(TAG_NUMBER,
-#                 category,
-#                 Date,
-#                 FishingGround,
-#                 DATE,
-#                 catchAREA,
-#                 timeDifference,
-#                 AvgtimeDifference,
-#                 timeDifferenceMin,
-#                 timeDifferenceMax,
-#                 No.InCategory,
-#                 No.ofSameNumberOfDays)%>%
-#   arrange(timeDifference)
-# 
-# 
-# kbl(Table, col.names=c("Tag Number", "Category", "Tagged Date", "Tagged Ground", "Catch Date", "Catch Area", "Time Difference (days)", "Average Time Difference (days)", "Minimum Time Difference", "Maximum Time Difference", "Amount in the Same Category", "Amount with the same number of Days"), align = "c") %>%
-#   kable_paper("striped", full_width = F)
 
 SummaryTable <- TagReturnsSI %>%
   group_by(TagLocation, category) %>%
