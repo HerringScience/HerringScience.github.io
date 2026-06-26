@@ -295,6 +295,8 @@ c="Vessels are reminded to complete their assigned transects as listed, straight
 `r c`
 
  **When running your transect, if you are recording a school of fish but are near the end of your line, please continue recording in a straight line even if it extends beyond the boundaries of the survey box.**
+ 
+ **Please wait until all vessels finish their lines before starting to fish.**
 
 ```{r, fig.width=7, fig.height=4}
 
@@ -303,7 +305,6 @@ Plan2 = Plan %>%
 
 if (surv == "GB") {
   a <- ggplot() + 
-    # 1. Base map using geom_sf (replaces geom_polygon for the sf object)
     geom_sf(data = GBout, fill = "gray") + 
     geom_polygon(data = GBCTD, aes(x = X, y = Y, group = PID), fill = 'white', col = 'black') +
     geom_segment(data = Plan2, aes(x = X, y = Y, xend = Xend, yend = Yend, colour = Vessel), linewidth = 1) +
@@ -447,10 +448,12 @@ h=if(Allocation == 0){
   print(i)
 }
 f=if(surv=="SB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", d)
+  paste0("7. Fishing to start on ", c, ", and allocation is ", d, 
+         "8. Please wait until all vessels have completed their lines before starting to fish.")
 }
 g=if(surv=="GB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", e)
+  paste0("7. Fishing to start on ", c, ", and allocation is ", e, 
+         "8. Please wait until all vessels have completed their lines before starting to fish.")
 }
 ```
 
