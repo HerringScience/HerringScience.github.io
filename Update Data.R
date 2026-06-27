@@ -5,19 +5,19 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="3"
+surv.no="4"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LM", "BP", "FM", "LJ", "MS")
+ids = c("LM", "BP", "FM", "LJ", "MS", "LB")
 
 #Area and TS values - From table C
-SB1= 605.5081 #SB main area
+SB1= 616.6171 #SB main area
 SB2= 80.94466 #SB north area
-SB3= 132.2646 #SB east area
+SB3= 119.3215 #SB east area
 
 GB1 = 826 #GB main area
 GB2 = 274  #Seal Island area
@@ -367,15 +367,14 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
 #These IDs are specifically for adjusted surveys
   ### Region has start and end times within it.
   
-   ids = c("LJ_T02", "LJ_T03", "LJ_T04", "LJ_T05")
-   northern = trans[which((trans$RegionName %in% ids)), ]
-  # 
-  # 
-   ids = c("FM_T02", "LM_T02", "LM_T03", "LM_T04")
-   eastern = trans[which((trans$RegionName %in% ids)), ]
-  # 
-   ids =c("BP_T01", "BP_T02", "BP_T03", "LM_T01", "MS_T01", "MS_T02", "MS_T03", "LJ_T01", "FM_T01", "FM_T03")
-   main = trans[which((trans$RegionName %in% ids)), ]
+  ids = c("MS_T02", "MS_T03", "MS_T04", "MS_T05")
+  northern = trans[which((trans$RegionName %in% ids)), ]
+  
+  ids = c("FM_T02", "FM_T03", "LM_T02", "LB_T02", "LB_T03")
+  eastern = trans[which((trans$RegionName %in% ids)), ]
+  
+  ids =c("BP_T01", "BP_T02", "LM_T01", "LM_T03", "LJ_T01", "LJ_T02", "LJ_T03", "MS_T01", "FM_T01", "LB_T01", "LB_T04")
+  main = trans[which((trans$RegionName %in% ids)), ]
 #To here
   
   ### Comment out chunk below if needed to adjust. 

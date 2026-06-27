@@ -13,9 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2026"
-surv.no = "3"
-hightide = "2026-07-06 18:00:00" #for Scots Bay only; YYYY-DD-MM (for some reason)
-mainBoxVessels = 5
+surv.no = "4"
+hightide = "2026-06-21 18:04:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 6
 Tow = "N"
 
 ```
@@ -287,7 +287,7 @@ tidediff = as.double(difftime(tidestring, hightide, units = "hours"))
 j = ifelse(tidediff < 0, "before", "after")
 k = abs(round(tidediff, digits = 2))
 if(surv == "SB")
-  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hour ", j, " hide tide.")}
+  {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ", which was ", k, " hour ", j, " high tide.")}
 if(surv == "GB")
 {n = paste0(a, " commercial purse seiners conducted this ", b, " survey on ", c, " starting at ", d, ".")}
 
@@ -360,7 +360,7 @@ if(surv == "GB"){t=cat("\n")
 
 ### Acoustic Equipment
 
-Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer prior to the survey that contains a 38kHz split beam and 200 kHz single beam transducer. Data was logged to the computer hard-drive for post-processing.
+Each vessel was equipped with a Simrad ES38-18/200-18C combi (2-in-1) transducer prior to the survey that contains a 38kHz split beam and 200 kHz single beam transducer. Data was logged to the computer hard-drive for post-processing. All participating boats were calibrated on 38kHz before the survey.
 
 ## Survey Results {.tabset}
 
