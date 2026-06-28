@@ -1,4 +1,5 @@
 library(EchoviewR)
+#install.packages("RDCOMClient", repos = "http://www.omegahat.net/R", type = "win.binary")
 library(RDCOMClient)
 
 Local_Regions_export<-function(rawFileslist, evFiles,region.path,vessel_search){
@@ -45,7 +46,6 @@ for(i in 1:length(rawFileslist)){
   transectFiles  
   
 }
-
 
 Integration_original_2022_07_06 <-
   function(rawFileslist,
@@ -156,7 +156,6 @@ Integration_original_2022_07_06 <-
     EvAppObj$Quit()
   }
   }
-
 
 Integration_original_2022_11_02 <-
   function(rawFileslist,
