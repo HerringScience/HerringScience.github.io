@@ -13,16 +13,17 @@ day="21"
 month="06"
 surv.no="4"
 
-source(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/DFO Scripts/DFO Scripting 2026/Echoview_Integrations_Functions.R"))
+source(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/DFO Scripts/DFO Scripting 2026/Echoview_Integration_Functions.R"))
 
-home.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year)
-data.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year,"/Data")
-export.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Export")
-exportbycell.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/By Cell")
+home.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/")
+data.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year,"/Data/")
+export.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Export/")
+exportbycell.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/By Cell/")
 evfile.path = home.path
 calfile.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Calibration Files/", year)
-transect.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Transect")
-region.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Region")
+transect.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Transect/")
+region.path = paste0("C:/Users/", Sys.info()[7], "/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " ", day, "-", month, "-", year, "/Region/")
+dir.create(exportbycell.path)
 dir.create(export.path)
 dir.create(region.path)
 dir.create(transect.path)
@@ -37,7 +38,7 @@ left = function (string,char){substr(string,1,char)}
 #Setting up calibrations
 vessel_search <- NULL
 for(i in 1:length(evFiles)){
-  vessel_search [i] <- right(left(evFiles[i],76),2)
+  vessel_search [i] <- right(left(evFiles[i],62),2)
 }
 calFiles = dir(calfile.path,full.names=T,pattern='.ecs$')
 ordered_calFiles <- NULL
@@ -59,13 +60,9 @@ for(i in 1:length(evFiles)){
 rawFileslist
 
 #Export Region Logs
-regionFiles<-Local_Regions_export(rawFileslist, evFiles,region.path,vessel_search)
-regionFiles
-
 transectFiles<-Transect_Regions_export(rawFileslist, evFiles,transect.path,vessel_search)
-transectFiles
 
-evFiles
+regionFiles<-Local_Regions_export(rawFileslist, evFiles,region.path,vessel_search)
 
 Integration_original_2022_07_06(rawFileslist,
                                 evFiles,

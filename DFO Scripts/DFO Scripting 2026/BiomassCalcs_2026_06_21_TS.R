@@ -14,23 +14,29 @@ library(maptools)
 library(lubridate)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(rnaturalearthhires) #devtools::install_github("ropensci/rnaturalearthhires") needed to run this to install it with my version of R
+#devtools::install_github("ropensci/rnaturalearthhires") needed to run this to install it with my version of R
+library(rnaturalearthhires) 
 library(sf)
 library(ggplot2)
 library(units)
 
-#be sure to edit NorthBox and EastBox transects below
-surveydate <- "2024-05-05"
+#probably need a "top line broken" =T/F check here instead of diving into the code
+surveydate <- "2024-05-05" #YYYY-MM-DD
 surv="SB" #SB or GB or SI
 year="2026"
 surv.no="4"
+
+#CODE FOR WHEN ONE BOX IS ALL ONE VESSEL 
+#NorthBox<-c(grep("MS",transects$Region_name, value = TRUE, fixed = TRUE))
+NorthBox <- c("MS_T02", "MS_T03", "MS_T04", "MS_T05")
+EastBox <- c("FM_T02", "FM_T03", "LM_T02", "LB_T02", "LB_T03")
 
 TS38 <- -35.5 
 TS50 <- -35.5-0.10727
 TS75 <- -35.5 -0.26575
 TS120 <- -35.5 -0.44946
 
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/"))
 source(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/DFO Scripts/DFO Scripting 2026/Acoustic_biomass functions.R"))
 #setwd(paste0("E:/Acoustic Index Review Files/Integration Versions/2022_07_06/2024/Scots Bay/",surveydate))
 #source("E:/Acoustic Index Review Files/Rscripting and automation/2022_07_06_R_SurveyScripts/Acoustic_biomass functions.R")
@@ -61,9 +67,7 @@ for (i in 1:length(file_list)) {
   temp_data2 <- temp_data[keep]
   transects <- rbind(transects, temp_data2)
 }
-
 rm(temp_data, temp_data2)
-
 transects
 
 #add survey boxes
@@ -106,17 +110,7 @@ plot(SpatialPoints(coords = cbind(transects$Lon_S, transects$Lat_S)), add=TRUE)
 axis(1, at = c(-65.3 + 0:25 *0.025), cex.axis=0.7)
 axis(2, at = c(45 + 0:20 *0.05), cex.axis=0.7)
 
-#outsideMain <- c(grep(c("C1",transects$Region_name, value = TRUE, fixed = TRUE))
-#CODE FOR WHEN ONE BOX IS ALL ONE VESSEL 
-#NorthBox<-c(grep("MS",transects$Region_name, value = TRUE, fixed = TRUE))
- NorthBox <- c(" MS_T02", " MS_T03", " MS_T04", " MS_T05")
-# 
- EastBox <- c(" LM_T0", " LM_T04")
-# 
-# c(NorthBox,EastBox)
-
 #NEED TO MANUAL EDIT FILTERS FOR SCOTS BAY UNTIL BOXES ARE DEFINED USING POLYGON SHAPES
-
 transects_ScotsBayMain <- filter(transects, !Region_name %in% c(NorthBox,EastBox))
 transects_ScotsBayNorthBox <-  filter(transects, Region_name %in% NorthBox)
 transects_ScotsBayEastBox <-  filter(transects, Region_name %in% EastBox)

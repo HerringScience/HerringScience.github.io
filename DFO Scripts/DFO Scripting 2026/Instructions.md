@@ -18,6 +18,10 @@ Some pathways are directed to Darren's local drive and would need to change per 
 
 
 
+> "vessel\_search" right/left will need to change based on users pathway (e.g. '62' works for me but not others, tweak until vessel\_search points towards 2-letter vessel name)
+
+
+
 **BiomassCalcs\_YYYY\_MM\_DD\_TS.R**
 
 \-Integrations need to be separated by GB/SI in same folder (test with GB1)
