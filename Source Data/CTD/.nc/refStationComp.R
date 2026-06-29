@@ -470,3 +470,192 @@ print(representativeness_stats)
 #German Bank: modest average bias but poor representativeness/tracking
 
 #That distinction is really important.
+
+
+ggplot(temp_compare,
+       aes(x = Prince5_temp,
+           y = HSC_temp,
+           color = ground)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1) +
+  geom_abline(slope = 1, intercept = 0,
+              linetype = "dashed",
+              color = "grey40") +
+  facet_wrap(~ ground) +
+  labs(
+    title = "Monthly Average Temperature: HSC Grounds vs Prince-5",
+    subtitle = "Dashed line shows perfect 1:1 agreement",
+    x = "Prince-5 monthly mean temperature (°C)",
+    y = "HSC ground monthly mean temperature (°C)",
+    color = "Ground"
+  ) +
+  theme_bw()
+
+
+
+#### Look monthly
+
+ggplot(temp_compare,
+       aes(x = month,
+           y = temp_difference,
+           color = ground,
+           group = ground)) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             color = "grey40") +
+  geom_point(size = 3, alpha = 0.8)  +
+  facet_wrap(~ ground) +
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  labs(
+    title = "Monthly Temperature Bias: HSC Grounds minus Prince-5",
+    subtitle = "Positive values mean the HSC ground was warmer than Prince-5",
+    x = "Month",
+    y = "Temperature difference (°C)",
+    color = "Ground"
+  ) +
+  theme_bw()
+
+
+# by year and month:
+
+ggplot(temp_compare,
+       aes(x = month,
+           y = temp_difference,
+           color = ground,
+           group = interaction(ground, Year))) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             color = "grey40") +
+  geom_line(alpha = 0.6) +
+  geom_point(size = 2.5) +
+  facet_wrap(~ Year) +
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  labs(
+    title = "Temperature Difference by Year",
+    subtitle = "HSC ground monthly average minus Prince-5 monthly average",
+    x = "Month",
+    y = "Temperature difference (°C)",
+    color = "Ground"
+  ) +
+  theme_bw()
+
+
+### Look at error:
+
+library(tidyr)
+
+rep_stats_long <- representativeness_stats %>%
+  select(ground, mean_absolute_error, RMSE) %>%
+  pivot_longer(
+    cols = c(mean_absolute_error, RMSE),
+    names_to = "metric",
+    values_to = "value"
+  ) %>%
+  mutate(
+    metric = recode(
+      metric,
+      mean_absolute_error = "Mean absolute error",
+      RMSE = "RMSE"
+    )
+  )
+
+ggplot(rep_stats_long,
+       aes(x = ground,
+           y = value,
+           fill = metric)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Prince-5 Representativeness Error by Ground",
+    subtitle = "Lower values indicate better agreement with HSC ground temperatures",
+    x = "Ground",
+    y = "Temperature error (°C)",
+    fill = "Metric"
+  ) +
+  theme_bw()
+
+## correlation bar plot:
+
+ggplot(representativeness_stats,
+       aes(x = ground,
+           y = correlation,
+           fill = ground)) +
+  geom_col(width = 0.6) +
+  geom_hline(yintercept = 0,
+             color = "grey40") +
+  ylim(-1, 1) +
+  labs(
+    title = "Correlation Between Prince-5 and HSC Ground Temperatures",
+    subtitle = "Higher values mean Prince-5 tracks monthly temperature patterns better",
+    x = "Ground",
+    y = "Correlation"
+  ) +
+  theme_bw() +
+  theme(legend.position = "none")
+
+
+### last one:
+library(patchwork)
+library(patchwork)
+
+p1 <- ggplot(temp_compare,
+             aes(x = Prince5_temp,
+                 y = HSC_temp,
+                 color = ground)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1) +
+  geom_abline(slope = 1, intercept = 0,
+              linetype = "dashed",
+              color = "grey40") +
+  facet_wrap(~ ground) +
+  labs(
+    title = "A. Matched monthly temperatures",
+    x = "Prince-5 temperature (°C)",
+    y = "HSC ground temperature (°C)",
+    color = "Ground"
+  ) +
+  theme_bw()
+
+p2 <- ggplot(temp_compare,
+             aes(x = month,
+                 y = temp_difference,
+                 color = ground,
+                 group = ground)) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             color = "grey40") +
+  geom_point(size = 3, alpha = 0.8)  +
+  facet_wrap(~ ground) +
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  labs(
+    title = "B. Monthly bias",
+    x = "Month",
+    y = "HSC minus Prince-5 (°C)",
+    color = "Ground"
+  ) +
+  theme_bw()
+
+p3 <- ggplot(rep_stats_long,
+             aes(x = ground,
+                 y = value,
+                 fill = metric)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "C. Error metrics",
+    x = "Ground",
+    y = "Temperature error (°C)",
+    fill = "Metric"
+  ) +
+  theme_bw()
+
+combined_plot <- (p1 / p2 / p3)
+
+combined_plot
