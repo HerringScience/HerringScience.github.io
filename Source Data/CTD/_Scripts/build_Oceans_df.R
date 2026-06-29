@@ -237,8 +237,8 @@ build_Oceans_df <- function (
         Oceans <- Oceans %>%
           dplyr::mutate(
             JD_bin = dplyr::case_when(
-              JulianDay >= 181 & JulianDay <= 220 ~ "Summer",
-              JulianDay >= 221 & JulianDay <= 300 ~ "LateSummer_Fall",
+              JulianDay >= 152 & JulianDay <= 220 ~ "Summer",
+              JulianDay >= 221 & JulianDay <= 305 ~ "LateSummer_Fall",
               # the cutoff was 260/261. Might want to reintroduce for Scots Bay modern analysis...?
             )
           ) %>%
