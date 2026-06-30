@@ -5,8 +5,10 @@
 build_Oceans_df <- function (
     ctd_path,
     dfo_paths, 
-    trim_top_m = 5,
-    trim_bottom_m = 30,
+    # 4.99999999999999999999999999999999999999999999999 for HSC
+    trim_top_m = NULL,
+    # 30.1 for HSC
+    trim_bottom_m = NULL,
     crs = 4326,
     predicate = "intersects",
     keep_source = TRUE)     {

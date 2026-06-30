@@ -19,7 +19,12 @@ source("build_Oceans_df.R")
 
 Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
 
+OceansAllDepths = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
+
+
+
 saveRDS(Oceans, "Oceans.rds")
+saveRDS(OceansAllDepths, "OceansAllDepths.rds")
 
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD")

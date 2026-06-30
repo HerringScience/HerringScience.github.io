@@ -1,11 +1,23 @@
 
 
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+
+
+# scripts used to create prince5 is Prince5.R
+# for HSC is CTD2026 and build_Oceans_df.R
+
+
 ## Take monthly_cast_averages (Prince 5) and compare with the same from HSC data, plot together
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
 # load Prince 5 data
 prince5 <- readRDS("monthly_cast_averages.rds")
+head(prince5)
+
 
 # Load HSC data
 HSC = readRDS("Oceans.rds")
@@ -13,6 +25,9 @@ HSC = readRDS("Oceans.rds")
 head(prince5)
 head(HSC)
 
+
+prince5$min_depth
+prince5$max_depth
 
 # HSC is in a raw format, edit for monthly averages:
 # create month in HSC
@@ -22,8 +37,6 @@ HSC$month = month(HSC$Date)
 min(HSC$Depth)
 max(HSC$Depth)
 unique(HSC$month)
-
-# why is there no June data from HSC?
 
 
 # Only select HSC data (not DFO historical for now)
@@ -35,6 +48,9 @@ averagesHSC <- HSC %>%
   summarise(
     mean_temperature = mean(Temperature, na.rm = TRUE),
     mean_salinity = mean(Salinity, na.rm = TRUE),
+    min_temperature = min(Temperature, na.rm = TRUE),
+    max_temperature = max(Temperature, na.rm = TRUE),
+    stratification = max_temperature - min_temperature,
     min_depth = min(Depth, na.rm = TRUE),
     max_depth = max(Depth, na.rm = TRUE),
     n_depths = n(),
@@ -48,7 +64,17 @@ averagesHSC <- HSC %>%
   group_by(Year, month, month_name, ground) %>%
   summarise(
     monthly_mean_temperature = mean(mean_temperature, na.rm = TRUE),
+    monthly_sd_temperature = sd(mean_temperature, na.rm = TRUE),
+    monthly_se_temperature = monthly_sd_temperature / sqrt(sum(!is.na(mean_temperature))),
+    
     monthly_mean_salinity = mean(mean_salinity, na.rm = TRUE),
+    monthly_sd_salinity = sd(mean_salinity, na.rm = TRUE),
+    monthly_se_salinity = monthly_sd_salinity / sqrt(sum(!is.na(mean_salinity))),
+    
+    monthly_mean_stratification = mean(stratification, na.rm = TRUE),
+    monthly_sd_stratification = sd(stratification, na.rm = TRUE),
+    monthly_se_stratification = monthly_sd_stratification / sqrt(sum(!is.na(stratification))),
+    
     n_casts = n(),
     mean_latitude = mean(Lat, na.rm = TRUE),
     mean_longitude = mean(Lon, na.rm = TRUE),
@@ -58,7 +84,6 @@ averagesHSC <- HSC %>%
   ) %>%
   arrange(Year, month)
 
-
 ### Now export a copy to view:
 write.csv(averagesHSC, "averagesHSC.csv", row.names = FALSE)
 
@@ -66,9 +91,6 @@ write.csv(averagesHSC, "averagesHSC.csv", row.names = FALSE)
 
 
 ########## Now plot together the monthly averages:
-
-library(dplyr)
-library(ggplot2)
 
 # --------------------------------------------------
 # 1. Standardize HSC monthly averages
@@ -87,6 +109,7 @@ hsc_plot <- averagesHSC %>%
     Source,
     monthly_mean_temperature,
     monthly_mean_salinity,
+    monthly_mean_stratification,
     n_casts,
     mean_latitude,
     mean_longitude
@@ -118,6 +141,7 @@ prince5_plot <- monthly_cast_averages %>%
     Source,
     monthly_mean_temperature,
     monthly_mean_salinity,
+    monthly_mean_stratification,
     n_casts,
     mean_latitude,
     mean_longitude
@@ -150,225 +174,578 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
 
 ### PLOTS
 
-ggplot(combined_monthly,
-       aes(x = month_label,
-           y = monthly_mean_temperature,
-           color = Source,
-           group = Source)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 2.5) +
-  facet_wrap(~ Year) +
-  labs(
-    title = "Monthly Mean Temperature: HSC Grounds vs Prince-5",
-    x = "Month",
-    y = "Monthly Mean Temperature",
-    color = "Dataset / Ground"
-  ) +
-  theme_bw() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  )
+
+## Temperature:
+
+          ggplot(combined_monthly,
+                 aes(x = month_label,
+                     y = monthly_mean_temperature,
+                     color = Source,
+                     group = Source)) +
+            geom_line(linewidth = 1) +
+            geom_point(size = 2.5) +
+            facet_wrap(~ Year) +
+            labs(
+              title = "Monthly Mean Temperature: HSC Grounds vs Prince-5",
+              x = "Month",
+              y = "Monthly Mean Temperature",
+              color = "Dataset / Ground"
+            ) +
+            theme_bw() +
+            theme(
+              axis.text.x = element_text(angle = 45, hjust = 1)
+            )
+
+## Salinity:
+          
+          ggplot(combined_monthly,
+                 aes(x = month_label,
+                     y = monthly_mean_salinity,
+                     color = Source,
+                     group = Source)) +
+            geom_line(linewidth = 1) +
+            geom_point(size = 2.5) +
+            facet_wrap(~ Year) +
+            labs(
+              title = "Monthly Mean Salinity: HSC Grounds vs Prince-5",
+              x = "Month",
+              y = "Monthly Mean Salinity",
+              color = "Dataset / Ground"
+            ) +
+            theme_bw() +
+            theme(
+              axis.text.x = element_text(angle = 45, hjust = 1)
+            )
+
+
+## Stratification:
+          
+          ggplot(combined_monthly,
+                 aes(x = month_label,
+                     y = monthly_mean_stratification,
+                     color = Source,
+                     group = Source)) +
+            geom_line(linewidth = 1) +
+            geom_point(size = 2.5) +
+            facet_wrap(~ Year) +
+            labs(
+              title = "Monthly Mean Stratification: HSC Grounds vs Prince-5",
+              x = "Month",
+              y = "Monthly Mean Stratification",
+              color = "Dataset / Ground"
+            ) +
+            theme_bw() +
+            theme(
+              axis.text.x = element_text(angle = 45, hjust = 1)
+            )
+          
 
 
 
 
-
-
-
-###### Compare average monthly temperatures between grounds
-library(dplyr)
-library(tidyr)
+###### Compare average monthly between grounds
 
 # --------------------------------------------------
 # 1. Prepare HSC monthly temperature data
 # --------------------------------------------------
-
-hsc_temp <- averagesHSC %>%
-  mutate(
-    Year = as.numeric(Year),
-    month = as.numeric(month)
-  ) %>%
-  select(
-    Year,
-    month,
-    ground,
-    HSC_temp = monthly_mean_temperature
-  )
+          hsc_vars <- averagesHSC %>%
+            mutate(
+              Year = as.numeric(Year),
+              month = as.numeric(month)
+            ) %>%
+            select(
+              Year,
+              month,
+              ground,
+              
+              HSC_temp = monthly_mean_temperature,
+              HSC_temp_se = monthly_se_temperature,
+              
+              HSC_sal = monthly_mean_salinity,
+              HSC_sal_se = monthly_se_salinity,
+              
+              HSC_strat = monthly_mean_stratification,
+              HSC_strat_se = monthly_se_stratification
+            )
 
 # --------------------------------------------------
 # 2. Prepare Prince-5 monthly temperature data
 # --------------------------------------------------
 # This handles either 'year' or 'Year' in monthly_cast_averages
 
-prince5_temp <- monthly_cast_averages %>%
-  rename(
-    Year = any_of("year")
-  ) %>%
-  mutate(
-    Year = as.numeric(Year),
-    month = as.numeric(month)
-  ) %>%
-  select(
-    Year,
-    month,
-    Prince5_temp = monthly_mean_temperature
-  )
+          prince5_vars <- monthly_cast_averages %>%
+            mutate(
+              Year = as.numeric(year),
+              month = as.numeric(month)
+            ) %>%
+            select(
+              Year,
+              month,
+              
+              Prince5_temp = monthly_mean_temperature,
+              Prince5_temp_se = monthly_se_temperature,
+              
+              Prince5_sal = monthly_mean_salinity,
+              Prince5_sal_se = monthly_se_salinity,
+              
+              Prince5_strat = monthly_mean_stratification,
+              Prince5_strat_se = monthly_se_stratification
+            )
 
 # --------------------------------------------------
 # 3. Join HSC grounds to Prince-5 by Year + month
 # --------------------------------------------------
 # This keeps only months where that HSC ground AND Prince-5 both exist.
 
-temp_compare <- hsc_temp %>%
-  inner_join(prince5_temp, by = c("Year", "month")) %>%
-  mutate(
-    temp_difference = HSC_temp - Prince5_temp,
-    abs_difference = abs(temp_difference),
-    month_name = month.name[month]
-  ) %>%
-  arrange(ground, Year, month)
-
-
+          comparison <- hsc_vars %>%
+            inner_join(prince5_vars, by = c("Year", "month")) %>%
+            mutate(
+              # Temperature difference
+              temp_diff = HSC_temp - Prince5_temp,
+              temp_abs_diff = abs(temp_diff),
+              temp_diff_se = sqrt(HSC_temp_se^2 + Prince5_temp_se^2),
+              
+              # Salinity difference
+              sal_diff = HSC_sal - Prince5_sal,
+              sal_abs_diff = abs(sal_diff),
+              sal_diff_se = sqrt(HSC_sal_se^2 + Prince5_sal_se^2),
+              
+              # Stratification difference
+              strat_diff = HSC_strat - Prince5_strat,
+              strat_abs_diff = abs(strat_diff),
+              strat_diff_se = sqrt(HSC_strat_se^2 + Prince5_strat_se^2),
+              
+              month_name = month.name[month]
+            ) %>%
+            arrange(ground, Year, month)
+          
 # View matched monthly comparisons
-print(temp_compare)
+print(comparison)
 
-temp_stats <- temp_compare %>%
+stats_summary <- comparison %>%
   group_by(ground) %>%
   summarise(
     n_matched_months = n(),
     
+    # -----------------------------
+    # Temperature stats
+    # -----------------------------
     mean_HSC_temp = mean(HSC_temp, na.rm = TRUE),
     mean_Prince5_temp = mean(Prince5_temp, na.rm = TRUE),
     
-    mean_difference_HSC_minus_Prince5 = mean(temp_difference, na.rm = TRUE),
-    median_difference = median(temp_difference, na.rm = TRUE),
-    sd_difference = sd(temp_difference, na.rm = TRUE),
+    mean_temp_difference_HSC_minus_Prince5 = mean(temp_diff, na.rm = TRUE),
+    median_temp_difference = median(temp_diff, na.rm = TRUE),
+    sd_temp_difference = sd(temp_diff, na.rm = TRUE),
+    mean_absolute_temp_difference = mean(temp_abs_diff, na.rm = TRUE),
+    temp_RMSE = sqrt(mean(temp_diff^2, na.rm = TRUE)),
+    min_temp_difference = min(temp_diff, na.rm = TRUE),
+    max_temp_difference = max(temp_diff, na.rm = TRUE),
+    temp_correlation = cor(HSC_temp, Prince5_temp, use = "complete.obs"),
     
-    mean_absolute_difference = mean(abs_difference, na.rm = TRUE),
+    # -----------------------------
+    # Salinity stats
+    # -----------------------------
+    mean_HSC_sal = mean(HSC_sal, na.rm = TRUE),
+    mean_Prince5_sal = mean(Prince5_sal, na.rm = TRUE),
     
-    RMSE = sqrt(mean(temp_difference^2, na.rm = TRUE)),
+    mean_sal_difference_HSC_minus_Prince5 = mean(sal_diff, na.rm = TRUE),
+    median_sal_difference = median(sal_diff, na.rm = TRUE),
+    sd_sal_difference = sd(sal_diff, na.rm = TRUE),
+    mean_absolute_sal_difference = mean(sal_abs_diff, na.rm = TRUE),
+    sal_RMSE = sqrt(mean(sal_diff^2, na.rm = TRUE)),
+    min_sal_difference = min(sal_diff, na.rm = TRUE),
+    max_sal_difference = max(sal_diff, na.rm = TRUE),
+    sal_correlation = cor(HSC_sal, Prince5_sal, use = "complete.obs"),
     
-    min_difference = min(temp_difference, na.rm = TRUE),
-    max_difference = max(temp_difference, na.rm = TRUE),
+    # -----------------------------
+    # Stratification stats
+    # -----------------------------
+    mean_HSC_strat = mean(HSC_strat, na.rm = TRUE),
+    mean_Prince5_strat = mean(Prince5_strat, na.rm = TRUE),
     
-    correlation = cor(HSC_temp, Prince5_temp, use = "complete.obs"),
+    mean_strat_difference_HSC_minus_Prince5 = mean(strat_diff, na.rm = TRUE),
+    median_strat_difference = median(strat_diff, na.rm = TRUE),
+    sd_strat_difference = sd(strat_diff, na.rm = TRUE),
+    mean_absolute_strat_difference = mean(strat_abs_diff, na.rm = TRUE),
+    strat_RMSE = sqrt(mean(strat_diff^2, na.rm = TRUE)),
+    min_strat_difference = min(strat_diff, na.rm = TRUE),
+    max_strat_difference = max(strat_diff, na.rm = TRUE),
+    strat_correlation = cor(HSC_strat, Prince5_strat, use = "complete.obs"),
     
     .groups = "drop"
   )
 
-print(temp_stats)
+print(stats_summary)
+View(stats_summary)
+
 
 ### STATS
 
-paired_tests <- temp_compare %>%
+## Q: are the monthly values at this ground statistically different from Prince 5 when matched by year and month? (t-test and wilcoxon)
+
+
+          paired_tests <- comparison %>%
+            group_by(ground) %>%
+            summarise(
+              n_matched_months = n(),
+              
+              # -----------------------------
+              # Temperature tests
+              # -----------------------------
+              temp_paired_t_test_p_value = ifelse(
+                n() >= 2,
+                t.test(HSC_temp, Prince5_temp, paired = TRUE)$p.value,
+                NA
+              ),
+              
+              temp_wilcoxon_p_value = ifelse(
+                n() >= 2,
+                wilcox.test(HSC_temp, Prince5_temp, paired = TRUE, exact = FALSE)$p.value,
+                NA
+              ),
+              
+              ### Neither ground is statistically significant different from Prince 5 in terms of temperature. Temperature is well represented by Prince 5.
+              
+              
+              # -----------------------------
+              # Salinity tests
+              # -----------------------------
+              sal_paired_t_test_p_value = ifelse(
+                n() >= 2,
+                t.test(HSC_sal, Prince5_sal, paired = TRUE)$p.value,
+                NA
+              ),
+              
+              sal_wilcoxon_p_value = ifelse(
+                n() >= 2,
+                wilcox.test(HSC_sal, Prince5_sal, paired = TRUE, exact = FALSE)$p.value,
+                NA
+              ),
+              
+              ##### Salinity is also well represented by Prince 5 (not statistically significant)
+              
+              
+              # -----------------------------
+              # Stratification tests
+              # -----------------------------
+              strat_paired_t_test_p_value = ifelse(
+                n() >= 2,
+                t.test(HSC_strat, Prince5_strat, paired = TRUE)$p.value,
+                NA
+              ),
+              
+              strat_wilcoxon_p_value = ifelse(
+                n() >= 2,
+                wilcox.test(HSC_strat, Prince5_strat, paired = TRUE, exact = FALSE)$p.value,
+                NA
+              ),
+              
+              .groups = "drop"
+            )
+          
+            #### German Bank IS statistically different than Prince 5 for stratification
+                #### Scots Bay is not different
+          
+          print(paired_tests)
+          view(paired_tests)
+          
+          scots_vs_prince5 <- comparison %>%
+            filter(ground == "Scots Bay")
+          
+          german_vs_prince5 <- comparison %>%
+            filter(ground == "German Bank")
+          
+          print(scots_vs_prince5)
+          print(german_vs_prince5)
+          
+
+
+
+
+#### test seasonality versus ground effect:
+          ## is there a true ground effect or season effect?
+
+comparison_summer <- comparison %>%
+  filter(month %in% c(7, 8, 9))  # July–September
+
+# same as above, just using overlapping months
+paired_tests <- comparison_summer %>%
   group_by(ground) %>%
   summarise(
     n_matched_months = n(),
     
-    paired_t_test_p_value = ifelse(
+    # -----------------------------
+    # Temperature tests
+    # -----------------------------
+    temp_paired_t_test_p_value = ifelse(
       n() >= 2,
       t.test(HSC_temp, Prince5_temp, paired = TRUE)$p.value,
       NA
     ),
     
-    wilcoxon_p_value = ifelse(
+    temp_wilcoxon_p_value = ifelse(
       n() >= 2,
       wilcox.test(HSC_temp, Prince5_temp, paired = TRUE, exact = FALSE)$p.value,
+      NA
+    ),
+    
+    
+    # -----------------------------
+    # Salinity tests
+    # -----------------------------
+    sal_paired_t_test_p_value = ifelse(
+      n() >= 2,
+      t.test(HSC_sal, Prince5_sal, paired = TRUE)$p.value,
+      NA
+    ),
+    
+    sal_wilcoxon_p_value = ifelse(
+      n() >= 2,
+      wilcox.test(HSC_sal, Prince5_sal, paired = TRUE, exact = FALSE)$p.value,
+      NA
+    ),
+    
+    
+    # -----------------------------
+    # Stratification tests
+    # -----------------------------
+    strat_paired_t_test_p_value = ifelse(
+      n() >= 2,
+      t.test(HSC_strat, Prince5_strat, paired = TRUE)$p.value,
+      NA
+    ),
+    
+    strat_wilcoxon_p_value = ifelse(
+      n() >= 2,
+      wilcox.test(HSC_strat, Prince5_strat, paired = TRUE, exact = FALSE)$p.value,
       NA
     ),
     
     .groups = "drop"
   )
 
-print(paired_tests)
+
+view(paired_tests)
 
 
-scots_vs_prince5 <- temp_compare %>%
-  filter(ground == "Scots Bay")
 
-german_vs_prince5 <- temp_compare %>%
-  filter(ground == "German Bank")
-
-print(scots_vs_prince5)
-print(german_vs_prince5)
+#### There is a real ground effect in stratification at German Bank relative to Prince‑5
 
 
-#### Explicit Stats
-scots_stats <- scots_vs_prince5 %>%
+##Differences in stratification between Prince‑5 and German Bank persist even when controlling for seasonal effects, indicating that these differences reflect genuine spatial variability rather than sampling timing alone.
+
+
+
+
+
+
+
+
+
+
+#### Descriptive performance metrics - not hypotheses tests
+### They answer - How close is Prince 5 to this ground on average? Or how big is the difference?
+# mean difference - average bias, directional difference
+  # median difference - less biased version of above, average bias (less influence of outliers)
+    # Error Size: 1. mean_absolute_difference and 2. RMSE
+      # 1. average magnitude of difference (ignores sign)
+        # 2. like mean absolute error but penalizes large error more
+            # RMSE is the best single 'how different are they metric'
+      # sd_difference - how consistent the differences are
+    # Relationship: correlation, do the time series move together? Do they track each other?
+        # high correlation and low RMSE = strong representativeness
+
+stats_summary <- comparison %>%
+  group_by(ground) %>%
   summarise(
-    comparison = "Scots Bay vs Prince-5",
     n_matched_months = n(),
-    mean_scots_temp = mean(HSC_temp, na.rm = TRUE),
-    mean_prince5_temp = mean(Prince5_temp, na.rm = TRUE),
-    mean_difference_scots_minus_prince5 = mean(temp_difference, na.rm = TRUE),
-    median_difference = median(temp_difference, na.rm = TRUE),
-    sd_difference = sd(temp_difference, na.rm = TRUE),
-    mean_absolute_difference = mean(abs_difference, na.rm = TRUE),
-    RMSE = sqrt(mean(temp_difference^2, na.rm = TRUE)),
-    correlation = cor(HSC_temp, Prince5_temp, use = "complete.obs")
+    
+    # -----------------------------
+    # Temperature
+    # -----------------------------
+    mean_HSC_temp = mean(HSC_temp, na.rm = TRUE),
+    mean_Prince5_temp = mean(Prince5_temp, na.rm = TRUE),
+    mean_temp_difference = mean(temp_diff, na.rm = TRUE),
+    median_temp_difference = median(temp_diff, na.rm = TRUE),
+    sd_temp_difference = sd(temp_diff, na.rm = TRUE),
+    mean_abs_temp_difference = mean(temp_abs_diff, na.rm = TRUE),
+    temp_RMSE = sqrt(mean(temp_diff^2, na.rm = TRUE)),
+    temp_correlation = cor(HSC_temp, Prince5_temp, use = "complete.obs"),
+    
+    # -----------------------------
+    # Salinity
+    # -----------------------------
+    mean_HSC_sal = mean(HSC_sal, na.rm = TRUE),
+    mean_Prince5_sal = mean(Prince5_sal, na.rm = TRUE),
+    mean_sal_difference = mean(sal_diff, na.rm = TRUE),
+    median_sal_difference = median(sal_diff, na.rm = TRUE),
+    sd_sal_difference = sd(sal_diff, na.rm = TRUE),
+    mean_abs_sal_difference = mean(sal_abs_diff, na.rm = TRUE),
+    sal_RMSE = sqrt(mean(sal_diff^2, na.rm = TRUE)),
+    sal_correlation = cor(HSC_sal, Prince5_sal, use = "complete.obs"),
+    
+    # -----------------------------
+    # Stratification
+    # -----------------------------
+    mean_HSC_strat = mean(HSC_strat, na.rm = TRUE),
+    mean_Prince5_strat = mean(Prince5_strat, na.rm = TRUE),
+    mean_strat_difference = mean(strat_diff, na.rm = TRUE),
+    median_strat_difference = median(strat_diff, na.rm = TRUE),
+    sd_strat_difference = sd(strat_diff, na.rm = TRUE),
+    mean_abs_strat_difference = mean(strat_abs_diff, na.rm = TRUE),
+    strat_RMSE = sqrt(mean(strat_diff^2, na.rm = TRUE)),
+    strat_correlation = cor(HSC_strat, Prince5_strat, use = "complete.obs"),
+    
+    .groups = "drop"
   )
 
-german_stats <- german_vs_prince5 %>%
-  summarise(
-    comparison = "German Bank vs Prince-5",
-    n_matched_months = n(),
-    mean_german_temp = mean(HSC_temp, na.rm = TRUE),
-    mean_prince5_temp = mean(Prince5_temp, na.rm = TRUE),
-    mean_difference_german_minus_prince5 = mean(temp_difference, na.rm = TRUE),
-    median_difference = median(temp_difference, na.rm = TRUE),
-    sd_difference = sd(temp_difference, na.rm = TRUE),
-    mean_absolute_difference = mean(abs_difference, na.rm = TRUE),
-    RMSE = sqrt(mean(temp_difference^2, na.rm = TRUE)),
-    correlation = cor(HSC_temp, Prince5_temp, use = "complete.obs")
-  )
+view(stats_summary)
 
-print(scots_stats)
-print(german_stats)
+#Across both German Bank and Scots Bay, Prince‑5 reproduces temperature and salinity patterns well, but shows weaker agreement for stratification at German Bank, indicating that vertical structure at that site differs from Prince‑5 despite similar broader hydrographic conditions.
 
 
-## Which months matter most?
+getwd()
+### PLOTS monthly differences
 
-largest_temp_differences <- temp_compare %>%
-  arrange(desc(abs_difference)) %>%
+library(grid)
+
+comparison_long <- comparison %>%
   select(
-    ground,
     Year,
     month,
-    month_name,
-    HSC_temp,
-    Prince5_temp,
-    temp_difference,
-    abs_difference
+    ground,
+    temp_diff,
+    sal_diff,
+    strat_diff
+  ) %>%
+  pivot_longer(
+    cols = c(temp_diff, sal_diff, strat_diff),
+    names_to = "variable",
+    values_to = "difference"
+  ) %>%
+  mutate(
+    variable = recode(
+      variable,
+      temp_diff = "Temperature",
+      sal_diff = "Salinity",
+      strat_diff = "Stratification"
+    )
   )
 
-print(largest_temp_differences)
-
-
-
-### PLOTS monthly differences
-library(ggplot2)
-
-ggplot(temp_compare,
+ggplot(comparison_long,
        aes(x = month,
-           y = temp_difference,
+           y = difference,
            color = ground,
            group = ground)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey40") +
   geom_line(linewidth = 1) +
+  geom_point(size = 1.65) +
+  facet_grid(variable ~ Year, scales = "free_y") +
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  labs(
+    title = "Monthly Differences: HSC Grounds minus Prince-5",
+    subtitle = "Positive values mean HSC ground values are greater than Prince-5",
+    x = "Month",
+    y = "Difference",
+    color = "Ground"
+  ) + theme_bw() +
+  theme(
+    axis.text.x = element_text(size = 5, angle = 45, hjust = 1),
+    plot.margin = margin(t = 10, r = 10, b = 30, l = 10),
+    panel.spacing = unit(1, "lines")
+  )
+
+### temp plots with error bars:
+ggplot(comparison,
+       aes(x = month,
+           y = temp_diff,
+           color = ground,
+           group = ground)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey40") +
+  geom_errorbar(
+    aes(
+      ymin = temp_diff - temp_diff_se,
+      ymax = temp_diff + temp_diff_se
+    ),
+    width = 0.15,
+    linewidth = 0.5
+  ) +
+  geom_line(linewidth = 1) +
   geom_point(size = 2.5) +
-  facet_wrap(~ Year) +
+  facet_wrap(~ Year, ncol = 4) +
   scale_x_continuous(
     breaks = 1:12,
     labels = month.abb
   ) +
   labs(
     title = "Monthly Temperature Difference: HSC Grounds minus Prince-5",
-    subtitle = "Positive values mean HSC ground is warmer than Prince-5",
+    subtitle = "Error bars show ±1 SE of the difference; positive values mean HSC ground is warmer than Prince-5",
     x = "Month",
     y = "Temperature Difference (°C)",
     color = "Ground"
   ) +
-  theme_bw()
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(size = 7, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 8),
+    strip.text = element_text(size = 8),
+    plot.margin = margin(t = 10, r = 10, b = 30, l = 10)
+  )
+
+#### error bars for stratification:
+ggplot(comparison,
+       aes(x = month,
+           y = strat_diff,
+           color = ground,
+           group = ground)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey40") +
+  geom_errorbar(
+    aes(
+      ymin = strat_diff - strat_diff_se,
+      ymax = strat_diff + strat_diff_se
+    ),
+    width = 0.15,
+    linewidth = 0.5
+  ) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  facet_wrap(~ Year, ncol = 4) +
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month.abb
+  ) +
+  labs(
+    title = "Monthly Stratification Difference: HSC Grounds minus Prince-5",
+    subtitle = "Error bars show ±1 SE of the difference; positive values mean HSC ground is more stratified than Prince-5",
+    x = "Month",
+    y = "Stratification Difference",
+    color = "Ground"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(size = 7, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 8),
+    strip.text = element_text(size = 8),
+    plot.margin = margin(t = 10, r = 10, b = 30, l = 10)
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # save the stats:
@@ -659,3 +1036,26 @@ p3 <- ggplot(rep_stats_long,
 combined_plot <- (p1 / p2 / p3)
 
 combined_plot
+
+
+
+
+
+
+
+## Which months matter most?
+
+largest_temp_differences <- temp_compare %>%
+  arrange(desc(abs_difference)) %>%
+  select(
+    ground,
+    Year,
+    month,
+    month_name,
+    HSC_temp,
+    Prince5_temp,
+    temp_difference,
+    abs_difference
+  )
+
+print(largest_temp_differences)
