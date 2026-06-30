@@ -12,7 +12,7 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2026-07-05 20:00:00" #survey date and time, as formatted
+surv.date = "2026-07-05 21:00:00" #survey date and time, as formatted
 surv.no = "5"
 Allocation = '150' #set to "0" for a non-fishing survey
 SIAllocation = '50' #Seal Island allocation for GB-only
@@ -25,11 +25,11 @@ NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = PlanktonVessel
-V2 = "Brunswick Provider"
+V1 = "Fundy Monarch"
+V2 = PlanktonVessel
 V3 = "Lady Janice"
 V4 = "Morning Star"
-V5 = "Fundy Monarch"
+V5 = "Brunswick Provider"
 V6 = "Leroy and Barry"
 V7 = NA
 V8 = NA
@@ -97,30 +97,30 @@ year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
 
-Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+#Plan = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
 #above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 
-# vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
-#            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
-#            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
-#            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
-#            NA))))
-# 
-# Main = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
-# #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
-# 
-# if(!is.na(NVessel)){North = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
-# #if there is a NVessel this will load the North_Box.csv box outline
-# if(!is.na(EVessel)){East = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
-# #if there is a EVessel this will load the East_Box.csv box outline
-# 
-# if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
-# if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
-# if(!is.na(NVessel) & !is.na(EVessel)){
-#   Plan = full_join(Main, North)
-#   Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
-# if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
+vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
+           ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
+           NA))))
+
+Main = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+#the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
+
+if(!is.na(NVessel)){North = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+#if there is a NVessel this will load the North_Box.csv box outline
+if(!is.na(EVessel)){East = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+#if there is a EVessel this will load the East_Box.csv box outline
+
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
+if(!is.na(NVessel) & !is.na(EVessel)){
+  Plan = full_join(Main, North)
+  Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
+if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
 
 #Comment out to here for manual plans.
 
@@ -153,38 +153,41 @@ write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/Her
 
 #Land Data
 
-# 1. Download GADM data (returns a terra 'SpatVector')
-# Note: geodata downloads the whole country, so we subset immediately after.
-can <- gadm(country = "CAN", level = 1, path = tempdir(), version = "latest", resolution = 1)
-can_sub <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"), ]
+# can <- gadm(country = "CAN", level = 1, path = tempdir(), version = "latest", resolution = 1)
+# can_sub <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"), ]
+# 
+# us <- gadm(country = "USA", level = 1, path = tempdir(), version = "latest", resolution = 1)
+# us_sub <- us[us$NAME_1 %in% c("Maine"), ]
 
-us <- gadm(country = "USA", level = 1, path = tempdir(), version = "latest", resolution = 1)
-us_sub <- us[us$NAME_1 %in% c("Maine"), ]
+can <- ne_states(country = "Canada", returnclass = "sf")
 
-# 2. Combine Canada and US subsets
-NBNS_terra <- rbind(can_sub, us_sub)
+us <- ne_states(country = "United States of America",returnclass = "sf")
 
-# 3. Convert to 'sf' object 
-# This replaces the extremely slow 'Spatial' conversion and runs instantly
-NBNS <- st_as_sf(NBNS_terra)
+NBNS <- bind_rows(can, us) %>%
+  filter(
+    name %in% c(
+      "New Brunswick",
+      "Nova Scotia",
+      "Prince Edward Island",
+      "Newfoundland and Labrador",
+      "Quebec",
+      "Maine"
+    )
+  )
 
-# 4. Proper coordinates for German Bank & Crop
-# st_bbox uses xmin, ymin, xmax, ymax format
 GBMap <- st_bbox(c(xmin = -66.5, xmax = -65.5, ymin = 43, ymax = 44), crs = st_crs(NBNS))
 GBout <- st_crop(NBNS, GBMap)
 
-# 5. Proper coordinates for Scots Bay & Crop
 SBMap <- st_bbox(c(xmin = -65.5, xmax = -64.5, ymin = 45, ymax = 45.5), crs = st_crs(NBNS))
 SBout <- st_crop(NBNS, SBMap)
 
-# 6. Make CTD Cast Box (GB or SB)
-# Quotes removed to treat these as numeric values instead of character strings
+# CTD Cast Box (GB or SB)
+
 a <- c(4334.320, 4333.600, 4333.600, 4334.320)
 b <- c(6622.080, 6622.080, 6621.000, 6621.000)
 c <- c(4503.432, 4503.000, 4503.000, 4503.432)
 d <- c(6513.048, 6513.048, 6512.000, 6512.000)
 
-# Make sure 'surv' is defined earlier in your script (e.g., surv <- "SB")
 if (surv == "SB") {
   CTDBox <- data.frame(Lat = c, Lon = d)
 } else if (surv == "GB") {
@@ -258,8 +261,7 @@ b=if(surv == "SB" & is.na(EVessel) & !is.na(NVessel)){
 }
 
 c=if(surv == "SB" & is.na(EVessel) & is.na(NVessel)){
-  "The Leroy and Barry and the Fundy Monarch will each complete one line in the North box and 2 lines in the main box. All other vessels complete 2 lines in the main box and one line in the East box."
-  #"All vessels will be running 2 lines in the Main Survey Box"
+  "All vessels will be running 2 lines in the Main Survey Box"
 }
 
 # change between one and two lines in Seal box as needed.
@@ -357,7 +359,7 @@ if(surv=="GB"){
 ```{r}
 
 #Use this if doing manual plan, and comment out from below
-Main = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Table.csv"))
+# Main = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Table.csv"))
 
 
 #Add vessel names to Plan
@@ -375,27 +377,27 @@ Plan = Main %>%
   mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
 
 #### if manual plan, read Table file and comment out below
-# 
-# if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-#             ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-#             ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
-#             ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
-#             NA))))}
-#  if(surv=="GB"){vessels2=vessels}
-# 
-#  Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
-# 
-# 
-#  if(surv=="SB"){
-#  if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
-#  if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
-#  if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
-#  if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
-#  if(!is.na(NVessel) & !is.na(EVessel)){
-#    Plan = full_join(Main, North)
-#    Plan = full_join(Plan, East)}
-#  if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
-#  if(surv=="GB"){Plan=Main} 
+
+if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
+            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+            NA))))}
+ if(surv=="GB"){vessels2=vessels}
+
+ Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
+
+
+ if(surv=="SB"){
+ if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
+ if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
+ if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+ if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+ if(!is.na(NVessel) & !is.na(EVessel)){
+   Plan = full_join(Main, North)
+   Plan = full_join(Plan, East)}
+ if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
+ if(surv=="GB"){Plan=Main}
 
 #Comment out to here
 
@@ -448,14 +450,13 @@ h=if(Allocation == 0){
   print(i)
 }
 f=if(surv=="SB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", d, 
-         "8. Please wait until all vessels have completed their lines before starting to fish.")
+  paste0("7. Fishing to start on ", c, ", and allocation is ", d, ". Please wait until all vessels have completed their lines before starting to fish")
 }
 g=if(surv=="GB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", e, 
-         "8. Please wait until all vessels have completed their lines before starting to fish.")
+  paste0("7. Fishing to start on ", c, ", and allocation is ", e, "Please wait until all vessels have completed their lines before starting to fish.")
 }
 ```
+
 
 `r g` `r f` `r h`
 
