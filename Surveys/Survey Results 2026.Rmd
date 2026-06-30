@@ -126,17 +126,6 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 can=readRDS("gadm36_CAN_1_sp.rds")
 NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
 
-#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-#can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-#can1 = rbind(can,us)
-#NBNS = can1
-
-
-# NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-#NBNS <- as(NBNS, "Spatial") #This causes it to run very slowly - takes up to 30minutes to process.
-
 # Proper coordinates for German Bank
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(GBMap) <- CRS(proj4string(NBNS))
@@ -197,8 +186,6 @@ if(surv == "GB"){
    }
 
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current))
-#setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/2025/SB1")
-#setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Surveys/ 2024/SB11")
 
 Map = list.files(pattern = "Map*") %>% 
   map_df(~read_csv(.))
