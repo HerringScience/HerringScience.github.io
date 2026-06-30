@@ -208,6 +208,53 @@ returnedTagsGermanBank <- inner_join(
     dataorigin
   )
 
+#Tags Returned to German Bank that were tagged Aug 1st or sooner
+
+OtherTags <- Tags %>%
+  filter((
+    Lon >= -66.51 &
+      Lon <= -65.229 &
+      Lat >= 43.223 &
+      Lat <= 43.567
+  ) |
+    (Lon >= -66.237 & 
+       Lon <= -66.119 &
+       Lat >= 43.24 &
+       Lat <= 43.51
+    )
+  )
+
+GermanBankTagsBeforeAugust <- GermanBankTags %>%
+  mutate(Date = ymd(Date)) %>%
+  filter(
+    month(Date) < 8 |
+      (month(Date) == 8 & day(Date) == 1)
+  )
+
+returnedTagsGermanBank <- inner_join(
+  GermanBankTagsBeforeAugust,
+  completeReturns,
+  by = c("Tag_Num" = "TAG_NUMBER")
+) %>%
+  mutate(TaggedArea = "German Bank") %>%
+  rename(
+    TagReturnArea = catchAREA,
+    DateTagged = Date,
+    TagReturnDate = DATE
+  ) %>%
+  dplyr::select(
+    Tag_Num,
+    DateTagged,
+    TaggedArea,
+    TagReturnDate,
+    TagReturnArea,
+    Lon,
+    Lat,
+    id,
+    dataorigin
+  )
+
+
 # CONVERT TAGS TO SF
 
 GermanBankTags_sf <- st_as_sf(
@@ -257,12 +304,6 @@ GB_Map <- print( ggplot() +
     size = 1,
     alpha = 0.8
   ) +
-  # geom_sf(
-  #   data = GermanBankTags_sf,
-  #   colour = "blue",
-  #   size = 1,
-  #   alpha = 0.8
-  # ) +
   coord_sf(
     xlim = c(-67, -65),
     ylim = c(43, 44.5),
@@ -443,3 +484,109 @@ print(
         )
 }))
 
+GermanBankTags <- Tags %>%
+  filter((
+    Lon >= -66.51 &
+      Lon <= -65.229 &
+      Lat >= 43.223 &
+      Lat <= 43.567
+  ) |
+    (Lon >= -66.237 & 
+       Lon <= -66.119 &
+       Lat >= 43.24 &
+       Lat <= 43.51
+    )
+  )
+
+GermanBankTagsBeforeAugust <- GermanBankTags %>%
+  mutate(Date = ymd(Date)) %>%
+  filter(
+    month(Date) < 8 |
+      (month(Date) == 8 & day(Date) == 1)
+  )
+
+returnedTagsGermanBank <- inner_join(
+  GermanBankTagsBeforeAugust,
+  completeReturns,
+  by = c("Tag_Num" = "TAG_NUMBER")
+) %>%
+  mutate(TaggedArea = "German Bank") %>%
+  rename(
+    TagReturnArea = catchAREA,
+    DateTagged = Date,
+    TagReturnDate = DATE
+  ) %>%
+  dplyr::select(
+    Tag_Num,
+    DateTagged,
+    TaggedArea,
+    TagReturnDate,
+    TagReturnArea,
+    Lon,
+    Lat,
+    id,
+    dataorigin
+  )
+
+#Tags Returned to German Bank that were tagged Aug 1st or sooner
+
+OtherTags <- Tags %>%
+  filter((
+    Lon >= -66.51 &
+      Lon <= -65.229 &
+      Lat >= 43.223 &
+      Lat <= 43.567
+  ) |
+    (Lon >= -66.237 & 
+       Lon <= -66.119 &
+       Lat >= 43.24 &
+       Lat <= 43.51
+    )
+  )
+
+GermanBankTagsBeforeAugust <- GermanBankTags %>%
+  mutate(Date = ymd(Date)) %>%
+  filter(
+    month(Date) < 8 |
+      (month(Date) == 8 & day(Date) == 1)
+  )
+
+returnedTagsGermanBank <- inner_join(
+  GermanBankTagsBeforeAugust,
+  completeReturns,
+  by = c("Tag_Num" = "TAG_NUMBER")
+) %>%
+  mutate(TaggedArea = "German Bank") %>%
+  rename(
+    TagReturnArea = catchAREA,
+    DateTagged = Date,
+    TagReturnDate = DATE
+  ) %>%
+  dplyr::select(
+    Tag_Num,
+    DateTagged,
+    TaggedArea,
+    TagReturnDate,
+    TagReturnArea,
+    Lon,
+    Lat,
+    id,
+    dataorigin
+  )
+
+
+# CONVERT TAGS TO SF
+
+GermanBankTags_sf <- st_as_sf(
+  GermanBankTags,
+  coords = c("Lon", "Lat"),
+  crs = 4326,
+  remove = FALSE
+)
+
+returnedTagsGermanBank <-st_as_sf(
+  returnedTagsGermanBank,
+  coords = c("Lon", "Lat"),
+  crs = 4326,
+  remove = FALSE
+)
