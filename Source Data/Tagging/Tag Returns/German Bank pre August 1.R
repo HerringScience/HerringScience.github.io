@@ -36,6 +36,19 @@ completeReturns <- read_csv(
   "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/complete.returns.csv"
 )
 
+boxes <- read_csv("C:/Users/herri/Herring Science Council/Tagging Project AFF 44 - Documents/Coding/workspace/timGrounds.csv")
+    box_polys <- boxes %>%
+      group_by(Box) %>%
+      summarise(
+        geometry = st_sfc(
+          st_polygon(
+            list(as.matrix(cbind(X, Y)))
+          )
+        ),
+        .groups = "drop"
+      ) %>%
+      st_as_sf(crs = 4326)
+
 #Survey boxes as per polygon_GB and polygon_SI
 surveyBoxGB <- 
   st_polygon(list(matrix(
@@ -210,7 +223,7 @@ returnedTagsGermanBank <- inner_join(
 
 #Tags Returned to German Bank that were tagged Aug 1st or sooner
 
-OtherTags <- Tags %>%
+GermanBankTagsBeforeAugust <- Tags %>%
   filter((
     Lon >= -66.51 &
       Lon <= -65.229 &
@@ -319,8 +332,13 @@ GB_Map <- print( ggplot() +
 )
 
 
-#GermanBankpreAugust1 <- write_csv(returnedTagsGermanBank, paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv"))
+#GermanBankpreAugust1 <- write_csv(returnedTagsGermanBank, paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1(1).csv"))
+
+#Add getting tagged and Returned Lat and Lon auto imported.
+
 GermanBankTagsBeforeAugust <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv")
+
+
 # Remove records with missing return coordinates
 tags_lines <- GermanBankTagsBeforeAugust %>%
   filter(
@@ -357,6 +375,13 @@ ggplot() +
     linewidth = 0.2
   ) +
   geom_sf(
+    data = box_polys,
+    aes(colour = Box),
+    fill = NA,
+    linewidth = 0.8,
+    show.legend = TRUE
+  ) +
+  geom_sf(
     data = GB_box,
     fill = NA,
     colour = "red",
@@ -379,19 +404,19 @@ ggplot() +
           linewidth = 0.5,
           alpha = 0.6) +
   geom_point(data = tags_lines,
-             aes(x = TaggedLon, y = TaggedLat),
-             colour = "green", size = 2) +
+             aes(x = TaggedLon, y = TaggedLat, colour = "Tagged Location"),
+             size = 2) +
   geom_point(data = tags_lines,
-             aes(x = ReturnedLon, y = ReturnedLat),
-             colour = "red", size = 2) +
+             aes(x = ReturnedLon, y = ReturnedLat, colour = "Returned Tag Location"),
+             size = 2) +
   coord_sf(
-    xlim = c(-65.3, -68),
-    ylim = c(43, 45.4)
+    xlim = c(-64, -68),
+    ylim = c(41.5, 45.5)
   ) +
   theme_minimal() +
   labs(
     title = "Tag Release and Return Locations",
-    subtitle = "Lines connect tagging locations to return locations",
+    subtitle = "Tagging location to tag returns",
     x = "Longitude",
     y = "Latitude"
   )
@@ -433,6 +458,13 @@ print(
         fill = "grey85",
         colour = "black",
         linewidth = 0.2
+      ) +
+        geom_sf(
+        data = box_polys,
+        aes(colour = Box),
+        fill = NA,
+        linewidth = 0.8,
+        show.legend = TRUE
       ) +
       geom_sf(
         data = GB_box,
@@ -480,24 +512,191 @@ print(
           subtitle = paste0(
             "Tagged: ", format(dat$DateTagged[1], "%Y-%m-%d"),
             " | Returned: ", format(dat$TagReturnDate[1], "%Y-%m-%d")
-          )
-        )
+          ),
+          x = "Lon",
+          y = "Lat"
+        ) 
 }))
 
-GermanBankTags <- Tags %>%
-  filter((
-    Lon >= -66.51 &
-      Lon <= -65.229 &
-      Lat >= 43.223 &
-      Lat <= 43.567
-  ) |
-    (Lon >= -66.237 & 
-       Lon <= -66.119 &
-       Lat >= 43.24 &
-       Lat <= 43.51
-    )
-  )
 
+ggsave(
+  filename = paste0(
+    "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/TagMaps/Tag_",
+    tag_id,
+    ".png"
+  ),
+  plot = p,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+# Create output folder if needed
+
+tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
+  imap(function(dat, tag_id) {
+    
+    p <- ggplot() +
+      geom_sf(
+        data = NBNS_sf,
+        fill = "grey85",
+        colour = "black",
+        linewidth = 0.2
+      ) +
+      geom_sf(
+        data = box_polys,
+        aes(colour = Box),
+        fill = NA,
+        linewidth = 0.8,
+        show.legend = TRUE
+      ) +
+      geom_sf(
+        data = GB_box,
+        fill = NA,
+        colour = "red",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = surveyBoxGB,
+        fill = NA,
+        colour = "darkgreen",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = surveyBoxSI,
+        fill = NA,
+        colour = "darkgreen",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = dat,
+        colour = "blue",
+        linewidth = 0.8
+      ) +
+      geom_point(
+        data = dat,
+        aes(
+          x = TaggedLon,
+          y = TaggedLat,
+          colour = "Tagged Location"
+        ),
+        size = 3
+      ) +
+      geom_point(
+        data = dat,
+        aes(
+          x = ReturnedLon,
+          y = ReturnedLat,
+          colour = "Recaptured Location"
+        ),
+        size = 3
+      ) +
+      coord_sf(
+        xlim = c(-68, -65.3),
+        ylim = c(43, 45.4)
+      ) +
+      theme_minimal() +
+      theme(
+        legend.position = "right"
+      ) +
+      labs(
+        title = paste("Tag", tag_id),
+        subtitle = paste0(
+          "Tagged: ", format(dat$DateTagged[1], "%Y-%m-%d"),
+          " | Returned: ", format(dat$TagReturnDate[1], "%Y-%m-%d")
+        ),
+        x = "Longitude",
+        y = "Latitude"
+      )
+    
+    # Save map
+    ggsave(
+      filename = paste0(
+        "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/TagMaps/Tag_",
+        tag_id,
+        ".png"
+      ),
+      plot = p,
+      width = 8,
+      height = 6,
+      dpi = 300
+    )
+    
+    p
+  })
+
+print(tag_maps)
+
+
+#Scots Bay Tags Returned to German Bank that were tagged Aug 1st or sooner
+
+surveyBoxSBEastern <-   
+  st_polygon(list(matrix(
+    c(
+      -64.682, 45.218,
+      -64.5499, 45.255,
+      -64.549, 45.34,
+      -64.765, 45.276,
+      -64.682, 45.218
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSBEastern <- st_sf(
+  geometry = st_sfc(surveyBoxSBEastern, crs = 4326)
+)
+
+surveyBoxSBNorthern <-   
+  st_polygon(list(matrix(
+    c(
+      -65.0599, 45.293,
+      -65.054, 45.247,
+      -64.83, 45.314,
+      -64.88, 45.344,
+      -65.0599, 45.293
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSBNorthern <- st_sf(
+  geometry = st_sfc(surveyBoxSBNorthern, crs = 4326)
+)
+
+surveyBoxSB <-   
+  st_polygon(list(matrix(
+    c(
+      -64.673, 45.209,
+      -65.82, 45.318,
+      -65.239, 45.175,
+      -65.239, 45.023,
+      -64.673, 45.209
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSB <- st_sf(
+  geometry = st_sfc(surveyBoxSB, crs = 4326)
+)
+
+Tags_sf <- st_as_sf(
+  Tags,
+  coords = c("Lon", "Lat"),
+  crs = 4326
+)
+
+SBTags <- Tags_sf[
+  st_within(
+    Tags_sf,
+    surveyBoxSB_sf,
+    sparse = FALSE
+  )[,1],
+]
+
+SBTags <- Tags %>%
+  
 GermanBankTagsBeforeAugust <- GermanBankTags %>%
   mutate(Date = ymd(Date)) %>%
   filter(
@@ -528,65 +727,3 @@ returnedTagsGermanBank <- inner_join(
     dataorigin
   )
 
-#Tags Returned to German Bank that were tagged Aug 1st or sooner
-
-OtherTags <- Tags %>%
-  filter((
-    Lon >= -66.51 &
-      Lon <= -65.229 &
-      Lat >= 43.223 &
-      Lat <= 43.567
-  ) |
-    (Lon >= -66.237 & 
-       Lon <= -66.119 &
-       Lat >= 43.24 &
-       Lat <= 43.51
-    )
-  )
-
-GermanBankTagsBeforeAugust <- GermanBankTags %>%
-  mutate(Date = ymd(Date)) %>%
-  filter(
-    month(Date) < 8 |
-      (month(Date) == 8 & day(Date) == 1)
-  )
-
-returnedTagsGermanBank <- inner_join(
-  GermanBankTagsBeforeAugust,
-  completeReturns,
-  by = c("Tag_Num" = "TAG_NUMBER")
-) %>%
-  mutate(TaggedArea = "German Bank") %>%
-  rename(
-    TagReturnArea = catchAREA,
-    DateTagged = Date,
-    TagReturnDate = DATE
-  ) %>%
-  dplyr::select(
-    Tag_Num,
-    DateTagged,
-    TaggedArea,
-    TagReturnDate,
-    TagReturnArea,
-    Lon,
-    Lat,
-    id,
-    dataorigin
-  )
-
-
-# CONVERT TAGS TO SF
-
-GermanBankTags_sf <- st_as_sf(
-  GermanBankTags,
-  coords = c("Lon", "Lat"),
-  crs = 4326,
-  remove = FALSE
-)
-
-returnedTagsGermanBank <-st_as_sf(
-  returnedTagsGermanBank,
-  coords = c("Lon", "Lat"),
-  crs = 4326,
-  remove = FALSE
-)
