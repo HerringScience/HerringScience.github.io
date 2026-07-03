@@ -1,6 +1,8 @@
 # Global options
 rm(list = ls())
 
+#Import libraries
+
 library(cli)
 library(lubridate)
 library(reprex)
@@ -26,15 +28,14 @@ library(geodata)
 library(terra)
 library(sf)
 library(rnaturalearth)
+
 setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/"))
 
-Tags <- read_csv(
-  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv"
-)
+#Files to import
 
-completeReturns <- read_csv(
-  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/complete.returns.csv"
-)
+Tags <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
+
+completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/complete.returns.csv")
 
 boxes <- read_csv("C:/Users/herri/Herring Science Council/Tagging Project AFF 44 - Documents/Coding/workspace/timGrounds.csv")
     box_polys <- boxes %>%
@@ -339,7 +340,7 @@ GB_Map <- print( ggplot() +
 GermanBankTagsBeforeAugust <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv")
 
 
-# Remove records with missing return coordinates
+# Remove records with missing return coordinates. Should just be the one that was found on a beach in Scots Bay.
 tags_lines <- GermanBankTagsBeforeAugust %>%
   filter(
     !is.na(TaggedLon),
@@ -421,117 +422,7 @@ ggplot() +
     y = "Latitude"
   )
 
-#Individual maps per tag
-# Create lines
-tags_lines <- GermanBankTagsBeforeAugust %>%
-  filter(
-    !is.na(TaggedLon),
-    !is.na(TaggedLat),
-    !is.na(ReturnedLon),
-    !is.na(ReturnedLat)
-  )
-
-line_geom <- lapply(seq_len(nrow(tags_lines)), function(i) {
-  st_linestring(matrix(
-    c(
-      tags_lines$TaggedLon[i], tags_lines$TaggedLat[i],
-      tags_lines$ReturnedLon[i], tags_lines$ReturnedLat[i]
-    ),
-    ncol = 2,
-    byrow = TRUE
-  ))
-})
-
-tag_tracks <- st_sf(
-  tags_lines,
-  geometry = st_sfc(line_geom, crs = 4326)
-)
-
-# Create one plot per tag
-print(
-  tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
-    imap(function(dat, tag_id) {
-    
-    ggplot() +
-      geom_sf(
-        data = NBNS_sf,
-        fill = "grey85",
-        colour = "black",
-        linewidth = 0.2
-      ) +
-        geom_sf(
-        data = box_polys,
-        aes(colour = Box),
-        fill = NA,
-        linewidth = 0.8,
-        show.legend = TRUE
-      ) +
-      geom_sf(
-        data = GB_box,
-        fill = NA,
-        colour = "red",
-        linewidth = 1
-      ) +
-      geom_sf(
-        data = surveyBoxGB,
-        fill = NA,
-        colour = "darkgreen",
-        linewidth = 1
-      ) +
-      geom_sf(
-        data = surveyBoxSI,
-        fill = NA,
-        colour = "darkgreen",
-        linewidth = 1
-      ) +
-      geom_sf(
-        data = dat,
-        colour = "blue",
-        linewidth = 0.8
-      ) +
-      geom_point(
-        data = dat,
-        aes(x = TaggedLon, y = TaggedLat, colour = "Tagged Locations"),
-        size = 3
-      ) +
-      geom_point(
-        data = dat,
-        aes(x = ReturnedLon, y = ReturnedLat, colour = "Recaptured Location"),
-        size = 3
-      ) +
-      coord_sf(
-        xlim = c(-68, -65.3),
-        ylim = c(43, 45.4)
-      ) +
-        theme_minimal() +
-        theme(
-          legend.position = "right"
-        ) +
-        labs(
-          title = paste("Tag", tag_id),
-          subtitle = paste0(
-            "Tagged: ", format(dat$DateTagged[1], "%Y-%m-%d"),
-            " | Returned: ", format(dat$TagReturnDate[1], "%Y-%m-%d")
-          ),
-          x = "Lon",
-          y = "Lat"
-        ) 
-}))
-
-
-ggsave(
-  filename = paste0(
-    "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/TagMaps/Tag_",
-    tag_id,
-    ".png"
-  ),
-  plot = p,
-  width = 8,
-  height = 6,
-  dpi = 300
-)
-
-# Create output folder if needed
+#Create one map per tag 
 
 tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
   imap(function(dat, tag_id) {
@@ -609,7 +500,7 @@ tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
         y = "Latitude"
       )
     
-    # Save map
+# Save map
     ggsave(
       filename = paste0(
         "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/TagMaps/Tag_",
@@ -625,105 +516,71 @@ tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
     p
   })
 
-print(tag_maps)
+GermanBankTagsBeforeAugust <- GermanBankTagsBeforeAugust %>%
+  filter(
+    !is.na(TaggedLon),
+    !is.na(TaggedLat),
+    !is.na(ReturnedLon),
+    !is.na(ReturnedLat)
+  )
 
-
-#Scots Bay Tags Returned to German Bank that were tagged Aug 1st or sooner
-
-surveyBoxSBEastern <-   
-  st_polygon(list(matrix(
-    c(
-      -64.682, 45.218,
-      -64.5499, 45.255,
-      -64.549, 45.34,
-      -64.765, 45.276,
-      -64.682, 45.218
-    ),
-    ncol = 2,
-    byrow = TRUE
-  )))
-
-surveyBoxSBEastern <- st_sf(
-  geometry = st_sfc(surveyBoxSBEastern, crs = 4326)
-)
-
-surveyBoxSBNorthern <-   
-  st_polygon(list(matrix(
-    c(
-      -65.0599, 45.293,
-      -65.054, 45.247,
-      -64.83, 45.314,
-      -64.88, 45.344,
-      -65.0599, 45.293
-    ),
-    ncol = 2,
-    byrow = TRUE
-  )))
-
-surveyBoxSBNorthern <- st_sf(
-  geometry = st_sfc(surveyBoxSBNorthern, crs = 4326)
-)
-
-surveyBoxSB <-   
-  st_polygon(list(matrix(
-    c(
-      -64.673, 45.209,
-      -65.82, 45.318,
-      -65.239, 45.175,
-      -65.239, 45.023,
-      -64.673, 45.209
-    ),
-    ncol = 2,
-    byrow = TRUE
-  )))
-
-surveyBoxSB <- st_sf(
-  geometry = st_sfc(surveyBoxSB, crs = 4326)
-)
-
-Tags_sf <- st_as_sf(
-  Tags,
-  coords = c("Lon", "Lat"),
+GermanBankTagsForBarchart <- st_as_sf(
+  GermanBankTagsBeforeAugust,
+  coords = c("ReturnedLon", "ReturnedLat"),
   crs = 4326
 )
 
-SBTags <- Tags_sf[
+GermanBankTagsForBarchart$TagReturnArea <- ifelse(
   st_within(
-    Tags_sf,
-    surveyBoxSB_sf,
+    GermanBankTagsForBarchart,
+    surveyBoxGB,
     sparse = FALSE
   )[,1],
-]
+  "German Bank",
+  "Elsewhere"
+)
 
-SBTags <- Tags %>%
-  
-GermanBankTagsBeforeAugust <- GermanBankTags %>%
-  mutate(Date = ymd(Date)) %>%
-  filter(
-    month(Date) < 8 |
-      (month(Date) == 8 & day(Date) == 1)
-  )
+return_counts <- GermanBankTagsForBarchart %>%
+  st_drop_geometry() %>%
+  count(TagReturnArea)
 
-returnedTagsGermanBank <- inner_join(
-  GermanBankTagsBeforeAugust,
-  completeReturns,
-  by = c("Tag_Num" = "TAG_NUMBER")
-) %>%
-  mutate(TaggedArea = "German Bank") %>%
-  rename(
-    TagReturnArea = catchAREA,
-    DateTagged = Date,
-    TagReturnDate = DATE
-  ) %>%
-  dplyr::select(
-    Tag_Num,
-    DateTagged,
-    TaggedArea,
-    TagReturnDate,
-    TagReturnArea,
-    Lon,
-    Lat,
-    id,
-    dataorigin
-  )
+returnPlot <- ggplot(return_counts,
+       aes(x = TagReturnArea,
+           y = n,
+           fill = TagReturnArea)) +
+  geom_col() +
+  geom_text(
+    aes(label = n),
+    vjust = -0.3
+  ) +
+  scale_fill_manual(
+    values = c(
+      "German Bank" = "steelblue",
+      "Elsewhere" = "grey70"
+    )
+  ) +
+  labs(
+    title = "Tag Returns",
+    x = "",
+    y = "Number of Tags Returned"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none"
+    ) 
 
+print(returnPlot)
+
+#Save Barchart
+
+ggsave(
+  filename = paste0(
+    "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/TagMaps/GermanBankReturns.png"
+  ),
+  plot = returnPlot,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+#No SB tags picked up in GB/SI before August 1st.
