@@ -43,7 +43,7 @@ TotalFatData <- TotalFatData %>%
 
 #Create scatterplot to compare lengths and when they dropped to fillet weight.
 
-ggplot (TotalFatData, aes(x = `FishWeight(g)`, y = `FishLength(cm)`, colour = factor(Year))) +
+TFD<- ggplot (TotalFatData, aes(x = `FishWeight(g)`, y = `FishLength(cm)`, colour = factor(Year))) +
   geom_point(size = 1, alpha = .7) +
   labs (
     title = "Fish Length by Fish Weight",
@@ -57,7 +57,7 @@ ggsave(
   filename = paste0(
     "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data/Fish Length by Weight graphs/Fish length by fish weight.png"
   ),
-  plot = p,
+  plot = TFD,
   width = 8,
   height = 6,
   dpi = 300
@@ -108,3 +108,42 @@ for (grp in unique(TotalFatData$LengthClass)) {
     dpi = 300
   )
 }
+
+#Average weight by length class per year.
+
+avg_weights <- TotalFatData %>%
+  group_by(Year, LengthClass) %>%
+  summarise(
+    MeanWeight = mean(`FishWeight(g)`, na.rm = TRUE),
+    N = n(),
+    .groups = "drop"
+  )
+
+
+avgWeight <- ggplot(avg_weights,
+       aes(x = LengthClass,
+           y = MeanWeight,
+           colour = factor(Year),
+           group = Year)) +
+  geom_point(size = 3) +
+  geom_line() +
+  labs(
+    title = "Average Weight by Length Class and Year",
+    x = "Length Class (cm)",
+    y = "Average Weight (g)",
+    colour = "Year"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave(
+  filename = paste0(
+    "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data/Fish Length by Weight graphs/Average Weight by Length Class and Year.png"
+  ),
+  plot = avgWeight,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+
