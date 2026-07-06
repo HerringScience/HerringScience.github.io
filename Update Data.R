@@ -549,21 +549,12 @@ SSB %>% write_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringS
 
 ###Performance data import and filtering###
 A = read_csv("tableA.csv")
-actual = A
-actual = actual %>% mutate(Type = "Actual")
+actual = A %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
-wd = getwd()
-Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
+Perform = full_join(A, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
 Perform = Perform %>% rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
-#Perform = Perform %>% rename(Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
-
-#Perform = Perform %>% mutate(Distance = distHaversine(cbind(Start.Lon,Start.Lat), cbind(End.Lon,End.Lat))) %>% mutate(Distance = Distance/1000)
-
-#added below
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(X,Y), cbind(Xend,Yend))) %>% mutate(Distance = Distance/1000)
-
-#OG
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
 
 #calculate time/speed
