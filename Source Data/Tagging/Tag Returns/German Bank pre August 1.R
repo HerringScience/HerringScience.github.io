@@ -24,6 +24,8 @@ library(cowplot)
 library(measurements)
 library(geodata)
 library(terra)
+library(sf)
+library(rnaturalearth)
 setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/"))
 
 Tags <- read_csv(
@@ -67,6 +69,58 @@ surveyBoxSI <-
 
 surveyBoxSI <- st_sf(
   geometry = st_sfc(surveyBoxSI, crs = 4326)
+)
+
+#Scots Bay main, northern and eastern box
+surveyBoxSBEastern <-   
+  st_polygon(list(matrix(
+    c(
+      -64.682, 45.218,
+      -64.5499, 45.255,
+      -64.549, 45.34,
+      -64.765, 45.276,
+      -64.682, 45.218
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSBEastern <- st_sf(
+  geometry = st_sfc(surveyBoxSBEastern, crs = 4326)
+)
+
+surveyBoxSBNorthern <-   
+  st_polygon(list(matrix(
+    c(
+      -65.0599, 45.293,
+      -65.054, 45.247,
+      -64.83, 45.314,
+      -64.88, 45.344,
+      -65.0599, 45.293
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSBNorthern <- st_sf(
+  geometry = st_sfc(surveyBoxSBNorthern, crs = 4326)
+)
+
+surveyBoxSB <-   
+  st_polygon(list(matrix(
+    c(
+      -64.673, 45.209,
+      -65.82, 45.318,
+      -65.239, 45.175,
+      -65.239, 45.023,
+      -64.673, 45.209
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )))
+
+surveyBoxSB <- st_sf(
+  geometry = st_sfc(surveyBoxSB, crs = 4326)
 )
 
 
@@ -142,7 +196,7 @@ returnedTagsGermanBank <- inner_join(
     DateTagged = Date,
     TagReturnDate = DATE
   ) %>%
-  select(
+  dplyr::select(
     Tag_Num,
     DateTagged,
     TaggedArea,
@@ -224,4 +278,168 @@ GB_Map <- print( ggplot() +
 )
 
 
-GermanBankpreAugust1 <- write_csv(returnedTagsGermanBank, paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv"))
+#GermanBankpreAugust1 <- write_csv(returnedTagsGermanBank, paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv"))
+GermanBankTagsBeforeAugust <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/GermanBankpreAugust1.csv")
+# Remove records with missing return coordinates
+tags_lines <- GermanBankTagsBeforeAugust %>%
+  filter(
+    !is.na(TaggedLon),
+    !is.na(TaggedLat),
+    !is.na(ReturnedLon),
+    !is.na(ReturnedLat)
+  )
+
+# Create LINESTRING geometries
+line_geom <- lapply(seq_len(nrow(tags_lines)), function(i) {
+  st_linestring(matrix(
+    c(
+      tags_lines$TaggedLon[i],  tags_lines$TaggedLat[i],
+      tags_lines$ReturnedLon[i], tags_lines$ReturnedLat[i]
+    ),
+    ncol = 2,
+    byrow = TRUE
+  ))
+})
+
+# Convert to sf object
+tag_tracks <- st_sf(
+  tags_lines,
+  geometry = st_sfc(line_geom, crs = 4326)
+)
+
+# Plot
+ggplot() +
+  geom_sf(
+    data = NBNS_sf,
+    fill = "grey85",
+    colour = "black",
+    linewidth = 0.2
+  ) +
+  geom_sf(
+    data = GB_box,
+    fill = NA,
+    colour = "red",
+    linewidth = 1
+  ) +
+  geom_sf(
+    data = surveyBoxGB,
+    fill = NA,
+    colour = "darkgreen",
+    linewidth = 1
+  ) +
+  geom_sf(
+    data = surveyBoxSI,
+    fill = NA,
+    colour = "darkgreen",
+    linewidth = 1
+  ) +
+  geom_sf(data = tag_tracks,
+          colour = "blue",
+          linewidth = 0.5,
+          alpha = 0.6) +
+  geom_point(data = tags_lines,
+             aes(x = TaggedLon, y = TaggedLat),
+             colour = "green", size = 2) +
+  geom_point(data = tags_lines,
+             aes(x = ReturnedLon, y = ReturnedLat),
+             colour = "red", size = 2) +
+  coord_sf(
+    xlim = c(-65.3, -68),
+    ylim = c(43, 45.4)
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Tag Release and Return Locations",
+    subtitle = "Lines connect tagging locations to return locations",
+    x = "Longitude",
+    y = "Latitude"
+  )
+
+#Individual maps per tag
+# Create lines
+tags_lines <- GermanBankTagsBeforeAugust %>%
+  filter(
+    !is.na(TaggedLon),
+    !is.na(TaggedLat),
+    !is.na(ReturnedLon),
+    !is.na(ReturnedLat)
+  )
+
+line_geom <- lapply(seq_len(nrow(tags_lines)), function(i) {
+  st_linestring(matrix(
+    c(
+      tags_lines$TaggedLon[i], tags_lines$TaggedLat[i],
+      tags_lines$ReturnedLon[i], tags_lines$ReturnedLat[i]
+    ),
+    ncol = 2,
+    byrow = TRUE
+  ))
+})
+
+tag_tracks <- st_sf(
+  tags_lines,
+  geometry = st_sfc(line_geom, crs = 4326)
+)
+
+# Create one plot per tag
+print(
+  tag_maps <- split(tag_tracks, tag_tracks$Tag_Num) %>%
+    imap(function(dat, tag_id) {
+    
+    ggplot() +
+      geom_sf(
+        data = NBNS_sf,
+        fill = "grey85",
+        colour = "black",
+        linewidth = 0.2
+      ) +
+      geom_sf(
+        data = GB_box,
+        fill = NA,
+        colour = "red",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = surveyBoxGB,
+        fill = NA,
+        colour = "darkgreen",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = surveyBoxSI,
+        fill = NA,
+        colour = "darkgreen",
+        linewidth = 1
+      ) +
+      geom_sf(
+        data = dat,
+        colour = "blue",
+        linewidth = 0.8
+      ) +
+      geom_point(
+        data = dat,
+        aes(x = TaggedLon, y = TaggedLat, colour = "Tagged Locations"),
+        size = 3
+      ) +
+      geom_point(
+        data = dat,
+        aes(x = ReturnedLon, y = ReturnedLat, colour = "Recaptured Location"),
+        size = 3
+      ) +
+      coord_sf(
+        xlim = c(-68, -65.3),
+        ylim = c(43, 45.4)
+      ) +
+        theme_minimal() +
+        theme(
+          legend.position = "right"
+        ) +
+        labs(
+          title = paste("Tag", tag_id),
+          subtitle = paste0(
+            "Tagged: ", format(dat$DateTagged[1], "%Y-%m-%d"),
+            " | Returned: ", format(dat$TagReturnDate[1], "%Y-%m-%d")
+          )
+        )
+}))
+
