@@ -6,6 +6,7 @@ setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/
 library(ncdf4)
 library(maps)
 library(dplyr)
+library(lubridate)
 library(ggplot2)
 
 # helper function
@@ -44,6 +45,8 @@ dir.create(out_dir, showWarnings = FALSE)
         buffer <- diff(r) * pad
         c(r[1] - buffer, r[2] + buffer)
       }      
+      
+########################## Need to determine what instrument types are listed and under what variable : use instrument_ID_manual
 
       # LOOP - take files in .nc folder                  
       
@@ -53,11 +56,19 @@ dir.create(out_dir, showWarnings = FALSE)
         
         nc <- nc_open(f)
         
+        # List variable names
+        var_names <- names(nc$var)
+        print(var_names)
+    
+        
+        
         # Load variables
         temp <- ncvar_get(nc, "temperature")
         sal  <- ncvar_get(nc, "salinity")
         lat  <- ncvar_get(nc, "latitude")
         lon  <- ncvar_get(nc, "longitude")
+        instrument <- ncvar_get(nc, "instrument_ID_manual")
+        
         # this is depth
         level <- nc$dim$level$vals
         station_id <- ncvar_get(nc, "station_ID")
@@ -98,6 +109,7 @@ dir.create(out_dir, showWarnings = FALSE)
           lat_i <- lat[i]
           lon_i <- lon[i]
           station_i <- station_id[i]
+          instrument_type_i <- instrument[i]
           
           # Store date table
           all_dates <- rbind(all_dates, data.frame(
@@ -106,7 +118,8 @@ dir.create(out_dir, showWarnings = FALSE)
             date = cast_date,
             station_id = station_i,
             latitude = lat_i,
-            longitude = lon_i
+            longitude = lon_i,
+            instrumentType = instrument_type_i
           ))
           
           # Store full cast dataframe
@@ -117,6 +130,7 @@ dir.create(out_dir, showWarnings = FALSE)
             station_id = station_i,
             latitude = lat_i,
             longitude = lon_i,
+            instrumentType = instrument_type_i,
             depth = depth,
             temperature = temperature,
             salinity = salinity
@@ -287,7 +301,17 @@ dir.create(out_dir, showWarnings = FALSE)
       min(final_casts$depth)
       max(final_casts$depth)
       hist(final_casts$depth)
-
+      
+      
+      unique(final_casts$instrumentType)
+      # BO = bottle, CT= CTD
+                final_casts %>%
+                      count(date, instrumentType)
+      
+                # the change from bottles to CTD came between October/November 1990 for Prince 5
+                
+                
+                
       # Make sure date is a Date
       final_casts$date <- as.Date(final_casts$date)
       head(final_casts)
@@ -300,8 +324,6 @@ dir.create(out_dir, showWarnings = FALSE)
         group_by(cast) %>%
         mutate(n_rows_in_cast = n()) %>%
         ungroup()
-      
-      library(lubridate)
       
         final_casts$Year = year(final_casts$date)      
             head(final_casts)
@@ -352,7 +374,14 @@ dir.create(out_dir, showWarnings = FALSE)
                   ) +
                   theme_minimal()
                 
+                ### data pre 1990 seems to use the same equipment
+                      ## 1990 has more data points
+                          # 1993 even more
+                            # 2009 was CTD.
+                                ## need equipment type..only compare the same type.
+                # Could look at the 1970/1980s?
                 
+                head(final_casts)
                 
                 
       
@@ -372,7 +401,10 @@ DFO <- readRDS("OceansAllDepths.rds")
         )
       
       hist(DFO$Depth)      
-      
+            head(DFO)      
+
+          hist(DFO$n_per_id)            
+            
 # remove IDs with casts that have less than 5 measurements
       DFO_filtered <- DFO %>%
         filter(n_per_id >= 5)
@@ -424,26 +456,166 @@ DFO <- readRDS("OceansAllDepths.rds")
           title = "Distribution of rows per cast by year (DFO)"
         ) +
         theme_minimal()
-    
+
+      unique(DFO$Year)    
+        
       
 # select only GB for now
       DFO_german_bank <- DFO_filtered %>%
         filter(ground == "German Bank")
       
+      unique(DFO_german_bank$Year)    
+          #how many years?  1977, 1978, 1980, 1982, 1985, 1989  (pre 1990)  
+              # 1989 looks like it has some CTD potentially. 1977-1985 safer for one set of comparisons
+      ### use data before 1986
+      DFO2 <- DFO_german_bank %>%
+        filter(Year < 1986)
+      
+            
 # what months?
-      head(DFO_german_bank)
+      head(DFO2)
       # add month variable:
-            DFO_german_bank$month = month(DFO_german_bank$Date)
+            DFO2$month = month(DFO2$Date)
               # what months do we have?
-                    unique(DFO_german_bank$month)
+                    unique(DFO2$month)
                       # July, August, October and November
                     
   
                     
-      hist(DFO_german_bank$Depth)
+      hist(DFO2$Depth)
+      hist(final_casts$depth)
+            head(final_casts)
+            
+            
+            # explore max depths for Prince 5
+            max_depths <- final_casts %>%
+              group_by(cast) %>%
+              summarize(max_depth = max(depth, na.rm = TRUE))
+            
+            hist(
+              max_depths$max_depth,
+              breaks = 30,
+              main = "Distribution of Maximum Cast Depths",
+              xlab = "Maximum Depth (m)",
+              xaxt = "n"
+            )
+            
+            axis(
+              1,
+              at = seq(
+                floor(min(max_depths$max_depth, na.rm = TRUE)),
+                ceiling(max(max_depths$max_depth, na.rm = TRUE)),
+                by = 10
+              )
+            )
       
+              ## 70-over 100m
+            
+            head(DFO2)
+            
+            #explore max depth for DFO
+            max_depths <- DFO2 %>%
+              group_by(id) %>%
+              summarize(max_depth = max(Depth, na.rm = TRUE))
+            
+            hist(
+              max_depths$max_depth,
+              breaks = 30,
+              main = "Distribution of Maximum Cast Depths",
+              xlab = "Maximum Depth (m)"
+            )
+            
+            ## 2m-over 100m
+            
+            length(unique(final_casts$cast))
+            length(unique(DFO2$id))
+            
+            
+            
+            # Filter Prince 5 for the 4 months there is GB data: July, August, October and November
+            
+            head(final_casts)
+            final_casts$month = month(final_casts$date)
+              
+            final_casts <- final_casts %>%
+              filter(month %in% c(7, 8, 10, 11))
+            
+            
+            ## How do the number of casts compare when month is synced?
+            
+            length(unique(final_casts$cast))
+            length(unique(DFO2$id))
+            
+            # not bad...
       
-# average temperature and salinity per cast and stratification
+            # 70m seems to be a consistent depth.
+            
+# add max depth to Prince5 :  final_casts
+            final_casts <- final_casts %>%
+              group_by(cast) %>%
+              mutate(maxDepth = max(depth, na.rm = TRUE)) %>%
+              ungroup()
+
+            # remove casts with maximum depth < 70m, and then chop casts that are deeper to 70m for all.
+            final_casts_70m <- final_casts %>%
+              filter(maxDepth >= 70) %>%  # remove shallow casts
+              filter(depth <= 70)         # keep only 0-70 m
+            
+            DFO_70m = DFO2 %>% 
+              filter(maximum_depth >= 70) %>%
+              filter(Depth <= 70)
+            
+            
+            
+            length(unique(final_casts_70m$cast))
+            length(unique(DFO_70m$id))
+            
+            final_casts_70m$id = final_casts_70m$cast 
+            
+            
+            
+            
+    ## lets see the overlap (monthly):
+            
+            casts_by_month <- bind_rows(
+              final_casts_70m %>%
+                distinct(month, id) %>%
+                count(month, name = "n_casts") %>%
+                mutate(dataset = "final_casts_70m"),
+              
+              DFO_70m %>%
+                distinct(month, id) %>%
+                count(month, name = "n_casts") %>%
+                mutate(dataset = "DFO_70m")
+            )
+            
+            ggplot(casts_by_month, aes(x = month, y = n_casts, fill = dataset)) +
+              geom_col(position = "dodge") +
+              scale_x_continuous(breaks = 1:12) +
+              labs(
+                title = "Number of Casts per Month",
+                x = "Month",
+                y = "Number of unique casts",
+                fill = "Dataset"
+              ) +
+              theme_bw()
+            
+            
+# response ~ ground + month or (* month if difference depends on month)
+            
+            
+            
+            
+            
+            
+            ### Next step - create 1 df (combine DFO and final_casts)
+                  ## calculate cast level averages
+                    #### monthly average/ground
+                      ### plot monthly ground means with uncertainity
+            
+            
+                  
+            # average temperature and salinity per cast and stratification
 
       
       
