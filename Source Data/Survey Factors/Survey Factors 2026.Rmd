@@ -59,9 +59,6 @@ Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
 SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
-#Need to find a way to import sunset and tide times
-
-
 RollingPeakBiomassAvg <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvg.csv")
 RollingPeakBiomassAvgGB <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvgGB.csv")
 
@@ -178,6 +175,7 @@ summary(
 # Scots Bay Sunset Relative
 
 ``` {r, echo = FALSE}
+
 ScotsBaySunsetData <- na.omit(
   subset(
     Survey_Factors,
@@ -547,10 +545,26 @@ summary(
 )
 ```
 
-###Sunset Relative
+###German Bank Sunset Relative
 
 ``` {r, echo = FALSE}
 
+GermanBankSunsetData <- na.omit(
+  subset(
+    Survey_Factors,
+    Ground == "GB",
+    select = c(
+      Survey_Date,
+      Year,
+      Ground,
+      DFO_Estimate,
+      Sunset_Relative
+    )
+  )
+)
+
+GermanBankSunsetData$Sunset_Relative <-
+  as.numeric(GermanBankSunsetData$Sunset_Relative)
 
 ggplot(
   GermanBankSunsetData,
@@ -569,6 +583,7 @@ summary(
     data = GermanBankSunsetData
   )
 )
+
 ```
 
 ###German Bank Peak Biomass
