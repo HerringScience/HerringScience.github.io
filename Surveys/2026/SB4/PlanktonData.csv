@@ -1,3 +1,3 @@
 Set_Number,No_jars,Tow_No,Lat1,Lon1,Lat2,Lon2,Time1,Time2,TideDirection,Speed,Heading,Observers,WindDirection,WindSpeed,Swell,AirTemp,FlowReading1,FlowReading2,DiscDepthD,DiscDepthA,CTD_ID,CTD_Lat,CTD_Lon,
-SB2026 - 07,1,1,4503.3,6514.9,4503.8,6513.4,17:22,17:32,With,6.8,68,Tracey,NE,14km/h,0,14,525133,586650,8,,,,,*Flowmeter did not have water in it for these tows.
-SB2026-08,1,2,4503.1,6512.9,4502.5,6513.6,17:41,17:51,against,4.3,216,Tracey,NE,14km/h,0,14,586650,655373,8,,,,,
+SB2026 - 07,1,1,4503.3,6514.9,4503.8,6513.4,17:22,17:32,With,6.8,68,Tracey,NE,14km/h,0,14,525133,586650,8,8,10K100766_20260621_205959,45.0541,-65.2116,*Flowmeter did not have water in it for these tows.
+SB2026-08,1,2,4503.1,6512.9,4502.5,6513.6,17:41,17:51,against,4.3,216,Tracey,NE,14km/h,0,14,586650,655373,8,8,10K100766_20260621_205959,45.0541,-65.2116,
