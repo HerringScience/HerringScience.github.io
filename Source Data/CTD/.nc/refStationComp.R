@@ -10,7 +10,7 @@ library(tidyr)
 # for HSC is CTD2026 and build_Oceans_df.R
 
 
-## Take monthly_cast_averages (Prince 5) and compare with the same from HSC data, plot together
+## Take monthly_cast_averages (Prince 5) and compare with the same from HSC data, plot together to look at modern comparison
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
@@ -43,6 +43,8 @@ unique(HSC$month)
 HSC=HSC[which(HSC$Source == "HSC"), ]
 unique(HSC$Year)
 
+head(HSC)
+
 averagesHSC <- HSC %>%
   group_by(id, Date, ground, Lat, Lon) %>%
   summarise(
@@ -51,6 +53,10 @@ averagesHSC <- HSC %>%
     min_temperature = min(Temperature, na.rm = TRUE),
     max_temperature = max(Temperature, na.rm = TRUE),
     stratification = max_temperature - min_temperature,
+    mean_density = mean(Density, na.rm = TRUE),
+    min_density = min(Density, na.rm=TRUE),
+    max_density = max(Density, na.rm = TRUE),
+    density_stratification = max_density - min_density,
     min_depth = min(Depth, na.rm = TRUE),
     max_depth = max(Depth, na.rm = TRUE),
     n_depths = n(),
@@ -67,6 +73,10 @@ averagesHSC <- HSC %>%
     monthly_sd_temperature = sd(mean_temperature, na.rm = TRUE),
     monthly_se_temperature = monthly_sd_temperature / sqrt(sum(!is.na(mean_temperature))),
     
+    monthly_mean_density = mean(mean_density, na.rm = TRUE),
+    monthly_sd_density = sd(mean_density, na.rm = TRUE),
+    monthly_se_density = monthly_sd_density / sqrt(sum(!is.na(mean_density))),
+    
     monthly_mean_salinity = mean(mean_salinity, na.rm = TRUE),
     monthly_sd_salinity = sd(mean_salinity, na.rm = TRUE),
     monthly_se_salinity = monthly_sd_salinity / sqrt(sum(!is.na(mean_salinity))),
@@ -74,6 +84,10 @@ averagesHSC <- HSC %>%
     monthly_mean_stratification = mean(stratification, na.rm = TRUE),
     monthly_sd_stratification = sd(stratification, na.rm = TRUE),
     monthly_se_stratification = monthly_sd_stratification / sqrt(sum(!is.na(stratification))),
+    
+    monthly_mean_density_stratification = mean(density_stratification, na.rm = TRUE),
+    monthly_sd_density_stratification = sd(density_stratification, na.rm = TRUE),
+    monthly_se_density_stratification =monthly_sd_density_stratification / sqrt(sum(!is.na(density_stratification))), 
     
     n_casts = n(),
     mean_latitude = mean(Lat, na.rm = TRUE),
@@ -110,6 +124,8 @@ hsc_plot <- averagesHSC %>%
     monthly_mean_temperature,
     monthly_mean_salinity,
     monthly_mean_stratification,
+    monthly_mean_density_stratification,
+    monthly_mean_density,
     n_casts,
     mean_latitude,
     mean_longitude
@@ -141,7 +157,9 @@ prince5_plot <- monthly_cast_averages %>%
     Source,
     monthly_mean_temperature,
     monthly_mean_salinity,
+    monthly_mean_density,
     monthly_mean_stratification,
+    monthly_mean_density_stratification,
     n_casts,
     mean_latitude,
     mean_longitude
@@ -173,7 +191,7 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
 
 
 ### PLOTS
-
+head(combined_monthly)
 
 ## Temperature:
 
@@ -217,8 +235,27 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
               axis.text.x = element_text(angle = 45, hjust = 1)
             )
 
+### Density
+          ggplot(combined_monthly,
+                 aes(x = month_label,
+                     y = monthly_mean_density,
+                     color = Source,
+                     group = Source)) +
+            geom_line(linewidth = 1) +
+            geom_point(size = 2.5) +
+            facet_wrap(~ Year) +
+            labs(
+              title = "Monthly Mean Density: HSC Grounds vs Prince-5",
+              x = "Month",
+              y = "Monthly Mean Density",
+              color = "Dataset / Ground"
+            ) +
+            theme_bw() +
+            theme(
+              axis.text.x = element_text(angle = 45, hjust = 1)
+            )
 
-## Stratification:
+## Temperature Stratification:
           
           ggplot(combined_monthly,
                  aes(x = month_label,
@@ -239,8 +276,27 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
               axis.text.x = element_text(angle = 45, hjust = 1)
             )
           
-
-
+          
+### Density strat:
+          ggplot(combined_monthly,
+                 aes(x = month_label,
+                     y = monthly_mean_density_stratification,
+                     color = Source,
+                     group = Source)) +
+            geom_line(linewidth = 1) +
+            geom_point(size = 2.5) +
+            facet_wrap(~ Year) +
+            labs(
+              title = "Monthly Mean Density Stratification: HSC Grounds vs Prince-5",
+              x = "Month",
+              y = "Monthly Mean Density Stratification",
+              color = "Dataset / Ground"
+            ) +
+            theme_bw() +
+            theme(
+              axis.text.x = element_text(angle = 45, hjust = 1)
+            )
+          
 
 
 ###### Compare average monthly between grounds
@@ -248,6 +304,9 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
 # --------------------------------------------------
 # 1. Prepare HSC monthly temperature data
 # --------------------------------------------------
+          head(averagesHSC)
+          
+          
           hsc_vars <- averagesHSC %>%
             mutate(
               Year = as.numeric(Year),
@@ -264,8 +323,15 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
               HSC_sal = monthly_mean_salinity,
               HSC_sal_se = monthly_se_salinity,
               
+              HSC_den = monthly_mean_density,
+              HSC_den_se = monthly_se_density,
+              
               HSC_strat = monthly_mean_stratification,
-              HSC_strat_se = monthly_se_stratification
+              HSC_strat_se = monthly_se_stratification,
+              
+              HSC_Dstrat = monthly_mean_density_stratification,
+              HSC_Dstrat_se = monthly_se_density_stratification
+              
             )
 
 # --------------------------------------------------
@@ -288,8 +354,14 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
               Prince5_sal = monthly_mean_salinity,
               Prince5_sal_se = monthly_se_salinity,
               
+              Prince5_den = monthly_mean_density,
+              Prince5_den_se = monthly_se_density,
+              
               Prince5_strat = monthly_mean_stratification,
-              Prince5_strat_se = monthly_se_stratification
+              Prince5_strat_se = monthly_se_stratification,
+              
+              Prince5_Dstrat = monthly_mean_density_stratification,
+              Prince5_Dstrat_se = monthly_se_density_stratification
             )
 
 # --------------------------------------------------
@@ -310,11 +382,21 @@ table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
               sal_abs_diff = abs(sal_diff),
               sal_diff_se = sqrt(HSC_sal_se^2 + Prince5_sal_se^2),
               
+              # Density difference
+              den_diff = HSC_den - Prince5_den,
+              den_abs_diff = abs(den_diff),
+              den_diff_se = sqrt(HSC_den_se^2 + Prince5_den_se^2),
+              
               # Stratification difference
               strat_diff = HSC_strat - Prince5_strat,
               strat_abs_diff = abs(strat_diff),
               strat_diff_se = sqrt(HSC_strat_se^2 + Prince5_strat_se^2),
               
+              # Density Stratification difference
+              Dstrat_diff = HSC_Dstrat - Prince5_Dstrat,
+              Dstrat_abs_diff = abs(Dstrat_diff),
+              Dstrat_diff_se = sqrt(HSC_Dstrat_se^2 + Prince5_Dstrat_se^2),
+        
               month_name = month.name[month]
             ) %>%
             arrange(ground, Year, month)
@@ -424,6 +506,21 @@ View(stats_summary)
               
               ##### Salinity is also well represented by Prince 5 (not statistically significant)
               
+              ## density TESTS
+              
+              den_paired_t_test_p_value = ifelse(
+                n() >= 2,
+                t.test(HSC_den, Prince5_den, paired = TRUE)$p.value,
+                NA
+              ),
+              
+              den_wilcoxon_p_value = ifelse(
+                n() >= 2,
+                wilcox.test(HSC_den, Prince5_den, paired = TRUE, exact = FALSE)$p.value,
+                NA
+              ),
+              
+              
               
               # -----------------------------
               # Stratification tests
@@ -440,6 +537,22 @@ View(stats_summary)
                 NA
               ),
               
+              
+      ### Density stratification:
+      Dstrat_paired_t_test_p_value = ifelse(
+        n() >= 2,
+        t.test(HSC_Dstrat, Prince5_Dstrat, paired = TRUE)$p.value,
+        NA
+      ),
+      
+      Dstrat_wilcoxon_p_value = ifelse(
+        n() >= 2,
+        wilcox.test(HSC_Dstrat, Prince5_Dstrat, paired = TRUE, exact = FALSE)$p.value,
+        NA
+      ),
+      
+      
+              
               .groups = "drop"
             )
           
@@ -447,7 +560,21 @@ View(stats_summary)
                 #### Scots Bay is not different
           
           print(paired_tests)
-          view(paired_tests)
+          View(paired_tests)
+          
+## Key Result
+          
+          #The sources/datasets seem broadly comparable for average temperature, salinity, and density, but they may differ in how well they capture vertical structure/stratification, especially on German Bank.
+          
+          #In Scots Bay, mean environmental conditions appear comparable between paired observations. Evidence for differences in stratification is weaker than on German Bank, although the Wilcoxon test suggests that density stratification may differ between sources.
+          
+       ###Paired comparisons were conducted using matched year-month observations for German Bank and Scots Bay. Across both grounds, monthly mean temperature, salinity, and density did not differ significantly between paired observations, with p-values consistently above 0.05 for both paired t-tests and Wilcoxon signed-rank tests. This suggests that average hydrographic conditions were broadly comparable between sources for matched months.
+          #In contrast, stratification metrics showed stronger evidence of source-related differences, particularly on German Bank. At German Bank, both temperature stratification and density stratification differed significantly between paired observations, with highly significant results from both paired t-tests and Wilcoxon tests. This indicates that although average conditions were similar, the vertical structure of the water column differed between sources.
+          #For Scots Bay, there was no significant difference in temperature stratification, and evidence for density stratification differences was weaker. The paired t-test for density stratification was not significant, but the Wilcoxon test was significant, suggesting a possible non-normal or skewed pattern in paired differences. Overall, Scots Bay showed less evidence of source-related differences than German Bank.
+          #These results suggest that source comparisons are more robust for monthly mean temperature, salinity, and density than for stratification metrics. Stratification should be interpreted cautiously, particularly for German Bank, because it is likely more sensitive to differences in cast depth, vertical resolution, and sampling coverage.
+          
+          
+          
           
           scots_vs_prince5 <- comparison %>%
             filter(ground == "Scots Bay")
