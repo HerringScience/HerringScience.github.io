@@ -1,0 +1,815 @@
+---
+title: "Survey Factors"
+output: html_document
+date: "2024-04-16"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#ANOVA Survey Factors Investigations_Scots Bay Tides
+
+library(rlang)
+library(cli)
+library(lubridate)
+library(reprex)
+library(tidyverse)
+library(geosphere)
+library(reshape2)
+library(moderndive)
+library(skimr)
+library(ggridges)
+library(weathercan)
+library(GGally)
+library(psych)
+library(sp)
+library(raster)
+library(PBSmapping)
+library(rgeos) # replaced by terra and sf
+library(knitr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(readxl)
+library(hms)
+library(measurements)
+library(ggplot2)
+library(maps)
+library(dplyr)
+library(RColorBrewer)
+library(AICcmodavg)
+library(datasets)
+library(terra)
+library(multcompView)
+library(sf)
+library(zoo)
+library(ggrepel)
+library(tidyr)
+
+###remove everything in environment
+rm(list = ls())
+options(scipen = 999)
+
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
+
+Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
+Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
+
+SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
+
+#Need to find a way to import sunset and tide times
+
+
+RollingPeakBiomassAvg <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvg.csv")
+RollingPeakBiomassAvgGB <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvgGB.csv")
+
+```
+
+# Scots Bay Julian and Biomass
+
+```{r, echo=FALSE}
+
+ScotsBay_Turnover <- Survey_Factors %>%
+  dplyr::select(Survey_Date, Ground, Julian, DFO_Estimate) %>%
+  na.omit() %>%
+  filter(Ground == "SB")
+
+print(ggplot(ScotsBay_Turnover, aes(Julian, DFO_Estimate)) +
+  geom_point() +
+  geom_smooth(span = 1) +
+  labs(
+    x = "Julian Day",
+    y = "Survey Biomass (mt)"
+  ))
+
+summary(aov(DFO_Estimate ~ Julian, data = ScotsBay_Turnover))
+
+
+```
+
+# Number of Vessels and biomass
+
+```{r, echo=FALSE}
+
+library(dplyr)
+
+SBVesselsBiomass <- Survey_Factors %>%
+  filter(
+    Ground == "SB") %>%
+  dplyr::select(
+    Survey_Date,
+    No_of_Vessels,
+    Julian,
+    DFO_Estimate,
+    Ground
+  ) %>%
+  na.omit() %>%
+  mutate(
+    No_of_Vessels = factor(No_of_Vessels)
+  )
+
+boxplot(
+  DFO_Estimate ~ No_of_Vessels,
+  data = SBVesselsBiomass,
+  xlab = "Number of Vessels in Survey",
+  ylab = "Survey Biomass (mt)"
+)
+
+summary(
+  aov(
+    DFO_Estimate ~ No_of_Vessels,
+    data = SBVesselsBiomass
+  )
+)
+
+```
+
+# Scots Bay Survey Area, Julian, Survey Time, High Tide Time, Survey Biomass
+
+``` {r, echo = FALSE}
+
+ScotsBayHighTideBiomass <- na.omit(
+  subset(
+    Survey_Factors,
+    Ground == "SB",
+    select = c(
+      Survey_Date,
+      No_of_Vessels,
+      Ground,
+      Year,
+      Julian,
+      DFO_Estimate,
+      Survey_Start,
+      High_Tide,
+      Tide_Difference,
+      Tide_Relative
+    )
+  )
+)
+
+ScotsBayHighTideBiomass$Tide_Relative <-
+  as.numeric(ScotsBayHighTideBiomass$Tide_Relative)
+
+ggplot(
+  ScotsBayHighTideBiomass,
+  aes(x = Tide_Relative, y = DFO_Estimate)
+) +
+  geom_point() +
+  geom_smooth(span = 1) +
+  geom_hline(
+    yintercept = mean(ScotsBayHighTideBiomass$DFO_Estimate)
+  ) +
+  labs(
+    x = "Tide Relative to Survey Start (hours)",
+    y = "Survey Biomass (mt)"
+  )
+
+summary(
+  aov(
+    DFO_Estimate ~ Tide_Relative,
+    data = ScotsBayHighTideBiomass
+  )
+)
+
+```
+
+# Scots Bay Sunset Relative
+
+``` {r, echo = FALSE}
+ScotsBaySunsetData <- na.omit(
+  subset(
+    Survey_Factors,
+    Ground == "SB",
+    select = c(
+      Survey_Date,
+      Year,
+      Ground,
+      DFO_Estimate,
+      Sunset_Relative
+    )
+  )
+)
+
+ScotsBaySunsetData$Sunset_Relative <-
+  as.numeric(ScotsBaySunsetData$Sunset_Relative)
+
+ggplot(
+  ScotsBaySunsetData,
+  aes(x = Sunset_Relative, y = DFO_Estimate)
+) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    x = "Sunset Relative to Survey Start (hrs)",
+    y = "Survey Biomass (mt)"
+  )
+
+summary(
+  lm(
+    DFO_Estimate ~ Sunset_Relative,
+    data = ScotsBaySunsetData
+  )
+)
+```
+
+###Scots Bay Peak Biomass
+
+``` {r, echo = FALSE}
+
+ScotsBayPeakBiomass <- Survey_Factors %>%
+  dplyr::select(
+    Survey_Date,
+    Year,
+    Julian,
+    Ground,
+    DFO_Turnover_Adjusted
+  ) %>%
+  na.omit() %>%
+  filter(Ground == "SB") %>%
+  group_by(Year) %>%
+  slice_max(
+    DFO_Turnover_Adjusted,
+    n = 1,
+    with_ties = FALSE
+  ) %>%
+  ungroup() %>%
+  mutate(
+    Month = factor(
+      format(Survey_Date, "%B"),
+      levels = c(
+        "June",
+        "July",
+        "August",
+        "September"
+      )
+    )
+  )
+
+ggplot(
+  ScotsBayPeakBiomass,
+  aes(
+    x = Julian,
+    y = DFO_Turnover_Adjusted,
+    color = Month
+  )
+) +
+  geom_point(size = 3) +
+  geom_label_repel(aes(label = Year), nudge_x = 2) +
+  labs(
+    x = "Julian Day",
+    y = "Peak Survey Biomass (mt)",
+    color = "Month"
+  )
+
+summary(
+  lm(
+    DFO_Turnover_Adjusted ~ Year,
+    data = ScotsBayPeakBiomass
+  )
+)
+
+```
+
+### Scots Bay Index trend
+
+``` {r, echo = FALSE}
+
+# Total biomass by year
+aggregateSB <- Survey_Factors %>%
+  filter(Ground == "SB") %>%
+  dplyr::select(Year, DFO_Estimate) %>%
+  na.omit() %>%
+  group_by(Year) %>%
+  summarise(
+    Total_Biomass = sum(DFO_Estimate),
+    .groups = "drop"
+  )
+
+ggplot(aggregateSB, aes(Year, Total_Biomass)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Total Biomass (mt)"
+  )
+
+# Peak biomass by year
+ScotsBayPeakBiomass <- Survey_Factors %>%
+  filter(
+    Ground == "SB"
+  ) %>%
+  dplyr::select(Survey_Date, Year, DFO_Estimate) %>%
+  na.omit() %>%
+  group_by(Year) %>%
+  slice_max(
+    DFO_Estimate,
+    n = 1,
+    with_ties = FALSE
+  ) %>%
+  ungroup()
+
+ggplot(ScotsBayPeakBiomass,
+       aes(Year, DFO_Estimate)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Peak Biomass (mt)"
+  )
+
+# Combined plot
+CombinedPlot <- aggregateSB %>%
+  left_join(
+    ScotsBayPeakBiomass %>%
+      dplyr::select(Year, Peak_Biomass = DFO_Estimate),
+    by = "Year"
+  )
+
+ggplot(CombinedPlot, aes(x = Year)) +
+  geom_line(
+    aes(
+      y = Total_Biomass,
+      color = "Total Biomass"
+    )
+  ) +
+  geom_line(
+    aes(
+      y = Peak_Biomass,
+      color = "Peak Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = Total_Biomass,
+      color = "Total Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = Peak_Biomass,
+      color = "Peak Biomass"
+    )
+  ) +
+  labs(
+    x = "Year",
+    y = "Biomass (mt)",
+    color = ""
+  )
+
+# TotalBiomass <- subset(Survey_Factors, select = c("id", "Year","Ground", "DFO_Estimate", "DFO_Turnover_Adjusted", "Survey_Date"))
+#   TotalBiomass <- na.omit(TotalBiomass)
+# 
+# ScotsBayTotalBiomass <- subset(TotalBiomass, Ground == "SB")
+#   ScotsBayTotalBiomass <- ScotsBayTotalBiomass %>% group_by(Year) %>% add_count(Year)
+# aggregateSB <- aggregate(ScotsBayTotalBiomass$DFO_Estimate, list(ScotsBayTotalBiomass$Year), FUN=(sum))
+# colnames(aggregateSB)<-c("Year", "DFO_Estimate")
+# 
+# SBTotalBiomass <- print(ggplot(aggregateSB, aes(x=Year, y=DFO_Estimate, col = "Yearly Total Biomass")) + 
+#                           geom_point() +
+#                           geom_line()+
+#                           labs(x = "Year", y= "Total Biomass (mt)"))                    
+# 
+# PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate"))
+#   PeakBiomass <- na.omit(PeakBiomass)
+#   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
+# 
+# ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
+#   ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
+# 
+# ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate, col = "Yearly Peak Biomass")) +
+#   geom_point()+
+#   geom_line() +
+#   labs(x="Year", y="Peak Biomass (mt)")
+# 
+# CombinedPlot <- merge(aggregateSB, ScotsBayPeakBiomass, by="Year" )
+# 
+# ggplot(CombinedPlot, aes(x=Year)) + 
+#           geom_line(aes(y=DFO_Estimate.x, color = "Scots Bay Total Yearly Biomass")) + 
+#           geom_line(aes(y=DFO_Estimate.y, color = "Scots Bay Peak Biomass")) +
+#           labs(x = "Year", y = "Total Biomass (mt)")
+```
+
+# Scots Bay 3 year rolling averages
+
+``` {r, echo = FALSE}
+
+ThreeYearRollingBiomass <- Survey_Factors %>%
+  filter(Ground == "SB") %>%
+  dplyr::select(Year, DFO_Turnover_Adjusted) %>%
+  na.omit() %>%
+  group_by(Year) %>%
+  summarise(
+    Total_Biomass = sum(DFO_Turnover_Adjusted),
+    .groups = "drop"
+  ) %>%
+  arrange(Year) %>%
+  mutate(
+    RollingBiomassAvg = rollmean(
+      Total_Biomass,
+      k = 3,
+      fill = NA,
+      align = "right"
+    )
+  )
+
+ggplot(
+  ThreeYearRollingBiomass,
+  aes(x = Year, y = RollingBiomassAvg)
+) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Three-Year Rolling Average Biomass (mt)",
+    title = "Scots Bay"
+  )
+
+```
+
+###German Bank Julian Date and Survey Biomass
+
+``` {r, echo = FALSE}  
+
+GermanBankTurnover <- na.omit(
+  subset(
+    Survey_Factors,
+    Ground == "GB",
+    select = c(
+      Survey_Date,
+      Ground,
+      Julian,
+      DFO_Estimate
+    )
+  )
+)
+
+ggplot(
+  GermanBankTurnover,
+  aes(x = Julian, y = DFO_Estimate)
+) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    x = "Julian Day",
+    y = "Survey Biomass (mt)"
+  )
+
+summary(
+  lm(
+    DFO_Estimate ~ Julian,
+    data = GermanBankTurnover
+  )
+)
+  
+```
+
+### German Bank Number of Vessels and Survey Biomass
+``` {r, echo = FALSE}
+GBVesselsBiomass <- Survey_Factors %>%
+  filter(
+    Ground == "GB"
+  ) %>%
+  dplyr::select(
+    Survey_Date,
+    No_of_Vessels,
+    Julian,
+    DFO_Estimate,
+    Ground
+  ) %>%
+  na.omit() %>%
+  mutate(
+    No_of_Vessels = factor(No_of_Vessels)
+  )
+
+boxplot(
+  DFO_Estimate ~ No_of_Vessels,
+  data = GBVesselsBiomass,
+  xlab = "Number of Vessels in Survey",
+  ylab = "Survey Biomass (mt)"
+)
+
+summary(
+  aov(
+    DFO_Estimate ~ No_of_Vessels,
+    data = GBVesselsBiomass
+  )
+)
+```
+
+###German Bank Survey Area, Julian, Survey Time, High Tide Time, DFO_Estimate
+
+``` {r, echo = FALSE}
+
+GermanBankHighTideBiomass <- Survey_Factors %>%
+  dplyr::filter(
+    Ground == "GB",
+   # !DFO_Estimate %in% c(228870, 191802, 143937)
+  ) %>%
+  dplyr::select(
+    Survey_Date,
+    No_of_Vessels,
+    Ground,
+    Year,
+    Julian,
+    DFO_Estimate,
+    Survey_Start,
+    High_Tide,
+    Tide_Difference,
+    Tide_Relative
+  ) %>%
+  na.omit()
+
+GermanBankHighTideBiomass$Tide_Relative <-
+  as.numeric(GermanBankHighTideBiomass$Tide_Relative)
+
+ggplot(
+  GermanBankHighTideBiomass,
+  aes(x = Tide_Relative, y = DFO_Estimate)
+) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_hline(
+    yintercept = mean(GermanBankHighTideBiomass$DFO_Estimate),
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Tide Relative to Survey Start (hrs)",
+    y = "Survey Biomass (mt)"
+  )
+
+summary(
+  lm(
+    DFO_Estimate ~ Tide_Relative,
+    data = GermanBankHighTideBiomass
+  )
+)
+```
+
+###Sunset Relative
+
+``` {r, echo = FALSE}
+
+
+ggplot(
+  GermanBankSunsetData,
+  aes(x = Sunset_Relative, y = DFO_Estimate)
+) +
+  geom_point() +
+  geom_smooth(span = 1) +
+  labs(
+    x = "Sunset Relative to Survey Start (hrs)",
+    y = "Survey Biomass (mt)"
+  )
+
+summary(
+  lm(
+    DFO_Estimate ~ Sunset_Relative,
+    data = GermanBankSunsetData
+  )
+)
+```
+
+###German Bank Peak Biomass
+
+``` {r, echo = FALSE}
+
+GermanBankPeakBiomass <- na.omit(
+  subset(
+    Survey_Factors,
+    Ground == "GB" &
+      Survey_Date < as.Date("2023-05-22"),
+    select = c(
+      Survey_Date,
+      Year,
+      Julian,
+      Ground,
+      DFO_Turnover_Adjusted
+    )
+  )
+) %>%
+  group_by(Year) %>%
+  slice_max(
+    DFO_Turnover_Adjusted,
+    n = 1,
+    with_ties = FALSE
+  ) %>%
+  ungroup()
+
+GermanBankPeakBiomass$Month <- factor(
+  format(GermanBankPeakBiomass$Survey_Date, "%B"),
+  levels = c("August", "September", "October")
+)
+
+ggplot(
+  GermanBankPeakBiomass,
+  aes(
+    x = Julian,
+    y = DFO_Turnover_Adjusted,
+    color = Month
+  )
+) +
+  geom_point(size = 3) +
+  geom_label_repel(aes(label = Year), nudge_x = 2) +
+  labs(
+    x = "Julian Day",
+    y = "Peak Survey Biomass (mt)"
+  )
+
+summary(
+  lm(
+    DFO_Turnover_Adjusted ~ Year,
+    data = GermanBankPeakBiomass
+  )
+)
+
+```
+
+### German Bank Index trend
+
+``` {r, echo = FALSE}  
+
+# Annual total biomass
+aggregateGB <- Survey_Factors %>%
+  filter(
+    Ground == "GB"
+  ) %>%
+  dplyr::select(Year, DFO_Turnover_Adjusted) %>%
+  na.omit() %>%
+  group_by(Year) %>%
+  summarise(
+    Total_Biomass = sum(DFO_Turnover_Adjusted),
+    .groups = "drop"
+  )
+
+ggplot(aggregateGB, aes(Year, Total_Biomass)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Total Biomass (mt)"
+  )
+
+# Annual peak biomass
+GermanBankPeakBiomass <- Survey_Factors %>%
+  filter(
+    Ground == "GB"
+  ) %>%
+  dplyr::select(
+    Survey_Date,
+    Year,
+    DFO_Estimate
+  ) %>%
+  na.omit() %>%
+  group_by(Year) %>%
+  slice_max(
+    DFO_Estimate,
+    n = 1,
+    with_ties = FALSE
+  ) %>%
+  ungroup()
+
+ggplot(
+  GermanBankPeakBiomass,
+  aes(Year, DFO_Estimate)
+) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Peak Biomass (mt)"
+  )
+
+# Combined plot
+CombinedPlot <- aggregateGB %>%
+  left_join(
+    GermanBankPeakBiomass %>%
+      dplyr::select(
+        Year,
+        Peak_Biomass = DFO_Estimate
+      ),
+    by = "Year"
+  )
+
+ggplot(CombinedPlot, aes(x = Year)) +
+  geom_line(
+    aes(
+      y = Total_Biomass,
+      color = "Total Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = Total_Biomass,
+      color = "Total Biomass"
+    )
+  ) +
+  geom_line(
+    aes(
+      y = Peak_Biomass,
+      color = "Peak Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = Peak_Biomass,
+      color = "Peak Biomass"
+    )
+  ) +
+  labs(
+    x = "Year",
+    y = "Biomass (mt)",
+    color = ""
+  )
+
+```
+
+#German Bank 3 year rolling averages
+
+``` {r, echo = FALSE}
+
+GBData <- Survey_Factors %>%
+  filter(
+    Ground == "GB"
+  ) %>%
+  dplyr::select(
+    Year,
+    Survey_Date,
+    DFO_Estimate,
+    DFO_Turnover_Adjusted
+  ) %>%
+  na.omit()
+
+ThreeYearRollingBiomass <- GBData %>%
+  group_by(Year) %>%
+  summarise(
+    TotalBiomass = sum(DFO_Turnover_Adjusted),
+    .groups = "drop"
+  ) %>%
+  arrange(Year) %>%
+  mutate(
+    AverageBiomassSumRollover = rollmean(
+      TotalBiomass,
+      k = 3,
+      fill = NA,
+      align = "right"
+    )
+  )
+
+RollingPeakBiomassAvgGB <- GBData %>%
+  group_by(Year) %>%
+  summarise(
+    PeakBiomass = max(DFO_Turnover_Adjusted),
+    .groups = "drop"
+  ) %>%
+  arrange(Year) %>%
+  mutate(
+    RollingPeakBiomassAvg = rollmean(
+      PeakBiomass,
+      k = 3,
+      fill = NA,
+      align = "right"
+    )
+  )
+
+CombinedPlot3 <- left_join(
+  ThreeYearRollingBiomass,
+  RollingPeakBiomassAvgGB,
+  by = "Year"
+)
+
+ggplot(CombinedPlot3, aes(x = Year)) +
+  geom_line(
+    aes(
+      y = AverageBiomassSumRollover,
+      colour = "3-Year Rolling Total Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = AverageBiomassSumRollover,
+      colour = "3-Year Rolling Total Biomass"
+    )
+  ) +
+  geom_line(
+    aes(
+      y = RollingPeakBiomassAvg,
+      colour = "3-Year Rolling Peak Biomass"
+    )
+  ) +
+  geom_point(
+    aes(
+      y = RollingPeakBiomassAvg,
+      colour = "3-Year Rolling Peak Biomass"
+    )
+  ) +
+  labs(
+    title = "German Bank",
+    x = "Year",
+    y = "Biomass (mt)",
+    colour = ""
+  ) +
+  theme_bw()
+
+```
