@@ -12,25 +12,25 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "SB"
 surv2 = "Scots Bay"
-surv.date = "2026-07-05 21:00:00" #survey date and time, as formatted
-surv.no = "5"
+surv.date = "2026-07-19 21:00:00" #survey date and time, as formatted
+surv.no = "6"
 Allocation = '150' #set to "0" for a non-fishing survey
 SIAllocation = '50' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 5
+vessels = 6
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Fundy Monarch"
+V1 = "Morning Star"
 V2 = PlanktonVessel
-V3 = "Morning Star"
-V4 = "Brunswick Provider"
-V5 = "Leroy and Barry"
-V6 = NA
+V3 = "Leroy and Barry"
+V4 = "Lady Melissa"
+V5 = "Brunswick Provider"
+V6 = "Fundy Monarch"
 V7 = NA
 V8 = NA
 V9 = NA
@@ -152,12 +152,6 @@ Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorth
 write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
 
 #Land Data
-
-# can <- gadm(country = "CAN", level = 1, path = tempdir(), version = "latest", resolution = 1)
-# can_sub <- can[can$NAME_1 %in% c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"), ]
-# 
-# us <- gadm(country = "USA", level = 1, path = tempdir(), version = "latest", resolution = 1)
-# us_sub <- us[us$NAME_1 %in% c("Maine"), ]
 
 can <- ne_states(country = "Canada", returnclass = "sf")
 
