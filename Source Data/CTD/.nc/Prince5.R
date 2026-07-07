@@ -1,6 +1,9 @@
 
+
 # Load Prince 5 Data from 
 # https://www.frdr-dfdr.ca/repo/dataset/167e21b2-7eb9-466a-9b80-3980de093b15
+
+# create the Prince5 modern dataset.
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
@@ -8,6 +11,7 @@ library(ncdf4)
 library(maps)
 library(dplyr)
 library(ggplot2)
+library(oce)
 
 # helper function
 read_char_var <- function(nc, varname) {
@@ -29,28 +33,57 @@ files <- paste0(years, ".nc")
 out_dir <- "Casts"
 dir.create(out_dir, showWarnings = FALSE)
 
-            # Store outputs
-            all_dates <- data.frame()
-            all_casts <- list()
-            counter <- 1
+# Store outputs
+all_dates <- data.frame()
+all_casts <- list()
+counter <- 1
 
-                  # Small helper for map axis padding
-                  pad_range <- function(x, pad = 0.05) {
-                    x <- x[!is.na(x)]
-                    
-                    if (length(x) == 0) return(c(NA, NA))
-                    
-                    if (length(unique(x)) == 1) {
-                      return(c(x[1] - 0.05, x[1] + 0.05))
-                    }
-                    
-                    r <- range(x, na.rm = TRUE)
-                    buffer <- diff(r) * pad
-                    c(r[1] - buffer, r[2] + buffer)
-                  }
+# Small helper for map axis padding
+pad_range <- function(x, pad = 0.05) {
+  x <- x[!is.na(x)]
+  
+  if (length(x) == 0) return(c(NA, NA))
+  
+  if (length(unique(x)) == 1) {
+    return(c(x[1] - 0.05, x[1] + 0.05))
+  }
+  
+  r <- range(x, na.rm = TRUE)
+  buffer <- diff(r) * pad
+  c(r[1] - buffer, r[2] + buffer)
+}
 
-# LOOP - take files in .nc folder                  
-                
+####################Look at what variables exist in the .nc files:
+
+for (f in files) {
+  
+  cat("\n========================\n")
+  cat("FILE:", f, "\n")
+  cat("========================\n")
+  
+  nc <- nc_open(f)
+  
+  # List variable names
+  cat("\nVariables:\n")
+  print(names(nc$var))
+  
+  # List dimensions
+  cat("\nDimensions:\n")
+  print(names(nc$dim))
+  
+  nc_close(nc)
+}
+
+# density doesn't exist so you have to create it.
+
+
+
+
+
+
+
+#### LOOP - take files in .nc folder                  
+
 for (f in files) {
   
   cat("\n--- Processing:", f, "---\n")
@@ -67,12 +100,12 @@ for (f in files) {
   station_id <- ncvar_get(nc, "station_ID")
   time_raw <- ncvar_get(nc, "time")
   
-      # Convert time
-      origin <- as.POSIXct("1900-01-01", tz = "UTC")
-      time <- origin + time_raw
-      
-      # Extract month
-      month <- as.numeric(format(time, "%m"))
+  # Convert time
+  origin <- as.POSIXct("1900-01-01", tz = "UTC")
+  time <- origin + time_raw
+  
+  # Extract month
+  month <- as.numeric(format(time, "%m"))
   
   # Extract only Prince-5    
   # Prince-5 matching; catches Prince-5, Prince 5, Prince5
@@ -261,21 +294,21 @@ for (f in files) {
 }
 
 
-                  
-                  
-# Combine all casts into a df
-        if (length(all_casts) > 0) {
-          final_casts <- do.call(rbind, all_casts)
-        } else {
-          final_casts <- data.frame()
-        }
 
-                  
+
+# Combine all casts into a df
+if (length(all_casts) > 0) {
+  final_casts <- do.call(rbind, all_casts)
+} else {
+  final_casts <- data.frame()
+}
+
+
 # Clean date table
-        if (nrow(all_dates) > 0) {
-          all_dates <- unique(all_dates)
-          all_dates <- all_dates[order(all_dates$date), ]
-        }
+if (nrow(all_dates) > 0) {
+  all_dates <- unique(all_dates)
+  all_dates <- all_dates[order(all_dates$date), ]
+}
 
 # Save outputs
 write.csv(all_dates, "Prince5_cast_dates.csv", row.names = FALSE)
@@ -285,37 +318,32 @@ write.csv(final_casts, "Prince5_all_casts.csv", row.names = FALSE)
 
 # Quick Health check of the dataset
 # Summary
-        cat("\n--- SUMMARY ---\n")
-        cat("Rows in final_casts:", nrow(final_casts), "\n")
-        cat("Number of cast records:", nrow(all_dates), "\n")
-                
-                if (nrow(all_dates) > 0) {
-                  cat("Date range:",
-                      as.character(min(all_dates$date)),
-                      "to",
-                      as.character(max(all_dates$date)),
-                      "\n")
-                }
+cat("\n--- SUMMARY ---\n")
+cat("Rows in final_casts:", nrow(final_casts), "\n")
+cat("Number of cast records:", nrow(all_dates), "\n")
+
+if (nrow(all_dates) > 0) {
+  cat("Date range:",
+      as.character(min(all_dates$date)),
+      "to",
+      as.character(max(all_dates$date)),
+      "\n")
+}
 
 # Useful checks
-        unique_dates <- sort(unique(all_dates$date))
-        print(unique_dates)
-        
-        dim(final_casts)
+unique_dates <- sort(unique(all_dates$date))
+print(unique_dates)
+
+dim(final_casts)
 
 # QC
-# where is 2024?
+# where is 2024? Missing
 
 
-        
-        
+
+
 ## Next Step ------>
-        ## Take the dataset and create an average per month per year to compare with HSC.
-
-### dataset exploration:
-
-head(final_casts)
-
+## Take the dataset and create an average per month per year to compare with HSC
 
 ######## Make changes to create comparability to HSC data:
 
@@ -332,9 +360,25 @@ max(final_casts_deep$depth)
 # Calculate monthly averages for salinity and temperature and also stratification
 # If there is more than one cast in a month/year, combine them into one monthly average
 
-
 # Make sure date is a Date
 final_casts_deep$date <- as.Date(final_casts_deep$date)
+
+
+# create density:
+
+# add mean density
+
+final_casts_deep <- final_casts_deep %>%
+  mutate(
+    density = swRho(
+      salinity = salinity,
+      temperature = temperature,
+      pressure = depth
+    )
+  )
+
+head(final_casts_deep)
+
 
 # -----------------------------
 # 1. Average each individual cast across depth
@@ -345,11 +389,19 @@ cast_averages <- final_casts_deep %>%
   summarise(
     mean_temperature = mean(temperature, na.rm = TRUE),
     mean_salinity = mean(salinity, na.rm = TRUE),
+    mean_density = mean(density, na.rm = TRUE),
     
-    # add these
+    # temp strat
     min_temperature = min(temperature, na.rm = TRUE),
     max_temperature = max(temperature, na.rm = TRUE),
     stratification = max_temperature - min_temperature,
+    
+    # density strat
+    
+    min_density = min(density, na.rm = TRUE),
+    max_density = max(density, na.rm = TRUE),
+    density_stratification = max_density - min_density,
+    
     
     min_depth = min(depth, na.rm = TRUE),
     max_depth = max(depth, na.rm = TRUE),
@@ -368,25 +420,47 @@ cast_averages <- cast_averages %>%
     month_name = format(date, "%B")
   )
 
+
+
+
 # -----------------------------
 # 3. Combine casts within same year/month
 #    This gives ONE value per month per year
 # -----------------------------
+
+
+
 monthly_cast_averages <- cast_averages %>%
   group_by(year, month, month_name, station_id) %>%
   summarise(
+    
+    # temperature mean over the entire WC
     monthly_mean_temperature = mean(mean_temperature, na.rm = TRUE),
     monthly_sd_temperature = sd(mean_temperature, na.rm = TRUE),
     monthly_se_temperature = monthly_sd_temperature / sqrt(sum(!is.na(mean_temperature))),
     
+    # salinity mean over the entire WC
     monthly_mean_salinity = mean(mean_salinity, na.rm = TRUE),
     monthly_sd_salinity = sd(mean_salinity, na.rm = TRUE),
     monthly_se_salinity = monthly_sd_salinity / sqrt(sum(!is.na(mean_salinity))),
     
+    # density over the entire WC
+    monthly_mean_density = mean(mean_density, na.rm = TRUE),
+    monthly_sd_density = sd(mean_density, na.rm = TRUE),
+    monthly_se_density = monthly_sd_density / sqrt(sum(!is.na(mean_density))),
+    
+    # temperature stratification 
     monthly_mean_stratification = mean(stratification, na.rm = TRUE),
     monthly_sd_stratification = sd(stratification, na.rm = TRUE),
     monthly_se_stratification = monthly_sd_stratification / sqrt(sum(!is.na(stratification))),
     
+    # density stratification 
+    monthly_mean_density_stratification = mean(density_stratification, na.rm = TRUE),
+    monthly_sd_density_stratification = sd(density_stratification, na.rm = TRUE),
+    monthly_se_density_stratification = monthly_sd_density_stratification / sqrt(sum(!is.na(density_stratification))),
+    
+    
+    # Meta Data
     n_casts = n(),
     mean_latitude = mean(latitude, na.rm = TRUE),
     mean_longitude = mean(longitude, na.rm = TRUE),
@@ -404,7 +478,8 @@ write.csv(
 )
 
 # -----------------------------
-# 4. Create output folder inside Casts
+# 4. Create Plots: Create output folder inside Casts
+# currently doesn't include density or densirty stratification but could be added.
 # -----------------------------
 
 names(monthly_cast_averages)
@@ -424,95 +499,95 @@ for (m in months_to_plot) {
   month_data <- monthly_cast_averages %>%
     filter(month == m)
   
-          # Skip month if no data
-          if (nrow(month_data) == 0) next
-          
-          this_month <- unique(month_data$month_name)[1]
-          
-          # -----------------------------
-          # Temperature plot
-          # -----------------------------
-          
-          p_temp <- ggplot(month_data, aes(x = year, y = monthly_mean_temperature)) +
-            geom_point(size = 3, colour = "firebrick") +
-            geom_line(aes(group = 1), colour = "firebrick", linewidth = 0.8) +
-            geom_text(aes(label = n_casts), vjust = -1, size = 3) +
-            labs(
-              title = paste("Prince-5 Monthly Mean Temperature by Year -", this_month),
-              subtitle = "Numbers above points show number of casts combined",
-              x = "Year",
-              y = "Monthly mean temperature below 5 m"
-            ) +
-            scale_x_continuous(breaks = sort(unique(month_data$year))) +
-            theme_bw()
-          
-          ggsave(
-            filename = file.path(
-              year_dir,
-              paste0("monthly_temperature_year_effect_", this_month, ".png")
-            ),
-            plot = p_temp,
-            width = 8,
-            height = 5,
-            dpi = 300
-          )
+  # Skip month if no data
+  if (nrow(month_data) == 0) next
+  
+  this_month <- unique(month_data$month_name)[1]
+  
+  # -----------------------------
+  # Temperature plot
+  # -----------------------------
+  
+  p_temp <- ggplot(month_data, aes(x = year, y = monthly_mean_temperature)) +
+    geom_point(size = 3, colour = "firebrick") +
+    geom_line(aes(group = 1), colour = "firebrick", linewidth = 0.8) +
+    geom_text(aes(label = n_casts), vjust = -1, size = 3) +
+    labs(
+      title = paste("Prince-5 Monthly Mean Temperature by Year -", this_month),
+      subtitle = "Numbers above points show number of casts combined",
+      x = "Year",
+      y = "Monthly mean temperature below 5 m"
+    ) +
+    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    theme_bw()
+  
+  ggsave(
+    filename = file.path(
+      year_dir,
+      paste0("monthly_temperature_year_effect_", this_month, ".png")
+    ),
+    plot = p_temp,
+    width = 8,
+    height = 5,
+    dpi = 300
+  )
   
   # -----------------------------
   # Salinity plot
   # -----------------------------
   
-          p_sal <- ggplot(month_data, aes(x = year, y = monthly_mean_salinity)) +
-            geom_point(size = 3, colour = "dodgerblue4") +
-            geom_line(aes(group = 1), colour = "dodgerblue4", linewidth = 0.8) +
-            geom_text(aes(label = n_casts), vjust = -1, size = 3) +
-            labs(
-              title = paste("Prince-5 Monthly Mean Salinity by Year -", this_month),
-              subtitle = "Numbers above points show number of casts combined",
-              x = "Year",
-              y = "Monthly mean salinity below 5 m"
-            ) +
-            scale_x_continuous(breaks = sort(unique(month_data$year))) +
-            theme_bw()
-          
-          ggsave(
-            filename = file.path(
-              year_dir,
-              paste0("monthly_salinity_year_effect_", this_month, ".png")
-            ),
-            plot = p_sal,
-            width = 8,
-            height = 5,
-            dpi = 300
-          )
+  p_sal <- ggplot(month_data, aes(x = year, y = monthly_mean_salinity)) +
+    geom_point(size = 3, colour = "dodgerblue4") +
+    geom_line(aes(group = 1), colour = "dodgerblue4", linewidth = 0.8) +
+    geom_text(aes(label = n_casts), vjust = -1, size = 3) +
+    labs(
+      title = paste("Prince-5 Monthly Mean Salinity by Year -", this_month),
+      subtitle = "Numbers above points show number of casts combined",
+      x = "Year",
+      y = "Monthly mean salinity below 5 m"
+    ) +
+    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    theme_bw()
+  
+  ggsave(
+    filename = file.path(
+      year_dir,
+      paste0("monthly_salinity_year_effect_", this_month, ".png")
+    ),
+    plot = p_sal,
+    width = 8,
+    height = 5,
+    dpi = 300
+  )
   
   # -----------------------------
   # Stratification plot
   # -----------------------------
   
-            p_strat <- ggplot(month_data, aes(x = year, y = monthly_mean_stratification)) +
-              geom_point(size = 3, colour = "darkorchid4") +
-              geom_line(aes(group = 1), colour = "darkorchid4", linewidth = 0.8) +
-              geom_text(aes(label = n_casts), vjust = -1, size = 3) +
-              labs(
-                title = paste("Prince-5 Monthly Mean Temperature Stratification by Year -", this_month),
-                subtitle = "Stratification = max temperature - min temperature; numbers show number of casts combined",
-                x = "Year",
-                y = "Monthly mean temperature stratification below 5 m"
-              ) +
-              scale_x_continuous(breaks = sort(unique(month_data$year))) +
-              theme_bw()
-            
-            ggsave(
-              filename = file.path(
-                year_dir,
-                paste0("monthly_stratification_year_effect_", this_month, ".png")
-              ),
-              plot = p_strat,
-              width = 8,
-              height = 5,
-              dpi = 300
-            )
-          }
+  p_strat <- ggplot(month_data, aes(x = year, y = monthly_mean_stratification)) +
+    geom_point(size = 3, colour = "darkorchid4") +
+    geom_line(aes(group = 1), colour = "darkorchid4", linewidth = 0.8) +
+    geom_text(aes(label = n_casts), vjust = -1, size = 3) +
+    labs(
+      title = paste("Prince-5 Monthly Mean Temperature Stratification by Year -", this_month),
+      subtitle = "Stratification = max temperature - min temperature; numbers show number of casts combined",
+      x = "Year",
+      y = "Monthly mean temperature stratification below 5 m"
+    ) +
+    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    theme_bw()
+  
+  ggsave(
+    filename = file.path(
+      year_dir,
+      paste0("monthly_stratification_year_effect_", this_month, ".png")
+    ),
+    plot = p_strat,
+    width = 8,
+    height = 5,
+    dpi = 300
+  )
+}
 # -----------------------------
 # 6. Quick checks
 # -----------------------------
@@ -524,5 +599,3 @@ saveRDS(monthly_cast_averages, "monthly_cast_averages.rds")
 # Show months where more than one cast was combined
 monthly_cast_averages %>%
   filter(n_casts > 1)
-
-
