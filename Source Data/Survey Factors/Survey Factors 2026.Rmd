@@ -7,7 +7,7 @@ date: "2024-04-16"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-#ANOVA Survey Factors Investigations_Scots Bay Tides
+rm(list = ls())
 
 library(rlang)
 library(cli)
@@ -48,13 +48,17 @@ library(ggrepel)
 library(tidyr)
 
 ###remove everything in environment
-rm(list = ls())
 options(scipen = 999)
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
 
-Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv")
-Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
+Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv") %>%
+  mutate(
+    Survey_Date = as.Date(Survey_Date),
+    Julian = yday(Survey_Date)
+  )
+
+#Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
 
 SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
@@ -356,37 +360,6 @@ ggplot(CombinedPlot, aes(x = Year)) +
     color = ""
   )
 
-# TotalBiomass <- subset(Survey_Factors, select = c("id", "Year","Ground", "DFO_Estimate", "DFO_Turnover_Adjusted", "Survey_Date"))
-#   TotalBiomass <- na.omit(TotalBiomass)
-# 
-# ScotsBayTotalBiomass <- subset(TotalBiomass, Ground == "SB")
-#   ScotsBayTotalBiomass <- ScotsBayTotalBiomass %>% group_by(Year) %>% add_count(Year)
-# aggregateSB <- aggregate(ScotsBayTotalBiomass$DFO_Estimate, list(ScotsBayTotalBiomass$Year), FUN=(sum))
-# colnames(aggregateSB)<-c("Year", "DFO_Estimate")
-# 
-# SBTotalBiomass <- print(ggplot(aggregateSB, aes(x=Year, y=DFO_Estimate, col = "Yearly Total Biomass")) + 
-#                           geom_point() +
-#                           geom_line()+
-#                           labs(x = "Year", y= "Total Biomass (mt)"))                    
-# 
-# PeakBiomass <- subset(Survey_Factors, select = c("Survey_Date", "Year","Ground", "DFO_Estimate"))
-#   PeakBiomass <- na.omit(PeakBiomass)
-#   PeakBiomass <- subset(PeakBiomass, Survey_Date < '2023-05-22')  
-# 
-# ScotsBayPeakBiomass <- subset(PeakBiomass, Ground == "SB")  
-#   ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>% group_by(Year) %>% slice_max(DFO_Estimate)
-# 
-# ggplot(ScotsBayPeakBiomass, aes(x=Year, y=DFO_Estimate, col = "Yearly Peak Biomass")) +
-#   geom_point()+
-#   geom_line() +
-#   labs(x="Year", y="Peak Biomass (mt)")
-# 
-# CombinedPlot <- merge(aggregateSB, ScotsBayPeakBiomass, by="Year" )
-# 
-# ggplot(CombinedPlot, aes(x=Year)) + 
-#           geom_line(aes(y=DFO_Estimate.x, color = "Scots Bay Total Yearly Biomass")) + 
-#           geom_line(aes(y=DFO_Estimate.y, color = "Scots Bay Peak Biomass")) +
-#           labs(x = "Year", y = "Total Biomass (mt)")
 ```
 
 # Scots Bay 3 year rolling averages
@@ -593,8 +566,7 @@ summary(
 GermanBankPeakBiomass <- na.omit(
   subset(
     Survey_Factors,
-    Ground == "GB" &
-      Survey_Date < as.Date("2023-05-22"),
+    Ground == "GB",
     select = c(
       Survey_Date,
       Year,
