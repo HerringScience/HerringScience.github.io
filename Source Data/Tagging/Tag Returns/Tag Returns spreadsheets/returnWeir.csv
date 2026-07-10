@@ -1,0 +1,34 @@
+id,TAG_NUMBER,RETURN_GEAR_TYPE,RETURN_FISH_PLANT,catchAREA,Y,X
+1,452393,shutoff,Connors,Flagg Cove,44.75117,-66.75
+46,450805,shutoff,Connors,Campobello North Road Shut Off,44.89316667,-66.959
+49,449132,shutoff,Connors,Campobello Meadow Brook Shut Off,44.88083333,-66.9125
+50,442103,shutoff,Connors,Mill Cove,44.93033333,-66.90466667
+51,445385,shutoff,Connors,Meadow Brook Campobello,44.88083333,-66.9125
+52,450542,shutoff,Connors,Seeleys Cove Shut Off,45.083633,-66.65
+85,44790,shutoff,Connors,Tuckers Cove,45.01716667,-66.84833333
+96,44358,shutoff,Connors,Flagg Cove,44.75,-66.75
+97,452653,shutoff,Connors,Flagg Cove,44.75,-66.75
+101,452321,shutoff,Connors,Chattis Point,45.016,-66.89933333
+102,443959,shutoff,Connors,Flagg Cove,44.75,-66.75
+108,456629,shutoff,Connors,Seelys Head,45.08633333,-66.65033333
+44,449455,weir,Connors,Grand Manan Mumps Weir,44.67266667,-66.686
+45,450645,weir,Connors,Grand Manan Mumps Weir,44.67266667,-66.686
+47,442815,weir,Connors,Bradfords Cove Weir,44.60584,-66.94
+48,445366,weir,Connors,Campobello Ship Head Weir,44.91616667,-66.88983333
+53,445556,weir,Connors,Money Cove Weir,44.777,-66.8215
+54,449480,weir,Connors,Money Cove Weir,44.777,-66.8215
+95,44374,weir,Connors,Cora Bell Weir Grand Manan,44.7566,-66.73
+98,44089,weir,Connors,Crow Island Weir,45.041,-66.882
+122,44639,weir,Connors,Spruce Island Weir,44.97083333,-66.91033333
+123,204314,weir,Connors,Spruce Island Weir,44.97083333,-66.91033333
+294,449786,weir,Sealife,Money Cove Weir,44.777,-66.8215
+295,450689,weir,Sealife,Money Cove Weir,44.777,-66.8215
+296,450446,weir,CapeBreeze,Money Cove Weir,44.777,-66.8215
+298,442788,weir,Sealife,Mill Cove,45.0395,-66.85783333
+299,442510,weir,CapeBreeze,The Mumps Weir,44.67266667,-66.686
+300,449347,weir,Sealife,Mill Cove,45.0395,-66.85783333
+301,442864,weir,Sealife,Ship Head,44.91616667,-66.88983333
+302,442927,weir,Sealife,Ship Head,44.91616667,-66.88983333
+323,444728,Weir,Connors ,Bradfords Cove Weir,44.60584,-66.94
+250,430067,Weir/Shutoff,Connors,Bradfords Cove Weir,44.60584,-66.94
+297,442133,Weir/Shutoff,Sealife,Mumps weir Shutoff,44.67266667,-66.686

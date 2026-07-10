@@ -1,0 +1,1140 @@
+"","TAG_NUMBER","plantReturnPlace","ReturnDate","ReturnVessel","ReturnGearType","ReturnCompany","Catch.plant","dataorigin","WEIRNO","portCode","OfficialReturnPlace","ReturnNAFO","Vessel","X_return","Y_return","Catch.DFO","Wharf_Name","Actual.Date"
+"1","44089","Crow Island Weir",2019-08-27,"Caroline B","Weir","Connors",NA,"rawReturn.csv",609,NA,"CROW IS","4Xs","Caroline B",45.04116667,-66.88,12.37,NA,NA
+"2","44358","Flagg Cove",2019-08-27,"Silver Harvester","Weir","Connors",NA,"rawReturn.csv",NA,25009,"4XU","4Xs","Silver Harvester",44.77433,-66.76,78,"North Head",NA
+"3","44374","Cora Bell Weir Grand Manan",2019-08-21,"Silver Harvester","ShutOff","Connors",NA,"rawReturn.csv",NA,25009,"NORTH HEAD","4Xs","Silver Harvester",44.7564,-66.7342,27,"North Head",NA
+"4","44639","Spruce Island Weir",2019-09-09,"Senator Neil","Weir","Connors",NA,"rawReturn.csv",741,NA,"SPRUCE IS COVE","4Xs","Senator Neil",45.02566667,-66.86,8.44,NA,NA
+"5","44790","Tuckers Cove",2019-08-15,"Silver King","Weir_ShutOff","Connors",NA,"rawReturn.csv",NA,25303,"BLACKS HARBOUR","4Xs","Silver King",45.019872,-66.844866,33.75,"Black's Harbour",NA
+"6","204314","Spruce Island Weir",2019-09-09,"Senator Neil","Weir","Connors",NA,"rawReturn.csv",741,NA,"SPRUCE IS COVE","4Xs","Senator Neil",45.02566667,-66.86,8.44,NA,NA
+"7","430067","Bradfords Cove Weir",2016-09-27,"Andrew & Deane","Weir","Connors",NA,"rawReturn.csv",364,NA,"BRADSFORDS COVE","4Xs","Andrew & Deane",44.62983333,-66.9,45,NA,NA
+"8","442133","Mumps weir Shutoff",2018-08-18,"Capelco","Weir_ShutOff","Sealife",NA,"rawReturn.csv",NA,13611,"SAULNIERVILLE","4Xs","Capelco",44.67364,-66.6866,65.25,"Saulnierville",NA
+"9","442510","The Mumps Weir",2018-07-09,"Michael Eileen","Weir","CapeBreeze",NA,"rawReturn.csv",376,NA,"DUCK IS LEDGE","4Xs","Michael Eileen",44.67266667,-66.69,22.5,NA,NA
+"10","442788","Mill Cove Back Bay",2018-08-10,"Silver King","ShutOff","Sealife",NA,"rawReturn.csv",NA,13611,"SAULNIERVILLE","4Xs","Silver King",44.93033,-66.9047,39.37,"Saulnierville",NA
+"11","443959","Flagg Cove",2019-08-28,"Andrew & Deane","Weir","Connors",NA,"rawReturn.csv",851,NA,"Pipe Dream","4Xs","Andrew & Deane",44.74283333,-66.75,11.25,NA,NA
+"12","444728","Bradfords Cove Weir",2017-09-12,"Senator Neil","Weir","Connors ",NA,"rawReturn.csv",364,NA,"BRADSFORDS COVE","4Xs","Senator Neil",44.62983333,-66.9,51.75,NA,NA
+"13","449347","Mill Cove Back Bay",2018-08-13,"Andrew & Deane","ShutOff","Sealife",NA,"rawReturn.csv",NA,13611,"SAULNIERVILLE","4Xs","Andrew & Deane",44.93033,-66.9047,45,"Nova Scotia",NA
+"14","449786","Money Cove Weir",2018-08-07,"Andrew & Deane","Weir","Sealife",NA,"rawReturn.csv",337,NA,"MONEY COVE","4Xs","Andrew & Deane",44.777,-66.82,41.06,NA,NA
+"15","450446","Money Cove Weir",2018-07-29,"Andrew & Deane","Weir","CapeBreeze",NA,"rawReturn.csv",337,NA,"MONEY COVE","4Xs","Andrew & Deane",44.777,-66.82,15.19,NA,NA
+"16","450689","Money Cove Weir",2018-08-06,"Michael Eileen","Weir","Sealife",NA,"rawReturn.csv",337,NA,"MONEY COVE","4Xs","Michael Eileen",44.777,-66.82,40.5,NA,NA
+"17","452321","Chattis Point",2019-08-28,"Caroline B","Weir","Connors",NA,"rawReturn.csv",416,NA,"CHATTIES PT","4Xs","Caroline B",45.016,-66.9,12.37,NA,NA
+"18","452653","Flagg Cove",2019-08-30,"Capelco","Weir","Connors",NA,"rawReturn.csv",339,NA,"WINNER","4Xs","Capelco",44.77433333,-66.76,15.309,NA,NA
+"19","456629","Seelys Head",2019-09-05,"Senator Neil","Weir","Connors",NA,"rawReturn.csv",727,NA,"FLOWER POT","4Xs","Senator Neil",45.04533333,-66.78,14.152,NA,NA
+"20","34171","Scots Bay",2019-08-05,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.1855,-64.97467,77.53848,NA,2019-08-05
+"21","34340","Scots Bay",2019-07-08,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.14017,-64.92033,92.999965,NA,2019-07-08
+"22","34429","Scots Bay",2019-07-21,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.1875,-65.01567,101.000016,NA,2019-07-21
+"23","34493","McDormant Patch",2019-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.0885,-66.47533,24,NA,2019-09-05
+"24","34586","Scots Bay",2019-08-19,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21983,-64.94333,63.000015,NA,2019-08-19
+"25","34613","Scots Bay",2019-07-22,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.179,-65.03717,71.00002,NA,2019-07-21
+"26","40597","Scots Bay",2020-08-24,"Fundy Monarch","Purse Seine","Connors",223,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,222.99992,NA,2020-08-24
+"27","40619","Moore's Ledge",2020-09-04,"Morning Star","Purse Seine","Cape Breeze",34,"CapeBreezeReturns2020.csv",NA,NA,NA,"4XR",NA,44.33333,-66.36667,34,NA,2020-09-03
+"28","41089","Scots Bay",2020-08-24,"Morning Star","Purse Seine","Scotia Garden",126,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.13333,-65,125.99998,NA,2020-08-24
+"29","41118","NE Bank",2020-10-21,"Brunswick Provider","Purse Seine","Connors",29,"ConnorsReturns2020.csv",NA,NA,NA,"5YB",NA,44.26667,-67,99,NA,2020-10-20
+"30","41265","Sandy Cove",2020-07-29,"Brunswick Provider","Purse Seine","Connors",92,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,91.99998,NA,2020-07-27
+"31","42041","Seal Island",2019-10-15,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.32133,-66.16183,176.99992,NA,2019-10-14
+"32","42335","Seal Island",2019-10-15,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15667,117.99996,NA,2019-10-14
+"33","42425","Seal Island",2019-10-15,"Lady Melissa","Purse Seine","CapeBreeze",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.32133,-66.16183,176.99992,NA,2019-10-14
+"34","42544","German Bank",2021-10-26,"Brunswick Provider","Purse Seine","Connors",NA,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21417,-66.3135,45.99999,NA,2021-10-25
+"35","42553","Seal Island",2019-10-14,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.28333,141.00002,NA,2019-10-13
+"36","42648","Seal Island",2019-10-14,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.35,-66.19167,123.99998,NA,2019-10-13
+"37","42737","Seal Island",2019-10-14,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.35,-66.19167,123.99998,NA,2019-10-13
+"38","42739","Seal Island",2019-10-15,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15667,117.99996,NA,2019-10-14
+"39","42749","Seal Island",2019-10-14,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.35,-66.19167,123.99998,NA,2019-10-13
+"40","42804","Seal Island",2019-10-15,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.16667,146,NA,2019-10-14
+"41","42937","Seal Island",2019-10-15,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.16667,146,NA,2019-10-14
+"42","44186","Prong",2019-06-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.40517,-66.76567,48,NA,2019-06-16
+"43","44217","Prong",2019-06-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.41667,-66.71667,57.00002,NA,2019-06-19
+"44","44882","Prong",2019-06-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.40517,-66.76567,48,NA,2019-06-16
+"45","44979","Prong",2019-06-18,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.414,-66.70867,17,NA,2019-06-17
+"46","111573","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"47","111602","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"48","111608","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"49","111612","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"50","111617","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"51","111660","Wolfs Bank",2019-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.87583,-66.7175,120.99996,NA,2019-10-13
+"52","111829","Wolfs Bank",2019-10-15,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.875,-66.71883,9.999996,NA,2019-10-14
+"53","204235","Northeast Bank",2019-06-18,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.4,-66.75,55.00002,NA,2019-06-17
+"54","204236","Prong",2019-06-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.41667,-66.71667,57.00002,NA,2019-06-19
+"55","204869","Sandy Cove",2020-07-28,"Brunswick Provider","Purse Seine","Connors",88,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,88.00002,NA,2020-07-28
+"56","204908","Lurcher",2020-07-17,"Fundy Monarch","Purse Seine","Connors",37,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.05,-66.45,36.99999,NA,2020-07-17
+"57","204921","Scots Bay",2020-08-12,"Canada 100","Purse Seine","Connors",86,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-65.03333,43,NA,2020-08-12
+"58","205155","German Bank",2021-09-08,"Leroy & Barry II","Purse Seine","Scotia Garden",101,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.30333,-66.4,100.999989,NA,2021-09-07
+"59","205442","Seal Island",2019-10-14,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.35,-66.19167,123.99998,NA,2019-10-13
+"60","206160","Sandy Cove",2020-07-28,"Brunswick Provider","Purse Seine","Connors",88,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,88.00002,NA,2020-07-28
+"61","206562","North West Ledge",2020-09-03,"Brunswick Provider","Purse Seine","Connors",114,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.33333,-66.36667,114.00004,NA,2020-09-02
+"62","206566","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"63","206567","Long Island Shore",2020-08-17,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.4,-66.3,84,NA,2020-08-16
+"64","206575","Long Island Shore",2020-08-18,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.4,-66.3,66.999975,NA,2020-08-17
+"65","206632","Sandy Cove",2020-07-28,"Brunswick Provider","Purse Seine","Connors",88,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,88.00002,NA,2020-07-28
+"66","207185","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"67","207368","McDormand Patch",2020-07-22,"Canada 100","Purse Seine","Connors",71,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.357,-66.34,35.5,NA,2020-07-21
+"68","207933","Sandy Cove",2020-07-28,"Brunswick Provider","Purse Seine","Connors",88,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,88.00002,NA,2020-07-28
+"69","208065","German Bank",2019-09-27,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.3,-66.35,123.99996,NA,2019-09-26
+"70","208140","German Bank",2019-09-27,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.38767,-66.38717,89,NA,2019-09-26
+"71","408257","German Bank",2019-09-27,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.297,-66.36283,127,NA,2019-09-27
+"72","414230","German Bank",2020-09-28,"Canada 100","Purse Seine","Connors",118,"ConnorsReturns2020.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.43033,118.000005,NA,2020-09-28
+"73","414521","McDormant Patch",2019-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.0885,-66.47533,24,NA,2019-09-05
+"74","414703","Scots Bay",2019-09-04,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.106,-65.06133,80.66664,NA,2019-09-03
+"75","414708","Scots Bay",2019-09-03,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-64.91667,77,NA,2019-09-02
+"76","414738","Scots Bay",2019-09-16,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.86667,90,NA,2019-09-16
+"77","414789","Scots Bay",2019-09-04,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.106,-65.06133,80.66664,NA,2019-09-03
+"78","414867","Scots Bay",2019-09-04,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.106,-65.06133,80.66664,NA,2019-09-03
+"79","415483","McDormant Patch",2019-07-29,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.122,-66.46817,25,NA,2019-07-29
+"80","416008","Scots Bay",2019-08-06,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18,-65,97,NA,2019-08-05
+"81","416345","Scots Bay",2019-08-06,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.86667,65.99999,NA,2019-08-06
+"82","416352","Scots Bay",2019-08-06,"Lady Janice II","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.20033,-64.836,60.000003,NA,2019-08-05
+"83","416418","Scots Bay",2020-08-25,"Leroy & Barry II","Purse Seine","Scotia Garden",72,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.21167,-64.94333,71.99998,NA,2020-08-24
+"84","416466","Sandy Cove NS",2019-09-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.1,30.99999,NA,2019-09-17
+"85","416516","Scots Bay",2019-08-05,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.1855,-64.97467,77.53848,NA,2019-08-05
+"86","416636","Sandy Cove NS",2019-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,82.00001,NA,2019-09-06
+"87","416653","Scots Bay",2019-08-21,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.16667,-64.88333,95.00001,NA,2019-08-18
+"88","416691","Scots Bay",2019-08-21,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.16667,-64.88333,95.00001,NA,2019-08-18
+"89","417007","Southwest Bank",2016-07-14,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.16233,-67.093,45,NA,2016-07-13
+"90","417029","Southwest Bank",2016-08-11,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.2555,-67.01717,35.538475,NA,2016-08-10
+"91","417050","Northeast Bank",2016-08-18,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.30333,-67.11517,55.00002,NA,2016-08-17
+"92","417180","Southwest Bank",2016-08-04,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.125,-67.121,72.999975,NA,2016-08-03
+"93","417442","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"94","417479","Southwest Bank",2016-08-22,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.258,-66.99833,53.99999,NA,2016-08-21
+"95","417512","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"96","417617","Northeast Bank",2016-08-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.31667,-66.96667,53,NA,2016-08-16
+"97","417623","Southwest Bank",2016-07-25,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.12167,-67.15317,35,NA,2016-07-24
+"98","417729","Southwest Bank",2016-08-08,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.095,-67.1285,66.000025,NA,2016-08-07
+"99","417874","Northeast Bank",2016-08-31,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.32483,-66.95417,30,NA,2016-08-30
+"100","417955","Southwest Bank",2016-08-22,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.258,-66.99833,53.99999,NA,2016-08-21
+"101","418119","Northeast Bank",2016-09-09,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.264,-67.00717,26,NA,2016-09-08
+"102","418175","Northeast Bank",2016-09-01,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28433,-67.0095,63,NA,2016-08-31
+"103","418828","Northeast Bank",2016-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.256,-67.03467,53.99999,NA,2016-09-05
+"104","418844","Northeast Bank",2016-08-16,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.26567,-67.11517,61,NA,2016-08-15
+"105","419130","Southwest Bank",2016-07-27,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.15,-67.1,41,NA,2016-07-26
+"106","419252","German Bank",2016-06-21,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.5,-66.75,9,NA,2016-06-20
+"107","419373","German Bank",2016-08-25,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,70.000016,NA,2016-08-24
+"108","419513","Tear Drop",2016-06-28,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.6,-66.91667,61.99998,NA,2016-06-27
+"109","419530","Tear Drop",2016-06-17,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.55,-66.96667,42.506016,NA,2016-06-17
+"110","419581","German Bank",2016-06-17,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.55,-66.96667,42.506016,NA,2016-06-17
+"111","420572","Tear Drop",2017-06-09,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.9,47,NA,2017-06-08
+"112","420714","Scots Bay",2016-07-31,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21667,-64.8,79.99997,NA,2016-07-31
+"113","420881","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"114","420894","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"115","420908","German Bank",2016-09-02,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.46667,-66.33333,100.99998,NA,2016-09-02
+"116","420925","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"117","420927","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"118","420971","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"119","420973","NW of German Bank",2016-07-05,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.51667,-66.66667,100.00004,NA,2016-07-05
+"120","421170","Scots Bay",2016-08-15,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15467,-64.99533,45.99999,NA,2016-08-13
+"121","421549","German Bank",2016-08-29,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.33333,100.7143,NA,2016-08-29
+"122","421619","Scots Bay",2016-08-16,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-65.03333,67.999995,NA,2016-08-15
+"123","421726","German Bank",2016-08-25,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.31667,77.000025,NA,2016-08-24
+"124","421727","Tear Drop",2016-07-06,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.73333,90.99996,NA,2016-07-05
+"125","421745","German Bank",2016-08-22,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.36667,-66.33333,93.999962,NA,2016-08-22
+"126","421877","SpawnTow",2016-08-24,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,134.000055,NA,2016-08-23
+"127","422315","German Bank",2016-07-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.494,-66.8,68.00003,NA,2016-07-06
+"128","422345","German Bank",2016-08-30,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.33333,40.000005,NA,2016-08-29
+"129","422788","German Bank",2016-08-31,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,78,NA,2016-08-30
+"130","423308","Gully 4Xq",2016-08-04,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.38333,-66.4,18,NA,2016-08-04
+"131","423592","German Bank",2016-08-11,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,61.00002,NA,2016-08-11
+"132","423786","German Bank",2017-09-07,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45133,-66.3405,98,NA,2017-09-06
+"133","424951","German Bank",2016-08-17,"Lady Janice II","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,98.000005,NA,2016-08-16
+"134","424996","German Bank",2016-08-10,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.35,-66.4,75.000036,NA,2016-08-09
+"135","425060","Southwest Bank",2016-07-22,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.13333,-67.1,45.99999,NA,2016-07-21
+"136","425379","White Head Grand Manan",2016-10-31,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.64867,-66.65933,63,NA,2016-10-30
+"137","425765","Northeast Bank",2016-09-07,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.25067,-67.04283,60,NA,2016-09-06
+"138","425773","Southwest Bank",2016-07-28,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.11867,-67.1475,68.99998,NA,2016-07-27
+"139","425809","Northeast Bank",2016-08-22,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.258,-66.99833,53.99999,NA,2016-08-21
+"140","426125","Northeast Bank",2016-08-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.31667,-66.96667,53,NA,2016-08-16
+"141","426195","Northeast Bank",2016-09-07,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.25067,-67.04283,60,NA,2016-09-06
+"142","426234","Northeast Bank",2016-09-02,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67.02333,43.99997,NA,2016-09-01
+"143","426247","White Head Grand Manan",2016-10-14,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.65,-66.65,42.99997,NA,2016-10-14
+"144","426501","Prong",2016-09-20,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.423,-66.77617,56.00001,NA,2016-09-19
+"145","426600","Prong",2016-09-20,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.423,-66.77617,56.00001,NA,2016-09-19
+"146","426633","Northeast Bank",2016-09-09,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.25,-67.11667,53.99999,NA,2016-09-09
+"147","426821","German Bank",2016-09-07,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.46167,-66.34667,65,NA,2016-09-06
+"148","426936","Northeast Bank",2016-08-19,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.26667,-66.96667,98,NA,2016-08-18
+"149","427393","Northeast Bank",2016-08-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.31667,-66.96667,53,NA,2016-08-16
+"150","427496","Northeast Bank",2016-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.256,-67.03467,53.99999,NA,2016-09-05
+"151","427727","Northeast Bank",2016-08-25,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.25317,-67.02167,63.999975,NA,2016-08-24
+"152","427813","Northeast Bank",2016-08-25,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.25317,-67.02167,63.999975,NA,2016-08-24
+"153","427820","Northeast Bank",2016-08-19,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.27933,-66.9895,24,NA,2016-08-18
+"154","428167","Northeast Bank",2016-08-19,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.258,-66.99917,53.99999,NA,2016-08-18
+"155","428374","Northeast Bank",2016-08-23,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.127,-67.13617,63.999985,NA,2016-08-22
+"156","428424","Southwest Bank",2016-08-23,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.127,-67.13617,63.999985,NA,2016-08-22
+"157","428528","Northeast Bank",2016-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.256,-67.03467,53.99999,NA,2016-09-05
+"158","428586","Northeast Bank",2016-08-11,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.2555,-67.01717,35.538475,NA,2016-08-10
+"159","428673","Northeast Bank",2016-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.256,-67.03467,53.99999,NA,2016-09-05
+"160","430142","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"161","430283","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"162","430295","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"163","430464","Northeast Bank",2016-08-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.31667,-66.96667,53,NA,2016-08-16
+"164","430522","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"165","430705","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"166","430859","Northeast Bank",2016-08-17,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.265,-67.11417,53.99999,NA,2016-08-16
+"167","431162","German Bank",2016-08-22,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.36667,-66.33333,93.999962,NA,2016-08-22
+"168","431354","German Bank",2016-08-16,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.35,123.000064,NA,2016-08-16
+"169","431444","Long Island",2016-09-14,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.2375,-66.37083,101,NA,2016-09-13
+"170","431506","German Bank",2016-08-25,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.28333,134.000055,NA,2016-08-24
+"171","431509","German Bank",2016-08-23,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,170,NA,2016-08-23
+"172","431543","German Bank",2016-08-23,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,170,NA,2016-08-23
+"173","431545","German Bank",2016-08-17,"Lady Janice II","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,98.000005,NA,2016-08-16
+"174","431555","German Bank",2016-08-23,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,170,NA,2016-08-23
+"175","431604","Scots Bay",2016-08-16,"Lady Melissa","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-64.96667,70.999992,NA,2016-08-15
+"176","431629","SpawnTow",2016-08-24,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,134.000055,NA,2016-08-23
+"177","431635","German Bank",2016-08-23,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.44,-66.33333,40.999995,NA,2016-08-22
+"178","431647","German Bank",2016-08-15,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.35,221.99991,NA,2016-08-14
+"179","431662","German Bank",2016-08-17,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.35,136.00002,NA,2016-08-16
+"180","431690","German Bank",2016-08-25,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,70.000016,NA,2016-08-24
+"181","431699","German Bank",2016-08-22,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.36667,-66.33333,67.99998,NA,2016-08-21
+"182","431880","German Bank",2016-09-02,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.46667,-66.33333,102,NA,2016-09-02
+"183","432950","Scots Bay",2019-09-03,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-64.91667,77,NA,2019-09-02
+"184","433341","Northeast Bank",2016-09-09,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.264,-67.00717,26,NA,2016-09-08
+"185","433596","Long Island",2016-10-04,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.31667,-66.31667,63.000015,NA,2016-10-03
+"186","433731","Southwest Bank",2016-08-23,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.127,-67.13617,63.999985,NA,2016-08-22
+"187","435040","German Bank",2016-08-22,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.31667,140.000034,NA,2016-08-21
+"188","435461","German Bank",2016-08-12,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,77.368425,NA,2016-08-11
+"189","435502","German Bank",2016-09-13,"Lady Janice II","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.44133,-66.32867,135.999945,NA,2016-09-13
+"190","436142","Northeast Bank",2016-09-02,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67.02333,43.99997,NA,2016-09-01
+"191","436331","Northeast Bank",2016-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67,78,NA,2016-09-05
+"192","437082","German Bank",2017-07-19,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.38333,33.999999,NA,2017-07-18
+"193","437173","German Bank",2016-09-13,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.44133,-66.32867,135.999945,NA,2016-09-13
+"194","437718","North West Ledge",2016-10-03,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.31667,-66.28333,70,NA,2016-10-02
+"195","437865","German Bank",2016-08-22,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.31667,140.000034,NA,2016-08-21
+"196","438411","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"197","438662","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"198","438666","Prong",2019-06-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.41667,-66.71667,57.00002,NA,2019-06-19
+"199","438680","Scots Bay",2019-06-24,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.1465,-64.94783,84.999957,NA,2019-06-23
+"200","438687","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"201","438742","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"202","438877","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"203","438889","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"204","438897","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"205","438969","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"206","439384","Northeast Bank",2017-09-26,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67,69,NA,2017-09-25
+"207","439468","Northeast Bank",2017-09-25,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.26667,-67,63.999975,NA,2017-09-24
+"208","439523","Northeast Bank",2017-09-19,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.26667,-67,44,NA,2017-09-18
+"209","439546","Northeast Bank",2017-09-18,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28283,-66.99583,53.000012,NA,2017-09-17
+"210","439800","Northeast Bank",2017-09-26,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67,69,NA,2017-09-25
+"211","439808","NE Bank",2017-09-26,"Brunswick Provider","","",NA,"DFOmailedin2023.csv",NA,NA,NA,"5YB",NA,44.28333,-67,69,NA,2017-09-25
+"212","439872","Northeast Bank",2017-09-26,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-67,69,NA,2017-09-25
+"213","440021","German Bank",2016-08-15,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.35,221.99991,NA,2016-08-14
+"214","440150","North West Ledge",2016-10-04,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.31667,-66.31667,63.000015,NA,2016-10-03
+"215","440222","White Head Grand Manan",2016-10-31,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.64867,-66.65933,63,NA,2016-10-30
+"216","440261","Scots Bay",2016-08-16,"Lady Melissa","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-64.96667,70.999992,NA,2016-08-15
+"217","440457","German Bank",2016-08-17,"Lady Janice II","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,98.000005,NA,2016-08-16
+"218","440591","German Bank",2016-08-25,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.31667,77.000025,NA,2016-08-24
+"219","440787","German Bank",2016-08-23,"Sealife II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.35,170,NA,2016-08-23
+"220","440888","German Bank",2016-09-13,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45833,-66.34167,55,NA,2016-09-13
+"221","440910","German Bank",2016-08-12,"Sealife II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.38333,-66.35,15,NA,2016-08-11
+"222","441773","German Bank",2018-09-25,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.46667,-66.35333,48.999991,NA,2018-09-24
+"223","441801","Scots Bay",2019-08-05,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.93333,117,NA,2019-08-05
+"224","443903","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"225","443922","Prong",2019-06-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.273,-66.97333,53.999995,NA,2019-06-05
+"226","443926","Prong",2019-06-19,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.4185,-66.692,51,NA,2019-06-18
+"227","443946","Prong",2019-06-06,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28333,-66.98333,72,NA,2019-06-05
+"228","443983","Prong",2019-06-21,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.4,-66.71667,10,NA,2019-06-20
+"229","444640","Northeast Bank",2017-09-18,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.28283,-66.99583,53.000012,NA,2017-09-17
+"230","445100","Prong",2019-06-20,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.4155,-66.7085,24.137925,NA,2019-06-19
+"231","445793","McDormant Patch",2019-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,82.00001,NA,2019-09-06
+"232","445880","German Bank",2018-09-24,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.4745,-66.35333,140.000003,NA,2018-09-24
+"233","445969","German Bank",2018-10-02,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.35,63.000015,NA,2018-10-02
+"234","446597","Sandy Cove NS",2019-07-11,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.47917,-66.18783,70.99999,NA,2019-07-11
+"235","448029","Scots Bay",2017-08-14,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.19417,-64.94967,79.29824,NA,2017-08-13
+"236","448030","Scots Bay",2017-08-27,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.81667,183.00006,NA,2017-08-26
+"237","448505","Scots Bay",2017-08-13,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.1985,-64.91667,111.999995,NA,2017-08-13
+"238","448906","Scots Bay",2017-07-29,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21917,-64.91617,116.999965,NA,2017-07-28
+"239","448912","Scots Bay",2017-07-31,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.86667,209.99992,NA,2017-07-28
+"240","451520","German Bank",2018-10-04,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45167,-66.33817,116.72724,NA,2018-10-03
+"241","452393","Sandy Cove NS",2019-07-10,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.51433,-66.0875,141.999965,NA,2019-07-10
+"242","452549","Scots Bay",2019-09-02,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15017,-64.9415,76.00003,NA,2019-09-02
+"243","452940","Scots Bay",2019-08-19,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21983,-64.94333,63.000015,NA,2019-08-19
+"244","453163","Long Island",2018-06-01,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.32867,-66.31283,47,NA,2018-06-01
+"245","453773","Scots Bay",2018-08-06,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,45,NA,2018-08-05
+"246","454158","German Bank",2017-08-31,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.45,-66.33333,134.000055,NA,2017-08-30
+"247","454497","German Bank",2017-09-11,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.41667,-66.33333,113.99996,NA,2017-09-11
+"248","455068","Sandy Cove NS",2019-08-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5155,-66.0875,95,NA,2019-08-19
+"249","455076","Scots Bay",2019-07-22,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,30.99999,NA,2019-07-21
+"250","455079","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"251","455080","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"252","455086","Scots Bay",2019-07-22,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.9705,49.13045,NA,2019-07-20
+"253","455133","Scots Bay",2019-07-22,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.9705,49.13045,NA,2019-07-20
+"254","455143","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"255","455147","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"256","455193","Scots Bay",2019-07-22,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.9705,49.13045,NA,2019-07-20
+"257","455260","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"258","455308","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"259","455322","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"260","455333","McDormant Patch",2019-08-01,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.16667,-66.41667,35,NA,2019-07-31
+"261","455336","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"262","455352","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"263","455355","Scots Bay",2019-07-22,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.9705,49.13045,NA,2019-07-20
+"264","455358","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"265","455361","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"266","455365","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"267","455390","Scots Bay",2019-07-22,"Leroy & Barry II","Purse Seine","Seacrest",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.2,-64.9705,49.13045,NA,2019-07-20
+"268","455392","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"269","455493","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"270","455499","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"271","455500","Scots Bay",2019-07-22,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-64.98333,111.000015,NA,2019-07-21
+"272","455602","Sandy Cove NS",2019-08-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5155,-66.0875,95,NA,2019-08-19
+"273","455750","McDormant Patch",2019-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,82.00001,NA,2019-09-06
+"274","455887","Scots Bay",2019-09-16,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.19233,-64.8695,68.13331,NA,2019-09-16
+"275","455889","Scots Bay",2019-09-03,"Lady Janice II","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.13333,-64.96667,73.33333,NA,2019-09-02
+"276","455976","Sandy Cove NS",2019-08-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5155,-66.0875,95,NA,2019-08-19
+"277","456401","Sandy Cove NS",2019-08-28,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.51333,-66.09,23,NA,2019-08-28
+"278","456509","Scots Bay",2019-09-16,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.17667,-64.89667,100,NA,2019-09-16
+"279","457012","German Bank",2017-08-16,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.3,106,NA,2017-08-16
+"280","457449","German Bank",2017-07-26,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.43333,-66.38333,148.00002,NA,2017-07-25
+"281","457452","Northeast Bank",2017-09-12,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"5YB",NA,44.26317,-67.01083,25,NA,2017-09-11
+"282","457506","German Bank",2017-08-17,"Brunswick Provider","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.31267,-66.386,107.00004,NA,2017-08-16
+"283","457550","German Bank",2017-07-26,"Lady Janice II","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.48333,-66.4,102.3392,NA,2017-07-26
+"284","457674","German Bank",2017-07-27,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.4,-66.35267,187.00002,NA,2017-07-26
+"285","457761","German Bank",2017-07-27,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.42083,-66.41267,58.36362,NA,2017-07-26
+"286","458295","German Bank",2017-07-27,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.4,-66.35267,187.00002,NA,2017-07-26
+"287","458336","German Bank",2017-07-27,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.4,-66.35267,187.00002,NA,2017-07-26
+"288","458887","German Bank",2017-08-21,"Canada 100","Purse Seine","Connors ",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.451,-66.37183,108.99999,NA,2017-08-20
+"289","459121","Scots Bay",2019-07-22,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.179,-65.03717,71.00002,NA,2019-07-21
+"290","459126","White Head Grand Manan",2019-07-23,"Fundy Monarch","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XS",NA,44.61667,-66.65,51,NA,2019-07-23
+"291","459268","Scots Bay",2019-08-20,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.18333,-65.01667,176.000006,NA,2019-08-19
+"292","459313","Sandy Cove NS",2019-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,82.00001,NA,2019-09-06
+"293","459364","Sandy Cove NS",2019-08-29,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.1,30,NA,2019-08-29
+"294","459394","Sandy Cove NS",2019-08-28,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.51333,-66.09,23,NA,2019-08-28
+"295","459473","Long Island",2019-08-19,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.505,-66.09833,70.999966,NA,2019-08-18
+"296","459479","Scots Bay",2019-08-06,"Lady Melissa","Purse Seine","Comeau Sea Foods",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.13283,-65.06883,161,NA,2019-08-05
+"297","459573","Leroy Island Shore (4WX)",2019-08-19,"Leroy & Barry II","Purse Seine","Scotia Gardens",NA,"DFOmailedin2023.csv",NA,NA,NA,"4XR",NA,44.505,-66.09833,70.999966,NA,2019-08-18
+"298","459703","Scots Bay",2019-08-21,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21983,-64.94333,110.999955,NA,2019-08-20
+"299","459943","Scots Bay",2019-09-02,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15017,-64.9415,76.00003,NA,2019-09-02
+"300","459975","Scots Bay",2019-09-03,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.15,-64.91667,77,NA,2019-09-02
+"301","459985","Scots Bay",2019-09-04,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.106,-65.06133,80.66664,NA,2019-09-03
+"302","460003","Sandy Cove NS",2019-09-06,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,82.00001,NA,2019-09-06
+"303","460094","Sandy Cove NS",2019-08-20,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5155,-66.0875,95,NA,2019-08-19
+"304","460131","Scots Bay",2019-09-03,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.13333,-64.96667,123.000014,NA,2019-09-02
+"305","460132","German Bank",2019-10-01,"Lady Melissa","Purse Seine","Sealife",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.338,-66.373,200.000066,NA,2019-09-30
+"306","460183","Sandy Cove NS",2019-09-17,"Brunswick Provider","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.5,-66.1,30.99999,NA,2019-09-17
+"307","460329","McDormant Patch",2019-09-06,"Canada 100","Purse Seine","Connors",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,44.0885,-66.47533,24,NA,2019-09-05
+"308","460375","Scots Bay",2019-07-17,"Lady Janice II","Purse Seine","Connors",NA,"ConnorsReturns2020.csv",NA,NA,NA,"4XO",NA,43.26667,-64.83333,143.99994,NA,2019-07-16
+"309","460583","Scotts Bay",2021-08-18,"Brunswick Provider","Purse Seine","Connors",65,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,61.99998,NA,2021-08-18
+"310","461321","Scots Bay",2018-09-04,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21667,-64.93333,101.08,NA,2018-09-03
+"311","461337","Scots Bay",2018-09-04,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XR",NA,45.21667,-64.93333,101.08,NA,2018-09-03
+"312","461393","Scots Bay",2018-09-04,"Morning Star","Purse Seine","Scotia Gardens",NA,"DFOmailedin2023.csv",NA,NA,NA,"4XR",NA,45.21667,-64.93333,101.08,NA,2018-09-03
+"313","461768","Seal Island",2018-09-13,"Morning Star","Purse Seine","Scotia Gardens",NA,"rawReturn.csv",NA,NA,NA,"4XQ",NA,43.46667,-66.33333,42,NA,2018-09-12
+"314","462553","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"315","462600","SCOTS BAY-AREA 8",2021-08-18,"Sealife II","Purse Seine","Comeau - Sea Life",16,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.154,-64.99533,16,NA,2021-08-17
+"316","462648","SCOTS BAY-AREA 8",2021-08-03,"Lady Janice II/Sealife II","Purse Seine","Comeau - Sea Life",88,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"317","462740","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"318","462835","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"319","462846","N/A",2021-08-06,"Brunswick Provider","Purse Seine","Connors",NA,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,44.63333,-66.65,72.999975,NA,2021-08-05
+"320","462879","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"321","463270","Scotts Bay",2021-08-19,"Fundy Monarch","Purse Seine","Connors",36,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.01667,26.00001,NA,2021-08-17
+"322","463335","Scots Bay",2021-09-16,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13383,-65.07067,115.000015,NA,2021-09-14
+"323","463346","SCOTS BAY-AREA 8",2021-08-19,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"324","463444","Scotts Bay",2021-08-19,"Fundy Monarch","Purse Seine","Connors",36,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.01667,26.00001,NA,2021-08-17
+"325","463463","SCOTS BAY-AREA 8",2021-08-19,"Lady Janice II/Sealife II","Purse Seine","Comeau - Sea Life",134,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"326","463482","German Bank",2021-09-15,"Canada 100","Purse Seine","Connors",97,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29867,-66.37833,91.000032,NA,2021-09-15
+"327","463776","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",100,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"328","463779","German Bank",2021-09-15,"Canada 100","Purse Seine","Connors",97,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29867,-66.37833,91.000032,NA,2021-09-15
+"329","463783","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"330","463789","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"331","463797","Scots Bay",2021-09-01,"Morning Star","Purse Seine","Scotia Garden",72,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XS",NA,44.625,-66.75,78,NA,2021-09-01
+"332","463807","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"333","463831","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"334","463875","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"335","463935","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"336","463962","German Bank",2021-09-09,"Brunswick Provider","Purse Seine","Connors",83,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,101.000025,NA,2021-09-08
+"337","464212","Scotts Bay",2021-08-25,"Canada 100","Purse Seine","Connors",76,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.18,-64.95867,75.999975,NA,2021-08-26
+"338","464224","Scots Bay",2021-08-19,"Leroy & Barry II","Purse Seine","Scotia Garden",42,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65,41.999999,NA,2021-08-18
+"339","464297","German Bank",2021-09-08,"Canada 100","Purse Seine","Connors",83,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.272,-66.36683,60.000005,NA,2021-09-08
+"340","464823","Gannet Dry Ledge",2021-07-28,"Leroy & Barry II","Purse Seine","Scotia Garden",94,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.86667,-66.5,67.68,NA,2021-07-28
+"341","465034","SW GROUNDS AREA 11",2020-07-06,"Sealife II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XO",NA,43.16167,-66.12,113.00004,NA,2020-07-05
+"342","465602","SW GROUNDS AREA 11",2020-07-02,"Lady Janice II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XO",NA,43.01667,-65.93333,98,NA,2020-07-02
+"343","465834","SW GROUNDS AREA 11",2020-07-06,"Sealife II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XO",NA,43.16167,-66.12,113.00004,NA,2020-07-05
+"344","465926","Casper",2020-07-07,"Morning Star","Purse Seine","Scotia Garden",101,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XO",NA,43.15,-66.115,100.99998,NA,2020-07-06
+"345","467016","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"346","467021","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"347","467067","GERMAN BANK (AREA 7)",2022-09-01,"Sealife II","Purse Seine","Comeau - Sea Life",36,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.25667,-66.35333,35.999985,NA,2022-08-31
+"348","467076","GERMAN BANK (AREA 7)",2022-08-31,"Lady Janice II","Purse Seine","Comeau - Sea Life",78,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.24783,-66.33733,78,NA,2022-08-30
+"349","467085","GERMAN BANK (AREA 7)",2022-08-30,"Lady Melissa","Purse Seine","Comeau - Sea Life",53,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35333,74.00003,NA,2022-08-31
+"350","467273","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"351","467290","German Bank",2022-09-02,"Tasha Marie","Purse Seine","Cape Breeze",66,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26,-66.35333,65.99999,NA,2022-09-01
+"352","467344","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"353","467356","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"354","467367","GERMAN BANK (AREA 7)",2022-09-01,"Sealife II","Purse Seine","Comeau - Sea Life",36,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.25667,-66.35333,35.999985,NA,2022-08-31
+"355","467423","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"356","467433","GERMAN BANK (AREA 7)",2022-08-30,"Lady Melissa","Purse Seine","Comeau - Sea Life",53,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35333,74.00003,NA,2022-08-31
+"357","467488","German Bank",2022-09-01,"Tasha Marie","Purse Seine","Cape Breeze",19,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27167,-66.35833,16.15,NA,2022-08-31
+"358","467545","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"359","467673","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"360","469668","Scots Bay ",2021-07-19,"Morning Star","Purse Seine","Scotia Garden",57,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.315,-64.90383,57,NA,2021-07-19
+"361","469700","Grand Manan Banks",2021-10-14,"Brunswick Provider","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"5YB",NA,44.26667,-67.03333,71.000024,NA,2021-10-13
+"362","469701","Scots Bay",2021-07-20,"Leroy & Barry II","Purse Seine","Scotia Garden",82,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XS",NA,45.30933,-65.01817,81.999996,NA,2021-07-20
+"363","469727","SCOTS BAY-AREA 8",2021-07-20,"Lady Janice II","Purse Seine","Comeau - Sea Life",142,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.30333,-64.86833,142.000068,NA,2021-07-19
+"364","469743","SCOTS BAY-AREA 8",2021-07-19,"Sealife II","Purse Seine","Comeau - Sea Life",110,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.29667,-64.85167,88,NA,2021-07-18
+"365","469756","Scots Bay",2022-08-02,"Canada 100","Purse Seine","Connors",149.4,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.167,-65.01117,129.999985,NA,2022-08-01
+"366","469867","SCOTS BAY-AREA 8",2021-07-21,"Sealife II","Purse Seine","Comeau - Sea Life",43,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.305,-64.92333,43.00002,NA,2021-07-19
+"367","469891","Scots Bay",2021-07-20,"Leroy & Barry II","Purse Seine","Scotia Garden",82,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XS",NA,45.30933,-65.01817,81.999996,NA,2021-07-20
+"368","469895","45 18,81N 690 52,34W",2021-07-21,"Lady Melissa","Purse Seine","Connors",42,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.05267,-66.655,41.999992,NA,2021-07-20
+"369","470031","SCOTS BAY (AREA 8)",2022-07-29,"Lady Janice II","Purse Seine","Comeau - Sea Life",69,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.17817,-64.9965,68.999976,NA,2022-07-28
+"370","470090","Scotts Bay ",2022-07-29,"Leroy & Barry II","Purse Seine","Scotia Garden",99,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-65.012,98.999975,NA,2022-07-29
+"371","470267","SCOTS BAY (AREA 8)",2022-08-08,"Lady Janice II","Purse Seine","Comeau - Sea Life",45,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.15283,-65.02483,45,NA,2022-08-08
+"372","473184","German Bank",2022-09-14,"Fundy Monarch","Purse Seine","Connors",103,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,45.25,-66.33333,193.00008,NA,2022-09-13
+"373","473252","German Bank",2022-09-13,"Fundy Monarch","Purse Seine","Connors",105,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,45.25,-66.33333,193.00008,NA,2022-09-13
+"374","473264","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"375","473378","Seal Iland",2022-09-21,"Morning Star","Purse Seine","Scotia Garden",106,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31617,-66.15483,105.999985,NA,2022-09-20
+"376","475008","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"377","475060","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"378","475083","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"379","475107","German Bank",2022-09-01,"Tasha Marie","Purse Seine","Cape Breeze",19,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27167,-66.35833,16.15,NA,2022-08-31
+"380","475127","GERMAN BANK (AREA 7)",2022-09-01,"Sealife II","Purse Seine","Comeau - Sea Life",36,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.25667,-66.35333,35.999985,NA,2022-08-31
+"381","475150","German Bank",2022-09-02,"Tasha Marie","Purse Seine","Cape Breeze",66,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26,-66.35333,65.99999,NA,2022-09-01
+"382","475464","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"383","475710","Scots Bay",2022-09-19,"Canada 100","Purse Seine","Connors",126,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.14683,-65.002,71.999968,NA,2022-09-19
+"384","475760","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"385","475771","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"386","475773","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"387","475807","Scots Bay",2022-09-08,"Canada 100","Purse Seine","Connors",68,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,47,NA,2022-09-07
+"388","475812","Scots Bay",2022-09-08,"Canada 100","Purse Seine","Connors",68,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,47,NA,2022-09-07
+"389","475834","SCOTS BAY (AREA 8)",2022-09-07,"Lady Janice II","Purse Seine","Comeau - Sea Life",98,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.18383,-64.983,49,NA,2022-09-06
+"390","475889","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"391","475939","Scots Bay",2022-09-19,"Fundy Monarch","Purse Seine","Connors",203,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,189,NA,2022-09-19
+"392","475984","Scots Bay",2022-09-19,"Canada 100","Purse Seine","Connors",126,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.14683,-65.002,71.999968,NA,2022-09-19
+"393","480396","Scots Bay",2020-08-24,"Fundy Monarch","Purse Seine","Connors",223,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,222.99992,NA,2020-08-24
+"394","480442","SCOTS BAY-AREA 8",2020-08-12,"Lady Melissa","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.06667,-65.1,102.00002,NA,2020-08-11
+"395","480591","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"396","480599","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",57,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"397","480600","SCOTS BAY-AREA 8",2020-08-12,"Lady Melissa","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.06667,-65.1,102.00002,NA,2020-08-11
+"398","480601","White Head",2020-08-12,"Brunswick Provider","Purse Seine","Connors",74,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.61667,-66.63333,74.000025,NA,2020-08-12
+"399","480616","SCOTS BAY-AREA 8",2020-08-25,"Lady Janice II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.93333,102,NA,2020-08-24
+"400","480623","Scots Bay",2020-08-12,"Canada 100","Purse Seine","Connors",86,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-65.03333,43,NA,2020-08-12
+"401","480639","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"402","480665","Scotts Bay",2021-08-23,"Brunswick Provider","Purse Seine","Connors",110,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,110.000007,NA,2021-08-23
+"403","480667","Scots Bay",2020-08-12,"Canada 100","Purse Seine","Connors",86,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-65.03333,43,NA,2020-08-12
+"404","480692","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"405","480705","Scots Bay",2020-08-25,"Canada 100","Purse Seine","Connors",135,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.17167,-65.058,135.000064,NA,2020-08-24
+"406","480712","Scots Bay",2020-08-25,"Canada 100","Purse Seine","Connors",135,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.17167,-65.058,135.000064,NA,2020-08-24
+"407","480757","Scots Bay",2020-08-25,"Canada 100","Purse Seine","Connors",135,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.17167,-65.058,135.000064,NA,2020-08-24
+"408","480864","Scots Bay",2020-08-25,"Morning Star","Purse Seine","Cape Breeze",66,"CapeBreezeReturns2020.csv",NA,NA,NA,"4XR",NA,45.1725,-65.0905,66,NA,2020-08-24
+"409","480874","Scots Bay",2020-08-25,"Leroy & Barry II","Purse Seine","Scotia Garden",72,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.21167,-64.94333,71.99998,NA,2020-08-24
+"410","480894","Scots Bay",2020-08-25,"Canada 100","Purse Seine","Connors",135,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.17167,-65.058,135.000064,NA,2020-08-24
+"411","480898","Lurcher",2020-09-08,"Fundy Monarch","Purse Seine","Connors",159,"ConnorsReturns2020.csv",NA,NA,NA,"4XQ",NA,43.91667,-66.48333,168.00003,NA,2020-09-08
+"412","480952","Scots Bay",2020-09-21,"Fundy Monarch","Purse Seine","Connors",NA,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.8,95.999952,NA,2020-09-21
+"413","481022","German Bank",2020-10-05,"Leroy & Barry II","Purse Seine","Scotia Garden",64,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XQ",NA,43.32667,-66.15667,63.999975,NA,2020-10-05
+"414","481051","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"415","481072","GERMAN BANK-AREA 7",2021-09-09,"Lady Melissa","Purse Seine","Comeau - Sea Life",104,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.32283,-66.40333,104.000007,NA,2021-09-08
+"416","481556","German Bank",2020-09-16,"Morning Star","Purse Seine","Scotia Garden",60,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XQ",NA,43.22267,-66.31433,59.999995,NA,2020-09-15
+"417","481652","Seal Island",2020-09-25,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XQ",NA,43.30333,-66.20733,69.000001,NA,2020-09-25
+"418","481720","Seal Island",2020-09-25,"Morning Star","Purse Seine","Scotia Garden",83,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XQ",NA,43.28667,-66.20167,83.000035,NA,2020-09-24
+"419","481753","GERMAN BANK-AREA 7",2021-10-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",71,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21783,-66.332,55.78573,NA,2021-10-25
+"420","481979","GERMAN BANK-AREA 7",2021-10-05,"Sealife II","Purse Seine","Comeau - Sea Life",139,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29,-66.45333,117.61541,NA,2021-10-04
+"421","482046","Lurcher",2020-09-10,"Canada 100","Purse Seine","Connors",24,"ConnorsReturns2020.csv",NA,NA,NA,"4XQ",NA,43.87717,-66.51433,24,NA,2020-09-10
+"422","482292","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"423","482669","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"424","482882","German Bank",2020-10-05,"Leroy & Barry II","Purse Seine","Scotia Garden",64,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XQ",NA,43.32667,-66.15667,63.999975,NA,2020-10-05
+"425","483667","Lurcher",2020-09-10,"Morning Star","Purse Seine","Cape Breeze",56,"CapeBreezeReturns2020.csv",NA,NA,NA,"4XQ",NA,43.88333,-66.50517,56.00001,NA,2020-09-10
+"426","483841","Lurcher",2020-09-10,"Canada 100","Purse Seine","Connors",24,"ConnorsReturns2020.csv",NA,NA,NA,"4XQ",NA,43.87717,-66.51433,24,NA,2020-09-10
+"427","484666","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"428","484725","Prong",2021-08-09,"Fundy Monarch","Purse Seine","Connors",95,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.33333,-66.38333,89.000015,NA,2021-08-09
+"429","484789","Scots Bay",2021-08-17,"Morning Star","Purse Seine","Scotia Garden",61,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.1285,-65.07783,61.00002,NA,2021-08-17
+"430","485775","Prong",2021-07-14,"Brunswick Provider","Purse Seine","Connors",92,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,44.71667,-66.71667,87.99999,NA,2021-07-13
+"431","485856","Scotts Bay",2021-08-27,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15067,-65.017,63.999975,NA,2021-08-27
+"432","486889","SCOTS BAY-AREA 8",2021-08-03,"Lady Melissa","Purse Seine","Comeau - Sea Life",55,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.1355,-65.0205,55,NA,2021-08-02
+"433","486910","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"434","486911","SCOTS BAY-AREA 8",2021-08-03,"Lady Melissa","Purse Seine","Comeau - Sea Life",55,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.1355,-65.0205,55,NA,2021-08-02
+"435","487227","Grand Manan ",2022-10-17,"Leroy & Barry II","Purse Seine","Scotia Garden",103,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XS",NA,44.76667,-66.71667,103,NA,2022-10-16
+"436","488050","Scot's Bay",2021-09-01,"Fundy Monarch","Purse Seine","Cape Breeze",51,"Mail in Tag Returns.csv",NA,NA,NA,"4XR",NA,45.11667,-65.05,51.000015,NA,2021-09-01
+"437","488052","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"438","488070","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"439","488081","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"440","488101","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"441","488122","Scot's Bay",2021-09-01,"Fundy Monarch","Purse Seine","Cape Breeze",51,"Mail in Tag Returns.csv",NA,NA,NA,"4XR",NA,45.11667,-65.05,51.000015,NA,2021-09-01
+"442","488138","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"443","488142","Scot's Bay",2021-09-01,"Morning Star","Purse Seine","Cape Breeze",78,"Mail in Tag Returns.csv",NA,NA,NA,"4XS",NA,44.625,-66.75,78,NA,2021-09-01
+"444","488145","Scots Bay",2021-09-02,"Leroy & Barry II","Purse Seine","Scotia Garden",103,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.37,-66.435,103.000011,NA,2021-09-01
+"445","488198","German Bank",2021-09-15,"Canada 100","Purse Seine","Connors",97,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29867,-66.37833,91.000032,NA,2021-09-15
+"446","488203","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"447","488244","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"448","488248","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"449","488266","German Bank",2021-09-02,"Fundy Monarch","Purse Seine","Connors",156,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,156,NA,2021-09-02
+"450","488355","German Bank",2021-09-02,"Fundy Monarch","Purse Seine","Connors",156,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,156,NA,2021-09-02
+"451","488502","German Bank",2021-09-08,"Fundy Monarch","Purse Seine","Connors",104,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.3,-66.4,104.00004,NA,2021-09-08
+"452","488533","German Bank",2021-09-02,"Fundy Monarch","Purse Seine","Connors",156,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,156,NA,2021-09-02
+"453","488534","German Bank",2021-09-02,"Fundy Monarch","Purse Seine","Connors",156,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,156,NA,2021-09-02
+"454","488585","German Bank",2021-09-09,"Morning Star","Purse Seine","Scotia Garden",66,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.32767,-66.19933,43.071435,NA,2021-09-09
+"455","488595","German Bank",2021-09-09,"Morning Star","Purse Seine","Scotia Garden",66,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.32767,-66.19933,43.071435,NA,2021-09-09
+"456","488618","German Bank",2021-09-02,"Fundy Monarch","Purse Seine","Connors",156,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.33333,-66.41667,156,NA,2021-09-02
+"457","488738","German Bank",2021-09-09,"Morning Star","Purse Seine","Cape Breeze",67,"Mail in Tag Returns.csv",NA,NA,NA,"4XQ",NA,43.32767,-66.19933,43.071435,NA,2021-09-09
+"458","489322","SEAL ISLAND (AREA 6)",2022-09-21,"Lady Janice II","Purse Seine","Comeau - Sea Life",41,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31567,-66.1525,40.999995,NA,2022-09-20
+"459","489473","German Bank",2021-09-23,"Morning Star","Purse Seine","Scotia Garden",95,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28117,-66.38683,95,NA,2021-09-22
+"460","489754","German Bank",2021-09-09,"Leroy & Barry II","Purse Seine","Scotia Garden",33,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.38,32.999995,NA,2021-09-09
+"461","490522","Scotts Bay",2021-09-14,"Brunswick Provider","Purse Seine","Connors",130,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65.06667,122.00004,NA,2021-09-14
+"462","491020","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",105,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"463","491282","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"464","491315","",2022-09-14,"Brunswick Provider","Purse Seine","Scotia Garden",NA,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"465","491324","German Bank",2022-09-19,"Lady Melissa","Purse Seine","Cape Breeze",115,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26833,-66.35167,115.00005,NA,2022-09-19
+"466","491344","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"467","491352","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"468","491360","German Bank",2022-09-14,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.386,115.00002,NA,2022-09-13
+"469","491365","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"470","491388","German Bank",2022-09-14,"Morning Star","Purse Seine","Scotia Garden",59,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26133,-66.05283,58.99998,NA,2022-09-13
+"471","491420","German Bank",2022-09-14,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.386,115.00002,NA,2022-09-13
+"472","491430","",2022-09-14,"Brunswick Provider","Purse Seine","Scotia Garden",NA,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"473","491540","GERMAN BANK (AREA 7)",2022-09-14,"Sealife II","Purse Seine","Comeau - Sea Life",86,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28667,-66.39667,86.00004,NA,2022-09-13
+"474","491543","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"475","491577","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"476","491582","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"477","491590","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"478","491594","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"479","491701","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"480","493022","GERMAN BANK-AREA 7",2021-10-22,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.2955,-66.3765,66.780486,NA,2021-10-22
+"481","493025","German Bank",2021-10-26,"Leroy & Barry II","Purse Seine","Scotia Garden",88,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21667,-66.325,88.00002,NA,2021-10-25
+"482","493029","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"483","493151","GERMAN BANK-AREA 7",2021-10-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",71,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21783,-66.332,55.78573,NA,2021-10-25
+"484","493287","South West Bank",2022-06-02,"Canada 100","Purse Seine","Connors",89.6,"ConnorsReturns2022.csv",NA,NA,NA,"5YB",NA,44.18867,-67.05183,68.00001,NA,2022-06-01
+"485","493430","German Bank",2021-11-03,"Brunswick Provider","Purse Seine","Cape Breeze",143,"Mail in Tag Returns.csv",NA,NA,NA,"4XQ",NA,43.21667,-66.33333,143.00006,NA,2021-11-03
+"486","494285","Scots Bay",2021-08-19,"Leroy & Barry II","Purse Seine","Scotia Garden",42,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65,41.999999,NA,2021-08-18
+"487","494299","Scots Bay",2021-08-18,"Morning Star","Purse Seine","Scotia Garden",50,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.14283,-65.02833,54,NA,2021-08-17
+"488","494330","SCOTS BAY-AREA 8",2021-08-19,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"489","494355","SCOTS BAY-AREA 8",2021-08-19,"Sealife II","Purse Seine","Comeau - Sea Life",87,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"490","494378","Scotts Bay",2021-08-25,"Fundy Monarch","Purse Seine","Connors",102,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,102.000001,NA,2021-08-25
+"491","494379","Scotts Bay",2021-08-23,"Brunswick Provider","Purse Seine","Connors",110,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,110.000007,NA,2021-08-23
+"492","494392","SCOTS BAY-AREA 8",2021-08-19,"Lady Janice II/Sealife II","Purse Seine","Comeau - Sea Life",134,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"493","494402","Scots Bay",2021-08-18,"Leroy & Barry II","Purse Seine","Scotia Garden",42,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65,41.999999,NA,2021-08-18
+"494","494405","SCOTS BAY-AREA 8",2021-08-19,"Sealife II","Purse Seine","Comeau - Sea Life",87,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"495","494445","Scotts Bay",2021-08-23,"Brunswick Provider","Purse Seine","Connors",110,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,110.000007,NA,2021-08-23
+"496","494446","Scotts Bay",2021-08-27,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15067,-65.017,63.999975,NA,2021-08-27
+"497","494476","SCOTS BAY-AREA 8",2021-08-19,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"498","494720","Scotts Bay",2021-08-27,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15067,-65.017,63.999975,NA,2021-08-27
+"499","494768","Scotts Bay",2021-08-27,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15067,-65.017,63.999975,NA,2021-08-27
+"500","494926","Scot's Bay",2021-09-01,"Fundy Monarch","Purse Seine","Cape Breeze",51,"Mail in Tag Returns.csv",NA,NA,NA,"4XR",NA,45.11667,-65.05,51.000015,NA,2021-09-01
+"501","494947","Scot's Bay",2021-09-01,"Morning Star","Purse Seine","Cape Breeze",78,"Mail in Tag Returns.csv",NA,NA,NA,"4XS",NA,44.625,-66.75,78,NA,2021-09-01
+"502","494962","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"503","495455","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"504","495458","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"505","495462","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"506","495463","Scots Bay",2022-08-09,"Brunswick Provider","Purse Seine","Connors",139.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,114.99996,NA,2022-08-08
+"507","495471","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"508","495479","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"509","495488","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"510","495489","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"511","495496","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"512","495498","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"513","495506","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"514","495517","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"515","495520","Scots Bay",2022-08-09,"Brunswick Provider","Purse Seine","Connors",139.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,114.99996,NA,2022-08-08
+"516","495548","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"517","495553","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"518","495555","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"519","495558","SCOTS BAY (AREA 8)",2022-08-09,"Sealife II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.145,-65.03167,52.85715,NA,2022-08-09
+"520","495560","Scots Bay",2022-08-09,"Lady Janice II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.18267,-64.9495,89.000015,NA,2022-08-09
+"521","495565","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"522","495566","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"523","495600","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"524","495625","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"525","495659","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"526","495666","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"527","495670","Scots Bay",2022-08-10,"Leroy & Barry II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"528","495675","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"529","495691","Scots Bay",2022-08-10,"Leroy & Barry II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"530","495701","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"531","495703","Scots Bay",2022-08-10,"Leroy & Barry II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"532","495779","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",105,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"533","495826","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"534","495848","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"535","495858","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"536","495866","SCOTS BAY (AREA 8)",2022-08-11,"Lady Melissa","Purse Seine","Comeau - Sea Life",33,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.18667,-64.93833,33,NA,2022-08-10
+"537","495876","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"538","495883","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"539","495903","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"540","495912","SCOTS BAY (AREA 8)",2022-08-11,"Lady Janice II","Purse Seine","Comeau - Sea Life",162,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"541","495917","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"542","495944","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"543","495945","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"544","495962","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"545","495990","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"546","495992","Scotts Bay ",2022-08-17,"Morning Star","Purse Seine","Scotia Garden",113,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"547","495993","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"548","496387","White Head",2022-07-07,"Brunswick Provider","Purse Seine","Connors",81.8,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.6,-66.63333,101.000025,NA,2022-07-06
+"549","496468","White Head",2022-07-15,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.65,83.99997,NA,2022-07-14
+"550","496592","White Head",2022-07-15,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.65,83.99997,NA,2022-07-14
+"551","496891","White Head",2022-07-08,"Brunswick Provider","Purse Seine","Connors",75,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.55,-66.61667,61.99999,NA,2022-07-08
+"552","498082","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"553","498101","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"554","498114","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"555","498122","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"556","498124","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"557","498150","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"558","498158","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"559","498250","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"560","498282","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"561","498289","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"562","498300","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"563","498315","GERMAN BANK (AREA 7)",2022-08-31,"Lady Janice II","Purse Seine","Comeau - Sea Life",78,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.24783,-66.33733,78,NA,2022-08-30
+"564","498352","Scots Bay",2022-09-02,"Canada 100","Purse Seine","Connors",68,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"565","498371","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"566","498408","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"567","498420","GERMAN BANK (AREA 7)",2022-08-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27433,-66.37183,51.000015,NA,2022-08-25
+"568","498427","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"569","498433","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"570","498441","GERMAN BANK (AREA 7)",2022-08-30,"Lady Janice II","Purse Seine","Comeau - Sea Life",151,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.264,-66.34567,151.00005,NA,2022-08-29
+"571","498443","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"572","498466","Seal Iland",2022-09-21,"Morning Star","Purse Seine","Scotia Garden",106,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31617,-66.15483,105.999985,NA,2022-09-20
+"573","498479","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"574","498533","GERMAN BANK (AREA 7)",2022-08-30,"Lady Janice II","Purse Seine","Comeau - Sea Life",151,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.264,-66.34567,151.00005,NA,2022-08-29
+"575","498552","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"576","498598","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"577","498624","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"578","498641","GERMAN BANK (AREA 7)",2022-08-31,"Lady Melissa","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35333,74.00003,NA,2022-08-31
+"579","498647","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"580","498732","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"581","498747","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",57,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"582","498769","Scots Bay",2022-08-23,"Canada 100","Purse Seine","Connors",145,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"583","498778","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",57,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"584","498795","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"585","498814","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"586","498828","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"587","498853","Scots Bay",2022-08-11,"Canada 100","Purse Seine","Connors",124.6,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"588","498866","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"589","498868","SCOTS BAY (AREA 8)",2022-09-06,"Sealife II","Purse Seine","Comeau - Sea Life",NA,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16333,-65.01333,44,NA,2022-09-06
+"590","498896","Scots Bay",2022-08-23,"Canada 100","Purse Seine","Connors",145,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"591","498899","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"592","498900","Scots Bay",2022-08-23,"Canada 100","Purse Seine","Connors",145,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"593","498911","Scots Bay",2022-08-25,"Canada 100","Purse Seine","Connors",145,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"594","498923","Scots Bay",2022-08-23,"Canada 100","Purse Seine","Connors",145,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"595","498935","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"596","498963","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"597","499078","Scotts Bay ",2022-08-17,"Morning Star","Purse Seine","Scotia Garden",113,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"598","499124","SCOTS BAY (AREA 8)",2022-07-29,"Lady Janice II","Purse Seine","Comeau - Sea Life",69,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.17817,-64.9965,68.999976,NA,2022-07-28
+"599","499155","Scots Bay",2022-09-18,"Canada 100","Purse Seine","Connors",126,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.14683,-65.002,71.999968,NA,2022-09-19
+"600","499156","Scotts Bay ",2022-07-28,"Leroy & Barry II","Purse Seine","Scotia Garden",55,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.21,-64.86583,55.00002,NA,2022-07-26
+"601","499203","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"602","499381","White Head",2022-10-13,"Canada 100","Purse Seine","Connors",35.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.353,-66.14333,68.99997,NA,2022-10-11
+"603","499869","German Bank",2022-08-16,"Brunswick Provider","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.41667,116.00004,NA,2022-08-15
+"604","499884","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"605","499931","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"606","499939","GERMAN BANK (AREA 7)",2022-08-16,"Lady Melissa","Purse Seine","Comeau - Sea Life",99,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.35667,-66.43667,99,NA,2022-08-16
+"607","499943","GERMAN BANK (AREA 7)",2022-08-16,"Lady Melissa","Purse Seine","Comeau - Sea Life",99,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.35667,-66.43667,99,NA,2022-08-16
+"608","499949","GERMAN BANK (AREA 7)",2022-08-16,"Lady Melissa","Purse Seine","Comeau - Sea Life",99,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.35667,-66.43667,99,NA,2022-08-16
+"609","499954","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"610","499957","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"611","499966","GERMAN BANK (AREA 7)",2022-08-16,"Lady Melissa","Purse Seine","Comeau - Sea Life",99,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.35667,-66.43667,99,NA,2022-08-16
+"612","500041","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"613","500047","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"614","500048","Scots Bay",2022-08-10,"Lady Melissa","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"615","500049","SCOTS BAY (AREA 8)",2022-08-11,"Lady Janice II","Purse Seine","Comeau - Sea Life",162,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"616","500052","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"617","500056","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"618","500063","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"619","500073","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"620","500103","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"621","500115","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"622","500131","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"623","500184","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"624","500195","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"625","500213","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"626","500217","Scots Bay",2022-09-07,"Fundy Monarch","Purse Seine","Connors",172,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.96667,146.000065,NA,2022-09-05
+"627","500223","Scots Bay",2022-08-11,"Canada 100","Purse Seine","Connors",124.6,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"628","500225","Scotts Bay ",2022-08-17,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.125,-65.0725,115.000032,NA,2022-08-16
+"629","500226","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"630","500245","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"631","500249","SCOTS BAY (AREA 8)",2022-08-11,"Lady Janice II","Purse Seine","Comeau - Sea Life",162,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"632","500252","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"633","500253","Scots Bay",2022-08-11,"Canada 100","Purse Seine","Connors",124.6,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"634","500256","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"635","500270","Scotts Bay ",2022-08-17,"Morning Star","Purse Seine","Scotia Garden",113,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"636","500271","Long Island Shore",2022-08-11,"Brunswick Provider","Purse Seine","Connors",25,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,44.3,-66.31667,15,NA,2022-08-10
+"637","500283","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",124,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"638","500296","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"639","500297","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"640","500301","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"641","500306","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"642","500326","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"643","500330","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"644","500342","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"645","500352","SCOTS BAY (AREA 8)",2022-08-11,"Lady Janice II","Purse Seine","Comeau - Sea Life",162,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"646","500392","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"647","500396","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"648","500458","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"649","500486","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"650","500558","Scots Bay",2022-08-24,"Fundy Monarch","Purse Seine","Connors",111,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.13333,-65,97.00002,NA,2022-08-23
+"651","500598","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"652","500658","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"653","500695","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"654","500735","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"655","500952","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",139,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"656","500961","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"657","502044","SCOTS BAY (AREA 8)",2002-09-08,"Lady Janice II","Purse Seine","Comeau - Sea Life",20,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.18867,-64.96033,20,NA,2022-09-07
+"658","502079","Scots Bay",2022-08-24,"Brunswick Provider","Purse Seine","Connors",57,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,50.000005,NA,2022-08-22
+"659","502085","Scots Bay",2022-09-19,"Fundy Monarch","Purse Seine","Connors",203,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.15,-64.98333,189,NA,2022-09-19
+"660","502094","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"661","502095","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"662","502111","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"663","502129","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"664","502148","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"665","502190","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"666","502247","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"667","502292","Scots Bay",2022-09-08,"Canada 100","Purse Seine","Connors",68,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,47,NA,2022-09-07
+"668","502304","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"669","502308","German Bank",2022-08-30,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28433,-66.3675,116.00004,NA,2022-08-30
+"670","502309","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"671","502315","GERMAN BANK (AREA 7)",2022-08-31,"Lady Janice II","Purse Seine","Comeau - Sea Life",78,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.24783,-66.33733,78,NA,2022-08-30
+"672","502337","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"673","502361","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"674","502380","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"675","502385","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"676","502429","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"677","502431","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"678","502496","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"679","502516","GERMAN BANK (AREA 7)",2022-08-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",51,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27433,-66.37183,51.000015,NA,2022-08-25
+"680","502546","GERMAN BANK (AREA 7)",2022-08-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27433,-66.37183,51.000015,NA,2022-08-25
+"681","502550","GERMAN BANK (AREA 7)",2022-08-26,"Sealife II","Purse Seine","Comeau - Sea Life",96,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28833,-66.37667,96,NA,2022-08-25
+"682","502622","GERMAN BANK (AREA 7)",2022-08-31,"Lady Melissa","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35333,74.00003,NA,2022-08-31
+"683","502653","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"684","502660","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"685","502664","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"686","502692","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"687","502718","GERMAN BANK (AREA 7)",2022-08-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",51,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27433,-66.37183,51.000015,NA,2022-08-25
+"688","502723","German Bank",2022-08-30,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28433,-66.3675,116.00004,NA,2022-08-30
+"689","502724","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"690","502769","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"691","502796","German Bank",2022-08-30,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28433,-66.3675,116.00004,NA,2022-08-30
+"692","502797","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"693","502801","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"694","502847","German Bank",2022-08-31,"Morning Star","Purse Seine","Cape Breeze",13,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2805,-66.3595,13.000005,NA,2022-08-31
+"695","502850","GERMAN BANK (AREA 7)",2022-08-31,"Lady Janice II","Purse Seine","Comeau - Sea Life",78,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.24783,-66.33733,78,NA,2022-08-30
+"696","502885","GERMAN BANK (AREA 7)",2022-08-26,"Lady Janice II","Purse Seine","Comeau - Sea Life",51,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27433,-66.37183,51.000015,NA,2022-08-25
+"697","502898","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"698","502903","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"699","502933","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"700","502976","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"701","502992","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"702","506113","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"703","506114","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"704","506117","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"705","506137","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"706","506149","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"707","506201","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"708","506209","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"709","506218","Scots Bay",2022-09-19,"Canada 100","Purse Seine","Connors",126,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.14683,-65.002,71.999968,NA,2022-09-19
+"710","506229","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"711","506243","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"712","507308","Patch",2022-07-07,"Fundy Monarch","Purse Seine","Connors",37.6,"ConnorsReturns2022.csv",NA,NA,NA,"4WK",NA,44.3,-62.26667,36,NA,2022-07-06
+"713","507389","White Head",2022-07-08,"Canada 100","Purse Seine","Connors",72.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.61833,-66.65617,28.999992,NA,2022-07-08
+"714","507438","White Head",2022-07-15,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.65,83.99997,NA,2022-07-14
+"715","507609","White Head",2022-07-15,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.65,83.99997,NA,2022-07-14
+"716","507716","White Head",2022-07-15,"Brunswick Provider","Purse Seine","Connors",84,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.61667,-66.65,83.99997,NA,2022-07-14
+"717","507736","White Head",2022-07-08,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.55,-66.61667,61.99999,NA,2022-07-08
+"718","507737","White Head",2022-07-08,"Brunswick Provider","Purse Seine","Connors",75,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.55,-66.61667,61.99999,NA,2022-07-08
+"719","510055","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"720","510072","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"721","510089","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"722","510101","German Bank",2021-10-22,"Morning Star","Purse Seine","Scotia Garden",53,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.52833,53,NA,2021-10-22
+"723","510146","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"724","510156","German Bank",2021-10-21,"Brunswick Provider","Purse Seine","Connors",NA,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.36667,101.999952,NA,2021-10-20
+"725","510467","GERMAN BANK (AREA 7)",2022-09-01,"Sealife II","Purse Seine","Comeau - Sea Life",36,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.25667,-66.35333,35.999985,NA,2022-08-31
+"726","510529","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"727","510552","GERMAN BANK (AREA 7)",2022-09-01,"Sealife II","Purse Seine","Comeau - Sea Life",36,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.25667,-66.35333,35.999985,NA,2022-08-31
+"728","510570","GERMAN BANK (AREA 7)",2022-08-31,"Lady Janice II","Purse Seine","Comeau - Sea Life",78,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.24783,-66.33733,78,NA,2022-08-30
+"729","510587","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"730","510594","German Bank",2022-09-01,"Tasha Marie","Purse Seine","Cape Breeze",19,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27167,-66.35833,16.15,NA,2022-08-31
+"731","510611","GERMAN BANK (AREA 7)",2022-08-31,"Lady Melissa","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35333,74.00003,NA,2022-08-31
+"732","510638","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"733","511097","GANNET DRY LEDGE-AREA 5",2021-06-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",56,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.63017,-66.9995,56.000027,NA,2021-06-13
+"734","511121","Scotts Bay",2021-08-23,"Brunswick Provider","Purse Seine","Connors",110,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,110.000007,NA,2021-08-23
+"735","511150","GANNET DRY LEDGE-AREA 5",2021-06-14,"Sealife II","Purse Seine","Comeau - Sea Life",34,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.45833,-67.00167,34,NA,2021-06-13
+"736","511231","German Bank",2021-09-15,"Canada 100","Purse Seine","Connors",97,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29867,-66.37833,91.000032,NA,2021-09-15
+"737","511323","Scotts Bay",2021-08-25,"Canada 100","Purse Seine","Connors",76,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.18,-64.95867,75.999975,NA,2021-08-26
+"738","511454","Scotts Bay",2021-08-02,"Fundy Monarch","Purse Seine","Connors",68,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.11667,-65.03333,68.00003,NA,2021-08-02
+"739","511675","McDormand Patch",2021-08-04,"Brunswick Provider","Purse Seine","Connors",46,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.1,-66.46667,45.99999,NA,2021-08-03
+"740","511729","Scotts Bay",2021-08-03,"Canada 100","Purse Seine","Connors",67,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.154,-65.01033,22.33334,NA,2021-08-03
+"741","512080","Scots Bay",2021-08-03,"Morning Star","Purse Seine","Scotia Garden",16,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15567,-64.99733,16.000005,NA,2021-08-03
+"742","512092","Scots Bay",2021-08-03,"Leroy & Barry II","Purse Seine","Scotia Garden",27,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.125,-65.05,26.999986,NA,2021-08-02
+"743","512098","Scots Bay",2021-08-03,"Morning Star","Purse Seine","Scotia Garden",16,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15567,-64.99733,16.000005,NA,2021-08-03
+"744","512120","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"745","512376","SCOTS BAY (AREA 8)",2022-07-28,"Lady Janice II","Purse Seine","Comeau - Sea Life",185,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.182,-64.956,185,NA,2022-07-27
+"746","512503","Moores Ledge",2021-08-10,"Canada 100","Purse Seine","Connors",48,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.3485,-66.3645,21,NA,2021-08-09
+"747","512543","Moores Ledge & Prong",2021-08-10,"Canada 100","Purse Seine","Connors",31,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.3485,-66.3645,21,NA,2021-08-09
+"748","512567","Moores Ledge",2021-08-10,"Canada 100","Purse Seine","Connors",48,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.3485,-66.3645,21,NA,2021-08-09
+"749","513256","Long Island Shore",2021-07-05,"Brunswick Provider","Purse Seine","Connors",100,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.33333,-66.35,78,NA,2021-07-05
+"750","514164","German Bank",2021-10-06,"Morning Star","Purse Seine","Scotia Garden",137,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.239,-66.403,137,NA,2021-10-06
+"751","514221","GERMAN BANK-AREA 7",2021-10-06,"Lady Janice II/Lady Melissa","Purse Seine","Comeau - Sea Life",273,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29183,-66.45483,149.999964,NA,2021-10-06
+"752","514422","German Bank",2021-10-06,"Morning Star","Purse Seine","Scotia Garden",137,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.239,-66.403,137,NA,2021-10-06
+"753","514447","German Bank",2021-10-06,"Morning Star","Purse Seine","Scotia Garden",137,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.239,-66.403,137,NA,2021-10-06
+"754","514635","Seal Island",2021-10-07,"Brunswick Provider","Purse Seine","Connors",129,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,133.000064,NA,2021-10-06
+"755","514668","Seal Island",2021-10-07,"Brunswick Provider","Purse Seine","Connors",129,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,133.000064,NA,2021-10-06
+"756","514724","Seal Island ",2021-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",39,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31333,-66.15,108.000048,NA,2021-10-06
+"757","514729","Seal Island",2021-10-07,"Brunswick Provider","Purse Seine","Connors",129,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,133.000064,NA,2021-10-06
+"758","514759","Seal Island ",2021-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",108,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31333,-66.15,108.000048,NA,2021-10-06
+"759","514777","Seal Island",2021-10-07,"Brunswick Provider","Purse Seine","Connors",129,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,133.000064,NA,2021-10-06
+"760","514778","Seal Island ",2021-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",39,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31333,-66.15,108.000048,NA,2021-10-06
+"761","514801","Seal Island",2021-10-07,"Brunswick Provider","Purse Seine","Connors",129,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,133.000064,NA,2021-10-06
+"762","515196","SCOTS BAY-AREA 8",2021-07-19,"Lady Janice II","Purse Seine","Comeau - Sea Life",154,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.29683,-64.85483,125.125,NA,2021-07-18
+"763","515202","Scots Bay",2021-07-20,"Leroy & Barry II","Purse Seine","Scotia Garden",82,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XS",NA,45.30933,-65.01817,81.999996,NA,2021-07-20
+"764","515215","McDormand Patch",2021-08-04,"Brunswick Provider","Purse Seine","Connors",46,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,44.1,-66.46667,45.99999,NA,2021-08-03
+"765","515504","SCOTS BAY-AREA 8",2021-07-20,"Lady Melissa","Purse Seine","Comeau - Sea Life",72,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.2995,-64.88317,72.000009,NA,2021-07-20
+"766","516366","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"767","516640","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"768","516656","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",53,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"769","516698","North East Banks",2021-10-06,"Canada 100","Purse Seine","Connors",95902,"ConnorsReturns2022.csv",NA,NA,NA,"5YB",NA,44.28633,-67.01333,83,NA,2021-10-05
+"770","516715","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"771","516733","GERMAN BANK-AREA 7",2021-10-22,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.2955,-66.3765,66.780486,NA,2021-10-22
+"772","516745","German Bank",2021-10-22,"Morning Star","Purse Seine","Scotia Garden",53,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.52833,53,NA,2021-10-22
+"773","516759","German Bank",2021-10-22,"Morning Star","Purse Seine","Scotia Garden",53,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.52833,53,NA,2021-10-22
+"774","516760","German Bank",2021-10-26,"Leroy & Barry II","Purse Seine","Scotia Garden",88,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21667,-66.325,88.00002,NA,2021-10-25
+"775","516775","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"776","516784","GERMAN BANK-AREA 7",2021-10-22,"Lady Janice II/Lady Melissa","Purse Seine","Comeau - Sea Life",233,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21683,-66.35017,159,NA,2021-10-21
+"777","516835","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"778","516963","German Bank",2021-10-26,"Leroy & Barry II","Purse Seine","Scotia Garden",88,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.21667,-66.325,88.00002,NA,2021-10-25
+"779","516976","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"780","517337","Sandy Cove",2022-08-22,"Canada 100","Purse Seine","Connors",117,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.1385,-65.04967,91.999995,NA,2022-08-21
+"781","518505","Scots Bay",2022-08-10,"Lady Melissa","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"782","518513","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"783","518517","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"784","518533","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"785","518601","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"786","518626","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"787","518630","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"788","518644","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"789","518667","Scots Bay",2022-08-11,"Lady Janice II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"790","518726","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"791","518735","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"792","518748","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"793","518776","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"794","518780","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"795","518791","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"796","518800","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"797","522002","Scots Bay",2022-08-10,"Canada 100","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.18017,-64.965,87.99999,NA,2022-08-10
+"798","522021","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"799","522025","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"800","522029","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",149,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"801","522223","SCOTS BAY (AREA 8)",2022-08-23,"Lady Melissa","Purse Seine","Comeau - Sea Life",40,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.13667,-65.04167,40,NA,2022-08-21
+"802","522275","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"803","522281","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"804","522287","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"805","522291","SCOTS BAY (AREA 8)",2022-08-11,"Lady Janice II","Purse Seine","Comeau - Sea Life",162,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1595,-64.972,161.999945,NA,2022-08-10
+"806","522370","Scots Bay",2022-08-10,"Lady Melissa","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"807","522380","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"808","522385","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"809","522389","SCOTS BAY (AREA 8)",2022-08-11,"Sealife II","Purse Seine","Comeau - Sea Life",73,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.19333,-64.885,72.999972,NA,2022-08-11
+"810","522397","Scotts Bay ",2022-08-17,"Morning Star","Purse Seine","Scotia Garden",113,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"811","522399","SCOTS BAY (AREA 8)",2022-08-10,"Lady Janice II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1745,-64.9675,74.000016,NA,2022-08-09
+"812","522460","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"813","522469","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"814","522501","Scots Bay",2022-08-12,"Canada 100","Purse Seine","Connors",139,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16817,-64.95617,107.99998,NA,2022-08-12
+"815","522544","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"816","522563","Scotts Bay ",2022-08-17,"Morning Star","Purse Seine","Scotia Garden",113,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"817","522665","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"818","522687","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"819","522729","German Bank",2022-08-26,"Morning Star","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"820","522747","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"821","522754","German Bank",2022-08-30,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"822","522803","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"823","522854","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"824","522875","German Bank",2022-09-02,"Tasha Marie","Purse Seine","Cape Breeze",66,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26,-66.35333,65.99999,NA,2022-09-01
+"825","522877","German Bank",2022-08-30,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.28433,-66.3675,116.00004,NA,2022-08-30
+"826","522891","German Bank",2022-08-26,"Leroy & Barry II","Purse Seine","Scotia Garden",69,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27,-66.3665,68.99997,NA,2022-08-25
+"827","522911","German Bank",2022-08-26,"Morning Star","Purse Seine","Scotia Garden",89,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.276,-66.37283,89,NA,2022-08-25
+"828","522931","Scots Bay",2022-08-22,"Lady Janice II","Purse Seine","Comeau - Sea Life",NA,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.1435,-65.006,99.000004,NA,2022-08-21
+"829","522937","Scot's Bay",2022-08-18,"Morning Star","Purse Seine","",113,"DFOmailedin2023.csv",NA,NA,NA,"4XR",NA,45.11717,-65.10083,112.99995,NA,2022-08-16
+"830","522938","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"831","522964","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"832","526523","Seal Island ",2021-10-08,"Morning Star","Purse Seine","Scotia Garden",40,"ScotiaGardenReturns2021.csv",NA,NA,NA,"5YB",NA,44.27467,-67.00033,39,NA,2021-10-07
+"833","526873","German Bank",2021-10-21,"Morning Star","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29667,-66.3715,115,NA,2021-10-21
+"834","527057","Scots Bay",2020-08-24,"Fundy Monarch","Purse Seine","Connors",223,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,222.99992,NA,2020-08-24
+"835","527118","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"836","531034","SCOTS BAY-AREA 8",2020-06-16,"Lady Janice II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.26667,-64.93333,67.999966,NA,2020-06-15
+"837","531273","Scots Bay",2020-06-15,"Morning Star","Purse Seine","Scotia Garden",131,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.28333,-64.85,131,NA,2020-06-15
+"838","531356","SCOTS BAY-AREA 8",2020-08-12,"Lady Melissa","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.06667,-65.1,102.00002,NA,2020-08-11
+"839","531382","Scots Bay",2020-08-13,"Leroy & Barry II","Purse Seine","Scotia Garden",68,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65.05,71.000024,NA,2020-08-11
+"840","531383","SCOTS BAY-AREA 8",2020-08-12,"Lady Melissa","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.06667,-65.1,102.00002,NA,2020-08-11
+"841","531489","German Bank",2020-08-18,"Lady Melissa","Purse Seine","Cape Breeze",99,"CapeBreezeReturns2020.csv",NA,NA,NA,"4XQ",NA,43.45,-66.41667,99,NA,2020-08-18
+"842","550014","Scots Bay",2020-08-12,"Canada 100","Purse Seine","Connors",86,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-65.03333,43,NA,2020-08-12
+"843","550036","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"844","550037","Scots Bay",2020-08-12,"Leroy & Barry II","Purse Seine","Scotia Garden",71,"ScotiaGardenReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65.05,71.000024,NA,2020-08-11
+"845","550074","Scots Bay",2020-08-10,"Canada 100","Purse Seine","Connors",110,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"846","550123","Scots Bay",2020-08-24,"Fundy Monarch","Purse Seine","Connors",223,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.2,-64.88333,222.99992,NA,2020-08-24
+"847","550158","SCOTS BAY-AREA 8",2020-08-11,"Sealife II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-64.98333,50.000005,NA,2020-08-10
+"848","550159","Scots Bay",2020-08-11,"Morning Star","Purse Seine","Cape Breeze Seafoods",NA,"DFOmailedin2023.csv",NA,NA,NA,"4XR",NA,45.11667,-65,79.99996,NA,2020-08-10
+"849","550166","SCOTS BAY-AREA 8",2020-08-11,"Lady Janice II","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.11667,-65,99.4012,NA,2020-08-11
+"850","550167","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"851","550173","SCOTS BAY-AREA 8",2020-08-12,"Lady Janice II/Lady Melissa","Purse Seine","COMEAU-SEA LIFE",NA,"ComeauReturns2020.csv",NA,NA,NA,"4XR",NA,45.06667,-65.1,102.00002,NA,2020-08-11
+"852","550194","Scots Bay",2020-08-11,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2020.csv",NA,NA,NA,"4XR",NA,45.1,-65,110.00004,NA,2020-08-10
+"853","551047","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"854","551063","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"855","551067","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"856","551097","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"857","551110","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"858","551123","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"859","551130","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"860","551142","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"861","551214","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"862","551575","White Head",2022-07-15,"Canada 100","Purse Seine","Connors",65,"ConnorsReturns2022.csv",NA,NA,NA,"4XS",NA,44.6345,-66.648,64.999998,NA,2022-07-14
+"863","552006","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"864","552010","Wolves",2020-10-15,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"865","552014","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",65,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"866","552051","Wolves",2020-10-07,"Brunswick Provider","Purse Seine","Connors",126,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95067,-66.69667,125.99998,NA,2020-10-06
+"867","552056","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"868","552081","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"869","552085","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"870","552092","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"871","552112","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"872","552132","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"873","552159","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"874","552176","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"875","552177","Wolves",2020-10-20,"Brunswick Provider","Purse Seine","Connors",11,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,11.000004,NA,2020-10-19
+"876","552229","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"877","552243","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"878","552271","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"879","552282","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"880","552293","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"881","552305","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"882","552318","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"883","552330","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"884","552341","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"885","552378","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"886","552390","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"887","552395","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"888","552419","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"889","552428","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"890","552437","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"891","552443","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"892","552444","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"893","552456","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"894","552463","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"895","552489","Wolves",2020-10-07,"Canada 100","Purse Seine","Connors",122,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94567,-66.74317,84.46158,NA,2020-10-06
+"896","552583","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"897","552588","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"898","552616","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"899","552635","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"900","552673","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"901","552683","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"902","552707","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"903","552758","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",70,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"904","552771","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"905","552817","Wolves",2020-10-15,"Brunswick Provider","Purse Seine","Connors",55,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94817,-66.776,76.000001,NA,2020-10-14
+"906","552818","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"907","552826","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"908","552828","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"909","552845","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"910","552854","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"911","552867","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"912","552882","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"913","552939","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"914","552975","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"915","552992","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"916","553003","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"917","553019","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"918","553023","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"919","553089","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"920","553118","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"921","553147","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"922","553178","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"923","553210","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"924","553212","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"925","553230","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"926","553247","Wolves",2020-10-15,"Canada 100","Purse Seine","Connors",59,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"927","553265","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"928","553280","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"929","553314","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"930","553350","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",65,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"931","553369","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"932","553378","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",70,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"933","553399","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"934","553403","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"935","553405","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"936","553422","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"937","553430","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"938","553467","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"939","553500","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"940","553507","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",65,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"941","553511","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"942","553519","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",70,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"943","553562","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"944","553597","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"945","553670","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"946","553671","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",70,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"947","553675","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"948","553679","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",72,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"949","553686","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"950","553789","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"951","553795","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"952","553826","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"953","553853","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"954","553900","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"955","553909","Wolves",2020-10-15,"Brunswick Provider","Purse Seine","Connors",55,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94817,-66.776,76.000001,NA,2020-10-14
+"956","553910","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"957","553929","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"958","553947","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"959","553949","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"960","553962","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"961","553967","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"962","553976","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"963","554001","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"964","554011","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"965","554015","Wolves",2020-10-20,"Brunswick Provider","Purse Seine","Connors",11,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,11.000004,NA,2020-10-19
+"966","554021","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"967","554050","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"968","554063","Wolves",2020-10-15,"Brunswick Provider","Purse Seine","Connors",55,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94817,-66.776,76.000001,NA,2020-10-14
+"969","554067","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"970","554077","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"971","554103","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"972","554228","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"973","554261","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"974","554300","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"975","554313","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"976","554368","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"977","554379","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"978","554393","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"979","554402","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"980","554410","Wolves",2020-10-16,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.69,44.00001,NA,2020-10-15
+"981","554416","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"982","554419","Wolves",2020-10-13,"Canada 100","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.98,-66.71383,48.461535,NA,2020-10-13
+"983","554430","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"984","554437","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"985","554468","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"986","554485","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"987","554500","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"988","554518","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"989","554550","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"990","554579","Wolves",2020-10-20,"Brunswick Provider","Purse Seine","Connors",11,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,11.000004,NA,2020-10-19
+"991","554600","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"992","554603","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"993","554610","Wolves",2020-10-14,"Brunswick Provider","Purse Seine","Connors",76,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.66667,54.999984,NA,2020-10-14
+"994","554626","Wolves",2020-10-15,"Brunswick Provider","Purse Seine","Connors",55,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.94817,-66.776,76.000001,NA,2020-10-14
+"995","554654","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"996","554677","Wolves",2020-10-20,"Brunswick Provider","Purse Seine","Connors",11,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,11.000004,NA,2020-10-19
+"997","554678","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"998","554682","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"999","554687","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1000","554694","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1001","554699","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"1002","554713","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1003","554718","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1004","554722","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1005","554761","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"1006","554781","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"1007","554792","German Bank",2020-10-14,"Fundy Monarch","Purse Seine","Connors",134,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.76667,22,NA,2020-10-14
+"1008","554798","Wolves",2020-10-13,"Brunswick Provider","Purse Seine","Connors",60,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.95,-66.73333,72,NA,2020-10-13
+"1009","554802","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"1010","554810","Wolves",2020-10-19,"Canada 100","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96417,-66.69367,36.4,NA,2020-10-18
+"1011","554834","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"1012","554869","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"1013","554877","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"1014","554878","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"1015","554885","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"1016","554891","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"1017","554918","Wolves",2020-10-19,"Brunswick Provider","Purse Seine","Connors",81,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.97817,-66.6955,80.999985,NA,2020-10-18
+"1018","554926","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"1019","554941","Wolves",2020-10-16,"Brunswick Provider","Purse Seine","Connors",38,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.9775,-66.7145,37.99999,NA,2020-10-16
+"1020","554994","Wolves",2020-10-15,"Fundy Monarch","Purse Seine","Connors",78,"ConnorsReturns2020.csv",NA,NA,NA,"4XS",NA,44.96667,-66.73333,78,NA,2020-10-15
+"1021","570488","GERMAN BANK (AREA 7)",2022-10-13,"Sealife II","Purse Seine","Comeau - Sea Life",NA,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.41667,55.846175,NA,2022-10-12
+"1022","570527","GERMAN BANK (AREA 7)",2022-10-13,"Sealife II","Purse Seine","Comeau - Sea Life",NA,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.41667,55.846175,NA,2022-10-12
+"1023","570583","GERMAN BANK (AREA 7)",2022-10-13,"Sealife II","Purse Seine","Comeau - Sea Life",NA,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.41667,55.846175,NA,2022-10-12
+"1024","579635","N/A",2021-08-31,"Lady Melissa","Purse Seine","Connors",NA,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12717,-65.055,141,NA,2021-08-31
+"1025","579872","Scotts Bay",2021-08-25,"Canada 100","Purse Seine","Connors",776,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.18,-64.95867,75.999975,NA,2021-08-26
+"1026","580027","North East Banks",2021-10-05,"Fundy Monarch","Purse Seine","Connors",43,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.28333,-66.45,104.999996,NA,2021-10-05
+"1027","580083","Scots Bay",2021-07-19,"Morning Star","Purse Seine","Scotia Garden",57,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.315,-64.90383,57,NA,2021-07-19
+"1028","580142","GANNET DRY LEDGE-AREA 5",2021-06-29,"Sealife II","Purse Seine","Comeau - Sea Life",58,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.78,-67.05667,58.00002,NA,2021-06-28
+"1029","580175","SCOTS BAY-AREA 8",2021-08-31,"Sealife II","Purse Seine","Comeau - Sea Life",146,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.12833,-65.05333,52.14285,NA,2021-08-31
+"1030","580326","Gannet Dry Ledge",2021-06-18,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.58167,-66.7805,114.999962,NA,2021-06-17
+"1031","580683","Gannet Dry Ledge",2021-06-19,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.58167,-66.7805,114.999962,NA,2021-06-17
+"1032","580818","German Bank",2021-09-08,"Fundy Monarch","Purse Seine","Connors",104,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.3,-66.4,104.00004,NA,2021-09-08
+"1033","580835","German Bank",2021-09-15,"Canada 100","Purse Seine","Connors",97,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.29867,-66.37833,91.000032,NA,2021-09-15
+"1034","581083","SCOTS BAY-AREA 8",2021-06-08,"Lady Melissa","Purse Seine","Comeau - Sea Life",151.1,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.23733,-64.91317,150.999926,NA,2021-06-08
+"1035","581226","Scotts Bay",2021-06-10,"Fundy Monarch","Purse Seine","Connors",67,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.28333,-64.91667,67.00001,NA,2021-06-09
+"1036","581777","German Bank",2021-06-24,"Leroy & Barry II","Purse Seine","Scotia Garden",90,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XQ",NA,43.79167,-67.04667,71.341465,NA,2021-06-24
+"1037","581796","German Bank",2021-09-08,"Fundy Monarch","Purse Seine","Connors",104,"ConnorsReturns2021.csv",NA,NA,NA,"4XQ",NA,43.3,-66.4,104.00004,NA,2021-09-08
+"1038","581803","Scotts Bay",2021-09-14,"Brunswick Provider","Purse Seine","Connors",130,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65.06667,122.00004,NA,2021-09-14
+"1039","583902","White Head",2021-08-11,"Fundy Monarch","Purse Seine","Connors",44,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,44.60667,-66.63333,34,NA,2021-08-10
+"1040","584493","North East Banks",2021-08-13,"Brunswick Provider","Purse Seine","Connors",42,"ConnorsReturns2021.csv",NA,NA,NA,"4WE",NA,44.25,-60.98333,53.999972,NA,2021-08-11
+"1041","584951","Grand Manan Banks",2021-10-24,"Canada 100","Purse Seine","Connors",137,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,44.78367,-66.7385,35.929824,NA,2021-10-24
+"1042","585004","Brier",2022-07-19,"Brunswick Provider","Purse Seine","Connors",42.9,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,44.33333,-66.33333,32.999995,NA,2022-07-18
+"1043","585308","Sandy Cove",2022-07-21,"Brunswick Provider","Purse Seine","Connors",122.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,44.51033,-66.09833,88,NA,2022-07-20
+"1044","585545","Seal Cove",2022-07-22,"Brunswick Provider","Purse Seine","Connors",17,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,44.5,-66.08333,3.000004,NA,2022-07-22
+"1045","585563","South East Banks",2022-06-14,"Fundy Monarch","Purse Seine","Connors",108,"ConnorsReturns2022.csv",NA,NA,NA,"5YB",NA,44.3,-66.98333,64.99998,NA,2022-06-14
+"1046","585683","Scots Bay",2022-07-12,"Brunswick Provider","Purse Seine","Connors",150,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.11667,-65.01667,116,NA,2022-07-10
+"1047","585852","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1048","585855","Scots Bay",2022-08-09,"Lady Janice II","Purse Seine","Cape Breeze",NA,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XR",NA,45.18267,-64.9495,89.000015,NA,2022-08-09
+"1049","585856","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1050","585858","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1051","585860","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1052","585864","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1053","585876","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1054","585883","Scots Bay",2022-08-10,"Brunswick Provider","Purse Seine","Connors",49.5,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.98333,37.99999,NA,2022-08-09
+"1055","585885","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1056","585894","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1057","585900","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1058","585903","SCOTS BAY (AREA 8)",2022-08-09,"Sealife II","Purse Seine","Comeau - Sea Life",74,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.145,-65.03167,52.85715,NA,2022-08-09
+"1059","585910","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1060","585912","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1061","585919","Scotts Bay ",2022-08-10,"Leroy & Barry II","Purse Seine","Scotia Garden",98,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.16833,-64.95667,98,NA,2022-08-09
+"1062","585920","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1063","585938","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1064","585942","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1065","585944","SCOTS BAY (AREA 8)",2022-08-10,"Lady Melissa","Purse Seine","Comeau - Sea Life",111,"ComeauReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.93833,110.999955,NA,2022-08-09
+"1066","585945","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1067","585964","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1068","585967","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1069","585970","Scotts Bay ",2022-08-09,"Morning Star","Purse Seine","Scotia Garden",116,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XR",NA,45.1905,-64.89917,115.99995,NA,2022-08-09
+"1070","586078","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"1071","587290","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"1072","587293","Scots Bay",2021-08-31,"Leroy & Barry II","Purse Seine","Scotia Garden",70,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03667,68.00001,NA,2021-08-31
+"1073","587334","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1074","587360","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1075","587582","Scotts Bay",2021-09-01,"Brunswick Provider","Purse Seine","Connors",27,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.03333,27,NA,2021-08-31
+"1076","587583","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1077","587637","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1078","587730","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1079","587744","Scotts Bay",2021-09-01,"Canada 100","Purse Seine","Connors",80,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.12483,-65.04733,80,NA,2021-09-01
+"1080","589502","SCOTS BAY-AREA 8",2021-08-03,"Lady Melissa","Purse Seine","Comeau - Sea Life",55,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.1355,-65.0205,55,NA,2021-08-02
+"1081","589507","SCOTS BAY-AREA 8",2021-08-03,"Lady Melissa","Purse Seine","Comeau - Sea Life",55,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.1355,-65.0205,55,NA,2021-08-02
+"1082","589533","SCOTS BAY-AREA 8",2021-08-03,"Sealife II","Purse Seine","Comeau - Sea Life",53,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"1083","589571","SCOTS BAY-AREA 8",2021-08-03,"Lady Janice II/Sealife II","Purse Seine","Comeau - Sea Life",88,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"1084","589646","SCOTS BAY-AREA 8",2021-08-03,"Lady Janice II","Purse Seine","Comeau - Sea Life",35,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.12983,-65.03783,20.810812,NA,2021-08-01
+"1085","589705","Scots Bay",2021-08-03,"Morning Star","Purse Seine","Scotia Garden",16,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15567,-64.99733,16.000005,NA,2021-08-03
+"1086","589736","Scots Bay",2021-08-03,"Morning Star","Purse Seine","Scotia Garden",16,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15567,-64.99733,16.000005,NA,2021-08-03
+"1087","589805","SCOTS BAY-AREA 8",2021-08-03,"Lady Janice II","Purse Seine","Comeau - Sea Life",35,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.12983,-65.03783,20.810812,NA,2021-08-01
+"1088","589826","Scots Bay",2021-08-03,"Leroy & Barry II","Purse Seine","Scotia Garden",27,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.125,-65.05,26.999986,NA,2021-08-02
+"1089","589836","Scots Bay",2021-08-03,"Canada 100","Purse Seine","Connors",86,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.154,-65.01033,22.33334,NA,2021-08-03
+"1090","589875","Scots Bay",2021-08-03,"Leroy & Barry II","Purse Seine","Scotia Garden",27,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.125,-65.05,26.999986,NA,2021-08-02
+"1091","589877","Scotts Bay",2021-08-03,"Brunswick Provider","Purse Seine","Connors",86,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.1,-65.075,68.00003,NA,2021-08-03
+"1092","589884","Scots Bay",2021-08-03,"Morning Star","Purse Seine","Scotia Garden",16,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15567,-64.99733,16.000005,NA,2021-08-03
+"1093","589890","SCOTS BAY-AREA 8",2021-08-03,"Lady Janice II/Sealife II","Purse Seine","Comeau - Sea Life",88,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"1094","589933","Scots Bay",2021-08-03,"Leroy & Barry II","Purse Seine","Scotia Garden",27,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.125,-65.05,26.999986,NA,2021-08-02
+"1095","589935","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"1096","589949","Scots Bay",2021-08-04,"Morning Star","Purse Seine","Scotia Garden",28,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.13533,-65.01517,28,NA,2021-08-04
+"1097","590064","SCOTS BAY-AREA 8",2021-08-03,"Sealife II","Purse Seine","Comeau - Sea Life",53,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"1098","590065","SCOTS BAY-AREA 8",2021-08-03,"Sealife II","Purse Seine","Comeau - Sea Life",53,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14833,-65.02,21.2,NA,2021-08-02
+"1099","590150","SCOTS BAY-AREA 8",2021-08-19,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"1100","590156","Scots Bay",2021-08-19,"Leroy & Barry II","Purse Seine","Scotia Garden",42,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65,41.999999,NA,2021-08-18
+"1101","590170","Scotts Bay",2021-08-18,"Brunswick Provider","Purse Seine","Connors",65,"ConnorsReturns2021.csv",NA,NA,NA,"4XS",NA,45.13333,-65.98333,61.99998,NA,2021-08-18
+"1102","590200","SCOTS BAY-AREA 8",2021-08-17,"Lady Janice II","Purse Seine","Comeau - Sea Life",109,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.12183,-65.07567,92.65,NA,2021-08-15
+"1103","590321","Scots Bay",2021-08-18,"Morning Star","Purse Seine","Scotia Garden",50,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.14283,-65.02833,54,NA,2021-08-17
+"1104","590330","Scotts Bay",2021-08-27,"Canada 100","Purse Seine","Connors",64,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.15067,-65.017,63.999975,NA,2021-08-27
+"1105","590372","Scots Bay ",2021-08-18,"Morning Star","Purse Seine","Scotia Garden",50,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.14283,-65.02833,54,NA,2021-08-17
+"1106","590536","SCOTS BAY-AREA 8",2021-08-19,"Lady Janice II","Purse Seine","Comeau - Sea Life",47,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.13317,-65.01983,23.499997,NA,2021-08-19
+"1107","590663","Scotts Bay",2021-08-19,"Fundy Monarch","Purse Seine","Connors",36,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.01667,26.00001,NA,2021-08-17
+"1108","590687","SCOTS BAY-AREA 8",2021-08-19,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"1109","590714","Scotts Bay",2021-08-19,"Fundy Monarch","Purse Seine","Connors",36,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.01667,26.00001,NA,2021-08-17
+"1110","590731","SCOTS BAY-AREA 8",2021-08-19,"Sealife II","Purse Seine","Comeau - Sea Life",87,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"1111","590756","SCOTS BAY-AREA 8",2021-08-19,"Lady Janice II/Lady Melissa","Purse Seine","Comeau - Sea Life",126,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.14417,-65.03317,79,NA,2021-08-18
+"1112","590768","Scotts Bay",2021-08-19,"Fundy Monarch","Purse Seine","Connors",36,"ConnorsReturns2021.csv",NA,NA,NA,"4XR",NA,45.13333,-65.01667,26.00001,NA,2021-08-17
+"1113","590796","SCOTS BAY-AREA 8",2021-08-19,"Sealife II","Purse Seine","Comeau - Sea Life",87,"ComeauReturns2021.csv",NA,NA,NA,"4XR",NA,45.16333,-64.97167,87,NA,2021-08-18
+"1114","590862","GERMAN BANK-AREA 7",2021-09-01,"Lady Melissa","Purse Seine","Comeau - Sea Life",129,"ComeauReturns2021.csv",NA,NA,NA,"4XQ",NA,43.34167,-66.42567,129.000062,NA,2021-08-31
+"1115","590964","German Bank",2022-08-31,"Fundy Monarch","Purse Seine","Connors",224,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.38333,193.99992,NA,2022-08-29
+"1116","594007","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"1117","594164","Scots Bay",2022-09-06,"Canada 100","Purse Seine","Connors",106,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.17333,-64.99667,37.666667,NA,2022-09-06
+"1118","594185","Scots Bay",2022-09-06,"Brunswick Provider","Purse Seine","Connors",113,"ConnorsReturns2022.csv",NA,NA,NA,"4XR",NA,45.16667,-64.95,100.00004,NA,2022-09-06
+"1119","600440","Seal Iland",2022-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",135,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29333,-66.14583,135.00006,NA,2022-10-07
+"1120","600457","Seal Iland",2022-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",135,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29333,-66.14583,135.00006,NA,2022-10-07
+"1121","600479","Seal Iland",2022-10-07,"Leroy & Barry II","Purse Seine","Scotia Garden",135,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29333,-66.14583,135.00006,NA,2022-10-07
+"1122","601148","SEAL ISLAND (AREA 6)",2022-09-21,"Lady Janice II","Purse Seine","Comeau - Sea Life",41,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31567,-66.1525,40.999995,NA,2022-09-20
+"1123","601184","Seal Iland",2022-09-21,"Leroy & Barry II","Purse Seine","Scotia Garden",45,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31667,-66.15,45.000018,NA,2022-09-20
+"1124","601230","Seal Iland",2022-09-21,"Morning Star","Purse Seine","Scotia Garden",106,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31617,-66.15483,105.999985,NA,2022-09-20
+"1125","601412","German Bank",2022-09-30,"Leroy & Barry II","Purse Seine","Cape Breeze",83,"CapeBreezeReturns2022.csv",NA,NA,NA,"4XQ",NA,43.23333,-66.365,83.000001,NA,2022-09-29
+"1126","603036","German Bank",2022-09-01,"Morning Star","Purse Seine","Scotia Garden",78,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.2875,-66.37167,78,NA,2022-09-01
+"1127","603451","German Bank",2022-09-02,"Morning Star","Purse Seine","Scotia Garden",107,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27917,-66.3605,107.000025,NA,2022-09-01
+"1128","603503","German Bank",2022-09-14,"Morning Star","Purse Seine","Scotia Garden",59,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26133,-66.05283,58.99998,NA,2022-09-13
+"1129","603505","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"1130","603511","GERMAN BANK (AREA 7)",2022-09-14,"Lady Melissa","Purse Seine","Comeau - Sea Life",79,"ComeauReturns2022.csv",NA,NA,NA,"4XQ",NA,43.29,-66.43,79,NA,2022-09-13
+"1131","603519","German Bank",2022-09-14,"Leroy & Barry II","Purse Seine","Scotia Garden",115,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.265,-66.386,115.00002,NA,2022-09-13
+"1132","603522","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"1133","603526","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"1134","603527","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"1135","603546","German Bank",2022-09-14,"Brunswick Provider","Purse Seine","Connors",125,"ConnorsReturns2022.csv",NA,NA,NA,"4XQ",NA,43.26667,-66.4,119.000045,NA,2022-09-14
+"1136","603644","German Bank",2022-09-19,"Leroy & Barry II","Purse Seine","Scotia Garden",102,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.27333,-66.35,102.00003,NA,2022-09-19
+"1137","603829","Seal Iland",2022-09-21,"Morning Star","Purse Seine","Scotia Garden",106,"ScotiaGardenReturns2022.csv",NA,NA,NA,"4XQ",NA,43.31617,-66.15483,105.999985,NA,2022-09-20
+"1138","5153193","Scots Bay",2021-07-19,"Morning Star","Purse Seine","Scotia Garden",57,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.315,-64.90383,57,NA,2021-07-19
+"1139","5900081","Scots Bay",2021-08-04,"Leroy & Barry II","Purse Seine","Scotia Garden",22,"ScotiaGardenReturns2021.csv",NA,NA,NA,"4XR",NA,45.15,-65.01667,22,NA,2021-08-04
