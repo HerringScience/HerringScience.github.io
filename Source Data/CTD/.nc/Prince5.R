@@ -5,31 +5,25 @@
 
 # create the Prince5 modern dataset.
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
 
 library(ncdf4)
 library(maps)
 library(dplyr)
 library(ggplot2)
 library(oce)
+library(sf)
 
-# helper function
-read_char_var <- function(nc, varname) {
-  raw <- ncvar_get(nc, varname)
-  
-  if (is.matrix(raw)) {
-    return(trimws(apply(raw, 2, paste, collapse = "")))
-  } else {
-    return(trimws(raw))
-  }
-}
+source("read_char_var.R")
+source("pad_range.R")
 
 
 ### June 29, 2026 Update:
 
+setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
+
 years <- 2017:2024
 files <- paste0(years, ".nc")
-
 out_dir <- "Casts"
 dir.create(out_dir, showWarnings = FALSE)
 
@@ -38,51 +32,31 @@ all_dates <- data.frame()
 all_casts <- list()
 counter <- 1
 
-# Small helper for map axis padding
-pad_range <- function(x, pad = 0.05) {
-  x <- x[!is.na(x)]
-  
-  if (length(x) == 0) return(c(NA, NA))
-  
-  if (length(unique(x)) == 1) {
-    return(c(x[1] - 0.05, x[1] + 0.05))
-  }
-  
-  r <- range(x, na.rm = TRUE)
-  buffer <- diff(r) * pad
-  c(r[1] - buffer, r[2] + buffer)
-}
+# Polygon coordinates (longitude, latitude) for extracting later
 
-####################Look at what variables exist in the .nc files:
+germanseal_coords <- matrix(
+  c(
+    -66.229, 43.70000,
+    -66.229, 43.56667,
+    -66.075, 43.56667,
+    -66.075, 43.23300,
+    -66.550, 43.23300,
+    -66.550, 43.70000,
+    -66.229, 43.70000
+  ),
+  ncol = 2,
+  byrow = TRUE
+)
 
-for (f in files) {
-  
-  cat("\n========================\n")
-  cat("FILE:", f, "\n")
-  cat("========================\n")
-  
-  nc <- nc_open(f)
-  
-  # List variable names
-  cat("\nVariables:\n")
-  print(names(nc$var))
-  
-  # List dimensions
-  cat("\nDimensions:\n")
-  print(names(nc$dim))
-  
-  nc_close(nc)
-}
+GS_poly <- st_polygon(list(germanseal_coords)) |>
+  st_sfc(crs = 4326)
 
-# density doesn't exist so you have to create it.
+                                
 
 
 
 
-
-
-
-#### LOOP - take files in .nc folder                  
+#### LOOP - load year files in .nc folder                  
 
 for (f in files) {
   
@@ -107,12 +81,14 @@ for (f in files) {
   # Extract month
   month <- as.numeric(format(time, "%m"))
   
-  # Extract only Prince-5    
+  # Extract only Prince-5 - we also want Lurcher!   
   # Prince-5 matching; catches Prince-5, Prince 5, Prince5
-  idx <- grep("Prince[- ]?5", station_id, ignore.case = TRUE)
+  #idx <- grep("Prince[- ]?5", station_id, ignore.case = TRUE)
   
   # Filter May to November (this is what overlaps with the HSC data collection)
-  idx <- idx[month[idx] >= 6 & month[idx] <= 11]
+  #idx <- idx[month[idx] >= 6 & month[idx] <= 11]
+  
+  idx <- which(month >= 6 & month <= 11)
   
   cat("Prince-5 casts after June-Nov filter:", length(idx), "\n")
   
@@ -293,13 +269,41 @@ for (f in files) {
   nc_close(nc)
 }
 
-
-
-
-# Combine all casts into a df
+                                
+                                
+############################## Combine all casts into a df
 if (length(all_casts) > 0) {
-  final_casts <- do.call(rbind, all_casts)
-} else {
+ 
+final_casts <- do.call(rbind, all_casts)
+
+# Create unique cast locations
+cast_locations <- final_casts %>%
+  distinct(cast, latitude, longitude)
+
+
+# Convert cast locations to sf
+casts_sf <- st_as_sf(
+  cast_locations,
+  coords = c("longitude", "latitude"),
+  crs = 4326
+)
+
+# Find casts inside polygon
+inside <- st_within(
+  casts_sf,
+  GS_poly,
+  sparse = FALSE
+)
+
+# Create table of casts inside polygon
+germanseal_casts <- cast_locations[inside[,1], ]
+
+# Now subset the full profile data
+germanseal_profiles <- final_casts %>%
+  filter(cast %in% germanseal_casts$cast)
+
+
+  } else {
   final_casts <- data.frame()
 }
 
@@ -310,6 +314,23 @@ if (nrow(all_dates) > 0) {
   all_dates <- all_dates[order(all_dates$date), ]
 }
 
+
+head(final_casts) 
+unique(final_casts$station_id)
+                                
+                                
+                                ### extract from data
+                                
+                                casts_sf <- st_as_sf(all_casts,coords = c("longitude", "latitude"),crs = 4326)
+                                
+                                inside <- st_within(
+                                  casts_sf,
+                                  lurcher_poly,
+                                  sparse = FALSE
+                                )
+                                
+                                lurcher_casts <- all_casts[inside[,1], ]
+          
 # Save outputs
 write.csv(all_dates, "Prince5_cast_dates.csv", row.names = FALSE)
 write.csv(final_casts, "Prince5_all_casts.csv", row.names = FALSE)

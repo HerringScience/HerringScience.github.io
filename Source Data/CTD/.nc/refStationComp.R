@@ -4,6 +4,10 @@ library(dplyr)
 library(lubridate)
 library(ggplot2)
 library(tidyr)
+library(lubridate)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
 
 
 # scripts used to create prince5 is Prince5.R
@@ -14,20 +18,37 @@ library(tidyr)
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
-# load Prince 5 data
-prince5 <- readRDS("monthly_cast_averages.rds")
-head(prince5)
+# load Prince 5/Lurcher data
+.nc <- readRDS("monthly_cast_averages.rds")
 
+unique(.nc$area)
+
+
+prince5 <- .nc %>%
+  filter(area == "Prince5")
+
+Lurcher <- .nc %>%
+  filter(area == "German Seal")
+
+Scots <- .nc %>%
+  filter(area == "Scots Bay")
+
+
+          head(prince5)
+          head(Lurcher)
+          head(Scots)
+          
+                prince5$min_depth
+                prince5$max_depth
+                
+                Lurcher$min_depth
+                Lurcher$max_depth
+
+                
+                write.csv(Lurcher, "Lurcher.csv")
 
 # Load HSC data
 HSC = readRDS("Oceans.rds")
-
-head(prince5)
-head(HSC)
-
-
-prince5$min_depth
-prince5$max_depth
 
 # HSC is in a raw format, edit for monthly averages:
 # create month in HSC
@@ -41,12 +62,48 @@ unique(HSC$month)
 
 # Only select HSC data (not DFO historical for now)
 HSC=HSC[which(HSC$Source == "HSC"), ]
-unique(HSC$Year)
-
+HSC$area = HSC$ground
+  
+# only German Bank  
+HSC = HSC[which(HSC$ground == "German Bank"), ]
 head(HSC)
 
+### Plot HSC Locations
+
+
+        # One row per cast
+        cast_locations <- HSC %>%
+          distinct(id, Lat, Lon, area)
+        
+        lon_range <- range(cast_locations$Lon, na.rm = TRUE)
+        lat_range <- range(cast_locations$Lat, na.rm = TRUE)
+
+                      ggplot() +
+                        borders("world", fill = "grey90", color = "grey70") +
+                        geom_point(
+                          data = cast_locations,
+                          aes(Lon, Lat, color = area),
+                          size = 2,
+                          alpha = 0.7
+                        ) +
+                        coord_quickmap(
+                          xlim = lon_range + c(-1, 1),
+                          ylim = lat_range + c(-1, 1)
+                        ) +
+                        labs(
+                          title = "HSC Cast Locations",
+                          x = "Longitude",
+                          y = "Latitude",
+                          color = "Area"
+                        ) +
+                        theme_minimal()
+
+
+                      
+unique(HSC$Year)
+
 averagesHSC <- HSC %>%
-  group_by(id, Date, ground, Lat, Lon) %>%
+  group_by(id, Date, area, Lat, Lon) %>%
   summarise(
     mean_temperature = mean(Temperature, na.rm = TRUE),
     mean_salinity = mean(Salinity, na.rm = TRUE),
@@ -67,7 +124,7 @@ averagesHSC <- HSC %>%
     month = as.numeric(format(Date, "%m")),
     month_name = format(Date, "%B")
   ) %>%
-  group_by(Year, month, month_name, ground) %>%
+  group_by(Year, month, month_name, area) %>%
   summarise(
     monthly_mean_temperature = mean(mean_temperature, na.rm = TRUE),
     monthly_sd_temperature = sd(mean_temperature, na.rm = TRUE),
@@ -101,6 +158,31 @@ averagesHSC <- HSC %>%
 ### Now export a copy to view:
 write.csv(averagesHSC, "averagesHSC.csv", row.names = FALSE)
 
+head(averagesHSC)
+
+
+## Combine averagesHSC and Lurcher
+colnames(averagesHSC)
+  unique(averagesHSC$area)
+colnames(Lurcher)
+  unique(Lurcher$area)
+
+  head(Lurcher)
+  
+  Lurcher <- Lurcher %>%
+    mutate(area = "German Bank")
+  
+  Lurcher <- Lurcher %>%
+    rename(Year = year)
+  
+  averagesHSC <- averagesHSC %>%
+    mutate(station_id = NA_character_)
+  
+x = rbind(Lurcher, averagesHSC)
+
+averagesHSC = x
+
+head(averagesHSC)
 
 
 
@@ -112,7 +194,6 @@ write.csv(averagesHSC, "averagesHSC.csv", row.names = FALSE)
 
 hsc_plot <- averagesHSC %>%
   mutate(
-    Source = paste0("HSC - ", ground),
     Year = as.numeric(Year),
     month = as.numeric(month)
   ) %>%
@@ -120,7 +201,7 @@ hsc_plot <- averagesHSC %>%
     Year,
     month,
     month_name,
-    Source,
+    area,
     monthly_mean_temperature,
     monthly_mean_salinity,
     monthly_mean_stratification,
@@ -140,12 +221,15 @@ hsc_plot <- averagesHSC %>%
 # this renames it to 'Year'.
 # If yours already has 'Year', this will still work.
 
+
+colnames(monthly_cast_averages)
+
 prince5_plot <- monthly_cast_averages %>%
   rename(
     Year = any_of("year")
   ) %>%
   mutate(
-    Source = "Prince-5",
+    area = "Prince-5",
     Year = as.numeric(Year),
     month = as.numeric(month),
     month_name = month.name[month]
@@ -154,7 +238,7 @@ prince5_plot <- monthly_cast_averages %>%
     Year,
     month,
     month_name,
-    Source,
+    area,
     monthly_mean_temperature,
     monthly_mean_salinity,
     monthly_mean_density,
@@ -166,8 +250,9 @@ prince5_plot <- monthly_cast_averages %>%
   )
 
 
+
 # --------------------------------------------------
-# 3. Combine HSC and Prince-5
+# 3. Combine HSC and Prince-5 & Lurcher
 # --------------------------------------------------
 
 combined_monthly <- bind_rows(hsc_plot, prince5_plot) %>%
@@ -176,9 +261,9 @@ combined_monthly <- bind_rows(hsc_plot, prince5_plot) %>%
       month.abb[month],
       levels = month.abb
     ),
-    Source = factor(Source)
+    area = factor(area)
   ) %>%
-  arrange(Year, month, Source)
+  arrange(Year, month, area)
 
 
 # --------------------------------------------------
@@ -187,24 +272,65 @@ combined_monthly <- bind_rows(hsc_plot, prince5_plot) %>%
 
 print(combined_monthly)
 
-table(combined_monthly$Year, combined_monthly$month, combined_monthly$Source)
+table(combined_monthly$Year, combined_monthly$month, combined_monthly$area)
 
+view(combined_monthly)
 
 ### PLOTS
 head(combined_monthly)
+
+### Plot locations of casts:
+
+            # Get coastline / land polygons
+            world <- ne_countries(scale = "medium", returnclass = "sf")
+
+                  # Convert your dataframe to spatial points
+                  combined_monthly_sf <- combined_monthly %>%
+                    filter(!is.na(mean_latitude), !is.na(mean_longitude)) %>%
+                    st_as_sf(
+                      coords = c("mean_longitude", "mean_latitude"),
+                      crs = 4326
+                    )
+
+                            # Plot
+                            ggplot() +
+                              geom_sf(data = world, fill = "grey90", color = "grey60") +
+                              geom_sf(
+                                data = combined_monthly_sf,
+                                aes(color = area, size = n_casts),
+                                alpha = 0.8
+                              ) +
+                              coord_sf(
+                                xlim = range(combined_monthly$mean_longitude, na.rm = TRUE) + c(-0.2, 0.2),
+                                ylim = range(combined_monthly$mean_latitude, na.rm = TRUE) + c(-0.2, 0.2),
+                                expand = FALSE
+                              ) +
+                              scale_size_continuous(name = "Number of casts") +
+                              labs(
+                                title = "Spatial distribution of casts",
+                                subtitle = "Points show monthly mean cast locations",
+                                x = "Longitude",
+                                y = "Latitude",
+                                color = "Area"
+                              ) +
+                              theme_minimal()
+                            
+                            
+
+
 
 ## Temperature:
 
           ggplot(combined_monthly,
                  aes(x = month_label,
                      y = monthly_mean_temperature,
-                     color = Source,
-                     group = Source)) +
+                     color = area,
+                     group = area)) +
             geom_line(linewidth = 1) +
             geom_point(size = 2.5) +
             facet_wrap(~ Year) +
             labs(
-              title = "Monthly Mean Temperature: HSC Grounds vs Prince-5",
+              title = "Monthly Mean Temperature: German Bank vs Prince-5",
               x = "Month",
               y = "Monthly Mean Temperature",
               color = "Dataset / Ground"
@@ -219,8 +345,8 @@ head(combined_monthly)
           ggplot(combined_monthly,
                  aes(x = month_label,
                      y = monthly_mean_salinity,
-                     color = Source,
-                     group = Source)) +
+                     color = area,
+                     group = area)) +
             geom_line(linewidth = 1) +
             geom_point(size = 2.5) +
             facet_wrap(~ Year) +
@@ -239,8 +365,8 @@ head(combined_monthly)
           ggplot(combined_monthly,
                  aes(x = month_label,
                      y = monthly_mean_density,
-                     color = Source,
-                     group = Source)) +
+                     color = area,
+                     group = area)) +
             geom_line(linewidth = 1) +
             geom_point(size = 2.5) +
             facet_wrap(~ Year) +
@@ -260,8 +386,8 @@ head(combined_monthly)
           ggplot(combined_monthly,
                  aes(x = month_label,
                      y = monthly_mean_stratification,
-                     color = Source,
-                     group = Source)) +
+                     color = area,
+                     group = area)) +
             geom_line(linewidth = 1) +
             geom_point(size = 2.5) +
             facet_wrap(~ Year) +
@@ -281,8 +407,8 @@ head(combined_monthly)
           ggplot(combined_monthly,
                  aes(x = month_label,
                      y = monthly_mean_density_stratification,
-                     color = Source,
-                     group = Source)) +
+                     color = area,
+                     group = area)) +
             geom_line(linewidth = 1) +
             geom_point(size = 2.5) +
             facet_wrap(~ Year) +
@@ -315,7 +441,7 @@ head(combined_monthly)
             select(
               Year,
               month,
-              ground,
+              area,
               
               HSC_temp = monthly_mean_temperature,
               HSC_temp_se = monthly_se_temperature,
@@ -399,13 +525,13 @@ head(combined_monthly)
         
               month_name = month.name[month]
             ) %>%
-            arrange(ground, Year, month)
+            arrange(area, Year, month)
           
 # View matched monthly comparisons
 print(comparison)
 
 stats_summary <- comparison %>%
-  group_by(ground) %>%
+  group_by(area) %>%
   summarise(
     n_matched_months = n(),
     
@@ -467,7 +593,7 @@ View(stats_summary)
 
 
           paired_tests <- comparison %>%
-            group_by(ground) %>%
+            group_by(area) %>%
             summarise(
               n_matched_months = n(),
               
@@ -539,21 +665,37 @@ View(stats_summary)
               
               
       ### Density stratification:
-      Dstrat_paired_t_test_p_value = ifelse(
-        n() >= 2,
-        t.test(HSC_Dstrat, Prince5_Dstrat, paired = TRUE)$p.value,
-        NA
-      ),
+      Dstrat_paired_t_test_p_value = {
+        valid <- !is.na(HSC_Dstrat) & !is.na(Prince5_Dstrat)
+        diffs <- HSC_Dstrat[valid] - Prince5_Dstrat[valid]
+        
+        if (sum(valid) >= 2 && sd(diffs, na.rm = TRUE) > 0) {
+          t.test(
+            HSC_Dstrat[valid],
+            Prince5_Dstrat[valid],
+            paired = TRUE
+          )$p.value
+        } else {
+          NA_real_
+        }
+      },
       
-      Dstrat_wilcoxon_p_value = ifelse(
-        n() >= 2,
-        wilcox.test(HSC_Dstrat, Prince5_Dstrat, paired = TRUE, exact = FALSE)$p.value,
-        NA
-      ),
+      Dstrat_wilcoxon_p_value = {
+        valid <- !is.na(HSC_Dstrat) & !is.na(Prince5_Dstrat)
+        
+        if (sum(valid) >= 2) {
+          wilcox.test(
+            HSC_Dstrat[valid],
+            Prince5_Dstrat[valid],
+            paired = TRUE,
+            exact = FALSE
+          )$p.value
+        } else {
+          NA_real_
+        }
+      },
       
-      
-              
-              .groups = "drop"
+      .groups = "drop"
             )
           
             #### German Bank IS statistically different than Prince 5 for stratification
@@ -575,7 +717,34 @@ View(stats_summary)
           
           
           
+     
           
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+               
           scots_vs_prince5 <- comparison %>%
             filter(ground == "Scots Bay")
           
