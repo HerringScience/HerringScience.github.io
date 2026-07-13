@@ -1,7 +1,6 @@
 
 
 library(dplyr)
-library(lubridate)
 library(ggplot2)
 library(tidyr)
 library(lubridate)
@@ -20,9 +19,10 @@ setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/
 
 # load Prince 5/Lurcher data
 .nc <- readRDS("monthly_cast_averages.rds")
+.nc$Source = "DFO"
 
 unique(.nc$area)
-
+unique(.nc$Source)
 
 prince5 <- .nc %>%
   filter(area == "Prince5")
@@ -43,7 +43,8 @@ Scots <- .nc %>%
                 
                 Lurcher$min_depth
                 Lurcher$max_depth
-
+                Scots$min_depth
+                Scots$max_depth
                 
                 write.csv(Lurcher, "Lurcher.csv")
 
@@ -59,14 +60,14 @@ min(HSC$Depth)
 max(HSC$Depth)
 unique(HSC$month)
 
-
 # Only select HSC data (not DFO historical for now)
 HSC=HSC[which(HSC$Source == "HSC"), ]
 HSC$area = HSC$ground
-  
-# only German Bank  
-HSC = HSC[which(HSC$ground == "German Bank"), ]
-head(HSC)
+
+unique(HSC$area)
+
+write.csv(HSC, "HSC.csv")
+
 
 ### Plot HSC Locations
 
@@ -155,13 +156,17 @@ averagesHSC <- HSC %>%
   ) %>%
   arrange(Year, month)
 
+
+unique(averagesHSC$area)
+
 ### Now export a copy to view:
 write.csv(averagesHSC, "averagesHSC.csv", row.names = FALSE)
 
 head(averagesHSC)
+averagesHSC$Source = "HSC"
 
 
-## Combine averagesHSC and Lurcher
+## Combine averagesHSC and Lurcher/Scots
 colnames(averagesHSC)
   unique(averagesHSC$area)
 colnames(Lurcher)
@@ -171,19 +176,25 @@ colnames(Lurcher)
   
   Lurcher <- Lurcher %>%
     mutate(area = "German Bank")
-  
-  Lurcher <- Lurcher %>%
-    rename(Year = year)
+          Lurcher <- Lurcher %>%
+            rename(Year = year)
+          
+  Scots <- Scots %>%
+    mutate(area = "Scots Bay")
+      Scots <- Scots %>%
+        rename(Year = year)
+    
   
   averagesHSC <- averagesHSC %>%
     mutate(station_id = NA_character_)
-  
-x = rbind(Lurcher, averagesHSC)
 
-averagesHSC = x
+colnames(averagesHSC)
+colnames(Lurcher)      
+colnames(Scots)
 
-head(averagesHSC)
-
+spawningGrounds = rbind(Lurcher, Scots, averagesHSC)
+head(spawningGrounds)
+unique(spawningGrounds$Source)
 
 
 ########## Now plot together the monthly averages:
@@ -192,7 +203,7 @@ head(averagesHSC)
 # 1. Standardize HSC monthly averages
 # --------------------------------------------------
 
-hsc_plot <- averagesHSC %>%
+hsc_plot <- spawningGrounds %>%
   mutate(
     Year = as.numeric(Year),
     month = as.numeric(month)
@@ -202,6 +213,7 @@ hsc_plot <- averagesHSC %>%
     month,
     month_name,
     area,
+    Source,
     monthly_mean_temperature,
     monthly_mean_salinity,
     monthly_mean_stratification,
@@ -212,6 +224,8 @@ hsc_plot <- averagesHSC %>%
     mean_longitude
   )
 
+unique(hsc_plot$area)
+unique(hsc_plot$Source)
 
 # --------------------------------------------------
 # 2. Standardize Prince-5 monthly averages
@@ -222,14 +236,15 @@ hsc_plot <- averagesHSC %>%
 # If yours already has 'Year', this will still work.
 
 
-colnames(monthly_cast_averages)
+colnames(prince5)
+unique(prince5$area)
 
-prince5_plot <- monthly_cast_averages %>%
+prince5_plot <- prince5 %>%
   rename(
     Year = any_of("year")
   ) %>%
   mutate(
-    area = "Prince-5",
+    area = "Prince5",
     Year = as.numeric(Year),
     month = as.numeric(month),
     month_name = month.name[month]
@@ -239,6 +254,7 @@ prince5_plot <- monthly_cast_averages %>%
     month,
     month_name,
     area,
+    Source,
     monthly_mean_temperature,
     monthly_mean_salinity,
     monthly_mean_density,
@@ -248,7 +264,6 @@ prince5_plot <- monthly_cast_averages %>%
     mean_latitude,
     mean_longitude
   )
-
 
 
 # --------------------------------------------------
@@ -274,10 +289,9 @@ print(combined_monthly)
 
 table(combined_monthly$Year, combined_monthly$month, combined_monthly$area)
 
-view(combined_monthly)
-
 ### PLOTS
 head(combined_monthly)
+write.csv(combined_monthly, "combined_monthly.csv")
 
 ### Plot locations of casts:
 
@@ -297,7 +311,7 @@ head(combined_monthly)
                               geom_sf(data = world, fill = "grey90", color = "grey60") +
                               geom_sf(
                                 data = combined_monthly_sf,
-                                aes(color = area, size = n_casts),
+                                aes(color = Source, size = n_casts),
                                 alpha = 0.8
                               ) +
                               coord_sf(
@@ -316,7 +330,9 @@ head(combined_monthly)
                               theme_minimal()
                             
                             
-
+                            combined_monthly %>%
+                              filter(area == "Scots Bay") %>%
+                              arrange(Year, month)
 
 
 ## Temperature:
