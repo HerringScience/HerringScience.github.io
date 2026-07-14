@@ -1,0 +1,11 @@
+rank,variable_label,comparison_area,n_paired,pearson_r,mean_difference,rmse,mae
+1,Temperature,Scots Bay,27,0.938,0.250,0.741,0.548
+2,Temperature,German Bank,22,0.745,-0.301,1.140,0.928
+3,Temperature stratification,German Bank,22,0.316,0.861,1.293,0.933
+4,Density stratification,German Bank,18,0.197,0.341,0.458,0.360
+5,Salinity,Scots Bay,27,0.193,0.159,1.189,0.644
+6,Temperature stratification,Scots Bay,27,0.104,-0.107,0.461,0.367
+7,Salinity,German Bank,20,0.001,-0.113,0.761,0.580
+8,Density,Scots Bay,27,-0.003,0.083,0.940,0.521
+9,Density,German Bank,20,-0.047,-0.039,0.661,0.526
+10,Density stratification,Scots Bay,27,-0.187,-0.499,2.288,0.593

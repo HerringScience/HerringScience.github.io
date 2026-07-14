@@ -14,6 +14,8 @@ library(ggplot2)
 library(oce)
 library(sf)
 library(rnaturalearth)
+library(tidyverse)
+library(broom)
 
 source("read_char_var.R")
 source("pad_range.R")
@@ -68,7 +70,7 @@ counter <- 1
                                     # Unique values
                                     unique(station_ids)
 
-#Cont here:     
+#Cont here for pipeline:     
 
 
 # Polygon coordinates (longitude, latitude)
@@ -477,8 +479,9 @@ scots_casts <- final_casts %>%
 ### Add HSC data:
 # Load HSC data
 HSC = readRDS("Oceans.rds")
-HSC=HSC[which(HSC$Source == "HSC"), ]
-
+  # Won't look at the historic data for now:
+    HSC=HSC[which(HSC$Source == "HSC"), ]
+    HSC$area = HSC$ground
 
 # Plot Coastline
 coast <- ne_countries(
@@ -507,8 +510,6 @@ prince5_df <- prince5_casts %>%
   distinct(latitude, longitude) %>%
   mutate(Source = "prince5")
 
-head(prince5_df)
-
 lurcher_df <- polygon_casts %>%
 distinct(longitude, latitude) %>%
 mutate(Source = "German Bank")
@@ -519,113 +520,110 @@ scots_df <- scots_casts %>%
 
                             
 plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
+      
+# Plot map with cast locations for modern comparison:          
+              
+              ggplot() +
+                geom_sf(
+                  data = coast,
+                  fill = "grey90",
+                  colour = "grey60",
+                  linewidth = 0.3
+                ) +
                 
-head(plot_df)                    
-unique(plot_df$Source)                                    
+                geom_point(
+                  data = hsc_df,
+                  aes(longitude, latitude,
+                      colour = Source,
+                      shape = Source),
+                  alpha = 0.6,
+                  size = 2
+                ) +
+                
+                geom_point(
+                  data = prince5_df,
+                  aes(longitude, latitude,
+                      colour = Source,
+                      shape = Source),
+                  size = 3
+                ) +
+                
+                geom_point(
+                  data = lurcher_df,
+                  aes(longitude, latitude,
+                      colour = Source,
+                      shape = Source),
+                  size = 3
+                ) +
+                
+                geom_point(
+                  data = scots_df,
+                  aes(longitude, latitude,
+                      colour = Source,
+                      shape = Source),
+                  size = 3
+                ) +
+                
+                scale_colour_manual(
+                  values = c(
+                    "German Bank" = "#D55E00",
+                    "HSC" = "#0072B2",
+                    "prince5" = "#009E73",
+                    "Scots Bay" = "#CC79A7"
+                  )
+                ) +
+                
+                scale_shape_manual(
+                  values = c(
+                    "German Bank" = 16,
+                    "HSC" = 17,
+                    "prince5" = 15,
+                    "Scots Bay" = 18
+                  )
+                ) +
+                
+                coord_sf(
+                  xlim = c(-67.5, -63),
+                  ylim = c(46, 42),
+                  expand = FALSE
+                ) +
+                
+                labs(
+                  x = "Longitude (°W)",
+                  y = "Latitude (°N)",
+                  colour = NULL,
+                  shape = NULL
+                ) +
+                
+                ggtitle("Cast Locations for Modern Comparison")+
+                
+                theme_bw(base_size = 11) +
+                theme(
+                  panel.grid.major = element_line(
+                    colour = "grey85",
+                    linewidth = 0.2
+                  ),
+                  panel.grid.minor = element_blank(),
+                  panel.border = element_rect(
+                    colour = "black",
+                    linewidth = 0.6
+                  ),
+                  axis.text = element_text(size = 8),
+                  axis.title = element_text(size = 10),
+                  legend.position = c(0.82, 0.22),
+                  legend.background = element_rect(
+                    fill = "white",
+                    colour = "grey70"
+                  ),
+                  legend.text = element_text(size = 8),
+                  legend.title = element_blank()
+                )
 
-
-ggplot() +
-  geom_sf(
-    data = coast,
-    fill = "grey90",
-    colour = "grey60",
-    linewidth = 0.3
-  ) +
-  
-  geom_point(
-    data = hsc_df,
-    aes(longitude, latitude,
-        colour = Source,
-        shape = Source),
-    alpha = 0.6,
-    size = 2
-  ) +
-  
-  geom_point(
-    data = prince5_df,
-    aes(longitude, latitude,
-        colour = Source,
-        shape = Source),
-    size = 3
-  ) +
-  
-  geom_point(
-    data = lurcher_df,
-    aes(longitude, latitude,
-        colour = Source,
-        shape = Source),
-    size = 3
-  ) +
-  
-  geom_point(
-    data = scots_df,
-    aes(longitude, latitude,
-        colour = Source,
-        shape = Source),
-    size = 3
-  ) +
-  
-  scale_colour_manual(
-    values = c(
-      "German Bank" = "#D55E00",
-      "HSC" = "#0072B2",
-      "prince5" = "#009E73",
-      "Scots Bay" = "#CC79A7"
-    )
-  ) +
-  
-  scale_shape_manual(
-    values = c(
-      "German Bank" = 16,
-      "HSC" = 17,
-      "prince5" = 15,
-      "Scots Bay" = 18
-    )
-  ) +
-  
-  coord_sf(
-    xlim = c(-67.5, -63),
-    ylim = c(46, 42),
-    expand = FALSE
-  ) +
-  
-  labs(
-    x = "Longitude (°W)",
-    y = "Latitude (°N)",
-    colour = NULL,
-    shape = NULL
-  ) +
-  
-  ggtitle("Cast Locations for Modern Comparison")+
-  
-  theme_bw(base_size = 11) +
-  theme(
-    panel.grid.major = element_line(
-      colour = "grey85",
-      linewidth = 0.2
-    ),
-    panel.grid.minor = element_blank(),
-    panel.border = element_rect(
-      colour = "black",
-      linewidth = 0.6
-    ),
-    axis.text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    legend.position = c(0.82, 0.22),
-    legend.background = element_rect(
-      fill = "white",
-      colour = "grey70"
-    ),
-    legend.text = element_text(size = 8),
-    legend.title = element_blank()
-  )
-
+              
+              
 
 # Need to combine HSC and final_casts ###################################################
 
-head(HSC)
-HSC$area = HSC$ground
-head(final_casts)
 
 HSC2 <- HSC %>%
   transmute(
@@ -650,9 +648,7 @@ HSC2 <- HSC2 %>%
     in_scotsbay = area == "Scots Bay"
   )
 
-
-head(HSC2)
-write.csv(HSC2, "HSC.csv")
+                write.csv(HSC2, "HSC.csv")
 
 final_casts2 <- final_casts %>%
   mutate(
@@ -692,31 +688,13 @@ all_casts <- bind_rows(
   final_casts2[, common_cols]
 )
 
-dim(all_casts)
-
-unique(all_casts$area)
-unique(all_casts$Source)
-
-
-saveRDS(all_casts, "all_casts.rds")
+        saveRDS(all_casts, "all_casts.rds")
 
 
 
+head(all_casts)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### Continue with .nc dataset
+#### Continue with .nc dataset (all_casts)
 
 # Cut top 5m
 all_casts_deep <- all_casts[all_casts$depth >= 5, ]
@@ -743,8 +721,6 @@ final_casts_deep <- final_casts_deep %>%
     )
   )
 
-head(final_casts_deep)
-
 # -----------------------------
 # 2. Add year/month fields to cast-level averages
 # -----------------------------
@@ -755,10 +731,8 @@ final_casts_deep <- final_casts_deep %>%
     month_name = format(date, "%B")
   )
 
-head(final_casts_deep)
+## Some of the DFO Lurcher data doesn not have salinity so can only contribute to temperature analyses. That will give a warning message
 
-
-## Some of the DFO Lurcher data doesn not have salinity so can only contribute to temperature analyses.
 
 # -----------------------------
 # 1. Average each individual cast across depth
@@ -789,8 +763,6 @@ cast_averages <- final_casts_deep %>%
     .groups = "drop"
   )
 
-
-head(cast_averages)
 
 
 # -----------------------------
@@ -839,12 +811,6 @@ monthly_cast_averages <- cast_averages %>%
   arrange(Year, month)
 
 
-colnames(monthly_cast_averages)
-unique(monthly_cast_averages$area)
-unique(monthly_cast_averages$Year)
-
-
-
 # Optional: save the monthly averaged dataframe
 write.csv(
   monthly_cast_averages,
@@ -853,6 +819,56 @@ write.csv(
 )
 
 
+head(monthly_cast_averages)
+
+
+# remove 2024:
+monthly_cast_averages <- monthly_cast_averages %>%
+  filter(Year != 2024)
+
+### Plot demonstrating samples sizes:
+
+plot_df <- monthly_cast_averages %>%
+  mutate(
+    month_label = factor(
+      month.abb[month],
+      levels = month.abb[6:11]
+    )
+  )
+
+
+ggplot(
+  plot_df,
+  aes(
+    x = month_label,
+    y = factor(Year)
+  )
+) +
+  geom_point(
+    aes(size = n_casts,
+        colour = n_casts)
+  ) +
+  facet_wrap(~area) +
+  scale_size_continuous(
+    range = c(2,10)
+  ) +
+  scale_colour_viridis_c() +
+  labs(
+    title = "Monthly Sampling Effort by Ground",
+    x = "Month",
+    y = "Year",
+    size = "Casts",
+    colour = "Casts"
+  ) +
+  theme_bw()+
+  theme(
+    axis.text.x = element_text(
+      size = 8,
+      angle = 45,
+      hjust = 1
+    )
+  ) 
+
 
 
 # -----------------------------
@@ -860,14 +876,13 @@ write.csv(
 # currently doesn't include density or densirty stratification but could be added.
 # -----------------------------
 
-names(monthly_cast_averages)
-
 year_dir <- file.path("Casts", "Year")
 dir.create(year_dir, showWarnings = FALSE, recursive = TRUE)
 
 # Months you are working with: June to November
 months_to_plot <- 6:11
 
+head(monthly_cast_averages)
 # -----------------------------
 # 5. Make one temperature and one salinity plot per month
 # -----------------------------
@@ -880,23 +895,25 @@ for (m in months_to_plot) {
   # Skip month if no data
   if (nrow(month_data) == 0) next
   
-  this_month <- unique(month_data$month_name)[1]
+  this_month <- unique(month_data$month)[1]
   
   # -----------------------------
   # Temperature plot
   # -----------------------------
   
-  p_temp <- ggplot(month_data, aes(x = year, y = monthly_mean_temperature)) +
+  p_temp <- ggplot(month_data, aes(x = Year, y = monthly_mean_temperature, colour = area, group = area)) +
     geom_point(size = 3, colour = "firebrick") +
-    geom_line(aes(group = 1), colour = "firebrick", linewidth = 0.8) +
+    geom_line(linewidth = 0.8) +
     geom_text(aes(label = n_casts), vjust = -1, size = 3) +
     labs(
-      title = paste("Prince-5 Monthly Mean Temperature by Year -", this_month),
+      title = paste("Monthly Mean Temperature by Year -", this_month),
       subtitle = "Numbers above points show number of casts combined",
       x = "Year",
-      y = "Monthly mean temperature below 5 m"
+      y = "Monthly mean temperature 5-30m",
+      colour = "Area"
     ) +
-    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    scale_x_continuous(
+      breaks = sort(unique(month_data$Year))) +
     theme_bw()
   
   ggsave(
@@ -914,17 +931,19 @@ for (m in months_to_plot) {
   # Salinity plot
   # -----------------------------
   
-  p_sal <- ggplot(month_data, aes(x = year, y = monthly_mean_salinity)) +
+  p_sal <- ggplot(month_data, aes(x = Year, y = monthly_mean_salinity, colour = area, group = area)) +
     geom_point(size = 3, colour = "dodgerblue4") +
-    geom_line(aes(group = 1), colour = "dodgerblue4", linewidth = 0.8) +
+    geom_line(linewidth = 0.8) +
     geom_text(aes(label = n_casts), vjust = -1, size = 3) +
     labs(
-      title = paste("Prince-5 Monthly Mean Salinity by Year -", this_month),
+      title = paste("Monthly Mean Salinity by Year -", this_month),
       subtitle = "Numbers above points show number of casts combined",
       x = "Year",
-      y = "Monthly mean salinity below 5 m"
+      y = "Monthly mean salinity 5-30m",
+      colour = "Area"
     ) +
-    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    scale_x_continuous(
+      breaks = sort(unique(month_data$Year))) +
     theme_bw()
   
   ggsave(
@@ -942,17 +961,19 @@ for (m in months_to_plot) {
   # Stratification plot
   # -----------------------------
   
-  p_strat <- ggplot(month_data, aes(x = year, y = monthly_mean_stratification)) +
+  p_strat <- ggplot(month_data, aes(x = Year, y = monthly_mean_stratification, colour = area, group = area)) +
     geom_point(size = 3, colour = "darkorchid4") +
-    geom_line(aes(group = 1), colour = "darkorchid4", linewidth = 0.8) +
+    geom_line(linewidth = 0.8) +
     geom_text(aes(label = n_casts), vjust = -1, size = 3) +
     labs(
-      title = paste("Prince-5 Monthly Mean Temperature Stratification by Year -", this_month),
+      title = paste("Monthly Mean Temperature Stratification by Year -", this_month),
       subtitle = "Stratification = max temperature - min temperature; numbers show number of casts combined",
       x = "Year",
-      y = "Monthly mean temperature stratification below 5 m"
+      y = "Monthly mean temperature stratification 5-30m",
+      colour = "Area"
     ) +
-    scale_x_continuous(breaks = sort(unique(month_data$year))) +
+    scale_x_continuous(
+      breaks = sort(unique(month_data$Year))) +
     theme_bw()
   
   ggsave(
@@ -980,8 +1001,6 @@ saveRDS(monthly_cast_averages, "monthly_cast_averages.rds")
 combined_monthly=monthly_cast_averages
 
 head(combined_monthly)
-
-
 unique(combined_monthly$Year)
 
 
@@ -1028,6 +1047,8 @@ ggplot() +
 ############################# Individual factor plots:
 
 head(combined_monthly)
+combined_monthly <- combined_monthly %>%
+  filter(Year != 2024)
 
 
 ## Temperature:
@@ -1045,7 +1066,7 @@ ggplot(
   geom_point(size = 2.5) +
   facet_wrap(~Year) +
   labs(
-    title = "Monthly Mean Temperature: German Bank, Scots Bay and Prince-5",
+    title = "Monthly Mean Temperature",
     x = "Month",
     y = "Monthly Mean Temperature",
     color = "Dataset / Ground"
@@ -1066,7 +1087,7 @@ ggplot(combined_monthly,
   geom_point(size = 2.5) +
   facet_wrap(~ Year) +
   labs(
-    title = "Monthly Mean Salinity: HSC Grounds vs Prince-5",
+    title = "Monthly Mean Salinity",
     x = "Month",
     y = "Monthly Mean Salinity",
     color = "Dataset / Ground"
@@ -1086,7 +1107,7 @@ ggplot(combined_monthly,
   geom_point(size = 2.5) +
   facet_wrap(~ Year) +
   labs(
-    title = "Monthly Mean Density: HSC Grounds vs Prince-5",
+    title = "Monthly Mean Density",
     x = "Month",
     y = "Monthly Mean Density",
     color = "Dataset / Ground"
@@ -1107,7 +1128,7 @@ ggplot(combined_monthly,
   geom_point(size = 2.5) +
   facet_wrap(~ Year) +
   labs(
-    title = "Monthly Mean Stratification: HSC Grounds vs Prince-5",
+    title = "Monthly Mean Stratification",
     x = "Month",
     y = "Monthly Mean Stratification",
     color = "Dataset / Ground"
@@ -1128,7 +1149,7 @@ ggplot(combined_monthly,
   geom_point(size = 2.5) +
   facet_wrap(~ Year) +
   labs(
-    title = "Monthly Mean Density Stratification: HSC Grounds vs Prince-5",
+    title = "Monthly Mean Density Stratification",
     x = "Month",
     y = "Monthly Mean Density Stratification",
     color = "Dataset / Ground"
@@ -1140,18 +1161,611 @@ ggplot(combined_monthly,
 
 
 
+
+
+
+
+
+
+
 ###################### Analysis::::: ----------------------------------->
-### COntinue here tomorrow:
 
 
 ###### Compare average monthly between grounds
 
 
 
+head(combined_monthly)
+
+
+library(tidyverse)
+library(broom)
+
+# -----------------------------
+# Output folder
+# -----------------------------
+stats_dir <- file.path("Casts", "Stats")
+dir.create(stats_dir, showWarnings = FALSE, recursive = TRUE)
+
+# -----------------------------
+# Check area names first
+# -----------------------------
+unique(combined_monthly$area)
+
+# -----------------------------
+# Oceanographic variables to compare
+# -----------------------------
+ocean_vars <- c(
+  "monthly_mean_temperature",
+  "monthly_mean_salinity",
+  "monthly_mean_density",
+  "monthly_mean_stratification",
+  "monthly_mean_density_stratification"
+)
+
+# keep only variables that actually exist
+ocean_vars <- ocean_vars[ocean_vars %in% names(combined_monthly)]
+
+ocean_vars
+
+# Convert to long format:
+monthly_long <- combined_monthly %>%
+  mutate(
+    Year = as.numeric(Year),
+    month = as.numeric(month),
+    month_label = factor(month.abb[month], levels = month.abb)
+  ) %>%
+  select(
+    Year,
+    month,
+    month_label,
+    area,
+    n_casts,
+    all_of(ocean_vars)
+  ) %>%
+  pivot_longer(
+    cols = all_of(ocean_vars),
+    names_to = "variable",
+    values_to = "value"
+  ) %>%
+  filter(!is.na(value))
+
+head(monthly_long)
+
+
+### Stats:
+
+fit_area_model <- function(d) {
+  
+  d <- d %>%
+    filter(!is.na(value), !is.na(area), !is.na(month), !is.na(Year))
+  
+  if (n_distinct(d$area) < 2 || nrow(d) < 6) {
+    return(
+      tibble(
+        n = nrow(d),
+        n_areas = n_distinct(d$area),
+        area_p_value = NA_real_,
+        model_r2 = NA_real_,
+        note = "Not enough data"
+      )
+    )
+  }
+  
+  fit <- lm(value ~ area + factor(month) + Year, data = d)
+  
+  area_test <- tryCatch(
+    drop1(fit, test = "F"),
+    error = function(e) NULL
+  )
+  
+  area_p <- if (!is.null(area_test) && "area" %in% rownames(area_test)) {
+    area_test["area", "Pr(>F)"]
+  } else {
+    NA_real_
+  }
+  
+  tibble(
+    n = nrow(d),
+    n_areas = n_distinct(d$area),
+    area_p_value = area_p,
+    model_r2 = summary(fit)$r.squared,
+    note = "Linear model: value ~ area + month + Year"
+  )
+}
+
+overall_area_stats <- monthly_long %>%
+  group_by(variable) %>%
+  group_modify(~fit_area_model(.x)) %>%
+  ungroup() %>%
+  mutate(
+    area_p_adj_BH = p.adjust(area_p_value, method = "BH")
+  )
+
+overall_area_stats
+
+write_csv(
+  overall_area_stats,
+  file.path(stats_dir, "overall_area_comparison_stats.csv")
+)
+
+
+## Paired prince5 comparisons:
+planned_comparisons <- tibble(
+  reference_area = "Prince5",
+  comparison_area = c("German Bank", "Scots Bay")
+)
+
+make_paired_data <- function(df, ref_area, comp_area) {
+  
+  df %>%
+    filter(area %in% c(ref_area, comp_area)) %>%
+    select(Year, month, month_label, variable, area, value) %>%
+    pivot_wider(
+      names_from = area,
+      values_from = value
+    ) %>%
+    filter(
+      !is.na(.data[[ref_area]]),
+      !is.na(.data[[comp_area]])
+    ) %>%
+    transmute(
+      Year,
+      month,
+      month_label,
+      variable,
+      reference_area = ref_area,
+      comparison_area = comp_area,
+      reference_value = .data[[ref_area]],
+      comparison_value = .data[[comp_area]],
+      difference = comparison_value - reference_value,
+      absolute_difference = abs(difference),
+      comparison = paste0(comp_area, " minus ", ref_area)
+    )
+}
+
+paired_data <- map2_dfr(
+  planned_comparisons$reference_area,
+  planned_comparisons$comparison_area,
+  ~make_paired_data(monthly_long, .x, .y)
+)
+
+head(paired_data)
+
+write_csv(
+  paired_data,
+  file.path(stats_dir, "paired_prince5_comparison_data.csv")
+)
 
 
 
 
+# Summary Stats:
+
+summarise_paired_comparison <- function(d) {
+  
+  # --------------------------------------------------
+  # Keep only complete, finite paired observations
+  # This removes NA, NaN, Inf, and -Inf
+  # --------------------------------------------------
+  
+  d <- d %>%
+    filter(
+      !is.na(reference_value),
+      !is.na(comparison_value),
+      !is.na(difference),
+      is.finite(reference_value),
+      is.finite(comparison_value),
+      is.finite(difference)
+    )
+  
+  n <- nrow(d)
+  
+  # --------------------------------------------------
+  # If no usable paired data, return NA summary row
+  # --------------------------------------------------
+  
+  if (n == 0) {
+    return(
+      tibble(
+        n_paired = 0,
+        mean_prince5 = NA_real_,
+        mean_comparison_ground = NA_real_,
+        mean_difference = NA_real_,
+        median_difference = NA_real_,
+        sd_difference = NA_real_,
+        se_difference = NA_real_,
+        diff_ci_lower = NA_real_,
+        diff_ci_upper = NA_real_,
+        paired_t_p = NA_real_,
+        wilcox_p = NA_real_,
+        pearson_r = NA_real_,
+        pearson_p = NA_real_,
+        rmse = NA_real_,
+        mae = NA_real_,
+        mean_absolute_percent_difference = NA_real_,
+        shapiro_p_difference = NA_real_
+      )
+    )
+  }
+  
+  # --------------------------------------------------
+  # Basic spread values
+  # --------------------------------------------------
+  
+  diff_sd <- if (n >= 2) sd(d$difference) else NA_real_
+  ref_sd  <- if (n >= 2) sd(d$reference_value) else NA_real_
+  comp_sd <- if (n >= 2) sd(d$comparison_value) else NA_real_
+  
+  # --------------------------------------------------
+  # Paired t-test: only if enough data and variation
+  # --------------------------------------------------
+  
+  t_res <- tryCatch(
+    {
+      if (
+        n >= 2 &&
+        !is.na(diff_sd) &&
+        is.finite(diff_sd) &&
+        diff_sd > 0
+      ) {
+        t.test(d$difference, mu = 0)
+      } else {
+        NULL
+      }
+    },
+    error = function(e) NULL
+  )
+  
+  # --------------------------------------------------
+  # Wilcoxon signed-rank test
+  # --------------------------------------------------
+  
+  w_res <- tryCatch(
+    {
+      if (
+        n >= 2 &&
+        any(d$difference != 0, na.rm = TRUE)
+      ) {
+        wilcox.test(
+          d$difference,
+          mu = 0,
+          exact = FALSE
+        )
+      } else {
+        NULL
+      }
+    },
+    error = function(e) NULL
+  )
+  
+  # --------------------------------------------------
+  # Pearson correlation
+  # Only valid if both series have variation
+  # --------------------------------------------------
+  
+  cor_res <- tryCatch(
+    {
+      if (
+        n >= 3 &&
+        !is.na(ref_sd) &&
+        !is.na(comp_sd) &&
+        is.finite(ref_sd) &&
+        is.finite(comp_sd) &&
+        ref_sd > 0 &&
+        comp_sd > 0
+      ) {
+        cor.test(
+          d$reference_value,
+          d$comparison_value
+        )
+      } else {
+        NULL
+      }
+    },
+    error = function(e) NULL
+  )
+  
+  # --------------------------------------------------
+  # Shapiro test for normality of paired differences
+  # --------------------------------------------------
+  
+  shapiro_res <- tryCatch(
+    {
+      if (
+        n >= 3 &&
+        n <= 5000 &&
+        !is.na(diff_sd) &&
+        is.finite(diff_sd) &&
+        diff_sd > 0
+      ) {
+        shapiro.test(d$difference)
+      } else {
+        NULL
+      }
+    },
+    error = function(e) NULL
+  )
+  
+  # --------------------------------------------------
+  # Mean absolute percent difference
+  # Avoid division by zero
+  # --------------------------------------------------
+  
+  percent_diff_data <- d %>%
+    filter(
+      reference_value != 0,
+      is.finite(reference_value),
+      is.finite(difference)
+    )
+  
+  mapd <- if (nrow(percent_diff_data) > 0) {
+    mean(
+      abs(
+        percent_diff_data$difference /
+          percent_diff_data$reference_value
+      ) * 100,
+      na.rm = TRUE
+    )
+  } else {
+    NA_real_
+  }
+  
+  # --------------------------------------------------
+  # Return summary
+  # --------------------------------------------------
+  
+  tibble(
+    n_paired = n,
+    
+    mean_prince5 =
+      mean(d$reference_value, na.rm = TRUE),
+    
+    mean_comparison_ground =
+      mean(d$comparison_value, na.rm = TRUE),
+    
+    mean_difference =
+      mean(d$difference, na.rm = TRUE),
+    
+    median_difference =
+      median(d$difference, na.rm = TRUE),
+    
+    sd_difference =
+      sd(d$difference, na.rm = TRUE),
+    
+    se_difference =
+      ifelse(
+        n >= 2 &&
+          !is.na(sd_difference) &&
+          is.finite(sd_difference),
+        sd_difference / sqrt(n),
+        NA_real_
+      ),
+    
+    diff_ci_lower =
+      if (!is.null(t_res)) t_res$conf.int[1] else NA_real_,
+    
+    diff_ci_upper =
+      if (!is.null(t_res)) t_res$conf.int[2] else NA_real_,
+    
+    paired_t_p =
+      if (!is.null(t_res)) t_res$p.value else NA_real_,
+    
+    wilcox_p =
+      if (!is.null(w_res)) w_res$p.value else NA_real_,
+    
+    pearson_r =
+      if (!is.null(cor_res))
+        as.numeric(cor_res$estimate)
+    else
+      NA_real_,
+    
+    pearson_p =
+      if (!is.null(cor_res))
+        cor_res$p.value
+    else
+      NA_real_,
+    
+    rmse =
+      sqrt(mean(d$difference^2, na.rm = TRUE)),
+    
+    mae =
+      mean(abs(d$difference), na.rm = TRUE),
+    
+    mean_absolute_percent_difference =
+      mapd,
+    
+    shapiro_p_difference =
+      if (!is.null(shapiro_res))
+        shapiro_res$p.value
+    else
+      NA_real_
+  )
+}
+
+
+
+
+##########################################
+
+
+paired_stats <- paired_data %>%
+  group_by(variable, comparison_area, comparison) %>%
+  group_modify(~summarise_paired_comparison(.x)) %>%
+  ungroup() %>%
+  group_by(variable) %>%
+  mutate(
+    paired_t_p_adj_BH =
+      p.adjust(paired_t_p, method = "BH"),
+    
+    wilcox_p_adj_BH =
+      p.adjust(wilcox_p, method = "BH"),
+    
+    pearson_p_adj_BH =
+      p.adjust(pearson_p, method = "BH")
+  ) %>%
+  ungroup()
+
+
+paired_stats %>%
+  select(
+    variable,
+    comparison_area,
+    n_paired,
+    pearson_r,
+    mean_difference,
+    rmse
+  ) %>%
+  arrange(variable)
+
+
+### Summary table:
+paired_stats_clean <- paired_stats %>%
+  mutate(
+    variable_label = case_when(
+      variable == "monthly_mean_temperature" ~ "Temperature",
+      variable == "monthly_mean_salinity" ~ "Salinity",
+      variable == "monthly_mean_density" ~ "Density",
+      variable == "monthly_mean_stratification" ~ "Temperature stratification",
+      variable == "monthly_mean_density_stratification" ~ "Density stratification",
+      TRUE ~ variable
+    ),
+    
+    reference_strength = case_when(
+      n_paired < 5 ~ "Insufficient paired data",
+      pearson_r >= 0.8 & rmse < quantile(rmse, 0.5, na.rm = TRUE) ~ "Strong",
+      pearson_r >= 0.6 ~ "Moderate",
+      pearson_r >= 0.4 ~ "Weak-moderate",
+      TRUE ~ "Weak"
+    ),
+    
+    conclusion = case_when(
+      variable_label == "Temperature" & pearson_r >= 0.7 ~
+        "Prince5 appears suitable as a temperature reference",
+      
+      variable_label != "Temperature" & pearson_r < 0.4 ~
+        "Prince5 does not appear suitable as a reference for this variable",
+      
+      TRUE ~
+        "Use caution"
+    )
+  ) %>%
+  select(
+    variable_label,
+    comparison_area,
+    n_paired,
+    pearson_r,
+    mean_difference,
+    rmse,
+    mae,
+    paired_t_p_adj_BH,
+    wilcox_p_adj_BH,
+    reference_strength,
+    conclusion
+  ) %>%
+  arrange(variable_label, comparison_area)
+
+paired_stats_clean
+
+write_csv(
+  paired_stats_clean,
+  file.path(stats_dir, "paired_prince5_reference_station_clean_summary.csv")
+)
+
+### Heat map for results:::
+
+p_reference_heatmap <- paired_stats %>%
+  mutate(
+    variable_label = case_when(
+      variable == "monthly_mean_temperature" ~ "Temperature",
+      variable == "monthly_mean_salinity" ~ "Salinity",
+      variable == "monthly_mean_density" ~ "Density",
+      variable == "monthly_mean_stratification" ~ "Temperature stratification",
+      variable == "monthly_mean_density_stratification" ~ "Density stratification",
+      TRUE ~ variable
+    )
+  ) %>%
+  ggplot(
+    aes(
+      x = comparison_area,
+      y = variable_label,
+      fill = pearson_r
+    )
+  ) +
+  geom_tile(colour = "white", linewidth = 0.6) +
+  geom_text(
+    aes(label = round(pearson_r, 2)),
+    size = 4
+  ) +
+  scale_fill_gradient2(
+    low = "firebrick3",
+    mid = "white",
+    high = "navy",
+    midpoint = 0,
+    limits = c(-1, 1),
+    name = "Pearson r"
+  ) +
+  labs(
+    title = "Strength of Paired Relationship with Prince5",
+    subtitle = "Higher positive correlations indicate stronger tracking of Prince5 conditions",
+    x = "Comparison ground",
+    y = "Oceanographic variable"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 30, hjust = 1),
+    panel.grid = element_blank()
+  )
+
+p_reference_heatmap
+
+ggsave(
+  filename = file.path(stats_dir, "prince5_reference_correlation_heatmap.png"),
+  plot = p_reference_heatmap,
+  width = 7,
+  height = 5,
+  dpi = 300
+)
+
+
+### ranking:
+
+paired_stats_ranked <- paired_stats %>%
+  mutate(
+    variable_label = case_when(
+      variable == "monthly_mean_temperature" ~ "Temperature",
+      variable == "monthly_mean_salinity" ~ "Salinity",
+      variable == "monthly_mean_density" ~ "Density",
+      variable == "monthly_mean_stratification" ~ "Temperature stratification",
+      variable == "monthly_mean_density_stratification" ~ "Density stratification",
+      TRUE ~ variable
+    )
+  ) %>%
+  arrange(desc(pearson_r)) %>%
+  mutate(rank = row_number()) %>%
+  select(
+    rank,
+    variable_label,
+    comparison_area,
+    n_paired,
+    pearson_r,
+    mean_difference,
+    rmse,
+    mae
+  )
+
+paired_stats_ranked
+
+write_csv(
+  paired_stats_ranked,
+  file.path(stats_dir, "prince5_reference_relationships_ranked.csv")
+)
+
+
+
+
+
+############################## Older Code ----------------------------->>>>>>>>>>
 
 # --------------------------------------------------
 # 3. Join HSC grounds to Prince-5 by Year + month
