@@ -13,9 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2026"
-surv.no = "4"
-hightide = "2026-06-21 18:04:00" #for Scots Bay only; YYYY-MM-DD
-mainBoxVessels = 6
+surv.no = "5"
+hightide = "2026-07-05 16:05:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 5
 Tow = "N"
 
 ```
@@ -383,7 +383,8 @@ knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/Git
 TransDetails = SurveyTotal %>%
   filter(Type == "Actual") %>%
   filter(!is.na(Vessel)) %>%
-  dplyr::select(-Dist..km., -Type, -Survey, -Start.Lon, -Start.Lat, -End.Lat, -End.Lon) %>%
+  #dplyr::select(-Dist..km., -Type, -Survey, -Start.Lon, -Start.Lat, -End.Lat, -End.Lon) %>%
+  dplyr::select(-Dist..km., -Type, -Survey) %>%
   rename("Transect #" = Transect.No., "Date/Time Start" = Date.Time.Start, "Date/Time End" = Date.Time.End, "Start Lon" = X, "Start Lat" = Y, "End Lon" = Xend, "End Lat" = Yend, "Distance (km)" = Distance) %>%
   arrange(Vessel, "Transect #") %>%
   dplyr::select(-Start, -End, -Duration, -Year, -Date)
