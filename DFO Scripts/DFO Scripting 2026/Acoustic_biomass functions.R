@@ -301,7 +301,7 @@ sort_points <- function(df, y = "latitude", x = "longitude", clockwise = TRUE) {
 }
 
 
-land.all <- st_read("Y:/Acoustic Index Review Files/NE_10M_Coastline/ne_10m_coastline.shp")
+land.all <- st_read(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/DFO Scripts/DFO Scripting 2026/ne_10m_coastline.shp"))
 land.all<-st_cast(land.all$geometry, "POLYGON")
 land.all
 

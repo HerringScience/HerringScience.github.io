@@ -6,11 +6,11 @@ rm(list = ls())
 library(dplyr)
 library(geosphere)
 library(sp)
-library(rgdal)
+#library(rgdal)
 library(raster)
 library(adehabitatHR)
-library(plotKML)
-library(maptools)
+#library(plotKML)
+#library(maptools)
 library(lubridate)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -21,7 +21,7 @@ library(ggplot2)
 library(units)
 
 #probably need a "top line broken" =T/F check here instead of diving into the code
-surveydate <- "2024-05-05" #YYYY-MM-DD
+surveydate <- "2026-06-21" #YYYY-MM-DD
 surv="SB" #SB or GB or SI
 year="2026"
 surv.no="4"
@@ -36,7 +36,7 @@ TS50 <- -35.5-0.10727
 TS75 <- -35.5 -0.26575
 TS120 <- -35.5 -0.44946
 
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/"))
+setwd(paste0("C:/Users/", Sys.info()[7],"/Desktop/Echoview/Surveys/", year, "/", surv, surv.no, " 21-06-2026/Export/"))
 source(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/DFO Scripts/DFO Scripting 2026/Acoustic_biomass functions.R"))
 #setwd(paste0("E:/Acoustic Index Review Files/Integration Versions/2022_07_06/2024/Scots Bay/",surveydate))
 #source("E:/Acoustic Index Review Files/Rscripting and automation/2022_07_06_R_SurveyScripts/Acoustic_biomass functions.R")
