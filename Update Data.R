@@ -5,17 +5,17 @@ rm(list = ls())
 surv="SB" #SB or GB or SI
 surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="4"
+surv.no="5"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LM", "BP", "FM", "LJ", "MS", "LB")
+ids = c("BP", "FM", "LJ", "MS", "LB")
 
 #Area and TS values - From table C
-SB1= 616.6171 #SB main area
+SB1= 690.2649 #SB main area
 SB2= 80.94466 #SB north area
 SB3= 119.3215 #SB east area
 
@@ -49,12 +49,12 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-library(rgeos)
+#library(rgeos)
 library(knitr)
 library(kableExtra)
 library(grid)
@@ -93,7 +93,7 @@ Plankton = Plankton %>%
   mutate(Year = year,
          Ground = surv,
          Survey.No = surv.no)
-if(Tow == "Y") {Plankton$TowTime = difftime(Time2, Time1, units = "mins")}
+if(Tow == "Y") {Plankton$TowTime = difftime(Plankton$Time2, Plankton$Time1, units = "mins")}
 if(Tow == "N") {Plankton$TowTime = 0}
 Plankton$Year = as.numeric(Plankton$Year)
 Plankton$Swell = as.character(Plankton$Swell)
@@ -367,21 +367,21 @@ EVessel = ifelse(Survey$EVessel == "Lady Janice II", "LJ",
 #These IDs are specifically for adjusted surveys
   ### Region has start and end times within it.
   
-  ids = c("MS_T02", "MS_T03", "MS_T04", "MS_T05")
-  northern = trans[which((trans$RegionName %in% ids)), ]
+#  ids = c("MS_T02", "MS_T03", "MS_T04", "MS_T05")
+#  northern = trans[which((trans$RegionName %in% ids)), ]
   
-  ids = c("FM_T02", "FM_T03", "LM_T02", "LB_T02", "LB_T03")
-  eastern = trans[which((trans$RegionName %in% ids)), ]
+#  ids = c("FM_T02", "FM_T03", "LM_T02", "LB_T02", "LB_T03")
+#  eastern = trans[which((trans$RegionName %in% ids)), ]
   
-  ids =c("BP_T01", "BP_T02", "LM_T01", "LM_T03", "LJ_T01", "LJ_T02", "LJ_T03", "MS_T01", "FM_T01", "LB_T01", "LB_T04")
-  main = trans[which((trans$RegionName %in% ids)), ]
+#  ids =c("BP_T01", "BP_T02", "LM_T01", "LM_T03", "LJ_T01", "LJ_T02", "LJ_T03", "MS_T01", "FM_T01", "LB_T01", "LB_T04")
+#  main = trans[which((trans$RegionName %in% ids)), ]
 #To here
   
   ### Comment out chunk below if needed to adjust. 
   
-#northern = trans[which((trans$Vessel == NVessel)), ]
-#eastern = trans[which((trans$Vessel == EVessel)), ]
-#main = trans[which((trans$Vessel %in% ids)), ]
+northern = trans[which((trans$Vessel == NVessel)), ]
+eastern = trans[which((trans$Vessel == EVessel)), ]
+main = trans[which((trans$Vessel %in% ids)), ]
 PRCplot=ggplot(map, aes(x=Xend, y=Yend)) + 
     geom_point(aes(colour = Vessel, size = PRC_ABC)) + 
     labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
@@ -552,7 +552,7 @@ A = read_csv("tableA.csv")
 actual = A %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
-Perform = full_join(A, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
+Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
 Perform = Perform %>% rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(X,Y), cbind(Xend,Yend))) %>% mutate(Distance = Distance/1000)
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
@@ -563,7 +563,7 @@ mutate(End=as.POSIXct(Date.Time.End, origin = "1970-01-01")) %>%
 #Duration in seconds. #Removed the /60 as this was causing the speed to be much smaller than it should be. This looks closer to what it should be.
    mutate(Duration = as.numeric(End-Start)*60) %>%
    mutate(Speed = (((Distance*1000)/(Duration))))
-Perform<-Perform %>% mutate(Speed = Speed*1.94384) #convert from m/s to knots
+Perform<-Perform %>% mutate(Speed = (Speed*1.94384)/60) #convert from m/s to knots
 Perform<-Perform %>% mutate(Year = as.numeric(substr(Start, 1, 4)))
 Perform<-Perform %>% mutate(Date = date(Start)) 
 
