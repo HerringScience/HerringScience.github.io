@@ -38,38 +38,76 @@ library(janitor)
 #Import All Boxes
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
 boxes = read.csv("surveyBoxes.csv")
+
+#Grounds to use
 timGrounds <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv")
 
+# Build polygons from timGrounds
+ground_list <- split(timGrounds, timGrounds$Box)
+
+polys <- lapply(ground_list, function(x){
+  
+  coords <- as.matrix(x[, c("X", "Y")])
+  
+  if(!all(coords[1, ] == coords[nrow(coords), ])){
+    coords <- rbind(coords, coords[1, ])
+  }
+  
+  st_polygon(list(coords))
+})
+
+grounds_sf <- st_sf(
+  Box = names(ground_list),
+  geometry = st_sfc(polys, crs = 4326)
+)
+
+
 #Tag Returns 2024
-tagReturns2024 = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/2024 Tag Returns.csv")
+tagReturns2024 = read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Return spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
 
 #Remove any tag that was unable to be associated with a catch/catch weight.
 tagReturns2024 = drop_na(tagReturns2024, Catch.t)
 
 
-#Change coordinates in tagReturns2024
-convert_ddm <- function(x){
-  
-  x <- trimws(as.character(x))
-  
-  parts <- strsplit(x, "\\s+")
-  
-  sapply(parts, function(p){
-    
-    if(length(p) != 2)
-      return(NA)
-    
-    deg <- as.numeric(p[1])
-    min <- as.numeric(p[2])
-    
-    deg + min / 60
+#Change coordinates in tagReturns2024 to decimal degrees
+dmm_to_dd <- function(x) {
+  sapply(strsplit(as.character(x), "\\s+"), function(z) {
+    as.numeric(z[1]) + as.numeric(z[2]) / 60
   })
 }
 
+tagReturns2024$returnedLat <- dmm_to_dd(tagReturns2024$returnedLat)
+tagReturns2024$returnedLon <- -dmm_to_dd(tagReturns2024$returnedLon)
+
+tagReturns2024 = drop_na(tagReturns2024, returnedLat)
+
+#Assign Grounds based from timGrounds
+pts <- st_as_sf(
+  tagReturns2024,
+  coords = c("returnedLon", "returnedLat"),
+  crs = 4326
+)
+
+joined <- st_join(
+  pts,
+  grounds_sf["Box"],
+  join = st_within,
+  left = TRUE
+)
+
+# Fill Unknown Ground values with the polygon name
+tagReturns2024$returnedArea <- ifelse(
+  is.na(tagReturns2024$returnedArea) |
+    tagReturns2024$returnedArea == "UNKNOWN",
+  joined$Box,
+  tagReturns2024$returnedArea
+)
+
+#Add Julien Date
 tagReturns2024 <- tagReturns2024 %>%
   mutate(
-    Lat4326 = convert_ddm(returnedLat),
-    Lon4326 = -convert_ddm(returnedLon)  # western hemisphere
+    returnedDate = dmy(returnedDate),   # dd/mm/yyyy
+    returnedJulian = yday(returnedDate)
   )
 
 
@@ -103,62 +141,6 @@ events_sf <- st_as_sf(
   coords = c("Lon", "Lat"),
   crs = 4326,
   remove = FALSE
-)
-
-# Build polygons from timGrounds
-ground_list <- split(timGrounds, timGrounds$Box)
-
-polys <- lapply(ground_list, function(x){
-  
-  coords <- as.matrix(x[, c("X", "Y")])
-  
-  # close polygon
-  if(!all(coords[1, ] == coords[nrow(coords), ])){
-    coords <- rbind(coords, coords[1, ])
-  }
-  
-  st_polygon(list(coords))
-})
-
-grounds_sf <- st_sf(
-  Box = names(ground_list),
-  geometry = st_sfc(polys, crs = 4326)
-)
-
-# Spatial join
-events_joined <- st_join(
-  events_sf,
-  grounds_sf["Box"],
-  join = st_within
-)
-
-# Replace Other with polygon-assigned ground
-events_joined <- events_joined %>%
-  mutate(
-    Ground = case_when(
-      Ground == "Other" & !is.na(Box) ~ Box,
-      TRUE ~ Ground
-    )
-  )
-
-# Build polygons from timGrounds
-ground_list <- split(timGrounds, timGrounds$Box)
-
-polys <- lapply(ground_list, function(x){
-
-  coords <- as.matrix(x[, c("X", "Y")])
-
-  # close polygon
-  if(!all(coords[1, ] == coords[nrow(coords), ])){
-    coords <- rbind(coords, coords[1, ])
-  }
-
-  st_polygon(list(coords))
-})
-
-grounds_sf <- st_sf(
-  Box = names(ground_list),
-  geometry = st_sfc(polys, crs = 4326)
 )
 
 # Spatial join
@@ -195,7 +177,51 @@ taggingEvents <- taggingEvents %>%
 
 #Join taggingEvents by tagReturns2024
 
+fullReturns2024 <- inner_join(tagReturns2024, taggingEvents,
+                      by = c("Tag_Num" = "Tag_Num"))
 
 
+#Number of days to recapture
+
+fullReturns2024 <- fullReturns2024 %>%
+  mutate(
+    Date = as.Date(Date),
+    daysAtLarge = as.numeric(returnedDate - Date)
+  )
+
+fullReturns2024 <- fullReturns2024 %>%
+  mutate(
+    daysAtLarge = as.numeric(returnedDate - Date)
+  )
+
+#remove any tags taht the values are negative. Must go through this list later to figure out what happened.
+
+fullReturns2024 <- fullReturns2024 %>%
+  filter(daysAtLarge >= 0)
+
+#Remove columns that do not add value and rearrange
+
+fullReturns2024 <- fullReturns2024 %>%
+  dplyr::select(
+    Tag_Num,
+    Date,
+    Julian,
+    Ground,
+    Lat,
+    Lon,
+    returnedDate,
+    returnedJulian,
+    returnedArea,
+    returnedLat,
+    returnedLon,
+    Catch.t,
+    daysAtLarge,
+    dataorigin, #returned data origin
+    Comments #comments, rename this
+
+  )
 
 
+#Write new full returns file
+setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))
+fullTagReturns <- write_csv(fullReturns2024, "Full Returns.csv" )

@@ -1,0 +1,103 @@
+Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,returnedLat,returnedLon,Catch.t,daysAtLarge,dataorigin,Comments
+569215,2023-08-29,241,Scots Bay,45.18972222,-64.92277778,2023-09-01,244,German Bank,43.28733333,-66.4115,84,3,2024 Tag Returns.csv,
+569032,2023-08-29,241,Scots Bay,45.15777778,-65.03361111,2023-09-01,244,German Bank,43.28733333,-66.4115,84,3,2024 Tag Returns.csv,
+564460,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,244,German Bank,43.28733333,-66.4115,84,3,2024 Tag Returns.csv,
+564341,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,244,German Bank,43.28733333,-66.4115,84,3,2024 Tag Returns.csv,
+471754,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2024-09-03,247,Scots Bay,45.131,-65.07066667,81,371,2024 Tag Returns.csv,
+577472,2023-09-04,247,German Bank,43.25972222,-66.37611111,2023-09-05,248,German Bank,43.26666667,-66.35,185,1,2024 Tag Returns.csv,
+567083,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-05,248,Seal Island,43.26666667,-66.385,78,7,2024 Tag Returns.csv,
+567442,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-05,248,Seal Island,43.26666667,-66.385,78,2,2024 Tag Returns.csv,
+564416,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,43.26666667,-66.385,78,7,2024 Tag Returns.csv,
+567465,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-05,248,Seal Island,43.26666667,-66.385,78,2,2024 Tag Returns.csv,
+564456,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,43.26666667,-66.385,78,7,2024 Tag Returns.csv,
+564640,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,43.26666667,-66.385,78,7,2024 Tag Returns.csv,
+564349,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,43.26666667,-66.385,78,7,2024 Tag Returns.csv,
+564107,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-06,219,Scots Bay,45.16266667,-64.97283333,106,344,2024 Tag Returns.csv,
+567570,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-06,249,German Bank,43.25,-66.38333333,122,3,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+567207,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-06,249,German Bank,43.25,-66.38333333,122,8,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+500940,2022-08-10,222,Scots Bay,45.18843333,-64.88335,2023-09-06,249,German Bank,43.25,-66.38333333,122,392,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+471823,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2023-09-06,249,German Bank,43.25,-66.38333333,122,8,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+569073,2023-08-29,241,Scots Bay,45.15777778,-65.03361111,2023-09-06,249,German Bank,43.25,-66.38333333,122,8,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+471652,2023-08-28,240,Scots Bay,45.1633,-64.9931,2023-09-06,249,German Bank,43.25,-66.38333333,122,9,2024 Tag Returns.csv,Used BP as Connors vessel that had the biggest catch on the day.
+521399,2023-08-23,235,German Bank,43.38333333,-66.16666667,2024-06-07,159,Lurcher,43.9,-68.465,66,289,2024 Tag Returns.csv,
+528137,2023-09-05,248,German Bank,43.26666667,-66.36638889,2023-09-07,250,German Bank,45.15433333,-64.99233333,147,2,2024 Tag Returns.csv,
+567428,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-07,250,German Bank,45.15433333,-64.99233333,147,4,2024 Tag Returns.csv,
+564354,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567510,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,4,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564891,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,10,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+471841,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567176,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+502446,2022-08-24,236,German Bank,43.29388333,-66.39218333,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,379,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+471495,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,10,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+563788,2023-08-20,232,Scots Bay,45.12166667,-65.05638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,18,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+563824,2023-08-20,232,Scots Bay,45.12166667,-65.05638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,18,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567199,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567221,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564937,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,10,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567200,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+532142,2023-09-04,247,German Bank,43.25,-66.35,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,3,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564665,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,10,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564319,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+594136,2022-08-24,236,Scots Bay,45.14533333,-65.0025,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,379,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564852,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,10,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567224,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+572426,2023-08-27,239,Scots Bay,45.13527778,-65.06972222,2023-09-07,250,Scots Bay,45.13333333,-65.05,119,11,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+578866,2023-09-07,250,Scots Bay,45.11333333,-65.09944444,2023-09-11,254,Scots Bay,45.11666667,-65.03333333,152,4,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+521966,2023-08-28,240,Trinity,44.05,-66.46666667,2024-06-12,164,Grand Manan,43.59666667,-66.62,109,289,2024 Tag Returns.csv,
+569507,2023-08-30,242,Long Island,44.295,-66.42,2024-08-12,225,Scots Bay,45.06666667,-65,102,348,2024 Tag Returns.csv,
+564585,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2024-08-12,225,Scots Bay,45.16775,-64.9565,63,349,2024 Tag Returns.csv,
+529460,2023-10-04,277,Long Island,44.36222222,-66.32055556,2024-06-13,165,Grand Manan,44.58333333,-66.60166667,98,253,2024 Tag Returns.csv,
+528811,2023-09-12,255,German Bank,43.31916667,-66.16166667,2023-09-13,256,Seal Island,43.285,-66.11333333,136,1,2024 Tag Returns.csv,
+564756,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-15,258,German Bank,43.275,-66.38333333,171,18,2024 Tag Returns.csv,
+567493,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-15,258,German Bank,43.275,-66.38333333,171,12,2024 Tag Returns.csv,
+500534,2022-08-09,221,Scots Bay,45.16556667,-64.94023333,2023-09-15,258,German Bank,43.25,-66.36666667,108,402,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+577946,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-15,258,German Bank,43.25,-66.36666667,108,9,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+514040,2021-10-04,277,German Bank,43.291,-66.45433333,2023-09-15,258,German Bank,43.25,-66.36666667,108,711,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+577445,2023-09-04,247,German Bank,43.25972222,-66.37611111,2023-09-15,258,German Bank,43.25,-66.36666667,108,11,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+569057,2023-08-29,241,Scots Bay,45.15777778,-65.03361111,2023-09-15,258,German Bank,43.25,-66.36666667,108,17,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+569147,2023-08-29,241,Scots Bay,45.15777778,-65.03361111,2023-09-15,258,German Bank,43.25,-66.36666667,108,17,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+567157,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-15,258,German Bank,43.25,-66.36666667,108,17,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch on the day.
+564179,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-09-17,261,Scots Bay,45.13333333,-65.05,88,386,2024 Tag Returns.csv,
+471737,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2024-09-17,261,Scots Bay,45.13333333,-65.05,88,385,2024 Tag Returns.csv,
+532292,2023-09-11,254,German Bank,43.25,-66.4,2023-09-18,261,German Bank,43.29833333,-66.135,132,7,2024 Tag Returns.csv,
+502414,2022-08-24,236,German Bank,43.29388333,-66.39218333,2022-09-19,262,German Bank,43.26833333,-66.35166667,115,26,2024 Tag Returns.csv,Used LM as Comeau vessel that had the biggest catch on the day.
+528324,2023-09-06,249,German Bank,43.26472222,-66.35638889,2023-09-19,262,German Bank,43.29066667,-66.12233333,58,13,2024 Tag Returns.csv,
+564740,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-19,262,German Bank,43.26833333,-66.35166667,115,22,2024 Tag Returns.csv,Used LM as Comeau vessel that had the biggest catch on the day.
+567880,2023-09-10,253,Scots Bay,45.13833333,-65.0175,2024-09-19,263,Scots Bay,45.11666667,-65.05,124,375,2024 Tag Returns.csv,
+566792,2023-08-23,235,German Bank,43.48611111,-66.22694444,2024-06-20,172,Scots Bay,44.68,-66.56666667,61,302,2024 Tag Returns.csv,
+564214,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-20,233,Scots Bay,45.18333333,-65.9,85,358,2024 Tag Returns.csv,
+567067,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-20,233,Scots Bay,45.18333333,-65.9,85,357,2024 Tag Returns.csv,
+567226,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-22,235,Scots Bay,44.06666667,-65.06666667,115,359,2024 Tag Returns.csv,
+567029,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-09-24,268,Scots Bay,45.165,-64.9785,91,392,2024 Tag Returns.csv,
+564204,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-06-25,177,White Head,45.13333333,-65.11666667,69,302,2024 Tag Returns.csv,
+578578,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-25,268,Scots Bay,45.15,-64.83333333,132,21,2024 Tag Returns.csv,Used C1 as Connors vessel that had the biggest catch.
+567565,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-25,268,Scots Bay,45.15,-64.83333333,132,22,2024 Tag Returns.csv,Used C1 as Connors vessel that had the biggest catch.
+529179,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2024-06-26,178,Grand Manan,44.58333333,-66.59666667,60,269,2024 Tag Returns.csv,
+577781,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2024-09-26,270,Scots Bay,45.13333333,-65.11666667,70,386,2024 Tag Returns.csv,
+603551,2022-09-12,255,German Bank,43.23446667,-66.34903333,2023-08-28,240,Scots Bay,45.13333333,-65.05,107,350,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch.
+532013,2023-09-04,247,German Bank,43.25,-66.35,2023-09-28,271,Scots Bay,45.13333333,-65.05,107,24,2024 Tag Returns.csv,Used FM as Connors vessel that had the biggest catch.
+471466,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-29,241,German Bank,43.2375,-66.321,50,1,2024 Tag Returns.csv,
+564145,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,German Bank,43.2375,-66.321,50,1,2024 Tag Returns.csv,
+474896,2023-10-04,277,Long Island,44.30111111,-66.33555556,2024-07-30,212,Scots Bay,46,-64.96666667,56,300,2024 Tag Returns.csv,
+603928,2022-09-13,256,German Bank,43.29043333,-66.4312,2023-08-30,242,German Bank,43.264,-66.34566667,32,351,2024 Tag Returns.csv,Used C1 as Connors only vessel out that day.
+563703,2023-08-14,226,Long Island,44.34916667,-66.35805556,2023-08-30,242,German Bank,43.264,-66.34566667,32,16,2024 Tag Returns.csv,Used C1 as Connors only vessel out that day.
+564573,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.264,-66.34566667,32,1,2024 Tag Returns.csv,Used C1 as Connors only vessel out that day.
+564038,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-30,242,German Bank,43.264,-66.34566667,32,2,2024 Tag Returns.csv,Used C1 as Connors only vessel out that day.
+564593,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.264,-66.34566667,32,1,2024 Tag Returns.csv,Used C1 as Connors only vessel out that day.
+564713,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,German Bank,43.23733333,-66.321,50,2,2024 Tag Returns.csv,
+564637,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564334,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564312,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564783,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,German Bank,43.23733333,-66.321,50,2,2024 Tag Returns.csv,
+564604,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564864,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,German Bank,43.23733333,-66.321,50,2,2024 Tag Returns.csv,
+564417,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564764,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,German Bank,43.23733333,-66.321,50,2,2024 Tag Returns.csv,
+564554,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+564761,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,German Bank,43.23733333,-66.321,50,2,2024 Tag Returns.csv,
+564463,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,German Bank,43.23733333,-66.321,50,1,2024 Tag Returns.csv,
+473112,2022-09-07,250,Scots Bay,45.19678333,-64.88591667,2023-08-30,242,Long Island,44.31666667,-66.41166667,12,357,2024 Tag Returns.csv,
+471616,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Long Island,44.31666667,-66.41166667,12,2,2024 Tag Returns.csv,
+564411,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Long Island,44.31666667,-66.41166667,12,1,2024 Tag Returns.csv,
+564358,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Long Island,44.31666667,-66.41166667,12,1,2024 Tag Returns.csv,
+471558,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Long Island,44.31666667,-66.41166667,12,2,2024 Tag Returns.csv,

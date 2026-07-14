@@ -1,4 +1,4 @@
-Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,Company,Catch.t,dataorigin,originalDF,id,
+Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,Company,Catch.t,dataorigin,originalDF,id,Comments
 564161,Scots Bay,,,?,Canada 100,Purse Seine,Connors,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
 572411,UNKNOWN,,,01-06-2023,UNKOWN,Purse Seine,Barry Group,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
 567482,UNKNOWN,43 17.24,66 24.69,01-09-2023,Lady Janice,Purse Seine,Comeau,84,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,01-09-2023 Lady Janice,
@@ -140,11 +140,11 @@ Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,
 528653,UNKNOWN,45.11,65.03,29-08-2023,Canada 100,Purse Seine,Connors,82,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors vessel that had the biggest catch.
 528707,UNKNOWN,45.11,65.03,29-08-2023,Canada 100,Purse Seine,Connors,82,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors vessel that had the biggest catch.
 474896,Scots Bay,45 60,64 58,30-07-2024,Brunswick Provider,Purse Seine,Connors,56,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-07-2024 Brunswick Provider,
-603928,UNKNOWN,43 15.84,66 20.74,30-08-2022,Lady Janice,Purse Seine,Comeau,151,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used LJ as Comeaus only vessel out that day.
-563703,UNKNOWN,43 15.84,66 20.74,30-08-2022,UNKOWN,Purse Seine,Comeau,151,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used LJ as Comeaus only vessel out that day.
-564573,UNKNOWN,43 15.84,66 20.74,30-08-2022,UNKOWN,Purse Seine,Comeau,151,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used LJ as Comeaus only vessel out that day.
-564038,UNKNOWN,43 15.84,66 20.74,30-08-2022,UNKOWN,Purse Seine,Comeau,151,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used LJ as Comeaus only vessel out that day.
-564593,UNKNOWN,43 15.84,66 20.74,30-08-2022,UNKOWN,Purse Seine,Comeau,151,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used LJ as Comeaus only vessel out that day.
+603928,UNKNOWN,43 15.84,66 20.74,30-08-2023,Canada 100,Purse Seine,Connors,32,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors only vessel out that day.
+563703,UNKNOWN,43 15.84,66 20.74,30-08-2023,Canada 100,Purse Seine,Connors,32,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors only vessel out that day.
+564573,UNKNOWN,43 15.84,66 20.74,30-08-2023,Canada 100,Purse Seine,Connors,32,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors only vessel out that day.
+564038,UNKNOWN,43 15.84,66 20.74,30-08-2023,Canada 100,Purse Seine,Connors,32,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors only vessel out that day.
+564593,UNKNOWN,43 15.84,66 20.74,30-08-2023,Canada 100,Purse Seine,Connors,32,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,Used C1 as Connors only vessel out that day.
 564713,UNKNOWN,43 14.24,66 19.26,30-08-2023,Lady Janice,Purse Seine,Comeau,50,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Lady Janice,
 564637,UNKNOWN,43 14.24,66 19.26,30-08-2023,Lady Janice,Purse Seine,Comeau,50,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Lady Janice,
 564334,UNKNOWN,43 14.24,66 19.26,30-08-2023,Lady Janice,Purse Seine,Comeau,50,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Lady Janice,
@@ -163,7 +163,7 @@ Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,
 564358,UNKNOWN,44 19 42,66 24.70,30-08-2023,Morning Star,Purse Seine,Scotia,12,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Morning Star,
 532075,UNKNOWN,44 19 42,66 24.70,30-08-2023,Morning Star,Purse Seine,Scotia,12,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Morning Star,
 471558,UNKNOWN,44 19 42,66 24.70,30-08-2023,Morning Star,Purse Seine,Scotia,12,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,30-08-2023 Morning Star,
-603692,UNKNOWN,,,31-08-2022,UNKOWN,Purse Seine,Cape Breeze,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
+603692,UNKNOWN,,,31-08-2023,UNKOWN,Purse Seine,Cape Breeze,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
 564066,Scots Bay,,,Fresh,Canada 100,Purse Seine,Connors,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
 564434,Scots Bay,,,Fresh,Canada 100,Purse Seine,Connors,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
 577797,Scots Bay,,,Fresh,Canada 100,Purse Seine,Connors,,2024 Tag Returns.csv,Connors Fish Tag Data 2024.xlsx,,
