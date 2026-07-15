@@ -1,2 +1,2 @@
 Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,Company,Catch.t,dataorigin,originalDF,id,Comments
-,,,,,,,,,name of this spreadsheet ( YEAR Tag Returns.csv),Original data frame (usually sent by each company),Date + Vessel,
+,,,,,,,,,YYYY Tag Returns,Original data frame (usually sent by each company),Date + Vessel,

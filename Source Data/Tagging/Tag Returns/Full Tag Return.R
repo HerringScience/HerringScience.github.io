@@ -12,12 +12,10 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-#library(weathercan)
 library(GGally)
 library(psych)
 library(raster)
 library(PBSmapping)
-#library(rgeos)
 library(sf)
 library(terra)
 library(knitr)
@@ -31,7 +29,7 @@ library(leaflet)
 library(rmapshaper)
 library(plotly)
 library(mapproj)
-library(oce) #new CTD Data package
+library(oce)
 library(pander)
 library(janitor)
 
@@ -47,62 +45,9 @@ tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
 tagReturns2023 <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
 tagReturns2024 <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
 tagReturns2025 <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
-
-#############################################
-
-
-# Add source file information
-returns2023 <- tagReturns2023 %>% mutate(source_year = 2023)
-returns2024 <- tagReturns2024 %>% mutate(source_year = 2024)
-returns2025 <- tagReturns2025 %>% mutate(source_year = 2025)
-
-# Combine all years
-all_returns <- bind_rows(
-  mutate_all(tagReturns2023, as.character),
-  mutate_all(tagReturns2024, as.character),
-  mutate_all(tagReturns2025, as.character)
-)
-
-# Parse dates
-all_returns <- all_returns %>%
-  mutate(
-    returnedDate = parse_date_time(
-      returnedDate,
-      orders = c("ymd", "dmy", "mdy")
-    ),
-    return_year = year(returnedDate)
-  )
-
-# Count non-missing fields to identify the most complete record
-all_returns <- all_returns %>%
-  mutate(
-    completeness =
-      rowSums(!is.na(.)) +
-      rowSums(across(everything(), ~ . != ""), na.rm = TRUE)
-  )
-
-# If a tag exists in multiple year files,
-# keep the most complete version
-all_returns <- all_returns %>%
-  arrange(Tag_Num, desc(completeness)) %>%
-  distinct(Tag_Num, .keep_all = TRUE)
-
-
-
-tagReturns2023 <- all_returns %>%
-  filter(return_year == 2023)
-
-tagReturns2024 <- all_returns %>%
-  filter(return_year == 2024)
-
-tagReturns2025 <- all_returns %>%
-  filter(return_year == 2025)
-
-# Records requiring manual review
-unknownDateReturns <- all_returns %>%
-  filter(is.na(return_year))
-
-############################################
+complete.returns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/complete.returns.csv")
+  complete.returns <- complete.returns %>%
+    dplyr::select(-X)
 
 #Full Returns.csv - This is the sheet to update!
 fullReturnsCSV <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
@@ -133,13 +78,7 @@ grounds_sf <- st_sf(
   geometry = st_sfc(polys, crs = 4326)
 )
 
-
-
-#Remove any tag that was unable to be associated with a catch/catch weight.
-tagReturns = drop_na(tagReturns, Catch.t)
-
-
-#Change coordinates in tagReturns2024 to decimal degrees
+#Change coordinates in tagReturns to decimal degrees
 dmm_to_dd <- function(x) {
   sapply(strsplit(as.character(x), "\\s+"), function(z) {
     as.numeric(z[1]) + as.numeric(z[2]) / 60
@@ -149,7 +88,64 @@ dmm_to_dd <- function(x) {
 tagReturns$returnedLat <- dmm_to_dd(tagReturns$returnedLat)
 tagReturns$returnedLon <- -dmm_to_dd(tagReturns$returnedLon)
 
-# tagReturns = drop_na(tagReturns, returnedLat) Do we always need the lat and lon if we have the ground?
+#Insert lat and lon from timGrounds if Ground is present.
+
+ground_lookup <- timGrounds %>%
+  group_by(Box) %>%
+  summarise(
+    fill_lon = first(X),
+    fill_lat = first(Y),
+    .groups = "drop"
+  )
+
+tagReturns <- tagReturns %>%
+  left_join(
+    ground_lookup,
+    by = c("returnedArea" = "Box")
+  ) %>%
+  mutate(
+    returnedLon = coalesce(returnedLon, fill_lon),
+    returnedLat = coalesce(returnedLat, fill_lat)
+  ) %>%
+  select(-fill_lon, -fill_lat)
+
+tagReturns <- tagReturns %>%
+  filter(
+    !is.na(returnedLat),
+    !is.na(returnedLon),
+    trimws(returnedLat) != "",
+    trimws(returnedLon) != ""
+  )
+
+
+events_sf <- st_as_sf(
+  tagReturns,
+  coords = c("returnedLon", "returnedLat"),
+  crs = 4326,
+  remove = FALSE
+)
+
+# Spatial join
+events_joined <- st_join(
+  events_sf,
+  grounds_sf["Box"],
+  join = st_within
+)
+
+# Replace Other with polygon-assigned ground
+events_joined <- events_joined %>%
+  mutate(
+    returnedArea = case_when(
+      returnedArea == "Other" & !is.na(Box) ~ Box,
+      TRUE ~ returnedArea
+    )
+  )
+
+# Remove geometry if desired
+taggingEvents <- events_joined %>%
+  st_drop_geometry()
+####
+
 
 needs_fill <- (
   is.na(tagReturns$returnedArea) |
@@ -301,6 +297,9 @@ fullReturnsCSV$Comments <- as.character(fullReturnsCSV$Comments)
 
 #Combine to FullReturnsCSV
 fullReturnsCSV <- bind_rows(fullReturnsCSV, fullReturns)
+
+# #Remove any tag that was unable to be associated with a catch/catch weight.
+# tagReturns = drop_na(tagReturns, Catch.t)
 
 #Write new full returns file
 setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))

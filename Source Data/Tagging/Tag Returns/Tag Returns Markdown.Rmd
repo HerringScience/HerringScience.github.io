@@ -1,0 +1,284 @@
+---
+title: "Tag Returns Markdown"
+output: html_document
+date: "2026-07-15"
+---
+
+```{r setup, include=FALSE}
+rm(list=ls()) # Clear environment
+
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(knitr)
+library(kableExtra)
+
+##Import needed files
+setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+  boxes = read.csv("surveyBoxes.csv")
+
+
+TagReturns <- read_csv(
+  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
+
+
+
+#Grounds to use
+timGrounds <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv")
+
+# Build polygons from timGrounds
+ground_list <- split(timGrounds, timGrounds$Box)
+
+polys <- lapply(ground_list, function(x){
+  
+  coords <- as.matrix(x[, c("X", "Y")])
+  
+  if(!all(coords[1, ] == coords[nrow(coords), ])){
+    coords <- rbind(coords, coords[1, ])
+  }
+  
+  st_polygon(list(coords))
+})
+
+grounds_sf <- st_sf(
+  Box = names(ground_list),
+  geometry = st_sfc(polys, crs = 4326)
+)
+
+TagReturns <- TagReturns %>%
+  mutate(
+    Date = as.Date(Date),
+    returnedDate = as.Date(returnedDate),
+
+    category = cut(
+      daysAtLarge,
+      breaks = c(-Inf, 3, 11, 31, 184, 366, 731, 1095, Inf),
+      labels = 1:8,
+      right = FALSE
+    ),
+
+    category = as.numeric(as.character(category)),
+    Count = 1
+  ) %>%
+  filter(
+    !is.na(Tag_Num),
+    daysAtLarge > 0
+  )
+
+location_lookup <- c(
+  "German Bank" = "GB",
+  "Scots Bay" = "SB",
+  "NB Coastal" = "NBC",
+  "Grand Manan" = "GM",
+  "Grand Manan Banks" = "GMB",
+  "Long Island" = "LI",
+  "Seal Island" = "SI",
+  "Yankee Bank" = "YB",
+  "Trinity" = "T",
+  "Browns Bank" = "BB",
+  "SW Grounds" = "SWG",
+  "Gannet Dry Ledge" = "GDL",
+  "Lurcher" = "L"
+)
+
+#### Functions
+create_tag_returns <- function(data, tagging_ground) {
+
+  origin_code <- location_lookup[[tagging_ground]]
+
+  data %>%
+    filter(Ground == tagging_ground) %>%
+    mutate(
+      DestinationCode = location_lookup[returnedArea],
+      TagLocation = paste(origin_code, "to", DestinationCode)
+    ) %>%
+    filter(!is.na(DestinationCode))
+}
+
+create_summary_table <- function(data) {
+
+  data %>%
+    count(
+      TagLocation,
+      category,
+      name = "Abundance"
+    ) %>%
+    arrange(TagLocation, category)
+}
+
+plot_tag_returns <- function(data, title) {
+
+  ggplot(
+    data,
+    aes(
+      x = TagLocation,
+      fill = factor(category)
+    )
+  ) +
+    geom_bar(colour = "white") +
+    theme_bw() +
+    labs(
+      x = "Tag to Catch Location",
+      y = "Number of Events",
+      fill = "Category"
+    ) +
+    ggtitle(title) +
+    scale_y_continuous(
+      breaks = pretty_breaks()
+    )
+}
+
+ground_report <- function(
+    data,
+    tagging_ground,
+    remove_cat1 = TRUE
+){
+
+  tag_data <- create_tag_returns(
+    data,
+    tagging_ground
+  )
+
+  if(remove_cat1){
+
+    tag_data <- tag_data %>%
+      filter(category != 1)
+
+  }
+
+  list(
+    data = tag_data,
+    summary = create_summary_table(tag_data),
+    plot = plot_tag_returns(
+      tag_data,
+      paste(tagging_ground, "Tag Returns")
+    )
+  )
+
+}
+
+```
+
+
+
+```{r Summary Table, echo=FALSE}
+
+SummaryTable <- TagReturns %>%
+  group_by(category) %>%
+  summarise(
+    AverageDaysAtLarge = round(mean(daysAtLarge, na.rm = TRUE), 1),
+    MinimumDaysAtLarge = min(daysAtLarge, na.rm = TRUE),
+    MaximumDaysAtLarge = max(daysAtLarge, na.rm = TRUE),
+    Abundance = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(category)
+
+kbl(
+  SummaryTable,
+  col.names = c(
+    "Category",
+    "Average Days at Large",
+    "Minimum Days",
+    "Maximum Days",
+    "Number of Returns"
+  ),
+  align = "c"
+) %>%
+  kable_paper("striped", full_width = FALSE)
+
+```
+
+```{r Returns by Year, echo = FALSE}
+
+returns_by_year <- TagReturns %>%
+  mutate(return_year = year(as.Date(returnedDate))) %>%
+  group_by(return_year) %>%
+  count(category)
+
+table(
+  Year = year(TagReturns$returnedDate),
+  Category = TagReturns$category
+)
+
+category_labels <- c(
+  "0-2",
+  "3-10",
+  "11-30",
+  "31-183",
+  "184-365",
+  "366-730",
+  "731-1094",
+  "1095+"
+)
+
+ggplot(
+  returns_by_year,
+  aes(
+    x = factor(category, labels = category_labels),
+    y = n,
+    fill = factor(return_year)
+  )
+) +
+  geom_col(position = "dodge") +
+  theme_bw() +
+  labs(
+    title = "Tag Returns by Category and Return Year",
+    x = "Days at Large Category",
+    y = "Number of Returns",
+    fill = "Return Year"
+  )
+
+```
+
+```{r, echo = FALSE}
+
+TagReturns <- TagReturns %>%
+  mutate(category = factor(category))
+
+grounds <- sort(unique(TagReturns$Ground))
+
+for(g in grounds){
+
+  p <- TagReturns %>%
+    filter(Ground == g) %>%
+    ggplot(
+      aes(
+        x = returnedArea,
+        fill = category
+      )
+    ) +
+    geom_bar() +
+    theme_bw() +
+    labs(
+      title = paste("Returns from", g),
+      x = "Return Area",
+      y = "Number of Returns",
+      fill = "Days at Large"
+    ) +
+    theme(
+      axis.text.x = element_text(
+        angle = 45,
+        hjust = 1
+      )
+    )
+
+  print(p)
+
+}
+
+SummaryTable <- TagReturns %>%
+  group_by(
+    Ground,
+    returnedArea,
+    category
+  ) %>%
+  summarise(
+    TotalReturns = n(),
+    .groups = "drop"
+  )
+
+kbl(SummaryTable)
+
+```

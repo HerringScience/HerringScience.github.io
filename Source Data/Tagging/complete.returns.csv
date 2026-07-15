@@ -1,4 +1,4 @@
-,TAG_NUMBER,catchAREA,DATE,BOAT,GearType,Company,Catch.t,dataorigin,id,
+,TAG_NUMBER,catchAREA,DATE,BOAT,GearType,Company,Catch.t,dataorigin,id,Comments
 1,205442,Seal Island,2019-10-14,Leroy & Barry II,Purse Seine,Scotia Gardens,NA,rawReturn.csv,2019-10-14 Leroy & Barry II,"id formula is as follows TEXT(DATE cell, ""yyyy-mm-dd"")& "" "" &BOAT cell"
 2,41089,Scots Bay,2020-08-24,Morning Star,Purse Seine,Scotia Garden,126,ScotiaGardenReturns2020.csv,2020-08-24 Morning Star,
 3,416008,Scots Bay,2019-08-06,Sealife II,Purse Seine,Comeau Sea Foods,NA,rawReturn.csv,2019-08-06 Sealife II,
