@@ -1,5 +1,5 @@
 ---
-title: "Tag Returns Markdown"
+title: "Tag Return Report"
 output: html_document
 date: "2026-07-15"
 ---
@@ -10,9 +10,37 @@ rm(list=ls()) # Clear environment
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
+library(ggplot2)
+library(patchwork)
 library(scales)
+library(cli)
+library(reprex)
+library(geosphere)
+library(reshape2)
+library(moderndive)
+library(skimr)
+library(ggridges)
+library(GGally)
+library(psych)
+library(raster)
+library(PBSmapping)
+library(sf)
+library(terra)
 library(knitr)
 library(kableExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(DT)
+library(dygraphs)
+library(leaflet)
+library(rmapshaper)
+library(plotly)
+library(mapproj)
+library(oce)
+library(pander)
+library(janitor)
+
 
 ##Import needed files
 setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
@@ -160,9 +188,37 @@ ground_report <- function(
 
 ```
 
+# {.tabset}
 
+## Summary Table
 
 ```{r Summary Table, echo=FALSE}
+
+category_labels <- c(
+  "0-2",
+  "3-10",
+  "11-30",
+  "31-183",
+  "184-365",
+  "366-730",
+  "731-1094",
+  "1095+"
+)
+
+category_table <- data.frame(
+  Category = 1:8,
+  DaysAtLarge = category_labels
+)
+
+kbl(
+  category_table,
+  caption = "Days at Large Category Definitions",
+  col.names = c("Category", "Days at Large")
+) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover"),
+    full_width = FALSE
+  )
 
 SummaryTable <- TagReturns %>%
   group_by(category) %>%
@@ -188,37 +244,79 @@ kbl(
 ) %>%
   kable_paper("striped", full_width = FALSE)
 
+TagReturns <- TagReturns %>%
+  mutate(
+    category = factor(
+      category,
+      levels = 1:8,
+      labels = category_labels
+    )
+  )
+
+SummaryTable <- TagReturns %>%
+  group_by(
+    Ground,
+    returnedArea,
+    category
+  ) %>%
+  summarise(
+    TotalReturns = n(),
+    .groups = "drop"
+  )
+
 ```
 
+
+## Category by Year
+
 ```{r Returns by Year, echo = FALSE}
+
+
 
 returns_by_year <- TagReturns %>%
   mutate(return_year = year(as.Date(returnedDate))) %>%
   group_by(return_year) %>%
   count(category)
 
-table(
-  Year = year(TagReturns$returnedDate),
-  Category = TagReturns$category
+year_category_table <- as.data.frame(
+  table(
+    Year = year(TagReturns$returnedDate),
+    Category = TagReturns$category
+  )
 )
 
-category_labels <- c(
-  "0-2",
-  "3-10",
-  "11-30",
-  "31-183",
-  "184-365",
-  "366-730",
-  "731-1094",
-  "1095+"
-)
+year_category_table %>%
+  pivot_wider(
+    names_from = Category,
+    values_from = Freq,
+    values_fill = 0
+  ) %>%
+  kbl(
+    caption = "Tag Returns by Year and Days-at-Large Category",
+    align = "c"
+  ) %>%
+  kable_styling(
+    bootstrap_options = c(
+      "striped",
+      "hover",
+      "condensed",
+      "responsive"
+    ),
+    full_width = FALSE
+  ) %>%
+  row_spec(
+    0,
+    bold = TRUE,
+    color = "white",
+    background = "#2C3E50"
+  )
 
 ggplot(
-  returns_by_year,
+  year_category_table,
   aes(
-    x = factor(category, labels = category_labels),
-    y = n,
-    fill = factor(return_year)
+    x = Category,
+    y = Freq,
+    fill = factor(Year)
   )
 ) +
   geom_col(position = "dodge") +
@@ -229,17 +327,17 @@ ggplot(
     y = "Number of Returns",
     fill = "Return Year"
   )
-
 ```
 
-```{r, echo = FALSE}
+## Individual Grounds Return Summaries {.tabset}
 
-TagReturns <- TagReturns %>%
-  mutate(category = factor(category))
+```{r Individual Grounds, results='asis', echo=FALSE}
 
 grounds <- sort(unique(TagReturns$Ground))
 
-for(g in grounds){
+for (g in grounds) {
+
+  cat(paste0("\n\n### ", g, "\n\n"))
 
   p <- TagReturns %>%
     filter(Ground == g) %>%
@@ -266,19 +364,19 @@ for(g in grounds){
 
   print(p)
 
-}
-
-SummaryTable <- TagReturns %>%
-  group_by(
-    Ground,
-    returnedArea,
-    category
-  ) %>%
-  summarise(
-    TotalReturns = n(),
-    .groups = "drop"
+  print(
+    kbl(
+      SummaryTable %>%
+        filter(Ground == g) %>%
+        arrange(returnedArea, category),
+      caption = paste("Return Summary for", g)
+    ) %>%
+      kable_paper(
+        "striped",
+        full_width = FALSE
+      )
   )
 
-kbl(SummaryTable)
-
+  cat("\n\n")
+}
 ```
