@@ -269,11 +269,6 @@ fullReturnsCSV <- fullReturnsCSV %>%
 fullReturns <- fullReturns %>%
   mutate(across(everything(), as.character))
 
-# fullReturnsCSV$Ground <- as.character(fullReturnsCSV$Ground)
-# fullReturnsCSV$returnedArea <- as.character(fullReturnsCSV$returnedArea)
-# fullReturnsCSV$dataorigin <- as.character(fullReturnsCSV$dataorigin)
-# fullReturnsCSV$Comments <- as.character(fullReturnsCSV$Comments)
-
 #Combine to FullReturnsCSV
 fullReturnsCSV <- bind_rows(fullReturnsCSV, fullReturns)
 
@@ -296,22 +291,12 @@ removed_missing_location <- removed_missing_location %>%
 removed_bad_dates <- removed_bad_dates %>%
   mutate(across(everything(), as.character))
 
-# removed_missing_locations <- removed_missing_locations %>%
-#   mutate(across(everything(), as.character))
-
-#removed_missing_coords <- removed_missing_coords %>%
-#  mutate(across(everything(), as.character))
-
-#removed_missing_area <- removed_missing_area %>%
-#  mutate(across(everything(), as.character))
 
 removed_tags <- bind_rows(
-#  removed_missing_coords,
   removed_negative_days,
   removed_missing_tag,
   removed_missing_location,
   removed_bad_dates,
-#  removed_missing_area
 ) %>%
   distinct(Tag_Num, .keep_all = TRUE)
 

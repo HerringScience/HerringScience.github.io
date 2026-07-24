@@ -22,10 +22,10 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 vessels = 6
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Leroy & Barry"
+PlanktonVessel = "Fundy Monarch"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Fundy Monarch"
+V1 = "Leroy & Barry"
 V2 = PlanktonVessel
 V3 = "Brunswick Provider"
 V4 = "Lady Janice"
