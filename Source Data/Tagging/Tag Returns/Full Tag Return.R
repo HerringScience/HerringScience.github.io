@@ -69,6 +69,14 @@ fullReturnsCSV$Tag_Num <- as.numeric(fullReturnsCSV$Tag_Num)
 fullReturnsCSV$Date <- as.Date(fullReturnsCSV$Date)
 fullReturnsCSV$returnedDate <- as.Date(fullReturnsCSV$returnedDate)
 
+NAFO_subunits <- read.csv(
+  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"
+)
+
+groundWeirMasterSheet <- read.csv(
+  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/Grounds Weir Master Sheet.csv",
+  stringsAsFactors = FALSE
+)
 
 #Grounds to use
 timGrounds <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv")
@@ -91,6 +99,96 @@ grounds_sf <- st_sf(
   Box = names(ground_list),
   geometry = st_sfc(polys, crs = 4326)
 )
+
+# Build NAFO polygons
+NAFO_subunits <- NAFO_subunits %>%
+  filter(
+    !Area %in% c(
+      "3",
+      "4",
+      "5",
+      "6"
+    )
+  )
+
+nafo_list <- split(
+  NAFO_subunits,
+  NAFO_subunits$Area
+)
+
+nafo_polys <- lapply(
+  nafo_list,
+  function(x){
+    
+    coords <- as.matrix(
+      x[, c("X","Y")]
+    )
+    
+    if(!all(coords[1,] == coords[nrow(coords),])){
+      
+      coords <- rbind(
+        coords,
+        coords[1,]
+      )
+      
+    }
+    
+    st_polygon(list(coords))
+  }
+)
+
+nafo_sf <- st_sf(
+  Area = names(nafo_list),
+  geometry = st_sfc(
+    nafo_polys,
+    crs = 4326
+  )
+)
+
+nafo_sf <- st_make_valid(nafo_sf)
+
+nafo_sf$PolyArea <- as.numeric(
+  st_area(
+    st_transform(
+      nafo_sf,
+      3347
+    )
+  )
+)
+
+find_smallest_nafo <- function(
+    lon,
+    lat,
+    nafo_sf
+){
+  
+  if(
+    is.na(lon) ||
+    is.na(lat)
+  ){
+    return(NA_character_)
+  }
+  
+  pt <- st_sfc(
+    st_point(c(lon, lat)),
+    crs = 4326
+  )
+  
+  hits <- st_within(
+    pt,
+    nafo_sf
+  )[[1]]
+  
+  if(length(hits) == 0){
+    return(NA_character_)
+  }
+  
+  candidates <- nafo_sf[hits, ]
+  
+  candidates$Area[
+    which.min(candidates$PolyArea)
+  ]
+}
 
 #Change coordinates in tagReturns to decimal degrees
 dmm_to_dd <- function(x) {
@@ -212,6 +310,136 @@ taggingEvents <- taggingEvents %>%
 fullReturns <- inner_join(tagReturns, taggingEvents,
                       by = c("Tag_Num" = "Tag_Num"))
 
+#=====================================================
+# RELEASE NAFO
+#=====================================================
+# 
+# release_sf <- st_as_sf(
+#   fullReturns,
+#   coords = c("Lon","Lat"),
+#   crs = 4326,
+#   remove = FALSE
+# )
+
+# release_join <- st_join(
+#   release_sf,
+#   nafo_sf["Area"],
+#   left = TRUE,
+#   largest = TRUE
+# )
+
+fullReturns$ReleaseNAFO <- mapply(
+  find_smallest_nafo,
+  fullReturns$Lon,
+  fullReturns$Lat,
+  MoreArgs = list(
+    nafo_sf = nafo_sf
+  )
+)
+
+#=====================================================
+# RETURN NAFO FROM RETURN COORDINATES
+#=====================================================
+
+fullReturns$ReturnNAFO <- NA_character_
+
+has_return_coords <-
+  !is.na(fullReturns$returnedLat) &
+  !is.na(fullReturns$returnedLon)
+
+return_sf <- st_as_sf(
+  fullReturns[has_return_coords, ],
+  coords = c(
+    "returnedLon",
+    "returnedLat"
+  ),
+  crs = 4326,
+  remove = FALSE
+)
+
+return_join <- st_join(
+  return_sf,
+  nafo_sf["Area"],
+  left = TRUE,
+  largest = TRUE
+)
+
+fullReturns$ReturnNAFO <- mapply(
+  find_smallest_nafo,
+  fullReturns$returnedLon,
+  fullReturns$returnedLat,
+  MoreArgs = list(
+    nafo_sf = nafo_sf
+  )
+)
+
+#=====================================================
+# FALLBACK TO WEIR LOCATIONS
+#=====================================================
+
+weir_lookup <- groundWeirMasterSheet %>%
+  dplyr::select(
+    Ground,
+    Lat,
+    Lon
+  ) %>%
+  filter(
+    !is.na(Lat),
+    !is.na(Lon)
+  )
+
+weir_lookup <- weir_lookup %>%
+  mutate(
+    Lon = -abs(Lon)
+  )
+`
+
+missing_return <- is.na(
+  fullReturns$ReturnNAFO
+)
+
+fallback <- fullReturns[
+  missing_return,
+] %>%
+  left_join(
+    weir_lookup,
+    by = c(
+      "returnedArea" = "Ground"
+    )
+  )
+
+valid_fallback <-
+  !is.na(fallback$Lat) &
+  !is.na(fallback$Lon)
+
+if(any(valid_fallback)){
+  
+  fallback_sf <- st_as_sf(
+    fallback[valid_fallback, ],
+    coords = c("Lon","Lat"),
+    crs = 4326,
+    remove = FALSE
+  )
+  
+  fallback_join <- st_join(
+    fallback_sf,
+    nafo_sf["Area"],
+    left = TRUE,
+    largest = TRUE
+  )
+  
+  fullReturns$ReturnNAFO[
+    which(missing_return)[valid_fallback]
+  ] <- mapply(
+    find_smallest_nafo,
+    fallback$Lon[valid_fallback],
+    fallback$Lat[valid_fallback],
+    MoreArgs = list(
+      nafo_sf = nafo_sf
+    )
+  )
+}
+
 
 #Number of days to recapture
 
@@ -250,16 +478,18 @@ fullReturns <- fullReturns %>%
     Date,
     Julian,
     Ground,
+    ReleaseNAFO,
     Lat,
     Lon,
     returnedDate,
     returnedJulian,
     returnedArea,
+    ReturnNAFO,
     returnedLat,
     returnedLon,
     Catch.t,
     daysAtLarge,
-    dataorigin, #returned data origin
+    dataorigin,
     Comments
   )
 

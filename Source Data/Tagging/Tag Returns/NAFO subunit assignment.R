@@ -49,6 +49,10 @@ timGrounds <- read.csv(
   file.path(data_dir, "Main Data", "timGrounds.csv")
 )
 
+NAFO_subunites <- read.csv(
+  file.path(data_dir, "Main Data", "NAFO_subunits.csv")
+)
+
 groundWeirMasterSheet <- read.csv(
   file.path(data_dir, "Box Coordinates", "Grounds Weir Master Sheet.csv")
 )
@@ -73,13 +77,13 @@ returns <- read.csv(
 ground_list <- split(timGrounds, timGrounds$Box)
 
 ground_polys <- lapply(ground_list, function(x){
-  
+
   coords <- as.matrix(x[, c("X", "Y")])
-  
+
   if(!all(coords[1, ] == coords[nrow(coords), ])){
     coords <- rbind(coords, coords[1, ])
   }
-  
+
   st_polygon(list(coords))
 })
 
@@ -132,116 +136,116 @@ ground_lookup <- tibble(
 # Weir -> NAFO lookup
 #=========================================================
 
-weir_lookup_df <- tibble(
-  
-  Location = c(
-    
-    #=====================================================
-    # 4Xs
-    #=====================================================
-    
-    "Back Bay","Blacks Harbour","Blisses","Campobello",
-    "Chance Harbour","Chattis Point","Crow Harbour",
-    "Crow Island","Curry Cove","Deadmans","Deep Cove",
-    "Digdeguash Basin","Fairhaven","Friers Bay",
-    "Fryes Island","Herring Cove","Indian Island",
-    "Lawrence Cove","Leonardville","Lepreau",
-    "Lords Cove","Meadow Brook","Mill Cove",
-    "New River","Oak Bay","Red Head",
-    "Round Meadow","Sand Beach","Sandy Cove",
-    "Schooner Cove","Seelys Basin","Seelys Cove",
-    "Seelys Head","Ship Beach","Spectacle",
-    "Spider Cove","Spruce Cove","Tuckers Cove",
-    "Wolves","Beaver Harbour","Crab Rock",
-    "Eagle Island","Letang","L'etete",
-    "Maces Bay","Passamaquoddy","St Andrews Bay",
-    
-    #=====================================================
-    # 4Xr
-    #=====================================================
-    
-    "Bradfords Cove",
-    "Bradfords Cove Weir",
-    "Cora Bell",
-    "Iron Lady",
-    "Money Cove",
-    "Mumps",
-    "Pipe Dream",
-    "Prong",
-    "Teardrop",
-    "White Head",
-    "Mystrey Island",
-    "Sea Wall",
-    "North Head",
-    "Whale Cove",
-    "Winner",
-    
-    #=====================================================
-    # 4Xq
-    #=====================================================
-    
-    "Long Island Shoal",
-    "Long Island",
-    "NE Banks",
-    "Northeast Bank",
-    "St Marys Bay",
-    "Centerville",
-    
-    #=====================================================
-    # 4Xp
-    #=====================================================
-    
-    "East of Gully",
-    "Horseshoe",
-    "Port Mouton",
-    "Roseway",
-    "Shelburne",
-    "Tusket Basin",
-    "Western Head",
-    
-    #=====================================================
-    # Offshore Banks
-    #=====================================================
-    
-    "The Patch",
-    "Offshore Banks",
-    "Bullpen"
-  ),
-  
-  NAFO = c(
-    
-    rep("4Xs", 47),
-    
-    rep("4Xr", 15),
-    
-    rep("4Xq", 6),
-    
-    rep("4Xp", 7),
-    
-    rep("4W", 3)
-    
-  )
-)
+# weir_lookup_df <- tibble(
+#
+#   Location = c(
+#
+#     #=====================================================
+#     # 4Xs
+#     #=====================================================
+#
+#     "Back Bay","Blacks Harbour","Blisses","Campobello",
+#     "Chance Harbour","Chattis Point","Crow Harbour",
+#     "Crow Island","Curry Cove","Deadmans","Deep Cove",
+#     "Digdeguash Basin","Fairhaven","Friers Bay",
+#     "Fryes Island","Herring Cove","Indian Island",
+#     "Lawrence Cove","Leonardville","Lepreau",
+#     "Lords Cove","Meadow Brook","Mill Cove",
+#     "New River","Oak Bay","Red Head",
+#     "Round Meadow","Sand Beach","Sandy Cove",
+#     "Schooner Cove","Seelys Basin","Seelys Cove",
+#     "Seelys Head","Ship Beach","Spectacle",
+#     "Spider Cove","Spruce Cove","Tuckers Cove",
+#     "Wolves","Beaver Harbour","Crab Rock",
+#     "Eagle Island","Letang","L'etete",
+#     "Maces Bay","Passamaquoddy","St Andrews Bay",
+#
+#     #=====================================================
+#     # 4Xr
+#     #=====================================================
+#
+#     "Bradfords Cove",
+#     "Bradfords Cove Weir",
+#     "Cora Bell",
+#     "Iron Lady",
+#     "Money Cove",
+#     "Mumps",
+#     "Pipe Dream",
+#     "Prong",
+#     "Teardrop",
+#     "White Head",
+#     "Mystrey Island",
+#     "Sea Wall",
+#     "North Head",
+#     "Whale Cove",
+#     "Winner",
+#
+#     #=====================================================
+#     # 4Xq
+#     #=====================================================
+#
+#     "Long Island Shoal",
+#     "Long Island",
+#     "NE Banks",
+#     "Northeast Bank",
+#     "St Marys Bay",
+#     "Centerville",
+#
+#     #=====================================================
+#     # 4Xp
+#     #=====================================================
+#
+#     "East of Gully",
+#     "Horseshoe",
+#     "Port Mouton",
+#     "Roseway",
+#     "Shelburne",
+#     "Tusket Basin",
+#     "Western Head",
+#
+#     #=====================================================
+#     # Offshore Banks
+#     #=====================================================
+#
+#     "The Patch",
+#     "Offshore Banks",
+#     "Bullpen"
+#   ),
+#
+#   NAFO = c(
+#
+#     rep("4Xs", 47),
+#
+#     rep("4Xr", 15),
+#
+#     rep("4Xq", 6),
+#
+#     rep("4Xp", 7),
+#
+#     rep("4W", 3)
+#
+#   )
+# )
 
 ## Use coordinates
 
-ground_points <- groundWeirMasterSheet %>%
-  left_join(
-    weir_lookup_df,
-    by = c("Ground" = "Location")
-  ) %>%
-  filter(
-    !is.na(Lat),
-    !is.na(Lon),
-    !is.na(NAFO)
-  )
-
-ground_points_sf <- st_as_sf(
-  ground_points,
-  coords = c("Lon", "Lat"),
-  crs = 4326
-)
-
+# ground_points <- groundWeirMasterSheet %>%
+#   left_join(
+#     weir_lookup_df,
+#     by = c("Ground" = "Location")
+#   ) %>%
+#   filter(
+#     !is.na(Lat),
+#     !is.na(Lon),
+#     !is.na(NAFO)
+#   )
+#
+# ground_points_sf <- st_as_sf(
+#   ground_points,
+#   coords = c("Lon", "Lat"),
+#   crs = 4326
+# )
+#
 
 #=========================================================
 # Release NAFO from Ground
@@ -310,7 +314,7 @@ returns <- returns %>%
 returns <- returns %>%
   mutate(
     ReturnNAFO = case_when(
-      
+
       # Existing grounds
       str_detect(returnedArea, regex("German Bank", TRUE)) ~ "4Xq",
       str_detect(returnedArea, regex("Northeast Bank", TRUE)) ~ "4Xq",
@@ -324,23 +328,23 @@ returns <- returns %>%
       str_detect(returnedArea, regex("NE Banks", TRUE)) ~ "4Xq",
       str_detect(returnedArea, regex("Northeast Bank", TRUE)) ~ "4Xq",
       str_detect(returnedArea, regex("Centerville", TRUE)) ~ "4Xq",
-      
+
       str_detect(returnedArea, regex("Seal Island", TRUE)) ~ "4Xp",
       str_detect(returnedArea, regex("Browns", TRUE)) ~ "4Xp",
       str_detect(returnedArea, regex("SW Grounds", TRUE)) ~ "4Xp",
       str_detect(returnedArea, regex("Tusket Basin", TRUE)) ~ "4Xp",
-      
+
       str_detect(returnedArea, regex("Grand Manan", TRUE)) ~ "4Xr",
       str_detect(returnedArea, regex("Scots Bay", TRUE)) ~ "4Xr",
       str_detect(returnedArea, regex("Yankee", TRUE)) ~ "4Xr",
       str_detect(returnedArea, regex("Bradfords", TRUE))      ~ "4Xr",
       str_detect(returnedArea, regex("Bradfords Cove Weir", TRUE)) ~ "4Xr",
-      
+
       str_detect(returnedArea, regex("NB Coastal", TRUE)) ~ "4Xs",
-      
+
       str_detect(returnedArea, regex("The Patch", TRUE)) ~ "4W",
       str_detect(returnedArea, regex("Bullpen", TRUE)) ~ "4W",
-      
+
       TRUE ~ NA_character_
     )
   )

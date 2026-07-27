@@ -40,53 +40,154 @@ library(mapproj)
 library(oce)
 library(pander)
 library(janitor)
+library(readr)
 
 
-##Import needed files
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
-  boxes = read.csv("surveyBoxes.csv")
+#=========================================================
+# Import files
+#=========================================================
 
+data_dir <- file.path(
+  "C:/Users",
+  Sys.info()[["user"]],
+  "Documents/GitHub/HerringScience.github.io"
+)
+
+boxes <- read.csv(
+  file.path(
+    data_dir,
+    "Box Coordinates",
+    "surveyBoxes.csv"
+  )
+)
 
 TagReturns <- read_csv(
-  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
-
-
-
-#Grounds to use
-timGrounds <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv")
-
-# Build polygons from timGrounds
-ground_list <- split(timGrounds, timGrounds$Box)
-
-polys <- lapply(ground_list, function(x){
-  
-  coords <- as.matrix(x[, c("X", "Y")])
-  
-  if(!all(coords[1, ] == coords[nrow(coords), ])){
-    coords <- rbind(coords, coords[1, ])
-  }
-  
-  st_polygon(list(coords))
-})
-
-grounds_sf <- st_sf(
-  Box = names(ground_list),
-  geometry = st_sfc(polys, crs = 4326)
+  file.path(
+    data_dir,
+    "Source Data",
+    "Tagging",
+    "Tag Returns",
+    "Full Returns.csv"
+  )
 )
+
+timGrounds <- read.csv(
+  file.path(
+    data_dir,
+    "Main Data",
+    "timGrounds.csv"
+  )
+)
+
+NAFO_subunits <- read.csv(
+  file.path(
+    data_dir,
+    "Main Data",
+    "NAFO_subunits.csv"
+  )
+)
+
+groundWeirMasterSheet <- read.csv(
+  file.path(
+    data_dir,
+    "Box Coordinates",
+    "Grounds Weir Master Sheet.csv"
+  )
+)
+
+sf_use_s2(FALSE)
+
+#=========================================================
+# Build NAFO polygons
+#=========================================================
+
+NAFO_subunits <- NAFO_subunits %>%
+  filter(
+    !Area %in% c(
+      "3","4","5","6",
+      "3NK","4NK","5NK","6NK"
+    )
+  )
+
+nafo_list <- split(
+  NAFO_subunits,
+  NAFO_subunits$Area
+)
+
+nafo_polys <- lapply(
+  nafo_list,
+  function(x){
+
+    coords <- as.matrix(
+      x[, c("X","Y")]
+    )
+
+    if(!all(coords[1,] == coords[nrow(coords),])){
+
+      coords <- rbind(
+        coords,
+        coords[1,]
+      )
+
+    }
+
+    st_polygon(list(coords))
+  }
+)
+
+nafo_sf <- st_sf(
+  Area = names(nafo_list),
+  geometry = st_sfc(
+    nafo_polys,
+    crs = 4326
+  )
+)
+
+nafo_sf <- st_make_valid(nafo_sf)
+
+#=========================================================
+# Clean tag return data
+#=========================================================
 
 TagReturns <- TagReturns %>%
   mutate(
     Date = as.Date(Date),
     returnedDate = as.Date(returnedDate),
 
+    returnedArea = case_when(
+
+      str_detect(returnedArea, "Bradfords") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Money Cove") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Mumps") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Sandy Cove") ~ "Scots Bay",
+
+      TRUE ~ returnedArea
+    ),
+
     category = cut(
       daysAtLarge,
-      breaks = c(-Inf, 3, 11, 31, 184, 366, 731, 1095, Inf),
+      breaks = c(
+        -Inf,
+        3,
+        11,
+        31,
+        184,
+        366,
+        731,
+        1095,
+        Inf
+      ),
       labels = 1:8,
       right = FALSE
     ),
 
-    category = as.numeric(as.character(category)),
+    category = as.numeric(
+      as.character(category)
+    ),
+
     Count = 1
   ) %>%
   filter(
@@ -94,34 +195,148 @@ TagReturns <- TagReturns %>%
     daysAtLarge > 0
   )
 
-location_lookup <- c(
-  "German Bank" = "GB",
-  "Scots Bay" = "SB",
-  "NB Coastal" = "NBC",
-  "Grand Manan" = "GM",
-  "Grand Manan Banks" = "GMB",
-  "Long Island" = "LI",
-  "Seal Island" = "SI",
-  "Yankee Bank" = "YB",
-  "Trinity" = "T",
-  "Browns Bank" = "BB",
-  "SW Grounds" = "SWG",
-  "Gannet Dry Ledge" = "GDL",
-  "Lurcher" = "L"
+#=========================================================
+# Release NAFO Assignment
+#=========================================================
+
+release_pts <- st_as_sf(
+  TagReturns,
+  coords = c("Lon","Lat"),
+  crs = 4326,
+  remove = FALSE
 )
 
-#### Functions
-create_tag_returns <- function(data, tagging_ground) {
+release_join <- st_join(
+  release_pts,
+  nafo_sf,
+  left = TRUE,
+  largest = TRUE
+)
 
-  origin_code <- location_lookup[[tagging_ground]]
+TagReturns$ReleaseNAFO <- release_join$Area
+
+#=========================================================
+# Return NAFO Assignment
+#=========================================================
+
+TagReturns$ReturnNAFO <- NA_character_
+
+has_return_coords <-
+  !is.na(TagReturns$returnedLat) &
+  !is.na(TagReturns$returnedLon)
+
+return_pts <- st_as_sf(
+  TagReturns[has_return_coords, ],
+  coords = c(
+    "returnedLon",
+    "returnedLat"
+  ),
+  crs = 4326,
+  remove = FALSE
+)
+
+return_join <- st_join(
+  return_pts,
+  nafo_sf,
+  left = TRUE,
+  largest = TRUE
+)
+
+TagReturns$ReturnNAFO[
+  has_return_coords
+] <- return_join$Area
+
+#=========================================================
+# Fallback using known ground coordinates
+#=========================================================
+
+grounds_lookup <- groundWeirMasterSheet %>%
+  select(
+    Ground,
+    Lat,
+    Lon
+  ) %>%
+  filter(
+    !is.na(Lat),
+    !is.na(Lon)
+  )
+
+missing_return <- is.na(
+  TagReturns$ReturnNAFO
+)
+
+fallback <- TagReturns[
+  missing_return,
+] %>%
+  left_join(
+    grounds_lookup,
+    by = c(
+      "returnedArea" = "Ground"
+    )
+  )
+
+valid_fallback <-
+  !is.na(fallback$Lat) &
+  !is.na(fallback$Lon)
+
+if(any(valid_fallback)){
+
+  fallback_pts <- st_as_sf(
+    fallback[valid_fallback, ],
+    coords = c("Lon","Lat"),
+    crs = 4326,
+    remove = FALSE
+  )
+
+  fallback_join <- st_join(
+    fallback_pts,
+    nafo_sf,
+    left = TRUE,
+    largest = TRUE
+  )
+
+  TagReturns$ReturnNAFO[
+    which(missing_return)[valid_fallback]
+  ] <- fallback_join$Area
+}
+
+#### Functions
+TagReturns <- TagReturns %>%
+  mutate(
+    returnedArea = case_when(
+
+      str_detect(returnedArea, "Bradfords") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Money Cove") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Mumps") ~ "Grand Manan",
+
+      str_detect(returnedArea, "Sandy Cove") ~ "Scots Bay",
+
+      TRUE ~ returnedArea
+    )
+  )
+
+create_tag_returns <- function(
+  data,
+  tagging_ground
+){
 
   data %>%
-    filter(Ground == tagging_ground) %>%
-    mutate(
-      DestinationCode = location_lookup[returnedArea],
-      TagLocation = paste(origin_code, "to", DestinationCode)
+    filter(
+      Ground == tagging_ground
     ) %>%
-    filter(!is.na(DestinationCode))
+    filter(
+      !is.na(ReleaseNAFO),
+      !is.na(ReturnNAFO)
+    ) %>%
+    mutate(
+      TagLocation = paste(
+        ReleaseNAFO,
+        "to",
+        ReturnNAFO
+      )
+    )
 }
 
 create_summary_table <- function(data) {
@@ -249,7 +464,8 @@ TagReturns <- TagReturns %>%
     category = factor(
       category,
       levels = 1:8,
-      labels = category_labels
+      labels = category_labels,
+      ordered = TRUE
     )
   )
 
@@ -274,9 +490,13 @@ SummaryTable <- TagReturns %>%
 
 
 returns_by_year <- TagReturns %>%
-  mutate(return_year = year(as.Date(returnedDate))) %>%
-  group_by(return_year) %>%
-  count(category)
+  mutate(
+    return_year = year(returnedDate)
+  ) %>%
+  count(
+    return_year,
+    category
+  )
 
 year_category_table <- as.data.frame(
   table(
@@ -333,7 +553,15 @@ ggplot(
 
 ```{r Individual Grounds, results='asis', echo=FALSE}
 
-grounds <- sort(unique(TagReturns$Ground))
+grounds <- TagReturns %>%
+  filter(
+    !is.na(Ground),
+    Ground != ""
+  ) %>%
+  pull(Ground) %>%
+  unique() %>%
+  sort()
+
 
 for (g in grounds) {
 
@@ -348,6 +576,7 @@ for (g in grounds) {
       )
     ) +
     geom_bar() +
+    coord_flip() +
     theme_bw() +
     labs(
       title = paste("Returns from", g),
@@ -378,5 +607,139 @@ for (g in grounds) {
   )
 
   cat("\n\n")
+}
+```
+
+## Three Return Group Summary {.tabset}
+
+```{r Three Group Summary, results='asis', echo=FALSE}
+
+#=========================================================
+# Create 3-group return categories
+#=========================================================
+
+ThreeGroupSummary <- TagReturns %>%
+  mutate(
+    ReturnGroup = case_when(
+
+      returnedArea == "Scots Bay" ~ "Scots Bay",
+
+      returnedArea %in% c(
+        "German Bank",
+        "Seal Island"
+      ) ~ "German Bank/Seal Island",
+
+      TRUE ~ "Other"
+    )
+  )
+
+# Summary table
+ThreeGroupTable <- ThreeGroupSummary %>%
+  group_by(
+    Ground,
+    ReturnGroup,
+    category
+  ) %>%
+  summarise(
+    TotalReturns = n(),
+    .groups = "drop"
+  )
+
+# Wide-format summary table
+ThreeGroupTableWide <- ThreeGroupTable %>%
+  pivot_wider(
+    names_from = category,
+    values_from = TotalReturns,
+    values_fill = 0
+  ) %>%
+  mutate(
+    TotalTags = rowSums(
+      select(
+        .,
+        -Ground,
+        -ReturnGroup
+      )
+    )
+  ) %>%
+  relocate(
+    TotalTags,
+    .after = ReturnGroup
+  ) %>%
+  arrange(
+    Ground,
+    ReturnGroup
+  )
+
+grounds <- ThreeGroupSummary %>%
+  filter(
+    !is.na(Ground),
+    Ground != ""
+  ) %>%
+  pull(Ground) %>%
+  unique() %>%
+  sort()
+
+for(g in grounds){
+
+  cat(
+    paste0(
+      "\n\n### ",
+      g,
+      "\n\n"
+    )
+  )
+
+  #-------------------------------------------------------
+  # Plot
+  #-------------------------------------------------------
+
+  p <- ThreeGroupSummary %>%
+    filter(Ground == g) %>%
+    ggplot(
+      aes(
+        x = ReturnGroup,
+        fill = category
+      )
+    ) +
+    geom_bar() +
+    theme_bw() +
+    labs(
+      title = paste(
+        "Three Return Groups -",
+        g
+      ),
+      x = "Return Group",
+      y = "Number of Returns",
+      fill = "Days at Large"
+    )
+
+  print(p)
+
+  #-------------------------------------------------------
+  # Summary Table
+  #-------------------------------------------------------
+
+  print(
+
+    kbl(
+      ThreeGroupTableWide %>%
+        filter(
+          Ground == g
+        ),
+      caption = paste(
+        "Three Group Summary for",
+        g
+      )
+    ) %>%
+
+      kable_paper(
+        "striped",
+        full_width = FALSE
+      )
+
+  )
+
+  cat("\n\n")
+
 }
 ```
