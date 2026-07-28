@@ -614,10 +614,6 @@ for (g in grounds) {
 
 ```{r Three Group Summary, results='asis', echo=FALSE}
 
-#=========================================================
-# Create 3-group return categories
-#=========================================================
-
 ThreeGroupSummary <- TagReturns %>%
   mutate(
     ReturnGroup = case_when(
@@ -645,7 +641,6 @@ ThreeGroupTable <- ThreeGroupSummary %>%
     .groups = "drop"
   )
 
-# Wide-format summary table
 ThreeGroupTableWide <- ThreeGroupTable %>%
   pivot_wider(
     names_from = category,
@@ -689,16 +684,13 @@ for(g in grounds){
     )
   )
 
-  #-------------------------------------------------------
-  # Plot
-  #-------------------------------------------------------
 
   p <- ThreeGroupSummary %>%
     filter(Ground == g) %>%
     ggplot(
       aes(
         x = ReturnGroup,
-        fill = category
+        fill = as.factor(category)
       )
     ) +
     geom_bar() +
@@ -710,14 +702,10 @@ for(g in grounds){
       ),
       x = "Return Group",
       y = "Number of Returns",
-      fill = "Days at Large"
+      fill = "Category"
     )
 
-  print(p)
-
-  #-------------------------------------------------------
-  # Summary Table
-  #-------------------------------------------------------
+print(p)
 
   print(
 
