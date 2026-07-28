@@ -75,10 +75,10 @@ RollingPeakBiomassAvgGB <- read_csv("C:/Users/herri/Documents/GitHub/HerringScie
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ScotsBay_Turnover <- Survey_Factors %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Ground,
     Julian,
@@ -109,11 +109,11 @@ summary(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 GermanBankTurnover <- Survey_Factors %>%
   filter(Ground == "GB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Ground,
     Julian,
@@ -145,11 +145,11 @@ summary(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 SBVesselsBiomass <- Survey_Factors %>%
   filter(Ground == "SB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     No_of_Vessels,
     Julian,
@@ -178,11 +178,11 @@ summary(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 GBVesselsBiomass <- Survey_Factors %>%
   filter(Ground == "GB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     No_of_Vessels,
     Julian,
@@ -214,11 +214,11 @@ summary(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ScotsBayHighTideBiomass <- Survey_Factors %>%
   filter(Ground == "SB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Year,
     Tide_Relative,
@@ -252,11 +252,11 @@ summary(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 GermanBankHighTideBiomass <- Survey_Factors %>%
   filter(Ground == "GB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Year,
     Tide_Relative,
@@ -293,11 +293,11 @@ summary(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ScotsBaySunsetData <- Survey_Factors %>%
   filter(Ground == "SB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Year,
     Sunset_Relative,
@@ -331,11 +331,11 @@ summary(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 GermanBankSunsetData <- Survey_Factors %>%
   filter(Ground == "GB") %>%
-  select(
+  dplyr::select(
     Survey_Date,
     Year,
     Sunset_Relative,
@@ -372,10 +372,17 @@ summary(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ScotsBayPeakBiomass <- Survey_Factors %>%
-  filter(Ground == "SB") %>%
+  filter(
+    Ground == "SB"
+  ) %>%
+  filter(
+    !is.na(DFO_Turnover_Adjusted),
+    !is.na(Julian),
+    !is.na(Year)
+  ) %>%
   group_by(Year) %>%
   slice_max(
     DFO_Turnover_Adjusted,
@@ -394,6 +401,10 @@ ggplot(
   geom_point(size = 3) +
   geom_label_repel(
     aes(label = Year)
+  ) +
+  labs(
+    x = "Julian Day",
+    y = "Peak Biomass (mt)"
   )
 
 summary(
@@ -407,7 +418,7 @@ summary(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 GermanBankPeakBiomass <- Survey_Factors %>%
   filter(Ground == "GB") %>%
@@ -417,7 +428,12 @@ GermanBankPeakBiomass <- Survey_Factors %>%
     n = 1,
     with_ties = FALSE
   ) %>%
-  ungroup()
+  ungroup() %>%
+  drop_na(
+    Julian,
+    DFO_Turnover_Adjusted,
+    Year
+  )
 
 ggplot(
   GermanBankPeakBiomass,
@@ -444,13 +460,20 @@ summary(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 aggregateSB <- Survey_Factors %>%
-  filter(Ground == "SB") %>%
+  filter(
+    Ground == "SB"
+  ) %>%
+  filter(
+    !is.na(DFO_Estimate)
+  ) %>%
   group_by(Year) %>%
   summarise(
-    Total_Biomass = sum(DFO_Estimate),
+    Total_Biomass = sum(
+      DFO_Estimate
+    ),
     .groups = "drop"
   )
 
@@ -468,7 +491,7 @@ ggplot(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 aggregateGB <- Survey_Factors %>%
   filter(Ground == "GB") %>%
@@ -494,7 +517,7 @@ ggplot(
 
 ### Scots Bay
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ThreeYearRollingBiomass <- Survey_Factors %>%
   filter(Ground == "SB") %>%
@@ -528,7 +551,7 @@ ggplot(
 
 ### German Bank
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ThreeYearRollingBiomass <- Survey_Factors %>%
   filter(Ground == "GB") %>%
