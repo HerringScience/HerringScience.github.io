@@ -98,13 +98,6 @@ ggplot(
     y = "Survey Biomass (mt)"
   )
 
-# summary(
-#   aov(
-#     DFO_Estimate ~ Julian,
-#     data = ScotsBay_Turnover
-#   )
-# )
-
 ```
 
 ### German Bank
@@ -131,13 +124,6 @@ ggplot(
     x = "Julian Day",
     y = "Survey Biomass (mt)"
   )
-
-# summary(
-#   lm(
-#     DFO_Estimate ~ Julian,
-#     data = GermanBankTurnover
-#   )
-# )
 
 ```
 
@@ -167,13 +153,6 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
-# summary(
-#   aov(
-#     DFO_Estimate ~ No_of_Vessels,
-#     data = SBVesselsBiomass
-#   )
-# )
-
 ```
 
 ### German Bank
@@ -199,13 +178,6 @@ boxplot(
   xlab = "Number of Vessels",
   ylab = "Survey Biomass (mt)"
 )
-
-# summary(
-#   aov(
-#     DFO_Estimate ~ No_of_Vessels,
-#     data = GBVesselsBiomass
-#   )
-# )
 
 ```
 
@@ -241,13 +213,6 @@ ggplot(
   geom_point() +
   geom_smooth(span = 1)
 
-# summary(
-#   aov(
-#     DFO_Estimate ~ Tide_Relative,
-#     data = ScotsBayHighTideBiomass
-#   )
-# )
-
 ```
 
 ### German Bank
@@ -278,13 +243,6 @@ ggplot(
 ) +
   geom_point() +
   geom_smooth(method = "lm")
-
-# summary(
-#   lm(
-#     DFO_Estimate ~ Tide_Relative,
-#     data = GermanBankHighTideBiomass
-#   )
-# )
 
 ```
 
@@ -320,12 +278,6 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-# summary(
-#   lm(
-#     DFO_Estimate ~ Sunset_Relative,
-#     data = ScotsBaySunsetData
-#   )
-# )
 
 ```
 
@@ -358,12 +310,6 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-# summary(
-#   lm(
-#     DFO_Estimate ~ Sunset_Relative,
-#     data = GermanBankSunsetData
-#   )
-# )
 
 ```
 
@@ -407,12 +353,6 @@ ggplot(
     y = "Peak Biomass (mt)"
   )
 
-# summary(
-#   lm(
-#     DFO_Turnover_Adjusted ~ Year,
-#     data = ScotsBayPeakBiomass
-#   )
-# )
 
 ```
 
@@ -615,6 +555,20 @@ model_SB <- lm(logBiomass ~ Tide_Relative +
 
 summary(model_SB)
 
+# Scots Bay Spearman correlation validation
+
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Tide_Relative,
+         method = "spearman")
+
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Sunset_Relative,
+         method = "spearman")
+
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Julian,
+         method = "spearman")
+
 #German Bank model 
 df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
 
@@ -624,4 +578,19 @@ model_GB <- lm(logBiomass ~ Tide_Relative +
                data = GB)
 
 summary(model_GB)
+
+##German Bank Spearman correlations 
+
+cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Tide_Relative,
+         method = "spearman")
+
+cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Sunset_Relative,
+         method = "spearman")
+
+cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Julian,
+         method = "spearman")
+
 ```
