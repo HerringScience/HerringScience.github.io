@@ -53,7 +53,7 @@ setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Surv
 
 #Updating survey Factors with rest of info
 
-Survey_Factors <- read_csv("surveyFactorsAll_Tracey with SSB data.csv") %>%
+Survey_Factors <- read_csv("surveyFactorsAll.csv") %>%
   mutate(
     Survey_Date = as.Date(Survey_Date),
     Julian = yday(Survey_Date),
@@ -380,6 +380,8 @@ start_dt <- as.POSIXct(
   min(na_dates),
   tz = "America/Halifax"
 )
+
+
 
 end_dt <- as.POSIXct(
   max(na_dates) + 2,

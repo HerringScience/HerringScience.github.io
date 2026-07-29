@@ -1,7 +1,7 @@
 ---
 title: "Survey Factors"
 output: html_document
-date: "2024-04-16"
+date: "2026-07-29"
 ---
 
 ```{r setup, include=FALSE}
@@ -98,12 +98,12 @@ ggplot(
     y = "Survey Biomass (mt)"
   )
 
-summary(
-  aov(
-    DFO_Estimate ~ Julian,
-    data = ScotsBay_Turnover
-  )
-)
+# summary(
+#   aov(
+#     DFO_Estimate ~ Julian,
+#     data = ScotsBay_Turnover
+#   )
+# )
 
 ```
 
@@ -132,12 +132,12 @@ ggplot(
     y = "Survey Biomass (mt)"
   )
 
-summary(
-  lm(
-    DFO_Estimate ~ Julian,
-    data = GermanBankTurnover
-  )
-)
+# summary(
+#   lm(
+#     DFO_Estimate ~ Julian,
+#     data = GermanBankTurnover
+#   )
+# )
 
 ```
 
@@ -167,12 +167,12 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
-summary(
-  aov(
-    DFO_Estimate ~ No_of_Vessels,
-    data = SBVesselsBiomass
-  )
-)
+# summary(
+#   aov(
+#     DFO_Estimate ~ No_of_Vessels,
+#     data = SBVesselsBiomass
+#   )
+# )
 
 ```
 
@@ -200,17 +200,17 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
-summary(
-  aov(
-    DFO_Estimate ~ No_of_Vessels,
-    data = GBVesselsBiomass
-  )
-)
+# summary(
+#   aov(
+#     DFO_Estimate ~ No_of_Vessels,
+#     data = GBVesselsBiomass
+#   )
+# )
 
 ```
 
 
-## Tide Relative and Biomass {.tabset}
+## Tide Relative {.tabset}
 
 ### Scots Bay
 
@@ -241,12 +241,12 @@ ggplot(
   geom_point() +
   geom_smooth(span = 1)
 
-summary(
-  aov(
-    DFO_Estimate ~ Tide_Relative,
-    data = ScotsBayHighTideBiomass
-  )
-)
+# summary(
+#   aov(
+#     DFO_Estimate ~ Tide_Relative,
+#     data = ScotsBayHighTideBiomass
+#   )
+# )
 
 ```
 
@@ -279,12 +279,12 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-summary(
-  lm(
-    DFO_Estimate ~ Tide_Relative,
-    data = GermanBankHighTideBiomass
-  )
-)
+# summary(
+#   lm(
+#     DFO_Estimate ~ Tide_Relative,
+#     data = GermanBankHighTideBiomass
+#   )
+# )
 
 ```
 
@@ -320,12 +320,12 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-summary(
-  lm(
-    DFO_Estimate ~ Sunset_Relative,
-    data = ScotsBaySunsetData
-  )
-)
+# summary(
+#   lm(
+#     DFO_Estimate ~ Sunset_Relative,
+#     data = ScotsBaySunsetData
+#   )
+# )
 
 ```
 
@@ -358,12 +358,12 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-summary(
-  lm(
-    DFO_Estimate ~ Sunset_Relative,
-    data = GermanBankSunsetData
-  )
-)
+# summary(
+#   lm(
+#     DFO_Estimate ~ Sunset_Relative,
+#     data = GermanBankSunsetData
+#   )
+# )
 
 ```
 
@@ -407,12 +407,12 @@ ggplot(
     y = "Peak Biomass (mt)"
   )
 
-summary(
-  lm(
-    DFO_Turnover_Adjusted ~ Year,
-    data = ScotsBayPeakBiomass
-  )
-)
+# summary(
+#   lm(
+#     DFO_Turnover_Adjusted ~ Year,
+#     data = ScotsBayPeakBiomass
+#   )
+# )
 
 ```
 
@@ -447,12 +447,6 @@ ggplot(
     aes(label = Year)
   )
 
-summary(
-  lm(
-    DFO_Turnover_Adjusted ~ Year,
-    data = GermanBankPeakBiomass
-  )
-)
 
 ```
 
@@ -581,4 +575,53 @@ ggplot(
   geom_line() +
   geom_point()
 
+```
+
+## Statistical Tests {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+###### if p-value > 0.5, fail to reject the hypothesis. Therefore not significantly significant.
+
+# Read data
+df <- read.csv("surveyFactorsAll.csv")
+
+# Convert variables to numeric
+df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
+df$Tide_Relative <- as.numeric(df$Tide_Relative)
+df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
+df$Survey_Date <- as.Date(df$Survey_Date)
+df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+
+# Remove missing values
+dat <- subset(df,
+              !is.na(DFO_Turnover_Adjusted) &
+              !is.na(Tide_Relative) &
+              !is.na(Sunset_Relative))
+
+# Log-transform biomass
+dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
+
+# Split datasets
+GB <- subset(dat, Ground == "GB")
+SB <- subset(dat, Ground == "SB")
+
+#Scots Bay model
+
+model_SB <- lm(logBiomass ~ Tide_Relative +
+                             Sunset_Relative +
+                             Julian,
+               data = SB)
+
+summary(model_SB)
+
+#German Bank model 
+df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+
+model_GB <- lm(logBiomass ~ Tide_Relative +
+                             Sunset_Relative +
+                             Julian,
+               data = GB)
+
+summary(model_GB)
 ```
