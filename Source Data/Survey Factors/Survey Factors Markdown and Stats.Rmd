@@ -60,6 +60,9 @@ Survey_Factors <- read_csv(
     Julian = yday(Survey_Date)
   )
 
+Survey_Factors <- Survey_Factors %>%
+  drop_na(DFO_Turnover_Adjusted)
+
 #Survey_Factors$Julian = as.POSIXlt(Survey_Factors$Survey_Date)$yday
 
 SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
@@ -532,12 +535,14 @@ df$Tide_Relative <- as.numeric(df$Tide_Relative)
 df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
 df$Survey_Date <- as.Date(df$Survey_Date)
 df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+df$No_of_Vessels <- as.numeric(df$No_of_Vessels)
 
 # Remove missing values
 dat <- subset(df,
               !is.na(DFO_Turnover_Adjusted) &
               !is.na(Tide_Relative) &
-              !is.na(Sunset_Relative))
+              !is.na(Sunset_Relative) &
+              !is.na(No_of_Vessels))
 
 # Log-transform biomass
 dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
@@ -549,8 +554,9 @@ SB <- subset(dat, Ground == "SB")
 #Scots Bay model
 
 model_SB <- lm(logBiomass ~ Tide_Relative +
-                             Sunset_Relative +
-                             Julian,
+                            Sunset_Relative +
+                            Julian +
+                            No_of_Vessels,
                data = SB)
 
 summary(model_SB)
@@ -569,15 +575,26 @@ cor.test(SB$DFO_Turnover_Adjusted,
          SB$Julian,
          method = "spearman")
 
+cor.test(
+  SB$DFO_Turnover_Adjusted,
+  SB$No_of_Vessels,
+  method = "spearman"
+)
+
+cor.test(dat$No_of_Vessels,
+         dat$Julian,
+         method = "spearman")
+
 #German Bank model 
 df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
 
 model_GB <- lm(logBiomass ~ Tide_Relative +
-                             Sunset_Relative +
-                             Julian,
+                            Sunset_Relative +
+                            Julian +
+                            No_of_Vessels,
                data = GB)
 
-summary(model_GB)
+#summary(model_GB)
 
 ##German Bank Spearman correlations 
 
@@ -592,5 +609,70 @@ cor.test(GB$DFO_Turnover_Adjusted,
 cor.test(GB$DFO_Turnover_Adjusted,
          GB$Julian,
          method = "spearman")
+
+cor.test(
+  GB$DFO_Turnover_Adjusted,
+  GB$No_of_Vessels,
+  method = "spearman"
+)
+
+corr_table <- data.frame(
+  Location = c(
+    "German Bank","German Bank","German Bank","German Bank",
+    "Scots Bay","Scots Bay","Scots Bay","Scots Bay"
+  ),
+  Variable = c(
+    "Tide Relative",
+    "Sunset Relative",
+    "Julian Day",
+    "No. of Vessels",
+    "Tide Relative",
+    "Sunset Relative",
+    "Julian Day",
+    "No. of Vessels"
+  ),
+  Rho = c(
+    0.005,
+    -0.214,
+    -0.333,
+    GB_vessels$estimate,
+    0.077,
+    0.183,
+    -0.448,
+    SB_vessels$estimate
+  ),
+  P_Value = c(
+    0.958,
+    0.012,
+    0.00007,
+    GB_vessels$p.value,
+    0.343,
+    0.024,
+    0.00000000649,
+    SB_vessels$p.value
+  )
+)
+
+corr_table$Significance <- ifelse(
+  corr_table$P_Value < 0.001, "***",
+  ifelse(corr_table$P_Value < 0.01, "**",
+         ifelse(corr_table$P_Value < 0.05, "*", "ns"))
+)
+
+#print(corr_table, row.names = FALSE)
+
+ggplot(corr_table,
+       aes(x = Variable,
+           y = Rho,
+           fill = Location)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0,
+             linetype = "dashed") +
+  labs(
+    y = "Spearman's rho",
+    x = "",
+    title = "Correlation of biomass with survey factors"
+  ) +
+  theme_bw()
 
 ```
