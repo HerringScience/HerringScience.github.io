@@ -71,6 +71,48 @@ Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.i
 RollingPeakBiomassAvg <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvg.csv")
 RollingPeakBiomassAvgGB <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvgGB.csv")
 
+# Read data
+df <- read.csv("surveyFactorsAll.csv")
+
+# Convert variables to numeric
+df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
+df$Tide_Relative <- as.numeric(df$Tide_Relative)
+df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
+df$Survey_Date <- as.Date(df$Survey_Date)
+df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+df$No_of_Vessels <- as.numeric(df$No_of_Vessels)
+
+# Remove missing values
+dat <- subset(df,
+              !is.na(DFO_Turnover_Adjusted) &
+              !is.na(Tide_Relative) &
+              !is.na(Sunset_Relative) &
+              !is.na(No_of_Vessels))
+
+# Log-transform biomass
+dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
+
+# Split datasets
+GB <- subset(dat, Ground == "GB")
+SB <- subset(dat, Ground == "SB")
+
+#Scots Bay Model
+
+model_SB <- lm(logBiomass ~ Tide_Relative +
+                            Sunset_Relative +
+                            Julian +
+                            No_of_Vessels,
+               data = SB)
+
+#German Bank Model
+
+df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+
+model_GB <- lm(logBiomass ~ Tide_Relative +
+                            Sunset_Relative +
+                            Julian +
+                            No_of_Vessels,
+               data = GB)
 ```
 # {.tabset}
 
@@ -90,6 +132,7 @@ ScotsBay_Turnover <- Survey_Factors %>%
   na.omit() %>%
   filter(Ground == "SB")
 
+
 ggplot(
   ScotsBay_Turnover,
   aes(Julian, DFO_Estimate)
@@ -100,6 +143,11 @@ ggplot(
     x = "Julian Day",
     y = "Survey Biomass (mt)"
   )
+
+
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Julian,
+         method = "spearman")
 
 ```
 
@@ -127,6 +175,12 @@ ggplot(
     x = "Julian Day",
     y = "Survey Biomass (mt)"
   )
+
+
+cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Julian,
+         method = "spearman")
+
 
 ```
 
@@ -156,6 +210,20 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
+cor.test(dat$No_of_Vessels,
+         dat$Julian,
+         method = "spearman")
+
+cor.test(
+  SB$DFO_Turnover_Adjusted,
+  SB$No_of_Vessels,
+  method = "spearman"
+)
+
+cor.test(dat$No_of_Vessels,
+         dat$Julian,
+         method = "spearman")
+
 ```
 
 ### German Bank
@@ -182,6 +250,16 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
+cor.test(dat$No_of_Vessels,
+         dat$Julian,
+         method = "spearman")
+
+cor.test(
+  GB$DFO_Turnover_Adjusted,
+  GB$No_of_Vessels,
+  method = "spearman"
+)
+
 ```
 
 
@@ -206,6 +284,7 @@ ScotsBayHighTideBiomass$Tide_Relative <-
     ScotsBayHighTideBiomass$Tide_Relative
   )
 
+
 ggplot(
   ScotsBayHighTideBiomass,
   aes(
@@ -215,6 +294,10 @@ ggplot(
 ) +
   geom_point() +
   geom_smooth(span = 1)
+
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Tide_Relative,
+         method = "spearman")
 
 ```
 
@@ -247,6 +330,9 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
+cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Tide_Relative,
+         method = "spearman")
 ```
 
 
@@ -281,6 +367,10 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
+cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Sunset_Relative,
+         method = "spearman")
+
 
 ```
 
@@ -313,6 +403,9 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
+corr_table <-cor.test(GB$DFO_Turnover_Adjusted,
+         GB$Sunset_Relative,
+         method = "spearman")
 
 ```
 
@@ -340,21 +433,41 @@ ScotsBayPeakBiomass <- Survey_Factors %>%
   ) %>%
   ungroup()
 
+ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>%
+  mutate(
+    Survey_Date = as.Date(Survey_Date),
+    Month = factor(format(Survey_Date, "%b"),
+                   levels = month.abb)
+  )
+
 ggplot(
   ScotsBayPeakBiomass,
   aes(
-    Julian,
-    DFO_Turnover_Adjusted
+    x = Julian,
+    y = DFO_Turnover_Adjusted,
+    color = Month
   )
 ) +
   geom_point(size = 3) +
   geom_label_repel(
-    aes(label = Year)
+    aes(
+      label = Year,
+      fill = Month
+    ),
+    color = "black"
   ) +
   labs(
     x = "Julian Day",
-    y = "Peak Biomass (mt)"
-  )
+    y = "Peak Biomass (mt)",
+    color = "Month",
+    fill = "Month"
+  ) +
+    guides(
+    fill = guide_legend(
+      override.aes = list(label = "")
+    )
+  ) +
+  theme_bw()
 
 
 ```
@@ -378,17 +491,41 @@ GermanBankPeakBiomass <- Survey_Factors %>%
     Year
   )
 
+GermanBankPeakBiomass <- GermanBankPeakBiomass %>%
+  mutate(
+    Survey_Date = as.Date(Survey_Date),
+    Month = factor(format(Survey_Date, "%b"),
+                   levels = month.abb)
+  )
+
 ggplot(
   GermanBankPeakBiomass,
   aes(
-    Julian,
-    DFO_Turnover_Adjusted
+    x = Julian,
+    y = DFO_Turnover_Adjusted,
+    color = Month
   )
 ) +
   geom_point(size = 3) +
   geom_label_repel(
-    aes(label = Year)
-  )
+    aes(
+      label = Year,
+      fill = Month
+    ),
+    color = "black"
+  ) +
+  labs(
+    x = "Julian Day",
+    y = "Peak Biomass (mt)",
+    color = "Month",
+    fill = "Month"
+  ) +
+  guides(
+    fill = guide_legend(
+      override.aes = list(label = "")
+    )
+  ) +
+  theme_bw()
 
 
 ```
@@ -430,11 +567,13 @@ ggplot(
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
+##Missing 2013 and 2015.
+
 aggregateGB <- Survey_Factors %>%
   filter(Ground == "GB") %>%
   group_by(Year) %>%
   summarise(
-    Total_Biomass = sum(DFO_Estimate),
+    Total_Biomass = sum(DFO_Estimate, na.rm = TRUE),
     .groups = "drop"
   )
 
@@ -520,101 +659,101 @@ ggplot(
 
 ```
 
-## Statistical Tests {.tabset}
+## Spearman Correlations {.tabset}
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ###### if p-value > 0.5, fail to reject the hypothesis. Therefore not significantly significant.
 
-# Read data
-df <- read.csv("surveyFactorsAll.csv")
+# # Read data
+# df <- read.csv("surveyFactorsAll.csv")
+# 
+# # Convert variables to numeric
+# df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
+# df$Tide_Relative <- as.numeric(df$Tide_Relative)
+# df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
+# df$Survey_Date <- as.Date(df$Survey_Date)
+# df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+# df$No_of_Vessels <- as.numeric(df$No_of_Vessels)
+# 
+# # Remove missing values
+# dat <- subset(df,
+#               !is.na(DFO_Turnover_Adjusted) &
+#               !is.na(Tide_Relative) &
+#               !is.na(Sunset_Relative) &
+#               !is.na(No_of_Vessels))
+# 
+# # Log-transform biomass
+# dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
+# 
+# # Split datasets
+# GB <- subset(dat, Ground == "GB")
+# SB <- subset(dat, Ground == "SB")
+# 
+# #Scots Bay model
+# 
+# model_SB <- lm(logBiomass ~ Tide_Relative +
+#                             Sunset_Relative +
+#                             Julian +
+#                             No_of_Vessels,
+#                data = SB)
 
-# Convert variables to numeric
-df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
-df$Tide_Relative <- as.numeric(df$Tide_Relative)
-df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
-df$Survey_Date <- as.Date(df$Survey_Date)
-df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
-df$No_of_Vessels <- as.numeric(df$No_of_Vessels)
-
-# Remove missing values
-dat <- subset(df,
-              !is.na(DFO_Turnover_Adjusted) &
-              !is.na(Tide_Relative) &
-              !is.na(Sunset_Relative) &
-              !is.na(No_of_Vessels))
-
-# Log-transform biomass
-dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
-
-# Split datasets
-GB <- subset(dat, Ground == "GB")
-SB <- subset(dat, Ground == "SB")
-
-#Scots Bay model
-
-model_SB <- lm(logBiomass ~ Tide_Relative +
-                            Sunset_Relative +
-                            Julian +
-                            No_of_Vessels,
-               data = SB)
-
-summary(model_SB)
+# summary(model_SB)
 
 # Scots Bay Spearman correlation validation
 
-cor.test(SB$DFO_Turnover_Adjusted,
-         SB$Tide_Relative,
-         method = "spearman")
-
-cor.test(SB$DFO_Turnover_Adjusted,
-         SB$Sunset_Relative,
-         method = "spearman")
-
-cor.test(SB$DFO_Turnover_Adjusted,
-         SB$Julian,
-         method = "spearman")
-
-cor.test(
-  SB$DFO_Turnover_Adjusted,
-  SB$No_of_Vessels,
-  method = "spearman"
-)
-
-cor.test(dat$No_of_Vessels,
-         dat$Julian,
-         method = "spearman")
+# cor.test(SB$DFO_Turnover_Adjusted,
+#          SB$Tide_Relative,
+#          method = "spearman")
+# 
+# cor.test(SB$DFO_Turnover_Adjusted,
+#          SB$Sunset_Relative,
+#          method = "spearman")
+# 
+# cor.test(SB$DFO_Turnover_Adjusted,
+#          SB$Julian,
+#          method = "spearman")
+# 
+# cor.test(
+#   SB$DFO_Turnover_Adjusted,
+#   SB$No_of_Vessels,
+#   method = "spearman"
+# )
+# 
+# cor.test(dat$No_of_Vessels,
+#          dat$Julian,
+#          method = "spearman")
 
 #German Bank model 
-df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
-
-model_GB <- lm(logBiomass ~ Tide_Relative +
-                            Sunset_Relative +
-                            Julian +
-                            No_of_Vessels,
-               data = GB)
+# df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
+# 
+# model_GB <- lm(logBiomass ~ Tide_Relative +
+#                             Sunset_Relative +
+#                             Julian +
+#                             No_of_Vessels,
+#                data = GB)
 
 #summary(model_GB)
 
 ##German Bank Spearman correlations 
-
-cor.test(GB$DFO_Turnover_Adjusted,
-         GB$Tide_Relative,
-         method = "spearman")
-
-cor.test(GB$DFO_Turnover_Adjusted,
-         GB$Sunset_Relative,
-         method = "spearman")
-
-cor.test(GB$DFO_Turnover_Adjusted,
-         GB$Julian,
-         method = "spearman")
-
-cor.test(
-  GB$DFO_Turnover_Adjusted,
-  GB$No_of_Vessels,
-  method = "spearman"
-)
+# 
+# cor.test(GB$DFO_Turnover_Adjusted,
+#          GB$Tide_Relative,
+#          method = "spearman")
+# 
+# cor.test(GB$DFO_Turnover_Adjusted,
+#          GB$Sunset_Relative,
+#          method = "spearman")
+# 
+# cor.test(GB$DFO_Turnover_Adjusted,
+#          GB$Julian,
+#          method = "spearman")
+# 
+# cor.test(
+#   GB$DFO_Turnover_Adjusted,
+#   GB$No_of_Vessels,
+#   method = "spearman"
+# )
 corr_table <- data.frame(
   Location = c(
     "German Bank","German Bank","German Bank","German Bank",
