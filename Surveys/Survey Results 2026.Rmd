@@ -13,9 +13,9 @@ rm(list = ls())
 surv = "SB"
 surv2 = "Scots Bay"
 year = "2026"
-surv.no = "5"
-hightide = "2026-07-05 16:05:00" #for Scots Bay only; YYYY-MM-DD
-mainBoxVessels = 5
+surv.no = "6"
+hightide = "2026-07-19 16:46:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 6
 Tow = "N"
 
 ```
@@ -582,7 +582,7 @@ The speed for each transect are rudimentary and are calculated based on distance
 Distance = Distance %>%
   filter(Difference < 0) %>%
   #changed filter(Difference >-10) %>% to below as it was removing large cuts from line.
-  filter(Difference < -10) %>%
+  filter(Difference < -5) %>%
   mutate(Difference = abs(Difference))
 
 ggplot(Distance, aes(Vessel, Difference)) + geom_boxplot() + 
