@@ -47,8 +47,6 @@ library(zoo)
 library(ggrepel)
 library(tidyr)
 
-###remove everything in environment
-options(scipen = 999)
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
 

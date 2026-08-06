@@ -47,7 +47,7 @@ complete.returns <- complete.returns %>%
   dplyr::select(-X)
 
 #Year spreadsheets - To be entered
-tagReturns1 <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
+tagReturns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
   
 tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
 
@@ -487,6 +487,7 @@ fullReturns <- fullReturns %>%
     ReturnNAFO,
     returnedLat,
     returnedLon,
+    GearType,
     Catch.t,
     daysAtLarge,
     dataorigin,
