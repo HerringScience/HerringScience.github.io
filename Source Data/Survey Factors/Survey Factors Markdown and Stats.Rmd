@@ -116,7 +116,7 @@ model_GB <- lm(logBiomass ~ Tide_Relative +
 ```
 # {.tabset}
 
-## Julian and Biomass {.tabset}
+## Julian Date {.tabset}
 
 ### Scots Bay
 
@@ -140,7 +140,7 @@ ggplot(
   geom_point() +
   geom_smooth(span = 1) +
   labs(
-    x = "Julian Day",
+    x = "Julian Date",
     y = "Survey Biomass (mt)"
   )
 
@@ -172,7 +172,7 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm") +
   labs(
-    x = "Julian Day",
+    x = "Julian Date",
     y = "Survey Biomass (mt)"
   )
 
@@ -184,7 +184,7 @@ cor.test(GB$DFO_Turnover_Adjusted,
 
 ```
 
-## Number of Vessels and Biomass {.tabset}
+## Number of Vessels{.tabset}
 
 ### Scots Bay
 
