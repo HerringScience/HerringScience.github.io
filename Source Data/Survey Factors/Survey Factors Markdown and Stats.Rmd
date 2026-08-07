@@ -143,9 +143,23 @@ ggplot(
   )
 
 
-cor.test(SB$DFO_Turnover_Adjusted,
-         SB$Julian,
-         method = "spearman")
+sp_test <- cor.test(
+  SB$DFO_Turnover_Adjusted,
+  SB$Julian,
+  method = "spearman"
+)
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and Julian date (rho = %.3f, p %s), indicating that turnover generally %s as Julian date increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+  )
+)
 
 ```
 
@@ -175,9 +189,24 @@ ggplot(
   )
 
 
-cor.test(GB$DFO_Turnover_Adjusted,
-         GB$Julian,
-         method = "spearman")
+sp_test <- cor.test(
+  SB$DFO_Turnover_Adjusted,
+  SB$Julian,
+  method = "spearman"
+)
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and Julian date (rho = %.3f, p %s), indicating that turnover generally %s as Julian date increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+  )
+)
+
 
 
 ```
@@ -208,19 +237,42 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
-cor.test(dat$No_of_Vessels,
-         dat$Julian,
-         method = "spearman")
 
-cor.test(
+## Earlier in the season we are able to send less vessels. How do I see if this is a problem? Just number of vessels? Test shows that the julian day is the most important.
+
+# spearman <- cor.test(dat$No_of_Vessels,
+#          dat$Julian,
+#          method = "spearman")
+# 
+# cat(
+#   sprintf(
+#     "Spearman's rank correlation revealed a %s association between number of vessels and Julian date (rho = %.3f, p %s), indicating that turnover generally %s as Julian date increased.",
+#     ifelse(abs(spearman$estimate) < 0.3, "weak",
+#            ifelse(abs(spearman$estimate) < 0.6, "moderate", "strong")),
+#     spearman$estimate,
+#     ifelse(spearman$p.value < 0.001, "< 0.001",
+#            paste("=", round(spearman$p.value, 3))),
+#     ifelse(spearman$estimate < 0, "decreased", "increased")
+#     ))
+
+
+sp_test <- cor.test(
   SB$DFO_Turnover_Adjusted,
   SB$No_of_Vessels,
-  method = "spearman"
-)
+  method = "spearman")
 
-cor.test(dat$No_of_Vessels,
-         dat$Julian,
-         method = "spearman")
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and number of vessels (rho = %.3f, p %s), indicating that turnover generally %s as number of vessels increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
+
 
 ```
 
@@ -248,15 +300,27 @@ boxplot(
   ylab = "Survey Biomass (mt)"
 )
 
-cor.test(dat$No_of_Vessels,
-         dat$Julian,
-         method = "spearman")
+## Earlier in the season we are able to send less vessels. How do I see if this is a problem? Just number of vessels? Test shows that the julian day is the most important.
+# cor.test(dat$No_of_Vessels,
+#          dat$Julian,
+#          method = "spearman")
 
-cor.test(
+sp_test <- cor.test(
   GB$DFO_Turnover_Adjusted,
   GB$No_of_Vessels,
   method = "spearman"
 )
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and number of vessels (rho = %.3f, p %s), indicating that turnover generally %s as number of vessels increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
 
 ```
 
@@ -293,9 +357,20 @@ ggplot(
   geom_point() +
   geom_smooth(span = 1)
 
-cor.test(SB$DFO_Turnover_Adjusted,
+sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
          SB$Tide_Relative,
          method = "spearman")
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and relative tide (rho = %.3f, p %s), indicating that turnover generally %s as tide relative increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
 
 ```
 
@@ -328,9 +403,20 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-cor.test(GB$DFO_Turnover_Adjusted,
-         GB$Tide_Relative,
+sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
+         SB$Tide_Relative,
          method = "spearman")
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and relative tide (rho = %.3f, p %s), indicating that turnover generally %s as tide relative increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
 ```
 
 
@@ -365,11 +451,20 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-cor.test(SB$DFO_Turnover_Adjusted,
+sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
          SB$Sunset_Relative,
          method = "spearman")
 
-
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and sunset relative (rho = %.3f, p %s), indicating that turnover generally %s as sunset relative increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
 ```
 
 ### German Bank
@@ -401,9 +496,20 @@ ggplot(
   geom_point() +
   geom_smooth(method = "lm")
 
-corr_table <-cor.test(GB$DFO_Turnover_Adjusted,
+sp_test <- corr_table <-cor.test(GB$DFO_Turnover_Adjusted,
          GB$Sunset_Relative,
          method = "spearman")
+
+cat(
+  sprintf(
+    "Spearman's rank correlation revealed a %s association between DFO turnover and sunset relative (rho = %.3f, p %s), indicating that turnover generally %s as sunset relative increased.",
+    ifelse(abs(sp_test$estimate) < 0.3, "weak",
+           ifelse(abs(sp_test$estimate) < 0.6, "moderate", "strong")),
+    sp_test$estimate,
+    ifelse(sp_test$p.value < 0.001, "< 0.001",
+           paste("=", round(sp_test$p.value, 3))),
+    ifelse(sp_test$estimate < 0, "decreased", "increased")
+ ))
 
 ```
 
