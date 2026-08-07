@@ -355,7 +355,13 @@ ggplot(
   )
 ) +
   geom_point() +
-  geom_smooth(span = 1)
+  geom_smooth(span = 1) +
+  labs(
+    x = "Tide Relative to survey start time (hrs)",
+    y = "DFO Biomass estimate (mt)",
+    title = "DFO Biomass (mt) compared to relative tide (hrs)",
+    subtitle = " - tide relative value is before the survey. + tide relative value is after the survey."
+  )
 
 sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
          SB$Tide_Relative,
@@ -401,7 +407,14 @@ ggplot(
   )
 ) +
   geom_point() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Tide Relative to survey start time (hrs)",
+    y = "DFO Biomass estimate (mt)",
+    title = "DFO Biomass (mt) compared to relative tide (hrs)",
+    subtitle = " - tide relative value is before the survey. + tide relative value is after the survey."
+  )
+
 
 sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
          SB$Tide_Relative,
@@ -449,7 +462,13 @@ ggplot(
   )
 ) +
   geom_point() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm")+
+  labs(
+    x = "Sunset Relative to survey start time (hrs)",
+    y = "DFO Biomass estimate (mt)",
+    title = "DFO Biomass (mt) compared to relative sunset (hrs)",
+    subtitle = " - sunset relative value is before the survey. + sunset relative value is after the survey."
+  )
 
 sp_test <- cor.test(SB$DFO_Turnover_Adjusted,
          SB$Sunset_Relative,
@@ -494,7 +513,13 @@ ggplot(
   )
 ) +
   geom_point() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm")+
+  labs(
+    x = "Sunset Relative to survey start time (hrs)",
+    y = "DFO Biomass estimate (mt)",
+    title = "DFO Biomass (mt) compared to relative sunset (hrs)",
+    subtitle = " - sunset relative value is before the survey. + sunset relative value is after the survey."
+  )
 
 sp_test <- corr_table <-cor.test(GB$DFO_Turnover_Adjusted,
          GB$Sunset_Relative,
@@ -551,7 +576,20 @@ PeakBiomassTable <- ScotsBayPeakBiomass %>%
   ) %>%
   arrange(Year)
 
-print(PeakBiomassTable)
+PeakBiomassTable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Survey Date",
+      "DFO Turnover (mt)"
+    ),
+    digits = 2,
+    caption = "Total Biomass per year."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 
 ggplot(
   ScotsBayPeakBiomass,
@@ -622,7 +660,20 @@ PeakBiomassTable <- GermanBankPeakBiomass %>%
   ) %>%
   arrange(Year)
 
-print(PeakBiomassTable)
+PeakBiomassTable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Survey Date",
+      "DFO Turnover (mt)"
+    ),
+    digits = 2,
+    caption = "Total Biomass per year."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 
 ggplot(
   GermanBankPeakBiomass,
@@ -684,7 +735,19 @@ aggregateSBtable <- aggregateSB %>%
   ) %>%
   arrange(Year)
 
-print(aggregateSBtable)
+aggregateSBtable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Biomass (mt)"
+    ),
+    digits = 2,
+    caption = "Total Biomass per year."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 
 ggplot(
   aggregateSB,
@@ -702,8 +765,6 @@ ggplot(
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
-##Missing 2013 and 2015.
-
 aggregateGB <- Survey_Factors %>%
   filter(Ground == "GB") %>%
   group_by(Year) %>%
@@ -719,7 +780,19 @@ aggregateGBtable <- aggregateGB %>%
   ) %>%
   arrange(Year)
 
-print(aggregateSBtable)
+aggregateGBtable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Biomass (mt)"
+    ),
+    digits = 2,
+    caption = "Total Biomass per year."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 
 ggplot(
   aggregateGB,
@@ -765,7 +838,20 @@ ThreeYearRollingBiomassTable <- ThreeYearRollingBiomass %>%
   ) %>%
   arrange(Year)
 
-print(ThreeYearRollingBiomassTable)
+ThreeYearRollingBiomassTable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Biomass (mt)",
+      "3-Year Rolling Average (mt)"
+    ),
+    digits = 2,
+    caption = "Annual biomass and 3-year rolling average."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 
 ggplot(
   ThreeYearRollingBiomass,
@@ -809,8 +895,20 @@ ThreeYearRollingBiomassTable <- ThreeYearRollingBiomass %>%
   ) %>%
   arrange(Year)
 
-print(ThreeYearRollingBiomassTable)
-
+ThreeYearRollingBiomassTable %>%
+  kable(
+    col.names = c(
+      "Year",
+      "Biomass (mt)",
+      "3-Year Rolling Average (mt)"
+    ),
+    digits = 2,
+    caption = "Annual biomass and 3-year rolling average."
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 ggplot(
   ThreeYearRollingBiomass,
   aes(
