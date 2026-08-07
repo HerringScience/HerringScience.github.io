@@ -519,7 +519,6 @@ cat(
 ### Scots Bay
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
 ScotsBayPeakBiomass <- Survey_Factors %>%
   filter(
     Ground == "SB"
@@ -544,6 +543,16 @@ ScotsBayPeakBiomass <- ScotsBayPeakBiomass %>%
                    levels = month.abb)
   )
 
+PeakBiomassTable <- ScotsBayPeakBiomass %>%
+  dplyr::select(
+    Year,
+    Survey_Date,
+    DFO_Turnover_Adjusted
+  ) %>%
+  arrange(Year)
+
+print(PeakBiomassTable)
+
 ggplot(
   ScotsBayPeakBiomass,
   aes(
@@ -559,7 +568,11 @@ ggplot(
       fill = Month
     ),
     color = "black"
-  ) +
+  ) + 
+  scale_x_continuous(breaks = seq(floor(min(ScotsBayPeakBiomass$Julian)),
+      ceiling(max(ScotsBayPeakBiomass$Julian)),
+      by = 10
+  )) + 
   labs(
     x = "Julian Day",
     y = "Peak Biomass (mt)",
@@ -572,7 +585,6 @@ ggplot(
     )
   ) +
   theme_bw()
-
 
 ```
 
@@ -601,6 +613,16 @@ GermanBankPeakBiomass <- GermanBankPeakBiomass %>%
     Month = factor(format(Survey_Date, "%b"),
                    levels = month.abb)
   )
+
+PeakBiomassTable <- GermanBankPeakBiomass %>%
+  dplyr::select(
+    Year,
+    Survey_Date,
+    DFO_Turnover_Adjusted
+  ) %>%
+  arrange(Year)
+
+print(PeakBiomassTable)
 
 ggplot(
   GermanBankPeakBiomass,
@@ -655,6 +677,15 @@ aggregateSB <- Survey_Factors %>%
     .groups = "drop"
   )
 
+aggregateSBtable <- aggregateSB %>%
+  dplyr::select(
+    Year,
+    Total_Biomass
+  ) %>%
+  arrange(Year)
+
+print(aggregateSBtable)
+
 ggplot(
   aggregateSB,
   aes(
@@ -680,6 +711,15 @@ aggregateGB <- Survey_Factors %>%
     Total_Biomass = sum(DFO_Estimate, na.rm = TRUE),
     .groups = "drop"
   )
+
+aggregateGBtable <- aggregateGB %>%
+  dplyr::select(
+    Year,
+    Total_Biomass
+  ) %>%
+  arrange(Year)
+
+print(aggregateSBtable)
 
 ggplot(
   aggregateGB,
@@ -717,6 +757,16 @@ ThreeYearRollingBiomass <- Survey_Factors %>%
     )
   )
 
+ThreeYearRollingBiomassTable <- ThreeYearRollingBiomass %>%
+  dplyr::select(
+    Year,
+    Biomass,
+    RollingAvg
+  ) %>%
+  arrange(Year)
+
+print(ThreeYearRollingBiomassTable)
+
 ggplot(
   ThreeYearRollingBiomass,
   aes(
@@ -751,6 +801,16 @@ ThreeYearRollingBiomass <- Survey_Factors %>%
     )
   )
 
+ThreeYearRollingBiomassTable <- ThreeYearRollingBiomass %>%
+  dplyr::select(
+    Year,
+    Biomass,
+    RollingAvg
+  ) %>%
+  arrange(Year)
+
+print(ThreeYearRollingBiomassTable)
+
 ggplot(
   ThreeYearRollingBiomass,
   aes(
@@ -769,95 +829,6 @@ ggplot(
 
 ###### if p-value > 0.5, fail to reject the hypothesis. Therefore not significantly significant.
 
-# # Read data
-# df <- read.csv("surveyFactorsAll.csv")
-# 
-# # Convert variables to numeric
-# df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
-# df$Tide_Relative <- as.numeric(df$Tide_Relative)
-# df$Sunset_Relative <- as.numeric(df$Sunset_Relative)
-# df$Survey_Date <- as.Date(df$Survey_Date)
-# df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
-# df$No_of_Vessels <- as.numeric(df$No_of_Vessels)
-# 
-# # Remove missing values
-# dat <- subset(df,
-#               !is.na(DFO_Turnover_Adjusted) &
-#               !is.na(Tide_Relative) &
-#               !is.na(Sunset_Relative) &
-#               !is.na(No_of_Vessels))
-# 
-# # Log-transform biomass
-# dat$logBiomass <- log10(dat$DFO_Turnover_Adjusted + 1)
-# 
-# # Split datasets
-# GB <- subset(dat, Ground == "GB")
-# SB <- subset(dat, Ground == "SB")
-# 
-# #Scots Bay model
-# 
-# model_SB <- lm(logBiomass ~ Tide_Relative +
-#                             Sunset_Relative +
-#                             Julian +
-#                             No_of_Vessels,
-#                data = SB)
-
-# summary(model_SB)
-
-# Scots Bay Spearman correlation validation
-
-# cor.test(SB$DFO_Turnover_Adjusted,
-#          SB$Tide_Relative,
-#          method = "spearman")
-# 
-# cor.test(SB$DFO_Turnover_Adjusted,
-#          SB$Sunset_Relative,
-#          method = "spearman")
-# 
-# cor.test(SB$DFO_Turnover_Adjusted,
-#          SB$Julian,
-#          method = "spearman")
-# 
-# cor.test(
-#   SB$DFO_Turnover_Adjusted,
-#   SB$No_of_Vessels,
-#   method = "spearman"
-# )
-# 
-# cor.test(dat$No_of_Vessels,
-#          dat$Julian,
-#          method = "spearman")
-
-#German Bank model 
-# df$MonthNum <- as.numeric(format(df$Survey_Date, "%m"))
-# 
-# model_GB <- lm(logBiomass ~ Tide_Relative +
-#                             Sunset_Relative +
-#                             Julian +
-#                             No_of_Vessels,
-#                data = GB)
-
-#summary(model_GB)
-
-##German Bank Spearman correlations 
-# 
-# cor.test(GB$DFO_Turnover_Adjusted,
-#          GB$Tide_Relative,
-#          method = "spearman")
-# 
-# cor.test(GB$DFO_Turnover_Adjusted,
-#          GB$Sunset_Relative,
-#          method = "spearman")
-# 
-# cor.test(GB$DFO_Turnover_Adjusted,
-#          GB$Julian,
-#          method = "spearman")
-# 
-# cor.test(
-#   GB$DFO_Turnover_Adjusted,
-#   GB$No_of_Vessels,
-#   method = "spearman"
-# )
 corr_table <- data.frame(
   Location = c(
     "German Bank","German Bank","German Bank","German Bank",
