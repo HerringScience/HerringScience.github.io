@@ -49,7 +49,7 @@ library(oce)
 library(jsonlite)
 library(httr)
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
+setwd("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
 
 #Updating survey Factors with rest of info
 
@@ -62,7 +62,7 @@ Survey_Factors <- read_csv("surveyFactorsAll.csv") %>%
 
 #Use these dataframes to update survey factors.
 
-SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv") %>%
+SSBEstimates <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv") %>%
   mutate(
     Survey_Number = as.character(Survey_Number),
     Ground = case_when(
@@ -72,7 +72,7 @@ SSBEstimates <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.
       filter(Ground != "Seal Island")
   
 
-Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv") %>%
+Survey_Data <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv") %>%
   mutate(
     Survey.No = as.character(Survey.No),
   )
@@ -146,6 +146,7 @@ Survey_Factors$id[missing_rows] <- seq(
 Survey_Data2 <- Survey_Data2 %>%
   filter(Tow_No == 1)
 
+
 # Fill columns that exist in Survey Data 
 
 Survey_Factors <- Survey_Factors %>%
@@ -157,7 +158,7 @@ Survey_Factors <- Survey_Factors %>%
         Survey_Number,
         Survey_Date,
         No_of_Vessels,
-        Survey_Start
+        Survey_Start,
       ),
     by = c(
       "Year",
