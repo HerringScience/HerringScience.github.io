@@ -20,8 +20,9 @@ local({r <- getOption("repos")
        options(repos=r)
 })
 
+
 #Packages
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/"))
+setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/"))
 library(devtools)
 library(ggplot2)
 library(patchwork)
@@ -76,25 +77,24 @@ library(dplyr)
 state_prov <- rnaturalearth::ne_states(c("united states of america", "canada"))
 
 #Survey Data
-surveyData <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
+surveyData <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
 #Tagging Data
-Tag = read_csv("TaggingEvents.csv") #Tagging Data
+Tag = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv") #Tagging Data
 TaggingEvents <- Tag %>%
-  rename(TAG_NUMBER = Tag_Num)
+  rename(Tag_Num = Tag_Num)
 #completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv") #Tag Return data
-completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
-polysT = read_csv("timGrounds.csv") #Coloured ground maps
+completeReturns <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
+polysT = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/timGrounds.csv") #Coloured ground maps
 Tag$Year = as.factor(Tag$Year)
 Tag$Vessel = as.factor(Tag$Vessel)
 Tag$Survey = as.factor(Tag$Survey)
 Tag$Tagger = as.factor(Tag$Tagger)
 
 #CTD Data
-SST = read_csv("CTD SST.csv") #SST
-polysT = read_csv("timGrounds.csv") #coloured ground maps
-CTD = read_csv("CTD Full.csv") #All Data
-atDepth = read_csv("CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+SST = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") #SST
+CTD = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
+atDepth = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
 SST$Year <- as.factor(SST$Year)
 SST$Month <- as.factor(SST$Month)
 atDepth$Year <- as.factor(atDepth$Year)
@@ -107,25 +107,25 @@ CTD <- CTD %>%
 CTD$Julian_factor <- as.factor(CTD$Julian_factor)
 
 #SSB Data
-SSB = read_csv("SSB Estimates.csv")
+SSB = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 SSB$Year <- as.factor(SSB$Year)
 SSB$Survey_Number <- as.factor(SSB$Survey_Number)
 SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
-LRP2 = read_csv("LRP Data.csv")
+LRP2 = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LRP Data.csv")
 LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
 
 #Fat Data
-FatData = read_csv("Total Fat Data.csv")
+FatData = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
 
 #Larval Data
 #All Adjusted Ages and Dates are originally added in Larval QC script.
 #All preservative length adjustments added in in Larval QC script.
 #Changed code within compendium from Lengthmm to LengthAdjustment
 
-Larval = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval Jan 2025.csv"))
-LarvalSum = read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
+Larval = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval Jan 2025.csv"))
+LarvalSum = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
 LarvalSum$Year <- as.factor(LarvalSum$Year)
 
 Larval$Date <- lubridate::ymd(Larval$Date)
@@ -175,7 +175,7 @@ SBout_sf <- st_as_sf(crop(NBNS_spat, SBMap))
 
 tag_points_df <- TaggingEvents %>%
   filter(!is.na(Lon) & !is.na(Lat)) %>%
-  distinct(TAG_NUMBER, .keep_all = TRUE)
+  distinct(Tag_Num, .keep_all = TRUE)
 
 tag_points_sf <- st_as_sf(tag_points_df, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
@@ -197,11 +197,15 @@ joined_spatial <- st_join(tag_points_sf, polysT_sf, join = st_intersects)
 
 r_final <- joined_spatial %>%
   st_drop_geometry() %>%
-  dplyr::select(TAG_NUMBER, Ground) %>%
-  mutate(Ground = case_when(
-    is.na(FishingGround)       ~ "Other",
-    FishingGround == "Browns Bank" ~ "Brown Bank",
-    TRUE                       ~ FishingGround
+  dplyr::select(Tag_Num, Ground.y) %>%
+  mutate(Ground.y = case_when(
+    # is.na(FishingGround)       ~ "Other",
+    # FishingGround.y == "Browns Bank" ~ "Brown Bank",
+    # TRUE                       ~ FishingGround
+  is.na(Ground.y)       ~ "Other",
+  Ground.y == "Browns Bank" ~ "Brown Bank",
+    TRUE                       ~ Ground.y
+
   ))
 # FishingGround.y is where they were initially released based on coordinates, returnedArea is where they were caught again.
 
@@ -228,32 +232,32 @@ TagReturns <- completeReturns %>%
 
 ```{r Box Import}
 #Import All Boxes
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
-boxes = read.csv("surveyBoxes.csv")
+#setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+boxes = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/surveyBoxes.csv")
 
 # Scots Bay plankton and CTD box
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
 
 # Scots Bay
-SUA = read.csv("polygon_SBEastern.csv")
+SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBEastern.csv")
 polyEastern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("polygon_SBNorthern.csv")
+SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBNorthern.csv")
 polyNorthern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("polygon_SB.csv")
+SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SB.csv")
 polySB_main = as.PolySet(SUA, projection="LL")
 
 #German Bank CTD box
 GBCTD=boxes[which(boxes$Box == "GBocean"), ]
 
 # German Bank      
-SUA = read.csv("polygon_GB.csv")
+SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_GB.csv")
 polyGB = as.PolySet(SUA, projection="LL")
 
 # Seal Island      
-SUA = read.csv("polygon_SI.csv")
+SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 ```
 
@@ -595,6 +599,10 @@ for(i in unique(SSB1$Year)) {
 #### Scots Bay {.tabset .tabset-pills}
 
 ```{r}
+
+##THIS IS NOT WORKING PROPERLY THIS ENTIRE SECTION. LOOK AT ORIGINAL TO SEE WHAT IT IS SUPPOSED TO BE LOOKING LIKE
+
+
 CP <- ext(-65.5, -64.5, 45, 45.5)
 out <- st_as_sf(crop(NBNS_spat, SBMap))
 
@@ -936,66 +944,69 @@ SBGB <- SBGB %>%
   mutate(No.InCategory = length(category))
 
 
-ggplot(GBSB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
+ggplot(GBSB, aes(x=category, y = length(count), fill = factor(timeDifference))) +
         geom_bar(stat="identity") +
         labs(y = "Number of Events", x = "Category") +
         ggtitle("Tag Returns that started in German Bank and were retrieved in Scots Bay") +
         labs(fill = "Days between tagging event and tag return") +
-        scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Maximum time difference between tag and recapture")
+        scale_fill_discrete(breaks = c("2", "10", "30", "133", "365", "715", "1079", "2092"), name = "Time difference between tag and recapture")
 
 
 TableGBSB <- GBSB %>% 
-  dplyr::select(TAG_NUMBER,
+  dplyr::select(Tag_Num,
                 category,
                 Date,
                 Ground,
-                DATE,
+                returnedDate,
                 returnedArea,
                 timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
+                #AvgtimeDifference,
+                timeDifference,
+                #timeDifferenceMin,
+                #timeDifferenceMax,
+                No.InCategory #,
+                #No.ofSameNumberOfDays
+                )%>%
   arrange(timeDifference)
 
-SummaryTable <- subset(TableGBSB, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(TableGBSB, select = -c(Tag_Num,timeDifference, Date, returnedDate))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Abundance in Category"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
 
 
-ggplot(SBGB, aes(x=category, y = length(count), fill = factor(timeDifferenceMax))) +
+ggplot(SBGB, aes(x=category, y = length(count), fill = factor(timeDifference))) +
         geom_bar(stat="identity") +
         labs(y = "Number of Events", x = "Category") +
         ggtitle("Tag Returns that started in Scots Bay and were retrieved in German Bank") +
-        labs(fill = "Days between tagging event and tag return") +
+       # labs(fill = "Days between tagging event and tag return") +
         scale_fill_discrete(breaks = c("10", "30", "133", "715"), name = "Maximum time difference between tag and recapture")
 
 
 TableSBGB <- SBGB %>% 
-  dplyr::select(TAG_NUMBER,
+  dplyr::select(Tag_Num,
                 category,
                 Date,
                 Ground,
-                DATE,
+                returnedDate,
                 returnedArea,
                 timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
+                #AvgtimeDifference,
+                #timeDifferenceMin,
+                #timeDifferenceMax,
+                No.InCategory #,
+                #No.ofSameNumberOfDays
+                )%>%
   arrange(timeDifference)
 
-SummaryTable <- subset(TableSBGB, select = -c(TAG_NUMBER, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(TableSBGB, select = -c(Tag_Num, timeDifference, Date, returnedDate))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
 
@@ -1031,27 +1042,27 @@ ggplot(data = TagReturns1, (aes(TagLocation, fill = category))) +
 
 
 Table <- TagReturns1 %>% 
-  dplyr::select(TAG_NUMBER,
+   dplyr::select(Tag_Num,
                 category,
                 Date,
                 Ground,
-                DATE,
+                returnedDate,
                 returnedArea,
                 timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
+                #AvgtimeDifference,
+                #timeDifferenceMin,
+                #timeDifferenceMax,
+                No.InCategory #,
+                #No.ofSameNumberOfDays
+                )%>%
   arrange(timeDifference)
 
-SummaryTable <- subset(Table, select = -c(TAG_NUMBER,TagLocation, timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(Table, select = -c(Tag_Num, timeDifference, Date, returnedDate, TagLocation))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
-
 
 ```
 #### Tag Returns between German Bank and Seal Island
@@ -1080,26 +1091,26 @@ ggplot(data = TagReturnsGBSI, (aes(TagLocation, fill = category))) +
         scale_y_continuous(breaks= pretty_breaks())
 
 Table <- TagReturnsGBSI %>% 
-  group_by(timeDifference) %>%
-  dplyr::select(TAG_NUMBER,
+     dplyr::select(Tag_Num,
                 category,
                 Date,
                 Ground,
-                DATE,
+                returnedDate,
                 returnedArea,
                 timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays) %>%
+                #AvgtimeDifference,
+                #timeDifferenceMin,
+                #timeDifferenceMax,
+                No.InCategory #,
+                #No.ofSameNumberOfDays
+                )%>%
   arrange(timeDifference)
 
-SummaryTable <- subset(Table, select = -c(TAG_NUMBER,timeDifference, Date, DATE,  No.ofSameNumberOfDays))
+SummaryTable <- subset(Table, select = -c(Tag_Num, timeDifference, Date, returnedDate, TagLocation))
 SummaryTable <- unique(SummaryTable) %>%
   arrange(category)
 
-kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Average Time from tagging event", "Minimum Time Difference", "Maximum Time Difference", "Abundance in Category"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
 
 ```
@@ -1131,13 +1142,17 @@ TagReturnsGB$TagLocation <- with(TagReturnsGB, ifelse(TagReturnsGB$Ground == "Ge
 
 TagReturnsGB  <- subset(TagReturnsGB, TagLocation != "Other")
 
-SummaryTable <- TagReturnsGB %>%
-  group_by(TagLocation, category) %>%
-  count()
+# SummaryTable <- TagReturnsGB %>%
+#   group_by(TagLocation, category) %>%
+#   count()
 
 #Removed category 1 larvae - any caught within 2 days of tagging.
 
 TagReturnsGB <- subset(TagReturnsGB, subset = (category != "1"))
+
+TagReturnsGB <- TagReturnsGB %>%
+  group_by(TagLocation, category) %>%
+  count()
 
 
 ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) + 
@@ -1147,26 +1162,29 @@ ggplot(data = TagReturnsGB, (aes(TagLocation, fill = category))) +
         ggtitle("German Bank Tag Returns excluding fish caught within 2 days of being tagged") +
         scale_y_continuous(breaks= pretty_breaks())
 
-Table <- TagReturnsGB %>%
-  dplyr::select(TAG_NUMBER,
-                category,
-                Date,
-                Ground,
-                DATE,
-                returnedArea,
-                timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)
+# Table <- TagReturnsGB %>%
+#      dplyr::select(Tag_Num,
+#                 category,
+#                 Date,
+#                 Ground,
+#                 returnedDate,
+#                 returnedArea,
+#                 timeDifference,
+#                 #AvgtimeDifference,
+#                 #timeDifferenceMin,
+#                 #timeDifferenceMax,
+#                 n #,
+#                 #No.ofSameNumberOfDays
+#                 )%>%
+#   arrange(timeDifference)
 
-SummaryTable <- TagReturnsGB %>%
-  group_by(TagLocation, category) %>%
-  count()
+#SummaryTable <- subset(Table, select = -c(timeDifference, Date, returnedDate, TagLocation))
+SummaryTable <- unique(TagReturnsGB) %>%
+  arrange(category)
 
-kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Category"), align = "c") %>%
+kbl(SummaryTable, col.names = c("Tag ground to return ground", "Category", "Abundance"), align = "c") %>%
   kable_paper("striped", full_width = F)
+
 
 ```
 
@@ -1793,20 +1811,39 @@ kbl(SummaryTable, col.names = c("Tag Location", "Category", "Abundance in Catego
 ```{r, results = "asis", fig.align='center'}
 
 GearTable <- TagReturns %>% 
-  dplyr::select(TAG_NUMBER,
+   dplyr::select(Tag_Num,
                 category,
                 Date,
                 Ground,
-                DATE,
+                returnedDate,
                 returnedArea,
-                GearType,
                 timeDifference,
-                AvgtimeDifference,
-                timeDifferenceMin,
-                timeDifferenceMax,
-                No.InCategory,
-                No.ofSameNumberOfDays)%>%
+                #No.InCategory,
+                GearType
+                )%>%
   arrange(timeDifference)
+
+SummaryTable <- subset(GearTable, select = -c(Tag_Num, timeDifference, Date, returnedDate))
+SummaryTable <- unique(SummaryTable) %>%
+  arrange(GearType)
+
+kbl(SummaryTable, col.names = c("Category", "Initial Tagging Ground", "Tag Retrieval Ground", "Gear Type"), align = "c") %>%
+  kable_paper("striped", full_width = F)
+
+  # dplyr::select(Tag_Num,
+  #               category,
+  #               Date,
+  #               Ground,
+  #               returnedDate,
+  #               returnedArea,
+  #               GearType,
+  #               timeDifference,
+  #               AvgtimeDifference,
+  #               timeDifferenceMin,
+  #               timeDifferenceMax,
+  #               No.InCategory,
+  #               No.ofSameNumberOfDays)%>%
+  # arrange(timeDifference)
 
 GearTable$Count = 1
 GearTable<-subset(GearTable, subset = (GearType != "N/A"))
