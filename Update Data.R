@@ -280,18 +280,6 @@ can=readRDS("gadm36_CAN_1_sp.rds")
 NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
 
 #Land Data
-#can<-getData('GADM', country="CAN", level=1) #getData is discontinued
-#can<-gadm(country='CAN', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("New Brunswick", "Nova Scotia", "Prince Edward Island", "Newfoundland and Labrador", "Québec"))
-#us = getData('GADM', country = "USA", level = 1) # getData is discontinued
-#us<-gadm(country='USA', level=1, path = "geodata_default_path",version="latest", resolution = 1, regions = c("Maine"))
-#can1 = rbind(can,us)
-#NBNS = can1
-#NBNS <- can1[can1@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Québec", "Maine"),]
-#NBNS <- spatVectorToSpatial(NBNS)
-#NBNS <- as(NBNS, "Spatial") #NEW 2024 - This causes it to run very slowly - takes around 30 minutes to process.
-# Load land data
-#NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
-
 # Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
 proj4string(GBMap) <- CRS(proj4string(NBNS))

@@ -612,15 +612,21 @@ out <- st_as_sf(crop(NBNS_spat, SBMap))
 
 ```{r echo=FALSE}
 
-#Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
+Plot = Tag %>% subset(Ground == "Scots Bay" & Year == year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for when using system year.
 
-Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
+# Plot = Tag %>% subset(Ground == "Scots Bay" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Line for previous year when it does not match system year. Used for before the season starts.
 
-Plot <- Tag %>% 
-  filter(Ground == "Scots Bay" & Year == Year) %>% 
-  group_by(Survey) %>% 
-  mutate(group2 = paste0(Survey, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
+Plot <- Tag %>%
+  filter(Ground == "Scots Bay" & Year == Year) %>%
+  group_by(Year) %>%
+  mutate(group2 = paste0(Year, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
   ungroup()
+
+# Plot <- Tag %>%
+#   filter(Ground == "Scots Bay" & Year == Year) %>%
+#   group_by(Survey) %>%
+#   mutate(group2 = paste0(Survey, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
+#   ungroup()
 
 Plot_sf <- st_as_sf(Plot, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
@@ -634,7 +640,8 @@ ggplot() +
   geom_sf(data = Plot_sf, aes(fill = group2), pch = 21, size = 2, color = "black") +
   coord_sf(xlim = c(-65.5, -64.5), ylim = c(45.0, 45.5), expand = FALSE) + 
   theme_minimal() +
-  labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
+  labs(x = NULL, y = NULL, fill = "Year, # of Tags") +
+  #labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
   theme(
     panel.background = element_rect(fill = "aliceblue", color = NA),
     legend.position = "right"
@@ -645,19 +652,19 @@ ggplot() +
 ```{r, results = "asis"}
 Tag1 = Tag %>% 
   filter(Year == Year & Ground == "Scots Bay") %>%
-  arrange(Survey) %>%
-  group_by(Vessel, Survey) %>%
+  arrange(Year) %>%
+  group_by(Vessel, Year) %>%
     mutate(group2 = paste0(Vessel, ", n=", n())) %>% # Upgraded length() to n()
   ungroup()
 
 Tag1_sf <- st_as_sf(Tag1, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
-for(i in unique(Tag1$Survey)) {
+for(i in unique(Tag1$Year)) {
   cat("\n")
-  cat("##### Survey", i, "\n")
+  cat("##### Year", i, "\n")
   cat("\n")
   
-survey_tags_sf <- Tag1_sf %>% filter(Survey == i)
+survey_tags_sf <- Tag1_sf %>% filter(Year == i)
 
 p <- ggplot() +
     geom_sf(data = SBout_sf, fill = "gray80", color = "darkgray") +  
@@ -669,7 +676,10 @@ p <- ggplot() +
     geom_sf(data = survey_tags_sf, aes(fill = group2), pch = 21, size = 2.5, color = "black") +
     coord_sf(xlim = c(-65.5, -64.5), ylim = c(45.0, 45.5), expand = FALSE) + 
     theme_minimal() +
-    labs(x = NULL, y = NULL, fill = "Vessel, # of Tags") +
+    labs(x = NULL, 
+         y = NULL, 
+         fill = "Vessel, # of Tags", 
+         title = paste("Year:", i)) + 
     theme(
       panel.background = element_rect(fill = "aliceblue", color = NA),
       legend.position = "right"
@@ -692,14 +702,14 @@ out <- st_as_sf(crop(NBNS_spat, GBMap))
 ##### Total
 
 ```{r echo=FALSE, fig.align='center'}
-#Plot = Tag %>% subset(Ground == "German Bank" & Year == Year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
+Plot = Tag %>% subset(Ground == "German Bank" & Year == Year) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #To use when you are currently in a survey period
 
-Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
+#Plot = Tag %>% subset(Ground == "German Bank" & Year == 2023) %>% group_by(Survey) %>% mutate(group2=paste0(Survey,", n=",length(Survey))) %>% ungroup() #Set previous survey year when you are between survey periods.
 
 Plot <- Tag %>% 
   filter(Ground == "German Bank" & Year == Year) %>% 
-  group_by(Survey) %>% 
-  mutate(group2 = paste0(Survey, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
+  group_by(Year) %>%
+  mutate(group2 = paste0(Year, ", n=", n())) %>% # n() is the modern dplyr equivalent of length()
   ungroup()
 
 Plot_sf <- st_as_sf(Plot, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
@@ -712,30 +722,32 @@ ggplot() +
   geom_sf(data = Plot_sf, aes(fill = group2), pch = 21, size = 2, color = "black") +
   coord_sf(xlim = c(-66.8, -65.5), ylim = c(43, 44), expand = FALSE) + 
   theme_minimal() +
-  labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
+  labs(x = NULL, y = NULL, fill = "Year, # of Tags") +
+  #labs(x = NULL, y = NULL, fill = "Survey, # of Tags") +
   theme(
     panel.background = element_rect(fill = "aliceblue", color = NA),
     legend.position = "right"
   )
+
 
 ```
 
 ```{r, results = "asis"}
 Tag1 = Tag %>% 
   filter(Year == Year & Ground == "German Bank") %>%
-  arrange(Survey) %>%
-  group_by(Vessel, Survey) %>%
+  arrange(Year) %>%
+  group_by(Vessel, Year) %>%
     mutate(group2 = paste0(Vessel, ", n=", n())) %>% # Upgraded length() to n()
   ungroup()
 
 Tag1_sf <- st_as_sf(Tag1, coords = c("Lon", "Lat"), crs = 4326, remove = FALSE)
 
-for(i in unique(Tag1$Survey)) {
+for(i in unique(Tag1$Year)) {
   cat("\n")
-  cat("##### Survey", i, "\n")
+  cat("##### Year", i, "\n")
   cat("\n")
   
-survey_tags_sf <- Tag1_sf %>% filter(Survey == i)
+survey_tags_sf <- Tag1_sf %>% filter(Year == i)
 
 p <- ggplot() +
     geom_sf(data = GBout_sf, fill = "gray80", color = "darkgray") +  
@@ -745,7 +757,10 @@ p <- ggplot() +
     geom_sf(data = survey_tags_sf, aes(fill = group2), pch = 21, size = 2.5, color = "black") +
     coord_sf(xlim = c(-66.8, -65.5), ylim = c(43, 44), expand = FALSE) + 
     theme_minimal() +
-    labs(x = NULL, y = NULL, fill = "Vessel, # of Tags") +
+    labs(x = NULL, 
+         y = NULL, 
+         fill = "Vessel, # of Tags", 
+         title = paste("Year:", i)) + 
     theme(
       panel.background = element_rect(fill = "aliceblue", color = NA),
       legend.position = "right"
