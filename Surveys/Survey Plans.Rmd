@@ -13,35 +13,44 @@ rm(list = ls()) #removes everything in the current environment
 surv = "SB"
 surv2 = "Scots Bay"
 surv.date = "2026-08-16 20:30:00" #survey date and time, as formatted
-surv.no = "8"
+surv.no = "10"
 Allocation = '200' #set to "0" for a non-fishing survey
 SIAllocation = '50' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 6
+vessels = 4
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Brunswick Provider"
+PlanktonVessel = "Fundy Monarch"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Lady Melissa"
 V2 = PlanktonVessel
 V3 = "Leroy & Barry"
 V4 = "Lady Janice"
-V5 = "Morning Star"
-V6 = "Fundy Monarch"
+V5 = NA
+V6 = NA
 V7 = NA
 V8 = NA
 V9 = NA
 
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()
+#knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/")) #sets the root directory for the entire document, when it isnt changed elsewhere by setwd()  #I think repo replaces this.
+
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center') #sets the coding chunk options of the whole document to not appear in the actual document (echo)
+
+
+repo <- file.path(
+  path.expand("~"),
+  "GitHub",
+  "HerringScience.github.io"
+)
+
 ```
 
 ```{r Data Import, include=FALSE}
 #Import all packages and data
-#install.packages("devtools")
+
 library(devtools)
 library(ggplot2)
 library(patchwork)
@@ -83,6 +92,7 @@ library(raster)
 library(devtools)
 library(maps)
 library(dplyr)
+library(here)
 
 #source("/Users/herri/Herring Science Council/Science Team - Documents/R Functions/getData.R")
 
@@ -107,12 +117,23 @@ vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north 
            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
            NA))))
 
-Main = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv"))
+
+Main = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv, paste0("V", vessels2, ".csv")))
+            
+#(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/V", vessels2, ".csv")) #### Old directory code
+
 #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
 
-if(!is.na(NVessel)){North = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))}
+if(!is.na(NVessel)){North = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"North_Box.csv"))}
+  
+  #read.csv(paste0("C:/Users//herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box.csv"))} #Old Directory code
 #if there is a NVessel this will load the North_Box.csv box outline
-if(!is.na(EVessel)){East = read.csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
+if(!is.na(EVessel)){East = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"East_Box.csv"))}
+  
+  #read.csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box.csv"))}
 #if there is a EVessel this will load the East_Box.csv box outline
 
 if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
@@ -149,7 +170,10 @@ Plan2 = Plan %>% #convert the vessel names (on a separate Plan2) to their shorth
   mutate(Vessel = replace(Vessel, Vessel == "Sealife II" | Vessel == "Sealife", "SL")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Lady Janice" | Vessel == "Lady Janice II", "LJ")) %>%
   mutate(Vessel = replace(Vessel, Vessel == "Tasha Marie", "TM"))
-write_csv(x=Plan2, file=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv"))
+write_csv(x=Plan2, file= file.path (repo, "Surveys", year, paste0(surv, surv.no), "survey plan.csv"))
+            
+            
+            #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/survey plan.csv")) ### Old directory
 
 #Land Data
 
@@ -198,32 +222,38 @@ TowBox <- data.frame(
 
 ```{r Box Import}
 #Import All Boxes
-setwd(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
-boxes = read.csv("surveyBoxes.csv")
+#setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+boxes = read.csv(
+  file.path(repo, "Box Coordinates", "surveyBoxes.csv"))
 
 # Scots Bay plankton and CTD box
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
 
 # Scots Bay
-SUA = read.csv("polygon_SBEastern.csv")
+SUA = read.csv(
+  file.path(repo, "Box Coordinates", "polygon_SBEastern.csv"))
 polyEastern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("polygon_SBNorthern.csv")
+SUA = read.csv(
+  file.path(repo, "Box Coordinates", "polygon_SBNorthern.csv"))
 polyNorthern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("polygon_SB.csv")
+SUA = read.csv(
+  file.path(repo,"Box Coordinates", "polygon_SB.csv"))
 polySB_main = as.PolySet(SUA, projection="LL")
 
 #German Bank CTD box
 GBCTD=boxes[which(boxes$Box == "GBocean"), ]
 
 # German Bank      
-SUA = read.csv("polygon_GB.csv")
+SUA = read.csv(
+  file.path(repo,"Box Coordinates", "polygon_GB.csv"))
 polyGB = as.PolySet(SUA, projection="LL")
 
 # Seal Island      
-SUA = read.csv("polygon_SI.csv")
+SUA = read.csv(
+  file.path(repo, "Box Coordinates", "polygon_SI.csv"))
 polySI = as.PolySet(SUA, projection="LL")
 ```
 
@@ -379,12 +409,17 @@ if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
             NA))))}
  if(surv=="GB"){vessels2=vessels}
 
- Main = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv"))
-
+Main = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv, paste0("C", vessels2, ".csv")))
+ #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/C", vessels2, ".csv")) #### Old directory
 
  if(surv=="SB"){
- if(!is.na(NVessel)){North = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
- if(!is.na(EVessel)){East = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
+ if(!is.na(NVessel)){North = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"North_Box_Captains.csv"))}
+   #North = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/North_Box_Captains.csv"))}
+ if(!is.na(EVessel)){East = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"East_Box_Captains.csv"))}
+   #East = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/Survey Lines/", surv, "/East_Box_Captains.csv"))}
  if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
  if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
  if(!is.na(NVessel) & !is.na(EVessel)){
@@ -459,13 +494,15 @@ if(surv=="SB"){
   cat("\n")
   cat("### Tidal Charts", "\n")
   cat("\n")
-  knitr::include_graphics(path=paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Hourly.jpg"), rel_path = FALSE)
+  knitr::include_graphics(path=file.path(repo, "Surveys", year, paste0(surv, surv.no), "Hourly.jpg"), rel_path = FALSE)
+                            #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Hourly.jpg"), rel_path = FALSE)
 }
 ```
 
 ```{r}
 if(surv=="SB"){
-    knitr::include_graphics(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Daily.jpg"), rel_path = FALSE)
+    knitr::include_graphics(path = file.path(repo, "Surveys", year, paste0(surv, surv.no), "Daily.jpg"), rel_path = FALSE)
+      #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Daily.jpg"), rel_path = FALSE)
 }
 ```
 
@@ -485,5 +522,6 @@ CurrentData = CurrentData %>%
                            NA))))) %>%
   mutate(Fishing = ifelse(Allocation > 0 | !is.na(Allocation), "Y", "N")) %>%
   mutate(PlanktonVessel = ifelse(PlanktonVessel == "Lady Janice", "Lady Janice II", PlanktonVessel))
-CurrentData %>% write_csv((paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
+CurrentData %>% write_csv(file.path(repo, "Surveys", year, paste0(surv, surv.no), "Plan Data.csv"))
+  #(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no, "/Plan Data.csv")))
 ```

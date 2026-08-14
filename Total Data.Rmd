@@ -7,8 +7,16 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+
+repo <- file.path(
+  path.expand("~"),
+  "GitHub",
+  "HerringScience.github.io"
+)
+
 year= substr(Sys.Date(),1,4)
-knitr::opts_knit$set(root.dir = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+knitr::opts_knit$set(root.dir = file.path(repo)) 
+                       #paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, fig.align='center')
 ```
 
@@ -22,7 +30,7 @@ local({r <- getOption("repos")
 
 
 #Packages
-setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/"))
+#setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/"))
 library(devtools)
 library(ggplot2)
 library(patchwork)
@@ -77,24 +85,31 @@ library(dplyr)
 state_prov <- rnaturalearth::ne_states(c("united states of america", "canada"))
 
 #Survey Data
-surveyData <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
+surveyData <- read_csv(file.path(repo, "Main Data", "Survey Data.csv"))
+    #C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv")
 
 #Tagging Data
-Tag = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv") #Tagging Data
+Tag = read_csv(file.path(repo, "Source Data", "TaggingEvents.csv")) #Tagging Data
+    #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/TaggingEvents.csv")
 TaggingEvents <- Tag %>%
   rename(Tag_Num = Tag_Num)
-#completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv") #Tag Return data
-completeReturns <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
-polysT = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/timGrounds.csv") #Coloured ground maps
+  #completeReturns <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tag Returns/complete.returns.csv") 
+completeReturns <- read_csv(file.path(repo, "Source Data", "Tagging", "Tag Returns", "Full Returns.csv"))#Tag Return data
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
+polysT = read_csv(file.path(repo, "Box Coordinates", "timGrounds.csv")) #Coloured ground maps
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/timGrounds.csv") 
 Tag$Year = as.factor(Tag$Year)
 Tag$Vessel = as.factor(Tag$Vessel)
 Tag$Survey = as.factor(Tag$Survey)
 Tag$Tagger = as.factor(Tag$Tagger)
 
 #CTD Data
-SST = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") #SST
-CTD = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
-atDepth = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+SST = read_csv(file.path(repo, "Main Data", "CTD Full.csv"))#SST
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") 
+CTD = read_csv(file.path(repo, "Main Data", "CTD Full.csv")) # All Data
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
+atDepth = read_csv(file.path(repo, "Main Data", "CTD 30m.csv")) #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv") #At 30m Depth > This one contains all Stratified Temp + Salinity data as well
 SST$Year <- as.factor(SST$Year)
 SST$Month <- as.factor(SST$Month)
 atDepth$Year <- as.factor(atDepth$Year)
@@ -107,25 +122,30 @@ CTD <- CTD %>%
 CTD$Julian_factor <- as.factor(CTD$Julian_factor)
 
 #SSB Data
-SSB = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
+SSB = read_csv(file.path(repo, "Main Data", "SSB Estimates.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/SSB Estimates.csv")
 SSB$Year <- as.factor(SSB$Year)
 SSB$Survey_Number <- as.factor(SSB$Survey_Number)
 SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
-LRP2 = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LRP Data.csv")
+LRP2 = read_csv(file.path(repo, "Main Data", "LRP Data.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LRP Data.csv")
 LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
 
 #Fat Data
-FatData = read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
+FatData = read_csv(file.path(repo, "Main Data", "Total Fat Data.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
 
 #Larval Data
 #All Adjusted Ages and Dates are originally added in Larval QC script.
 #All preservative length adjustments added in in Larval QC script.
 #Changed code within compendium from Lengthmm to LengthAdjustment
 
-Larval = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval Jan 2025.csv"))
-LarvalSum = read_csv(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
+Larval = read_csv(file.path(repo, "Main Data", "Full Larval Jan 2025.csv"))
+  #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Full Larval Jan 2025.csv"))
+LarvalSum = read_csv(file.path(repo, "Main Data", "LarvalSum Jan 2025.csv"))
+  #paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LarvalSum Jan 2025.csv"))
 LarvalSum$Year <- as.factor(LarvalSum$Year)
 
 Larval$Date <- lubridate::ymd(Larval$Date)
@@ -233,31 +253,37 @@ TagReturns <- completeReturns %>%
 ```{r Box Import}
 #Import All Boxes
 #setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
-boxes = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/surveyBoxes.csv")
+boxes = read_csv(file.path(repo, "Box Coordinates", "surveyBoxes.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/surveyBoxes.csv")
 
 # Scots Bay plankton and CTD box
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
 
 # Scots Bay
-SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBEastern.csv")
+SUA = read_csv(file.path(repo, "Box Coordinates", "polygon_SBEastern.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBEastern.csv")
 polyEastern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBNorthern.csv")
+SUA = read_csv(file.path(repo, "Box Coordinates", "polygon_SBNorthern.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SBNorthern.csv")
 polyNorthern = as.PolySet(SUA, projection="LL")
 
-SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SB.csv")
+SUA = read_csv(file.path(repo, "Box Coordinates", "polygon_SB.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SB.csv")
 polySB_main = as.PolySet(SUA, projection="LL")
 
 #German Bank CTD box
 GBCTD=boxes[which(boxes$Box == "GBocean"), ]
 
 # German Bank      
-SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_GB.csv")
+SUA = read_csv(file.path(repo, "Box Coordinates", "polygon_GB.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_GB.csv")
 polyGB = as.PolySet(SUA, projection="LL")
 
 # Seal Island      
-SUA = read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SI.csv")
+SUA = read_csv(file.path(repo, "Box Coordinates", "polygon_SI.csv"))
+  #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 ```
 

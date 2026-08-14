@@ -87,45 +87,56 @@ library(dplyr)
 library(sp)
 library(here)
 
-##Survey Data import and filtering
-
-survey_dir <- here(
-  "Surveys",
-  year,
-  paste0(surv, surv.no)
+repo <- file.path(
+  path.expand("~"),
+  "GitHub",
+  "HerringScience.github.io"
 )
 
-# setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+boxes <- read.csv(
+  file.path(repo, "Box Coordinates", "surveyBoxes.csv")
+)
+
+SurveyData <- read_csv(
+  file.path(repo, "Surveys", year, paste0(surv, surv.no), "Plan Data.csv"))
+
+
+##Survey Data import and filtering
+
+#setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 
 #Plankton = read_csv("PlanktonData.csv")
-
+boxes <- read.csv(here("Box Coordinates", "surveyBoxes.csv"))
 #get CTD data from Plankton
 SurveyData = read_csv("Plan Data.csv")
 SurveyData$StartDate = as.Date(SurveyData$Date, format = "%d/%m/%Y")
+PlanData = SurveyData
 
 if(!is.na(first(Plankton$CTD_ID))){
-  CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
-  CTDData = CTDData %>%
-    dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)",
-                  Salinity = "Salinity (Practical Salinity Scale)", Sound_velocity = "Sound velocity (Meters per Second)", Density = "Density (Kilograms per Cubic Meter)")
-  CTDData = CTDData %>%
-    mutate(plankton_ID = paste0(first(Plankton$Set_Number), "/", last(Plankton$Set_Number)),
-           ground = surv2,
-           id = first(Plankton$CTD_ID),
-           Date = first(SurveyData$StartDate),
-           Lat = first(Plankton$CTD_Lat),
-           Lon = first(Plankton$CTD_Lon),
-           Year = first(year),
-           Survey = first(surv.no))
-  setwd(paste0(survey_dir))
-  CTDRaw = read_csv("CTD_Raw.csv")
-  CTDData$Year = as.numeric(CTDData$Year)
-  CTDData$Survey = as.numeric(CTDData$Survey)
-  CTDTotal = full_join(CTDRaw, CTDData)
-  CTDTotal %>% write_csv("CTD_Raw.csv")
-  Plankton = Plankton %>%
-    mutate(AvgTemp = mean(CTDData$Temperature),
-           AvgSalinity = mean(CTDData$Salinity))
+#   CTDData = read_csv(paste0(Plankton$CTD_ID, ".csv"))
+#   CTDData = CTDData %>%
+#     dplyr::select(Pressure = "Pressure (Decibar)", Depth = "Depth (Meter)", Temperature = "Temperature (Celsius)",	Conductivity = "Conductivity (MicroSiemens per Centimeter)", Specific_conductance = "Specific conductance (MicroSiemens per Centimeter)",
+#                   Salinity = "Salinity (Practical Salinity Scale)", Sound_velocity = "Sound velocity (Meters per Second)", Density = "Density (Kilograms per Cubic Meter)")
+#   CTDData = CTDData %>%
+#     mutate(plankton_ID = paste0(first(Plankton$Set_Number), "/", last(Plankton$Set_Number)),
+#            ground = surv2,
+#            id = first(Plankton$CTD_ID),
+#            Date = first(SurveyData$StartDate),
+#            Lat = first(Plankton$CTD_Lat),
+#            Lon = first(Plankton$CTD_Lon),
+#            Year = first(year),
+#            Survey = first(surv.no))
+#   CTDRaw = read_csv("CTD_Raw.csv")
+#   CTDData$Year = as.numeric(CTDData$Year)
+#   CTDData$Survey = as.numeric(CTDData$Survey)
+#   CTDTotal = full_join(CTDRaw, CTDData)
+#  # CTDTotal %>% write_csv("CTD_Raw.csv")
+#   Plankton = Plankton %>%
+#     mutate(AvgTemp = mean(CTDData$Temperature),
+#            AvgSalinity = mean(CTDData$Salinity))
+# }
+
+CTDTotal <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv")
 }
 
 if(is.na(first(Plankton$CTD_ID))){
@@ -136,23 +147,23 @@ if(is.na(first(Plankton$CTD_ID))){
 
 ##ECHOVIEW DATA##
 #Land Data
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
-can=readRDS("gadm36_CAN_1_sp.rds")
-NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
+# setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/"))
+# can=readRDS("gadm36_CAN_1_sp.rds")
+# NBNS <- can[can@data$NAME_1%in%c("New Brunswick","Nova Scotia","Prince Edward Island","Newfoundland and Labrador","Qu?bec"),]
 
 #Land Data
 # Proper coordinates for German Bank. Replaced gIntersection with crop
 GBMap <- as(extent(-66.5, -65.5, 43, 44), "SpatialPolygons")
-proj4string(GBMap) <- CRS(proj4string(NBNS))
-GBout <- crop(NBNS, GBMap, byid=TRUE)
+# proj4string(GBMap) <- CRS(proj4string(NBNS))
+# GBout <- crop(NBNS, GBMap, byid=TRUE)
 
-# Proper coordinates for Scots Bay. eplaced gIntersection with crop
+# Proper coordinates for Scots Bay. replaced gIntersection with crop
 SBMap <- as(extent(-65.5, -64.5, 45, 45.5), "SpatialPolygons")
-proj4string(SBMap) <- CRS(proj4string(NBNS))
-SBout <- crop(NBNS, SBMap, byid=TRUE)
+# proj4string(SBMap) <- CRS(proj4string(NBNS))
+# SBout <- crop(NBNS, SBMap, byid=TRUE)
 
 #Import All Boxes
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
 boxes = read.csv("surveyBoxes.csv")
 SBplankton=boxes[which(boxes$Box == "SBPlanktonBox"), ]
 SBCTD=boxes[which(boxes$Box == "SBocean"), ]
@@ -162,7 +173,7 @@ polyGB = as.PolySet(SUA, projection="LL")
 SUA = read.csv("polygon_SI.csv")
 polySI = as.PolySet(SUA, projection="LL")
 
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
+setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
 if(surv == "SB") {
   if(!is.na(PlanData$EVessel)){SUA = read.csv("polygon_SBEastern.csv")
   polyEastern = as.PolySet(SUA, projection="LL")}
@@ -213,14 +224,14 @@ CTD$Year <- as.factor(CTD$Year)
   CTD$spd_max_gust = NA
   CTD$min_temp = NA
   CTD$max_temp = NA
-  CTDheat_deg_days = NA
+  CTD$heat_deg_days = NA
   CTD$cool_deg_days = NA
 
 CTD = CTD %>%
   mutate(Ground = ifelse(station_name == "GREENWOOD A", "Scots Bay", "German Bank"))
 
 #Combine with ECCC data, need to make Scots Bay = Greenwod, German Bank = Yarmouth
-CTD = left_join(CTD, ECCC, by = c("Date", "Ground"))
+#CTD = left_join(CTD, ECCC, by = c("Date", "Ground"))
 
 #Cast in or out of box factor
 CTD = CTD %>% 
@@ -230,28 +241,35 @@ CTD = CTD %>%
 CTD$In_Box = as.factor(CTD$In_Box)
 
 #SST
+
+mean_na <- function(x) if (all(is.na(x))) NA else mean(x, na.rm = TRUE)
+sd_na   <- function(x) if (all(is.na(x))) NA else sd(x, na.rm = TRUE)
+max_na  <- function(x) if (all(is.na(x))) NA else max(x, na.rm = TRUE)
+min_na  <- function(x) if (all(is.na(x))) NA else min(x, na.rm = TRUE)
+
+
 SST = CTD %>% 
   filter(between(Depth, 0, 5)) %>%
   filter(grepl('German Bank|Scots Bay', Ground)) %>%
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
+  summarize(TempSD = sd_na(Temperature),
+            Temperature = mean_na(Temperature),
+            Biomass = mean_na(Biomass),
             logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
+            Lat = mean_na(Lat),
+            Lon = mean_na(Lon),
             logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
+            SalinitySD = sd_na(Salinity),
+            Salinity = mean_na(Salinity),
+            mean_temp = mean_na(mean_temp),
+            total_precip = mean_na(total_precip),
+            total_snow = mean_na(total_snow),
+            total_rain = mean_na(total_rain),
+            spd_max_gust = max_na(spd_max_gust),
+            min_temp = min_na(min_temp),
+            max_temp = max_na(max_temp),
+            heat_deg_days = mean_na(heat_deg_days),
+            cool_deg_days = mean_na(cool_deg_days))
 
 SST = SST %>%
   group_by(Year, Month, Ground) %>%
@@ -262,24 +280,24 @@ CTD30 = CTD %>%
   filter(between(Depth, 28, 32)) %>%
   filter(grepl('German Bank|Scots Bay', Ground)) %>%
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
+  summarize(TempSD = sd_na(Temperature),
+            Temperature = mean_na(Temperature),
+            Biomass = mean_na(Biomass),
             logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
+            Lat = mean_na(Lat),
+            Lon = mean_na(Lon),
             logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
+            SalinitySD = sd_na(Salinity),
+            Salinity = mean_na(Salinity),
+            mean_temp = mean_na(mean_temp),
+            total_precip = mean_na(total_precip),
+            total_snow = mean_na(total_precip),
+            total_rain = mean_na(total_rain),
+            spd_max_gust = max_na(spd_max_gust),
+            min_temp = min_na(min_temp),
+            max_temp = max_na(max_temp),
+            heat_deg_days = mean_na(heat_deg_days),
+            cool_deg_days = mean_na(cool_deg_days))
 
 CTD30 = CTD30 %>%
   group_by(Year, Month, Ground) %>%
@@ -294,34 +312,34 @@ Strat = Strat %>% rename(Temperature = Temperature.x, SST = Temperature.y, Salin
 Strat = Strat %>% mutate(StratTemp = SST-Temperature) %>% mutate(StratSalt = Salinity-SurfaceSalinity)
 Strat = Strat %>%   
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
+  summarize(TempSD = sd_na(Temperature),
+            Temperature = mean_na(Temperature),
+            Biomass = mean_na(Biomass),
             logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
+            Lat = mean_na(Lat),
+            Lon = mean_na(Lon),
             logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days),
-            SST = mean(SST),
-            SurfaceSalinity = mean(SurfaceSalinity),
-            StratTemp = mean(StratTemp),
-            StratSalt = mean(StratSalt))
+            SalinitySD = sd_na(Salinity),
+            Salinity = mean_na(Salinity),
+            mean_temp = mean_na(mean_temp),
+            total_precip = mean_na(total_precip),
+            total_snow = mean_na(total_precip),
+            total_rain = mean_na(total_rain),
+            spd_max_gust = max_na(spd_max_gust),
+            min_temp = min_na(min_temp),
+            max_temp = max_na(max_temp),
+            heat_deg_days = mean_na(heat_deg_days),
+            cool_deg_days = mean_na(cool_deg_days),
+            SST = mean_na(SST),
+            SurfaceSalinity = mean_na(SurfaceSalinity),
+            StratTemp = mean_na(StratTemp),
+            StratSalt = mean_na(StratSalt))
 
 CTD30 = Strat
 
-CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
-CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
-SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
+#CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
+#CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
+#SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
 # 
 # #Larval Data
 # 
