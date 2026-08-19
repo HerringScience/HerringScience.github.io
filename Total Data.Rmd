@@ -399,14 +399,14 @@ LRP3 %>% filter(Year > 2017) %>%
 Plot_Summary <- SSB %>%
   filter(Ground %in% c("Scots Bay", "German Bank", "Seal Island")) %>%
   filter(!is.na(DFO_Turnover_Adjusted)) %>%
-  group_by(Year) %>%
+  group_by(Ground, Year) %>%
   summarize(
     Biomass = sum(DFO_Turnover_Adjusted, na.rm = TRUE),
     .groups = "drop"
   )
 
-p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass)) +
-  geom_col(fill = "darkblue") +
+p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass, fill = Ground)) +
+  geom_col() +
   scale_y_continuous(labels = comma) +
   labs(
     x = "Year",
@@ -415,7 +415,7 @@ p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass)) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 55, hjust = 1),
-    legend.position = "none"
+    legend.position = "right"
   )
 
 
