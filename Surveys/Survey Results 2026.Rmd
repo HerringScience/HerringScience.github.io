@@ -10,10 +10,10 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2026"
-surv.no = "7"
+surv.no = "1"
 hightide = "2026-08-02 14:48:00" #for Scots Bay only; YYYY-MM-DD
 mainBoxVessels = 5
 Tow = "Y"
