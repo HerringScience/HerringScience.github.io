@@ -10,28 +10,28 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
-surv.date = "2026-08-30 20:00:00" #survey date and time, as formatted
-surv.no = "9"
+surv = "GB"
+surv2 = "German Bank"
+surv.date = "2026-08-24 20:30:00" #survey date and time, as formatted
+surv.no = "2"
 Allocation = '200' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 4
+vessels = 7
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Brunswick Provider"
+PlanktonVessel = "Leroy and Barry"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Morning Star"
-V2 = PlanktonVessel
-V3 = "Lady Melissa"
-V4 = "Lady Janice"
-V5 = NA
-V6 = NA
-V7 = NA
+V1 = "Tasha Marie"
+V2 = "Fundy Monarch"
+V3 = "Morning Star"
+V4 = "Brunswick Provider"
+V5 = "Lady Janice"
+V6 = "Lady Melissa"
+V7 = PlanktonVessel
 V8 = NA
 V9 = NA
 
@@ -466,7 +466,7 @@ changing.
 b=surv.date+days(1)
 c=substr(b,1,10)
 d=paste0(Allocation, "mt/vessel.")
-e=paste0(Allocation, "mt/vessel for German Bank and ", SIAllocation, "mt/vessel for Seal Island.")
+e=paste0(Allocation, "mt/vessel for German Bank and Seal Island combined.")
 i= "7. This is a non-fishing survey."
 h=if(Allocation == 0){
   print(i)
