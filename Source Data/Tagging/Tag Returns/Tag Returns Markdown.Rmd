@@ -47,23 +47,23 @@ library(readr)
 # Import files
 #=========================================================
 
-data_dir <- file.path(
-  "C:/Users",
-  Sys.info()[["user"]],
-  "Documents/GitHub/HerringScience.github.io"
+data_dir <-  file.path(
+  path.expand("~"),
+  "GitHub",
+  "HerringScience.github.io"
 )
 
 boxes <- read.csv(
   file.path(
-    data_dir,
+  data_dir,
     "Box Coordinates",
     "surveyBoxes.csv"
   )
 )
 
 TagReturns <- read_csv(
-  file.path(
-    data_dir,
+ file.path(
+  data_dir,
     "Source Data",
     "Tagging",
     "Tag Returns",
@@ -73,7 +73,7 @@ TagReturns <- read_csv(
 
 timGrounds <- read.csv(
   file.path(
-    data_dir,
+  data_dir,
     "Main Data",
     "timGrounds.csv"
   )
