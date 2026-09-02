@@ -12,8 +12,8 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "GB"
 surv2 = "German Bank"
-surv.date = "2026-12-30 20:00:00" #survey date and time, as formatted
-surv.no = "99"
+surv.date = "2026-09-06 20:00:00" #survey date and time, as formatted9
+surv.no = "3"
 Allocation = '200' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
@@ -22,16 +22,16 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 vessels = 7
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Lady Janice"
+PlanktonVessel = "Brunswick Provider"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
-V1 = "Leroy & Barry"
-V2 = PlanktonVessel
-V3 = "Fundy Monarch"
-V4 = "Brunswick Provider"
-V5 = "Morning Star"
+V1 = "Morning Star"
+V2 = "Leroy and Barry"
+V3 = "Lady Janice"
+V4 = "Fundy Monarch"
+V5 = "Lady Melissa"
 V6 = "Tasha Marie"
-V7 = "Lady Melissa"
+V7 = PlanktonVessel
 V8 = NA
 V9 = NA
 
@@ -106,7 +106,7 @@ year = substr(surv.date, 1,4)
 
 
 #Create Plan by combining main box with any extra boxes
-
+# 
 Plan = read_csv(file.path(repo,
                           "Surveys",
                           year,
@@ -288,7 +288,7 @@ c=if(surv == "SB" & is.na(EVessel) & is.na(NVessel)){
 
 # change between one and two lines in Seal box as needed.
 d=if(surv=="GB"){
-  "All vessels are to complete two lines each in the German Survey Box and two line in the Seal Island Box"
+  paste(PlanktonVessel, "will run 2 lines in the German Bank Box, and 2 lines in the Seal Island Box. All other vessels will complete 3 lines in the German Bank Box and 1 line in the Seal Island Box")
 }
 
 e=if(surv == "SB" & !is.na(EVessel) & is.na(NVessel)){
@@ -403,7 +403,7 @@ Plan = Main %>%
   mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
 
 #### if manual plan, read Table file and comment out below
-
+# 
 # if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
 #             ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
 #             ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
