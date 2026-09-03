@@ -12,8 +12,8 @@ rm(list = ls()) #removes everything in the current environment
 #Change these options
 surv = "GB"
 surv2 = "German Bank"
-surv.date = "2026-09-06 20:00:00" #survey date and time, as formatted9
-surv.no = "3"
+surv.date = "2026-12-31 20:00:00" #survey date and time, as formatted9
+surv.no = "99"
 Allocation = '200' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
@@ -22,16 +22,16 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 vessels = 7
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Brunswick Provider"
+PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = "Morning Star"
-V2 = "Leroy and Barry"
-V3 = "Lady Janice"
-V4 = "Fundy Monarch"
-V5 = "Lady Melissa"
-V6 = "Tasha Marie"
-V7 = PlanktonVessel
+V2 = PlanktonVessel
+V3 = "Fundy Monarch"
+V4 = "Lady Melissa"
+V5 = "Leroy & Barry"
+V6 = "Brunswick Provider"
+V7 = "Tasha Marie"
 V8 = NA
 V9 = NA
 
@@ -107,41 +107,41 @@ year = substr(surv.date, 1,4)
 
 #Create Plan by combining main box with any extra boxes
 # 
-Plan = read_csv(file.path(repo,
-                          "Surveys",
-                          year,
-                          paste0(surv, surv.no),
-                          "survey plan.csv"))
+# Plan = read_csv(file.path(repo,
+#                           "Surveys",
+#                           year,
+#                           paste0(surv, surv.no),
+#                           "survey plan.csv"))
 
 #above line is only used if a manual plan override is needed, the ignore the below code (can '#' it to temporarily disable it)
 
-# vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
-#            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
-#            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
-#            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
-#            NA))))
-# 
-# 
-# Main = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv, paste0("V", vessels2, ".csv")))
-# 
-# #the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
-# 
-# if(!is.na(NVessel)){North = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv,"North_Box.csv"))}
-# 
-# #if there is a NVessel this will load the North_Box.csv box outline
-# if(!is.na(EVessel)){East = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv,"East_Box.csv"))}
-# 
-# #if there is a EVessel this will load the East_Box.csv box outline
-# 
-# if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
-# if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
-# if(!is.na(NVessel) & !is.na(EVessel)){
-#   Plan = full_join(Main, North)
-#   Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
-# if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
+vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels, #if no east + north vessels (SB), total number of main box vessels is equal to 'vessels' without changes
+           ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1, #if there is an east vessel (but not north), total # of main box vessels is equal to 'vessels' minus 1
+           ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1, #if there is a north vessel (but not east), total # of main box vessels is equal to 'vessels' minus 1
+           ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2, #if there is both an east + north vessel, total number of main box vessels is equal to 'vessels' minus 2
+           NA))))
+
+
+Main = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv, paste0("V", vessels2, ".csv")))
+
+#the above line loads the default V# spreadsheets with the proper box spacing, based on number of attending vessels.
+
+if(!is.na(NVessel)){North = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"North_Box.csv"))}
+
+#if there is a NVessel this will load the North_Box.csv box outline
+if(!is.na(EVessel)){East = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"East_Box.csv"))}
+
+#if there is a EVessel this will load the East_Box.csv box outline
+
+if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)} #if there is a north vessel (but not east), the plan combines (full join) the main box + north box
+if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)} #if there is an east vessel (but not north), the plan combines (full join) the main box + east box
+if(!is.na(NVessel) & !is.na(EVessel)){
+  Plan = full_join(Main, North)
+  Plan = full_join(Plan, East)} #if there is both an east and north vessel, the plan combines main + north first, then this combined frame with + east box.
+if(is.na(NVessel) & is.na(EVessel)){Plan = Main} #if there is only main box vessels, the plan is equal to the main box plan with no changes.
 
 #Comment out to here for manual plans.
 
@@ -381,11 +381,11 @@ if(surv=="GB"){
 ```{r}
 
 #Use this if doing manual plan, and comment out from below
-Main = read_csv(file.path(repo,
-                          "Surveys",
-                          year,
-                          paste0(surv, surv.no),
-                          "Table.csv"))
+# Main = read_csv(file.path(repo,
+#                           "Surveys",
+#                           year,
+#                           paste0(surv, surv.no),
+#                           "Table.csv"))
 
 
 #Add vessel names to Plan
@@ -403,31 +403,31 @@ Plan = Main %>%
   mutate(Vessel = replace(Vessel, Vessel == "V11", EVessel))
 
 #### if manual plan, read Table file and comment out below
-# 
-# if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
-#             ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
-#             ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
-#             ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
-#             NA))))}
-#  if(surv=="GB"){vessels2=vessels}
-# 
-# Main = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv, paste0("C", vessels2, ".csv")))
-# 
-#  if(surv=="SB"){
-#  if(!is.na(NVessel)){North = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv,"North_Box_Captains.csv"))}
-# 
-#  if(!is.na(EVessel)){East = read.csv(
-#   file.path(repo, "Surveys", "Survey Lines", surv,"East_Box_Captains.csv"))}
-# 
-#  if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
-#  if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
-#  if(!is.na(NVessel) & !is.na(EVessel)){
-#    Plan = full_join(Main, North)
-#    Plan = full_join(Plan, East)}
-#  if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
-#  if(surv=="GB"){Plan=Main}
+
+if(surv=="SB"){vessels2 = ifelse(is.na(EVessel) & is.na(NVessel), vessels,
+            ifelse(!is.na(EVessel) & is.na(NVessel), vessels-1,
+            ifelse(is.na(EVessel) & !is.na(NVessel), vessels-1,
+            ifelse(!is.na(EVessel) & !is.na(NVessel), vessels-2,
+            NA))))}
+ if(surv=="GB"){vessels2=vessels}
+
+Main = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv, paste0("C", vessels2, ".csv")))
+
+ if(surv=="SB"){
+ if(!is.na(NVessel)){North = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"North_Box_Captains.csv"))}
+
+ if(!is.na(EVessel)){East = read.csv(
+  file.path(repo, "Surveys", "Survey Lines", surv,"East_Box_Captains.csv"))}
+
+ if(!is.na(NVessel) & is.na(EVessel)){Plan = full_join(Main, North)}
+ if(is.na(NVessel) & !is.na(EVessel)){Plan = full_join(Main, East)}
+ if(!is.na(NVessel) & !is.na(EVessel)){
+   Plan = full_join(Main, North)
+   Plan = full_join(Plan, East)}
+ if(is.na(NVessel) & is.na(EVessel)){Plan = Main}}
+ if(surv=="GB"){Plan=Main}
 
 #Comment out to here
 

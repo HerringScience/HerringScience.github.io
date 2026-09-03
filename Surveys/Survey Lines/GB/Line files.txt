@@ -1,0 +1,5 @@
+One line in SI folder is the original lines created by Darren.
+
+Two lines in SI double the amount of lines in SI, used in 2024 to GB2 in 2026. The spacing across SI and GB is different, resulting in different percentage of coverage in both areas.
+
+Currently not in folder - even spacing across both grounds, treating GB and SI as one larger ground, instead of two separate ones. This means that the last line in german and the first line in Seal should not be right against each other and likely will not be on the outermost boundary of each box.
