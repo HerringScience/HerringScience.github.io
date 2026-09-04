@@ -1950,7 +1950,7 @@ kbl(SummaryTable, col.names = c("Gear Type", "Category", "Abundance in Category"
 
 
 
-## Oceanographic Project
+## Oceanographic Project {.tabset}
 
 ### Current CTD Data {.tabset}
 
@@ -1990,7 +1990,7 @@ filter(Year == year & Ground == "Scots Bay") %>%
 arrange(Survey)                                         
 
 
-for(i in unique(CTD1$Survey)) {
+for(i in sort(unique(CTD1$Survey))) {
   
   cat("\n")
   cat("##### Survey", i, "\n")
@@ -2074,7 +2074,7 @@ CTD1 = CTD %>%
   filter(Year == year & Ground == "German Bank") %>%
   arrange(Survey)
 
-for(i in unique(CTD1$Survey)) {
+for(i in sort(unique(CTD1$Survey))) {
   
   cat("\n")
   cat("##### Survey", i, "\n")
@@ -2141,7 +2141,7 @@ SST1 = SST %>%
   arrange(Survey) %>%
   arrange(Year)
 
-for(i in unique(SST1$Year)) {
+for(i in sort(unique(SST1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2197,7 +2197,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2239,7 +2239,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2281,7 +2281,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2338,7 +2338,7 @@ SST1 = SST %>%
   filter(Ground == "German Bank" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(SST1$Year)) {
+for(i in sort(unique(SST1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2393,7 +2393,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2435,7 +2435,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2477,7 +2477,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank" & In_Box == "1") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2536,7 +2536,7 @@ SST1 = SST %>%
   filter(Ground == "Scots Bay") %>%
   arrange(Survey)
 
-for(i in unique(SST1$Year)) {
+for(i in sort(unique(SST1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2591,7 +2591,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2633,7 +2633,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2675,7 +2675,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "Scots Bay") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2732,7 +2732,7 @@ SST1 = SST %>%
   filter(Ground == "German Bank") %>%
   arrange(Survey)
 
-for(i in unique(SST1$Year)) {
+for(i in sort(unique(SST1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2787,7 +2787,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2829,7 +2829,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
@@ -2871,7 +2871,7 @@ atDepth1 = atDepth %>%
   filter(Ground == "German Bank") %>%
   arrange(Survey)
 
-for(i in unique(atDepth1$Year)) {
+for(i in sort(unique(atDepth1$Year))) {
   
   cat("\n")
   cat("######", i, "\n")
