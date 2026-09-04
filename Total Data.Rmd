@@ -104,7 +104,7 @@ Tag$Survey = as.factor(Tag$Survey)
 Tag$Tagger = as.factor(Tag$Tagger)
 
 #CTD Data
-SST = read_csv(file.path(repo, "Main Data", "CTD Full.csv"))#SST
+SST = read_csv(file.path(repo, "Main Data", "CTD SST.csv"))#SST
   #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv") 
 CTD = read_csv(file.path(repo, "Main Data", "CTD Full.csv")) # All Data
   #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv") #All Data
@@ -1996,28 +1996,30 @@ for(i in unique(CTD1$Survey)) {
   cat("##### Survey", i, "\n")
   cat("\n")
   
-ggplot() + 
-  geom_polygon(data= subset (CTD1, Survey == i), aes(x=Lon, y=Lat)) +  
+ggplot() +
+  geom_polygon(data= subset (CTD1, Survey == i), aes(x=Lon, y=Lat)) +
   geom_polygon(data=polySB_main, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
   geom_polygon(data=SBplankton, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
   geom_polygon(data=SBCTD, aes(x=X, y=Y, group=PID), colour = "black", fill = NA, linetype = 3) +
   geom_polygon(data=polyNorthern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
   geom_polygon(data=polyEastern, aes(x=X, y=Y, group=PID), colour = "black", fill=NA, linetype = 3) +
-  geom_point(data = subset(CTD, Ground == "Scots Bay" & Year == Year & In_Box == "1"),
+  geom_point(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"),
              aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
-  coord_sf() + 
-  labs(x=NULL, y=NULL)  
+  coord_map() +
+  labs(x=NULL, y=NULL)
   
-print(ggplot(data = subset(CTD1, Survey == i), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_point(pch=21, size = 2, fill = "red") +
-  coord_map() + 
-  labs(x=NULL, y=NULL))
+# print(ggplot(data = subset(CTD1, Survey == i), aes(x=Lon, y=Lat)) + 
+#   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
+#   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
+#   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
+#   geom_point(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"),
+#              aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
+#   coord_map() + 
+#   labs(x=NULL, y=NULL))
+
   cat("\n")
   
 print(ggplot(data = subset(CTD1, Survey == i), aes(x=Temperature, y=Depth)) + 

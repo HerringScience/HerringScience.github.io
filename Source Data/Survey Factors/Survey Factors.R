@@ -659,8 +659,8 @@ Survey_Factors <- Survey_Factors %>%
 
 #Write new dataframe
 
-write.csv(
-  Survey_Factors,
-  "surveyFactorsAll.csv",
-  row.names = FALSE
-)
+# write.csv(
+#   Survey_Factors,
+#   "surveyFactorsAll.csv",
+#   row.names = FALSE
+# )
