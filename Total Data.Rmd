@@ -289,7 +289,7 @@ polySI = as.PolySet(SUA, projection="LL")
 
 # {.tabset}
 
-## SSB Estimates
+## SSB Estimates {.tabset}
 
 ### LRP Data {.tabset}
 
@@ -618,7 +618,7 @@ for(i in unique(SSB1$Year)) {
   cat("\n")
 }
 ```
-## Tagging Project
+## Tagging Project {.tabset}
 
 ### Current Tag Data {.tabset}
 
