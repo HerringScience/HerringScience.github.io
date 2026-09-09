@@ -94,6 +94,7 @@ repo <- file.path(
   "GitHub",
   "HerringScience.github.io"
 )
+
 ##CTD Data import and filtering
 CTD <- read_csv(file.path(repo, "Source Data", "CTD_Raw.csv"))
 
@@ -101,6 +102,9 @@ CTD <- CTD %>% dplyr::select(-Pressure, -Conductivity, -Specific_conductance, -S
 CTD$Date = ymd(CTD$Date)
 CTD <- CTD %>% mutate(Julian = yday(Date)) #add Julian day
 CTD <- CTD %>% rename(Ground = ground, ID = id)
+
+#Since up to this point Seal Island was NOT part of the biomass calculations.
+CTD <- CTD %>% filter(Ground != "Seal Island")
 
 #Bio <- read_csv(file.path(repo, "Source Data", "Biomass.csv"))
 Bio <- read_csv(file.path(repo, "Main Data", "SSB Estimates.csv"))
@@ -116,7 +120,7 @@ CTD$Year <- as.factor(CTD$Year)
 #imports daily ECCC historical data for GB=Yarmouth=8202000, SB=Greenwood=8202000
 ECCC = get_climatedata('yarmouth a', 2017:2025, 'd')
 ECCC <- ECCC %>%
-  filter(!is.na(max_temp_c)) #remove duplicates to keep the one that has the most info.
+  filter(!is.na(total_precip_mm)) #remove duplicates to keep the one that has the most info.
 
 ECCC2 = get_climatedata('greenwood a', 2017:2025, 'd')
 ECCC <- full_join(ECCC, ECCC2)
@@ -135,6 +139,7 @@ ECCC = ECCC %>%
 ECCC <- ECCC %>%
   rename(Ground = station_name)
 
+
 #Combine with ECCC data, need to make Scots Bay = Greenwod, German Bank = Yarmouth
 CTD = left_join(CTD, ECCC, by = c("Date", "Ground"))
 
@@ -145,98 +150,103 @@ CTD = CTD %>%
 
 CTD$In_Box = as.factor(CTD$In_Box)
 
-#SST
-SST = CTD %>% 
-  filter(between(Depth, 0, 5)) %>%
-  filter(grepl('German Bank|Scots Bay', Ground)) %>%
-  group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
-            logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
-            logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
 
-SST = SST %>%
-  group_by(Year, Month, Ground) %>%
-  mutate(Count = length(Temperature))
+#Pull CTD Full.csv, and append JUST the missing ones to CTD Full.csv
 
-#At-depth
-CTD30 = CTD %>% 
-  filter(between(Depth, 28, 32)) %>%
-  filter(grepl('German Bank|Scots Bay', Ground)) %>%
-  group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
-            logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
-            logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
+#################### Figure out what these ones are used for, then update them. ##########################
 
-CTD30 = CTD30 %>%
-  group_by(Year, Month, Ground) %>%
-  mutate(Count = length(Temperature))
-
-#Adding Stratification
-#Take SST temps and salinity and add it to 30m dataframe (30m will always have less), mutate stratified = 30m-1m
-
-SSTTemp = SST %>% ungroup() %>% dplyr::select(Date, Temperature, Salinity)
-Strat = left_join(CTD30, SSTTemp, by = "Date")
-Strat = Strat %>% rename(Temperature = Temperature.x, SST = Temperature.y, Salinity = Salinity.x, SurfaceSalinity = Salinity.y)
-Strat = Strat %>% mutate(StratTemp = SST-Temperature) %>% mutate(StratSalt = Salinity-SurfaceSalinity)
-Strat = Strat %>%   
-  group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
-            Temperature = mean(Temperature),
-            Biomass = mean(Biomass),
-            logTemp = log(Temperature),
-            Lat = mean(Lat),
-            Lon = mean(Lon),
-            logBiomass = log(Biomass),
-            SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days),
-            SST = mean(SST),
-            SurfaceSalinity = mean(SurfaceSalinity),
-            StratTemp = mean(StratTemp),
-            StratSalt = mean(StratSalt))
-
-CTD30 = Strat
-
+# #SST
+# SST = CTD %>% 
+#   filter(between(Depth, 0, 5)) %>%
+#   filter(grepl('German Bank|Scots Bay', Ground)) %>%
+#   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
+#   summarize(TempSD = sd(Temperature),
+#             Temperature = mean(Temperature),
+#             Biomass = mean(Biomass),
+#             logTemp = log(Temperature),
+#             Lat = mean(Lat),
+#             Lon = mean(Lon),
+#             logBiomass = log(Biomass),
+#             SalinitySD = sd(Salinity),
+#             Salinity = mean(Salinity),
+#             mean_temp = mean(mean_temp),
+#             total_precip = mean(total_precip),
+#             total_snow = mean(total_precip),
+#             total_rain = mean(total_rain),
+#             spd_max_gust = max(spd_max_gust),
+#             min_temp = min(min_temp),
+#             max_temp = max(max_temp),
+#             heat_deg_days = mean(heat_deg_days),
+#             cool_deg_days = mean(cool_deg_days))
+# 
+# SST = SST %>%
+#   group_by(Year, Month, Ground) %>%
+#   mutate(Count = length(Temperature))
+# 
+# #At-depth
+# CTD30 = CTD %>% 
+#   filter(between(Depth, 28, 32)) %>%
+#   filter(grepl('German Bank|Scots Bay', Ground)) %>%
+#   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
+#   summarize(TempSD = sd(Temperature),
+#             Temperature = mean(Temperature),
+#             Biomass = mean(Biomass),
+#             logTemp = log(Temperature),
+#             Lat = mean(Lat),
+#             Lon = mean(Lon),
+#             logBiomass = log(Biomass),
+#             SalinitySD = sd(Salinity),
+#             Salinity = mean(Salinity),
+#             mean_temp = mean(mean_temp),
+#             total_precip = mean(total_precip),
+#             total_snow = mean(total_precip),
+#             total_rain = mean(total_rain),
+#             spd_max_gust = max(spd_max_gust),
+#             min_temp = min(min_temp),
+#             max_temp = max(max_temp),
+#             heat_deg_days = mean(heat_deg_days),
+#             cool_deg_days = mean(cool_deg_days))
+# 
+# CTD30 = CTD30 %>%
+#   group_by(Year, Month, Ground) %>%
+#   mutate(Count = length(Temperature))
+# 
+# #Adding Stratification
+# #Take SST temps and salinity and add it to 30m dataframe (30m will always have less), mutate stratified = 30m-1m
+# 
+# SSTTemp = SST %>% ungroup() %>% dplyr::select(Date, Temperature, Salinity)
+# Strat = left_join(CTD30, SSTTemp, by = "Date")
+# Strat = Strat %>% rename(Temperature = Temperature.x, SST = Temperature.y, Salinity = Salinity.x, SurfaceSalinity = Salinity.y)
+# Strat = Strat %>% mutate(StratTemp = SST-Temperature) %>% mutate(StratSalt = Salinity-SurfaceSalinity)
+# Strat = Strat %>%   
+#   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
+#   summarize(TempSD = sd(Temperature),
+#             Temperature = mean(Temperature),
+#             Biomass = mean(Biomass),
+#             logTemp = log(Temperature),
+#             Lat = mean(Lat),
+#             Lon = mean(Lon),
+#             logBiomass = log(Biomass),
+#             SalinitySD = sd(Salinity),
+#             Salinity = mean(Salinity),
+#             mean_temp = mean(mean_temp),
+#             total_precip = mean(total_precip),
+#             total_snow = mean(total_precip),
+#             total_rain = mean(total_rain),
+#             spd_max_gust = max(spd_max_gust),
+#             min_temp = min(min_temp),
+#             max_temp = max(max_temp),
+#             heat_deg_days = mean(heat_deg_days),
+#             cool_deg_days = mean(cool_deg_days),
+#             SST = mean(SST),
+#             SurfaceSalinity = mean(SurfaceSalinity),
+#             StratTemp = mean(StratTemp),
+#             StratSalt = mean(StratSalt))
+# 
+# CTD30 = Strat
+# 
 ### Write all CTD files.
-
+# 
 # CTD %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD Full.csv"))
 # CTD30 %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD 30m.csv"))
 # SST %>% write_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Main Data/CTD SST.csv"))
