@@ -10,12 +10,12 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2026"
-surv.no = "9"
-hightide = "2026-08-30 13:35:00" #for Scots Bay only; YYYY-MM-DD
-mainBoxVessels = 3
+surv.no = "3"
+hightide = "2026-09-06 19:08:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 7
 Tow = "Y"
 
 ```
@@ -251,7 +251,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "All vessels ran two transects in the German Bank box and two transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", "The Lady Janice II ran two transects in the German Bank box and two transects in the Seal Island box. All other vessels ran three transects in the German Bank box and one transect in the Seal Island Box", 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
@@ -540,7 +540,7 @@ kbl(Annual_Compare4, caption="Table 4: Annual Comparison Table", format.args=lis
 ```{r}
 Annual_Compare5 = full_join(Annual_Compare1, Annual_Compare2, by=c("Ground", "Survey_Number", "Year", "Survey_Date", "HSC_Estimate", "HSC_Turnover_Adjusted")) %>%
   group_by(Year, Ground) %>%
- summarize("HSC Estimate" = sum(HSC_Estimate),
+ dplyr::summarize("HSC Estimate" = sum(HSC_Estimate),
            "HSC Turnover Adjusted" = sum(HSC_Turnover_Adjusted, na.rm=TRUE),
            "DFO Estimate" = sum(DFO_Estimate),
             "DFO Turnover Adjusted" = sum(DFO_Turnover_Adjusted))
@@ -549,6 +549,118 @@ Annual_Compare5 <- Annual_Compare5 %>% mutate_if(is.numeric, ~na_if(., 0))
 kbl(Annual_Compare5, caption="Table 5: Annual Summary Table", format.args=list(big.mark=",")) %>%
   kable_paper("striped", full_width=F)
 ```
+
+
+## Plankton and CTD Data {.tabset}
+
+### Plankton Data
+
+#### Tow Summary Table
+
+```{r Tow table}
+if(Tow=="Y"){Plankton = Survey %>%
+  rename(Vessel = PlanktonVessel) %>%
+  dplyr::select(Vessel, id, Ground, Date, WindDirection, Swell, AirTemp, Time1, Time2, Lat1, Lat2, Lon1, Lon2, AvgTowDepth, Speed, Heading, TideDirection, FlowReading1, FlowReading2, NoRevs, DistanceCalc, Volume, DiscDepthD, DiscDepthA) %>%
+  rename("Set Number" = id, "Wind Direction (km/h)" = WindDirection, "Swell (m)" = Swell, "Air Temp (c)" = AirTemp, "Tow Start" = Time1, "Tow End" = Time2, "Start Lat" = Lat1, "End Lat" = Lat2, "Start Lon" = Lon1, "End Lon" = Lon2, "Avg Tow Depth (m)" = AvgTowDepth, "Tide Direction" = TideDirection, "Flow Start" = FlowReading1, "Flow End" = FlowReading2, "No. Revolutions" = NoRevs, "Distance (m)" = DistanceCalc, "Secchi Disappear (m)" = DiscDepthD, "Secchi Reappear (m)" = DiscDepthA)
+
+Plankton = t(Plankton)
+
+kbl(Plankton) %>%
+  kable_paper("striped") %>%
+  add_header_above(c("", "Tow 1", "Tow 2")) %>%
+  pack_rows("Base Details", 1, 7) %>%
+  pack_rows("Tow Details", 8, 17) %>%
+  pack_rows("Other Data Collection", 18, 24)}
+```
+
+```{r}
+a=first(Survey$id)
+b=Survey %>% slice(1L) 
+c=b$TideDirection
+d=b$AvgTowDepth
+e=last(Survey$id)
+f=Survey %>% slice(2L) 
+g=unique(f$TideDirection)
+h=unique(f$AvgTowDepth)
+```
+
+#### Tow Depth Profiles
+
+::: row
+::: col-md-6
+```{r fig.align='center', fig.cap="Plankton tow depth profile #1"}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 1.jpg"), rel_path = FALSE)
+```
+:::
+
+::: col-md-6
+```{r fig.align='center', fig.cap="Plankton tow depth profile #2"}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Tow 2.jpg"), rel_path = FALSE)
+```
+:::
+:::
+
+The first tow is `r a`, which was `r c` the tide and had an average depth of `r d`m. The second tow is `r e`, which was `r g` the tide and had an average depth of `r h`m.
+
+#### Captured plankton
+
+```{r fig.align='center', fig.cap="Captured plankton from the surface tows"}
+knitr::include_graphics(path = paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", current, "/Plankton.jpg"), rel_path = FALSE)
+```
+
+### CTD Data
+
+```{r fig.align='center', fig.show="first", results="hide"}
+#removed & Survey == 1 to ensure all surveys from the current year are included.
+a=ggplot(data = subset(CTD2, Ground == "Scots Bay" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+geom_path(size = 1.5) + 
+scale_y_reverse() + 
+labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
+
+#removed & Survey == 1 to ensure all surveys from the current year are included.
+b=ggplot(data = subset(CTD2, Ground == "German Bank" & Year == year), aes(x=Temperature, y=Depth, colour = Julian_factor)) + 
+geom_path(size = 1.5) + 
+scale_y_reverse() + 
+labs(x="Temperature (°C)", y = "Depth (m)", colour='Julian Day', title = "Temperature (°C) vs. Depth (m)")
+
+if (unique(Survey$Ground) == "SB") {
+  print(a)
+} else {
+  print(b)
+}
+
+c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
+```
+
+CTD depth profiles for all `r year` `r c` surveys so far.
+
+#### Sea surface temperatures
+
+```{r fig.align='center', fig.show="first", results="hide"}
+
+a=ggplot(data = subset(SST, Ground == "Scots Bay" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
+  geom_point() + 
+  geom_line() +
+  ylab("Average Sea Surface Temperature") +
+  xlab("Julian Day")
+
+b=ggplot(data = subset(SST, Ground == "German Bank" & In_Box == "1"), aes(x = Julian, y = Temperature, colour = Year)) + 
+  geom_point() + 
+  geom_line() +
+  ylab("Average Sea Surface Temperature") +
+  xlab("Julian Day")
+
+if (unique(Survey$Ground) == "SB") {
+  print(a)
+} else {
+  print(b)
+}
+
+c=unique(ifelse(Survey$Ground == "SB", "Scots Bay", "German Bank"))
+
+```
+
+Annual average sea surface temperatures (SST) for `r c`.
 
 ## Vessel Performance {.tabset}
 

@@ -2,17 +2,17 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB or SI
-surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="GB" #SB or GB or SI
+surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="9"
+surv.no="3"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
-Tow = "N" #whether or not plankton tow(s) were conducted
+Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LB", "FM", "LJ")
+ids = c("LB", "FM", "LJ", "BP", "LM", "MS", "TM")
 
 #Area and TS values - From table C
 SB1= 675.4278 #SB main area
@@ -432,9 +432,16 @@ if(surv=="GB"){
   map1 = map[which((map$Transect_No %in% ids)), ]
   
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
-  SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
-  ids = c("T01", "T02")
-  GB = trans[which((trans$Transect_No %in% ids)), ]
+ 
+  #use if different GB/SI line splits between vessels 
+  #SI <- trans[trans$Transect_No == "T04" | trans$Region_name == "LJ_T03", ]
+  #ids <- c("T01", "T02", "T03")
+  #GB <- trans[trans$Transect_No %in% ids & trans$Region_name != "LJ_T03", ]
+  
+  
+ SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
+ ids = c("T01", "T02")
+ GB = trans[which((trans$Transect_No %in% ids)), ]
   
   #Results
   resultsa = biomassCalc(x = GB, areaKm = GB1)
@@ -590,15 +597,15 @@ CTD$Month <- as.factor(CTD$Month)
 CTD$Year <- as.factor(CTD$Year)
 
 #imports daily ECCC historical data for GB=Yarmouth=50133, SB=Greenwood=6354
-ECCC = weather_dl(station_ids = c(50133, 6354), start = "2017-01-01", interval = "day")
-ECCC = ECCC %>% 
-  dplyr::select(station_name, date, mean_temp, total_precip, total_snow, total_rain, spd_max_gust, 
-                min_temp, max_temp, heat_deg_days, cool_deg_days) %>%
-  rename(Date = date) %>%
-  mutate(Ground = ifelse(station_name == "GREENWOOD A", "Scots Bay", "German Bank"))
+#ECCC = weather_dl(station_ids = c(50133, 6354), start = "2017-01-01", interval = "day")
+#ECCC = ECCC %>% 
+#  dplyr::select(station_name, date, mean_temp, total_precip, total_snow, total_rain, spd_max_gust, 
+#                min_temp, max_temp, heat_deg_days, cool_deg_days) %>%
+#  rename(Date = date) %>%
+#  mutate(Ground = ifelse(station_name == "GREENWOOD A", "Scots Bay", "German Bank"))
 
 #Combine with ECCC data, need to make Scots Bay = Greenwod, German Bank = Yarmouth
-CTD = left_join(CTD, ECCC, by = c("Date", "Ground"))
+#CTD = left_join(CTD, ECCC, by = c("Date", "Ground"))
 
 #Cast in or out of box factor
 CTD = CTD %>% 
@@ -612,7 +619,7 @@ SST = CTD %>%
   filter(between(Depth, 0, 5)) %>%
   filter(grepl('German Bank|Scots Bay', Ground)) %>%
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
+  dplyr::summarize(TempSD = sd(Temperature),
             Temperature = mean(Temperature),
             Biomass = mean(Biomass),
             logTemp = log(Temperature),
@@ -620,16 +627,16 @@ SST = CTD %>%
             Lon = mean(Lon),
             logBiomass = log(Biomass),
             SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
+            Salinity = mean(Salinity))
+            #mean_temp = mean(mean_temp),
+            #total_precip = mean(total_precip),
+            #total_snow = mean(total_precip),
+            #total_rain = mean(total_rain),
+            #spd_max_gust = max(spd_max_gust),
+            #min_temp = min(min_temp),
+            #max_temp = max(max_temp),
+            #heat_deg_days = mean(heat_deg_days),
+            #cool_deg_days = mean(cool_deg_days))
 
 SST = SST %>%
   group_by(Year, Month, Ground) %>%
@@ -640,7 +647,7 @@ CTD30 = CTD %>%
   filter(between(Depth, 28, 32)) %>%
   filter(grepl('German Bank|Scots Bay', Ground)) %>%
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
+  dplyr::summarize(TempSD = sd(Temperature),
             Temperature = mean(Temperature),
             Biomass = mean(Biomass),
             logTemp = log(Temperature),
@@ -648,16 +655,16 @@ CTD30 = CTD %>%
             Lon = mean(Lon),
             logBiomass = log(Biomass),
             SalinitySD = sd(Salinity),
-            Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days))
+            Salinity = mean(Salinity))
+#mean_temp = mean(mean_temp),
+#total_precip = mean(total_precip),
+#total_snow = mean(total_precip),
+#total_rain = mean(total_rain),
+#spd_max_gust = max(spd_max_gust),
+#min_temp = min(min_temp),
+#max_temp = max(max_temp),
+#heat_deg_days = mean(heat_deg_days),
+#cool_deg_days = mean(cool_deg_days))
 
 CTD30 = CTD30 %>%
   group_by(Year, Month, Ground) %>%
@@ -672,7 +679,7 @@ Strat = Strat %>% rename(Temperature = Temperature.x, SST = Temperature.y, Salin
 Strat = Strat %>% mutate(StratTemp = SST-Temperature) %>% mutate(StratSalt = Salinity-SurfaceSalinity)
 Strat = Strat %>%   
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
-  summarize(TempSD = sd(Temperature),
+  dplyr::summarize(TempSD = sd(Temperature),
             Temperature = mean(Temperature),
             Biomass = mean(Biomass),
             logTemp = log(Temperature),
@@ -681,15 +688,15 @@ Strat = Strat %>%
             logBiomass = log(Biomass),
             SalinitySD = sd(Salinity),
             Salinity = mean(Salinity),
-            mean_temp = mean(mean_temp),
-            total_precip = mean(total_precip),
-            total_snow = mean(total_precip),
-            total_rain = mean(total_rain),
-            spd_max_gust = max(spd_max_gust),
-            min_temp = min(min_temp),
-            max_temp = max(max_temp),
-            heat_deg_days = mean(heat_deg_days),
-            cool_deg_days = mean(cool_deg_days),
+            #mean_temp = mean(mean_temp),
+            #total_precip = mean(total_precip),
+            #total_snow = mean(total_precip),
+            #total_rain = mean(total_rain),
+            #spd_max_gust = max(spd_max_gust),
+            #min_temp = min(min_temp),
+            #max_temp = max(max_temp),
+            #heat_deg_days = mean(heat_deg_days),
+            #cool_deg_days = mean(cool_deg_days),
             SST = mean(SST),
             SurfaceSalinity = mean(SurfaceSalinity),
             StratTemp = mean(StratTemp),
