@@ -14,7 +14,7 @@ surv = "GB"
 surv2 = "German Bank"
 surv.date = "2026-09-20 19:30:00" #survey date and time, as formatted.
 surv.no = "4"
-Allocation = '200' #set to "0" for a non-fishing survey
+Allocation = '300' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
