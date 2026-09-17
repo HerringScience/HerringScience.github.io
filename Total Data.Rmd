@@ -1987,11 +1987,49 @@ ggplot(data = subset(CTD, Ground == "Scots Bay" & Year == year), aes(x=Temperatu
 ```{r, results = "asis"}
 CTD1 = CTD %>%
 filter(Year == year & Ground == "Scots Bay") %>%
-arrange(Survey)                                         
+arrange(Survey)
 
 
 for(i in sort(unique(CTD1$Survey))) {
-  
+
+  print(
+    ggplot() +
+      geom_sf(data = out, fill = "grey80", colour = "black") +
+
+      geom_polygon(data = polySB_main,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = SBplankton,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = SBCTD,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = polyNorthern,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = polyEastern,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+
+      geom_point(
+        data = subset(CTD1, Survey == i),
+        aes(x = Lon, y = Lat),
+        colour = scales::hue_pal()(length(unique(CTD1$Survey)))[
+          which(sort(unique(CTD1$Survey)) == i)
+        ],
+        size = 2
+      ) +
+
+      coord_sf() +
+      labs(
+        title = paste("Survey", i),
+        x = NULL,
+        y = NULL
+      ) +
+      theme_bw()
+  )
+
   cat("\n")
   cat("##### Survey", i, "\n")
   cat("\n")
@@ -2007,18 +2045,6 @@ ggplot() +
              aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
   coord_map() +
   labs(x=NULL, y=NULL)
-  
-# print(ggplot(data = subset(CTD1, Survey == i), aes(x=Lon, y=Lat)) + 
-#   geom_polygon(data=polySB_main,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-#   geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-#   geom_polygon(data=SBplankton,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-#   geom_polygon(data=SBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-#   geom_polygon(data=polyNorthern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-#   geom_polygon(data=polyEastern,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-#   geom_point(data = subset(CTD, Ground == "Scots Bay" & Year == year & In_Box == "1"),
-#              aes(x=Lon, y=Lat, fill = Year), pch=21, size = 2) +
-#   coord_map() + 
-#   labs(x=NULL, y=NULL))
 
   cat("\n")
   
@@ -2035,14 +2061,6 @@ labs(x="Temperature (°C)", y = "Depth (m)", title = "Temperature (°C) vs. Dept
 ##### Total
 
 ```{r message=FALSE, warning=FALSE}
-##Full Map
-# CP <- ext(-69, -63, 42, 45.5)
-# out <- st_as_sf(crop(NBNS_spat, CP))
-# 
-# #Scots Bay
-# CP <- ext(-65.5, -64.5, 45, 45.5)
-# out <- st_as_sf(crop(NBNS_spat, SBMap))
-
 #German Bank
 
 CP <- ext(-66.8, -65.5, 43, 44)
@@ -2079,17 +2097,41 @@ for(i in sort(unique(CTD1$Survey))) {
   cat("\n")
   cat("##### Survey", i, "\n")
   cat("\n")
-  
-print(ggplot(data = subset(CTD1, Survey == i), aes(x=Lon, y=Lat)) + 
-  geom_polygon(data=out,aes(x=long, y=lat, group=group)) +  
-  geom_polygon(data=polyGB,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=polySI,aes(x=X, y=Y, group=PID), colour = "black", fill="white",linetype = 3) +
-  geom_polygon(data=GBCTD,aes(x=X, y=Y, group=PID), colour = "black", fill = "white", linetype = 3) +
-  geom_point(pch=21, size = 2, fill = "red") +
-  coord_map() + 
-  labs(x=NULL, y=NULL))
-  cat("\n")
-  
+
+  print(
+    ggplot() +
+      geom_sf(data = out, fill = "grey80", colour = "black") +
+
+      geom_polygon(data = polyGB,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = GBCTD,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = GBCTD,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_polygon(data = polySI,
+                   aes(x = X, y = Y, group = PID),
+                   colour = "black", fill = NA, linetype = 3) +
+      geom_point(
+        data = subset(CTD1, Survey == i),
+        aes(x = Lon, y = Lat),
+        colour = scales::hue_pal()(length(unique(CTD1$Survey)))[
+          which(sort(unique(CTD1$Survey)) == i)
+        ],
+        size = 2
+      ) +
+
+      coord_sf() +
+      labs(
+        title = paste("Survey", i),
+        x = NULL,
+        y = NULL
+      ) +
+      theme_bw()
+  )
+
 print(ggplot(data = subset(CTD1, Survey == i), aes(x=Temperature, y=Depth)) + 
 geom_path(size = 1.5) + 
 scale_y_reverse() + 
