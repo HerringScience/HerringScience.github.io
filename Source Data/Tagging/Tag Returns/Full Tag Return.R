@@ -33,22 +33,40 @@ library(oce)
 library(pander)
 library(janitor)
 
+repo <-  file.path(
+  path.expand("~"),
+  "GitHub",
+  "HerringScience.github.io"
+)
+
 #Import All Boxes
-setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Box Coordinates/"))
+setwd(file.path(repo, "Box Coordinates"))
 boxes = read.csv("surveyBoxes.csv")
 
 
 #Previously entered
-tagReturns2023 <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
-tagReturns <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
-tagReturns2025 <-read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
-complete.returns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/complete.returns.csv")
+setwd(file.path(repo,
+                "Source Data",
+                "Tagging",
+                "Tag Returns"))
+tagReturns2023 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
+tagReturns <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
+tagReturns2025 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
+complete.returns <- read.csv(file.path(repo, 
+                                       "Source Data",
+                                       "Tagging",
+                                       "Tag Returns",
+                                       "complete.returns.csv"))
+
 complete.returns <- complete.returns %>%
   dplyr::select(-X)
 
+tagReturns <- complete.returns
+
+
 #Year spreadsheets - To be entered
-tagReturns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
-  
+#tagReturns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
+
 tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
 
 #Remove damaged/missing/incomplete tag numbers and put in their own dataset
@@ -58,28 +76,35 @@ removed_missing_tag <- tagReturns %>%
 
 tagReturns <- tagReturns %>%
   dplyr::filter(!is.na(Tag_Num))
-  
-  tagReturns$returnedArea = as.character(tagReturns$returnedArea)
+
+tagReturns$returnedArea = as.character(tagReturns$returnedArea)
 
 original_tagReturns <- tagReturns
 
 #Full Returns.csv - This is the sheet to update!
-fullReturnsCSV <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Full Returns.csv")
+fullReturnsCSV <- read.csv(file.path(repo,
+                                     "Source Data",
+                                     "Tagging",
+                                     "Tag Returns",
+                                     "Full Returns.csv"))
+
 fullReturnsCSV$Tag_Num <- as.numeric(fullReturnsCSV$Tag_Num)
 fullReturnsCSV$Date <- as.Date(fullReturnsCSV$Date)
 fullReturnsCSV$returnedDate <- as.Date(fullReturnsCSV$returnedDate)
 
-NAFO_subunits <- read.csv(
-  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/NAFO_subunits.csv"
-)
+NAFO_subunits <- read.csv(file.path(repo,
+                                    "Main Data",
+                                    "NAFO_subunits.csv"))
 
-groundWeirMasterSheet <- read.csv(
-  "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Box Coordinates/Grounds Weir Master Sheet.csv",
-  stringsAsFactors = FALSE
-)
+groundWeirMasterSheet <- read.csv(file.path(repo,
+                                            "Box Coordinates",
+                                            "Grounds Weir Master Sheet.csv"))
+
 
 #Grounds to use
-timGrounds <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/timGrounds.csv")
+timGrounds <- read.csv(file.path(repo,
+                                 "Main Data",
+                                 "timGrounds.csv"))
 
 # Build polygons from timGrounds
 ground_list <- split(timGrounds, timGrounds$Box)
@@ -225,8 +250,8 @@ tagReturns <- tagReturns %>%
 
 tagReturns <- tagReturns %>%
   mutate(
-    #returnedDate = ymd(returnedDate),   # yyyy/mm/dd or dd/mm/yyyy. Seems to keep switching between the two.
-    returnedDate = dmy(returnedDate),
+    returnedDate = ymd(returnedDate),   # yyyy/mm/dd or dd/mm/yyyy. Seems to keep switching between the two.
+    #returnedDate = dmy(returnedDate),
     returnedJulian = yday(returnedDate)
   )
 
@@ -241,7 +266,10 @@ removed_bad_dates <- tagReturns %>%
 
 
 #Original Tagging Events
-taggingEvents <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/TaggingEvents.csv")
+taggingEvents <- read.csv(file.path(repo,
+                                    "Main Data",
+                                    "TaggingEvents.csv"))
+
 taggingEvents$Tag_Num <- as.numeric(taggingEvents$Tag_Num)
 
 #First coordinate for each ground
@@ -253,45 +281,45 @@ ground_lookup <- timGrounds %>%
     .groups = "drop"
   )
 
-# Fill missing coordinates - The Tagger did not enter actual coordinates, but did enter the ground. The coordinates were pulled from timGrounds and filled in.
+# Fill missing coordinates - The Tagger did not enter actual coordinates, but did enter the ground. The coordinates were pulled from timGrounds and filled in. Do I need this?
+# 
+# taggingEvents <- taggingEvents %>%
+#   left_join(
+#     ground_lookup,
+#     by = c("Ground" = "Box")
+#   ) %>%
+#   mutate(
+#     Lon = coalesce(Lon, fill_lon),
+#     Lat = coalesce(Lat, fill_lat)
+#   ) %>%
+#   select(-fill_lon, -fill_lat)
+# 
+# events_sf <- st_as_sf(
+#   taggingEvents,
+#   coords = c("Lon", "Lat"),
+#   crs = 4326,
+#   remove = FALSE
+# )
+# 
+# # Spatial join
+# events_joined <- st_join(
+#   events_sf,
+#   grounds_sf["Box"],
+#   join = st_within
+# )
+# 
+# # Replace Other with polygon-assigned ground
+# events_joined <- events_joined %>%
+#   mutate(
+#     Ground = case_when(
+#       Ground == "Other" & !is.na(Box) ~ Box,
+#       TRUE ~ Ground
+#     )
+#   )
 
-taggingEvents <- taggingEvents %>%
-  left_join(
-    ground_lookup,
-    by = c("Ground" = "Box")
-  ) %>%
-  mutate(
-    Lon = coalesce(Lon, fill_lon),
-    Lat = coalesce(Lat, fill_lat)
-  ) %>%
-  select(-fill_lon, -fill_lat)
-
-events_sf <- st_as_sf(
-  taggingEvents,
-  coords = c("Lon", "Lat"),
-  crs = 4326,
-  remove = FALSE
-)
-
-# Spatial join
-events_joined <- st_join(
-  events_sf,
-  grounds_sf["Box"],
-  join = st_within
-)
-
-# Replace Other with polygon-assigned ground
-events_joined <- events_joined %>%
-  mutate(
-    Ground = case_when(
-      Ground == "Other" & !is.na(Box) ~ Box,
-      TRUE ~ Ground
-    )
-  )
-
-# Remove geometry if desired
-taggingEvents <- events_joined %>%
-  st_drop_geometry()
+# # Remove geometry if desired
+# taggingEvents <- events_joined %>%
+#   st_drop_geometry()
 
 
 #Shrink taggingEvents down to just what is needed
@@ -308,12 +336,20 @@ taggingEvents <- taggingEvents %>%
 #Join taggingEvents by YYYYtagReturns
 
 fullReturns <- inner_join(tagReturns, taggingEvents,
-                      by = c("Tag_Num" = "Tag_Num"))
+                          by = c("Tag_Num" = "Tag_Num"))
 
-#=====================================================
-# RELEASE NAFO
-#=====================================================
-# 
+# taggingEvents <- taggingEvents %>%
+#   arrange(Tag_Num, Ground == "Other") %>%
+#   group_by(Tag_Num) %>%
+#   filter(
+#     !(Ground == "Other" & any(Ground != "Other"))
+#   ) %>%
+#   ungroup()
+
+
+# RELEASE NAFO ## Section currently not working
+
+
 # release_sf <- st_as_sf(
 #   fullReturns,
 #   coords = c("Lon","Lat"),
@@ -327,55 +363,55 @@ fullReturns <- inner_join(tagReturns, taggingEvents,
 #   left = TRUE,
 #   largest = TRUE
 # )
+# 
+# fullReturns$ReleaseNAFO <- mapply(
+#   find_smallest_nafo,
+#   fullReturns$Lon,
+#   fullReturns$Lat,
+#   MoreArgs = list(
+#     nafo_sf = nafo_sf
+#   )
+# )
 
-fullReturns$ReleaseNAFO <- mapply(
-  find_smallest_nafo,
-  fullReturns$Lon,
-  fullReturns$Lat,
-  MoreArgs = list(
-    nafo_sf = nafo_sf
-  )
-)
 
-#=====================================================
 # RETURN NAFO FROM RETURN COORDINATES
-#=====================================================
 
-fullReturns$ReturnNAFO <- NA_character_
+# 
+# fullReturns$ReturnNAFO <- NA_character_
+# 
+# has_return_coords <-
+#   !is.na(fullReturns$returnedLat) &
+#   !is.na(fullReturns$returnedLon)
+# 
+# return_sf <- st_as_sf(
+#   fullReturns[has_return_coords, ],
+#   coords = c(
+#     "returnedLon",
+#     "returnedLat"
+#   ),
+#   crs = 4326,
+#   remove = FALSE
+# )
+# 
+# return_join <- st_join(
+#   return_sf,
+#   nafo_sf["Area"],
+#   left = TRUE,
+#   largest = TRUE
+# )
+# 
+# fullReturns$ReturnNAFO <- mapply(
+#   find_smallest_nafo,
+#   fullReturns$returnedLon,
+#   fullReturns$returnedLat,
+#   MoreArgs = list(
+#     nafo_sf = nafo_sf
+#   )
+# )
 
-has_return_coords <-
-  !is.na(fullReturns$returnedLat) &
-  !is.na(fullReturns$returnedLon)
 
-return_sf <- st_as_sf(
-  fullReturns[has_return_coords, ],
-  coords = c(
-    "returnedLon",
-    "returnedLat"
-  ),
-  crs = 4326,
-  remove = FALSE
-)
-
-return_join <- st_join(
-  return_sf,
-  nafo_sf["Area"],
-  left = TRUE,
-  largest = TRUE
-)
-
-fullReturns$ReturnNAFO <- mapply(
-  find_smallest_nafo,
-  fullReturns$returnedLon,
-  fullReturns$returnedLat,
-  MoreArgs = list(
-    nafo_sf = nafo_sf
-  )
-)
-
-#=====================================================
 # FALLBACK TO WEIR LOCATIONS
-#=====================================================
+
 
 weir_lookup <- groundWeirMasterSheet %>%
   dplyr::select(
@@ -392,7 +428,7 @@ weir_lookup <- weir_lookup %>%
   mutate(
     Lon = -abs(Lon)
   )
-`
+
 
 missing_return <- is.na(
   fullReturns$ReturnNAFO
@@ -478,13 +514,13 @@ fullReturns <- fullReturns %>%
     Date,
     Julian,
     Ground,
-    ReleaseNAFO,
+    #ReleaseNAFO,
     Lat,
     Lon,
     returnedDate,
     returnedJulian,
     returnedArea,
-    ReturnNAFO,
+    #ReturnNAFO,
     returnedLat,
     returnedLon,
     GearType,
@@ -504,44 +540,46 @@ fullReturns <- fullReturns %>%
 fullReturnsCSV <- bind_rows(fullReturnsCSV, fullReturns)
 
 
-#Write/Update Full Returns file
-setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))
-fullTagReturns <- write_csv(fullReturnsCSV, "Full Returns.csv" )
 
 
-#Write/Update tags that were found but had to be removed for some reason.
-removed_negative_days <- removed_negative_days %>%
-  mutate(across(everything(), as.character))
-
-removed_missing_tag <- removed_missing_tag %>%
-  mutate(across(everything(), as.character))
-
-removed_missing_location <- removed_missing_location %>%
-  mutate(across(everything(), as.character))
-
-removed_bad_dates <- removed_bad_dates %>%
-  mutate(across(everything(), as.character))
-
-
-removed_tags <- bind_rows(
-  removed_negative_days,
-  removed_missing_tag,
-  removed_missing_location,
-  removed_bad_dates,
-) %>%
-  distinct(Tag_Num, .keep_all = TRUE)
-
-removed_tags <- removed_tags %>%
-  mutate(across(everything(), as.character))
-
-removed_tagsCSV <- read_csv("Removed_From_FullReturns.csv" )
-
-removed_tagsCSV <- removed_tagsCSV %>%
-  mutate(across(everything(), as.character))
-
-removed_tagsCSV <- bind_rows(removed_tagsCSV, removed_tags)
-
-write_csv(
-  removed_tagsCSV,
-  "Removed_From_FullReturns.csv"
-)
+# #Write/Update Full Returns file
+# setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))
+# fullTagReturns <- write_csv(fullReturnsCSV, "Full Returns.csv" )
+# 
+# 
+# #Write/Update tags that were found but had to be removed for some reason.
+# removed_negative_days <- removed_negative_days %>%
+#   mutate(across(everything(), as.character))
+# 
+# removed_missing_tag <- removed_missing_tag %>%
+#   mutate(across(everything(), as.character))
+# 
+# removed_missing_location <- removed_missing_location %>%
+#   mutate(across(everything(), as.character))
+# 
+# removed_bad_dates <- removed_bad_dates %>%
+#   mutate(across(everything(), as.character))
+# 
+# 
+# removed_tags <- bind_rows(
+#   removed_negative_days,
+#   removed_missing_tag,
+#   removed_missing_location,
+#   removed_bad_dates,
+# ) %>%
+#   distinct(Tag_Num, .keep_all = TRUE)
+# 
+# removed_tags <- removed_tags %>%
+#   mutate(across(everything(), as.character))
+# 
+# removed_tagsCSV <- read_csv("Removed_From_FullReturns.csv" )
+# 
+# removed_tagsCSV <- removed_tagsCSV %>%
+#   mutate(across(everything(), as.character))
+# 
+# removed_tagsCSV <- bind_rows(removed_tagsCSV, removed_tags)
+# 
+# write_csv(
+#   removed_tagsCSV,
+#   "Removed_From_FullReturns.csv"
+# )

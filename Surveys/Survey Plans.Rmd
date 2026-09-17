@@ -14,7 +14,7 @@ surv = "GB"
 surv2 = "German Bank"
 surv.date = "2026-09-20 19:30:00" #survey date and time, as formatted.
 surv.no = "4"
-Allocation = '300' #set to "0" for a non-fishing survey
+Allocation = '250' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
@@ -22,16 +22,16 @@ Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and
 vessels = 7
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
-PlanktonVessel = "Lady Melissa"
+PlanktonVessel = "Brunswick Provider"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = PlanktonVessel
-V2 = "Fundy Monarch"
-V3 = "Morning Star"
-V4 = "Lady Janice"
-V5 = "Leroy & Barry"
-V6 = "Brunswick Provider"
-V7 = "Tasha Marie"
+V2 = "Morning Star"
+V3 = "Leroy and Barry"
+V4 = "Tasha Marie"
+V5 = "Fundy Monarch"
+V6 = "Lady Melissa"
+V7 = "Lady Janice"
 V8 = NA
 V9 = NA
 
