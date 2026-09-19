@@ -2,17 +2,17 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="GB" #SB or GB or SI
-surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="SB" #SB or GB or SI
+surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="3"
+surv.no="10"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LB", "FM", "LJ", "BP", "LM", "MS", "TM")
+ids = c("LM", "MS", "BP")
 
 #Area and TS values - From table C
 SB1= 675.4278 #SB main area
@@ -141,8 +141,8 @@ if(Tow == "Y"){
   TowData$DateTime = TowData$Time
   
 #Changed to UTC  
-  #TowData$DateTime = TowData$DateTime-hours(3) #Summer daylight savings
-  TowData$DateTime = TowData$DateTime-hours(4) #Fall daylight savings
+  TowData$DateTime = TowData$DateTime-hours(3) #Summer daylight savings
+  #TowData$DateTime = TowData$DateTime-hours(4) #Fall daylight savings
   TowData$Date = substr(TowData$DateTime,1,10)
   TowData$Time = substr(TowData$DateTime,12,19)
   TowData$Time = hms::as_hms(TowData$Time)
