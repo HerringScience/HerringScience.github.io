@@ -12,7 +12,7 @@ library(reshape2)
 library(moderndive)
 library(skimr)
 library(ggridges)
-library(weathercan)
+#library(weathercan)
 library(GGally)
 library(psych)
 library(sp)
@@ -377,17 +377,28 @@ na_dates <- Survey_Factors %>%
   filter(is.na(High_Tide)) %>%
   pull(Survey_Date)
 
+end_dt <- as.POSIXct(
+  Sys.Date(),
+  tz = "America/Halifax"
+) 
+
 start_dt <- as.POSIXct(
-  min(na_dates),
+  Sys.Date() - 365,
   tz = "America/Halifax"
 )
 
 
+# start_dt <- as.POSIXct(
+#   min(na_dates),
+#   tz = "America/Halifax"
+# )
 
-end_dt <- as.POSIXct(
-  max(na_dates) + 2,
-  tz = "America/Halifax"
-) - 1 
+# end_dt <- as.POSIXct(
+#   max(na_dates) + 2,
+#   tz = "America/Halifax"
+# ) - 1 
+
+
 
 start_date <- format(
   start_dt,
