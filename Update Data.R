@@ -2,17 +2,17 @@
 rm(list = ls())
 
 # IMPORTANT : SET GROUND, YEAR, AND SURVEY # HERE
-surv="SB" #SB or GB or SI
-surv2="Scots Bay" #"German Bank", "Seal Island" or "Scots Bay" as written
+surv="GB" #SB or GB or SI
+surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="10"
+surv.no="4"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LM", "MS", "BP")
+ids = c("LM", "MS", "BP", "FM", "LJ", "TM", "LB")
 
 #Area and TS values - From table C
 SB1= 675.4278 #SB main area
@@ -434,14 +434,14 @@ if(surv=="GB"){
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
  
   #use if different GB/SI line splits between vessels 
-  #SI <- trans[trans$Transect_No == "T04" | trans$Region_name == "LJ_T03", ]
-  #ids <- c("T01", "T02", "T03")
-  #GB <- trans[trans$Transect_No %in% ids & trans$Region_name != "LJ_T03", ]
+  SI <- trans[trans$Transect_No == "T04" | trans$Region_name == "TM_T03", ]
+  ids <- c("T01", "T02", "T03")
+  GB <- trans[trans$Transect_No %in% ids & trans$Region_name != "TM_T03", ]
   
   
- SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
- ids = c("T01", "T02")
- GB = trans[which((trans$Transect_No %in% ids)), ]
+# SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
+# ids = c("T01", "T02")
+# GB = trans[which((trans$Transect_No %in% ids)), ]
   
   #Results
   resultsa = biomassCalc(x = GB, areaKm = GB1)

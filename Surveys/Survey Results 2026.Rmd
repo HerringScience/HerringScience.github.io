@@ -10,12 +10,12 @@ output:
 rm(list = ls())
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
+surv = "GB"
+surv2 = "German Bank"
 year = "2026"
-surv.no = "10"
-hightide = "2026-09-13 14:21:00" #for Scots Bay only; YYYY-MM-DD
-mainBoxVessels = 3
+surv.no = "4"
+hightide = "2026-09-20 18:43:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 7
 Tow = "Y"
 
 ```
@@ -251,7 +251,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", "The Lady Janice II ran two transects in the German Bank box and two transects in the Seal Island box. All other vessels ran three transects in the German Bank box and one transect in the Seal Island Box", 
+g=unique(ifelse(Survey$Ground == "GB", paste("The ", unique(Survey$PlanktonVessel), " ran two transects in the German Bank box and two transects in the Seal Island box. All other vessels ran three transects in the German Bank box and one transect in the Seal Island Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
