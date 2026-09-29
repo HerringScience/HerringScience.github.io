@@ -129,6 +129,7 @@ SSB$Survey_Number <- as.factor(SSB$Survey_Number)
 SSB$Ground <- as.factor(SSB$Ground)
 
 #LRP Data
+### 2025 data German bank INCLUDES seal island.
 LRP2 = read_csv(file.path(repo, "Main Data", "LRP Data.csv"))
   #"C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/LRP Data.csv")
 LRP2 = LRP2 %>% rename(ThreeYear = "3yr Avg")
