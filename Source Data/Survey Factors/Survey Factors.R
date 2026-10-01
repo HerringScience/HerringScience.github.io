@@ -387,19 +387,6 @@ start_dt <- as.POSIXct(
   tz = "America/Halifax"
 )
 
-
-# start_dt <- as.POSIXct(
-#   min(na_dates),
-#   tz = "America/Halifax"
-# )
-
-# end_dt <- as.POSIXct(
-#   max(na_dates) + 2,
-#   tz = "America/Halifax"
-# ) - 1 
-
-
-
 start_date <- format(
   start_dt,
   "%Y-%m-%dT%H:%M:%S%z"

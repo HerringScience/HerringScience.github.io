@@ -50,7 +50,9 @@ library(tidyr)
 
 setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors")
 
-Survey_Factors <- read_csv(
+##Survey_Factors 
+
+df<- read_csv(
   "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Survey Factors/surveyFactorsAll.csv"
 ) %>%
   mutate(
@@ -68,9 +70,6 @@ Survey_Data <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.i
 
 RollingPeakBiomassAvg <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvg.csv")
 RollingPeakBiomassAvgGB <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Tracey's Folder/RollingPeakBiomassAvgGB.csv")
-
-# Read data
-df <- read.csv("surveyFactorsAll.csv")
 
 # Convert variables to numeric
 df$DFO_Turnover_Adjusted <- as.numeric(df$DFO_Turnover_Adjusted)
