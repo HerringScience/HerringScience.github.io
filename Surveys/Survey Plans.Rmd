@@ -10,28 +10,28 @@ output:
 rm(list = ls()) #removes everything in the current environment
 
 #Change these options
-surv = "SB"
-surv2 = "Scots Bay"
-surv.date = "2026-09-27 19:00:00" #survey date and time, as formatted.
-surv.no = "11"
-Allocation = '200' #set to "0" for a non-fishing survey
+surv = "GB"
+surv2 = "German Bank"
+surv.date = "2026-10-04 19:00:00" #survey date and time, as formatted.
+surv.no = "5"
+Allocation = '250' #set to "0" for a non-fishing survey
 SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 3
+vessels = 6
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Janice"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = PlanktonVessel
-V2 = "Leroy and Barry"
-V3 = "Fundy Monarch"
-V4 = "Brunswick Provider"
-V5 = "Fundy Monarch"
-V6 = "Lady Melissa"
-V7 = "Lady Janice"
+V2 = "Morning Star"
+V3 = "Leroy and Barry"
+V4 = "Fundy Monarch"
+V5 = "Lady Melissa"
+V6 = "Brunswick Provider"
+V7 = NA
 V8 = NA
 V9 = NA
 
@@ -475,20 +475,34 @@ b=surv.date+days(1)
 c=substr(b,1,10)
 d=paste0(Allocation, "mt/vessel.")
 e=paste0(Allocation, "mt/vessel for German Bank and Seal Island combined.")
-i= "7. This is a non-fishing survey."
 h=if(Allocation == 0){
   print(i)
 }
 f=if(surv=="SB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", d, "Please wait until all vessels have completed their lines before starting to fish")
+  paste0("7. Fishing to start on ", c, ", and allocation is ", d, " Please wait until all vessels have completed their lines before starting to fish")
 }
 g=if(surv=="GB" & Allocation != 0){
-  paste0("7. Fishing to start on ", c, ", and allocation is ", e, "Please wait until all vessels have completed their lines before starting to fish.")
+  paste0("7. Fishing to start on ", c, ", and allocation is ", e)
 }
+
 ```
 
 
 `r g` `r f` `r h`
+
+```{r, include="FALSE"}
+
+j=if(surv=="SB" & Allocation != 0){
+  paste0("8. Please wait until all vessels have completed their lines before starting to fish")
+}
+
+i=if(surv=="GB" & Allocation !=0){
+  paste0("8. This is a non-fishing survey.")
+}
+```
+
+`r j` `r i`
+
 
 ```{r, results="asis"}
 if(surv=="SB"){
