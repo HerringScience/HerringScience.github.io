@@ -434,9 +434,9 @@ if(surv=="GB"){
   PRCplot=ggplot(map1, aes(x=Xend, y=Yend)) + geom_point(aes(colour = Vessel, size = PRC_ABC)) + labs(x=NULL, y=NULL, title = "PRC Area Backscattering Coefficient (m2/m2) for each transect")
  
   #use if different GB/SI line splits between vessels 
-  SI <- trans[trans$Transect_No == "T04" | trans$Region_name == "TM_T03", ]
+  SI <- trans[trans$Transect_No == "T04" | trans$Region_name == "TM_T04" | trans$Region_name == "TM_T03", ]
   ids <- c("T01", "T02", "T03")
-  GB <- trans[trans$Transect_No %in% ids & trans$Region_name != "TM_T03", ]
+  GB <- trans[trans$Transect_No %in% ids & trans$Region_name != "TM_T04" | trans$Region_name != "TM_T03", ]
   
   
 # SI = trans[which(trans$Transect_No == c("T03", "T04")), ]
