@@ -61,10 +61,10 @@ complete.returns <- read.csv(file.path(repo,
 complete.returns <- complete.returns %>%
   dplyr::select(-X)
 
-tagReturns <- complete.returns
 
 
-#Year spreadsheets - To be entered
+#Year spreadsheets - To be entered, change with each year/new tag return files.
+
 #tagReturns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
 
 tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
