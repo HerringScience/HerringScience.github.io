@@ -31,11 +31,15 @@ library(terra)
 library(sf)
 library(rnaturalearth)
 
-setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/"))
+setwd(paste0("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/"))
 
 #Files to import
 
-TotalFatData <- read_csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
+TotalFatData <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Main Data/Total Fat Data.csv")
+
+# New Fat Data import to update Total Fat Data.csv
+
+FatData2026 <- read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data/2026 DFO - FAT REPORT(2).csv")
 
 TotalFatData <- TotalFatData %>%
   tidyr::drop_na('FishWeight(g)', 'FishLength(cm)')
