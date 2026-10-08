@@ -39,10 +39,43 @@ TotalFatData <- read_csv("C:/Users/herri/OneDrive - Herring Science Council/Docu
 
 # New Fat Data import to update Total Fat Data.csv
 
-FatData2026 <- read.csv("C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data/2026 DFO - FAT REPORT(2).csv")
+FatData2026 <- read.csv(
+  "C:/Users/herri/OneDrive - Herring Science Council/Documents/GitHub/HerringScience.github.io/Source Data/Fat Data/2026 DFO - FAT REPORT(2).csv",
+  fileEncoding = "latin1",
+  stringsAsFactors = FALSE
+)
+
+FatData2026 = FatData2026 %>%
+  mutate(Date = as.Date(Date, format = "%d-%b-%y"),
+         Year = as.numeric(format(Date,"%Y")),
+         Month = as.numeric(format(Date,"%m")),
+         Day = as.numeric(format(Date, "%d"))
+  )
+
+FatData2026 = FatData2026 %>%
+  dplyr::select(
+        Year = Year,
+        Month = Month,
+          Day = Day,
+         "FishLength(cm)" = "Fish.Length..cm.",
+         "FishWeight(g)" = "FishWeight.g.",
+)
 
 TotalFatData <- TotalFatData %>%
   tidyr::drop_na('FishWeight(g)', 'FishLength(cm)')
+
+TotalFatData <- TotalFatData %>%
+  dplyr::select(Year = Year,
+                Month = Month,
+                Day = Day,
+                "FishLength(cm)",
+                "FishWeight(g)",
+                Year = Year)
+
+TotalFatData <- TotalFatData %>%
+  bind_rows(TotalFatData, FatData2026)
+
+## Start from here to compare length.
 
 
 #Create scatterplot to compare lengths and when they dropped to fillet weight.
