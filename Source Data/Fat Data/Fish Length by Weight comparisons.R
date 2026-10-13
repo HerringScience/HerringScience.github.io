@@ -88,7 +88,7 @@ TFD<- ggplot (TotalFatData, aes(x = `FishWeight(g)`, y = `FishLength(cm)`, colou
     y = "Fish Length (cm)"
   ) +
   theme_minimal()
-
+print(TFD)
 
 ggsave(
   filename = paste0(
@@ -172,6 +172,7 @@ avgWeight <- ggplot(avg_weights,
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+print(avgWeight)
 
 ggsave(
   filename = paste0(

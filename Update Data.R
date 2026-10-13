@@ -232,6 +232,9 @@ setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github
 Total %>% write_csv("Survey Data.csv")
 }
 
+
+## If Tow == "No", no plankton tow was completed. planktonsamplingData.csv will NOT update. Survey Data.csv still will as the survey did still happen.
+
 if(Tow == "N"){
   Survey = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
   Total = read_csv(paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
@@ -258,7 +261,10 @@ Survey = Survey %>%
 
 
 write_csv(Total, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Main Data/Survey Data.csv"))
-write_csv(Survey, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
+
+########## Removed this to no longer update the planktonsamplingData.csv when no tow was completed. This will remove unnecesary NAs in the data frame. To look for general survey data, go to Survey Data.csv datasheet which updates regardless if tow is completed or not.
+
+#write_csv(Survey, paste0("C:/Users/", Sys.info()[7], "/Documents/GitHub/HerringScience.github.io/Source Data/planktonsamplingData.csv"))
     
   
   setwd(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Surveys/", year, "/", surv, surv.no))
