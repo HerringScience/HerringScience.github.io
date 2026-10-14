@@ -32,6 +32,7 @@ library(mapproj)
 library(oce)
 library(pander)
 library(janitor)
+library(dplyr)
 
 repo <-  file.path(
   path.expand("~"),
@@ -49,25 +50,26 @@ setwd(file.path(repo,
                 "Source Data",
                 "Tagging",
                 "Tag Returns"))
-tagReturns2023 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
-tagReturns <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
-tagReturns2025 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
-complete.returns <- read.csv(file.path(repo, 
-                                       "Source Data",
-                                       "Tagging",
-                                       "Tag Returns",
-                                       "complete.returns.csv"))
+# tagReturns2023 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
+# tagReturns2026 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
+# tagReturns2025 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
+# complete.returns <- read.csv(file.path(repo, 
+#                                        "Source Data",
+#                                        "Tagging",
+#                                        "Tag Returns",
+#                                        "complete.returns.csv"))
 
-complete.returns <- complete.returns %>%
-  dplyr::select(-X)
 
 
 
 #Year spreadsheets - To be entered, change with each year/new tag return files.
 
-#tagReturns <- read.csv("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
+tagReturns <- read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
 
 tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
+tagReturns <- tagReturns %>%
+  mutate(returnedDate = as.Date(returnedDate, "%Y-%m-%d"))
+
 
 #Remove damaged/missing/incomplete tag numbers and put in their own dataset
 removed_missing_tag <- tagReturns %>%
@@ -125,95 +127,95 @@ grounds_sf <- st_sf(
   geometry = st_sfc(polys, crs = 4326)
 )
 
-# Build NAFO polygons
-NAFO_subunits <- NAFO_subunits %>%
-  filter(
-    !Area %in% c(
-      "3",
-      "4",
-      "5",
-      "6"
-    )
-  )
-
-nafo_list <- split(
-  NAFO_subunits,
-  NAFO_subunits$Area
-)
-
-nafo_polys <- lapply(
-  nafo_list,
-  function(x){
-    
-    coords <- as.matrix(
-      x[, c("X","Y")]
-    )
-    
-    if(!all(coords[1,] == coords[nrow(coords),])){
-      
-      coords <- rbind(
-        coords,
-        coords[1,]
-      )
-      
-    }
-    
-    st_polygon(list(coords))
-  }
-)
-
-nafo_sf <- st_sf(
-  Area = names(nafo_list),
-  geometry = st_sfc(
-    nafo_polys,
-    crs = 4326
-  )
-)
-
-nafo_sf <- st_make_valid(nafo_sf)
-
-nafo_sf$PolyArea <- as.numeric(
-  st_area(
-    st_transform(
-      nafo_sf,
-      3347
-    )
-  )
-)
-
-find_smallest_nafo <- function(
-    lon,
-    lat,
-    nafo_sf
-){
-  
-  if(
-    is.na(lon) ||
-    is.na(lat)
-  ){
-    return(NA_character_)
-  }
-  
-  pt <- st_sfc(
-    st_point(c(lon, lat)),
-    crs = 4326
-  )
-  
-  hits <- st_within(
-    pt,
-    nafo_sf
-  )[[1]]
-  
-  if(length(hits) == 0){
-    return(NA_character_)
-  }
-  
-  candidates <- nafo_sf[hits, ]
-  
-  candidates$Area[
-    which.min(candidates$PolyArea)
-  ]
-}
+# # Build NAFO polygons
+# NAFO_subunits <- NAFO_subunits %>%
+#   filter(
+#     !Area %in% c(
+#       "3",
+#       "4",
+#       "5",
+#       "6"
+#     )
+#   )
+# 
+# nafo_list <- split(
+#   NAFO_subunits,
+#   NAFO_subunits$Area
+# )
+# 
+# nafo_polys <- lapply(
+#   nafo_list,
+#   function(x){
+#     
+#     coords <- as.matrix(
+#       x[, c("X","Y")]
+#     )
+#     
+#     if(!all(coords[1,] == coords[nrow(coords),])){
+#       
+#       coords <- rbind(
+#         coords,
+#         coords[1,]
+#       )
+#       
+#     }
+#     
+#     st_polygon(list(coords))
+#   }
+# )
+# 
+# nafo_sf <- st_sf(
+#   Area = names(nafo_list),
+#   geometry = st_sfc(
+#     nafo_polys,
+#     crs = 4326
+#   )
+# )
+# 
+# nafo_sf <- st_make_valid(nafo_sf)
+# 
+# nafo_sf$PolyArea <- as.numeric(
+#   st_area(
+#     st_transform(
+#       nafo_sf,
+#       3347
+#     )
+#   )
+# )
+# 
+# find_smallest_nafo <- function(
+#     lon,
+#     lat,
+#     nafo_sf
+# ){
+#   
+#   if(
+#     is.na(lon) ||
+#     is.na(lat)
+#   ){
+#     return(NA_character_)
+#   }
+#   
+#   pt <- st_sfc(
+#     st_point(c(lon, lat)),
+#     crs = 4326
+#   )
+#   
+#   hits <- st_within(
+#     pt,
+#     nafo_sf
+#   )[[1]]
+#   
+#   if(length(hits) == 0){
+#     return(NA_character_)
+#   }
+#   
+#   candidates <- nafo_sf[hits, ]
+#   
+#   candidates$Area[
+#     which.min(candidates$PolyArea)
+#   ]
+# }
 
 #Change coordinates in tagReturns to decimal degrees
 dmm_to_dd <- function(x) {
@@ -251,7 +253,7 @@ tagReturns <- tagReturns %>%
 tagReturns <- tagReturns %>%
   mutate(
     returnedDate = ymd(returnedDate),   # yyyy/mm/dd or dd/mm/yyyy. Seems to keep switching between the two.
-    #returnedDate = dmy(returnedDate),
+    # returnedDate = dmy(returnedDate),
     returnedJulian = yday(returnedDate)
   )
 
@@ -271,6 +273,11 @@ taggingEvents <- read.csv(file.path(repo,
                                     "TaggingEvents.csv"))
 
 taggingEvents$Tag_Num <- as.numeric(taggingEvents$Tag_Num)
+
+taggingEvents <- taggingEvents %>%
+  group_by(Date, Vessel, Tagger) %>%
+  mutate(setNo = cur_group_id()) %>%
+  ungroup()
 
 #First coordinate for each ground
 ground_lookup <- timGrounds %>%
@@ -330,7 +337,8 @@ taggingEvents <- taggingEvents %>%
     Lon,
     Lat,
     Ground,
-    Julian)
+    Julian,
+    setNo)
 
 
 #Join taggingEvents by YYYYtagReturns
