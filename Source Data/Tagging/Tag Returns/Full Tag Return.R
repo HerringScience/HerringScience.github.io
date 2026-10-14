@@ -501,10 +501,10 @@ fullReturns <- fullReturns %>%
 #Tracking removed tags
 
 removed_negative_days <- fullReturns %>%
-  filter(daysAtLarge <= 0) %>%
+  filter(daysAtLarge < 0) %>%
   mutate(
     RemovalReason = paste(
-      "Days at large <= 0 (",
+      "Days at large < 0 (",
       daysAtLarge,
       ")"
     )
