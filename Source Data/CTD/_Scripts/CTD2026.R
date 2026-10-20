@@ -13,15 +13,22 @@ pacman::p_load(
 # CTD DATA
 # Look at DFO and HSC data
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
+setwd("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
 
 source("build_Oceans_df.R")
 
-Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
+## pathway to connect to the desktop github
+Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
 
+          # this one is outdated.
+          Oceans  = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
+
+## pathway to connect to the desktop github
+OceansAllDepths = build_Oceans_df(ctd_path = "C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
+          
+          
+                    # this one is outdated.
 OceansAllDepths = build_Oceans_df(ctd_path = "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD_Raw.csv", dfo_paths = c("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurveyClimateData.csv", "C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/herringLarvalSurvey2009Data.csv"))
-
-
 
 saveRDS(Oceans, "Oceans.rds")
 saveRDS(OceansAllDepths, "OceansAllDepths.rds")
