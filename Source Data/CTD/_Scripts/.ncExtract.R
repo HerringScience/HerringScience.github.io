@@ -5,7 +5,7 @@
 
 # create the Prince5 modern dataset.
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
+setwd("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
 
 library(ncdf4)
 library(maps)
@@ -20,7 +20,7 @@ library(broom)
 source("read_char_var.R")
 source("pad_range.R")
 
-setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
+setwd("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
 years <- 2017:2024
 files <- paste0(years, ".nc")
@@ -545,7 +545,7 @@ plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
                   aes(longitude, latitude,
                       colour = Source,
                       shape = Source),
-                  size = 3
+                  size = 2
                 ) +
                 
                 geom_point(
@@ -581,10 +581,22 @@ plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
                     "Scots Bay" = 18
                   )
                 ) +
+               geom_text(
+                  data = data.frame(
+                    longitude = c(-66.4, -65.2, -67),
+                    latitude  = c(43.8, 45.5, 45.05),
+                    label     = c("German Bank/Seal Island", "Scots Bay", "Prince 5")
+                  ),
+                  aes(longitude, latitude, label = label),
+                  fontface = "bold",
+                  size = 4,
+                  color = "black"
+                ) +
+                
                 
                 coord_sf(
                   xlim = c(-67.5, -63),
-                  ylim = c(46, 42),
+                  ylim = c(46, 43),
                   expand = FALSE
                 ) +
                 
@@ -620,7 +632,7 @@ plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
                 )
 
               
-              
+           
 
 # Need to combine HSC and final_casts ###################################################
 
@@ -693,6 +705,27 @@ all_casts <- bind_rows(
 
 
 head(all_casts)
+colnames(all_casts)
+
+
+cast_summary <- all_casts %>%
+  distinct(Source, Year, cast) %>%
+  count(Source, Year)
+
+ggplot(cast_summary,
+       aes(x = Year, y = Source, fill = n)) +
+  geom_tile() +
+  scale_fill_viridis_c(name = "Unique casts") +
+  theme_bw() +
+  labs(
+    x = "Year",
+    y = NULL
+  )+theme(
+    aspect.ratio = 1
+  )
+
+
+
 
 #### Continue with .nc dataset (all_casts)
 
