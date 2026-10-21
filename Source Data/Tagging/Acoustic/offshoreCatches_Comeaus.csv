@@ -1,0 +1,59 @@
+id,Date,Lat,Lon,Vessel,Ground,Comment
+1,2023-06-13,43.98166667,-62.39166667,Lady Melissa,Offshore,
+2,2023-06-13,44.22833333,-62.35833333,Lady Melissa,Offshore,The Patch
+3,2023-06-21,44.16666667,-61.205,Lady Melissa,Offshore,The Owl
+4,2023-07-02,43.65666667,-62.425,Lady Melissa,Offshore,The Mackezie Spot
+5,2023-07-03,44.22333333,-62.35666667,Lady Melissa,Shelburne,
+6,2022-06-20,44.31166667,-62.28166667,Lady Melissa,Offshore,
+7,2022-06-22,44.31666667,-62.33166667,Lady Melissa,Offshore,
+8,2022-06-23,44.25,-62.51,Lady Melissa,Offshore,
+9,2022-06-24,44.30833333,-62.27166667,Lady Melissa,Offshore,
+10,2022-06-27,44.27833333,-62.33,Lady Melissa,Offshore,The Patch
+11,2022-06-30,44.3,-63.20333333,Lady Melissa,Offshore,The Patch
+12,2022-07-05,44.27833333,-62.27833333,Lady Melissa,Offshore,The Patch
+13,2022-07-05,44.27,-62.26,Lady Melissa,Offshore,The Patch
+14,2022-07-08,44.25166667,-62.41833333,Lady Melissa,Offshore,The Patch
+15,2022-07-10,44.23,-62.39833333,Lady Melissa,Offshore,
+16,2022-07-12,44.20666667,-62.30666667,Lady Melissa,Offshore,
+17,2022-07-18,44.00333333,-62.38833333,Lady Melissa,Offshore,
+18,2022-07-21,43.99166667,-62.40666667,Lady Melissa,Offshore,Mackenzie Spot
+19,2022-07-22,43.99166667,-62.39,Lady Melissa,Offshore,
+20,2022-07-23,43.95833333,-62.46666667,Lady Melissa,Offshore,
+21,2017-05-28,44.21666667,-62.38333333,Lady Melissa,Offshore,
+22,2017-05-30,44.21666667,-62.38333333,Lady Melissa,Offshore,
+23,2017-05-01,44.23333333,-62.35,Lady Melissa,Offshore,
+24,2015-05-17,43.22677,-62.34666667,Lady Melissa,Offshore,Small Patch
+25,2015-05-18,44.21667,-62.45,Lady Melissa,Offshore,Small Patch
+26,2015-05-19,44.26667,-62.35,Lady Melissa,Offshore,Small Patch
+27,2015-05-21,44.22167,0,Lady Melissa,Offshore,
+28,2015-05-29,44.20000,-62.25,Lady Melissa,Offshore,
+29,2015-06-03,44.20000,-62.35,Lady Melissa,Offshore,The Patch
+30,2015-06-04,44.22667,-62.36166667,Lady Melissa,Offshore,The Patch
+31,2015-06-05,44.23333,-62.35,Lady Melissa,Offshore,The Patch
+32,2018-05-13,44.3165,-62.26833333,Sealife II,Offshore,Halifax
+33,2018-05-21,44.28666667,-62.45,Sealife II,Offshore,Halifax
+34,2018-05-27,44.185,-62.34666667,Sealife II,Offshore,Halifax
+35,2018-05-28,44.31,-62.22333333,Sealife II,Offshore,Halifax
+36,2018-05-30,44.20833333,-62.42333333,Sealife II,Offshore,Halifax
+37,1997-05-20,43.55,-62.38333333,Lady Melissa,Offshore,Emerald Bank
+38,1997-05-23,43.81666667,-62.38333333,Lady Melissa,Offshore,Emerald Bank
+39,1997-05-27,44.05,-62.13333333,Lady Melissa,Offshore,Mackenzie Spot
+40,1997-05-28,43.98333333,-62.31666667,Lady Melissa,Offshore,Mackenzie Spot
+41,1997-05-28,43.96666667,-62.3,Lady Melissa,Offshore,Mackenzie Spot
+42,1997-06-01,44.18333333,-62.13333333,Lady Melissa,Offshore,Mackenzie Spot
+43,1997-06-02,0,-62.01666667,Lady Melissa,Offshore,Mackenzie Spot
+44,1997-06-03,44.28333333,-62.26666667,Lady Melissa,Offshore,The Patch
+45,1997-06-03,44.28333333,-62.3,Lady Melissa,Offshore,The Patch
+46,1997-06-16,44.25,-62.26666667,Lady Melissa,Offshore,Mackenzie Spot
+47,1997-06-18,44.2,-62.4,Lady Melissa,Offshore,The Patch
+48,1997-06-18,44.2,-62.28333333,Lady Melissa,Offshore,The Patch
+49,1997-06-19,44.20083333,-62.3835,Lady Melissa,Offshore,The Patch
+50,1997-06-20,44.21666667,0,Lady Melissa,Offshore,The Patch
+51,1997-06-24,44.33483333,-61.6255,Lady Melissa,Offshore,Bull Pen
+52,1997-06-25,44.34483333,-61.58983333,Lady Melissa,Offshore,Bull Pen
+53,1997-06-26,44.34483333,-61.58983333,Lady Melissa,Offshore,Bull Pen
+54,1997-06-26,44.36666667,-61.73333333,Lady Melissa,Offshore,Bull Pen
+55,1996-06-29,44.10933333,-62.03333333,Lady Melissa,Offshore,Tear Drop 
+56,1997-07-01,44.1295,-62.04366667,Lady Melissa,Offshore,Tear Drop
+57,1997-07-04,43.96666667,-62.45,Lady Melissa,Offshore,Mackenzie Spot
+58,1997-07-08,43.98333333,-63.05,Lady Melissa,Offshore,Emerald Bank
