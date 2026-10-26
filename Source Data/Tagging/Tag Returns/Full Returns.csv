@@ -410,7 +410,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 471228,2023-08-21,233,German Bank,43.26611111,-66.37361111,2023-08-24,236,German Bank,NA,NA,60,3,2023TagReturns,,4Xq,4Xq,Purse Seine,Unique
 471237,2023-08-21,233,German Bank,43.26611111,-66.37361111,2023-08-24,236,Seal Island,NA,NA,20,3,2023TagReturns,,4Xq,4Xo,Purse Seine,Unique
 471259,2023-08-21,233,German Bank,43.26611111,-66.37361111,2023-08-29,241,Scots Bay ,45.18333333,-65.05,29,8,2023TagReturns,,4Xq,4Xr,Purse Seine,Unique
-471466,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-29,241,Scots Bay ,45.18333333,-65.05,29,1,2023TagReturns,,4Xr,4Xr,Purse Seine,Unique
+471466,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-29,241,German Bank,43.2375,-66.321,29,1,2023TagReturns,,4Xr,4Xr,Purse Seine,Unique
 471488,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,2023TagReturns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 471489,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-08,251,Scots Bay,NA,NA,119,11,2023TagReturns,,4Xr,4Xs,Purse Seine,Unique
 471490,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-08,251,Scots Bay,NA,NA,119,11,2023TagReturns,,4Xr,4Xs,Purse Seine,Unique
@@ -419,7 +419,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 471497,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 471554,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,NA,NA,40,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471555,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-471558,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+471558,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,44.31666667,-66.41166667,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471559,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-12,255,Scots Bay,NA,NA,42,15,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471570,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 471581,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-08,251,Scots Bay,NA,NA,NA,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -427,7 +427,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 471601,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 471605,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,NA,NA,39,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471608,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-471616,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+471616,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay ,44.31666667,-66.41166667,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471619,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 471622,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471626,2023-08-28,240,Scots Bay,45.1925,-64.8775,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -464,7 +464,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 471903,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 471910,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 473086,2022-09-07,250,Scots Bay,45.19678333,-64.88591667,2023-08-31,243,Northeast Bank,NA,NA,26,358,complete.returns,,4Xr,,Purse Seine,Unique
-473112,2022-09-07,250,Scots Bay,45.19678333,-64.88591667,2023-08-30,242,Scots Bay ,NA,NA,NA,357,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+473112,2022-09-07,250,Scots Bay,45.19678333,-64.88591667,2023-08-30,242,Scots Bay ,44.31666667,-66.41166667,NA,357,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 473184,2022-09-12,255,German Bank,43.27091667,-66.36568333,2022-09-14,257,German Bank,NA,NA,103,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 473252,2022-09-12,255,German Bank,43.27091667,-66.36568333,2022-09-13,256,German Bank,NA,NA,105,1,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 473264,2022-09-12,255,German Bank,43.27091667,-66.36568333,2022-09-14,257,German Bank,NA,NA,125,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
@@ -472,7 +472,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 473464,2023-07-07,188,Grand Manan,44.58111111,-66.58416667,2024-09-17,261,UNKNOWN,NA,NA,NA,438,complete.returns,,4Xs,,Purse Seine,Unique
 473474,2023-07-07,188,Grand Manan,44.58111111,-66.58416667,2023-10-18,291,White Head,NA,NA,62,103,complete.returns,,4Xs,4Xr,Purse Seine,Unique
 473477,2023-07-07,188,Grand Manan,44.58111111,-66.58416667,2023-07-21,202,White Head,NA,NA,48,14,complete.returns,,4Xs,4Xr,Purse Seine/Frozen,Unique
-474896,2023-10-04,277,Long Island,44.30111111,-66.33555556,2024-07-30,212,Scots Bay,NA,NA,NA,300,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+474896,2023-10-04,277,Long Island,44.30111111,-66.33555556,2024-07-30,212,Scots Bay,46,-64.96666667,NA,300,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 475464,2022-08-31,243,German Bank,43.27755,-66.38485,2022-09-02,245,German Bank,NA,NA,107,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 475710,2022-09-06,249,Scots Bay,45.17516667,-64.98425,2022-09-19,262,Scots Bay,NA,NA,126,13,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 475807,2022-09-06,249,Scots Bay,45.17516667,-64.98425,2022-09-08,251,Scots Bay,NA,NA,68,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -964,7 +964,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 529158,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2023-10-17,290,White Head,NA,NA,115,16,complete.returns,,4Xs,4Xr,Purse Seine,Unique
 529159,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2023-10-12,285,White Head,NA,NA,118,11,complete.returns,,4Xs,4Xr,Purse Seine,Unique
 529172,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2023-10-03,276,White Head ,NA,NA,56,2,complete.returns,,4Xs,4Xr,Purse Seine,Unique
-529179,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2024-06-26,178,Grand Manan,NA,NA,NA,269,complete.returns,,4Xs,4Xs,Purse Seine,Unique
+529179,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2024-06-26,178,Grand Manan,44.58333333,-66.59666667,NA,269,complete.returns,,4Xs,4Xs,Purse Seine,Unique
 529193,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2023-10-13,286,White Head,NA,NA,96,12,complete.returns,,4Xs,4Xr,Purse Seine,Unique
 529221,2023-10-01,274,Grand Manan,44.63277778,-66.63972222,2023-10-18,291,White Head,NA,NA,62,17,complete.returns,,4Xs,4Xr,Purse Seine,Unique
 529230,2023-10-02,275,Grand Manan,44.67416667,-66.65333333,2023-10-04,277,White Head ,NA,NA,123,2,complete.returns,,4Xs,4Xr,Purse Seine,Unique
@@ -1002,7 +1002,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 531383,2020-08-10,223,Scots Bay,45.09808,-65.0482,2020-08-12,225,Scots Bay,NA,NA,NA,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 531489,2020-08-17,230,German Bank,43.45705,-66.4307,2020-08-18,231,German Bank,NA,NA,99,1,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 532001,2023-09-04,247,German Bank,43.25,-66.35,2023-09-06,249,German Bank,NA,NA,102,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
-532013,2023-09-04,247,German Bank,43.25,-66.35,2023-09-28,271,German Bank ,NA,NA,NA,24,complete.returns,,4Xq,4Xq,Purse Seine,Unique
+532013,2023-09-04,247,German Bank,43.25,-66.35,2023-09-28,271,Scots Bay,45.13333333,-65.05,NA,24,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 532020,2023-09-04,247,German Bank,43.25,-66.35,2023-09-06,249,German Bank,NA,NA,102,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 532029,2023-09-04,247,German Bank,43.25,-66.35,2023-09-06,249,German Bank,NA,NA,102,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 532087,2023-09-04,247,German Bank,43.25,-66.35,2023-09-19,262,German Bank,NA,NA,NA,15,complete.returns,,4Xq,4Xq,Purse Seine,Unique
@@ -1265,7 +1265,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564107,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-06,219,Scots Bay,NA,NA,NA,344,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564111,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564113,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,Scots Bay,NA,NA,69,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564145,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564145,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,,43.2375,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564150,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-09-07,250,Scots Bay,NA,NA,129,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564167,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,Scots Bay,NA,NA,102,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564172,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1273,22 +1273,22 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564179,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-09-17,261,Scots Bay,NA,NA,NA,386,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564193,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-09-07,250,Scots Bay,NA,NA,129,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564202,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-30,243,Scots Bay,NA,NA,NA,368,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564204,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-06-25,177,White Head,NA,NA,NA,302,complete.returns,,4Xr,4Xr,Purse Seine,Unique
+564204,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-06-25,177,White Head,45.13333333,-65.11666667,NA,302,complete.returns,,4Xr,4Xr,Purse Seine,Unique
 564208,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,Scots Bay,NA,NA,34,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-564214,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-20,233,Scots Bay,NA,NA,NA,358,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564214,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-20,233,Scots Bay,45.18333333,-65.9,NA,358,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564219,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-10-13,286,White Head,NA,NA,96,46,complete.returns,,4Xr,4Xr,Purse Seine,Unique
 564220,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-10-13,286,White Head,NA,NA,96,46,complete.returns,,4Xr,4Xr,Purse Seine,Unique
 564234,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2023-08-29,241,Scots Bay ,NA,NA,102,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564304,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564307,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564309,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-10-11,284,German Bank ,NA,NA,186,43,complete.returns,,4Xr,4Xq,Purse Seine,Unique
-564312,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564312,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564317,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,39,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564318,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-08,251,Scots Bay,NA,NA,NA,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564319,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay ,NA,NA,NA,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564321,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-10,253,Scots Bay,NA,NA,129,12,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564331,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-564334,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564334,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564335,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564341,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,244,German Bank,NA,NA,NA,3,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 564343,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1297,7 +1297,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564348,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564349,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,NA,NA,NA,7,complete.returns,,4Xr,4Xo,Purse Seine,Unique
 564354,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay ,NA,NA,NA,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564358,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564358,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,44.31666667,-66.41166667,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564361,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-08,251,Scots Bay,NA,NA,NA,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564373,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564374,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
@@ -1309,11 +1309,11 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564407,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564408,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564410,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-564411,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564411,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,44.31666667,-66.41166667,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564412,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564414,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564416,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,NA,NA,NA,7,complete.returns,,4Xr,4Xo,Purse Seine,Unique
-564417,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564417,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564434,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2024-08-29,242,Scots Bay,NA,NA,NA,366,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564441,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564442,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay ,NA,NA,165,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1323,7 +1323,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564456,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,NA,NA,NA,7,complete.returns,,4Xr,4Xo,Purse Seine,Unique
 564458,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564460,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,244,German Bank,NA,NA,NA,3,complete.returns,,4Xr,4Xq,Purse Seine,Unique
-564463,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564463,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564465,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-15,258,Scots Bay ,NA,NA,116,17,complete.returns,,4Xr,4Xs,Purse Seine ,Unique
 564474,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564478,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
@@ -1338,7 +1338,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564525,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564538,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564541,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-29,272,German Bank ,NA,NA,82,31,complete.returns,,4Xr,4Xq,Purse Seine,Unique
-564550,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
+564550,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,43.23733333,-66.321,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564552,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564553,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564554,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1355,7 +1355,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564595,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564597,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564603,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564604,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564604,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564605,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564611,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564618,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-10-12,285,White Head,NA,NA,31,44,complete.returns,,4Xr,4Xr,Purse Seine,Unique
@@ -1364,7 +1364,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564633,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2024-09-17,261,Scots Bay,NA,NA,NA,385,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564635,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564636,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564637,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,NA,NA,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564637,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564640,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,248,Seal Island,NA,NA,NA,7,complete.returns,,4Xr,4Xo,Purse Seine,Unique
 564647,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-30,242,Scots Bay,NA,NA,74,1,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564651,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
@@ -1377,12 +1377,12 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564708,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,NA,NA,129,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564710,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564712,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,NA,NA,129,10,complete.returns,,4Xr,4Xs,Purse Seine ,Unique
-564713,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564713,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564721,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564722,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564723,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-12,255,Scots Bay,NA,NA,94,15,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564725,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564740,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-19,262,German Bank,NA,NA,NA,22,complete.returns,,4Xr,4Xq,Purse Seine,Unique
+564740,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-19,262,German Bank,43.26833333,-66.35166667,NA,22,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 564744,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564747,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564748,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
@@ -1390,15 +1390,15 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564754,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-12,255,Scots Bay,NA,NA,94,15,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564756,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-15,258,German Bank,NA,NA,NA,18,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 564759,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564761,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564761,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564763,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
-564764,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564764,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564769,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,Scots Bay,NA,NA,129,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564777,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564778,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564780,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564782,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-12,255,Scots Bay,NA,NA,94,15,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-564783,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564783,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564785,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
 564787,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-07,250,German Bank,NA,NA,147,10,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 564798,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1415,7 +1415,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 564852,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-23,266,UNKNOWN,NA,NA,NA,26,complete.returns,,4Xr,,Purse Seine,Unique
 564853,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-12,255,Scots Bay,NA,NA,94,15,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564854,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-10-16,289,White Head,NA,NA,110,49,complete.returns,,4Xr,4Xr,Purse Seine,Unique
-564864,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+564864,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,43.23733333,-66.321,NA,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564874,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-08,251,Scots Bay,NA,NA,119,11,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564875,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay ,NA,NA,40,2,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 564879,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-08-30,242,Scots Bay,NA,NA,74,2,complete.returns,Scots Bay (Area 8),4Xr,4Xs,Purse Seine,Unique
@@ -1445,12 +1445,12 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 565378,2023-07-03,184,Scots Bay,45.26888889,-64.85,2023-10-04,277,White Head ,NA,NA,123,93,complete.returns,,4Xr,4Xr,Purse Seine,Unique
 565484,2023-07-03,184,Scots Bay,45.26888889,-64.85,2023-10-16,289,White Head,NA,NA,110,105,complete.returns,,4Xr,4Xr,Purse Seine,Unique
 566638,2023-08-23,235,German Bank,43.48611111,-66.22694444,2025-02-04,35,UNKNOWN,NA,NA,NA,531,complete.returns,,4Xq,,Purse Seine,Unique
-566792,2023-08-23,235,German Bank,43.48611111,-66.22694444,2024-06-20,172,Scots Bay,NA,NA,61,302,complete.returns,,4Xq,4Xs,Purse Seine,Unique
+566792,2023-08-23,235,German Bank,43.48611111,-66.22694444,2024-06-20,172,Scots Bay,44.68,-66.56666667,61,302,complete.returns,,4Xq,4Xs,Purse Seine,Unique
 567024,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-12,255,Scots Bay,NA,NA,94,14,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567025,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-567029,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-09-24,268,Scots Bay,NA,NA,NA,392,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+567029,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-09-24,268,Scots Bay,45.165,-64.9785,NA,392,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567037,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,NA,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-567067,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-20,233,Scots Bay,NA,NA,NA,357,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+567067,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-20,233,Scots Bay,45.18333333,-65.9,NA,357,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567078,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567080,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567083,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-05,248,Seal Island,NA,NA,NA,7,complete.returns,,4Xr,4Xo,Purse Seine,Unique
@@ -1481,11 +1481,10 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 567207,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-06,249,German Bank,NA,NA,NA,8,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 567213,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,NA,NA,147,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567215,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-567218,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-09-17,261,UNKNOWN,NA,NA,NA,385,complete.returns,,4Xr,,Purse Seine,Unique
 567221,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay ,NA,NA,NA,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567224,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay ,NA,NA,NA,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567225,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-07,250,Scots Bay,NA,NA,129,9,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-567226,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-22,235,Scots Bay,NA,NA,NA,359,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+567226,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2024-08-22,235,Scots Bay,44.06666667,-65.06666667,NA,359,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567228,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567237,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 567240,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-08,251,Scots Bay,NA,NA,119,10,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1530,7 +1529,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 567546,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-15,258,German Bank,NA,NA,96,12,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 567558,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-15,258,German Bank ,NA,NA,107,12,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 567564,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-19,262,German Bank ,NA,NA,47,16,complete.returns,,4Xq,4Xq,Purse Seine,Unique
-567565,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-25,268,Seal Island,NA,NA,NA,22,complete.returns,,4Xq,4Xo,Purse Seine,Unique
+567565,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-25,268,Scots Bay,45.15,-64.83333333,NA,22,complete.returns,,4Xq,4Xo,Purse Seine,Unique
 567566,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-21,264,German Bank ,NA,NA,194,18,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 567570,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-06,249,German Bank,NA,NA,NA,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 567576,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-06,249,German Bank,NA,NA,102,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
@@ -1626,7 +1625,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 574192,2023-09-12,255,German Bank,43.31,-66.2847,2023-09-19,262,German Bank,NA,NA,108,7,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 574256,2023-09-12,255,German Bank,43.31,-66.2847,2023-09-19,262,German Bank ,NA,NA,171,7,complete.returns,,4Xq,4Xq,Purse Seine ,Unique
 574299,2023-09-12,255,German Bank,43.31,-66.2847,2023-09-19,262,German Bank ,NA,NA,171,7,complete.returns,,4Xq,4Xq,Purse Seine,Unique
-574362,2023-09-18,261,German Bank,43.26666667,-66.36666667,2023-09-21,264,German Bank,NA,NA,NA,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
+574362,2023-09-18,261,German Bank,43.26666667,-66.36666667,2023-09-21,264,German Bank,43.29066667,-66.12233333,NA,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 574420,2023-09-18,261,German Bank,43.26666667,-66.36666667,2023-09-22,265,German Bank,NA,NA,67,4,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 574585,2023-09-18,261,German Bank,43.26666667,-66.36666667,2023-09-21,264,German Bank ,NA,NA,121,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 575759,2023-10-09,282,Grand Manan Banks,44.1547222,-67.10972222,2023-10-16,289,Grand Manan Banks,NA,NA,91,7,complete.returns,,5Yb,5Yb,Purse Seine,Unique
@@ -1656,7 +1655,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 577764,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-12,255,Scots Bay,NA,NA,11,6,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 577765,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-12,255,Scots Bay,NA,NA,165,6,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 577774,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-07,250,Scots Bay,NA,NA,29,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
-577781,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2024-09-26,270,Scots Bay,NA,NA,NA,386,complete.returns,,4Xr,4Xs,Purse Seine,Unique
+577781,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2024-09-26,270,Scots Bay,45.13333333,-65.11666667,NA,386,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 577797,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2024-08-29,242,Scots Bay,NA,NA,NA,358,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 577836,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-11,254,Scots Bay,NA,NA,NA,5,complete.returns,,4Xr,4Xs,Purse Seine,Unique
 577842,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-07,250,Scots Bay,NA,NA,147,1,complete.returns,,4Xr,4Xs,Purse Seine,Unique
@@ -1675,7 +1674,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 577946,2023-09-06,249,Scots Bay,45.15833333,-65.01138889,2023-09-15,258,German Bank,NA,NA,NA,9,complete.returns,,4Xr,4Xq,Purse Seine,Unique
 578202,2023-09-14,257,German Bank,43.3075,-66.4,2023-09-19,262,German Bank,NA,NA,108,5,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 578413,2023-09-14,257,German Bank,43.3075,-66.4,2023-09-18,261,German Bank,NA,NA,121,4,complete.returns,,4Xq,4Xq,Purse Seine,Unique
-578578,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-25,268,Seal Island,NA,NA,NA,21,complete.returns,,4Xq,4Xo,Purse Seine,Unique
+578578,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-25,268,Scots Bay,45.15,-64.83333333,NA,21,complete.returns,,4Xq,4Xo,Purse Seine,Unique
 578599,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-07,250,German Bank,NA,NA,110,3,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 578643,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-06,249,German Bank,NA,NA,102,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 578658,2023-09-04,247,German Bank,43.25305556,-66.36638889,2023-09-06,249,German Bank,NA,NA,102,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
@@ -1807,7 +1806,7 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 603526,2022-09-12,255,German Bank,43.23446667,-66.34903333,2022-09-14,257,German Bank,NA,NA,125,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 603527,2022-09-12,255,German Bank,43.23446667,-66.34903333,2022-09-14,257,German Bank,NA,NA,125,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 603546,2022-09-12,255,German Bank,43.23446667,-66.34903333,2022-09-14,257,German Bank,NA,NA,125,2,complete.returns,,4Xq,4Xq,Purse Seine,Unique
-603551,2022-09-12,255,German Bank,43.23446667,-66.34903333,2023-08-28,240,Scots Bay,NA,NA,NA,350,complete.returns,,4Xq,4Xs,Purse Seine,Unique
+603551,2022-09-12,255,German Bank,43.23446667,-66.34903333,2023-08-28,240,Scots Bay,45 08,65 03,NA,350,complete.returns,,4Xq,4Xs,Purse Seine,Unique
 603644,2022-09-13,256,German Bank,43.25433333,-66.39785,2022-09-19,262,German Bank,NA,NA,102,6,complete.returns,,4Xq,4Xq,Purse Seine,Unique
 603692,2022-09-13,256,German Bank,43.25433333,-66.39785,2023-08-31,243,UNKNOWN,NA,NA,NA,352,2024 Tag Returns,,4Xq,,Purse Seine,Unique
 603829,2022-09-13,256,German Bank,43.29043333,-66.4312,2022-09-21,264,Seal Island,NA,NA,106,8,complete.returns,,4Xq,4Xo,Purse Seine,Unique
@@ -1870,7 +1869,6 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 530309,2023-09-11,254,Scots Bay,45.13083333,-65.045,2023-09-11,254,Scots Bay,NA,NA,165,0,Connor Bros Copy of Fish Tag Data 2023.xlsx,NA,,,Purse Seine,
 564641,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-08-29,241,Scots Bay,NA,NA,102,0,Connor Bros Copy of Fish Tag Data 2023.xlsx,NA,,,Purse Seine,
 569220,2023-08-29,241,Scots Bay,45.18972222,-64.92277778,2023-08-29,241,Scots Bay,NA,NA,102,0,Connor Bros Copy of Fish Tag Data 2023.xlsx,NA,,,Purse Seine,
-569218,2023-08-29,241,Scots Bay,45.18972222,-64.92277778,2023-08-29,241,Scots Bay,NA,NA,NA,0,Connors Fish Tag Data 2024,NA,,,Purse Seine,
 205442,2019-10-14,287,German Bank,43.28651667,-66.1228,2019-10-14,287,Seal Island,NA,NA,NA,0,rawReturn.csv,"id formula is as follows TEXT(DATE cell, ""yyyy-mm-dd"")& "" "" &BOAT cell",,,Purse Seine,
 42553,2019-10-14,287,German Bank,43.30968333,-66.1393,2019-10-14,287,Seal Island,NA,NA,NA,0,rawReturn.csv,NA,,,Purse Seine,
 42648,2019-10-14,287,German Bank,43.30968333,-66.1393,2019-10-14,287,Seal Island,NA,NA,NA,0,rawReturn.csv,NA,,,Purse Seine,
@@ -1895,4 +1893,31 @@ Tag_Num,Date,Julian,Ground,Lat,Lon,returnedDate,returnedJulian,returnedArea,retu
 569808,2023-09-12,255,Long Island,44.29472222,-66.34027778,2023-09-12,255,Scots Bay,NA,NA,38,0,Comeau Tag Retrievals 2023.xlsx,NA,,,Purse Seine,
 569817,2023-09-12,255,Long Island,44.29472222,-66.34027778,2023-09-12,255,Scots Bay,NA,NA,38,0,Comeau Tag Retrievals 2023.xlsx,NA,,,Purse Seine,
 569831,2023-09-12,255,Long Island,44.29472222,-66.34027778,2023-09-12,255,Scots Bay,NA,NA,38,0,Comeau Tag Retrievals 2023.xlsx,NA,,,Purse Seine,
-,,,,,,,,,,,82,0,Connors Fish Tag Data 2024.xlsx,,,,,
+569215,2023-08-29,241,Scots Bay,45.18972222,-64.92277778,2023-09-01,,,43.28733333,-66.4115,,3,Connors Fish Tag Data 2024,,,,Purse Seine,
+563807,2023-08-20,232,Scots Bay,45.12166667,-65.05638889,2023-12-30,,,,,,132,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+572457,2023-08-27,239,Scots Bay,45.13527778,-65.06972222,2023-12-07,,,,,,102,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564590,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2024-05-01,,,,,,246,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+569215,2023-08-29,241,Scots Bay,45.18972222,-64.92277778,2023-09-01,,,43.28733333,-66.4115,,3,Connors Fish Tag Data 2024,,,,Purse Seine,
+564460,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,,,43 17.24,66 24.69,,3,Connors Fish Tag Data 2024,,,,Purse Seine,
+564341,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-01,,,43 17.24,66 24.69,,3,Connors Fish Tag Data 2024,,,,Purse Seine,
+471754,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2024-09-24,,Scots Bay,45.131,-65.07066667,,392,Connors Fish Tag Data 2024.xlsx,,,,Purse Seine,
+577472,2023-09-04,247,German Bank,43.25972222,-66.37611111,2023-09-05,,,43 16.00,66 21.00,,1,Connors Fish Tag Data 2024,,,,Purse Seine,
+567083,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-05,,Seal Island,43.26666667,-66.385,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+567442,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-05,,Seal Island,43.26666667,-66.385,,2,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564416,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,,Seal Island,43.26666667,-66.385,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+567465,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-05,,Seal Island,43.26666667,-66.385,,2,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564456,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,,Seal Island,43.26666667,-66.385,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564640,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,,Seal Island,43.26666667,-66.385,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564349,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-05,,Seal Island,43.26666667,-66.385,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564107,2023-08-28,240,Scots Bay,45.14111111,-65.05194444,2024-08-06,,Scots Bay,45.16266667,-64.97283333,,344,Connors Fish Tag Data 2024,,,,Purse Seine,
+567570,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-06,,,43.25,-66.38333333,,3,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+567207,2023-08-29,241,Scots Bay,45.20138889,-64.88638889,2023-09-06,,,43.25,-66.38333333,,8,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+500940,2022-08-10,222,Scots Bay,45.18843333,-64.88335,2023-09-06,,,43.25,-66.38333333,,392,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+471823,2023-08-29,241,Scots Bay,45.21111111,-64.8225,2023-09-06,,,43.25,-66.38333333,,8,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+569073,2023-08-29,241,Scots Bay,45.15777778,-65.03361111,2023-09-06,,,43.25,-66.38333333,,8,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+471652,2023-08-28,240,Scots Bay,45.1633,-64.9931,2023-09-06,,,43.25,-66.38333333,,9,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+528137,2023-09-05,248,German Bank,43.26666667,-66.36638889,2023-09-07,,German Bank,45.15433333,-64.99233333,,2,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+567428,2023-09-03,246,German Bank,43.27138889,-66.37361111,2023-09-07,,German Bank,45.15433333,-64.99233333,,4,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+564354,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2023-09-07,,,45.13333333,-65.05,,9,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+532292,2023-09-11,254,German Bank,43.25,-66.4,2023-09-18,,German Bank,43.29833333,-66.135,,7,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
+502414,2022-08-24,236,German Bank,43.29388333,-66.39218333,2022-09-19,,,43.26833333,-66.35166667,,26,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,
