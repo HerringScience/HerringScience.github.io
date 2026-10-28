@@ -1,0 +1,20 @@
+,TAG_NUMBER,catchAREA,DATE,BOAT,GearType,Company,Catch.t,dataorigin,Year,Can.serial.number,DATE_ENTERED,X,Y,Means.found,Name,Date_codes,Time_found,Date_found,Address,Notes,Plant.Found,whatstage
+1,51378,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,NA,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+2,444659,NE Bank,2017-09-19,Margaret Elizabeth,,NA,NA,DFOmailedin2023.csv,2017,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+3,490487, Scots Bay,2022-07-11,Fundy Monarch,Purse Seine,NA,NA,ConnorsReturns2022.csv,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+4,507157,White Head,2022-08-17,Canada 100,Purse Seine,NA,NA,ConnorsReturns2022.csv,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+5,513483,NW Ledge,2021-08-16,Brunswick Provider,Purse Seine,NA,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+6,549139,White Head,2022-08-15,Canada 100,Purse Seine,NA,NA,ConnorsReturns2022.csv,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+7,551388,White Head,2022-08-17,Canada 100,Purse Seine,NA,NA,ConnorsReturns2022.csv,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+8,583187,,2021-10-24,Brunswick Provider,N/A,NA,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,mobilethatdidntmatch
+9,442815,Bradfords Cove Weir,2019-01-17,Strathburn,Weir_ShutOff,Connors,NA,rawReturn.csv,2019,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+10,445366,Campobello Ship Head Weir,2019-01-17,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+11,449455,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+12,450645,Grand Manan Mumps Weir,2019-01-08,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+13,450805,Campobello North Road Shut Off,2019-01-16,Capelco,Weir_ShutOff,Connors,NA,rawReturn.csv,2019,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+14,460200,"Mill Cove, Campobello ",2020-03-06,Capelco,Shut off,Connors,NA,ConnorsReturns2020.csv,2020,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+15,469366,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+16,507351,Seelys Head,2022-08-04,Caroline B,Shut off,Connors,NA,ConnorsReturns2022.csv,2022,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+17,515650,Deer Island NB,2021-10-15,Senator Neil,Weir/Black Water,Connors,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+18,515768,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
+19,583368,Whale Cove/Grand Manan,2021-09-06,Silver King,Weir/Star,Connors,NA,ConnorsReturns2021.csv,2021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,fixedthatdidntmatch
