@@ -593,22 +593,47 @@ for (g in grounds) {
     )
 
   print(p)
+  
+cat_levels <- levels(SummaryTable$category)
+  
+  tab <- SummaryTable %>%
+    filter(Ground == g) %>%
+    count(returnedArea, category, .drop = FALSE) %>%
+    pivot_wider(
+      names_from = category,
+      values_from = n,
+      values_fill = 0
+    ) %>%
+    select(returnedArea, all_of(cat_levels)) %>% 
+    mutate(
+      `Total Returns` = rowSums(across(-returnedArea))
+    ) %>%
+    rename(
+      `Return Area` = returnedArea
+    ) %>%
+    arrange(desc(`Total Returns`)) %>%
+    adorn_totals("row", name = "Total")
 
   print(
     kbl(
-      SummaryTable %>%
-        filter(Ground == g) %>%
-        arrange(returnedArea, category),
-      caption = paste("Return Summary for", g)
+      tab,
+      caption = paste0("Table ", which(sort(unique(SummaryTable$Ground)) == g),
+                       ". Tag returns from ", g),
+      booktabs = TRUE,
+      align = c("l", rep("c", ncol(tab) - 1))
     ) %>%
-      kable_paper(
-        "striped",
-        full_width = FALSE
-      )
+      kable_classic(
+        full_width = FALSE,
+        html_font = "Times New Roman"
+      ) %>%
+      row_spec(0, bold = TRUE) %>%
+      column_spec(1, bold = TRUE) %>%
+      column_spec(ncol(tab), bold = TRUE)
   )
-
+  
   cat("\n\n")
 }
+
 ```
 
 ## Three Return Group Summary {.tabset}
