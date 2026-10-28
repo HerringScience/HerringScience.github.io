@@ -5,14 +5,14 @@ rm(list = ls())
 surv="GB" #SB or GB or SI
 surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="4"
+surv.no="6"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
 Tow = "Y" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LM", "MS", "BP", "FM", "LJ", "TM", "LB")
+ids = c("LM", "MS", "BP", "FM", "LJ", "LB")
 
 #Area and TS values - From table C
 SB1= 675.4278 #SB main area
@@ -554,7 +554,7 @@ actual = A %>% mutate(Type = "Actual")
 plan = list.files(pattern = "*plan.csv") %>% map_df(~read_csv(.))
 plan = plan %>% mutate(Type = "Plan")
 Perform = full_join(actual, plan) %>% mutate(Survey = surv.no) %>% mutate(Location = surv)
-Perform = Perform %>% rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
+Perform = Perform %>% dplyr::rename(Yend="End Lat", Xend="End Lon", Y="Start Lat", X="Start Lon", Dist..km.="Dist (km)", Date.Time.Start="Date Time Start", Date.Time.End="Date Time End", Transect.No.="Transect No.")
 Perform = Perform %>% mutate(Distance = distHaversine(cbind(X,Y), cbind(Xend,Yend))) %>% mutate(Distance = Distance/1000)
 Perform = Perform %>% mutate(Distance = ifelse(is.na(Dist..km.), Distance, Dist..km.))
 
@@ -595,7 +595,7 @@ CTD <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScie
 CTD <- CTD %>% dplyr::select(-Pressure, -Conductivity, -Specific_conductance, -Sound_velocity, -Density, -plankton_ID)
 CTD$Date = ymd(CTD$Date)
 CTD <- CTD %>% mutate(Julian = yday(Date)) #add Julian day
-CTD <- CTD %>% rename(Ground = ground, ID = id)
+CTD <- CTD %>% dplyr::rename(Ground = ground, ID = id)
 Bio <- read_csv(paste0("C:/Users/", Sys.info()[7],"/Documents/GitHub/HerringScience.github.io/Source Data/Biomass.csv"))
 CTD <- left_join(CTD, Bio, by = "Date")
 CTD <- CTD %>% mutate(Month = as.numeric(substr(Date, 6, 7))) %>% dplyr::select(-Location) #may need to remove other columns
@@ -681,7 +681,7 @@ CTD30 = CTD30 %>%
 
 SSTTemp = SST %>% ungroup() %>% dplyr::select(Date, Temperature, Salinity)
 Strat = left_join(CTD30, SSTTemp, by = "Date")
-Strat = Strat %>% rename(Temperature = Temperature.x, SST = Temperature.y, Salinity = Salinity.x, SurfaceSalinity = Salinity.y)
+Strat = Strat %>% dplyr::rename(Temperature = Temperature.x, SST = Temperature.y, Salinity = Salinity.x, SurfaceSalinity = Salinity.y)
 Strat = Strat %>% mutate(StratTemp = SST-Temperature) %>% mutate(StratSalt = Salinity-SurfaceSalinity)
 Strat = Strat %>%   
   group_by(Ground, Date, Year, Julian, Month, Survey, In_Box) %>%
