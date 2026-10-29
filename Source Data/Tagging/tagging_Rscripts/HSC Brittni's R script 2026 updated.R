@@ -36,7 +36,7 @@ TaggingEvents <- TaggingEvents %>%
 # 158144 Tags
 
 
-returnData <- read.csv(file.path(
+returnData <- read.csv(file.path(repo,
   "Source Data",
   "Tagging",
   "Tag Returns",
@@ -94,7 +94,7 @@ negDaL <- workingsheet %>%
          # for having insufficient initial data for linking to commercial catch (i.e., missing tag number, boat, and/or return date)
         # Update with Removed_From_FullReturns. Check that these tags are also in Removed_From_FullReturns
     
-      incomplete.returns <- read.csv(file.path(
+      incomplete.returns <- read.csv(file.path(repo,
         "Source Data",
         "Tagging",
         "Tag Returns",
@@ -107,7 +107,7 @@ negDaL <- workingsheet %>%
       # 2. Unmatched returns - These tags appear to have all the info needed but do not match into commercial catch; includes both mobile and fixed unmatched
     #Create new spreadsheet once I get updated commercial catch
     
-      unmatchedreturns <- read.csv(file.path(
+      unmatchedreturns <- read.csv(file.path(repo,
         "Source Data",
         "Tagging",
         "Tag Returns",
@@ -119,7 +119,7 @@ negDaL <- workingsheet %>%
     
       # 3. Missing tags - Had info and matched into CC, but the tag number itself is not found in the TaggingEvents.csv
       
-      missingtags <- read.csv(file.path(
+      missingtags <- read.csv(file.path(repo,
         "Source Data",
         "Tagging",
         "Tag Returns",
@@ -262,29 +262,31 @@ negDaL <- workingsheet %>%
                                             "catches.csv")) %>%
                                     select(!X)
         
-              #Whats passive? This has not been created yet.
+              #######passive is the weir catches.
               
-              passive <- passive %>%
-                mutate(DATE = ymd(DATE)) %>%
-                mutate(Year = year(DATE))
+        #### Look into what these do/are supposed to find ####
               
-              #what is this for?
-              tag <- filtered_unlinked %>%
-                filter(TAG_NUMBER == 449374)
-              
-              #all tests either don't run, or have 0 rows.
-              test <- catches %>%
-                filter(LAND_DATE %in% tag$DATE) %>%
-                arrange(LAND_DATE)
-              
-              test <- catches %>%
-                filter(Year %in% tag$Year) %>%
-                arrange(Actual.Date)
-          
-              test <- passive %>%
-                filter(Year %in% tag$Year) %>%
-                arrange(DATE)
-      
+              # passive <- passive %>%
+              #   mutate(DATE = ymd(DATE)) %>%
+              #   mutate(Year = year(DATE))
+              # 
+              # #what is this for?
+              # tag <- filtered_unlinked %>%
+              #   filter(TAG_NUMBER == 449374)
+              # 
+              # #all tests either don't run, or have 0 rows.
+              # test <- catches %>%
+              #   filter(LAND_DATE %in% tag$DATE) %>%
+              #   arrange(LAND_DATE)
+              # 
+              # test <- catches %>%
+              #   filter(Year %in% tag$Year) %>%
+              #   arrange(Actual.Date)
+              # 
+              # test <- passive %>%
+              #   filter(Year %in% tag$Year) %>%
+              #   arrange(DATE)
+              # 
 
 # Make basemaps ####
 
@@ -302,7 +304,7 @@ NAFOmajor <- st_read(file.path(
 world <- ne_countries(scale = "large", returnclass = "sf")
 na <- ne_countries(scale = "large", continent = "North America", returnclass = "sf")
 
-map <- ggplot(data = na) +
+print(map <- ggplot(data = na) +
   geom_sf(fill = "antiquewhite") +
   geom_sf(data = NAFOmajor, colour = "lightyellow4", size = 0.5) +
   coord_sf(xlim = c(-68, -61), ylim = c(42.6, 45.9)) +
@@ -318,9 +320,8 @@ map <- ggplot(data = na) +
   annotation_scale(location = "br", width_hint = 0.5) +
   annotation_north_arrow(location = "br", which_north = "true", 
                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
-                         style = north_arrow_nautical)
+                         style = north_arrow_nautical))
 
-map
 
 # Herring fishing ground base map
 
@@ -338,7 +339,7 @@ mycolours21 <- c("#8DD3C7", "#B4E2C0", "palegoldenrod", "#FBFBB4", "#E4E3C2", "#
                           "#D0CD66","darkseagreen", "#DCF1B9", "#E2D2B9", "#FCCDE5") 
                           
 
-herringgrounds <- ggplot(data = na) +
+print(herringgrounds <- ggplot(data = na) +
   geom_sf(data = herringgroundsshp, aes(fill = Ground, alpha = 0.1)) +
   scale_fill_manual(values = mycolours21) +
   geom_sf(fill = "antiquewhite", colour = "antiquewhite4") +
@@ -359,9 +360,8 @@ herringgrounds <- ggplot(data = na) +
                          style = north_arrow_nautical) +
   guides(fill = guide_legend(title = "Ground",
                              override.aes = list(alpha = 0.6))) +
-  scale_alpha(guide = 'none')
+  scale_alpha(guide = 'none'))
 
-herringgrounds
 
 # NAFO subunits base map
 
@@ -385,7 +385,7 @@ mycolours23 <- c("#8DD3C7","#B1E1C0","#D5EFBA","goldenrod","#EDECBD","#D8D6CA", 
                           "#B4DD6B","yellow3","#CDD796","#E4D2BD","#FCCDE5")
                           
 
-NAFO1 <- ggplot(data = na) +
+print(NAFO1 <- ggplot(data = na) +
   geom_sf(data = NAFOtrimmed, aes(fill = UnitArea, colour = NA, alpha = 0.5)) +
   scale_fill_manual(values = mycolours23) +
   scale_colour_manual(values = mycolours23) +
@@ -407,15 +407,13 @@ NAFO1 <- ggplot(data = na) +
                          style = north_arrow_nautical) +
   guides(fill = guide_legend(title = "Unit Area",
                              override.aes = list(alpha = 0.6)),
-         colour = FALSE,
-         alpha = FALSE)
-
-NAFO1
+         colour = 'none',
+         alpha = 'none'))
 
 
 centeroids <- st_centroid(NAFOtrimmed)
 
-NAFO2 <- ggplot(data = na) +
+print(NAFO2 <- ggplot(data = na) +
   geom_sf(data = NAFOtrimmed, colour = "darkslategray4", fill = NA) +
   geom_sf(fill = "antiquewhite", colour = "antiquewhite4", linewidth = 0.7) +
   geom_sf(data = NAFOmajor, colour = "black", linewidth = 1, alpha = 0.5) +
@@ -435,14 +433,19 @@ NAFO2 <- ggplot(data = na) +
                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
                          style = north_arrow_nautical) +
   guides(colour = "none",
-         alpha = "none")
-
-NAFO2
+         alpha = "none"))
 
 
 # Seiner Box base map
 
-seinerboxesshp <- NAFOshp <- st_read("/Users/brittniscott/Desktop/Herring Science Council/R/shapefiles/DFO/seiner_boxes/seiner_boxes.shp")
+## Orginally went seinerboxesship <- NAFOshp <- st_read ... removed NAFOshp because I think this was mislabled.
+
+seinerboxesshp <- st_read(file.path(repo,
+                                    "Source Data",
+                                    "Tagging",
+                                    "Tag Returns",
+                                    "Old Files",
+                                    "seiner_boxes.shp"))
 
 mycolours3 <- c("#8DD3C7","#B1E1C0","#D5EFBA")
 
@@ -479,19 +482,40 @@ seinerboxes
 # Martin thesis: 'only fish that were tagged and recaptured on the same spawning ground during spawning season are considered in the evaluation'
 
 # assign spawning ground to all tags in rel - Scots Bay vs German Banks vs. unknown. Note not all tagged fish were tagged in these two spots. so this will exclude some fish.
-reINFO <- read.csv('relINFO.csv')
-r <- read.csv('r.csv')
+reINFO <- read.csv(file.path(repo,
+                             "Source Data",
+                             "Tagging",
+                             "Tag Returns",
+                             "Old Files",
+                             "relINFO.csv"))
+
+
+r <- read.csv(file.path(repo,
+                        "Source Data",
+                        "Tagging",
+                        "Tag Returns",
+                        "Old Files",
+                        "r.csv"))
 
 # Extract spawning box shapefile
-NAFOmajor <- st_read("/Users/brittniscott/Desktop/Herring Science Council/R/shapefiles/NAFO Divisions/NAFO_Divisions_SHP/NAFO_Divisions_2021_line_enclosed.shp")
+NAFOmajor <- st_read(file.path(repo,
+                               "Source Data",
+                               "Tagging",
+                               "Tag Returns",
+                               "Old Files",
+                               "NAFO_Divisions_2021_line_enclosed.shp"))
+
 world <- ne_countries(scale = "large", returnclass = "sf")
 na <- ne_countries(scale = "large", continent = "North America", returnclass = "sf")
-seinerboxesshp <- NAFOshp <- st_read("/Users/brittniscott/Desktop/Herring Science Council/R/shapefiles/DFO/seiner_boxes/seiner_boxes.shp")
+
+## This was already loaded.
+
+#seinerboxesshp <- NAFOshp <- st_read("/Users/brittniscott/Desktop/Herring Science Council/R/shapefiles/DFO/seiner_boxes/seiner_boxes.shp")
 
 spawningareasshp <- seinerboxesshp %>%
   filter(box_type == "spawning area")
 
-spawningareas <- ggplot(data = na) +
+print(spawningareas <- ggplot(data = na) +
   geom_sf(data = spawningareasshp) +
   geom_sf(fill = "antiquewhite", colour = "antiquewhite4") +
   geom_sf(data = NAFOmajor, colour = "black", size = 1, alpha = 0.5) +
@@ -508,7 +532,7 @@ spawningareas <- ggplot(data = na) +
   annotation_scale(location = "br", width_hint = 0.5) +
   annotation_north_arrow(location = "br", which_north = "true", 
                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
-                         style = north_arrow_nautical)
+                         style = north_arrow_nautical))
 
 
 spawningareas # beuno
@@ -516,7 +540,13 @@ spawningareas # beuno
 
 # Assign all tagged fish (from df = rel) to either 1.) German Banks spawning ground, 2.) Scots Bay spawning ground, or 3.) none      
 
-rel <- read.csv('alltags.csv')
+# Replace this with updated tags when everything comes through
+rel <- read.csv(file.path(repo,
+                          "Source Data",
+                          "Tagging",
+                          "Tag Returns",
+                          "Old Files",
+                          "alltags.csv"))
 
 # convert X & Y to coord points
 reltemp <- rel %>% 
@@ -574,9 +604,11 @@ workingsheetassigned <- workingsheet %>%
 
 # map to make sure it looks right
 
-assigned <- ggplot(data = na) +
+#The geom_point is the initial Tagging ground.
+
+print(assigned <- ggplot(data = na) +
   geom_sf(data = spawningareasshp, fill = "#8DD3C7", colour = NA) +
-  geom_point(data = workingsheetassigned, aes(x = X_tagging, y = Y_tagging, colour = SpawningGround)) + # this had all been working but now the points are not showing up?
+  geom_point(data = workingsheetassigned, aes(x = Lon, y = Lat, colour = SpawningGround)) +
   geom_sf(fill = "antiquewhite") +
   geom_sf(data = NAFOmajor, colour = "lightyellow4", size = 0.5) +
   coord_sf(xlim = c(-68, -61), ylim = c(42.6, 45.9)) +
@@ -592,10 +624,8 @@ assigned <- ggplot(data = na) +
   annotation_scale(location = "br", width_hint = 0.5) +
   annotation_north_arrow(location = "br", which_north = "true", 
                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
-                         style = north_arrow_nautical)
+                         style = north_arrow_nautical))
 
-
-assigned # great
 
 
 
@@ -606,14 +636,12 @@ workingsheettest <- workingsheetassigned %>%
 
   # get spawning grounds for return locations
 
-  temp <- workingsheetassigned %>% 
-    rename('SpawiningGroundtag' = 'SpawningGround') %>%
-    st_as_sf(coords = c("X_return", "Y_return"), crs = 4326) %>% 
-    st_transform(st_crs(spawningareasshp)) # align coordinate systems
+  temp <- workingsheetassigned %>%
+    rename(SpawningGroundtag = Ground) %>%
+    st_as_sf(coords = c("Y_return", "X_return"), crs = 4326) %>%
+    st_transform(st_crs(spawningareasshp))
 
-  wstemp <- st_join(temp, spawningareasshp, left = F) # not left = inner join 
-
-  wstemp
+  wstemp <- st_join(temp, spawningareasshp)
 
   # grab tag numbers for each GB, SB, and unknown
   
@@ -642,10 +670,11 @@ workingsheettest <- workingsheetassigned %>%
       TAG_NUMBER %in% GBTAG_NUMBERreturn ~ "German Bank"
     ))
   
-  # WHY NAs? e.g., TAG_NUMBER 459473 <- just straight up not in either vector... why dat....
+  # WHY NAs? e.g., TAG_NUMBER 459473 <- just straight up not in either vector... why dat.... ## Originally tagged 2019, present in Full Returns. Specifically tag 459473
+  
   '459473' %in% GBTAG_NUMBERreturn
   '459473' %in% SBTAG_NUMBERreturn
-  '459473' %in% unknownTAG_NUMBERreturn
+  '459473' %in% unknownTAG_NUMBERreturn # True
         
         table(groundsx2$SpawningGroundreturn) 
         # 51+50+199 --> thus 21 NAs....

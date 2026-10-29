@@ -19,10 +19,9 @@ Tag_Num,returnedArea,returnedLat,returnedLon,returnedDate,ReturnedBoat,GearType,
 528707,Scots Bay,NA,NA,2023-08-29,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2023-08-29 Canada 100,NA,Days at large <= 0 ( -13 ),241,2023-09-11,-65.03972222,45.14333333,Scots Bay,254,-13,Canada 100,NA
 567923,Seal Island,NA,NA,2023-09-05,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2023-09-05 Unspecified Connors Boat,NA,Days at large <= 0 ( -5 ),248,2023-09-10,-65.0175,45.13833333,Scots Bay,253,-5,Unspecified Connors Boat,NA
 572411,UNKNOWN,NA,NA,2023-06-01,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2023-06-01 UNKNOWN,NA,Days at large <= 0 ( -87 ),152,2023-08-27,-65.06972222,45.13527778,Scots Bay,239,-87,UNKNOWN,NA
-603928,UNKNOWN,NA,NA,2022-08-30,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2022-08-30 UNKNOWN,NA,Days at large <= 0 ( -14 ),242,2022-09-13,-66.4312,43.29043333,German Bank,256,-14,UNKNOWN,NA
 563703,UNKNOWN,NA,NA,2022-08-30,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2022-08-30 UNKNOWN,NA,Days at large <= 0 ( -349 ),242,2023-08-14,-66.35805556,44.34916667,Long Island,226,-349,UNKNOWN,NA
 564593,UNKNOWN,NA,NA,2022-08-30,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2022-08-30 UNKNOWN,NA,Days at large <= 0 ( -364 ),242,2023-08-29,-64.85777778,45.19805556,Scots Bay,241,-364,UNKNOWN,NA
-603692,UNKNOWN,NA,NA,2022-08-31,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2022-08-31 UNKNOWN,NA,Days at large <= 0 ( -13 ),243,2022-09-13,-66.39785,43.25433333,German Bank,256,-13,UNKNOWN,NA
+603692,UNKNOWN,NA,NA,2022-08-31,NA,Purse Seine,Connors,NA,complete.returns,Connors Fish Tag Data 2024,2022-08-31 UNKNOWN,NA,Missing return area and latitude/longitude,243,2022-09-13,-66.39785,43.25433333,German Bank,256,-13,UNKNOWN,NA
 NA,German Bank,NA,NA,2023-09-06,NA,Purse Seine,Comeau,148,complete.returns,Comeau Tag Retrievals 2023.xlsx,2023-09-06 LADY MELISSA,NA,Missing complete Tag Number,NA,NA,NA,NA,NA,NA,NA,LADY MELISSA,NA
 491315,NA,NA,NA,2022-09-14,NA,Purse Seine,Scotia Garden,NA,complete.returns,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider,NA,Missing return area and latitude/longitude,NA,NA,NA,NA,NA,NA,NA,Brunswick Provider,NA
 491430,NA,NA,NA,2022-09-14,NA,Purse Seine,Scotia Garden,NA,complete.returns,ScotiaGardenReturns2022.csv,2022-09-14 Brunswick Provider,NA,Missing return area and latitude/longitude,NA,NA,NA,NA,NA,NA,NA,Brunswick Provider,NA
@@ -73,3 +72,8 @@ NA,German Bank,NA,NA,2023-09-06,NA,Purse Seine,Comeau,148,complete.returns,Comea
 474385,Grand Manan,44.59133333,-66.61233333,NA,MORNING STAR,Purse Seine,Scotia Gardens,55,2024 Tag Returns,Herring Research Tags Collected Information (1).xlsx,27-06-2024 MORNING STAR,NA,Invalid returnedDate,NA,NA,NA,NA,NA,NA,NA,NA,NA
 566638,NA,NA,NA,2025-02-04,,Purse Seine,website,NA,complete.returns,,,NA,Missing return area and latitude/longitude,,2023-08-23,235,German Bank,43.48611111,-66.22694444,,,
 594136,2022-08-24,236,Scots Bay,45.14533333,-65.0025,2023-09-23,266,UNKNOWN,complete.returns,NA,NA,395,Missing return area and latitude/longitude,,4Xr,,Purse Seine,Unique,,,,
+431628,2016-08-11,224,German Bank,43.4623,-66.349,2016-08-15,228,Undetermined,NA,NA,NA,4,complete.returns,,4Xq,,Purse Seine,Unique,,,,
+563807,2023-08-20,232,Scots Bay,45.12166667,-65.05638889,2023-12-30,,,,,,132,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,Unique,,,,
+564590,2023-08-29,241,Scots Bay,45.19805556,-64.85777778,2024-05-01,,,,,,246,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,Unique,,,,
+564852,2023-08-28,240,Scots Bay,45.18027778,-64.95611111,2023-09-23,266,UNKNOWN,NA,NA,NA,26,complete.returns,,4Xr,,Purse Seine,Unique,,,,
+572457,2023-08-27,239,Scots Bay,45.13527778,-65.06972222,2023-12-07,,,,,,102,Connors Fish Tag Data 2024,,,,Purse Seine/Frozen,Unique,,,,
