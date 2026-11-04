@@ -19,16 +19,16 @@ SIAllocation = '0' #Seal Island allocation for GB-only
 Tagging = NA #list vessel names in a single quote string (e.g. "Lady Melissa and Sealife II")
 
 #Set vessels below
-vessels = 4
+vessels = 3
 EVessel = NA #Set NA for GB or excluding box
 NVessel = NA #Set NA for GB or excluding box
 PlanktonVessel = "Lady Melissa"
 
 #Main box only (e.g. if vessels = 9 with both SB boxes, should have 1 Evessel, 1 Nvessel, and 7 Vessels below)
 V1 = PlanktonVessel
-V2 = "Morning Star"
-V3 = "Lady Janice"
-V4 = "Leroy and Barry"
+V2 = "Lady Janice"
+V3 = "Leroy and Barry"
+V4 = NA
 V5 = NA
 V6 = NA
 V7 = NA
