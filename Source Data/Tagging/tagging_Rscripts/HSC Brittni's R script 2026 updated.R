@@ -631,8 +631,10 @@ print(assigned <- ggplot(data = na) +
 
 # Make a version of workingsheet with SpawningGroundTag and SpawningGroundReturn and a column indicating if they are the same (Y/N)
 
+    ##### What does that mean? Why would they be different? #####
+
 workingsheettest <- workingsheetassigned %>%
-  rename('SpawiningGroundtag' = 'SpawningGround')
+  rename('SpawningGroundtag' = 'SpawningGround')
 
   # get spawning grounds for return locations
 

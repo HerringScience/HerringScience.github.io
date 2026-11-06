@@ -50,28 +50,56 @@ setwd(file.path(repo,
                 "Source Data",
                 "Tagging",
                 "Tag Returns"))
-# tagReturns2023 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
-# tagReturns2026 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
-# tagReturns2025 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
-# complete.returns <- read.csv(file.path(repo, 
-#                                        "Source Data",
-#                                        "Tagging",
-#                                        "Tag Returns",
-#                                        "complete.returns.csv"))
+
+tagReturns2023 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2023/2023 Tag Returns.csv")
+tagReturns2024 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2024/2024 Tag Returns.csv")
+tagReturns2025 <-read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2025/2025 Tag Returns.csv")
+complete.returns <- read.csv(file.path(repo,
+                                       "Source Data",
+                                       "Tagging",
+                                       "Tag Returns",
+                                       "Old Files",
+                                       "complete.returns.csv"))
+
+complete.returns <- complete.returns %>%
+  rename(Tag_Num = TAG_NUMBER,
+         returnedArea = catchAREA,
+         returnedDate = DATE,
+         ReturnedBoat = BOAT)
+
+tagReturns2023$Tag_Num <- as.character(tagReturns2023$Tag_Num)
+tagReturns2024$Tag_Num <- as.character(tagReturns2024$Tag_Num)
+tagReturns2025$Tag_Num <- as.character(tagReturns2025$Tag_Num)
+complete.returns$Tag_Num <- as.character(complete.returns$Tag_Num)
+
+tagReturns <- bind_rows(
+  tagReturns2023,
+  tagReturns2024,
+  tagReturns2025,
+  complete.returns
+)
 
 
+tagReturns <- tagReturns %>%
+  mutate(id = paste(returnedDate, ReturnedBoat, sep = " "))
 
+
+tagReturns <- tagReturns %>%
+  arrange(desc(returnedDate)) %>%
+  distinct(Tag_Num, .keep_all = TRUE)
 
 #Year spreadsheets - To be entered, change with each year/new tag return files.
 
-tagReturns <- read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
+#tagReturns <- read.csv("Tag Returns spreadsheets/Compiled tag return spreadsheets/2026/2026 Tag Returns.csv")
 
 tagReturns$Tag_Num = as.numeric(tagReturns$Tag_Num)
 tagReturns <- tagReturns %>%
   mutate(returnedDate = as.Date(returnedDate, "%Y-%m-%d"))
 
 
-#Remove damaged/missing/incomplete tag numbers and put in their own dataset
+## need set number added as well. Probably easiest to add this to commercial catch data as set numbers as it's the commercial catches that are the sets, not the tag. Could also be assigned based on ID?
+
+#Remove damaged/missing/incomplete tag numbers and put in their own data set
 removed_missing_tag <- tagReturns %>%
   dplyr::filter(is.na(Tag_Num)) %>%
   dplyr::mutate(RemovalReason = "Missing complete Tag Number")
@@ -531,6 +559,7 @@ fullReturns <- fullReturns %>%
     #ReturnNAFO,
     returnedLat,
     returnedLon,
+    id,
     GearType,
     Catch.t,
     daysAtLarge,
