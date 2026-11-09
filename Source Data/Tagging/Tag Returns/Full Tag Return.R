@@ -60,6 +60,12 @@ complete.returns <- read.csv(file.path(repo,
                                        "Tag Returns",
                                        "Old Files",
                                        "complete.returns.csv"))
+rawReturns <- read.csv(file.path(repo,
+                                 "Source Data",
+                                 "Tagging",
+                                 "Tag Returns",
+                                 "Old Files",
+                                 "rawReturn.csv"))
 
 complete.returns <- complete.returns %>%
   rename(Tag_Num = TAG_NUMBER,
@@ -67,18 +73,28 @@ complete.returns <- complete.returns %>%
          returnedDate = DATE,
          ReturnedBoat = BOAT)
 
-tagReturns2023$Tag_Num <- as.character(tagReturns2023$Tag_Num)
-tagReturns2024$Tag_Num <- as.character(tagReturns2024$Tag_Num)
-tagReturns2025$Tag_Num <- as.character(tagReturns2025$Tag_Num)
-complete.returns$Tag_Num <- as.character(complete.returns$Tag_Num)
+rawReturns <- rawReturns %>%
+  rename(Tag_Num = TAG_NUMBER,
+        returnedLat = X,
+        returnedLon = Y,
+        returnedArea = catchAREA,
+        returnedDate = DATE,
+        ReturnedBoat = BOAT)
 
-tagReturns <- bind_rows(
+dfs <- list(
   tagReturns2023,
   tagReturns2024,
   tagReturns2025,
-  complete.returns
+  complete.returns,
+  rawReturns
 )
 
+dfs <- lapply(dfs, function(df) {
+  df[] <- lapply(df, as.character)
+  df
+})
+
+tagReturns <- bind_rows(dfs)
 
 tagReturns <- tagReturns %>%
   mutate(id = paste(returnedDate, ReturnedBoat, sep = " "))
@@ -87,6 +103,8 @@ tagReturns <- tagReturns %>%
 tagReturns <- tagReturns %>%
   arrange(desc(returnedDate)) %>%
   distinct(Tag_Num, .keep_all = TRUE)
+
+#### Some X and Ys are in a different format so don't convert to Lat and Lon properly.
 
 #Year spreadsheets - To be entered, change with each year/new tag return files.
 
@@ -576,47 +594,51 @@ fullReturns <- fullReturns %>%
 #Combine to FullReturnsCSV
 fullReturnsCSV <- bind_rows(fullReturnsCSV, fullReturns)
 
+### Many ids are missing. Why?? 
 
 
+#Write/Update Full Returns file
+#setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))
+fullTagReturns <- write_csv(fullReturnsCSV, "Full Returns.csv" )
 
-# #Write/Update Full Returns file
-# setwd(paste0("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/Tagging/Tag Returns/"))
-# fullTagReturns <- write_csv(fullReturnsCSV, "Full Returns.csv" )
-# 
-# 
-# #Write/Update tags that were found but had to be removed for some reason.
-# removed_negative_days <- removed_negative_days %>%
-#   mutate(across(everything(), as.character))
-# 
-# removed_missing_tag <- removed_missing_tag %>%
-#   mutate(across(everything(), as.character))
-# 
-# removed_missing_location <- removed_missing_location %>%
-#   mutate(across(everything(), as.character))
-# 
-# removed_bad_dates <- removed_bad_dates %>%
-#   mutate(across(everything(), as.character))
-# 
-# 
-# removed_tags <- bind_rows(
-#   removed_negative_days,
-#   removed_missing_tag,
-#   removed_missing_location,
-#   removed_bad_dates,
-# ) %>%
-#   distinct(Tag_Num, .keep_all = TRUE)
-# 
-# removed_tags <- removed_tags %>%
-#   mutate(across(everything(), as.character))
-# 
-# removed_tagsCSV <- read_csv("Removed_From_FullReturns.csv" )
-# 
-# removed_tagsCSV <- removed_tagsCSV %>%
-#   mutate(across(everything(), as.character))
-# 
-# removed_tagsCSV <- bind_rows(removed_tagsCSV, removed_tags)
-# 
-# write_csv(
-#   removed_tagsCSV,
-#   "Removed_From_FullReturns.csv"
-# )
+
+#Write/Update tags that were found but had to be removed for some reason.
+removed_negative_days <- removed_negative_days %>%
+  mutate(across(everything(), as.character))
+
+removed_missing_tag <- removed_missing_tag %>%
+  mutate(across(everything(), as.character))
+
+removed_missing_location <- removed_missing_location %>%
+  mutate(across(everything(), as.character))
+
+removed_bad_dates <- removed_bad_dates %>%
+  mutate(across(everything(), as.character))
+
+
+removed_tags <- bind_rows(
+  removed_negative_days,
+  removed_missing_tag,
+  removed_missing_location,
+  removed_bad_dates,
+) %>%
+  distinct(Tag_Num, .keep_all = TRUE)
+
+removed_tags <- removed_tags %>%
+  mutate(across(everything(), as.character))
+
+removed_tagsCSV <- read_csv(file.path(repo,
+                                      "Source Data",
+                                      "Tagging",
+                                      "Tag Returns",
+                                      "Removed_From_FullReturns.csv" ))
+
+removed_tagsCSV <- removed_tagsCSV %>%
+  mutate(across(everything(), as.character))
+
+removed_tagsCSV <- bind_rows(removed_tagsCSV, removed_tags)
+
+write_csv(
+  removed_tagsCSV,
+  "Removed_From_FullReturns.csv"
+)
