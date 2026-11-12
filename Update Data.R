@@ -5,14 +5,14 @@ rm(list = ls())
 surv="GB" #SB or GB or SI
 surv2="German Bank" #"German Bank", "Seal Island" or "Scots Bay" as written
 year="2026"
-surv.no="6"
+surv.no="7"
 adhoc = "false" #true or false if an adhoc survey was completed (and "adhoc.csv" exists)
 Sample = "Y" #whether ("Y") or not ("N") they caught fish during this survey window
-Tow = "Y" #whether or not plankton tow(s) were conducted
+Tow = "N" #whether or not plankton tow(s) were conducted
 
 #(SB ONLY) Set main-box vessels
 ## (SB ONLY) OG was main-box vessels only, but then it stopped doing distance properly. Add in all vessels here.
-ids = c("LM", "MS", "BP", "FM", "LJ", "LB")
+ids = c("LM", "MS", "LJ", "LB")
 
 #Area and TS values - From table C
 SB1= 675.4278 #SB main area

@@ -13,10 +13,10 @@ rm(list = ls())
 surv = "GB"
 surv2 = "German Bank"
 year = "2026"
-surv.no = "6"
-hightide = "2026-10-18 17:49:00" #for Scots Bay only; YYYY-MM-DD
-mainBoxVessels = 6
-Tow = "Y"
+surv.no = "7"
+hightide = "2026-11-01 16:30:00" #for Scots Bay only; YYYY-MM-DD
+mainBoxVessels = 4
+Tow = "N"
 
 ```
 
@@ -251,7 +251,7 @@ c=unique(Survey$Date)
 d=unique(Survey$StartTime)
 e=unique(Survey$EVessel)
 f=unique(Survey$NVessel)
-g=unique(ifelse(Survey$Ground == "GB", paste("The ", unique(Survey$PlanktonVessel), " ran two transects in the German Bank box and two transects in the Seal Island box. All other vessels ran three transects in the German Bank box and one transect in the Seal Island Box"), 
+g=unique(ifelse(Survey$Ground == "GB", paste("The Lady Melissa", unique(Survey$PlanktonVessel), " ran two transects in the German Bank box and two transects in the Seal Island box. All other vessels ran three transects in the German Bank box and one transect in the Seal Island Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "None", "All vessels ran two transects each in the Main Survey Box",
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "East", paste("All vessels ran two transects each in the Main Survey Box, and the ", e, " ran four lines in the Eastern Survey Box"), 
          ifelse(Survey$Ground == "SB" & Survey$ExtraBox == "North", paste("All vessels ran two transects each in the Main Survey Box, and the ", f, "ran four lines in the Northern Survey Box"), 
@@ -368,7 +368,7 @@ if(surv.no > 1){f=ifelse(Survey$Ground=="GB", paste0("Preliminary biomass predic
 f=f[1:1]
 ```
 
-The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength.
+The results are subject to change as DFO will re-evaluate data editing, area estimation and apply a target strength. Please note that DFO biomass estimates from 2025 forward are not directly comparable to HSC values due to changes in protocols being applied by the DFO. This will be aligned in the future if/when the protocols are standardized and adopted by both HSC and DFO.
 
 **`r f`**
 
@@ -503,7 +503,7 @@ plot(a)
 
 ### Annual Summaries
 
-This table does not include the biomass from adhoc surveys.
+This table does not include the biomass from adhoc surveys. Please note that DFO biomass estimates from 2025 forward are not directly comparable to HSC values due to changes in protocols being applied by the DFO. This will be aligned in the future if/when the protocols are standardized and adopted by both HSC and DFO.
 
 ```{r}
 
