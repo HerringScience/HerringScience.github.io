@@ -682,6 +682,15 @@ workingsheettest <- workingsheetassigned %>%
         # 51+50+199 --> thus 21 NAs....
   
 # Catch Weighting (coding incomplete) ####
+        
+        
+        ########### Pt = 1 -e^(-kt)  ### Equation 1
+        
+        ### k is equal to the slope of Ln(1-Pt) plotted against days at large (t) with the y intercept set to 0. Instantaneous rate of change of recaptured fish can then be multiplied by the days at large 
+          #following equation 1 to determine the mean cumulative proportion of fish that have left the spawning ground (Pt) if tagged fish are assumed to behave no differently than non-tagged fish.
+          ### Ln is the natural logarithm  
+          ### e ≈ 2.71828
+              ###ln(e) = 1
 
         # Follow Ryan Martin's thesis:
             # 1. Start with workingsheetassigned
