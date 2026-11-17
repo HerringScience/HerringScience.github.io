@@ -39,8 +39,13 @@ setwd("C:/Users/herri/Documents/GitHub/HerringScience.github.io/Source Data/CTD"
 write.table(Oceans, file= "Oceans.csv", sep = ",", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 head(Oceans)
+hist(Oceans$Depth)
 
 HSC=Oceans[which(Oceans$Source == "HSC"), ]
+
+hist(HSC$Depth)
+min(HSC$Depth)
+
 
 #QC
 length(unique(HSC$id))

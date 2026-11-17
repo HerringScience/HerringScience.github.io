@@ -724,9 +724,13 @@ ggplot(cast_summary,
     aspect.ratio = 1
   )
 
+                  ### count the number of casts in 2025 to make sure only GB and SB are being counted:
+                  
+                  cast_summary %>%
+                    filter(Source == "HSC", Year == 2025)
+                        # yup 3 - this is right.
 
-
-
+                  
 #### Continue with .nc dataset (all_casts)
 
 # Cut top 5m
@@ -735,6 +739,13 @@ all_casts_deep <- all_casts_deep[all_casts_deep$depth <= 30, ]
 
 min(all_casts_deep$depth)
 max(all_casts_deep$depth)
+
+head(all_casts_deep)
+
+          # visualization
+
+                      hist(all_casts_deep$depth)
+                    
 
 # Make sure date is a Date
 all_casts_deep$date <- as.Date(all_casts_deep$date)
@@ -796,8 +807,22 @@ cast_averages <- final_casts_deep %>%
     .groups = "drop"
   )
 
+            
+
+                
+## I need to remove casts with max depth that is below a certain threshold...                
+            hist(cast_averages$min_depth)
+            range(cast_averages$min_depth)
+            
+            hist(cast_averages$max_depth)
+            range(cast_averages$max_depth)
 
 
+cast_averages <- cast_averages %>%
+  filter(max_depth >= 25)
+
+
+                
 # -----------------------------
 # 3. Combine casts within same year/month
 #    This gives ONE value per month per year
@@ -855,9 +880,9 @@ write.csv(
 head(monthly_cast_averages)
 
 
-# remove 2024:
+# remove 2024, 2025 and 2026 for now....can maybe add them later:
 monthly_cast_averages <- monthly_cast_averages %>%
-  filter(Year != 2024)
+  filter(!Year %in% c(2024, 2025, 2026))
 
 ### Plot demonstrating samples sizes:
 
@@ -1022,7 +1047,6 @@ for (m in months_to_plot) {
 }
 
 
-
 # -----------------------------
 # 6. Quick checks
 # -----------------------------
@@ -1076,13 +1100,14 @@ ggplot() +
 
 
 
+### look at sample sizes for each month, ground and year
+
+
+
 
 ############################# Individual factor plots:
 
 head(combined_monthly)
-combined_monthly <- combined_monthly %>%
-  filter(Year != 2024)
-
 
 ## Temperature:
 
@@ -1193,8 +1218,66 @@ ggplot(combined_monthly,
   )
 
 
+######################facet approach, same data as above:
 
+combined_long <- combined_monthly %>%
+  pivot_longer(
+    cols = c(
+      monthly_mean_temperature,
+      monthly_mean_salinity,
+      monthly_mean_density,
+      monthly_mean_stratification,
+      monthly_mean_density_stratification
+    ),
+    names_to = "variable",
+    values_to = "value"
+  ) %>%
+  mutate(
+    variable = recode(
+      variable,
+      monthly_mean_temperature = "Temperature",
+      monthly_mean_salinity = "Salinity",
+      monthly_mean_density = "Density",
+      monthly_mean_stratification = "Temp. Strat.",
+      monthly_mean_density_stratification = "Density Strat."
+    )
+  )
 
+## Plot
+
+ggplot(
+  combined_long,
+  aes(
+    x = month,
+    y = value,
+    color = area,
+    group = area
+  )
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  facet_grid(
+    variable ~ Year,
+    scales = "free_y"
+  ) +
+  labs(
+    x = "Month",
+    y = NULL,
+    color = "Dataset / Ground"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      size = 6
+    ),
+    axis.text.y = element_text(size = 6),
+    axis.ticks = element_line(linewidth = 0.3),
+    axis.ticks.length = unit(0.1, "cm"),
+    strip.text = element_text(size = 8),
+    legend.position = "bottom"
+  )
 
 
 
@@ -1266,38 +1349,49 @@ monthly_long <- combined_monthly %>%
 head(monthly_long)
 
 
-### Stats:
 
+### Stats:
+### After accounting for month and year, is there evidence that the oceanographic variable differs among grounds (area)?
+## So if value is temperature, it's essentially asking whether mean temperature differs among your grounds after controlling for seasonal and interannual variation.
+
+# creates a function
 fit_area_model <- function(d) {
-  
+  # d is subset of data
   d <- d %>%
     filter(!is.na(value), !is.na(area), !is.na(month), !is.na(Year))
-  
-  if (n_distinct(d$area) < 2 || nrow(d) < 6) {
-    return(
-      tibble(
-        n = nrow(d),
-        n_areas = n_distinct(d$area),
-        area_p_value = NA_real_,
-        model_r2 = NA_real_,
-        note = "Not enough data"
-      )
+  # the function won't fit a model is there is less than 2 areas or less than 6 observations...why 6?
+ if (n_distinct(d$area) < 2 || nrow(d) < 6) {
+   return(
+    tibble(
+     n = nrow(d),
+    n_areas = n_distinct(d$area),
+   area_p_value = NA_real_,
+  model_r2 = NA_real_,
+ note = "Not enough data"
+ )
     )
   }
   
-  fit <- lm(value ~ area + factor(month) + Year, data = d)
+  # fits statistical model
+  
+  fit <- lm(value ~ area + factor(month) + factor(Year), data = d)
+  
+  #What happens if I remove area from the model?
+  #The F-test determines whether including area significantly improves the model. That's particularly useful if you have more than two grounds, because you're getting an overall test of area, rather than individual coefficients comparing each ground with the reference ground.
   
   area_test <- tryCatch(
     drop1(fit, test = "F"),
     error = function(e) NULL
   )
   
+  # Extracts the p-value for area
   area_p <- if (!is.null(area_test) && "area" %in% rownames(area_test)) {
     area_test["area", "Pr(>F)"]
   } else {
     NA_real_
   }
   
+  #Calculates R²: R² describes how much of the variability in value is explained by the entire model:
   tibble(
     n = nrow(d),
     n_areas = n_distinct(d$area),
@@ -1306,6 +1400,12 @@ fit_area_model <- function(d) {
     note = "Linear model: value ~ area + month + Year"
   )
 }
+
+
+head(monthly_long)
+test_data <- monthly_long %>%
+  filter(variable == "Salinity")
+  fit_area_model(test_data)
 
 overall_area_stats <- monthly_long %>%
   group_by(variable) %>%
@@ -1321,6 +1421,14 @@ write_csv(
   overall_area_stats,
   file.path(stats_dir, "overall_area_comparison_stats.csv")
 )
+
+
+
+
+
+
+
+
 
 
 ## Paired prince5 comparisons:
