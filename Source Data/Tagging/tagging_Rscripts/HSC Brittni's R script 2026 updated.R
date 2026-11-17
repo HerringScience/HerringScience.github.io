@@ -683,7 +683,7 @@ workingsheettest <- workingsheetassigned %>%
   
 # Catch Weighting (coding incomplete) ####
         
-        
+        ## This equation is turnover time.
         ########### Pt = 1 -e^(-kt)  ### Equation 1
         
         ### k is equal to the slope of Ln(1-Pt) plotted against days at large (t) with the y intercept set to 0. Instantaneous rate of change of recaptured fish can then be multiplied by the days at large 
@@ -697,12 +697,14 @@ workingsheettest <- workingsheetassigned %>%
             # 2. Make df summarizing # of tags/set
             # 3. Find # of tags/1000(?) tonnes
             # 4. For each tag, have days at large and associated adjustment factor (#tag/tonnage for the set it was caught in)
+        
  
    # make id column for sets in workingsheetCW
         
         workingsheetCWtemp <- workingsheetassigned %>%
-          mutate(id = paste(ReturnDate, ReturnVessel, CATCH_T)) 
-  
+          mutate(id = paste(ReturnDate, ReturnVessel, Catch.DFO)) %>%
+          rename(CATCH_T = Catch.DFO)
+        
     # add count column
     # /1000
       
@@ -717,7 +719,7 @@ workingsheettest <- workingsheetassigned %>%
     
             table(duplicated(workingsheetCW$TAG_NUMBER)) # ensure no duplicated tags made in the process
     
-    # find mean AdstFac by day at large
+    # find mean AdjFac by day at large
         # plot DaL vs mean Adj factor
             
     test <- workingsheetCW %>%
