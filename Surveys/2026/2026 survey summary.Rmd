@@ -373,15 +373,12 @@ Table = SSB %>%
   filter(!is.na(HSC_Turnover_Adjusted)) %>%
   group_by(Year) %>%
   summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
-            #DFO_Estmate = sum(DFO_Estimate),
-            #DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted)
             ) %>%
   arrange(desc(Year))
 
 datatable(Table, 
           colnames = c("Year", "HSC Estimate", "HSC w/ Turnover"
-                       #, "DFO Estimate", "DFO w/ Turnover"
                        ), 
           extensions = 'Buttons',
   options = list(
@@ -419,20 +416,16 @@ p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass, fill = Ground)) +
 print(p)
 
 Table = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank" | Ground == "Seal Island") %>%
+  filter(Ground == "Seal Island") %>%
   filter(Year>2016) %>%
   group_by(Year) %>%
   summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted, na.rm = TRUE),
-            #DFO_Estmate = sum(DFO_Estimate),
-            #DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted, na.rm = TRUE)
             ) %>%
   arrange(desc(Year))
 
 datatable(Table, 
-          colnames = c("Year", "HSC Estimate", "HSC w/ Turnover"
-                       #,"DFO Estimate", "DFO w/ Turnover"
-                       ), 
+          colnames = c("Year", "HSC Estimate"), 
           extensions = 'Buttons',
   options = list(
   pageLength = 5,

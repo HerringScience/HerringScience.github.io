@@ -685,6 +685,10 @@ workingsheettest <- workingsheetassigned %>%
         
         ## This equation is turnover time.
         ########### Pt = 1 -e^(-kt)  ### Equation 1
+        ## Pt = Mean cumulative proportion of fish that have left the spawning grounds by time
+        ## t = days at large
+        ## e = Euler's number ~ 2.71828
+        ## k = turnover rate
         
         ### k is equal to the slope of Ln(1-Pt) plotted against days at large (t) with the y intercept set to 0. Instantaneous rate of change of recaptured fish can then be multiplied by the days at large 
           #following equation 1 to determine the mean cumulative proportion of fish that have left the spawning ground (Pt) if tagged fish are assumed to behave no differently than non-tagged fish.
@@ -698,15 +702,18 @@ workingsheettest <- workingsheetassigned %>%
             # 3. Find # of tags/1000(?) tonnes
             # 4. For each tag, have days at large and associated adjustment factor (#tag/tonnage for the set it was caught in)
         
+        #Use Melvin et al 2014 as well. Has more equations in it. r^2 is coefficient of determination.
+        #### P = 0.528*log(day) + 0.119. r^2 = 0.973 German Bank
+        #### P = 0.437*log(day) + 0.364. r^2 = 0.827
  
    # make id column for sets in workingsheetCW
         
         workingsheetCWtemp <- workingsheetassigned %>%
-          mutate(id = paste(ReturnDate, ReturnVessel, Catch.DFO)) %>%
+          mutate(id = paste(ReturnDate, ReturnVessel)) %>% #, Catch.DFO)) %>% Why is this in the id? ID should only be ReturnData and Return Vessel. The DFO catch is different.
           rename(CATCH_T = Catch.DFO)
         
-    # add count column
-    # /1000
+    # add count column to find number of tags per set.
+    # /1000 to find 
       
     CWcount <- workingsheetCWtemp %>%
       group_by(id) %>%
@@ -717,15 +724,17 @@ workingsheettest <- workingsheetassigned %>%
       mutate(tagsperton = (numtagsfromset/CATCH_T),
              tagsper1000ton = (((1000/CATCH_T)*numtagsfromset)))
     
-            table(duplicated(workingsheetCW$TAG_NUMBER)) # ensure no duplicated tags made in the process
+            print(table(duplicated(workingsheetCW$TAG_NUMBER))) # ensure no duplicated tags made in the process
     
     # find mean AdjFac by day at large
         # plot DaL vs mean Adj factor
-            
-    test <- workingsheetCW %>%
-      group_by(days_at_large) %>%
-      mutate(mean = mean(AdjFactor))
     
+            ### Unsure as to what this is for.
+             
+    # test <- workingsheetCW %>%
+    #   group_by(days_at_large) %>%
+    #   mutate(mean = mean(AdjFactor))
+     
     
             
             
@@ -734,8 +743,9 @@ workingsheettest <- workingsheetassigned %>%
 # make cumulative proportion of tag returns (%) vs. days at large plot
     ## Step 1: Make table counting number of tags per day at large value (count number of observations/rows as each row = 1 tag)
     ## Step 2: Make the count cumulative
-    ## Step 3: Make it proportionate
+    ## Step 3: Make it proportionate ## To make proportionate, this must be the # tags / 1000 tons. Why isn't this in the initial steps?
 
+            #This is without catch weighting.
   proptagsbyyear <- workingsheetCW %>% # workingsheet with assigned grounds and adjustment factor
     filter(!SpawningGround == "unknown") %>%
     mutate(returnyear = year(ReturnDate)) %>%
@@ -746,18 +756,41 @@ workingsheettest <- workingsheetassigned %>%
     mutate(cumtags = cumsum(numtags)) %>%
     mutate(prop = cumtags/sum(numtags)) %>%
     mutate(returnyear = as.factor(returnyear))
+              
+            #This is with catch weighting
+            proptagsbyyear <- workingsheetCW %>% # workingsheet with assigned grounds and adjustment factor
+              filter(SpawningGround != "unknown") %>%
+              mutate(returnyear = year(ReturnDate)) %>%
+              group_by(returnyear, SpawningGround, days_at_large) %>%
+              arrange(days_at_large) %>%
+              summarise( numtags = sum(tagsper1000ton, na.rm = TRUE),
+                .groups = "drop") %>%
+              group_by(returnyear, SpawningGround) %>%
+              mutate(cumtags = cumsum(numtags),
+                prop = cumtags / sum(numtags)) %>%
+              mutate(returnyear = as.factor(returnyear))
+            
+            proptagsbyyearSummary <- proptagsbyyear %>%
+              # filter(days_at_large <= 120) %>%
+              # filter(days_at_large >= 0) %>%
+              group_by(SpawningGround, returnyear, days_at_large) %>%
+              summarise(mean_prop = mean(prop, na.rm = TRUE),
+                        sd_prop = 1) # Not sure why sd = 1 for all years, but inputting this for now based on Britni's notes
   
-      # sum how many tags by year to check what totals should be 
+      # sum how many tags by year to check what totals should be for non-catch weighted. This includes unknown grounds.
       test <- workingsheetCW %>%
         mutate(returnyear = year(ReturnDate)) %>%
         group_by(returnyear, SpawningGround) %>% 
         count(returnyear) # counts total number of observations/rows/tags by year
 
  
-  # plot by year and also by means with st dev = 1 of all years
+  # plot by year and also by means with st dev = 1 of all years, currently does not include st. dev.
       # by year
+      # removing anything over 120 days (~4 months) as that is out of season therefore does not affect turnover.
       
-      ggplot(proptagsbyyear) +
+      ggplot(proptagsbyyear %>%
+               filter(days_at_large <= 120) %>%
+               filter(days_at_large >= 0)) +
         geom_point(aes(x = days_at_large, y=prop, colour = returnyear)) +
         geom_line(aes(x = days_at_large, y=prop, fill=returnyear), alpha = 0.1) +
         facet_wrap(~ SpawningGround) +
@@ -773,9 +806,26 @@ workingsheettest <- workingsheetassigned %>%
         xlab("Days at large") + 
         ylab("Cumulative proportion of tag returns (%)")
       
+      ggplot(proptagsbyyearSummary) +
+               geom_point(aes(x = days_at_large, y=mean_prop, colour = returnyear)) +
+               geom_line(aes(x = days_at_large, y=mean_prop, fill=returnyear), alpha = 0.1) +
+               facet_wrap(~ SpawningGround) +
+               theme(panel.grid.major = element_blank(), 
+                     panel.grid.minor = element_blank(),
+                     panel.background = element_blank(), 
+                     axis.line = element_line(colour = "black"),
+                     legend.position = c(0.7, 0.45),
+                     legend.direction = "vertical",
+                     legend.title=element_blank(),
+                     legend.key=element_rect(fill="white"),
+                     legend.text = element_text(size = 12)) +
+               xlab("Days at large") + 
+               ylab("Cumulative proportion of tag returns (%)")
+      
     # find cumulative mean
       
         # make summary df from workingsheetassigned with mean cumulative # of tags by days at large and standard error for each spawning ground
+      ## This is not catch weighted.
       
       sumdf <- workingsheetassigned %>%
         filter(!SpawningGround == "unknown") %>%
