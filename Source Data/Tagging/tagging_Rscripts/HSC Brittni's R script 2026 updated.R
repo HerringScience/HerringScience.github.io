@@ -771,11 +771,12 @@ workingsheettest <- workingsheetassigned %>%
               mutate(returnyear = as.factor(returnyear))
             
             proptagsbyyearSummary <- proptagsbyyear %>%
-              # filter(days_at_large <= 120) %>%
-              # filter(days_at_large >= 0) %>%
+              #filter(days_at_large <= 120) %>%
+              filter(days_at_large >= 0) %>%
               group_by(SpawningGround, returnyear, days_at_large) %>%
-              summarise(mean_prop = mean(prop, na.rm = TRUE),
-                        sd_prop = 1) # Not sure why sd = 1 for all years, but inputting this for now based on Britni's notes
+              summarise(mean_prop = mean(prop, na.rm = TRUE))
+                        # ,
+                        # sd_prop = 1) # 
   
       # sum how many tags by year to check what totals should be for non-catch weighted. This includes unknown grounds.
       test <- workingsheetCW %>%
@@ -786,7 +787,7 @@ workingsheettest <- workingsheetassigned %>%
  
   # plot by year and also by means with st dev = 1 of all years, currently does not include st. dev.
       # by year
-      # removing anything over 120 days (~4 months) as that is out of season therefore does not affect turnover.
+      # removing anything over 120 days (~4 months) as that is out of season therefore does not affect turnover. There are a few days that are negative value, so those are also removed.
       
       ggplot(proptagsbyyear %>%
                filter(days_at_large <= 120) %>%
@@ -872,15 +873,18 @@ workingsheettest <- workingsheetassigned %>%
         # a = expected value of y when x=1
         # b = some form of slope?
       
+      ### Need to figure out what to do when there is only 1 tag, so can't find mean prop, st dev or st error.
+      
+      
       str(sumdf)
       
       SBsumdf <- sumdf %>%
-        filter(!days_at_large == 0,
+        filter(!days_at_large <= 0, # trimmed off any negatives and 0s. ##### Some values are negative, not sure why they weren't removed in a previous step. Look into the start where this was supposed to happen. 
                !days_at_large > 50) %>% # trimmed to 50 days at large as per Melvin 2020
         filter(SpawningGround == "Scots Bay")
         
       GBsumdf <- sumdf %>%
-        filter(!days_at_large == 0,
+        filter(!days_at_large <= 0,
                !days_at_large > 50) %>%
         filter(SpawningGround == "German Bank")
       
@@ -897,7 +901,7 @@ workingsheettest <- workingsheetassigned %>%
         geom_point(aes(x = days_at_large, y = meanprop)) +
         geom_smooth(aes(x = days_at_large, y = meanprop), method = 'lm', formula = y~log(x), se = FALSE) +
         annotate("text", x=40, y=0.3, label = "P = 0.66096 + 0.06555 ln(day)", size = 5, col="lightslategrey", fontface = 2) +
-        annotate("text", x=40, y=0.25, label = quote(R^2~"= 0.5655, p = 0.001921"), size = 4, col="lightslategrey", fontface = 2) +
+        annotate("text", x=40, y=0.25, label = "R^2~= 0.5655, p = 0.001921", size = 4, col="lightslategrey", fontface = 2) +
         xlab("Days at large") + 
         ylab("Mean cumulative proportion of tag returns (%)") +
         theme(panel.background = element_blank(),
@@ -907,26 +911,30 @@ workingsheettest <- workingsheetassigned %>%
         geom_point(aes(x = days_at_large, y = meanprop)) +
         geom_smooth(aes(x = days_at_large, y = meanprop), method = 'lm', formula = y~log(x), se = FALSE) +
         annotate("text", x=40, y=0.3, label = "P = -0.009049 + 0.219463 ln(day)", size = 5, col="lightslategrey", fontface = 2) +
-        annotate("text", x=40, y=0.25, label = quote(R^2~"= 0.7314, p = 5.156e-08"), size = 4, col="lightslategrey", fontface = 2) +
+        annotate("text", x=40, y=0.25, label = "R^2~= 0.7314, p = 5.156e-08", size = 4, col="lightslategrey", fontface = 2) +
         xlab("Days at large") + 
         ylab("Mean cumulative proportion of tag returns (%)") +
         theme(panel.background = element_blank(),
               axis.line = element_line(colour = "black"))
   
 # Distance traveled vs. days at large plot (coding incomplete) ####
+      ### Flipped X_returns and Y_returns, this worked.
 
 library(geosphere)
 library(tidyverse)     
      
  tagcoords <- workingsheet %>%
+   rename(X_tagging = "Lon", Y_tagging = "Lat") %>%
    arrange(TAG_NUMBER) %>%
-   select(Y_tagging, X_tagging)
+   select(X_tagging, Y_tagging)
       
  returncoords <- workingsheet %>%
    arrange(TAG_NUMBER) %>%
    select(Y_return, X_return)
        
-dist <- distGeo(tagcoords, returncoords) 
+dist <- distGeo(tagcoords, returncoords) # This creates distance in meters
+
+options(scipen = 999)
       
 distance <- workingsheet %>%
         arrange(TAG_NUMBER) %>%
@@ -950,43 +958,61 @@ ggplot(distance) +
 # check https://www.r-bloggers.com/2020/02/three-ways-to-calculate-distances-in-r/
 
 #add in tagging and returned locations
+  ## No fishing ground has been loaded at this point. There is a ReturnCatchArea_FishingGround.R, not sure if this is the correct on. What about Tim Grounds or herringgrounds, NAFOtrimmed,seinerboxes that were previously loaded?
 
-tagged <- fishinggrounds + geom_point(data = workingsheet, size = 1, colour = "blue", #all fish that were tagged and eventually returned
-                                      aes(x = X_tagging, y = Y_tagging))
-tagged
+print(
+  tagged <- herringgrounds + #fishinggrounds 
+    geom_point(data = workingsheet, size = 1, colour = "blue", #all fish that were tagged and eventually returned
+                                      aes(x = Lon, y = Lat))
+)
+  #tagged
 
-alltagged <- fishinggrounds + geom_jitter(data = TaggingEvents, size = 1, colour = 'red', width = 0.01, height = 0.01,
-                                          aes(x=X_tagging, y=Y_tagging))
+#Both alltagged plots are appear to be the same, just different way to get the same result.
 
-alltagged
+print(
+  alltagged <- herringgrounds + #fishinggrounds 
+    geom_jitter(data = TaggingEvents, size = 1, colour = 'red', width = 0.01, height = 0.01,
+                                          aes(x=Lon, y=Lat))
+  )
+  #alltagged
 
-alltagged <- fishinggrounds + geom_point(data = TaggingEvents, size = 1, colour = 'red', aes(x=X_tagging, y=Y_tagging))
+print(
+  alltagged <- herringgrounds + #fishinggrounds + 
+    geom_point(data = TaggingEvents, size = 1, colour = 'red', 
+             aes(x=Lon, y=Lat))
+)
+  
+#alltagged
 
-alltagged
+#No map installed yet. Using herringgrounds
+print( 
+  returned <- herringgrounds + #map + 
+    geom_point(data = workingsheet, size = 1, colour = "blue", 
+                             aes(x = Y_return, y = X_return)) #swapped X and Y to allow for correct data points.
+)
+#returned
 
-returned <- map + geom_point(data = workingsheet, size = 1, colour = "blue", 
-                             aes(x = X_return, y = Y_return))
+print(
+tagandreturn <- herringgrounds + #tagged + 
+  geom_point(data = workingsheet, size = 1, colour = "blue",
+                                    aes(x = Y_return, y = X_return)) #swapped X and Y to allow for correct data points.
+  )
+#tagandreturn
 
-returned
-
-
-tagandreturn <- tagged + geom_point(data = workingsheet, size = 1, colour = "blue",
-                                    aes(x = X_returned, y = Y_returned))
-tagandreturn
-
-alltagandreturn <- alltagged + geom_point(data = workingsheet, size = 1, colour = "blue", #all fish that were tagged and eventually returned
-                                          aes(x = X_tagging, y = Y_tagging))
-
-alltagandreturn
+print(
+  alltagandreturn <- alltagged + geom_point(data = workingsheet, size = 1, colour = "blue", #all fish that were tagged and eventually returned
+                                          aes(x = Lon, y = Lat)) #Changed X_tagging and Y_tagging to Lat and Lon
+)
+# alltagandreturn
 
 # add in arrows to visualize straight line distances:
 
 lines <- ggplot(data = na) +
   geom_sf(fill = "antiquewhite") +
-  geom_sf(data = NAFO, colour = "lightyellow4", size = 0.5) +
+  geom_sf(data = NAFOshp, colour = "lightyellow4", size = 0.5) + #changed NAFO to NAFOshp
   coord_sf(xlim = c(-68, -61), ylim = c(42.6, 45.9)) +
   geom_segment(data = workingsheet, colour = "black", lwd = 1, arrow = arrow(length = unit(0.5, 'cm')),
-               aes(x=X_tagging, y = Y_tagging, xend = X_return, yend = Y_return)) +
+               aes(x=Lon, y = Lat, xend = Y_return, yend = X_return)) + #changed X_tagging to Lon and Y_tagging to Lat. Swapped X_return and Y_return
   theme(axis.title.x = element_blank(), 
         axis.text.x = element_blank(), 
         axis.text.y = element_blank(),
@@ -1001,36 +1027,42 @@ lines <- ggplot(data = na) +
                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
                          style = north_arrow_nautical)
 
-weirtags <- c(44089, 44358, 44374, 44639, 44790)
-weirtags <- workingsheet %>%
-  filter(TAG_NUMBER %in% weirtags)
+print(lines) #Prints the lines, but black and a mess.
 
-weirlines <- ggplot(data = na) +
-  geom_polygon(polysT, mapping = aes(x=X, y=Y, fill = Box, alpha = 0.5)) +
-  scale_fill_manual(values = mycolours) +
-  geom_sf(fill = "antiquewhite") +
-  geom_sf(data = NAFO, colour = "lightyellow4", size = 0.5) +
-  coord_sf(xlim = c(-68, -61), ylim = c(42.6, 45.9)) +
-  geom_segment(data = weirtags, colour = TAG_NUMBER, lwd = 1, arrow = arrow(length = unit(0.5, 'cm')),
-               aes(x=X_tagging, y = Y_tagging, xend = X_return, yend = Y_return)) +
-  theme(axis.title.x = element_blank(), 
-        axis.text.x = element_blank(), 
-        axis.text.y = element_blank(),
-        axis.title.y = element_blank(),
-        axis.ticks = element_blank(),
-        panel.background = element_rect(fill = "white"),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "white", fill = NA, size = 0.5),
-        legend.position = c(0.9, 0.4)) +
-  annotation_scale(location = "br", width_hint = 0.5) +
-  annotation_north_arrow(location = "br", which_north = "true", 
-                         pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
-                         style = north_arrow_nautical) +
-  guides(fill = guide_legend(title = "Ground")) +
-  scale_alpha(guide = 'none')
 
-lines
+# weirtags <- c(44089, 44358, 44374, 44639, 44790)
+# weirtags <- workingsheet %>%
+#   filter(TAG_NUMBER %in% weirtags)
+
+
+#This is currently not working.
+# 
+# weirlines <- ggplot(data = na) +
+#   geom_polygon(polysT, mapping = aes(x=X, y=Y, fill = Box, alpha = 0.5)) + 
+#   scale_fill_manual(values = mycolours) +
+#   geom_sf(fill = "antiquewhite") +
+#   geom_sf(data = NAFO, colour = "lightyellow4", size = 0.5) +
+#   coord_sf(xlim = c(-68, -61), ylim = c(42.6, 45.9)) +
+#   geom_segment(data = weirtags, colour = TAG_NUMBER, lwd = 1, arrow = arrow(length = unit(0.5, 'cm')),
+#                aes(x=X_tagging, y = Y_tagging, xend = X_return, yend = Y_return)) +
+#   theme(axis.title.x = element_blank(), 
+#         axis.text.x = element_blank(), 
+#         axis.text.y = element_blank(),
+#         axis.title.y = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.background = element_rect(fill = "white"),
+#         panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.border = element_rect(colour = "white", fill = NA, size = 0.5),
+#         legend.position = c(0.9, 0.4)) +
+#   annotation_scale(location = "br", width_hint = 0.5) +
+#   annotation_north_arrow(location = "br", which_north = "true", 
+#                          pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
+#                          style = north_arrow_nautical) +
+#   guides(fill = guide_legend(title = "Ground")) +
+#   scale_alpha(guide = 'none')
+# 
+# lines
 # if you want tag labels:   geom_label(data = workingsheet, aes(label = TAG_NUMBER, x = X_tagging, y = Y_tagging))
 
 
@@ -1039,9 +1071,9 @@ lines
 library(fasterize)
 library(raster)
 library(dplyr)
-library(rgdal)
+# library(rgdal) ### sf or terra replacement
 library(sf)
-library(maptools)
+# library(maptools) ### sf or terra replacement
 
 world <- ne_countries(scale = "large", returnclass = "sf")
 na <- ne_countries(scale = "large", continent = "North America", returnclass = "sf")
