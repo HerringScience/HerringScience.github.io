@@ -1,5 +1,17 @@
 
 
+pacman::p_load(
+  tidyverse, patchwork, scales, cli, lubridate, reprex,
+  geosphere, reshape2, moderndive, skimr, ggridges, GGally, psych,
+  raster, terra, sf, PBSmapping,
+  knitr, kableExtra, grid, gridExtra, cowplot,
+  DT, dygraphs, leaflet, plotly, rmapshaper,
+  mapproj, maps, rnaturalearth, rnaturalearthdata, geodata,
+  oce, pander, devtools,
+  coin, mgcv, writexl, perm, ncdf4, dplyr, broom
+)
+
+
 # Load Prince 5 Data from 
 # https://www.frdr-dfdr.ca/repo/dataset/167e21b2-7eb9-466a-9b80-3980de093b15
 
@@ -7,117 +19,66 @@
 
 setwd("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD/_Scripts")
 
-library(ncdf4)
-library(maps)
-library(dplyr)
-library(ggplot2)
-library(oce)
-library(sf)
-library(rnaturalearth)
-library(tidyverse)
-library(broom)
-
 source("read_char_var.R")
 source("pad_range.R")
 
 setwd("C:/Users/herri/OneDrive/Documents/GitHub/HerringScience.github.io/Source Data/CTD/.nc")
 
-years <- 2017:2024
+
+# Change years here for CAST downloads
+years <- 2017:2023
 files <- paste0(years, ".nc")
 out_dir <- "Casts"
 dir.create(out_dir, showWarnings = FALSE)
 
-# Store outputs
-all_dates <- data.frame()
-all_casts <- list()
-counter <- 1
+    # Store outputs
+    all_dates <- data.frame()
+    all_casts <- list()
+    counter <- 1
 
 ## Just data exploration - can skip:
 
                   #Look at what variables exist in the .nc files:
-              
                           for (f in files) {
-                            
                             cat("\n========================\n")
                             cat("FILE:", f, "\n")
                             cat("========================\n")
-                            
                             nc <- nc_open(f)
-                            
-                            # List variable names
-                            cat("\nVariables:\n")
-                            print(names(nc$var))
-                            
-                            # List dimensions
-                            cat("\nDimensions:\n")
-                            print(names(nc$dim))
-                            
-                            nc_close(nc)
-                          }
-            
-                                # density doesn't exist so you have to create it.
-                                    
+                                # List variable names
+                                cat("\nVariables:\n")
+                                print(names(nc$var))
+                                      # List dimensions
+                                      cat("\nDimensions:\n")
+                                      print(names(nc$dim))
+                                      
+                                      nc_close(nc)
+                                    }
+                      
+                        # density doesn't exist so you have to create it.
                                     # What ar the station names?
-                                    
                                     nc <- nc_open("1978.nc")
-                                    
                                     # See available variables
                                     names(nc$var)
-                                    
                                     # Extract station IDs
-                                    station_ids <- ncvar_get(nc, "station_ID")
-                                    
+                                  station_ids <- ncvar_get(nc, "station_ID")
                                     # Unique values
                                     unique(station_ids)
 
 #Cont here for pipeline:     
 
+## if changes need to be made, see the script search_polys.R
+# C:\Users\herri\OneDrive\Documents\GitHub\HerringScience.github.io\Source Data\CTD\_Scripts
+                                    
+search_polys <- readRDS("search_polys.rds")
+# German Bank polygon
+germanseal_poly <- search_polys %>%
+  filter(area_poly == "German Bank")
 
-# Polygon coordinates (longitude, latitude)
-# German/Seal
-polygon_coords <- matrix(
-  c(
-    -66.229, 43.70000,
-    -66.229, 43.56667,
-    -66.075, 43.56667,
-    -66.075, 43.23300,
-    -66.550, 43.23300,
-    -66.550, 43.70000,
-    -66.229, 43.70000
-  ),
-  ncol = 2,
-  byrow = TRUE
-)
-
-germanseal_poly <- st_polygon(list(polygon_coords)) |>
-  st_sfc(crs = 4326)
-
-# Scots Bay
-SB_box <- matrix(
-c(
-  -65.61, 44.7500,
-  -64.67, 45.000,
-  -64.67,45.500,
-  -65.61, 45.5,
-  -65.61, 44.7500
-),
-ncol = 2,
-byrow = TRUE
-)
-
-SB_poly<- st_polygon(list(SB_box)) |>
-  st_sfc(crs = 4326)
-
-
-# Combine into 1:
-search_polys <- st_sf(
-  area_poly = c("German Bank", "Scots Bay"),
-  geometry = c(germanseal_poly, SB_poly)
-)
+# Scots Bay polygon
+SB_poly <- search_polys %>%
+  filter(area_poly == "Scots Bay")
 
 ############ LOOP:
-
-
 #### LOOP - load year files in .nc folder                  
 
 for (f in files) {
@@ -424,9 +385,6 @@ for (f in files) {
   nc_close(nc)
 }
 
-
-
-
 # Combine all casts into a df
 if (length(all_casts) > 0) {
   final_casts <- do.call(rbind, all_casts)
@@ -434,13 +392,11 @@ if (length(all_casts) > 0) {
   final_casts <- data.frame()
 }
 
-
 # Clean date table
 if (nrow(all_dates) > 0) {
   all_dates <- unique(all_dates)
   all_dates <- all_dates[order(all_dates$date), ]
 }
-
 
 # Quick Health check of the dataset
 # Summary
@@ -483,15 +439,17 @@ HSC = readRDS("Oceans.rds")
     HSC=HSC[which(HSC$Source == "HSC"), ]
     HSC$area = HSC$ground
 
+        # filter year here:
+          HSC <- HSC %>%
+              filter(Year <= 2023)
+
 # Plot Coastline
 coast <- ne_countries(
   scale = "medium",
   returnclass = "sf"
 )
 
-
 # Create plotting dataframes
-
 HSC_locations <- HSC %>%
   distinct(stn_id, Lat, Lon) %>%
   mutate(Source = "HSC")
@@ -523,93 +481,157 @@ plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
       
 # Plot map with cast locations for modern comparison:          
               
+              # Get land/coastline
+              land <- ne_countries(
+                scale = "medium",
+                returnclass = "sf"
+              )
+              
+              # Combined map
               ggplot() +
-                geom_sf(
-                  data = coast,
-                  fill = "grey90",
-                  colour = "grey60",
-                  linewidth = 0.3
-                ) +
                 
-                geom_point(
-                  data = hsc_df,
-                  aes(longitude, latitude,
-                      colour = Source,
-                      shape = Source),
-                  alpha = 0.6,
-                  size = 2
-                ) +
+                # -------------------------
+              # Search polygons
+              # -------------------------
+              geom_sf(
+                data = search_polys,
+                aes(fill = area_poly),
+                alpha = 0.25,
+                colour = "black",
+                linewidth = 0.8
+              ) +
+                # -------------------------
+              # Land
+              # -------------------------
+              geom_sf(
+                data = land,
+                fill = "grey90",
+                colour = "grey60",
+                linewidth = 0.3
+              ) +
+                
+                
+                # -------------------------
+              # Cast locations
+              # -------------------------
+              geom_point(
+                data = hsc_df,
+                aes(
+                  longitude, latitude,
+                  colour = Source,
+                  shape = Source
+                ),
+                alpha = 0.6,
+                size = 2
+              ) +
                 
                 geom_point(
                   data = prince5_df,
-                  aes(longitude, latitude,
-                      colour = Source,
-                      shape = Source),
+                  aes(
+                    longitude, latitude,
+                    colour = Source,
+                    shape = Source
+                  ),
                   size = 2
                 ) +
                 
                 geom_point(
                   data = lurcher_df,
-                  aes(longitude, latitude,
-                      colour = Source,
-                      shape = Source),
+                  aes(
+                    longitude, latitude,
+                    colour = Source,
+                    shape = Source
+                  ),
                   size = 3
                 ) +
                 
                 geom_point(
                   data = scots_df,
-                  aes(longitude, latitude,
-                      colour = Source,
-                      shape = Source),
-                  size = 3
+                  aes(
+                    longitude, latitude,
+                    colour = Source,
+                    shape = Source
+                  ),
+                  size = 2.5
                 ) +
                 
-                scale_colour_manual(
-                  values = c(
-                    "German Bank" = "#D55E00",
-                    "HSC" = "#0072B2",
-                    "prince5" = "#009E73",
-                    "Scots Bay" = "#CC79A7"
-                  )
-                ) +
+                # -------------------------
+              # Cast colours
+              # -------------------------
+              scale_colour_manual(
+                values = c(
+                  "German Bank" = "#D55E00",
+                  "HSC" = "#0072B2",
+                  "prince5" = "#009E73",
+                  "Scots Bay" = "#CC79A7"
+                )
+              ) +
                 
+                # Cast shapes
                 scale_shape_manual(
-                  values = c(
-                    "German Bank" = 16,
-                    "HSC" = 17,
+                 values = c(
+                  "German Bank" = 16,
+                 "HSC" = 17,
                     "prince5" = 15,
                     "Scots Bay" = 18
                   )
                 ) +
-               geom_text(
-                  data = data.frame(
-                    longitude = c(-66.4, -65.2, -67),
-                    latitude  = c(43.8, 45.5, 45.05),
-                    label     = c("German Bank/Seal Island", "Scots Bay", "Prince 5")
-                  ),
-                  aes(longitude, latitude, label = label),
-                  fontface = "bold",
-                  size = 4,
-                  color = "black"
-                ) +
                 
+                # -------------------------
+              # Polygon fill colours
+              # -------------------------
+              scale_fill_manual(
+                values = c(
+                  "German Bank" = "#E69F00",
+                  "Scots Bay" = "#CC79A7"
+                ),
+                name = "Search Area"
+              ) +
                 
-                coord_sf(
-                  xlim = c(-67.5, -63),
-                  ylim = c(46, 43),
-                  expand = FALSE
-                ) +
+                # -------------------------
+              # Labels
+              # -------------------------
+              geom_text(
+                data = data.frame(
+                  longitude = c(-66.4, -65.2, -66.85),
+                  latitude  = c(43.73, 45.5, 45.05),
+                  label = c(
+                    "German Bank",
+                    "Scots Bay",
+                    "Prince 5"
+                  )
+                ),
+                aes(
+                  longitude,
+                  latitude,
+                  label = label
+                ),
+                fontface = "bold",
+                size = 4,
+                colour = "black"
+              ) +
+                
+                # -------------------------
+              # Map extent
+              # -------------------------
+              coord_sf(
+                xlim = c(-67.5, -63),
+                ylim = c(43, 46),
+                expand = FALSE
+              ) +
                 
                 labs(
                   x = "Longitude (°W)",
                   y = "Latitude (°N)",
                   colour = NULL,
-                  shape = NULL
+                  shape = NULL,
+                  fill = "Search Area"
                 ) +
                 
-                ggtitle("Cast Locations for Modern Comparison")+
+                ggtitle("Cast Locations") +
                 
                 theme_bw(base_size = 11) +
+                
                 theme(
                   panel.grid.major = element_line(
                     colour = "grey85",
@@ -622,20 +644,21 @@ plot_df <- bind_rows(lurcher_df, hsc_df, prince5_df, scots_df)
                   ),
                   axis.text = element_text(size = 8),
                   axis.title = element_text(size = 10),
+                  
                   legend.position = c(0.82, 0.22),
                   legend.background = element_rect(
                     fill = "white",
                     colour = "grey70"
                   ),
-                  legend.text = element_text(size = 8),
-                  legend.title = element_blank()
+                  legend.text = element_text(size = 8)
                 )
 
               
-           
-
+  
+              
+              
+              
 # Need to combine HSC and final_casts ###################################################
-
 
 HSC2 <- HSC %>%
   transmute(
@@ -712,25 +735,24 @@ cast_summary <- all_casts %>%
   distinct(Source, Year, cast) %>%
   count(Source, Year)
 
-ggplot(cast_summary,
-       aes(x = Year, y = Source, fill = n)) +
-  geom_tile() +
-  scale_fill_viridis_c(name = "Unique casts") +
-  theme_bw() +
-  labs(
-    x = "Year",
-    y = NULL
-  )+theme(
-    aspect.ratio = 1
-  )
 
-                  ### count the number of casts in 2025 to make sure only GB and SB are being counted:
-                  
-                  cast_summary %>%
-                    filter(Source == "HSC", Year == 2025)
-                        # yup 3 - this is right.
+head(cast_summary)
 
-                  
+# Plot to show number of cast between DFO and HSC...not that useful, more so what to know how many casts per month/per ground/per year
+          
+          ggplot(cast_summary,
+                 aes(x = Year, y = Source, fill = n)) +
+            geom_tile() +
+            scale_fill_viridis_c(name = "Unique casts") +
+            theme_bw() +
+            labs(
+              x = "Year",
+              y = NULL
+            )+theme(
+              aspect.ratio = 1
+            )
+
+
 #### Continue with .nc dataset (all_casts)
 
 # Cut top 5m
@@ -745,11 +767,11 @@ head(all_casts_deep)
           # visualization
 
                       hist(all_casts_deep$depth)
-                    
 
+head(all_casts_deep)                      
+                      
 # Make sure date is a Date
 all_casts_deep$date <- as.Date(all_casts_deep$date)
-
 final_casts_deep = all_casts_deep
 
 # create density:
@@ -821,7 +843,7 @@ cast_averages <- final_casts_deep %>%
 cast_averages <- cast_averages %>%
   filter(max_depth >= 25)
 
-
+### this is a step where the number of casts will be reduced so the map with the points is not fully accurate.
                 
 # -----------------------------
 # 3. Combine casts within same year/month
@@ -878,11 +900,10 @@ write.csv(
 
 
 head(monthly_cast_averages)
+getwd()
+write.csv(monthly_cast_averages, "monthly_cast_averages.csv", row.names=FALSE )
+unique(monthly_cast_averages$Year)
 
-
-# remove 2024, 2025 and 2026 for now....can maybe add them later:
-monthly_cast_averages <- monthly_cast_averages %>%
-  filter(!Year %in% c(2024, 2025, 2026))
 
 ### Plot demonstrating samples sizes:
 
@@ -927,8 +948,50 @@ ggplot(
     )
   ) 
 
-
-
+                ### try and make 1 casts more obvious
+              ggplot(
+                plot_df,
+                aes(
+                  x = month_label,
+                  y = factor(Year)
+                )
+              ) +
+                geom_tile(
+                  aes(fill = n_casts),
+                  colour = "white",
+                  linewidth = 0.5
+                ) +
+                
+                # show actual sample size
+                geom_text(
+                  aes(label = n_casts),
+                  colour = "white",
+                  size = 3
+                ) +
+                
+                facet_wrap(~area) +
+                
+                scale_fill_viridis_c(
+                  option = "H"
+                ) +
+                
+                labs(
+                  title = "Monthly Sampling Size by Ground",
+                  x = "Month",
+                  y = "Year",
+                  fill = "Casts"
+                ) +
+                
+                theme_bw() +
+                theme(
+                  axis.text.x = element_text(
+                    size = 8,
+                    angle = 45,
+                    hjust = 1
+                  ),
+                  panel.grid = element_blank()
+                )
+              
 # -----------------------------
 # 4. Create Plots: Create output folder inside Casts
 # currently doesn't include density or densirty stratification but could be added.
