@@ -82,7 +82,8 @@ SSB <- read.csv(file.path(repo,
 ### Group SSB into grounds, then adding the HSC biomass with turnover for each invidual ground by year. Count the number of surveys in each year by ground.
 
 SSB <- SSB %>%
-  group_by(Year, Ground)
+  group_by(Year, Ground) %>%
+  filter(Year>2016)
 
 SurveyNumbers <- SSB %>%
   count(Year, Ground) %>%
@@ -256,7 +257,7 @@ LRP3 %>% arrange(desc(Year)) %>%
 
 #### Scots Bay
 
-```{r}
+```{r echo=FALSE}
 LRP_HSC %>% dplyr::select(Year, `Scots Bay`) %>% 
   dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
   dyOptions(drawPoints = TRUE, pointSize = 2) %>%
@@ -279,7 +280,7 @@ LRP_HSC %>%
 
 #### German Bank
 
-```{r}
+```{r echo=FALSE}
 LRP_HSC %>% dplyr::select(Year, `German Bank`) %>% 
   dygraph(ylab = "Biomass (mt)", xlab = "Year") %>%
   dyOptions(drawPoints = TRUE, pointSize = 2) %>%
@@ -302,7 +303,7 @@ LRP_HSC %>%
 
 #### Seal Island
 
-```{r}
+```{r echo=FALSE}
 
 LRP_HSC %>% 
   dplyr::select(Year, `Seal Island`) %>%
@@ -330,10 +331,12 @@ LRP_HSC %>%
 
 #### Total
 
+`HSC spawning stock biomass estimates for Scots Bay and German Bank.`
+
 ```{r echo=FALSE}
 
 Plot_Summary <- SSB %>%
-  filter(Ground %in% c("Scots Bay", "German Bank", "Seal Island")) %>%
+  filter(Ground %in% c("Scots Bay", "German Bank")) %>%
   mutate(
     Biomass = case_when(
       Ground == "Seal Island" ~ as.numeric(HSC_Estimate),
@@ -346,42 +349,6 @@ Plot_Summary <- SSB %>%
   group_by(Ground, Year) %>%
   summarise(
     Biomass = sum(Biomass, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-# Plot_Summary <- SSB %>%
-#   filter(Ground %in% c("Scots Bay", "German Bank", "Seal Island")) %>%
-#   filter(!is.na(HSC_Turnover_Adjusted)) %>%
-#   group_by(Ground, Year) %>%
-#   summarize(
-#     Biomass = sum(HSC_Turnover_Adjusted, na.rm = TRUE),
-#     .groups = "drop"
-#   )
-
-p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass, fill = Ground)) +
-  geom_col() +
-  scale_y_continuous(labels = comma) +
-  labs(
-    x = "Year",
-    y = "HSC Estimate w/ Turnover, except Seal Island which has no turnover"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    legend.position = "right"
-  )
-
-
-print(p)
-
-```
-```{r echo=FALSE}
-Plot_Summary <- SSB %>%
-  filter(Ground %in% c("Seal Island")) %>%
-  filter(!is.na(HSC_Estimate)) %>%
-  group_by(Ground, Year) %>%
-  summarize(
-    Biomass = sum(HSC_Estimate, na.rm = TRUE),
     .groups = "drop"
   )
 
@@ -401,27 +368,73 @@ p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass, fill = Ground)) +
 
 print(p)
 
-```
-
-```{r echo=FALSE}
 Table = SSB %>%
-  filter(Ground == "Scots Bay" | Ground == "German Bank" | Ground == "Seal Island") %>%
+  filter(Ground == "Scots Bay" | Ground == "German Bank") %>%
   filter(!is.na(HSC_Turnover_Adjusted)) %>%
   group_by(Year) %>%
   summarize(HSC_Estimate = sum(HSC_Estimate),
-            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted),
-            DFO_Estmate = sum(DFO_Estimate),
-            DFO_Turnover_Adjusted = sum(DFO_Turnover_Adjusted)) %>%
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted)
+            ) %>%
   arrange(desc(Year))
 
 datatable(Table, 
-          colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Estimate", "DFO w/ Turnover"), 
+          colnames = c("Year", "HSC Estimate", "HSC w/ Turnover"
+                       ), 
           extensions = 'Buttons',
   options = list(
   pageLength = 5,
   dom = 'lfrtiBp', 
   buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+
 ```
+`HSC spawning stock biomass estimates for Scots Bay, German Bank and Seal Island. Turnover does not include Seal Island. The total estimate provided will be artificially high due to no turnover being applied to Seal Island.`
+
+```{r echo=FALSE}
+Plot_Summary <- SSB %>%
+  filter(Ground %in% c("Seal Island")) %>%
+  filter(!is.na(HSC_Estimate)) %>%
+  group_by(Ground, Year) %>%
+  summarize(
+    Biomass = sum(HSC_Estimate, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+p <- ggplot(Plot_Summary, aes(x = factor(Year), y = Biomass, fill = Ground)) +
+  geom_col() +
+  scale_y_continuous(labels = comma) +
+  labs(
+    x = "Year",
+    y = "Seal Island HSC Estimate w/o Turnover"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    legend.position = "right"
+  )
+
+
+print(p)
+
+Table = SSB %>%
+  filter(Ground == "Seal Island") %>%
+  filter(Year>2016) %>%
+  group_by(Year) %>%
+  summarize(HSC_Estimate = sum(HSC_Estimate),
+            HSC_Turnover_Adjusted = sum(HSC_Turnover_Adjusted, na.rm = TRUE)
+            ) %>%
+  arrange(desc(Year))
+
+datatable(Table, 
+          colnames = c("Year", "HSC Estimate"), 
+          extensions = 'Buttons',
+  options = list(
+  pageLength = 5,
+  dom = 'lfrtiBp', 
+  buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+
+
+```
+
 
 #### Scots Bay
 
@@ -444,9 +457,7 @@ p <- ggplot(
   )
 
 p
-```
 
-```{r echo=FALSE}
 Table = SSB %>%
   filter(Ground == "Scots Bay") %>%
   group_by(Year) %>%
@@ -486,9 +497,7 @@ p = ggplot(data=subset(SSB, Ground == "German Bank"),
     )
 
 p
-```
 
-```{r echo=FALSE}
 Table = SSB %>%
   filter(Ground == "German Bank") %>%
   group_by(Year) %>%
@@ -505,7 +514,9 @@ datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Es
   pageLength = 5,
   dom = 'lfrtiBp', 
   buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+
 ```
+
 
 #### Seal Island
 
@@ -519,9 +530,7 @@ p = ggplot(data=subset(SSB, Ground == "Seal Island"),  aes(x=Year, y=HSC_Estimat
   theme(axis.text.x = element_text(angle = 55), legend.position = "none")
 
 p
-```
 
-```{r echo=FALSE}
 Table = SSB %>%
   filter(Ground == "Seal Island") %>%
   group_by(Year) %>%
@@ -538,7 +547,6 @@ datatable(Table, colnames = c("Year", "HSC Estimate", "HSC w/ Turnover", "DFO Es
   pageLength = 5,
   dom = 'lfrtiBp', 
   buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
-
 
 ```
 
